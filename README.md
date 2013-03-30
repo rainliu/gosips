@@ -1,7 +1,6 @@
 GoSIP
 =====
 
-SIP stack in Go
 
 Objective
 ---------
