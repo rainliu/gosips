@@ -4,17 +4,6 @@ import (
 	//"errors"
 	"strings"
 )
-
-
-    const SIP_URI_SCHEME = "sip"; 
-    const SIPS_URI_SCHEME = "sips"; 
-    const TEL_URI_SCHEME = "tel";
-    const POSTDIAL  =  "postdial";
-    const PHONE_CONTEXT_TAG  = "context-tag";
-    const ISUB 	  = "isub";
-    const PROVIDER_TAG    = "provider-tag";
-    //const UDP = GenericURI.UDP;
-    //const TCP = GenericURI.TCP;
     
     
 /** Implementation of the URI class. This relies on the 1.4 URI class.
@@ -23,13 +12,6 @@ import (
  *
  *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
  */
- 	const SIP = SIP_URI_SCHEME;
-    const SIPS = SIPS_URI_SCHEME;
-    const TEL = TEL_URI_SCHEME;
-    //const POSTDIAL  =  POSTDIAL;
-    //const PHONE_CONTEXT_TAG = PHONE_CONTEXT_TAG;
-    //const ISUB 	  = ISUB;
-    //const PROVIDER_TAG    = PROVIDER_TAG;
     
 type GenericURI struct {// implements gosip.address.URI
        
@@ -68,10 +50,10 @@ type GenericURI struct {// implements gosip.address.URI
     /** Encode this URI.
      * @return The encoded URI
      */
-    func (this *GenericURI) ToString() string {
+    /*func (this *GenericURI) ToString() string {
         return this.Encode(); 
      
-    }
+    }*/
     
     /** Overrides the base clone method
      * @return The Cloned strucutre,

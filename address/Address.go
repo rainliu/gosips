@@ -13,12 +13,12 @@ import (
 
 /**
  * This interface represents a user's display name and URI address. The display
- * name of an address is optional but if included can be displayed to an end-user. 
- * The address URI (most likely a SipURI) is the user's address. For example a 
- * 'To' address of <code>To: Bob sip:duke@jcp.org</code> would have a display 
- * name attribute of <code>Bob</code> and an address of 
+ * name of an address is optional but if included can be displayed to an end-user.
+ * The address URI (most likely a SipURI) is the user's address. For example a
+ * 'To' address of <code>To: Bob sip:duke@jcp.org</code> would have a display
+ * name attribute of <code>Bob</code> and an address of
  * <code>sip:duke@jcp.org</code>.
- * 
+ *
  * @see SipURI
  * @see TelURL
  *
@@ -68,7 +68,7 @@ type Address interface{// extends Cloneable, Serializable{
      *
      * @return the stringified representation of the Address
      */
-    ToString() string;
+    Encode() string;//ToString() string;
 
     /**
      * Indicates whether some other Object is "equal to" this Address.
@@ -86,7 +86,7 @@ type Address interface{// extends Cloneable, Serializable{
 
     /**
      * This determines if this address is a wildcard address. That is
-     * <code>((SipURI)Address.getURI()).getUser() == *;</code>. This method 
+     * <code>((SipURI)Address.getURI()).getUser() == *;</code>. This method
      * is specific to SIP and SIPS schemes.
      *
      * @return true if this address is a wildcard, false otherwise.
@@ -94,4 +94,3 @@ type Address interface{// extends Cloneable, Serializable{
     IsWildcard() bool;
 
 }
-

@@ -129,7 +129,7 @@ type Header interface {
      *
      * @return string representation of Header
      */
-    ToString() string;
+    String() string;
 
 }
 
