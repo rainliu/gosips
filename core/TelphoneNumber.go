@@ -51,7 +51,7 @@ type TelephoneNumber struct{
          * @return String
          */    
      func (this *TelephoneNumber) GetPostDial() string {
-        return this.parms.GetValue(NetObject_POSTDIAL).(string);
+        return this.parms.GetValue(SIPTransportNames_POSTDIAL).(string);
     }
     
      /**
@@ -59,14 +59,14 @@ type TelephoneNumber struct{
       * @return String
       */
      func (this *TelephoneNumber) GetIsdnSubaddress() string{
-            return this.parms.GetValue(NetObject_ISUB).(string);
+            return this.parms.GetValue(SIPTransportNames_ISUB).(string);
         }
      
         /** returns true if th PostDial field exists
          * @return boolean
          */        
     func (this *TelephoneNumber) HasPostDial() bool {
-        return this.parms.GetValue(NetObject_POSTDIAL) != nil;
+        return this.parms.GetValue(SIPTransportNames_POSTDIAL) != nil;
     }    
     
         /** return true if this header has parameters.
@@ -82,7 +82,7 @@ type TelephoneNumber struct{
      * @return boolean
      */
     func (this *TelephoneNumber) HasIsdnSubaddress() bool {
-        return this.HasParm(NetObject_ISUB);
+        return this.HasParm(SIPTransportNames_ISUB);
     }    
    
     /**
@@ -96,14 +96,14 @@ type TelephoneNumber struct{
         /** remove the PostDial field
          */    
     func (this *TelephoneNumber) RemovePostDial() {
-        this.parms.Delete(NetObject_POSTDIAL);
+        this.parms.Delete(SIPTransportNames_POSTDIAL);
     }
     
     /**
      * Remove the isdn subaddress (if it exists).
      */
     func (this *TelephoneNumber) RemoveIsdnSubaddress() {
-        this.DeleteParm(NetObject_ISUB);
+        this.DeleteParm(SIPTransportNames_ISUB);
     }    
     
     /**
@@ -125,7 +125,7 @@ type TelephoneNumber struct{
          * @param p String to set
          */    
     func (this *TelephoneNumber) SetPostDial(p string) {
-        nv := NewNameValue(NetObject_POSTDIAL, p);
+        nv := NewNameValue(SIPTransportNames_POSTDIAL, p);
         this.parms.AddNameValue(nv);
     }
        
@@ -143,7 +143,7 @@ type TelephoneNumber struct{
      * @param isub String to set
      */
     func (this *TelephoneNumber) SetIsdnSubaddress(isub string) {
-        this.SetParm(NetObject_ISUB,isub);
+        this.SetParm(SIPTransportNames_ISUB,isub);
     }
       
         /** set the PhoneNumber field
@@ -175,7 +175,7 @@ type TelephoneNumber struct{
 		}
 		retval += this.phoneNumber;
 		if this.parms.Len()!=0 {
-		   retval += Separators_SEMICOLON;
+		   retval += SIPSeparatorNames_SEMICOLON;
 		   retval += this.parms.String();
 		}
 		return retval;

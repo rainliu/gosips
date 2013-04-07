@@ -21,7 +21,7 @@ type To struct{ //  implements javax.sip.header.ToHeader {
          */
     func NewTo() *To{
     	this := &To{};
-		this.AddressParametersHeader.super(SIPHeaderNames_TO);
+		this.AddressParametersHeader.super(core.SIPHeaderNames_TO);
 		return this;
     }
     
@@ -32,7 +32,7 @@ type To struct{ //  implements javax.sip.header.ToHeader {
 	/** Generate a TO header from a FROM header
 	*/
      func (this *To) CloneFrom (from *From) {
-		this.super(SIPHeaderNames_TO);
+		this.super(core.SIPHeaderNames_TO);
 		this.SetAddress(from.addr);
 		this.SetParameters(from.parameters);
      }
@@ -66,7 +66,7 @@ type To struct{ //  implements javax.sip.header.ToHeader {
     * @return String
     */
     func (this *To) String() string {
-        return this.headerName + core.Separators_COLON + core.Separators_SP + this.EncodeBody() + core.Separators_NEWLINE;
+        return this.headerName + core.SIPSeparatorNames_COLON + core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE;
     }
 
    /**
@@ -79,15 +79,15 @@ type To struct{ //  implements javax.sip.header.ToHeader {
 		}
 		var retval bytes.Buffer;
         if this.addr.GetAddressType() == address.ADDRESS_SPEC {
-            retval.WriteString(core.Separators_LESS_THAN);
+            retval.WriteString(core.SIPSeparatorNames_LESS_THAN);
         }
         retval.WriteString(this.addr.String());
         if this.addr.GetAddressType() == address.ADDRESS_SPEC {
-            retval.WriteString(core.Separators_GREATER_THAN);
+            retval.WriteString(core.SIPSeparatorNames_GREATER_THAN);
         }
 
         if this.parameters.Len()>0 {
-            retval.WriteString(core.Separators_SEMICOLON);
+            retval.WriteString(core.SIPSeparatorNames_SEMICOLON);
             retval.WriteString(this.parameters.String());
         }
         return retval.String();

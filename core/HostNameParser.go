@@ -35,7 +35,7 @@ func NewHostNameParserFromLexerCore(lexer *LexerCore) *HostNameParser {
 
 func (this *HostNameParser) DomainLabel() (s string, ParseException error) {
     var retval bytes.Buffer //= new StringBuffer();
-    if Debug.parserDebug {
+    if Debug.ParserDebug {
         this.Dbg_enter("domainLabel")
         defer this.Dbg_leave("domainLabel")
     }
@@ -67,7 +67,7 @@ func (this *HostNameParser) DomainLabel() (s string, ParseException error) {
 
 func (this *HostNameParser) Ipv6Reference() (s string, ParseException error) {
     var retval bytes.Buffer //= new StringBuffer();
-    if Debug.parserDebug {
+    if Debug.ParserDebug {
         this.Dbg_enter("ipv6Reference")
         defer this.Dbg_leave("ipv6Reference")
     }
@@ -102,7 +102,7 @@ func (this *HostNameParser) Ipv6Reference() (s string, ParseException error) {
 }
 
 func (this *HostNameParser) GetHost() (h *Host, ParseException error) {
-    if Debug.parserDebug {
+    if Debug.ParserDebug {
         this.Dbg_enter("host")
         defer this.Dbg_leave("host")
     }
@@ -143,7 +143,7 @@ func (this *HostNameParser) GetHost() (h *Host, ParseException error) {
 }
 
 func (this *HostNameParser) GetHostPort() (hp *HostPort, ParseException error) {
-    if Debug.parserDebug {
+    if Debug.ParserDebug {
         this.Dbg_enter("hostPort")
         defer this.Dbg_leave("hostPort")
     }

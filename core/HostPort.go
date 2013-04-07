@@ -43,7 +43,7 @@ func (this *HostPort) String() string {
     if this.host!=nil {
         retval.WriteString(this.host.String())
         if this.port != -1 {
-            retval.WriteString(Separators_COLON+strconv.Itoa(this.port))
+            retval.WriteString(SIPSeparatorNames_COLON+strconv.Itoa(this.port))
         }
     }
     return retval.String()

@@ -26,6 +26,11 @@ func NewStringTokenizer(buffer string) *StringTokenizer {
     return this
 }
 
+func (this *StringTokenizer) super(buffer string){
+	this.buffer = buffer
+    this.ptr = 0
+}
+
 func (this *StringTokenizer) NextToken() string {
     var retval bytes.Buffer
 
@@ -135,7 +140,7 @@ func (this *StringTokenizer) GetLines() map[int]string {
 
 /** Get the next token from the buffer.
  */
-func (this *StringTokenizer) GetNextToken(delim byte) string { //throws ParseException {
+func (this *StringTokenizer) GetNextTokenByDelim(delim byte) string { //throws ParseException {
     var retval bytes.Buffer // new StringBuffer();
     for {
         la, err := this.LookAheadK(0)

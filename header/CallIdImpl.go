@@ -1,7 +1,7 @@
 package header
 
 import (
-
+	"gosip/core"
 )
 
 
@@ -31,7 +31,7 @@ type CallID struct{ // implements javax.sip.header.CallIdHeader {
 	*/
 	func NewCallID(callId string) (this *CallID, IllegalArgumentException error) {
 		this = &CallID{};
-	    this.SIPHeaderImpl.headerName = SIPHeaderNames_CALL_ID;
+	    this.SIPHeaderImpl.headerName = core.SIPHeaderNames_CALL_ID;
 		this.callIdentifier, IllegalArgumentException = NewCallIdentifier(callId);
 		if IllegalArgumentException!=nil{
 			return nil, IllegalArgumentException;

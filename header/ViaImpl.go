@@ -35,7 +35,7 @@ type Via struct {//implements javax.sip.header.ViaHeader {
     func NewVia() *Via {
     	this := &Via{};
     	
-        this.ParametersHeader.super(SIPHeaderNames_VIA);
+        this.ParametersHeader.super(core.SIPHeaderNames_VIA);
         this.sentProtocol=NewProtocol();
     	
     	return this;
@@ -209,21 +209,21 @@ type Via struct {//implements javax.sip.header.ViaHeader {
     func (this *Via) EncodeBody() string { 
 		var encoding bytes.Buffer;//= new StringBuffer();
 		encoding.WriteString(this.sentProtocol.String());
-		encoding.WriteString(core.Separators_SP)
+		encoding.WriteString(core.SIPSeparatorNames_SP)
 		encoding.WriteString(this.sentBy.String());
 		// Add the default port if there is no port specified.
 		if !this.sentBy.HasPort() {
-			encoding.WriteString(core.Separators_COLON)
+			encoding.WriteString(core.SIPSeparatorNames_COLON)
 			encoding.WriteString("5060");
 		}
         if this.comment != "" {
-              encoding.WriteString(core.Separators_SP)
-		      encoding.WriteString(core.Separators_LPAREN)
+              encoding.WriteString(core.SIPSeparatorNames_SP)
+		      encoding.WriteString(core.SIPSeparatorNames_LPAREN)
 		      encoding.WriteString(this.comment)
-		      encoding.WriteString(core.Separators_RPAREN);
+		      encoding.WriteString(core.SIPSeparatorNames_RPAREN);
         }
 		if this.parameters.Len()>0 {
-			encoding.WriteString(core.Separators_SEMICOLON)
+			encoding.WriteString(core.SIPSeparatorNames_SEMICOLON)
 			encoding.WriteString(this.parameters.String());
 		}
 		return encoding.String();

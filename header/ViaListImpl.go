@@ -1,6 +1,7 @@
 package header
 
 import (
+	"gosip/core"
 )
 
 
@@ -20,7 +21,7 @@ type ViaList struct{
           */
     func NewViaList() *ViaList {
     	this := &ViaList{}
-        this.SIPHeaderListImpl.super(SIPHeaderNames_VIA);
+        this.SIPHeaderListImpl.super(core.SIPHeaderNames_VIA);
     	return this;
     }
     

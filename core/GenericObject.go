@@ -18,28 +18,6 @@ import (
  *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
  *
  */
-const Separators_SEMICOLON = ";"
-const Separators_COLON = ":"
-const Separators_COMMA = ","
-const Separators_SLASH = "/"
-const Separators_SP = " "
-const Separators_EQUALS = "="
-const Separators_STAR = "*"
-const Separators_NEWLINE = "\r\n"
-const Separators_RETURN = "\n"
-const Separators_LESS_THAN = "<"
-const Separators_GREATER_THAN = ">"
-const Separators_AT = "@"
-const Separators_DOT = "."
-const Separators_QUESTION = "?"
-const Separators_POUND = "#"
-const Separators_AND = "&"
-const Separators_LPAREN = "("
-const Separators_RPAREN = ")"
-const Separators_DOUBLE_QUOTE = "\""
-const Separators_QUOTE = "'" //\'
-const Separators_HT = "\t"
-const Separators_PERCENT = "%"
 
 type GenericObject interface {
     Clone() interface{}

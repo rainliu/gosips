@@ -80,7 +80,7 @@ type UserInfo struct{
          */
 	func (this *UserInfo) String() string {
 		if this.password != ""{
-			return this.user + Separators_COLON + this.password;
+			return this.user + SIPSeparatorNames_COLON + this.password;
 		}//else{
 		 	return this.user;
 		//}
@@ -125,8 +125,8 @@ type UserInfo struct{
            // otherwise comparison of two SipUrl will fail because this
            // parameter is not set (whereas it is set in sip_messageParser).
             if 	user!= "" && 
-            	strings.Index(user, Separators_POUND) >= 0 || 
-				strings.Index(user, Separators_SEMICOLON) >= 0  {
+            	strings.Index(user, SIPSeparatorNames_POUND) >= 0 || 
+				strings.Index(user, SIPSeparatorNames_SEMICOLON) >= 0  {
                 this.SetUserType(TELEPHONE_SUBSCRIBER);
             } else {
             	this.SetUserType(USER);

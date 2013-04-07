@@ -54,14 +54,12 @@ const LexerCore_QUESTION = (int)('?')
 const LexerCore_AND = (int)('&')
 const LexerCore_UNDERSCORE = (int)('_')
 
-type Lexer map[string]int
-
 type LexerCore struct {
     StringTokenizer
 
     globalSymbolTable map[int]string
-    lexerTables       map[string]Lexer
-    currentLexer      Lexer
+    lexerTables       map[string]LexerMap
+    currentLexer      LexerMap
     currentLexerName  string
     currentMatch      *Token
 }
@@ -73,15 +71,33 @@ type LexerCore struct {
 func NewLexerCore(lexerName string, buffer string) *LexerCore {
     this := &LexerCore{}
 
+	this.StringTokenizer.super(buffer);
+
     this.globalSymbolTable = make(map[int]string)
-    this.lexerTables = make(map[string]Lexer)
-    this.currentLexer = make(Lexer)
+    this.lexerTables = make(map[string]LexerMap)
+    this.currentLexer = make(LexerMap)
     this.currentLexerName = lexerName
-    this.buffer = buffer
 
     return this
 }
 
+func (this *LexerCore) Super(lexerName, buffer string){
+	this.StringTokenizer.super(buffer);
+
+    this.globalSymbolTable = make(map[int]string)
+    this.lexerTables = make(map[string]LexerMap)
+    this.currentLexer = make(LexerMap)
+    this.currentLexerName = lexerName
+}
+
+func (this *LexerCore) SetLexerName(lexerName string){
+	this.currentLexerName = lexerName;
+}
+
+func (this *LexerCore) GetLexerName() string{
+	return this.currentLexerName;
+}
+	
 func (this *LexerCore) AddKeyword(name string, value int) {
     // System.out.println("addKeyword " + name + " value = " + value);
     // new Exception().printStackTrace();
@@ -100,11 +116,11 @@ func (this *LexerCore) LookupToken(value int) string {
     //}
 }
 
-func (this *LexerCore) AddLexer(lexerName string) Lexer {
+func (this *LexerCore) AddLexer(lexerName string) LexerMap {
     var ok bool
     this.currentLexer, ok = this.lexerTables[lexerName]
     if !ok {
-        this.currentLexer = make(Lexer)
+        this.currentLexer = make(LexerMap)
         this.lexerTables[lexerName] = this.currentLexer
     }
     return this.currentLexer
@@ -113,7 +129,12 @@ func (this *LexerCore) AddLexer(lexerName string) Lexer {
 //public abstract void selectLexer(String lexerName);
 
 func (this *LexerCore) SelectLexer(lexerName string) {
+	this.currentLexer = this.lexerTables[lexerName];
     this.currentLexerName = lexerName
+}
+
+func (this *LexerCore) CurrentLexer() LexerMap{
+	return this.currentLexer;	
 }
 
 /*protected LexerCore() {
@@ -197,7 +218,7 @@ func (this *LexerCore) PeekNextTokenK(ntokens int) []*Token {
  * can be matched.
  */
 func (this *LexerCore) Match(tok int) (t *Token, ParseException error) {
-    if Debug.parserDebug {
+    if Debug.ParserDebug {
         Debug.println("match " + strconv.Itoa(tok))
     }
     if tok > LexerCore_START && tok < LexerCore_END {

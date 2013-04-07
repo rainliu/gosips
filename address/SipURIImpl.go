@@ -42,7 +42,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
     func NewSipUri() *SipUri{
 		this := &SipUri{}
 
-		this.scheme = core.NetObject_SIP;
+		this.scheme = core.SIPTransportNames_SIP;
 		this.uriParms = core.NewNameValueList("uriparms");
 		this.qheaders = core.NewNameValueList("qheaders");
 		this.qheaders.SetSeparator("&");
@@ -56,7 +56,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
     */
     func (this *SipUri) SetScheme (scheme string) {
     	scheme = strings.ToLower(scheme)
-		if scheme!=core.NetObject_SIP && scheme!=core.NetObject_SIPS {
+		if scheme!=core.SIPTransportNames_SIP && scheme!=core.SIPTransportNames_SIPS {
 			return;//throw new IllegalArgumentException("bad scheme "+scheme);
 		}
 		this.scheme = scheme;
@@ -166,16 +166,16 @@ type SipUri struct {//implements javax.sip.address.SipURI{
     func (this *SipUri) String() string {
           var retval bytes.Buffer
           retval.WriteString(this.scheme);
-          retval.WriteString(core.Separators_COLON);
+          retval.WriteString(core.SIPSeparatorNames_COLON);
 	  	  if this.authority != nil{
              retval.WriteString(this.authority.String());
           }
           if this.uriParms.Len()!=0 {
-             retval.WriteString(core.Separators_SEMICOLON);
+             retval.WriteString(core.SIPSeparatorNames_SEMICOLON);
              retval.WriteString(this.uriParms.String());
           }
           if this.qheaders.Len()!=0 {
-            retval.WriteString(core.Separators_QUESTION);
+            retval.WriteString(core.SIPSeparatorNames_QUESTION);
             retval.WriteString(this.qheaders.String());
           }
           return retval.String();
@@ -198,7 +198,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
     func (this *SipUri) GetUserAtHost () string {
 	 	user := this.authority.GetUserInfo().GetUser();
 		host := this.authority.GetHost().String();
-		return user + core.Separators_AT + host;
+		return user + core.SIPSeparatorNames_AT + host;
     }
 
         /**
@@ -216,11 +216,11 @@ type SipUri struct {//implements javax.sip.address.SipURI{
         var s bytes.Buffer;
         if user!="" {
            s.WriteString(user);
-           s.WriteString(core.Separators_AT);
+           s.WriteString(core.SIPSeparatorNames_AT);
         }
         s.WriteString(host);
 		if port != -1 {
-	  		s.WriteString(core.Separators_COLON);
+	  		s.WriteString(core.SIPSeparatorNames_COLON);
 	  		s.WriteString(strconv.Itoa(port));
 	    }
 		//else
@@ -242,7 +242,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
          * @return Method parameter.
          */
     func (this *SipUri) GetMethod() string {
-        return this.GetParm(core.NetObject_METHOD).(string);
+        return this.GetParm(core.SIPTransportNames_METHOD).(string);
     }
 
 
@@ -277,7 +277,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
       * @return User parameter (user= phone or user=ip).
       */
     func (this *SipUri) GetUserType() string {
-        return this.uriParms.GetValue(core.NetObject_USER).(string);
+        return this.uriParms.GetValue(core.SIPTransportNames_USER).(string);
     }
 
 
@@ -377,11 +377,11 @@ type SipUri struct {//implements javax.sip.address.SipURI{
      * @return true if the user is a telephone subscriber.
      */
     func (this *SipUri) IsUserTelephoneSubscriber() bool {
-        usrtype := this.uriParms.GetValue(core.NetObject_USER).(string);
+        usrtype := this.uriParms.GetValue(core.SIPTransportNames_USER).(string);
         if usrtype == "" {
          	return false;
         }
-        return usrtype == (core.NetObject_PHONE);
+        return usrtype == (core.SIPTransportNames_PHONE);
     }
 
       /**
@@ -389,7 +389,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
        */
     func (this *SipUri) RemoveTTL() {
         if this.uriParms != nil {
-         	this.uriParms.Delete(core.NetObject_TTL);
+         	this.uriParms.Delete(core.SIPTransportNames_TTL);
     	}
     }
 
@@ -398,7 +398,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
      */
     func (this *SipUri) RemoveMAddr() {
         if this.uriParms != nil {
-        	this.uriParms.Delete(core.NetObject_MADDR);
+        	this.uriParms.Delete(core.SIPTransportNames_MADDR);
     	}
     }
 
@@ -407,7 +407,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
      */
     func (this *SipUri) RemoveTransport() {
         if this.uriParms != nil {
-        	this.uriParms.Delete(core.NetObject_TRANSPORT);
+        	this.uriParms.Delete(core.SIPTransportNames_TRANSPORT);
         }
     }
 
@@ -431,7 +431,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
      */
     func (this *SipUri) RemoveUserType() {
         if this.uriParms != nil{
-        	this.uriParms.Delete(core.NetObject_USER);
+        	this.uriParms.Delete(core.SIPTransportNames_USER);
         }
     }
 
@@ -447,7 +447,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
      */
     func (this *SipUri) RemoveMethod() {
         if this.uriParms != nil{
-         	this.uriParms.Delete(core.NetObject_METHOD);
+         	this.uriParms.Delete(core.SIPTransportNames_METHOD);
          }
     }
 
@@ -536,13 +536,13 @@ type SipUri struct {//implements javax.sip.address.SipURI{
          * @param mAddr Host Name to set
          */
     func (this *SipUri) SetMAddr( mAddr string)  {
-        nameValue:=this.uriParms.GetNameValue(core.NetObject_MADDR);
+        nameValue:=this.uriParms.GetNameValue(core.SIPTransportNames_MADDR);
         host:=&core.Host{};
         host.SetAddress(mAddr);
         if nameValue!=nil{
            nameValue.SetValue(host);
         }else {
-           nameValue= core.NewNameValue(core.NetObject_MADDR,host);
+           nameValue= core.NewNameValue(core.SIPTransportNames_MADDR,host);
            this.uriParms.AddNameValue(nameValue);
         }
     }
@@ -555,15 +555,15 @@ type SipUri struct {//implements javax.sip.address.SipURI{
       * @param  userParam - new value String value of the method parameter
       */
     func (this *SipUri) SetUserParam(  usertype string) {
-        this.uriParms.Delete(core.NetObject_USER);
-        this.uriParms.AddNameAndValue(core.NetObject_USER,usertype);
+        this.uriParms.Delete(core.SIPTransportNames_USER);
+        this.uriParms.AddNameAndValue(core.SIPTransportNames_USER,usertype);
     }
 
      /** set the Method
       * @param method method parameter
       */
     func (this *SipUri) SetMethod( method string) {
-        this.uriParms.AddNameAndValue(core.NetObject_METHOD,method);
+        this.uriParms.AddNameAndValue(core.SIPTransportNames_METHOD,method);
     }
 
      /**
@@ -623,7 +623,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
       * @return true if transport appears as a parameter and false otherwise.
       */
     func (this *SipUri) HasTransport() bool{
-		return this.HasParameter(core.NetObject_TRANSPORT);
+		return this.HasParameter(core.SIPTransportNames_TRANSPORT);
     }
 
     /**
@@ -701,7 +701,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
       * @return the value of the <code>lr</code> parameter
       */
      func (this *SipUri) GetLrParam() string {
-	    if this.HasParameter(core.NetObject_LR) {
+	    if this.HasParameter(core.SIPTransportNames_LR) {
 	    	return "true"
 	    }
 		return "";
@@ -713,7 +713,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
       * @return the value of the <code>maddr</code> parameter
       */
      func (this *SipUri) GetMAddrParam() string {
-        maddr :=  this.uriParms.GetNameValue(core.NetObject_MADDR);
+        maddr :=  this.uriParms.GetNameValue(core.SIPTransportNames_MADDR);
 		if maddr == nil {
 		 	return "";
 		}
@@ -726,7 +726,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
       * @return  the value of the <code>method</code> parameter
       */
      func (this *SipUri) GetMethodParam() string{
-		return this.GetParameter(core.NetObject_METHOD);
+		return this.GetParameter(core.SIPTransportNames_METHOD);
      }
 
      /**
@@ -786,7 +786,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
       */
      func (this *SipUri) GetTransportParam() string{
         if this.uriParms != nil {
-            return this.uriParms.GetValue(core.NetObject_TRANSPORT).(string);
+            return this.uriParms.GetValue(core.SIPTransportNames_TRANSPORT).(string);
         }
         return "";
      }
@@ -809,7 +809,7 @@ type SipUri struct {//implements javax.sip.address.SipURI{
       * <code>false</code> if it represents a sip URI.
       */
      func (this *SipUri) IsSecure() bool {
-		return strings.ToLower(this.GetScheme()) == (core.NetObject_SIPS);
+		return strings.ToLower(this.GetScheme()) == (core.SIPTransportNames_SIPS);
      }
 
      /** This method determines if this is a URI with a scheme of "sip" or "sips".
@@ -923,9 +923,9 @@ type SipUri struct {//implements javax.sip.address.SipURI{
       */
      func (this *SipUri) SetSecure( secure bool) {
          if secure{
-            this.scheme = core.NetObject_SIPS;
+            this.scheme = core.SIPTransportNames_SIPS;
          }else{
-          this.scheme = core.NetObject_SIP;
+          this.scheme = core.SIPTransportNames_SIP;
          }
      }
 
@@ -964,8 +964,8 @@ type SipUri struct {//implements javax.sip.address.SipURI{
 		}
 		if  strings.ToUpper(transport) == "UDP" ||
 	    	strings.ToUpper(transport) =="TCP" {
-            nv := core.NewNameValue(core.NetObject_TRANSPORT,strings.ToLower(transport));
-            this.uriParms.Delete(core.NetObject_TRANSPORT);
+            nv := core.NewNameValue(core.SIPTransportNames_TRANSPORT,strings.ToLower(transport));
+            this.uriParms.Delete(core.SIPTransportNames_TRANSPORT);
             this.uriParms.AddNameValue(nv);
 		}// else throw new ParseException ("bad transport " + transport, 0);
      }

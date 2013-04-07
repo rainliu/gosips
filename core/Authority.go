@@ -44,11 +44,11 @@ type Authority struct{
          */        
 	func (this *Authority) String() string {	
 		if this.userInfo != nil && this.hostPort !=nil {
-	       	  return this.userInfo.String() + Separators_AT + this.hostPort.String();
+	       	  return this.userInfo.String() + SIPSeparatorNames_AT + this.hostPort.String();
 		} else if this.hostPort !=nil{
 			return this.hostPort.String();
 		} else if this.userInfo !=nil {
-			return this.userInfo.String() + Separators_AT;
+			return this.userInfo.String() + SIPSeparatorNames_AT;
 		}
 		
 		return "";

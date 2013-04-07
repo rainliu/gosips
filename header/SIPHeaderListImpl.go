@@ -74,16 +74,16 @@ func (this *SIPHeaderListImpl) Concatenate(shl *SIPHeaderListImpl){//, topFlag b
      */
     func (this *SIPHeaderListImpl) String() string{
         if this.Len()==0 { 
-        	return this.headerName + ":" + core.Separators_NEWLINE;
+        	return this.headerName + ":" + core.SIPSeparatorNames_NEWLINE;
         }
         
         var encoding bytes.Buffer;//= new StringBuffer();
         // The following headers do not have comma separated forms for
         // multiple headers. Thus, they must be encoded separately.
-        if  this.headerName==SIPHeaderNames_WWW_AUTHENTICATE ||
-        	this.headerName==SIPHeaderNames_PROXY_AUTHENTICATE ||
-        	this.headerName==SIPHeaderNames_AUTHORIZATION ||
-        	this.headerName==SIPHeaderNames_PROXY_AUTHORIZATION { //||
+        if  this.headerName==core.SIPHeaderNames_WWW_AUTHENTICATE ||
+        	this.headerName==core.SIPHeaderNames_PROXY_AUTHENTICATE ||
+        	this.headerName==core.SIPHeaderNames_AUTHORIZATION ||
+        	this.headerName==core.SIPHeaderNames_PROXY_AUTHORIZATION { //||
 			//this instanceof ExtensionHeaderList ) {
             //ListIterator li = hlist.listIterator();
             for e := this.Front(); e != nil; e = e.Next() {
@@ -98,7 +98,7 @@ func (this *SIPHeaderListImpl) Concatenate(shl *SIPHeaderListImpl){//, topFlag b
         } else {
 	    // These can be concatenated together in an comma separated
 	    // list.
-            return this.headerName + core.Separators_COLON + core.Separators_SP + this.EncodeBody() + core.Separators_NEWLINE;
+            return this.headerName + core.SIPSeparatorNames_COLON + core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE;
         }
     }
     
@@ -117,7 +117,7 @@ func (this *SIPHeaderListImpl) Concatenate(shl *SIPHeaderListImpl){//, topFlag b
 	            encoding.WriteString(e.Value.(string));
 	        }
 	        if e.Next()!=nil{
-	        	encoding.WriteString(core.Separators_COMMA);
+	        	encoding.WriteString(core.SIPSeparatorNames_COMMA);
 	        }
 	    }
        

@@ -156,18 +156,18 @@ type AddressImpl struct{//implements gosip/address/Address
         
         var encoding bytes.Buffer;//= new StringBuffer();
         if this.displayName != "" {
-            encoding.WriteString(core.Separators_DOUBLE_QUOTE)
+            encoding.WriteString(core.SIPSeparatorNames_DOUBLE_QUOTE)
             encoding.WriteString(this.displayName)
-            encoding.WriteString(core.Separators_DOUBLE_QUOTE)
-            encoding.WriteString(core.Separators_SP);
+            encoding.WriteString(core.SIPSeparatorNames_DOUBLE_QUOTE)
+            encoding.WriteString(core.SIPSeparatorNames_SP);
         }
         if this.address != nil {
             if this.addressType == NAME_ADDR || this.displayName != ""{
-                encoding.WriteString(core.Separators_LESS_THAN);
+                encoding.WriteString(core.SIPSeparatorNames_LESS_THAN);
             }
             encoding.WriteString(this.address.Encode());
             if this.addressType == NAME_ADDR || this.displayName != ""{
-                encoding.WriteString(core.Separators_GREATER_THAN);
+                encoding.WriteString(core.SIPSeparatorNames_GREATER_THAN);
             }
         }
         return encoding.String();

@@ -59,7 +59,7 @@ type CallIdentifier struct{
          */
 	func (this *CallIdentifier) String() string {
 		if this.host != "" {
-			return this.localId + core.Separators_AT + this.host;
+			return this.localId + core.SIPSeparatorNames_AT + this.host;
 		} else {
 			return this.localId;
 		}

@@ -68,9 +68,9 @@ type Protocol struct{// SIPObject {
          */  
         func (this *Protocol) String() string {
             return  strings.ToUpper(this.protocolName) + 
-            	    core.Separators_SLASH + 
+            	    core.SIPSeparatorNames_SLASH + 
 					this.protocolVersion +
-                	core.Separators_SLASH + 
+                	core.SIPSeparatorNames_SLASH + 
                 	strings.ToUpper(this.transport);
         }
 

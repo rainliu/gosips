@@ -22,7 +22,7 @@ func NewNameValue(n string, v interface{}) *NameValue {
 
     this.name = n
     this.value = v
-    this.separator = Separators_EQUALS
+    this.separator = SIPSeparatorNames_EQUALS
     this.quotes = ""
 
     return this
@@ -41,7 +41,7 @@ func (this *NameValue) SetSeparator(sep string) {
  */
 func (this *NameValue) SetQuotedValue() {
     this.isQuotedString = true
-    this.quotes = Separators_DOUBLE_QUOTE
+    this.quotes = SIPSeparatorNames_DOUBLE_QUOTE
 }
 
 /** Return true if the value is quoted in doublequotes.

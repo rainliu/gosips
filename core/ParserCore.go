@@ -13,7 +13,7 @@ type ParserCore struct {
     //public static final boolean debug = Debug.parserDebug;
     nesting_level int //protected static int
 
-    lexer *LexerCore
+    lexer Lexer;//*LexerCore
 }
 
 func NewParserCore(buffer string) *ParserCore {
@@ -24,8 +24,19 @@ func NewParserCore(buffer string) *ParserCore {
     return this
 }
 
+func (this *ParserCore) Super(buffer string){
+	this.lexer = NewLexerCore("CharLexer", buffer)	
+}
+
+func (this *ParserCore) GetLexer() Lexer {
+	return this.lexer;
+}
+func (this *ParserCore) SetLexer( lexer Lexer) {
+	this.lexer = lexer;
+}
+
 func (this *ParserCore) GetNameValue(separator byte) *NameValue {
-    if Debug.parserDebug {
+    if Debug.ParserDebug {
         this.Dbg_enter("nameValue")
         defer this.Dbg_leave("nameValue")
     }
@@ -67,7 +78,7 @@ func (this *ParserCore) Dbg_enter(rule string) {
     for i := 0; i < this.nesting_level; i++ {
         stringBuffer.WriteString(">")
     }
-    if Debug.parserDebug {
+    if Debug.ParserDebug {
         println(stringBuffer.String() + rule + "\nlexer buffer = \n" + this.lexer.GetRest())
     }
     this.nesting_level++
@@ -78,7 +89,7 @@ func (this *ParserCore) Dbg_leave(rule string) {
     for i := 0; i < this.nesting_level; i++ {
         stringBuffer.WriteString("<")
     }
-    if Debug.parserDebug {
+    if Debug.ParserDebug {
         println(stringBuffer.String() + rule + "\nlexer buffer = \n" + this.lexer.GetRest())
     }
     this.nesting_level--
@@ -89,7 +100,7 @@ func (this *ParserCore) Dbg_leave(rule string) {
 }*/
 
 func (this *ParserCore) PeekLine(rule string) {
-    if Debug.parserDebug {
+    if Debug.ParserDebug {
         Debug.println(rule + " " + this.lexer.PeekLine())
     }
 }

@@ -71,7 +71,7 @@ type CSeq struct{//implements javax.sip.header.CSeqHeader{
      * @return String with canonical encoded header.
      */
     func (this *CSeq) String() string{
-        return this.headerName + core.Separators_COLON + core.Separators_SP + this.EncodeBody() + core.Separators_NEWLINE;
+        return this.headerName + core.SIPSeparatorNames_COLON + core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE;
     }
     
     /**
@@ -80,7 +80,7 @@ type CSeq struct{//implements javax.sip.header.CSeqHeader{
      * @return encoded string.
      */
     func (this *CSeq) EncodeBody() string{
-        return strconv.Itoa(this.seqno) + core.Separators_SP + strings.ToUpper(this.method);
+        return strconv.Itoa(this.seqno) + core.SIPSeparatorNames_SP + strings.ToUpper(this.method);
     }
     
 
