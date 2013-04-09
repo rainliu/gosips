@@ -285,11 +285,14 @@ func (this *LexerCore) Match(tok int) (t *Token, ParseException error) {
 
 func (this *LexerCore) SPorHT() {
     //try {
-
-    for ch, err := this.LookAheadK(0); err != nil && (ch == ' ' || ch == '\t'); ch, err = this.LookAheadK(0) {
-        this.ConsumeK(1)
+    var ch byte;
+    
+    ch, _ = this.LookAheadK(0);
+    for ch == ' ' || ch == '\t' {
+    	this.ConsumeK(1)
+    	ch, _ = this.LookAheadK(0);
     }
-    //} catch (ParseException ex) {
+	//} catch (ParseException ex) {
     // Ignore
     //}
 }
@@ -505,13 +508,17 @@ func (this *LexerCore) CharAsString(nchars int) string {
 
 /** Get and consume the next number.
  */
-func (this *LexerCore) Number() (s string, ParseException error) {
+func (this *LexerCore) Number() (n int, ParseException error) {
     var retval bytes.Buffer //= new StringBuffer();
     //try {
     next, err := this.LookAheadK(0)
-    if !this.IsDigit(next) || err != nil {
-        return "", errors.New("ParseException: Unexpected token")
+    if err != nil {
+        return -1, err;
     }
+    if !this.IsDigit(next) {
+    	return -1, errors.New("ParseException: unexpected token \""+string(next)+"\"");
+    }
+    
     retval.WriteByte(next)
     this.ConsumeK(1)
     for {
@@ -523,7 +530,12 @@ func (this *LexerCore) Number() (s string, ParseException error) {
             break
         }
     }
-    return retval.String(), nil
+    
+    if n, err = strconv.Atoi(retval.String()); err!=nil{
+    	return -1, err;
+    }else{
+    	return n, nil
+    }
     //} catch (ParseException ex) {
     //    return retval.toString();
     //}

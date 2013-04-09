@@ -35,7 +35,7 @@ func (this *ParserCore) SetLexer( lexer Lexer) {
 	this.lexer = lexer;
 }
 
-func (this *ParserCore) GetNameValue(separator byte) *NameValue {
+func (this *ParserCore) NameValue(separator byte) *NameValue {
     if Debug.ParserDebug {
         this.Dbg_enter("nameValue")
         defer this.Dbg_leave("nameValue")

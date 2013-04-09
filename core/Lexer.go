@@ -39,7 +39,7 @@ type Lexer interface{
     LookupToken(value int) string
     MarkInputPosition() int
     Match(tok int) (t *Token, ParseException error)
-    Number() (s string, ParseException error)
+    Number() (n int, ParseException error)
     PeekNextId() string
     PeekNextToken() *Token
     PeekNextTokenK(ntokens int) []*Token

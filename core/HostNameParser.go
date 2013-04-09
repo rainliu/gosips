@@ -3,7 +3,7 @@ package core
 import (
     "bytes"
     "errors"
-    "strconv"
+    //"strconv"
 )
 
 /** Parser for host names.
@@ -157,8 +157,8 @@ func (this *HostNameParser) GetHostPort() (hp *HostPort, ParseException error) {
             this.lexer.ConsumeK(1)
             //try {
             port, _ := this.lexer.Number()
-            p, _ := strconv.Atoi(port)
-            hp.SetPort(p)
+            //p, _ := strconv.Atoi(port)
+            hp.SetPort(port)
             /*} catch (NumberFormatException nfe) {
               throw new ParseException
                       (lexer.getBuffer() + " :Error parsing port ",

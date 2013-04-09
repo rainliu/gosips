@@ -31,7 +31,7 @@ type CallID struct{ // implements javax.sip.header.CallIdHeader {
 	*/
 	func NewCallID(callId string) (this *CallID, IllegalArgumentException error) {
 		this = &CallID{};
-	    this.SIPHeaderImpl.headerName = core.SIPHeaderNames_CALL_ID;
+	    this.SIPHeaderImpl.super(core.SIPHeaderNames_CALL_ID);
 		this.callIdentifier, IllegalArgumentException = NewCallIdentifier(callId);
 		if IllegalArgumentException!=nil{
 			return nil, IllegalArgumentException;
@@ -39,6 +39,13 @@ type CallID struct{ // implements javax.sip.header.CallIdHeader {
 			return this, nil;
 		}
 	}
+	
+	func (this *CallID) super(callId string) (IllegalArgumentException error){
+		this.SIPHeaderImpl.super(core.SIPHeaderNames_CALL_ID);
+		this.callIdentifier, IllegalArgumentException = NewCallIdentifier(callId);
+		return IllegalArgumentException;
+	}
+	
 	
         /**
          * Compare two call ids for equality.
@@ -52,7 +59,10 @@ type CallID struct{ // implements javax.sip.header.CallIdHeader {
             CallID that = (CallID) other;
             return this.callIdentifier.equals(that.callIdentifier);    
         }*/
-	
+	func (this *CallID) String() string{
+		return this.headerName + core.SIPSeparatorNames_COLON + 
+			core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE;
+	}
         
 	/** Encode the body part of this header (i.e. leave out the hdrName).
 	*@return String encoded body part of the header.
@@ -100,7 +110,7 @@ type CallID struct{ // implements javax.sip.header.CallIdHeader {
          * Set the callIdentifier member.
          * @param cid CallIdentifier to set (localId@host).
          */
-	func (this *CallID) setCallIdentifier(  cid  *CallIdentifier) {
+	func (this *CallID) SetCallIdentifier(  cid  *CallIdentifier) {
             this.callIdentifier = cid;
         }
 
