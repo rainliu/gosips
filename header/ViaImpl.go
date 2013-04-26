@@ -15,7 +15,7 @@ import (
 
 
 type Via struct {//implements javax.sip.header.ViaHeader {
-    ParametersHeader
+    ParametersHeaderImpl
 
     /** sentProtocol field.
      */    
@@ -35,14 +35,14 @@ type Via struct {//implements javax.sip.header.ViaHeader {
     func NewVia() *Via {
     	this := &Via{};
     	
-        this.ParametersHeader.super(core.SIPHeaderNames_VIA);
+        this.ParametersHeaderImpl.super(core.SIPHeaderNames_VIA);
         this.sentProtocol=NewProtocol();
     	
     	return this;
     }
     
     func (this *Via) super(name string) {
-    	this.ParametersHeader.super(name);
+    	this.ParametersHeaderImpl.super(name);
     	this.sentProtocol=NewProtocol();
     }
     

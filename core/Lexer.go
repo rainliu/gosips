@@ -27,7 +27,8 @@ type Lexer interface{
     AddLexer(lexerName string) LexerMap
     ByteStringNoComma() string
     ByteStringNoSemicolon() string
-    CharAsString(nchars int) string
+    CharAsString(ch byte) string
+    NCharAsString(nchars int) string
     Comment() (s string, ParseException error)
     CurrentLexer() LexerMap
     GetBuffer() string

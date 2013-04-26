@@ -2,6 +2,7 @@ package parser
 
 import (
 	"gosip/header"
+	"gosip/core"
 )
 
 
@@ -11,9 +12,11 @@ type AddressParametersParser struct{
  	ParametersParser
 }
 
-	/*protected AddressParametersParser(Lexer lexer) {
-		super(lexer);
-	}*/
+	func NewAddressParametersParserFromLexer(lexer core.Lexer) *AddressParametersParser {
+		this := &AddressParametersParser{};
+		this.ParametersParser.superFromLexer(lexer);
+		return this;
+	}
 
 	func NewAddressParametersParser(buffer string) *AddressParametersParser {
 		this := &AddressParametersParser{}
@@ -25,7 +28,11 @@ type AddressParametersParser struct{
 		this.ParametersParser.super(buffer);
 	}
 
-	func (this *AddressParametersParser) Parse(addressParametersHeader *header.AddressParametersHeader) (ParseException error) {
+	func (this *AddressParametersParser) superFromLexer(lexer core.Lexer){
+		this.ParametersParser.superFromLexer(lexer);
+	}
+	
+	func (this *AddressParametersParser) Parse(addressParametersHeader header.AddressParametersHeader) (ParseException error) {
 		//dbg_enter("AddressParametersParser.parse");
 		//try {
 		addressParser := NewAddressParserFromLexer(this.GetLexer());

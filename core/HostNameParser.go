@@ -23,15 +23,15 @@ func NewHostNameParser(hname string) *HostNameParser {
 
 /** The lexer is initialized with the buffer.
  */
- /*
-func NewHostNameParserFromLexerCore(lexer *LexerCore) *HostNameParser {
+ 
+func NewHostNameParserFromLexer(lexer Lexer) *HostNameParser {
     this := &HostNameParser{}
 
-    this.lexer = lexer
-    this.lexer.SelectLexer("charLexer")
+    this.ParserCore.SetLexer(lexer)
+    this.ParserCore.GetLexer().SelectLexer("charLexer")
 
     return this
-}*/
+}
 
 func (this *HostNameParser) DomainLabel() (s string, ParseException error) {
     var retval bytes.Buffer //= new StringBuffer();

@@ -48,15 +48,15 @@ type AddressParser struct{
 	    //if (debug) dbg_enter("nameAddr");
 	    //try {
 	    var ch byte;
-	    var err error;
+	    //var err error;
 	    
 	    lexer := this.GetLexer();
 		if ch, _ = lexer.LookAheadK(0); ch == '<' {
 		   lexer.Match('<');
 		   lexer.SelectLexer("sip_urlLexer");
 		   lexer.SPorHT();
-		   uriParser := NewURLParser(lexer);
-		   uri := uriParser.UriReference();
+		   uriParser := NewURLParserFromLexer(lexer);
+		   uri, _ := uriParser.UriReference();
 		   addr = address.NewAddressImpl();
 		   addr.SetAddressType(address.NAME_ADDR);
 		   addr.SetURI(uri);
@@ -76,8 +76,8 @@ type AddressParser struct{
 		   addr.SetDisplayName(strings.TrimSpace(name));
 		   lexer.Match('<');
 		   lexer.SPorHT();
-		   uriParser := NewURLParser(lexer);
-		   uri := uriParser.UriReference();
+		   uriParser := NewURLParserFromLexer(lexer);
+		   uri, _ := uriParser.UriReference();
 		   addr = address.NewAddressImpl();
 		   addr.SetAddressType(address.NAME_ADDR);
 		   addr.SetURI(uri);
@@ -96,11 +96,11 @@ type AddressParser struct{
 	    //AddressImpl retval = null;
 	    //try {
 	    var ch byte;
-	    var err error
+	    //var err error
 	    lexer := this.GetLexer();
 	 	k := 0;
 		for lexer.HasMoreChars() {
-		   if ch, err = lexer.LookAheadK(k); 
+		   if ch, _ = lexer.LookAheadK(k); 
 		    ch == '<' || 
 			ch == '"' ||
 			ch == ':' ||
@@ -112,15 +112,15 @@ type AddressParser struct{
 		   	k++;
 		   }
 		}
-		if ch, err = lexer.LookAheadK(k); 
+		if ch, _ = lexer.LookAheadK(k); 
 			ch == '<' || 
 		    ch == '"'  {
 			retval,_ = this.NameAddr();
 		} else if ch == ':' || 
 				  ch == '/' {
 			retval = address.NewAddressImpl();
-			uriParser := NewURLParser(lexer);
-		 	uri := uriParser.UriReference();
+			uriParser := NewURLParserFromLexer(lexer);
+		 	uri, _ := uriParser.UriReference();
 			retval.SetAddressType(address.ADDRESS_SPEC);
 			retval.SetURI(uri);
 		} else {

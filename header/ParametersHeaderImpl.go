@@ -65,25 +65,25 @@ const ParameterNames_ID="id";
 */
 
 
-type ParametersHeader struct{//implements javax.sip.header.Parameters {
+type ParametersHeaderImpl struct{//implements javax.sip.header.Parameters {
 	SIPHeaderImpl 
         
 	parameters *core.NameValueList;
 }
 	
-	//protected ParametersHeader() {
+	//protected ParametersHeaderImpl() {
 	//	this.parameters = new NameValueList();
 	//}
 
-	func NewParametersHeader(hdrName string) *ParametersHeader {
-		this := &ParametersHeader{}
+	func NewParametersHeaderImpl(hdrName string) *ParametersHeaderImpl {
+		this := &ParametersHeaderImpl{}
 		this.SIPHeaderImpl.super(hdrName);
 		this.parameters = core.NewNameValueList(hdrName);
 		
 		return this;
 	}
 	
-	func (this *ParametersHeader) super(hdrName string){	
+	func (this *ParametersHeaderImpl) super(hdrName string){	
 		this.SIPHeaderImpl.super(hdrName);
 		this.parameters = core.NewNameValueList(hdrName);
 	}
@@ -96,7 +96,7 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
       * @return the value of specified parameter
       */
 
-     func (this *ParametersHeader) GetParameter( name string) string {
+     func (this *ParametersHeaderImpl) GetParameter( name string) string {
             return this.parameters.GetParameter(name);
             
      }
@@ -108,18 +108,18 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
        *@return the object associated with the name.
        *
        */
-      func (this *ParametersHeader) GetParameterValue( name string) interface{} {
+      func (this *ParametersHeaderImpl) GetParameterValue( name string) interface{} {
             return this.parameters.GetValue(name);
       }
 
      /**
       * Returns an Iterator over the names (Strings) of all parameters present
-      * in this ParametersHeader.
+      * in this ParametersHeaderImpl.
       *
       * @return an Iterator over all the parameter names
       */
 
-    func (this *ParametersHeader) GetParameterNames() *list.List {
+    func (this *ParametersHeaderImpl) GetParameterNames() *list.List {
         return this.parameters.GetNames();
     }
 
@@ -128,19 +128,19 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
       *@return true if the parameters list is non-empty.
       */
 
-      func (this *ParametersHeader) HasParameters() bool{
+      func (this *ParametersHeaderImpl) HasParameters() bool{
 		return this.parameters != nil && this.parameters.Len()!=0;
       }
     
      /**
-     * Removes the specified parameter from Parameters of this ParametersHeader.
+     * Removes the specified parameter from Parameters of this ParametersHeaderImpl.
      * This method returns silently if the parameter is not part of the
-     * ParametersHeader.
+     * ParametersHeaderImpl.
      *
      * @param name - a String specifying the parameter name
      */
 
-    func (this *ParametersHeader) RemoveParameter( name string) {
+    func (this *ParametersHeaderImpl) RemoveParameter( name string) {
     	this.parameters.Delete(name);
     }
     
@@ -163,7 +163,7 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
      * unexpectedly while parsing the parameter name or value.
      *
      */
-    func (this *ParametersHeader) SetParameter( name,  value string)  {
+    func (this *ParametersHeaderImpl) SetParameter( name,  value string)  {
 		 nv := this.parameters.GetNameValue(name);
 		if nv != nil {
 		   nv.SetValue(value);
@@ -191,7 +191,7 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
      * unexpectedly while parsing the parameter name or value.
      *
      */
-    func (this *ParametersHeader) SetQuotedParameter( name,  value string) {
+    func (this *ParametersHeaderImpl) SetQuotedParameter( name,  value string) {
 		nv := this.parameters.GetNameValue(name);
 		if nv != nil {
 		 	nv.SetValue(value);
@@ -218,7 +218,7 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
      * unexpectedly while parsing the parameter name or value.
      *
      */
-    /*func (this *ParametersHeader) SetParameter( name string,  value int) {
+    /*func (this *ParametersHeaderImpl) SetParameter( name string,  value int) {
 	Integer val = new Integer(value);
 	NameValue nv = parameters.getNameValue(name);
 	if (nv != null) {
@@ -316,14 +316,14 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
       *
       *@return true if the parameter exists and false if not.
       */
-     func (this *ParametersHeader) HasParameter( parameterName string) bool {
+     func (this *ParametersHeaderImpl) HasParameter( parameterName string) bool {
 		return this.parameters.HasNameValue(parameterName);
      }
 	
    /**
     *Remove all parameters.
     */
-   func (this *ParametersHeader) RemoveParameters() {
+   func (this *ParametersHeaderImpl) RemoveParameters() {
        this.parameters.Init();// = new NameValueList();
    }
     
@@ -331,7 +331,7 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
     * get the parameter list.
     * @return parameter list
     */
-    func (this *ParametersHeader) GetParameters () *core.NameValueList{
+    func (this *ParametersHeaderImpl) GetParameters () *core.NameValueList{
         return this.parameters;
     }
 
@@ -339,7 +339,7 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
      *
      * @param nameValue - the name value of the parameter to set.
      */
-    //func (this *ParametersHeader) SetParameter( nameValue *NameValue) {
+    //func (this *ParametersHeaderImpl) SetParameter( nameValue *NameValue) {
 	//System.out.println("setParameter " + this + " nbv = " + nameValue);
 	//	this.parameters.AddNameValue(nameValue);
     //}
@@ -348,7 +348,7 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
      *
      *@param nameValueList - the name value list to set as the parameter list.
      */
-    func (this *ParametersHeader) SetParameters(  parameters *core.NameValueList) {
+    func (this *ParametersHeaderImpl) SetParameters(  parameters *core.NameValueList) {
         this.parameters = parameters;
     }
     
@@ -359,7 +359,7 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
      *
      *@return -1 if the parameter is not defined in the header.
      */
-    /*func (this *ParametersHeader) GetParameterAsInt(String parameterName) int{
+    /*func (this *ParametersHeaderImpl) GetParameterAsInt(String parameterName) int{
         if (this.getParameterValue(parameterName) != null) {
                 try {
                   if (this.getParameterValue(parameterName) 
@@ -491,12 +491,12 @@ type ParametersHeader struct{//implements javax.sip.header.Parameters {
 	*
 	*@return the name value pair for the given parameter name.
 	*/
-	func (this *ParametersHeader) GetNameValue( parameterName string) *core.NameValue {
+	func (this *ParametersHeaderImpl) GetNameValue( parameterName string) *core.NameValue {
 		return this.parameters.GetNameValue(parameterName);
 	}
 	
     
     
-    func (this *ParametersHeader) EncodeBody() string{
+    func (this *ParametersHeaderImpl) EncodeBody() string{
     	return ""
     }

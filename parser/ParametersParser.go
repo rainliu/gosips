@@ -2,6 +2,7 @@ package parser
 
 import (
 	"gosip/header"
+	"gosip/core"
 )
 
 
@@ -11,9 +12,11 @@ type ParametersParser struct{
 	HeaderParserImpl
 }
 
-	/*protected ParametersParser(Lexer lexer) {
-		super((Lexer)lexer);
-	}*/
+	func NewParametersParserFromLexer(lexer core.Lexer) *ParametersParser{
+		this :=&ParametersParser{};
+		this.HeaderParserImpl.superFromLexer(lexer);
+		return this;
+	}
 
 	func NewParametersParser(buffer string) *ParametersParser {
 		this := &ParametersParser{};
@@ -24,8 +27,12 @@ type ParametersParser struct{
 	func (this *ParametersParser) super(buffer string){
 		this.HeaderParserImpl.super(buffer);
 	}
+	
+	func (this *ParametersParser) superFromLexer(lexer core.Lexer) {
+		this.HeaderParserImpl.superFromLexer(lexer);
+	}
 
-	func (this *ParametersParser) Parse(parametersHeader *header.ParametersHeader) (ParseException error) {
+	func (this *ParametersParser) Parse(parametersHeader header.ParametersHeader) (ParseException error) {
 		var ch byte;
 		var err error;
 		

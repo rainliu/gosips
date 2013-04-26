@@ -34,7 +34,7 @@ type HeaderParserImpl struct{
     func NewHeaderParserImplFromLexer(lexer core.Lexer) *HeaderParserImpl {
     	this := &HeaderParserImpl{}
     	
-        this.SetLexer(lexer);
+        this.ParserImpl.SetLexer(lexer);
     	this.ParserImpl.GetLexer().SetLexerName("command_keywordLexer");
     	
     	return this;

@@ -483,14 +483,16 @@ func (this *LexerCore) ByteStringNoComma() string {
     return retval.String()
 }
 
-/*public static String charAsString(char ch) {
-    return new Character(ch).toString();
-}*/
+func (this *LexerCore) CharAsString(ch byte) string {
+	var retval bytes.Buffer
+	retval.WriteByte(ch);
+    return retval.String();
+}
 
 /** Lookahead in the inputBuffer for n chars and return as a string.
  * Do not consume the input.
  */
-func (this *LexerCore) CharAsString(nchars int) string {
+func (this *LexerCore) NCharAsString(nchars int) string {
     var retval bytes.Buffer // new StringBuffer();
     //try {
     for i := 0; i < nchars; i++ {

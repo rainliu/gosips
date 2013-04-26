@@ -15,18 +15,18 @@ import (
 */
 
 type To struct{ //  implements javax.sip.header.ToHeader {
-	AddressParametersHeader
+	AddressParametersHeaderImpl
 }
         /** default Constructor.
          */
     func NewTo() *To{
     	this := &To{};
-		this.AddressParametersHeader.super(core.SIPHeaderNames_TO);
+		this.AddressParametersHeaderImpl.super(core.SIPHeaderNames_TO);
 		return this;
     }
     
     func (this *To) super(name string) {
-    	this.AddressParametersHeader.super(name);
+    	this.AddressParametersHeaderImpl.super(name);
     }
 
 	/** Generate a TO header from a FROM header
