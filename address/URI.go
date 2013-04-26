@@ -61,7 +61,7 @@ type URI interface{// extends Cloneable, Serializable{
      *
      * @return String The stringified version of the URI
      */    
-    Encode() string;
+    String() string;
             
 }
 

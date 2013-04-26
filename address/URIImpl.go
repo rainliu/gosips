@@ -42,7 +42,7 @@ type GenericURI struct {// implements gosip.address.URI
     /** Encode the URI.
      * @return The encoded URI
      */    
-    func (this *GenericURI) Encode() string {
+    func (this *GenericURI) String() string {
        return this.uriString;
        
     }

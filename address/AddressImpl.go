@@ -111,7 +111,7 @@ type AddressImpl struct{//implements gosip/address/Address
     	if sipuri, ok:=this.address.(*SipUri); ok{
     		sipuri.GetUserAtHostPort();
     	}
-    	return this.address.Encode();    
+    	return this.address.String();    
     }
 
     /** Get the host name from the address.
@@ -165,7 +165,7 @@ type AddressImpl struct{//implements gosip/address/Address
             if this.addressType == NAME_ADDR || this.displayName != ""{
                 encoding.WriteString(core.SIPSeparatorNames_LESS_THAN);
             }
-            encoding.WriteString(this.address.Encode());
+            encoding.WriteString(this.address.String());
             if this.addressType == NAME_ADDR || this.displayName != ""{
                 encoding.WriteString(core.SIPSeparatorNames_GREATER_THAN);
             }

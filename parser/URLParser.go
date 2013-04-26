@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"fmt"
 	"bytes"
 	"strings"
 	"gosip/core"
@@ -16,7 +17,7 @@ type URLParser struct{
     
     func NewURLParser(url string) *URLParser {
     	this := &URLParser{}
-        this.ParserImpl.SetLexer(core.NewLexerCore("sip_urlLexer",url));
+        this.ParserImpl.SetLexer(NewLexerImpl("sip_urlLexer",url));
         return this;
     }
     
@@ -278,8 +279,8 @@ type URLParser struct{
         t2 := vect[1];
         //try {
 
-	     // System.out.println("token = "  + t1.getTokenValue());
-	     // System.out.println("tokenval = " + t1.getTokenType());
+	     fmt.Printf("token = %s\n", t1.GetTokenValue());
+	     fmt.Printf("tokenval = %d\n", t1.GetTokenType());
 
             if t1.GetTokenType() == TokenTypes_SIP  {
                 if t2.GetTokenType() == ':'{
@@ -294,6 +295,7 @@ type URLParser struct{
 				 return nil, this.CreateParseException("Expecting ':'");
 				}
             } else {
+            	println("i'm hit");
                 urlString := this.UricString();
                 //try {
                     retval = address.NewGenericURI(urlString);
@@ -416,7 +418,7 @@ type URLParser struct{
         //}
     }
     
-    func (this *URLParser)  Local_phone_number()(tn *core.TelephoneNumber, ParseException error) {
+    func (this *URLParser) Local_phone_number()(tn *core.TelephoneNumber, ParseException error) {
         //if (debug) dbg_enter("local_phone_number");
         tn = core.NewTelephoneNumber();
         tn.SetGlobal(false);

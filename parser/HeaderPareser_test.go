@@ -3,6 +3,24 @@ package parser
 import (
 	"testing"
 )
+	func TestAddressParser(t *testing.T) {
+	     var addresses =[]string { 
+		"<sip:user@example.com?Route=%3csip:sip.example.com%3e>",
+		"\"M. Ranganathan\"   <sip:mranga@nist.gov>",
+		"<sip:+1-650-555-2222@ss1.wcom.com;user=phone>",
+		"M. Ranganathan <sip:mranga@nist.gov>" };
+
+	    for i := 0; i < len(addresses); i++ {
+        	addressParser := NewAddressParser(addresses[i]);
+			if addr, err := addressParser.Address(); err!=nil{
+            	t.Log(err);
+            	t.Fail();
+            }else{
+            	t.Log("encoded = " + addr.String());
+            }
+	    }
+	}
+	
 	func testHeaderParser(t *testing.T, hp HeaderParser){
 			if sh, err := hp.Parse(); err!=nil{
             	t.Log(err);
@@ -43,28 +61,10 @@ import (
 		}	
 	}
 	
-	func TestAddressParser(t *testing.T) {
-	     var addresses =[]string { 
-		"<sip:user@example.com?Route=%3csip:sip.example.com%3e>",
-		"\"M. Ranganathan\"   <sip:mranga@nist.gov>",
-		"<sip:+1-650-555-2222@ss1.wcom.com;user=phone>",
-		"M. Ranganathan <sip:mranga@nist.gov>" };
+	
 
-	    for i := 0; i < len(addresses); i++ {
-        	addressParser := NewAddressParser(addresses[i]);
-			if addr, err := addressParser.Address(); err!=nil{
-            	t.Log(err);
-            	t.Fail();
-            }else{
-            	t.Log("encoded = " + addr.String());
-            }
-	    }
-	}
-
-
-/**
-static private String urls[] = 
-{ 
+    func TestURLParser(t *testing.T) {
+        var urls = []string { 
    "sip:conference=1234@sip.convedia.com;xyz=pqd",
    "sip:herbivore.ncsl.nist.gov:5070;maddr=129.6.55.251;lc",
   "sip:1-301-975-3664@foo.bar.com;user=phone", "sip:129.6.55.181",
@@ -79,28 +79,18 @@ static private String urls[] =
   "sip:alice",
   "sip:alice@registrar.com;method=REGISTER",
   "sip:annc@10.10.30.186:6666;early=no;play=http://10.10.30.186:8080/examples/pin.vxml",
-"tel:+463-1701-4291" ,
-"tel:46317014291" ,
-"http://10.10.30.186:8080/examples/pin.vxml" 
-};
+	"tel:+463-1701-4291" ,
+	"tel:46317014291" ,
+	"http://10.10.30.186:8080/examples/pin.vxml" };
 
-    public static void main(String[] args) {
-        
-        try {
-            for (int i = 0; i < urls.length; i++) {
-                
-                String url = urls[i];
-                System.out.println("URI = " + url);
-                URLParser urlParser = new URLParser(url);
-                GenericURI uri = urlParser.parse();
-		System.out.println("class = " + uri.getClass());
-                System.out.println("encoded URI = " + uri.toString());
-                System.out.println("cloned encoded URI = " + 
-				uri.clone().toString());
+            for i := 0; i < len(urls); i++ {
+            	hp := NewURLParser(urls[i]);
+            	if sh, err := hp.Parse(); err!=nil{
+            		t.Log(err);
+            		t.Fail();
+            	}else{
+            		t.Log("encoded = " + sh.String());
+            	}
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        
     }
-**/
+
