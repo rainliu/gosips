@@ -103,7 +103,7 @@ type Header interface {
      * @return <code>true</code> if <code>obj</code> is an instance of this class
      * representing the same SIP Header as this, <code>false</code> otherwise.
      */
-    Equals(obj interface{}) bool;
+    //Equals(obj interface{}) bool;
 
     /**
      * Creates and returns a deep copy of the Header. This methods must ensure a

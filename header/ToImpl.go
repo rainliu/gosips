@@ -78,11 +78,12 @@ type To struct{ //  implements javax.sip.header.ToHeader {
          	return "";
 		}
 		var retval bytes.Buffer;
-        if this.addr.GetAddressType() == address.ADDRESS_SPEC {
+		addr,_:=this.addr.(*address.AddressImpl);
+        if addr.GetAddressType() == address.ADDRESS_SPEC {
             retval.WriteString(core.SIPSeparatorNames_LESS_THAN);
         }
         retval.WriteString(this.addr.String());
-        if this.addr.GetAddressType() == address.ADDRESS_SPEC {
+        if addr.GetAddressType() == address.ADDRESS_SPEC {
             retval.WriteString(core.SIPSeparatorNames_GREATER_THAN);
         }
 
@@ -103,7 +104,8 @@ type To struct{ //  implements javax.sip.header.ToHeader {
         if this.addr == nil { 
         	return nil, errors.New("Address is nil");
         }
-        return this.addr.GetHostPort();
+        addr,_:=this.addr.(*address.AddressImpl);
+        return addr.GetHostPort();
     }
 
    /**
@@ -171,7 +173,8 @@ type To struct{ //  implements javax.sip.header.ToHeader {
         if this.addr==nil{ 
         	return "";
         }
-		return this.addr.GetUserAtHostPort();
+        addr,_:=this.addr.(*address.AddressImpl);
+		return addr.GetUserAtHostPort();
     }       
 
     /** Gets a string representation of the Header. This method overrides the

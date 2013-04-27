@@ -29,9 +29,13 @@ type CallIDParser struct{
     /** Constructor
      * @param Lexer lexer to set
      */
-    /*protected CallIDParser(Lexer lexer) {
-        super(lexer);
-    }*/
+    func NewCallIDParserFromLexer(lexer core.Lexer) *CallIDParser {
+    	this := &CallIDParser{}
+    	
+        this.HeaderParserImpl.superFromLexer(lexer);
+        
+        return this;
+    }
     
         /** parse the String message
          * @return SIPHeader (CallID object)

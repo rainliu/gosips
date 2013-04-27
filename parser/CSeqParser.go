@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"gosip/core"
 	"gosip/header"
 )
 
@@ -21,9 +22,11 @@ type CSeqParser struct{
     	this.HeaderParserImpl.super(cseq);
     }
 
-        /*protected  CSeqParser(Lexer lexer) {
-		super(lexer);
-	}*/
+    func NewCSeqParserFromLexer(lexer core.Lexer) *CSeqParser {
+    	this:=&CSeqParser{};
+		this.HeaderParserImpl.superFromLexer(lexer);
+		return this;
+	}
 	
 	func (this *CSeqParser) Parse() (sh header.SIPHeader, ParseException error) {
         //try {

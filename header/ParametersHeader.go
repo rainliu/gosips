@@ -11,7 +11,7 @@ type ParametersHeader interface{
 	GetParameterNames() *list.List
 	HasParameters() bool
 	RemoveParameter( name string)
-	SetParameter( name,  value string) 
+	SetParameter( name,  value string) (ParseException error)
 	SetQuotedParameter( name,  value string)
 	HasParameter( parameterName string) bool
 	RemoveParameters()

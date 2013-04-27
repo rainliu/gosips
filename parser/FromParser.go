@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"gosip/core"
 	"gosip/address"
 	"gosip/header"
 )
@@ -15,30 +16,26 @@ type FromParser struct{
 	func NewFromParser(from string) *FromParser {
 		this := &FromParser{};
 		this.AddressParametersParser.super(from);
-		
 		return this;
 	}
 	
 	func (this *FromParser) super(from string){
 		this.AddressParametersParser.super(from);
 	}
-	
-	
 
-    /*protected FromParser(Lexer lexer) {
-		super(lexer);
-	}*/
+    func NewFromParserFromLexer(lexer core.Lexer) *FromParser{
+    	this := &FromParser{};
+		this.AddressParametersParser.superFromLexer(lexer);
+		return this;
+	}
 	
 	func (this *FromParser) Parse() (sh header.SIPHeader, ParseException error) {
 	 	from := header.NewFrom();
-		lexer := this.GetLexer()
-		lexer.Match (TokenTypes_FROM);
-		lexer.SPorHT();
-		lexer.Match(':');
-		lexer.SPorHT();
+		this.HeaderName(TokenTypes_FROM);
 		this.AddressParametersParser.Parse(from);
-		lexer.Match('\n');
-		if from.GetAddress().GetAddressType() == address.ADDRESS_SPEC {
+		this.GetLexer().Match('\n');
+		addr,_:=from.GetAddress().(*address.AddressImpl);
+		if addr.GetAddressType() == address.ADDRESS_SPEC {
 			// the parameters are header parameters.
 			if from.GetAddress().GetURI().IsSipURI() {
 			  sipUri,_ := from.GetAddress().GetURI().(*address.SipUri);

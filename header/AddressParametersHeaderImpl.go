@@ -11,7 +11,7 @@ import (
 type AddressParametersHeaderImpl struct{
 	ParametersHeaderImpl
 
-  	addr *address.AddressImpl;
+  	addr address.Address;
 }
 	
 	/** Constructor given the name of the header.
@@ -29,14 +29,14 @@ type AddressParametersHeaderImpl struct{
         /** get the Address field
          * @return the imbedded  Address
          */        
-    func (this *AddressParametersHeaderImpl) GetAddress() *address.AddressImpl {
+    func (this *AddressParametersHeaderImpl) GetAddress() address.Address {
 		return this.addr;
 	}
         
         /** set the Address field
          * @param address Address to set
          */        
-	func (this *AddressParametersHeaderImpl) SetAddress(addr *address.AddressImpl) {
+	func (this *AddressParametersHeaderImpl) SetAddress(addr address.Address) {
 		this.addr = addr
 	}
 

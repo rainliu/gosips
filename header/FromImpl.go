@@ -76,11 +76,12 @@ type From struct{//implements javax.sip.header.FromHeader {
      */
     func (this *From) EncodeBody() string {
         var retval bytes.Buffer;
-        if this.addr.GetAddressType() == address.ADDRESS_SPEC {
+        addr,_:=this.addr.(*address.AddressImpl);
+        if addr.GetAddressType() == address.ADDRESS_SPEC {
             retval.WriteString(core.SIPSeparatorNames_LESS_THAN);
         }
         retval.WriteString(this.addr.String());
-        if this.addr.GetAddressType() == address.ADDRESS_SPEC {
+        if addr.GetAddressType() == address.ADDRESS_SPEC {
             retval.WriteString(core.SIPSeparatorNames_GREATER_THAN);
         }
         if this.parameters.Len()>0 {
@@ -103,7 +104,8 @@ type From struct{//implements javax.sip.header.FromHeader {
     	if this.addr == nil { 
         	return nil, errors.New("Address is nil");
         }
-        return this.addr.GetHostPort();
+        addr,_:=this.addr.(*address.AddressImpl);
+        return addr.GetHostPort();
     }
     
     
@@ -147,7 +149,7 @@ type From struct{//implements javax.sip.header.FromHeader {
      * Set the address member
      * @param address Address to set
      */
-    func (this *From) SetAddress(addr *address.AddressImpl) {
+    func (this *From) SetAddress(addr address.Address) {
         this.addr = addr;
     }
     
@@ -175,7 +177,8 @@ type From struct{//implements javax.sip.header.FromHeader {
     /** Get the user@host port string.
      */
     func (this *From) GetUserAtHostPort() string {
-        return this.addr.GetUserAtHostPort();
+    	addr,_:=this.addr.(*address.AddressImpl);
+        return addr.GetUserAtHostPort();
     }
     
     

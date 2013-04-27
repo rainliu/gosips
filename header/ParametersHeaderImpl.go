@@ -163,7 +163,7 @@ type ParametersHeaderImpl struct{//implements javax.sip.header.Parameters {
      * unexpectedly while parsing the parameter name or value.
      *
      */
-    func (this *ParametersHeaderImpl) SetParameter( name,  value string)  {
+    func (this *ParametersHeaderImpl) SetParameter( name,  value string) (ParseException error) {
 		 nv := this.parameters.GetNameValue(name);
 		if nv != nil {
 		   nv.SetValue(value);
@@ -171,6 +171,7 @@ type ParametersHeaderImpl struct{//implements javax.sip.header.Parameters {
            nv  = core.NewNameValue(name,value);
            this.parameters.AddNameValue(nv);
 		}
+		return nil;
     }
 
     /**

@@ -7,6 +7,6 @@ import (
 type AddressParametersHeader interface{
 	ParametersHeader
 	
-	GetAddress() *address.AddressImpl
-	SetAddress(addr *address.AddressImpl)
+	GetAddress() address.Address
+	SetAddress(addr address.Address)
 }

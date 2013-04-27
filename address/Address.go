@@ -68,7 +68,7 @@ type Address interface{// extends Cloneable, Serializable{
      *
      * @return the stringified representation of the Address
      */
-    Encode() string;//ToString() string;
+    String() string;//ToString() string;
 
     /**
      * Indicates whether some other Object is "equal to" this Address.
@@ -82,7 +82,7 @@ type Address interface{// extends Cloneable, Serializable{
      * false otherwise.
      * @see Object
      */
-    Equals(obj interface{}) bool;
+    //Equals(obj interface{}) bool;
 
     /**
      * This determines if this address is a wildcard address. That is

@@ -213,9 +213,10 @@ type AddressImpl struct{//implements gosip/address/Address
      * @param displayName String to set
      *
      */
-    func (this *AddressImpl) SetDisplayName(displayName string) {
+    func (this *AddressImpl) SetDisplayName(displayName string) (ParseException error){
         this.displayName = displayName ;
         this.addressType = NAME_ADDR;
+        return nil;
     }
     
     
