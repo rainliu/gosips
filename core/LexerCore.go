@@ -1,6 +1,7 @@
 package core
 
 import (
+	//"fmt"
     "bytes"
     "errors"
     "strconv"
@@ -185,6 +186,7 @@ func (this *LexerCore) PeekNextToken() *Token {
 
 func (this *LexerCore) PeekNextTokenK(ntokens int) []*Token {
     old := this.ptr
+    //fmt.Printf("len=%d\n",len(this.currentLexer));
     retval := make([]*Token, ntokens)
     for i := 0; i < ntokens; i++ {
         tok := &Token{}

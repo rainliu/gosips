@@ -152,6 +152,8 @@ type LexerImpl struct{
                 this.AddKeyword(strings.ToUpper(core.SIPTransportNames_TEL),TokenTypes_TEL);
                 this.AddKeyword(strings.ToUpper(core.SIPTransportNames_SIP),TokenTypes_SIP);
 	    	}
-        }
+        }/*else{
+        	println("this.CurrentLexer() != nil");
+        }*/
         
     }

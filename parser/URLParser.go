@@ -24,6 +24,9 @@ type URLParser struct{
     func NewURLParserFromLexer(lexer core.Lexer) *URLParser {
     	this := &URLParser{}
         this.ParserImpl.SetLexer(lexer);
+        //println("NewURLParserFromLexer:SelectLexer(sip_urlLexer)");
+        //_, ok:=this.ParserImpl.GetLexer().(*LexerImpl);
+        //fmt.Printf("%v\n", ok);
         this.ParserImpl.GetLexer().SelectLexer("sip_urlLexer");
         return this;
     }
@@ -280,9 +283,10 @@ type URLParser struct{
         t1 := vect[0];
         t2 := vect[1];
         //try {
-
-	     //fmt.Printf("token = %s\n", t1.GetTokenValue());
-	     //fmt.Printf("tokenval = %d\n", t1.GetTokenType());
+		//println("URLParser::UriReference():"+this.GetLexer().GetRest());
+	    //println("t2 :" + t2.GetTokenValue());
+	    //println("t1 :" + t1.GetTokenValue());
+	    //fmt.Printf("tokenval = %d\n", t1.GetTokenType());
 
             if t1.GetTokenType() == TokenTypes_SIP  {
                 if t2.GetTokenType() == ':'{
@@ -297,7 +301,7 @@ type URLParser struct{
 				 return nil, this.CreateParseException("Expecting ':'");
 				}
             } else {
-            	//println("i'm hit");
+            	//println("i'm UriString()");
                 urlString := this.UricString();
                 //try {
                     retval = address.NewGenericURI(urlString);
@@ -494,7 +498,9 @@ type URLParser struct{
             this.GetLexer().Match(':');
             retval.SetScheme(core.SIPTransportNames_SIP)//TokenNames_SIP);
             //m := this.GetLexer().MarkInputPosition();
-
+			//println("sipulr"+this.GetLexer().GetRest());
+			
+			
             buffer := this.GetLexer().GetRest();
             if n := strings.Index(buffer, "@"); n==-1{
             	// hostPort
@@ -530,7 +536,7 @@ type URLParser struct{
                 	retval.SetHostPort(hp);
             	}
             }
-
+			//println(this.GetLexer().GetRest());
             this.GetLexer().SelectLexer("charLexer");
             for this.GetLexer().HasMoreChars() {
                 if la,_:=this.GetLexer().LookAheadK(0); la != ';' {

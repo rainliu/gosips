@@ -49,8 +49,10 @@ type AddressParser struct{
 	    //try {
 	    var ch byte;
 	    //var err error;
-	    
 	    lexer := this.GetLexer();
+		
+		//println("AddressParser::NameAddr():"+lexer.GetRest());
+		
 		if ch, _ = lexer.LookAheadK(0); ch == '<' {
 		   lexer.Match('<');
 		   lexer.SelectLexer("sip_urlLexer");
@@ -99,6 +101,7 @@ type AddressParser struct{
 	    //var err error
 	    lexer := this.GetLexer();
 	 	k := 0;
+	 	//println(lexer.GetRest());
 		for lexer.HasMoreChars() {
 		   if ch, _ = lexer.LookAheadK(k); 
 		    ch == '<' || 
@@ -126,6 +129,7 @@ type AddressParser struct{
 		} else {
 			return nil, this.CreateParseException("Bad address spec");
 		}
+		//println(lexer.GetRest());
 		return retval, nil;
 	    // } finally {
 		//if (debug) dbg_leave("address");

@@ -132,12 +132,14 @@ func NewParserImpl(buffer string) *ParserImpl{
 	this := &ParserImpl{};
 	
 	this.ParserCore.Super(buffer);
+	this.ParserCore.SetLexer(NewLexerImpl("CharLexer", buffer));
 	
 	return this;
 }
 
 func (this *ParserImpl) super(buffer string) { 
 	this.ParserCore.Super(buffer);
+	this.ParserCore.SetLexer(NewLexerImpl("CharLexer", buffer));
 }
 
 

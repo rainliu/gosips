@@ -48,6 +48,7 @@ type ContactParser struct{
 		   } else if la,_=lexer.LookAheadK(0); la == '\n' {
 		    break;
 		   }else{
+		    //println(lexer.GetRest());
 		    return nil, this.CreateParseException("unexpected char");
 		   }
 		}
