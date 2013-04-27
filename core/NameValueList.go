@@ -5,8 +5,8 @@ import (
 )
 
 /**
-* Implements a simple NameValue association with a quick lookup 
-* function (via a hash table) this class is not thread safe 
+* Implements a simple NameValue association with a quick lookup
+* function (via a hash table) this class is not thread safe
 * because it uses HashTables.
 *
 *@version  JAIN-SIP-1.1
@@ -25,6 +25,7 @@ func NewNameValueList(listName string) *NameValueList {
     this := &NameValueList{}
 
     this.GenericObjectListImpl.listName = listName
+    this.GenericObjectListImpl.super();
 
     return this
 }
@@ -124,7 +125,7 @@ func (this *NameValueList) GetNameValue(name string) *NameValue {
 
 /**
 * Returns a boolean telling if this NameValueList
-* has a record with this name  
+* has a record with this name
 * @since 1.0
  */
 func (this *NameValueList) HasNameValue(name string) bool {

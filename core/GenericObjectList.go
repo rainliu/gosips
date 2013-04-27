@@ -20,7 +20,11 @@ type GenericObjectListImpl struct {
 }
 
 func NewGenericObjectListImpl() *GenericObjectListImpl{
-	return &GenericObjectListImpl{};
+	return &GenericObjectListImpl{separator:";"};
+}
+
+func (this *GenericObjectListImpl) super() {
+    this.separator = ";";
 }
 
 func (this *GenericObjectListImpl) GetIndentation() string {
@@ -108,6 +112,11 @@ func (this *GenericObjectListImpl) String() string {
         } else {
             encoding.WriteString(e.Value.(string));
         }
+        if e.Next()!=nil{
+            //println(this.separator);
+            encoding.WriteString(this.separator);
+        }
+
     }
 
     return encoding.String();

@@ -23,7 +23,7 @@ func NewHostNameParser(hname string) *HostNameParser {
 
 /** The lexer is initialized with the buffer.
  */
- 
+
 func NewHostNameParserFromLexer(lexer Lexer) *HostNameParser {
     this := &HostNameParser{}
 
@@ -132,6 +132,7 @@ func (this *HostNameParser) GetHost() (h *Host, ParseException error) {
     }
 
     hostname := hname.String();
+    //println(hostname);
     if hostname == "" {
         return nil, errors.New("ParseException: Illegal Host name")
     }   //else{
@@ -163,9 +164,9 @@ func (this *HostNameParser) GetHostPort() (hp *HostPort, ParseException error) {
               throw new ParseException
                       (lexer.getBuffer() + " :Error parsing port ",
                               lexer.getPtr());*/
-        } else {
-            return nil, errors.New("ParseException: Error parsing port")
-        }
+        }// else {
+         //   return nil, errors.New("ParseException: Error parsing port")
+        //}
     }
     return hp, nil
     //} finally {

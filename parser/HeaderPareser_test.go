@@ -1,10 +1,12 @@
 package parser
 
 import (
+	"strconv"
 	"testing"
 )
+    /*
 	func TestAddressParser(t *testing.T) {
-	     var addresses =[]string { 
+	     var addresses =[]string {
 		"<sip:user@example.com?Route=%3csip:sip.example.com%3e>",
 		"\"M. Ranganathan\"   <sip:mranga@nist.gov>",
 		"<sip:+1-650-555-2222@ss1.wcom.com;user=phone>",
@@ -20,7 +22,7 @@ import (
             }
 	    }
 	}
-	
+
 	func testHeaderParser(t *testing.T, hp HeaderParser){
 			if sh, err := hp.Parse(); err!=nil{
             	t.Log(err);
@@ -39,7 +41,7 @@ import (
             "Call-ID	:kl24ahsd546folnyt2vbak9sad98u23naodiunzds09a3bqw0sdfbsk34poouymnae0043nsed09mfkvc74bd0cuwnms05dknw87hjpobd76f\n",
             "Call-Id: 281794\n",
         }
-        
+
         for i := 0; i < len(call); i++  {
             shp := NewCallIDParser(call[i]);
             testHeaderParser(t, shp)
@@ -54,24 +56,25 @@ import (
             "CSeq:1 CANCEL\n",
             "CSeq: 3 BYE\n",
         };
-			
+
 		for i := 0; i < len(cseq); i++  {
 		    shp := NewCSeqParser(cseq[i]);
 		    testHeaderParser(t, shp);
-		}	
+		}
 	}
-	
-	
+	*/
+
 
     func TestURLParser(t *testing.T) {
-        var urls = []string { 
+        var urls = []string {
    "sip:conference=1234@sip.convedia.com;xyz=pqd",
    "sip:herbivore.ncsl.nist.gov:5070;maddr=129.6.55.251;lc",
-  "sip:1-301-975-3664@foo.bar.com;user=phone", "sip:129.6.55.181",
-  "sip:herbivore.ncsl.nist.gov:5070;maddr=129.6.55.251?method=INVITE&contact=sip:foo.bar.com",
-  "sip:j.doe@big.com", 
+   "sip:1-301-975-3664@foo.bar.com;user=phone",
+   "sip:129.6.55.181",
+   "sip:herbivore.ncsl.nist.gov:5070;maddr=129.6.55.251?method=INVITE&contact=sip:foo.bar.com",
+   "sip:j.doe@big.com",
   "sip:j.doe:secret@big.com;transport=tcp",
-  "sip:j.doe@big.com?subject=project",  
+  "sip:j.doe@big.com?subject=project",
   "sip:+1-212-555-1212:1234@gateway.com;user=phone" ,
   "sip:1212@gateway.com",
   "sip:alice@10.1.2.3",
@@ -89,8 +92,12 @@ import (
             		t.Log(err);
             		t.Fail();
             	}else{
-            		t.Log("encoded = " + sh.String());
+            		if sh.String()!=urls[i] {
+            		    t.Log("failed" + strconv.Itoa(i) +" = " + sh.String());
+            		    t.Fail();
+            		}else{
+            		    t.Log("encoded" + strconv.Itoa(i) +" = " + sh.String());
+            		}
             	}
             }
     }
-
