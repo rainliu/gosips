@@ -13,19 +13,19 @@ import (
  */
 
 type From struct{//implements javax.sip.header.FromHeader {
-    AddressParametersHeaderImpl
+    AddressParameters
 }
 
     /** Default constructor
      */
     func NewFrom() *From {
     	this := &From{};
-    	this.AddressParametersHeaderImpl.super(core.SIPHeaderNames_FROM);
+    	this.AddressParameters.super(core.SIPHeaderNames_FROM);
     	return this;
     }
     
     func (this *From) super(name string){
-    	this.AddressParametersHeaderImpl.super(name);
+    	this.AddressParameters.super(name);
     }
     
     /** Generate a FROM header from a TO header

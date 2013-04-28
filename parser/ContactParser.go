@@ -27,13 +27,13 @@ type ContactParser struct{
 	}
 
 	func (this *ContactParser) Parse() (sh header.SIPHeader, ParseException error) {
-		retval := header.NewContactListImpl();
+		retval := header.NewContactList();
 		// past the header name and the colon.
 		lexer := this.GetLexer();
 		var la byte;
 		this.HeaderName(TokenTypes_CONTACT);
 		for {
-		   contact := header.NewContactImpl();
+		   contact := header.NewContact();
 		   if la,_=lexer.LookAheadK(0); la == '*'  {
 			 lexer.Match('*');
 			 contact.SetWildCardFlag(true);

@@ -17,7 +17,7 @@ import (
  *
  *
  */
-type SIPHeaderListImpl struct{//extends 
+type SIPHeaderList struct{//extends 
 	SIPHeaderImpl 
 	list.List
 }    
@@ -25,22 +25,22 @@ type SIPHeaderListImpl struct{//extends
      * @param hl SIPObjectList to set
      * @param hname String to set
      */
-    func NewSIPHeaderListImpl(hname string) *SIPHeaderListImpl{
-		this := &SIPHeaderListImpl{};
+    func NewSIPHeaderList(hname string) *SIPHeaderList{
+		this := &SIPHeaderList{};
 		this.SIPHeaderImpl.super(hname);
 		
 		return this;
 	}
 	
-	func (this *SIPHeaderListImpl) super(hname string) {
+	func (this *SIPHeaderList) super(hname string) {
 		this.SIPHeaderImpl.super(hname);
 	}
    
    /**
  * Implement the clone method.
  */
-func (this *SIPHeaderListImpl) Clone() interface{} {
-    retval := &SIPHeaderListImpl{}
+func (this *SIPHeaderList) Clone() interface{} {
+    retval := &SIPHeaderList{}
 
     retval.headerName = this.headerName;
 
@@ -48,7 +48,7 @@ func (this *SIPHeaderListImpl) Clone() interface{} {
 }
 
 
-func (this *SIPHeaderListImpl) Concatenate(shl *SIPHeaderListImpl){//, topFlag bool) {
+func (this *SIPHeaderList) Concatenate(shl *SIPHeaderList){//, topFlag bool) {
     if shl == nil {
         return
     }
@@ -72,7 +72,7 @@ func (this *SIPHeaderListImpl) Concatenate(shl *SIPHeaderListImpl){//, topFlag b
      * @return String encoded string representation of this list of
      * 	 headers. (Contains string append of each encoded header).
      */
-    func (this *SIPHeaderListImpl) String() string{
+    func (this *SIPHeaderList) String() string{
         if this.Len()==0 { 
         	return this.headerName + ":" + core.SIPSeparatorNames_NEWLINE;
         }
@@ -107,7 +107,7 @@ func (this *SIPHeaderListImpl) Concatenate(shl *SIPHeaderListImpl){//, topFlag b
      *WWW-Authenticate, Authorization, Proxy-Authenticate and
      *Proxy-Authorization and hence this is protected.
      */
-    func (this *SIPHeaderListImpl) EncodeBody() string{
+    func (this *SIPHeaderList) EncodeBody() string{
         var encoding bytes.Buffer;// = new StringBuffer();
         //ListIterator iterator = this.listIterator();
         for e := this.Front(); e != nil; e = e.Next() {
@@ -124,7 +124,7 @@ func (this *SIPHeaderListImpl) Concatenate(shl *SIPHeaderListImpl){//, topFlag b
         return encoding.String();
     }
     
-    func (this *SIPHeaderListImpl) IsHeaderList() bool{ 
+    func (this *SIPHeaderList) IsHeaderList() bool{ 
 		return true; 
 	}
     

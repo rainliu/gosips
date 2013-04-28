@@ -10,7 +10,7 @@ import (
 */
 
 type ViaList struct{
- 	SIPHeaderListImpl
+ 	SIPHeaderList
 
     stringRep string;
 }    
@@ -21,12 +21,12 @@ type ViaList struct{
           */
     func NewViaList() *ViaList {
     	this := &ViaList{}
-        this.SIPHeaderListImpl.super(core.SIPHeaderNames_VIA);
+        this.SIPHeaderList.super(core.SIPHeaderNames_VIA);
     	return this;
     }
     
     func (this *ViaList) super(name string){
-    	this.SIPHeaderListImpl.super(name);
+    	this.SIPHeaderList.super(name);
     }
     
     

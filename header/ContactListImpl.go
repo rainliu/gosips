@@ -8,8 +8,8 @@ import (
 /**
 * List of contact headers.ContactLists are also maintained in a hashtable for quick lookup.
 */
-type ContactListImpl struct{
- 	SIPHeaderListImpl
+type ContactList struct{
+ 	SIPHeaderList
 } 	
     
         /** constructor
@@ -22,15 +22,15 @@ type ContactListImpl struct{
 	/**
 	* Constructor. 
 	*/
-	func NewContactListImpl() *ContactListImpl {
-		this := &ContactListImpl{}
-	    this.SIPHeaderListImpl.super( core.SIPHeaderNames_CONTACT);
+	func NewContactList() *ContactList {
+		this := &ContactList{}
+	    this.SIPHeaderList.super( core.SIPHeaderNames_CONTACT);
 	    return this;
 		// Set the headerlist field in our superclass.
 	}
 	
-	func (this *ContactListImpl) super(hname string) {
-		this.SIPHeaderListImpl.super(hname);
+	func (this *ContactList) super(hname string) {
+		this.SIPHeaderList.super(hname);
 	}
 
 	/**
@@ -38,9 +38,9 @@ type ContactListImpl struct{
          * @param contact -- contact to add to this list.
          * @throws IllegalArgumentException if Duplicate Contact for same addr
          */
-	func (this *ContactListImpl) AddContact(contact ContactHeader) (IllegalArgumentException error){
+	func (this *ContactList) AddContact(contact ContactHeader) (IllegalArgumentException error){
 		// Concatenate my lists.
-		this.SIPHeaderListImpl.PushBack(contact);
+		this.SIPHeaderList.PushBack(contact);
 		return nil;
 	}
 
@@ -49,8 +49,8 @@ type ContactListImpl struct{
         * make a clone of this contact list.
         * @return Object cloned list.
         */
-	func (this *ContactListImpl) Clone() interface{} {
-		retval := NewContactListImpl();
+	func (this *ContactList) Clone() interface{} {
+		retval := NewContactList();
 		for c:= this.Front(); c != nil; c = c.Next() {
 		 	newc := c.Value.(ContactHeader).Clone();
 			retval.PushBack(newc);
@@ -66,7 +66,7 @@ type ContactListImpl struct{
          * @return  array of contacts.
 	 *
          */
-	func (this *ContactListImpl) GetContacts() []ContactHeader{
+	func (this *ContactList) GetContacts() []ContactHeader{
 	   retval := make([]ContactHeader, this.Len());
 
 	   i := 0;
