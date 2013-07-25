@@ -7,7 +7,7 @@ import (
 
 type ParametersHeader interface{
 	GetParameter( name string) string
-	GetParameterValue( name string) interface{}
+	GetParameterValue( name string) string;//interface{}
 	GetParameterNames() *list.List
 	HasParameters() bool
 	RemoveParameter( name string)

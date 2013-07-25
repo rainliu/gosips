@@ -108,8 +108,8 @@ type Parameters struct{//implements javax.sip.header.Parameters {
        *@return the object associated with the name.
        *
        */
-      func (this *Parameters) GetParameterValue( name string) interface{} {
-            return this.parameters.GetValue(name);
+      func (this *Parameters) GetParameterValue( name string) string {
+            return this.parameters.GetValue(name).(string);
       }
 
      /**
