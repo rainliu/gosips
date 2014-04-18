@@ -60,9 +60,9 @@ func (this *AcceptLanguageParser) Parse() (sh header.SIPHeader, ParseException e
 	lexer := this.GetLexer()
 
 	this.HeaderName(TokenTypes_ACCEPT_LANGUAGE)
-	
+
 	//println(lexer.GetRest());
-	
+
 	for ch, _ = lexer.LookAheadK(0); ch != '\n'; ch, _ = lexer.LookAheadK(0) {
 		acceptLanguage := header.NewAcceptLanguage()
 		acceptLanguage.SetHeaderName(core.SIPHeaderNames_ACCEPT_LANGUAGE)
@@ -72,7 +72,7 @@ func (this *AcceptLanguageParser) Parse() (sh header.SIPHeader, ParseException e
 			value := lexer.GetNextToken()
 			acceptLanguage.SetLanguageRange(value.GetTokenValue())
 		}
-		
+
 		//println(lexer.GetRest());
 
 		for ch, _ = lexer.LookAheadK(0); ch == ';'; ch, _ = lexer.LookAheadK(0) {

@@ -1,0 +1,4968 @@
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "gosip/header"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+			</div>
+		</div>
+		
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+				<dd><a href="#pkg-constants">Constants</a></dd>
+			
+			
+			
+			
+				
+				<dd><a href="#AcceptEncoding">type AcceptEncoding</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewAcceptEncoding">func NewAcceptEncoding() *AcceptEncoding</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptEncoding.EncodeBody">func (this *AcceptEncoding) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptEncoding.GetEncoding">func (this *AcceptEncoding) GetEncoding() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptEncoding.GetQValue">func (this *AcceptEncoding) GetQValue() float32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptEncoding.SetEncoding">func (this *AcceptEncoding) SetEncoding(encoding string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptEncoding.SetQValue">func (this *AcceptEncoding) SetQValue(q float32) (InvalidArgumentException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptEncoding.String">func (this *AcceptEncoding) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#AcceptEncodingHeader">type AcceptEncodingHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#AcceptEncodingList">type AcceptEncodingList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewAcceptEncodingList">func NewAcceptEncodingList() *AcceptEncodingList</a></dd>
+				
+				
+			
+				
+				<dd><a href="#AcceptLanguage">type AcceptLanguage</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewAcceptLanguage">func NewAcceptLanguage() *AcceptLanguage</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguage.EncodeBody">func (this *AcceptLanguage) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguage.GetAcceptLanguage">func (this *AcceptLanguage) GetAcceptLanguage() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguage.GetLanguageRange">func (this *AcceptLanguage) GetLanguageRange() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguage.GetQValue">func (this *AcceptLanguage) GetQValue() float32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguage.HasQValue">func (this *AcceptLanguage) HasQValue() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguage.RemoveQValue">func (this *AcceptLanguage) RemoveQValue()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguage.SetAcceptLanguage">func (this *AcceptLanguage) SetAcceptLanguage(language string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguage.SetLanguageRange">func (this *AcceptLanguage) SetLanguageRange(languageRange string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguage.SetQValue">func (this *AcceptLanguage) SetQValue(q float32) (InvalidArgumentException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguage.String">func (this *AcceptLanguage) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#AcceptLanguageHeader">type AcceptLanguageHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#AcceptLanguageList">type AcceptLanguageList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewAcceptLanguageList">func NewAcceptLanguageList() *AcceptLanguageList</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguageList.GetFirst">func (this *AcceptLanguageList) GetFirst() SIPHeader</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AcceptLanguageList.GetLast">func (this *AcceptLanguageList) GetLast() SIPHeader</a></dd>
+				
+			
+				
+				<dd><a href="#AddressParameters">type AddressParameters</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewAddressParameters">func NewAddressParameters(name string) *AddressParameters</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressParameters.GetAddress">func (this *AddressParameters) GetAddress() address.Address</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressParameters.SetAddress">func (this *AddressParameters) SetAddress(addr address.Address)</a></dd>
+				
+			
+				
+				<dd><a href="#AddressParametersHeader">type AddressParametersHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#CSeq">type CSeq</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewCSeq">func NewCSeq(seqno int, method string) *CSeq</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CSeq.EncodeBody">func (this *CSeq) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CSeq.GetMethod">func (this *CSeq) GetMethod() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CSeq.GetSequenceNumber">func (this *CSeq) GetSequenceNumber() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CSeq.SetMethod">func (this *CSeq) SetMethod(meth string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CSeq.SetSequenceNumber">func (this *CSeq) SetSequenceNumber(sequenceNumber int) (InvalidArgumentException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CSeq.String">func (this *CSeq) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#CSeqHeader">type CSeqHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#CallID">type CallID</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewCallID">func NewCallID(callId string) (this *CallID, IllegalArgumentException error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallID.EncodeBody">func (this *CallID) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallID.GetCallId">func (this *CallID) GetCallId() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallID.GetCallIdentifer">func (this *CallID) GetCallIdentifer() *CallIdentifier</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallID.SetCallId">func (this *CallID) SetCallId(cid string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallID.SetCallIdentifier">func (this *CallID) SetCallIdentifier(cid *CallIdentifier)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallID.String">func (this *CallID) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#CallIdHeader">type CallIdHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#CallIdentifier">type CallIdentifier</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewCallIdentifier">func NewCallIdentifier(cid string) (*CallIdentifier, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallIdentifier.GetHost">func (this *CallIdentifier) GetHost() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallIdentifier.GetLocalId">func (this *CallIdentifier) GetLocalId() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallIdentifier.SetCallID">func (this *CallIdentifier) SetCallID(cid string) (IllegalArgumentException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallIdentifier.SetHost">func (this *CallIdentifier) SetHost(host string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallIdentifier.SetLocalId">func (this *CallIdentifier) SetLocalId(localId string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#CallIdentifier.String">func (this *CallIdentifier) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#Contact">type Contact</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewContact">func NewContact() *Contact</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.EncodeBody">func (this *Contact) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.GetAddress">func (this *Contact) GetAddress() address.Address</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.GetContactList">func (this *Contact) GetContactList() *ContactList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.GetContactParms">func (this *Contact) GetContactParms() *core.NameValueList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.GetExpires">func (this *Contact) GetExpires() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.GetQValue">func (this *Contact) GetQValue() float32</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.GetWildCardFlag">func (this *Contact) GetWildCardFlag() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.SetAddress">func (this *Contact) SetAddress(addr address.Address)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.SetContactList">func (this *Contact) SetContactList(cl *ContactList)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.SetExpires">func (this *Contact) SetExpires(expiryDeltaSeconds int) (InvalidArgumentException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.SetParameter">func (this *Contact) SetParameter(name, value string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.SetQValue">func (this *Contact) SetQValue(qValue float32) (InvalidArgumentException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Contact.SetWildCardFlag">func (this *Contact) SetWildCardFlag(w bool)</a></dd>
+				
+			
+				
+				<dd><a href="#ContactHeader">type ContactHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ContactList">type ContactList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewContactList">func NewContactList() *ContactList</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ContactList.AddContact">func (this *ContactList) AddContact(contact ContactHeader) (IllegalArgumentException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ContactList.Clone">func (this *ContactList) Clone() interface{}</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ContactList.GetContacts">func (this *ContactList) GetContacts() []ContactHeader</a></dd>
+				
+			
+				
+				<dd><a href="#ContentDispositionHeader">type ContentDispositionHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ContentEncodingHeader">type ContentEncodingHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ContentLanguageHeader">type ContentLanguageHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ContentLengthHeader">type ContentLengthHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ContentTypeHeader">type ContentTypeHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Encoding">type Encoding</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ExpiresHeader">type ExpiresHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ExtensionHeader">type ExtensionHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ExtensionHeaderImpl">type ExtensionHeaderImpl</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewExtensionHeaderImpl">func NewExtensionHeaderImpl(headerName string) *ExtensionHeaderImpl</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ExtensionHeaderImpl.EncodeBody">func (this *ExtensionHeaderImpl) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ExtensionHeaderImpl.GetHeaderValue">func (this *ExtensionHeaderImpl) GetHeaderValue() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ExtensionHeaderImpl.SetName">func (this *ExtensionHeaderImpl) SetName(headerName string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ExtensionHeaderImpl.SetValue">func (this *ExtensionHeaderImpl) SetValue(value string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ExtensionHeaderImpl.String">func (this *ExtensionHeaderImpl) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#From">type From</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewFrom">func NewFrom() *From</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.CloneTo">func (this *From) CloneTo(to *To)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.EncodeBody">func (this *From) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.GetDisplayName">func (this *From) GetDisplayName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.GetHostPort">func (this *From) GetHostPort() (*core.HostPort, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.GetTag">func (this *From) GetTag() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.GetUserAtHostPort">func (this *From) GetUserAtHostPort() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.HasTag">func (this *From) HasTag() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.RemoveTag">func (this *From) RemoveTag()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.SetAddress">func (this *From) SetAddress(addr address.Address)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.SetTag">func (this *From) SetTag(t string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#From.String">func (this *From) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#FromHeader">type FromHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Header">type Header</a></dd>
+				
+				
+			
+				
+				<dd><a href="#HeaderAddress">type HeaderAddress</a></dd>
+				
+				
+			
+				
+				<dd><a href="#MaxForwards">type MaxForwards</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewMaxForwards">func NewMaxForwards() *MaxForwards</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#MaxForwards.DecrementMaxForwards">func (this *MaxForwards) DecrementMaxForwards()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#MaxForwards.EncodeBody">func (this *MaxForwards) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#MaxForwards.GetMaxForwards">func (this *MaxForwards) GetMaxForwards() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#MaxForwards.HasReachedZero">func (this *MaxForwards) HasReachedZero() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#MaxForwards.SetMaxForwards">func (this *MaxForwards) SetMaxForwards(maxForwards int) (InvalidArgumentException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#MaxForwards.String">func (this *MaxForwards) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#MaxForwardsHeader">type MaxForwardsHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#MediaType">type MediaType</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Parameters">type Parameters</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewParameters">func NewParameters(hdrName string) *Parameters</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.EncodeBody">func (this *Parameters) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.GetNameValue">func (this *Parameters) GetNameValue(parameterName string) *core.NameValue</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.GetParameter">func (this *Parameters) GetParameter(name string) string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.GetParameterNames">func (this *Parameters) GetParameterNames() *list.List</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.GetParameterValue">func (this *Parameters) GetParameterValue(name string) string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.GetParameters">func (this *Parameters) GetParameters() *core.NameValueList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.HasParameter">func (this *Parameters) HasParameter(parameterName string) bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.HasParameters">func (this *Parameters) HasParameters() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.RemoveParameter">func (this *Parameters) RemoveParameter(name string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.RemoveParameters">func (this *Parameters) RemoveParameters()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.SetParameter">func (this *Parameters) SetParameter(name, value string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.SetParameters">func (this *Parameters) SetParameters(parameters *core.NameValueList)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Parameters.SetQuotedParameter">func (this *Parameters) SetQuotedParameter(name, value string)</a></dd>
+				
+			
+				
+				<dd><a href="#ParametersHeader">type ParametersHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Protocol">type Protocol</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewProtocol">func NewProtocol() *Protocol</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Protocol.GetProtocolName">func (this *Protocol) GetProtocolName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Protocol.GetProtocolVersion">func (this *Protocol) GetProtocolVersion() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Protocol.GetTransport">func (this *Protocol) GetTransport() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Protocol.SetProtocolName">func (this *Protocol) SetProtocolName(p string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Protocol.SetProtocolVersion">func (this *Protocol) SetProtocolVersion(p string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Protocol.SetTransport">func (this *Protocol) SetTransport(t string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Protocol.String">func (this *Protocol) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#SIPHeader">type SIPHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#SIPHeaderImpl">type SIPHeaderImpl</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewSIPHeaderImpl">func NewSIPHeaderImpl(hname string) *SIPHeaderImpl</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderImpl.Clone">func (this *SIPHeaderImpl) Clone() interface{}</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderImpl.EncodeBody">func (this *SIPHeaderImpl) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderImpl.GetHeaderName">func (this *SIPHeaderImpl) GetHeaderName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderImpl.GetHeaderValue">func (this *SIPHeaderImpl) GetHeaderValue() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderImpl.GetName">func (this *SIPHeaderImpl) GetName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderImpl.GetValue">func (this *SIPHeaderImpl) GetValue() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderImpl.IsHeaderList">func (this *SIPHeaderImpl) IsHeaderList() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderImpl.SetHeaderName">func (this *SIPHeaderImpl) SetHeaderName(hdrname string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderImpl.String">func (this *SIPHeaderImpl) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#SIPHeaderList">type SIPHeaderList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewSIPHeaderList">func NewSIPHeaderList(hname string) *SIPHeaderList</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderList.Clone">func (this *SIPHeaderList) Clone() interface{}</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderList.Concatenate">func (this *SIPHeaderList) Concatenate(shl *SIPHeaderList)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderList.EncodeBody">func (this *SIPHeaderList) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderList.IsHeaderList">func (this *SIPHeaderList) IsHeaderList() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SIPHeaderList.String">func (this *SIPHeaderList) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#To">type To</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewTo">func NewTo() *To</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#To.CloneFrom">func (this *To) CloneFrom(from *From)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#To.EncodeBody">func (this *To) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#To.GetDisplayName">func (this *To) GetDisplayName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#To.GetHostPort">func (this *To) GetHostPort() (*core.HostPort, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#To.GetTag">func (this *To) GetTag() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#To.GetUserAtHostPort">func (this *To) GetUserAtHostPort() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#To.HasTag">func (this *To) HasTag() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#To.RemoveTag">func (this *To) RemoveTag()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#To.SetTag">func (this *To) SetTag(t string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#To.String">func (this *To) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#ToHeader">type ToHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Via">type Via</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewVia">func NewVia() *Via</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.EncodeBody">func (this *Via) EncodeBody() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetBranch">func (this *Via) GetBranch() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetComment">func (this *Via) GetComment() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetHost">func (this *Via) GetHost() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetMAddr">func (this *Via) GetMAddr() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetMaddr">func (this *Via) GetMaddr() *core.Host</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetPort">func (this *Via) GetPort() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetProtocol">func (this *Via) GetProtocol() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetProtocolVersion">func (this *Via) GetProtocolVersion() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetReceived">func (this *Via) GetReceived() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetSentBy">func (this *Via) GetSentBy() *core.HostPort</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetSentProtocol">func (this *Via) GetSentProtocol() *Protocol</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetTTL">func (this *Via) GetTTL() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetTransport">func (this *Via) GetTransport() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.GetViaParms">func (this *Via) GetViaParms() *core.NameValueList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.HasComment">func (this *Via) HasComment() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.HasPort">func (this *Via) HasPort() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.RemoveComment">func (this *Via) RemoveComment()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.RemovePort">func (this *Via) RemovePort()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetBranch">func (this *Via) SetBranch(branch string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetComment">func (this *Via) SetComment(c string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetHost">func (this *Via) SetHost(host *core.Host)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetHostFromString">func (this *Via) SetHostFromString(host string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetMAddr">func (this *Via) SetMAddr(mAddr string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetPort">func (this *Via) SetPort(port int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetProtocol">func (this *Via) SetProtocol(protocol string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetProtocolVersion">func (this *Via) SetProtocolVersion(protocolVersion string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetReceived">func (this *Via) SetReceived(received string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetSentBy">func (this *Via) SetSentBy(s *core.HostPort)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetSentProtocol">func (this *Via) SetSentProtocol(s *Protocol)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Via.SetTTL">func (this *Via) SetTTL(ttl int) (InvalidArgumentException error)</a></dd>
+				
+			
+				
+				<dd><a href="#ViaHeader">type ViaHeader</a></dd>
+				
+				
+			
+				
+				<dd><a href="#ViaList">type ViaList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewViaList">func NewViaList() *ViaList</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ViaList.Clone">func (this *ViaList) Clone() interface{}</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h4>Package files</h4>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="/target/AcceptEncoding.go">AcceptEncoding.go</a>
+			
+				<a href="/target/AcceptEncodingHeader.go">AcceptEncodingHeader.go</a>
+			
+				<a href="/target/AcceptEncodingList.go">AcceptEncodingList.go</a>
+			
+				<a href="/target/AcceptLanguage.go">AcceptLanguage.go</a>
+			
+				<a href="/target/AcceptLanguageHeader.go">AcceptLanguageHeader.go</a>
+			
+				<a href="/target/AcceptLanguageList.go">AcceptLanguageList.go</a>
+			
+				<a href="/target/AddressParametersHeader.go">AddressParametersHeader.go</a>
+			
+				<a href="/target/AddressParametersImpl.go">AddressParametersImpl.go</a>
+			
+				<a href="/target/CSeqHeader.go">CSeqHeader.go</a>
+			
+				<a href="/target/CSeqImpl.go">CSeqImpl.go</a>
+			
+				<a href="/target/CallIdHeader.go">CallIdHeader.go</a>
+			
+				<a href="/target/CallIdImpl.go">CallIdImpl.go</a>
+			
+				<a href="/target/CallIdentifierImpl.go">CallIdentifierImpl.go</a>
+			
+				<a href="/target/ContactHeader.go">ContactHeader.go</a>
+			
+				<a href="/target/ContactImpl.go">ContactImpl.go</a>
+			
+				<a href="/target/ContactListImpl.go">ContactListImpl.go</a>
+			
+				<a href="/target/ContentDispositionHeader.go">ContentDispositionHeader.go</a>
+			
+				<a href="/target/ContentEncodingHeader.go">ContentEncodingHeader.go</a>
+			
+				<a href="/target/ContentLanguageHeader.go">ContentLanguageHeader.go</a>
+			
+				<a href="/target/ContentLengthHeader.go">ContentLengthHeader.go</a>
+			
+				<a href="/target/ContentTypeHeader.go">ContentTypeHeader.go</a>
+			
+				<a href="/target/Encoding.go">Encoding.go</a>
+			
+				<a href="/target/ExpiresHeader.go">ExpiresHeader.go</a>
+			
+				<a href="/target/ExtensionHeader.go">ExtensionHeader.go</a>
+			
+				<a href="/target/ExtensionHeaderImpl.go">ExtensionHeaderImpl.go</a>
+			
+				<a href="/target/FromHeader.go">FromHeader.go</a>
+			
+				<a href="/target/FromImpl.go">FromImpl.go</a>
+			
+				<a href="/target/Header.go">Header.go</a>
+			
+				<a href="/target/HeaderAddress.go">HeaderAddress.go</a>
+			
+				<a href="/target/MaxForwardsHeader.go">MaxForwardsHeader.go</a>
+			
+				<a href="/target/MaxForwardsImpl.go">MaxForwardsImpl.go</a>
+			
+				<a href="/target/MediaType.go">MediaType.go</a>
+			
+				<a href="/target/ParametersHeader.go">ParametersHeader.go</a>
+			
+				<a href="/target/ParametersImpl.go">ParametersImpl.go</a>
+			
+				<a href="/target/ProtocolImpl.go">ProtocolImpl.go</a>
+			
+				<a href="/target/SIPHeader.go">SIPHeader.go</a>
+			
+				<a href="/target/SIPHeaderImpl.go">SIPHeaderImpl.go</a>
+			
+				<a href="/target/SIPHeaderListImpl.go">SIPHeaderListImpl.go</a>
+			
+				<a href="/target/ToHeader.go">ToHeader.go</a>
+			
+				<a href="/target/ToImpl.go">ToImpl.go</a>
+			
+				<a href="/target/ViaHeader.go">ViaHeader.go</a>
+			
+				<a href="/target/ViaImpl.go">ViaImpl.go</a>
+			
+				<a href="/target/ViaListImpl.go">ViaListImpl.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				<pre>const <span id="ParameterNames_ACTION">ParameterNames_ACTION</span> = &#34;action&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_ALERT">ParameterNames_ALERT</span> = &#34;alert&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_ALGORITHM">ParameterNames_ALGORITHM</span> = &#34;algorithm&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_BRANCH">ParameterNames_BRANCH</span> = &#34;branch&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_CARD">ParameterNames_CARD</span> = &#34;card&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_CAUSE">ParameterNames_CAUSE</span> = &#34;cause&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_CNONCE">ParameterNames_CNONCE</span> = &#34;cnonce&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_COOKIE">ParameterNames_COOKIE</span> = &#34;cookie&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_DIGEST">ParameterNames_DIGEST</span> = &#34;Digest&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_DOMAIN">ParameterNames_DOMAIN</span> = &#34;domain&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_DURATION">ParameterNames_DURATION</span> = &#34;duration&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_EMERGENCY">ParameterNames_EMERGENCY</span> = &#34;emergency&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_EXPIRES">ParameterNames_EXPIRES</span> = &#34;expires&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_HANDLING">ParameterNames_HANDLING</span> = &#34;handling&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_HIDDEN">ParameterNames_HIDDEN</span> = &#34;hidden&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_ICON">ParameterNames_ICON</span> = &#34;icon&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_ID">ParameterNames_ID</span> = &#34;id&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_INFO">ParameterNames_INFO</span> = &#34;info&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_MADDR">ParameterNames_MADDR</span> = &#34;maddr&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_NC">ParameterNames_NC</span> = &#34;nc&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_NEXT_NONCE">ParameterNames_NEXT_NONCE</span> = &#34;nextnonce&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_NONCE">ParameterNames_NONCE</span> = &#34;nonce&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_NONCE_COUNT">ParameterNames_NONCE_COUNT</span> = &#34;nc&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_NON_URGENT">ParameterNames_NON_URGENT</span> = &#34;non-urgent&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_NORMAL">ParameterNames_NORMAL</span> = &#34;normal&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_OPAQUE">ParameterNames_OPAQUE</span> = &#34;opaque&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_OPTIONAL">ParameterNames_OPTIONAL</span> = &#34;optional&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_PASSWORD">ParameterNames_PASSWORD</span> = &#34;password&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_PROXY">ParameterNames_PROXY</span> = &#34;proxy&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_PUBKEY">ParameterNames_PUBKEY</span> = &#34;pubkey&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_PURPOSE">ParameterNames_PURPOSE</span> = &#34;purpose&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_Q">ParameterNames_Q</span> = &#34;q&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_QOP">ParameterNames_QOP</span> = &#34;qop&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_REALM">ParameterNames_REALM</span> = &#34;realm&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_RECEIVED">ParameterNames_RECEIVED</span> = &#34;received&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_REDIRECT">ParameterNames_REDIRECT</span> = &#34;redirect&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_RENDER">ParameterNames_RENDER</span> = &#34;render&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_REQUIRED">ParameterNames_REQUIRED</span> = &#34;required&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_RESPONSE">ParameterNames_RESPONSE</span> = &#34;response&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_RESPONSE_AUTH">ParameterNames_RESPONSE_AUTH</span> = &#34;rspauth&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_SESSION">ParameterNames_SESSION</span> = &#34;session&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_SIGNATURE">ParameterNames_SIGNATURE</span> = &#34;signature&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_SIGNED_BY">ParameterNames_SIGNED_BY</span> = &#34;signed-by&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_STALE">ParameterNames_STALE</span> = &#34;stale&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_TAG">ParameterNames_TAG</span> = &#34;tag&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_TEXT">ParameterNames_TEXT</span> = &#34;text&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_TRANSPORT">ParameterNames_TRANSPORT</span> = &#34;transport&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_TTL">ParameterNames_TTL</span> = &#34;ttl&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_URGENT">ParameterNames_URGENT</span> = &#34;urgent&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_URI">ParameterNames_URI</span> = &#34;uri&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_USERNAME">ParameterNames_USERNAME</span> = &#34;username&#34;</pre>
+				
+			
+				<pre>const <span id="ParameterNames_VERSION">ParameterNames_VERSION</span> = &#34;version&#34;</pre>
+				
+			
+		
+		
+		
+		
+			
+			
+			<h2 id="AcceptEncoding">type <a href="/target/AcceptEncoding.go?s=767:925#L27">AcceptEncoding</a></h2>
+			<pre>type AcceptEncoding struct {
+    <a href="#Parameters">Parameters</a> <span class="comment">//ParametersHeader</span>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+* Accept-Encoding SIP (HTTP) Header.
+* &lt;pre&gt;
+* From HTTP RFC 2616
+*
+*
+*   The Accept-Encoding request-header field is similar to Accept, but
+*   restricts the content-codings (section 3.5) that are acceptable in
+*   the response.
+*
+*
+*       Accept-Encoding  = &#34;Accept-Encoding&#34; &#34;:&#34;
+*
+*
+*                          1#( codings [ &#34;;&#34; &#34;q&#34; &#34;=&#34; qvalue ] )
+*       codings          = ( content-coding | &#34;*&#34; )
+*
+*   Examples of its use are:
+*
+*       Accept-Encoding: compress, gzip
+*       Accept-Encoding:
+*       Accept-Encoding: *
+*       Accept-Encoding: compress;q=0.5, gzip;q=1.0
+*       Accept-Encoding: gzip;q=1.0, identity; q=0.5, *;q=0
+* &lt;/pre&gt;
+*
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewAcceptEncoding">func <a href="/target/AcceptEncoding.go?s=959:999#L37">NewAcceptEncoding</a></h3>
+				<pre>func NewAcceptEncoding() *<a href="#AcceptEncoding">AcceptEncoding</a></pre>
+				<p>
+* default constructor
+</p>
+
+				
+			
+
+			
+				
+				<h3 id="AcceptEncoding.EncodeBody">func (*AcceptEncoding) <a href="/target/AcceptEncoding.go?s=1404:1451#L51">EncodeBody</a></h3>
+				<pre>func (this *<a href="#AcceptEncoding">AcceptEncoding</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Encode the value of this header.
+*@return the value of this header encoded into a string.
+</p>
+
+				
+				
+			
+				
+				<h3 id="AcceptEncoding.GetEncoding">func (*AcceptEncoding) <a href="/target/AcceptEncoding.go?s=2064:2112#L75">GetEncoding</a></h3>
+				<pre>func (this *<a href="#AcceptEncoding">AcceptEncoding</a>) GetEncoding() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* get ContentEncoding field
+</p>
+<pre>* @return String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptEncoding.GetQValue">func (*AcceptEncoding) <a href="/target/AcceptEncoding.go?s=1845:1892#L66">GetQValue</a></h3>
+				<pre>func (this *<a href="#AcceptEncoding">AcceptEncoding</a>) GetQValue() <a href="/pkg/builtin/#float32">float32</a></pre>
+				<p>
+* get QValue field
+</p>
+<pre>* @return float
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptEncoding.SetEncoding">func (*AcceptEncoding) <a href="/target/AcceptEncoding.go?s=2722:2801#L99">SetEncoding</a></h3>
+				<pre>func (this *<a href="#AcceptEncoding">AcceptEncoding</a>) SetEncoding(encoding <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+			
+				
+				<h3 id="AcceptEncoding.SetQValue">func (*AcceptEncoding) <a href="/target/AcceptEncoding.go?s=2212:2293#L83">SetQValue</a></h3>
+				<pre>func (this *<a href="#AcceptEncoding">AcceptEncoding</a>) SetQValue(q <a href="/pkg/builtin/#float32">float32</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the qvalue member
+* @param q double to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptEncoding.String">func (*AcceptEncoding) <a href="/target/AcceptEncoding.go?s=1111:1154#L43">String</a></h3>
+				<pre>func (this *<a href="#AcceptEncoding">AcceptEncoding</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="AcceptEncodingHeader">type <a href="/target/AcceptEncodingHeader.go?s=858:1986#L16">AcceptEncodingHeader</a></h2>
+			<pre>type AcceptEncodingHeader interface {
+    <a href="#ParametersHeader">ParametersHeader</a>
+    <a href="#Encoding">Encoding</a>
+    <a href="#Header">Header</a>
+
+    <span class="comment">/**
+     * Gets q-value of the encoding in this encoding value. A value of
+     * &lt;code&gt;-1&lt;/code&gt; indicates the&lt;code&gt;q-value&lt;/code&gt; is not set.
+     *
+     * @return q-value of encoding value, -1 if q-value is not set.
+     * @since v1.1
+     */</span>
+    GetQValue() <a href="/pkg/builtin/#float32">float32</a>
+
+    <span class="comment">/**
+     * Sets q-value for the encoding in this encoding value. Q-values allow the
+     * user to indicate the relative degree of preference for that encoding,
+     * using the qvalue scale from 0 to 1. If no q-value is present, the
+     * encoding should be treated as having a q-value of 1.
+     *
+     * @param qValue - the new float value of the q-value, a value of -1 resets
+     * the qValue.
+     * @throws InvalidArgumentException if the q parameter value is not
+     * &lt;code&gt;-1&lt;/code&gt; or between &lt;code&gt;0 and 1&lt;/code&gt;.
+     * @since v1.1
+     */</span>
+    SetQValue(qValue <a href="/pkg/builtin/#float32">float32</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)
+}</pre>
+			<p>
+*
+</p>
+<pre>* This interface represents the Accept-Encoding request-header.
+* A client includes an AcceptEncodingHeader in a Request to tell the server
+* what coding schemes are acceptable in the Response e.g. compress, gzip.
+* &lt;p&gt;
+* If an AcceptEncodingHeader is present, and if the server cannot send a
+* Response which is acceptable according to the AcceptEncodingHeader, then
+* the server should return a Response with a status code of NOT_ACCEPTABLE.
+* &lt;p&gt;
+* An empty Accept-Encoding header field is permissible, it is equivalent to
+* &lt;code&gt;Accept-Encoding: identity&lt;/code&gt;, meaning no encoding is permissible.
+* &lt;p&gt;
+* If no Accept-Encoding header field is present, the server SHOULD assume a
+* default value of identity.
+* &lt;p&gt;
+* For Example:&lt;br&gt;
+* &lt;code&gt;Accept-Encoding: gzip&lt;/code&gt;
+*
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="AcceptEncodingList">type <a href="/target/AcceptEncodingList.go?s=106:157#L1">AcceptEncodingList</a></h2>
+			<pre>type AcceptEncodingList struct {
+    <a href="#SIPHeaderList">SIPHeaderList</a>
+}</pre>
+			<p>
+*
+* AcceptEncodingList of AccepEncoding headers.
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewAcceptEncodingList">func <a href="/target/AcceptEncodingList.go?s=191:239#L6">NewAcceptEncodingList</a></h3>
+				<pre>func NewAcceptEncodingList() *<a href="#AcceptEncodingList">AcceptEncodingList</a></pre>
+				<p>
+* default constructor
+</p>
+
+				
+			
+
+			
+		
+			
+			
+			<h2 id="AcceptLanguage">type <a href="/target/AcceptLanguage.go?s=402:539#L13">AcceptLanguage</a></h2>
+			<pre>type AcceptLanguage struct {
+    <a href="#Parameters">Parameters</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+</p>
+<pre>* Accept Language body.
+* &lt;pre&gt;
+* HTTP RFC 2616 Section 14.4
+* Accept-Language = &#34;Accept-Language&#34; &#34;:&#34;
+*                         1#( language-range [ &#34;;&#34; &#34;q&#34; &#34;=&#34; qvalue ] )
+*       language-range  = ( ( 1*8ALPHA *( &#34;-&#34; 1*8ALPHA ) ) | &#34;*&#34; )
+*
+* &lt;/pre&gt;
+*
+* @see AcceptLanguageList
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewAcceptLanguage">func <a href="/target/AcceptLanguage.go?s=573:613#L23">NewAcceptLanguage</a></h3>
+				<pre>func NewAcceptLanguage() *<a href="#AcceptLanguage">AcceptLanguage</a></pre>
+				<p>
+* default constructor
+</p>
+
+				
+			
+
+			
+				
+				<h3 id="AcceptLanguage.EncodeBody">func (*AcceptLanguage) <a href="/target/AcceptLanguage.go?s=1012:1059#L37">EncodeBody</a></h3>
+				<pre>func (this *<a href="#AcceptLanguage">AcceptLanguage</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Encode the value of this header to a string.
+</p>
+<pre>*@return  encoded header as a string.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptLanguage.GetAcceptLanguage">func (*AcceptLanguage) <a href="/target/AcceptLanguage.go?s=3425:3479#L137">GetAcceptLanguage</a></h3>
+				<pre>func (this *<a href="#AcceptLanguage">AcceptLanguage</a>) GetAcceptLanguage() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Gets the language value of the AcceptLanguageHeader.
+*
+*
+*
+* @return the language Locale value of this AcceptLanguageHeader
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptLanguage.GetLanguageRange">func (*AcceptLanguage) <a href="/target/AcceptLanguage.go?s=1482:1535#L53">GetLanguageRange</a></h3>
+				<pre>func (this *<a href="#AcceptLanguage">AcceptLanguage</a>) GetLanguageRange() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* get the LanguageRange field
+</p>
+<pre>* @return String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptLanguage.GetQValue">func (*AcceptLanguage) <a href="/target/AcceptLanguage.go?s=1671:1718#L61">GetQValue</a></h3>
+				<pre>func (this *<a href="#AcceptLanguage">AcceptLanguage</a>) GetQValue() <a href="/pkg/builtin/#float32">float32</a></pre>
+				<p>
+* get the QValue field. Return -1 if the parameter has not been
+</p>
+<pre>* set.
+* @return float
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptLanguage.HasQValue">func (*AcceptLanguage) <a href="/target/AcceptLanguage.go?s=1973:2017#L75">HasQValue</a></h3>
+				<pre>func (this *<a href="#AcceptLanguage">AcceptLanguage</a>) HasQValue() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+*
+</p>
+<pre>* Return true if the q value has been set.
+* @since 1.0
+* @return boolean
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptLanguage.RemoveQValue">func (*AcceptLanguage) <a href="/target/AcceptLanguage.go?s=2107:2149#L83">RemoveQValue</a></h3>
+				<pre>func (this *<a href="#AcceptLanguage">AcceptLanguage</a>) RemoveQValue()</pre>
+				<p>
+*
+</p>
+<pre>* Remove the q value.
+* @since 1.0
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptLanguage.SetAcceptLanguage">func (*AcceptLanguage) <a href="/target/AcceptLanguage.go?s=3828:3890#L156">SetAcceptLanguage</a></h3>
+				<pre>func (this *<a href="#AcceptLanguage">AcceptLanguage</a>) SetAcceptLanguage(language <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets the language parameter of this AcceptLanguageHeader.
+*
+*
+*
+* @param language - the new Locale value of the language of
+*
+* AcceptLanguageHeader
+*
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptLanguage.SetLanguageRange">func (*AcceptLanguage) <a href="/target/AcceptLanguage.go?s=2286:2352#L93">SetLanguageRange</a></h3>
+				<pre>func (this *<a href="#AcceptLanguage">AcceptLanguage</a>) SetLanguageRange(languageRange <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the languageRange.
+*
+* @param languageRange is the language range to set.
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptLanguage.SetQValue">func (*AcceptLanguage) <a href="/target/AcceptLanguage.go?s=2966:3047#L117">SetQValue</a></h3>
+				<pre>func (this *<a href="#AcceptLanguage">AcceptLanguage</a>) SetQValue(q <a href="/pkg/builtin/#float32">float32</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets q-value for media-range in AcceptLanguageHeader. Q-values allow the
+*
+* user to indicate the relative degree of preference for that media-range,
+*
+* using the qvalue scale from 0 to 1. If no q-value is present, the
+*
+* media-range should be treated as having a q-value of 1.
+*
+*
+*
+* @param qValue - the new float value of the q-value, a value of -1 resets
+*
+* the qValue.
+*
+* @throws InvalidArgumentException if the q parameter value is not
+*
+* &lt;code&gt;-1&lt;/code&gt; or between &lt;code&gt;0 and 1&lt;/code&gt;.
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AcceptLanguage.String">func (*AcceptLanguage) <a href="/target/AcceptLanguage.go?s=725:768#L29">String</a></h3>
+				<pre>func (this *<a href="#AcceptLanguage">AcceptLanguage</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="AcceptLanguageHeader">type <a href="/target/AcceptLanguageHeader.go?s=608:2076#L21">AcceptLanguageHeader</a></h2>
+			<pre>type AcceptLanguageHeader interface {
+    <a href="#ParametersHeader">ParametersHeader</a>
+    <a href="#Header">Header</a>
+
+    GetQValue() <a href="/pkg/builtin/#float32">float32</a>
+
+    SetQValue(qValue <a href="/pkg/builtin/#float32">float32</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)
+
+    GetAcceptLanguage() <a href="/pkg/builtin/#string">string</a> <span class="comment">//Locale</span>
+
+    SetAcceptLanguage(language <a href="/pkg/builtin/#string">string</a>)
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="AcceptLanguageList">type <a href="/target/AcceptLanguageList.go?s=135:186#L1">AcceptLanguageList</a></h2>
+			<pre>type AcceptLanguageList struct {
+    <a href="#SIPHeaderList">SIPHeaderList</a>
+}</pre>
+			<p>
+*
+* AcceptLanguageList: Strings together a list of AcceptLanguage SIPHeaders.
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewAcceptLanguageList">func <a href="/target/AcceptLanguageList.go?s=190:238#L4">NewAcceptLanguageList</a></h3>
+				<pre>func NewAcceptLanguageList() *<a href="#AcceptLanguageList">AcceptLanguageList</a></pre>
+				
+				
+			
+
+			
+				
+				<h3 id="AcceptLanguageList.GetFirst">func (*AcceptLanguageList) <a href="/target/AcceptLanguageList.go?s=357:409#L10">GetFirst</a></h3>
+				<pre>func (this *<a href="#AcceptLanguageList">AcceptLanguageList</a>) GetFirst() <a href="#SIPHeader">SIPHeader</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="AcceptLanguageList.GetLast">func (*AcceptLanguageList) <a href="/target/AcceptLanguageList.go?s=578:629#L19">GetLast</a></h3>
+				<pre>func (this *<a href="#AcceptLanguageList">AcceptLanguageList</a>) GetLast() <a href="#SIPHeader">SIPHeader</a></pre>
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="AddressParameters">type <a href="/target/AddressParametersImpl.go?s=132:206#L1">AddressParameters</a></h2>
+			<pre>type AddressParameters struct {
+    <a href="#Parameters">Parameters</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewAddressParameters">func <a href="/target/AddressParametersImpl.go?s=265:323#L9">NewAddressParameters</a></h3>
+				<pre>func NewAddressParameters(name <a href="/pkg/builtin/#string">string</a>) *<a href="#AddressParameters">AddressParameters</a></pre>
+				<p>
+* Constructor given the name of the header.
+</p>
+
+				
+			
+
+			
+				
+				<h3 id="AddressParameters.GetAddress">func (*AddressParameters) <a href="/target/AddressParametersImpl.go?s=609:668#L22">GetAddress</a></h3>
+				<pre>func (this *<a href="#AddressParameters">AddressParameters</a>) GetAddress() <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a></pre>
+				<p>
+* get the Address field
+</p>
+<pre>* @return the imbedded  Address
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressParameters.SetAddress">func (*AddressParameters) <a href="/target/AddressParametersImpl.go?s=806:869#L29">SetAddress</a></h3>
+				<pre>func (this *<a href="#AddressParameters">AddressParameters</a>) SetAddress(addr <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a>)</pre>
+				<p>
+* set the Address field
+</p>
+<pre>* @param address Address to set
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="AddressParametersHeader">type <a href="/target/AddressParametersHeader.go?s=51:181#L1">AddressParametersHeader</a></h2>
+			<pre>type AddressParametersHeader interface {
+    <a href="#ParametersHeader">ParametersHeader</a>
+
+    GetAddress() <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a>
+    SetAddress(addr <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a>)
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="CSeq">type <a href="/target/CSeqImpl.go?s=117:310#L4">CSeq</a></h2>
+			<pre>type CSeq struct {
+    <a href="#SIPHeaderImpl">SIPHeaderImpl</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewCSeq">func <a href="/target/CSeqImpl.go?s=599:643#L29">NewCSeq</a></h3>
+				<pre>func NewCSeq(seqno <a href="/pkg/builtin/#int">int</a>, method <a href="/pkg/builtin/#string">string</a>) *<a href="#CSeq">CSeq</a></pre>
+				<p>
+*
+</p>
+<pre>* Constructor given the sequence number and method.
+*
+*@param seqno is the sequence number to assign.
+*@param method is the method string.
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="CSeq.EncodeBody">func (*CSeq) <a href="/target/CSeqImpl.go?s=2074:2111#L81">EncodeBody</a></h3>
+				<pre>func (this *<a href="#CSeq">CSeq</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Return canonical header content. (encoded header except headerName:)
+*
+* @return encoded string.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CSeq.GetMethod">func (*CSeq) <a href="/target/CSeqImpl.go?s=2317:2353#L91">GetMethod</a></h3>
+				<pre>func (this *<a href="#CSeq">CSeq</a>) GetMethod() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the method.
+* @return String the method.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CSeq.GetSequenceNumber">func (*CSeq) <a href="/target/CSeqImpl.go?s=3598:3639#L131">GetSequenceNumber</a></h3>
+				<pre>func (this *<a href="#CSeq">CSeq</a>) GetSequenceNumber() <a href="/pkg/builtin/#int">int</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="CSeq.SetMethod">func (*CSeq) <a href="/target/CSeqImpl.go?s=3180:3244#L117">SetMethod</a></h3>
+				<pre>func (this *<a href="#CSeq">CSeq</a>) SetMethod(meth <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the method member
+*
+* @param meth -- String to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CSeq.SetSequenceNumber">func (*CSeq) <a href="/target/CSeqImpl.go?s=2725:2814#L103">SetSequenceNumber</a></h3>
+				<pre>func (this *<a href="#CSeq">CSeq</a>) SetSequenceNumber(sequenceNumber <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+* Sets the sequence number of this CSeqHeader. The sequence number
+</p>
+<pre>* MUST be expressible as a 32-bit unsigned integer and MUST be less than
+* 2**31.
+*
+* @param sequenceNumber - the sequence number to set.
+* @throws InvalidArgumentException -- if the seq number is &lt;= 0
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CSeq.String">func (*CSeq) <a href="/target/CSeqImpl.go?s=1741:1774#L72">String</a></h3>
+				<pre>func (this *<a href="#CSeq">CSeq</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Return canonical encoded header.
+* @return String with canonical encoded header.
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="CSeqHeader">type <a href="/target/CSeqHeader.go?s=2731:3950#L51">CSeqHeader</a></h2>
+			<pre>type CSeqHeader interface {
+    <a href="#Header">Header</a>
+
+    <span class="comment">/**
+     * Sets the method of CSeqHeader
+     *
+     * @param method - the method of the Request of this CSeqHeader
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the method value.
+     */</span>
+    SetMethod(method <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets the method of CSeqHeader
+     *
+     * @return method of CSeqHeader
+     */</span>
+    GetMethod() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the sequence number value of the CSeqHeader. The sequence number
+     * MUST be expressible as a 32-bit unsigned integer and MUST be less than
+     * 2**31.
+     *
+     * @param sequenceNumber - the new sequence number of this CSeqHeader
+     * @throws InvalidArgumentException if supplied value is less than zero.
+     * @since v1.1
+     */</span>
+    SetSequenceNumber(sequenceNumber <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets the sequence number of this CSeqHeader.
+     *
+     * @return sequence number of the CSeqHeader
+     * @since v1.1
+     */</span>
+    GetSequenceNumber() <a href="/pkg/builtin/#int">int</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="CallID">type <a href="/target/CallIdImpl.go?s=83:261#L2">CallID</a></h2>
+			<pre>type CallID struct {
+    <a href="#SIPHeaderImpl">SIPHeaderImpl</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewCallID">func <a href="/target/CallIdImpl.go?s=643:719#L22">NewCallID</a></h3>
+				<pre>func NewCallID(callId <a href="/pkg/builtin/#string">string</a>) (this *<a href="#CallID">CallID</a>, IllegalArgumentException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+* Constructor given the call Identifier.
+</p>
+<pre>*@param callId string call identifier (should be localid@host)
+*@throws IllegalArgumentException if call identifier is bad.
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="CallID.EncodeBody">func (*CallID) <a href="/target/CallIdImpl.go?s=2063:2102#L60">EncodeBody</a></h3>
+				<pre>func (this *<a href="#CallID">CallID</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Encode the body part of this header (i.e. leave out the hdrName).
+</p>
+<pre>*@return String encoded body part of the header.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CallID.GetCallId">func (*CallID) <a href="/target/CallIdImpl.go?s=2386:2424#L72">GetCallId</a></h3>
+				<pre>func (this *<a href="#CallID">CallID</a>) GetCallId() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* get the CallId field. This does the same thing as
+</p>
+<pre>	 * encodeBody
+         * @return String the encoded body part of the
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CallID.GetCallIdentifer">func (*CallID) <a href="/target/CallIdImpl.go?s=2562:2616#L80">GetCallIdentifer</a></h3>
+				<pre>func (this *<a href="#CallID">CallID</a>) GetCallIdentifer() *<a href="#CallIdentifier">CallIdentifier</a></pre>
+				<p>
+*
+</p>
+<pre>* get the call Identifer member.
+* @return CallIdentifier
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CallID.SetCallId">func (*CallID) <a href="/target/CallIdImpl.go?s=2987:3053#L90">SetCallId</a></h3>
+				<pre>func (this *<a href="#CallID">CallID</a>) SetCallId(cid <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+* set the CallId field
+</p>
+<pre>         * @param cid String to set. This is the body part of the Call-Id
+	  *  header. It must have the form localId@host or localId.
+         * @throws IllegalArgumentException if cid is null, not a token, or is
+         * not a token@token.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CallID.SetCallIdentifier">func (*CallID) <a href="/target/CallIdImpl.go?s=3392:3453#L103">SetCallIdentifier</a></h3>
+				<pre>func (this *<a href="#CallID">CallID</a>) SetCallIdentifier(cid *<a href="#CallIdentifier">CallIdentifier</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the callIdentifier member.
+* @param cid CallIdentifier to set (localId@host).
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CallID.String">func (*CallID) <a href="/target/CallIdImpl.go?s=1738:1773#L52">String</a></h3>
+				<pre>func (this *<a href="#CallID">CallID</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Compare two call ids for equality.
+* @param other Object to set
+* @return true if the two call ids are equals, false otherwise
+</pre>
+<p>
+public boolean equals(Object other) {
+</p>
+<pre>    if (! this.getClass().equals(other.getClass())) {
+        return false;
+    }
+    CallID that = (CallID) other;
+    return this.callIdentifier.equals(that.callIdentifier);
+}
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="CallIdHeader">type <a href="/target/CallIdHeader.go?s=1989:2861#L66">CallIdHeader</a></h2>
+			<pre>type CallIdHeader interface {
+    <a href="#Header">Header</a>
+
+    SetCallId(callId <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    GetCallId() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="CallIdentifier">type <a href="/target/CallIdentifierImpl.go?s=194:384#L5">CallIdentifier</a></h2>
+			<pre>type CallIdentifier struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+* The call identifer that goes into a callID header and a in-reply-to header.
+* @see CallID
+* @see InReplyTo
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewCallIdentifier">func <a href="/target/CallIdentifierImpl.go?s=1029:1091#L36">NewCallIdentifier</a></h3>
+				<pre>func NewCallIdentifier(cid <a href="/pkg/builtin/#string">string</a>) (*<a href="#CallIdentifier">CallIdentifier</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+* constructor
+</p>
+<pre>* @param cid String to set
+* @throws IllegalArgumentException if cid is null or is not a token,
+* or token@token
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="CallIdentifier.GetHost">func (*CallIdentifier) <a href="/target/CallIdentifierImpl.go?s=2779:2823#L91">GetHost</a></h3>
+				<pre>func (this *<a href="#CallIdentifier">CallIdentifier</a>) GetHost() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* get the host field
+</p>
+<pre>* @return host member String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CallIdentifier.GetLocalId">func (*CallIdentifier) <a href="/target/CallIdentifierImpl.go?s=2585:2632#L84">GetLocalId</a></h3>
+				<pre>func (this *<a href="#CallIdentifier">CallIdentifier</a>) GetLocalId() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* get the LocalId field
+</p>
+<pre>* @return String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CallIdentifier.SetCallID">func (*CallIdentifier) <a href="/target/CallIdentifierImpl.go?s=3295:3378#L108">SetCallID</a></h3>
+				<pre>func (this *<a href="#CallIdentifier">CallIdentifier</a>) SetCallID(cid <a href="/pkg/builtin/#string">string</a>) (IllegalArgumentException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+* set the callId field
+</p>
+<pre>* @param cid Strimg to set
+* @throws IllegalArgumentException if cid is null or is not a token or
+* token@token
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CallIdentifier.SetHost">func (*CallIdentifier) <a href="/target/CallIdentifierImpl.go?s=3922:3971#L131">SetHost</a></h3>
+				<pre>func (this *<a href="#CallIdentifier">CallIdentifier</a>) SetHost(host <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the host member
+* @param host String to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CallIdentifier.SetLocalId">func (*CallIdentifier) <a href="/target/CallIdentifierImpl.go?s=2976:3031#L99">SetLocalId</a></h3>
+				<pre>func (this *<a href="#CallIdentifier">CallIdentifier</a>) SetLocalId(localId <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the localId member
+* @param localId String to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="CallIdentifier.String">func (*CallIdentifier) <a href="/target/CallIdentifierImpl.go?s=1418:1461#L50">String</a></h3>
+				<pre>func (this *<a href="#CallIdentifier">CallIdentifier</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the encoded version of this id.
+* @return String to set
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="Contact">type <a href="/target/ContactImpl.go?s=146:415#L6">Contact</a></h2>
+			<pre>type Contact struct {
+    <a href="#AddressParameters">AddressParameters</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+* Contact Item.
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewContact">func <a href="/target/ContactImpl.go?s=478:504#L19">NewContact</a></h3>
+				<pre>func NewContact() *<a href="#Contact">Contact</a></pre>
+				<p>
+* Default constructor.
+</p>
+
+				
+			
+
+			
+				
+				<h3 id="Contact.EncodeBody">func (*Contact) <a href="/target/ContactImpl.go?s=1359:1399#L53">EncodeBody</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Encode body of the header into a cannonical String.
+* @return string encoding of the header value.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Contact.GetAddress">func (*Contact) <a href="/target/ContactImpl.go?s=2575:2624#L95">GetAddress</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) GetAddress() <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a></pre>
+				<p>
+* get the address field.
+</p>
+<pre>* @return Address
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Contact.GetContactList">func (*Contact) <a href="/target/ContactImpl.go?s=2201:2251#L80">GetContactList</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) GetContactList() *<a href="#ContactList">ContactList</a></pre>
+				<p>
+* get the Contact list.
+</p>
+<pre>* @return ContactList
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Contact.GetContactParms">func (*Contact) <a href="/target/ContactImpl.go?s=2808:2866#L103">GetContactParms</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) GetContactParms() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a></pre>
+				<p>
+* get the parameters List
+</p>
+<pre>* @return NameValueList
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Contact.GetExpires">func (*Contact) <a href="/target/ContactImpl.go?s=3032:3069#L112">GetExpires</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) GetExpires() <a href="/pkg/builtin/#int">int</a></pre>
+				<p>
+* get Expires parameter.
+</p>
+<pre>* @return the Expires parameter.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Contact.GetQValue">func (*Contact) <a href="/target/ContactImpl.go?s=3642:3682#L130">GetQValue</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) GetQValue() <a href="/pkg/builtin/#float32">float32</a></pre>
+				<p>
+* get the Q-value
+</p>
+<pre>* @return float
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Contact.GetWildCardFlag">func (*Contact) <a href="/target/ContactImpl.go?s=2381:2424#L88">GetWildCardFlag</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) GetWildCardFlag() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* get the WildCardFlag field
+</p>
+<pre>* @return boolean
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Contact.SetAddress">func (*Contact) <a href="/target/ContactImpl.go?s=4406:4459#L162">SetAddress</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) SetAddress(addr <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the address member
+*
+* @param address Address to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Contact.SetContactList">func (*Contact) <a href="/target/ContactImpl.go?s=3916:3970#L141">SetContactList</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) SetContactList(cl *<a href="#ContactList">ContactList</a>)</pre>
+				<p>
+* set the Contact List
+</p>
+<pre>* @param cl ContactList to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Contact.SetExpires">func (*Contact) <a href="/target/ContactImpl.go?s=3264:3353#L121">SetExpires</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) SetExpires(expiryDeltaSeconds <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+				
+			
+				
+				<h3 id="Contact.SetParameter">func (*Contact) <a href="/target/ContactImpl.go?s=823:901#L35">SetParameter</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) SetParameter(name, value <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+* Set a parameter.
+</p>
+
+				
+				
+			
+				
+				<h3 id="Contact.SetQValue">func (*Contact) <a href="/target/ContactImpl.go?s=4741:4820#L174">SetQValue</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) SetQValue(qValue <a href="/pkg/builtin/#float32">float32</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+* set the Q-value parameter
+</p>
+<pre>* @param qValue float to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Contact.SetWildCardFlag">func (*Contact) <a href="/target/ContactImpl.go?s=4113:4158#L150">SetWildCardFlag</a></h3>
+				<pre>func (this *<a href="#Contact">Contact</a>) SetWildCardFlag(w <a href="/pkg/builtin/#bool">bool</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the wildCardFlag member
+* @param w boolean to set
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="ContactHeader">type <a href="/target/ContactHeader.go?s=3369:7255#L72">ContactHeader</a></h2>
+			<pre>type ContactHeader interface {
+    <a href="#HeaderAddress">HeaderAddress</a>
+    <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Parameters">Parameters</a>
+    <a href="#Header">Header</a>
+
+    SetExpires(expires <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)
+
+    GetExpires() <a href="/pkg/builtin/#int">int</a>
+
+    <span class="comment">/**
+
+     * Sets the &lt;code&gt;qValue&lt;/code&gt; value of the Name Address. If more than
+
+     * one Contact is sent in a REGISTER request, the registering UA intends
+
+     * to associate all of the URIs in these Contact header field values with
+
+     * the address-of-record present in the To field.  This list can be
+
+     * prioritized with the &#34;q&#34; parameter in the Contact header field.  The &#34;q&#34;
+
+     * parameter indicates a relative preference for the particular Contact
+
+     * header field value compared to other bindings for this address-of-record.
+
+     * A value of &lt;code&gt;-1&lt;/code&gt; indicates the &lt;code&gt;qValue&lt;/code&gt; paramater
+
+     * is not set.
+     *
+     * @param qValue - the new float value of the q-value parameter.
+     * @throws InvalidArgumentException if the q-value parameter value is not
+     * &lt;code&gt;-1&lt;/code&gt; or between &lt;code&gt;0 and 1&lt;/code&gt;.
+     * @since v1.1
+     */</span>
+    SetQValue(qValue <a href="/pkg/builtin/#float32">float32</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)
+
+    GetQValue() <a href="/pkg/builtin/#float32">float32</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ContactList">type <a href="/target/ContactListImpl.go?s=170:214#L1">ContactList</a></h2>
+			<pre>type ContactList struct {
+    <a href="#SIPHeaderList">SIPHeaderList</a>
+}</pre>
+			<p>
+*
+* List of contact headers.ContactLists are also maintained in a hashtable for quick lookup.
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewContactList">func <a href="/target/ContactListImpl.go?s=409:443#L15">NewContactList</a></h3>
+				<pre>func NewContactList() *<a href="#ContactList">ContactList</a></pre>
+				<p>
+*
+</p>
+<pre>* Constructor.
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="ContactList.AddContact">func (*ContactList) <a href="/target/ContactListImpl.go?s=930:1021#L31">AddContact</a></h3>
+				<pre>func (this *<a href="#ContactList">ContactList</a>) AddContact(contact <a href="#ContactHeader">ContactHeader</a>) (IllegalArgumentException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* add a new contact header. Store it in the hashtable also
+* @param contact -- contact to add to this list.
+* @throws IllegalArgumentException if Duplicate Contact for same addr
+</pre>
+
+				
+				
+			
+				
+				<h3 id="ContactList.Clone">func (*ContactList) <a href="/target/ContactListImpl.go?s=1220:1264#L42">Clone</a></h3>
+				<pre>func (this *<a href="#ContactList">ContactList</a>) Clone() interface{}</pre>
+				<p>
+*
+</p>
+<pre>* make a clone of this contact list.
+* @return Object cloned list.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="ContactList.GetContacts">func (*ContactList) <a href="/target/ContactListImpl.go?s=1576:1630#L59">GetContacts</a></h3>
+				<pre>func (this *<a href="#ContactList">ContactList</a>) GetContacts() []<a href="#ContactHeader">ContactHeader</a></pre>
+				<p>
+*
+</p>
+<pre>         * Get an array of contact addresses.
+  	 *
+         * @return  array of contacts.
+	 *
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="ContentDispositionHeader">type <a href="/target/ContentDispositionHeader.go?s=2055:4340#L43">ContentDispositionHeader</a></h2>
+			<pre>type ContentDispositionHeader interface {
+    <a href="#Header">Header</a>
+    <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Parameters">Parameters</a>
+
+    <span class="comment">/**
+     * Sets the interpretation value of the message body or message body part
+     * for this ContentDispositionHeader.
+     *
+     * @param &lt;var&gt;dispositiontype&lt;/var&gt; the new String value of the
+     * disposition type.
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the dispositionType parameter.
+     */</span>
+    SetDispositionType(dispositionType <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets the interpretation of the message body or message body part of
+     * this ContentDispositionHeader.
+     *
+     * @return interpretation of the message body or message body part
+     */</span>
+    GetDispositionType() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * The handling parameter describes how the UAS should react if it
+     * receives a message body whose content type or disposition type it
+     * does not understand.  The parameter has defined values of &#34;optional&#34;
+     * and &#34;required&#34;.  If the handling parameter is missing, the value
+     * &#34;required&#34; SHOULD be assumed.
+     *
+     * @param &lt;var&gt;handling&lt;/var&gt; the new String value either &#34;optional&#34;
+     * or &#34;required&#34;.
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the handling parameter.
+     */</span>
+    SetHandling(handling <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets the handling information of the unknown content disposition of the
+     * ContentDispositionHeader.
+     *
+     * @return handling information for unknown content dispositions.
+     */</span>
+    GetHandling() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			<p>
+*
+</p>
+<pre>* The Content-Disposition header field describes how the message body or,
+* for multipart messages, a message body part is to be interpreted by the
+* UAC or UAS. This SIP header field extends the MIME Content-Type. Several
+* new &#34;disposition-types&#34; of the Content-Disposition header are defined by
+* SIP, namely:-
+* &lt;ul&gt;
+* &lt;li&gt;session - indicates that the body part describes a session, for either
+* calls or early (pre-call) media.
+* &lt;li&gt;render - indicates that the body part should be displayed or otherwise
+* rendered to the user.
+* &lt;li&gt;icon - indicates that the body part contains an image suitable as an
+* iconic representation of the caller or callee that could be rendered
+* informationally by a user agent when a message has been received, or
+* persistently while a dialog takes place.
+* &lt;li&gt;alert - indicates that the body part contains information, such as an
+* audio clip, that should be rendered by the user agent in an attempt to alert
+* the user to the receipt of a request, generally a request that initiates a
+* dialog.
+* &lt;/ul&gt;
+* For backward-compatibility, if the Content-Disposition header field is
+* missing, the server SHOULD assume bodies of Content-Type application/sdp are
+* the disposition &#34;session&#34;, while other content types are &#34;render&#34;.
+* &lt;p&gt;
+* If this header field is missing, the MIME type determines the default
+* content disposition.  If there is none, &#34;render&#34; is assumed.
+* &lt;p&gt;
+* For Example:&lt;br&gt;
+* &lt;code&gt;Content-Disposition: session&lt;/code&gt;
+*
+* @see ContentTypeHeader
+* @see ContentLengthHeader
+* @see ContentEncodingHeader
+* @see ContentLanguageHeader
+*
+* @since 1.1
+* @author Sun Microsystems
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ContentEncodingHeader">type <a href="/target/ContentEncodingHeader.go?s=1624:1806#L33">ContentEncodingHeader</a></h2>
+			<pre>type ContentEncodingHeader interface {
+    <a href="#Header">Header</a>
+    <a href="#Encoding">Encoding</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ContentLanguageHeader">type <a href="/target/ContentLanguageHeader.go?s=674:1284#L21">ContentLanguageHeader</a></h2>
+			<pre>type ContentLanguageHeader interface {
+    <a href="#Header">Header</a>
+
+    <span class="comment">/**
+     * Gets the language value of the ContentLanguageHeader.
+     *
+     * @return the Locale value of this ContentLanguageHeader
+     */</span>
+    GetContentLanguage() <a href="/pkg/builtin/#string">string</a> <span class="comment">//Locale;</span>
+
+    <span class="comment">/**
+     * Sets the language parameter of this ContentLanguageHeader.
+     *
+     * @param language - the new Locale value of the language of
+     * ContentLanguageHeader
+     */</span>
+    SetContentLanguage(language <a href="/pkg/builtin/#string">string</a>) <span class="comment">//Locale);</span>
+
+}</pre>
+			<p>
+*
+</p>
+<pre>* The Content-Language header field is used to indicate the language of the
+* message body.
+* &lt;p&gt;
+* For Example:&lt;br&gt;
+* &lt;code&gt;Content-Language: fr&lt;/code&gt;
+*
+* @see ContentDispositionHeader
+* @see ContentLengthHeader
+* @see ContentEncodingHeader
+* @see ContentTypeHeader
+*
+* @since 1.1
+* @author Sun Microsystems
+*
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ContentLengthHeader">type <a href="/target/ContentLengthHeader.go?s=1217:2024#L48">ContentLengthHeader</a></h2>
+			<pre>type ContentLengthHeader interface {
+    <a href="#Header">Header</a>
+
+    SetContentLength(contentLength <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)
+
+    GetContentLength() <a href="/pkg/builtin/#int">int</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ContentTypeHeader">type <a href="/target/ContentTypeHeader.go?s=964:1156#L25">ContentTypeHeader</a></h2>
+			<pre>type ContentTypeHeader interface {
+    <a href="#Header">Header</a>
+    <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Parameters">Parameters</a>
+    <a href="#MediaType">MediaType</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Encoding">type <a href="/target/Encoding.go?s=536:1137#L16">Encoding</a></h2>
+			<pre>type Encoding interface {
+    SetEncoding(encoding <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets the encoding of an EncodingHeader. Returns null if no
+     * encoding is defined in an EncodingHeader.
+     *
+     * @return the string value identifing the encoding
+     */</span>
+    GetEncoding() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			<p>
+*
+</p>
+<pre>* This interface represents encoding methods for any header that contains an
+* encoding value.
+*
+* @see AcceptEncodingHeader
+* @see ContentEncodingHeader
+*
+* @since 1.1
+* @author Sun Microsystems
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ExpiresHeader">type <a href="/target/ExpiresHeader.go?s=2202:2963#L75">ExpiresHeader</a></h2>
+			<pre>type ExpiresHeader interface {
+    <a href="#Header">Header</a>
+
+    SetExpires(expires <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)
+
+    GetExpires() <a href="/pkg/builtin/#int">int</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ExtensionHeader">type <a href="/target/ExtensionHeader.go?s=823:1358#L15">ExtensionHeader</a></h2>
+			<pre>type ExtensionHeader interface {
+    <a href="#Header">Header</a>
+
+    <span class="comment">/**
+     * Sets the value parameter of the ExtensionHeader.
+     *
+     * @param value - the new value of the ExtensionHeader
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the value parameter.
+     */</span>
+    SetValue(value <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets the value of the ExtensionHeader.
+     *
+     * @return the string of the value parameter.
+     */</span>
+    GetValue() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ExtensionHeaderImpl">type <a href="/target/ExtensionHeaderImpl.go?s=169:290#L3">ExtensionHeaderImpl</a></h2>
+			<pre>type ExtensionHeaderImpl struct {
+    <a href="#SIPHeaderImpl">SIPHeaderImpl</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewExtensionHeaderImpl">func <a href="/target/ExtensionHeaderImpl.go?s=402:470#L13">NewExtensionHeaderImpl</a></h3>
+				<pre>func NewExtensionHeaderImpl(headerName <a href="/pkg/builtin/#string">string</a>) *<a href="#ExtensionHeaderImpl">ExtensionHeaderImpl</a></pre>
+				
+				
+			
+
+			
+				
+				<h3 id="ExtensionHeaderImpl.EncodeBody">func (*ExtensionHeaderImpl) <a href="/target/ExtensionHeaderImpl.go?s=2015:2067#L75">EncodeBody</a></h3>
+				<pre>func (this *<a href="#ExtensionHeaderImpl">ExtensionHeaderImpl</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="ExtensionHeaderImpl.GetHeaderValue">func (*ExtensionHeaderImpl) <a href="/target/ExtensionHeaderImpl.go?s=1115:1171#L42">GetHeaderValue</a></h3>
+				<pre>func (this *<a href="#ExtensionHeaderImpl">ExtensionHeaderImpl</a>) GetHeaderValue() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Get the value of the extension header.
+</p>
+<pre>*@return the value of the extension header.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="ExtensionHeaderImpl.SetName">func (*ExtensionHeaderImpl) <a href="/target/ExtensionHeaderImpl.go?s=785:845#L29">SetName</a></h3>
+				<pre>func (this *<a href="#ExtensionHeaderImpl">ExtensionHeaderImpl</a>) SetName(headerName <a href="/pkg/builtin/#string">string</a>)</pre>
+				
+				
+				
+			
+				
+				<h3 id="ExtensionHeaderImpl.SetValue">func (*ExtensionHeaderImpl) <a href="/target/ExtensionHeaderImpl.go?s=929:985#L35">SetValue</a></h3>
+				<pre>func (this *<a href="#ExtensionHeaderImpl">ExtensionHeaderImpl</a>) SetValue(value <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Set the value of the header.
+</p>
+
+				
+				
+			
+				
+				<h3 id="ExtensionHeaderImpl.String">func (*ExtensionHeaderImpl) <a href="/target/ExtensionHeaderImpl.go?s=1702:1750#L65">String</a></h3>
+				<pre>func (this *<a href="#ExtensionHeaderImpl">ExtensionHeaderImpl</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Return the canonical encoding of this header.
+</p>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="From">type <a href="/target/FromImpl.go?s=131:216#L5">From</a></h2>
+			<pre>type From struct {
+    <a href="#AddressParameters">AddressParameters</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewFrom">func <a href="/target/FromImpl.go?s=262:282#L11">NewFrom</a></h3>
+				<pre>func NewFrom() *<a href="#From">From</a></pre>
+				<p>
+* Default constructor
+</p>
+
+				
+			
+
+			
+				
+				<h3 id="From.CloneTo">func (*From) <a href="/target/FromImpl.go?s=563:596#L23">CloneTo</a></h3>
+				<pre>func (this *<a href="#From">From</a>) CloneTo(to *<a href="#To">To</a>)</pre>
+				<p>
+* Generate a FROM header from a TO header
+</p>
+
+				
+				
+			
+				
+				<h3 id="From.EncodeBody">func (*From) <a href="/target/FromImpl.go?s=1857:1894#L67">EncodeBody</a></h3>
+				<pre>func (this *<a href="#From">From</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Encode the header content into a String.
+*
+* @return String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="From.GetDisplayName">func (*From) <a href="/target/FromImpl.go?s=3113:3154#L106">GetDisplayName</a></h3>
+				<pre>func (this *<a href="#From">From</a>) GetDisplayName() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the display name from the address.
+* @return Display name
+</pre>
+
+				
+				
+			
+				
+				<h3 id="From.GetHostPort">func (*From) <a href="/target/FromImpl.go?s=2759:2814#L93">GetHostPort</a></h3>
+				<pre>func (this *<a href="#From">From</a>) GetHostPort() (*<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#HostPort">HostPort</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Conveniance accessor function to get the hostPort field from the address.
+* Warning -- this assumes that the embedded URI is a SipURL.
+*
+* @return hostport field
+</pre>
+
+				
+				
+			
+				
+				<h3 id="From.GetTag">func (*From) <a href="/target/FromImpl.go?s=3327:3360#L115">GetTag</a></h3>
+				<pre>func (this *<a href="#From">From</a>) GetTag() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the tag parameter from the address parm list.
+* @return tag field
+</pre>
+
+				
+				
+			
+				
+				<h3 id="From.GetUserAtHostPort">func (*From) <a href="/target/FromImpl.go?s=4639:4683#L169">GetUserAtHostPort</a></h3>
+				<pre>func (this *<a href="#From">From</a>) GetUserAtHostPort() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Get the user@host port string.
+</p>
+
+				
+				
+			
+				
+				<h3 id="From.HasTag">func (*From) <a href="/target/FromImpl.go?s=3590:3621#L127">HasTag</a></h3>
+				<pre>func (this *<a href="#From">From</a>) HasTag() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Boolean function
+</p>
+<pre>* @return true if the Tag exist
+</pre>
+
+				
+				
+			
+				
+				<h3 id="From.RemoveTag">func (*From) <a href="/target/FromImpl.go?s=3732:3761#L133">RemoveTag</a></h3>
+				<pre>func (this *<a href="#From">From</a>) RemoveTag()</pre>
+				<p>
+* remove Tag member
+</p>
+
+				
+				
+			
+				
+				<h3 id="From.SetAddress">func (*From) <a href="/target/FromImpl.go?s=3927:3977#L142">SetAddress</a></h3>
+				<pre>func (this *<a href="#From">From</a>) SetAddress(addr <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the address member
+* @param address Address to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="From.SetTag">func (*From) <a href="/target/FromImpl.go?s=4124:4181#L150">SetTag</a></h3>
+				<pre>func (this *<a href="#From">From</a>) SetTag(t <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the tag member
+* @param t tag to set. From tags are mandatory.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="From.String">func (*From) <a href="/target/FromImpl.go?s=1560:1593#L58">String</a></h3>
+				<pre>func (this *<a href="#From">From</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Encode the header into a String.
+*
+* @return String
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="FromHeader">type <a href="/target/FromHeader.go?s=3722:5084#L107">FromHeader</a></h2>
+			<pre>type FromHeader interface {
+    <a href="#Header">Header</a>
+    <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Parameters">Parameters</a>
+    <a href="#HeaderAddress">HeaderAddress</a>
+
+    <span class="comment">/**
+
+     * Sets the tag parameter of the FromHeader. The tag in the From field of a
+     * request identifies the peer of the dialog. When a UA sends a request
+     * outside of a dialog, it contains a From tag only, providing &#34;half&#34; of
+     * the dialog Identifier.
+     * &lt;p&gt;
+     * The From Header MUST contain a new &#34;tag&#34; parameter, chosen by the UAC
+     * applicaton. Once the initial From &#34;tag&#34; is assigned it should not be
+     * manipulated by the application. That is on the client side for outbound
+     * requests the application is responsible for Tag assigmennment, after
+     * dialog establishment the stack will take care of Tag assignment.
+     *
+     * @param tag - the new tag of the FromHeader
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the Tag value.
+     */</span>
+    SetTag(tag <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    GetTag() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			<p>
+*
+</p>
+<pre>* The From header field indicates the logical identity of the initiator
+
+* of the request, possibly the user&#39;s address-of-record. This may be different
+
+* from the initiator of the dialog.  Requests sent by the callee to the caller
+
+* use the callee&#39;s address in the From header field.
+
+* &lt;p&gt;
+
+* Like the To header field, it contains a URI and optionally a display name,
+
+* encapsulated in a {@link javax.sip.address.Address}.  It is used by SIP
+
+* elements to determine which processing rules to apply to a request (for
+
+* example, automatic call rejection). As such, it is very important that the
+
+* From URI not contain IP addresses or the FQDN of the host on which the UA is
+
+* running, since these are not logical names.
+
+* &lt;p&gt;
+
+* The From header field allows for a display name.  A UAC SHOULD use
+
+* the display name &#34;Anonymous&#34;, along with a syntactically correct, but
+
+* otherwise meaningless URI (like sip:thisis@anonymous.invalid), if the
+
+* identity of the client is to remain hidden.
+
+* &lt;p&gt;
+
+* Usually, the value that populates the From header field in requests
+
+* generated by a particular UA is pre-provisioned by the user or by the
+
+* administrators of the user&#39;s local domain.  If a particular UA is used by
+
+* multiple users, it might have switchable profiles that include a URI
+
+* corresponding to the identity of the profiled user. Recipients of requests
+
+* can authenticate the originator of a request in order to ascertain that
+
+* they are who their From header field claims they are.
+
+* &lt;p&gt;
+
+* Two From header fields are equivalent if their URIs match, and their
+
+* parameters match. Extension parameters in one header field, not present in
+
+* the other are ignored for the purposes of comparison. This means that the
+
+* display name and presence or absence of angle brackets do not affect
+
+* matching.
+
+* &lt;ul&gt;
+
+* &lt;li&gt; The &#34;Tag&#34; parameter - is used in the To and From header fields of SIP
+
+* messages.  It serves as a general mechanism to identify a dialog, which is
+
+* the combination of the Call-ID along with two tags, one from each
+
+* participant in the dialog.  When a User Agent sends a request outside of a dialog,
+
+* it contains a From tag only, providing &#34;half&#34; of the dialog ID. The dialog
+
+* is completed from the response(s), each of which contributes the second half
+
+* in the To header field. When a tag is generated by a User Agent for insertion into
+
+* a request or response, it MUST be globally unique and cryptographically
+
+* random with at least 32 bits of randomness. Besides the requirement for
+
+* global uniqueness, the algorithm for generating a tag is implementation
+
+* specific.  Tags are helpful in fault tolerant systems, where a dialog is to
+
+* be recovered on an alternate server after a failure.  A UAS can select the
+
+* tag in such a way that a backup can recognize a request as part of a dialog
+
+* on the failed server, and therefore determine that it should attempt to
+
+* recover the dialog and any other state associated with it.
+
+* &lt;/ul&gt;
+* For Example:&lt;br&gt;
+* &lt;code&gt;From: &#34;Bob&#34; sips:bob@biloxi.com ;tag=a48s&lt;br&gt;
+* From: sip:+12125551212@phone2net.com;tag=887s&lt;br&gt;
+* From: Anonymous sip:c8oqz84zk7z@privacy.org;tag=hyh8&lt;/code&gt;
+*
+* @version 1.1
+* @author Sun Microsystems
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Header">type <a href="/target/Header.go?s=4481:6484#L74">Header</a></h2>
+			<pre>type Header interface {
+    <span class="comment">/**
+     * Gets the unique string name of this Header. A name constant is defined in
+     * each individual Header identifying each Header.
+     *
+     * @return the name of this specific Header
+     */</span>
+    GetName() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Creates and returns a deep copy of the Header. This methods must ensure a
+     * deep copy of the Header, so that when a message is cloned the Header can
+     * be modified without effecting the original Header in the message. This
+     * provides useful functionality for proxying Requests and Responses, for
+     * example:
+     * &lt;ul&gt;
+     * &lt;li&gt;Recieve a message.
+     * &lt;li&gt;Create a deep clone of the message and headers.
+     * &lt;li&gt;Modify necessary headers.
+     * &lt;li&gt;Proxy the message using the send methods on the SipProvider.
+     * &lt;/ul&gt;
+     * This method overrides the clone method in java.lang.Object.
+     *
+     * @return a deep copy of Header
+     */</span>
+    Clone() interface{}
+
+    <span class="comment">/**
+     * Gets a string representation of the Header. This method overrides the
+     * toString method in java.lang.Object.
+     *
+     * @return string representation of Header
+     */</span>
+    String() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="HeaderAddress">type <a href="/target/HeaderAddress.go?s=1041:1457#L26">HeaderAddress</a></h2>
+			<pre>type HeaderAddress interface {
+
+    <span class="comment">/**
+     * Sets the Address parameter of this Address.
+     *
+     * @param address - the Address object that represents the new
+     *  address of this Address.
+     */</span>
+    SetAddress(addr <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a>)
+
+    <span class="comment">/**
+     * Gets the address parameter of this Address.
+     *
+     * @return the Address of this Address
+     */</span>
+    GetAddress() <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a>
+}</pre>
+			<p>
+*
+</p>
+<pre>* This interface represents methods for manipulating Address object
+* values for any header that contains a Address value.
+* &lt;p&gt;
+* When the header field value contains a display name encapsulated in the
+* Address, the URI including all URI parameters is enclosed in &#34;&lt;&#34; and &#34;&gt;&#34;.
+* If no &#34;&lt;&#34; and &#34;&gt;&#34; are present, all parameters after the URI are header
+* parameters, not URI parameters. The display name can be tokens, or a
+* quoted string, if a larger character set is desired.
+*
+* @see Address
+* @see ContactHeader
+* @see FromHeader
+* @see RecordRouteHeader
+* @see ReplyToHeader
+* @see RouteHeader
+* @see ToHeader
+*
+* @version 1.1
+* @author Sun Microsystems
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="MaxForwards">type <a href="/target/MaxForwardsImpl.go?s=105:255#L2">MaxForwards</a></h2>
+			<pre>type MaxForwards struct {
+    <a href="#SIPHeaderImpl">SIPHeaderImpl</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+* MaxForwards SIPHeader
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewMaxForwards">func <a href="/target/MaxForwardsImpl.go?s=321:355#L11">NewMaxForwards</a></h3>
+				<pre>func NewMaxForwards() *<a href="#MaxForwards">MaxForwards</a></pre>
+				<p>
+* Default constructor.
+</p>
+
+				
+			
+
+			
+				
+				<h3 id="MaxForwards.DecrementMaxForwards">func (*MaxForwards) <a href="/target/MaxForwardsImpl.go?s=2017:2064#L62">DecrementMaxForwards</a></h3>
+				<pre>func (this *<a href="#MaxForwards">MaxForwards</a>) DecrementMaxForwards()</pre>
+				<p>
+* decrement MaxForwards field one by one.
+</p>
+
+				
+				
+			
+				
+				<h3 id="MaxForwards.EncodeBody">func (*MaxForwards) <a href="/target/MaxForwardsImpl.go?s=1599:1643#L49">EncodeBody</a></h3>
+				<pre>func (this *<a href="#MaxForwards">MaxForwards</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Encode into a string.
+* @return encoded string.
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="MaxForwards.GetMaxForwards">func (*MaxForwards) <a href="/target/MaxForwardsImpl.go?s=764:809#L25">GetMaxForwards</a></h3>
+				<pre>func (this *<a href="#MaxForwards">MaxForwards</a>) GetMaxForwards() <a href="/pkg/builtin/#int">int</a></pre>
+				<p>
+* get the MaxForwards field.
+</p>
+<pre>* @return the maxForwards member.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="MaxForwards.HasReachedZero">func (*MaxForwards) <a href="/target/MaxForwardsImpl.go?s=1823:1869#L56">HasReachedZero</a></h3>
+				<pre>func (this *<a href="#MaxForwards">MaxForwards</a>) HasReachedZero() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Boolean function
+</p>
+<pre>* @return true if MaxForwards field reached zero.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="MaxForwards.SetMaxForwards">func (*MaxForwards) <a href="/target/MaxForwardsImpl.go?s=984:1073#L33">SetMaxForwards</a></h3>
+				<pre>func (this *<a href="#MaxForwards">MaxForwards</a>) SetMaxForwards(maxForwards <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the maxForwards member
+* @param maxForwards maxForwards parameter to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="MaxForwards.String">func (*MaxForwards) <a href="/target/MaxForwardsImpl.go?s=1294:1334#L41">String</a></h3>
+				<pre>func (this *<a href="#MaxForwards">MaxForwards</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="MaxForwardsHeader">type <a href="/target/MaxForwardsHeader.go?s=1265:2428#L50">MaxForwardsHeader</a></h2>
+			<pre>type MaxForwardsHeader interface {
+    <a href="#Header">Header</a>
+
+    DecrementMaxForwards() (TooManyHopsException <a href="/pkg/builtin/#error">error</a>)
+
+    GetMaxForwards() <a href="/pkg/builtin/#int">int</a>
+
+    SetMaxForwards(maxForwards <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="MediaType">type <a href="/target/MediaType.go?s=552:1676#L16">MediaType</a></h2>
+			<pre>type MediaType interface {
+
+    <span class="comment">/**
+     * Sets value of media type of Header with Content Type.
+     *
+     * @param contentType - the new string value of the content type
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the contentType value.
+     */</span>
+    SetContentType(contentType <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets media type of Header with Content type.
+     *
+     * @return media type of Header with Content type.
+     */</span>
+    GetContentType() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets value of media subtype of Header with Content sub-type.
+     *
+     * @param contentSubType - the new string value of the content sub-type.
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the contentSubType value.
+     */</span>
+    SetContentSubType(contentSubType <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets media sub-type of Header with Content sub-type.
+     *
+     * @return media sub-type of Header with Content sub-type.
+     */</span>
+    GetContentSubType() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Parameters">type <a href="/target/ParametersImpl.go?s=2333:2462#L58">Parameters</a></h2>
+			<pre>type Parameters struct {
+    <a href="#SIPHeaderImpl">SIPHeaderImpl</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewParameters">func <a href="/target/ParametersImpl.go?s=2549:2595#L68">NewParameters</a></h3>
+				<pre>func NewParameters(hdrName <a href="/pkg/builtin/#string">string</a>) *<a href="#Parameters">Parameters</a></pre>
+				
+				
+			
+
+			
+				
+				<h3 id="Parameters.EncodeBody">func (*Parameters) <a href="/target/ParametersImpl.go?s=15753:15796#L491">EncodeBody</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="Parameters.GetNameValue">func (*Parameters) <a href="/target/ParametersImpl.go?s=15596:15671#L485">GetNameValue</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) GetNameValue(parameterName <a href="/pkg/builtin/#string">string</a>) *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValue">NameValue</a></pre>
+				<p>
+* This is for the benifit of the TCK.
+</p>
+<pre>*
+*@return the name value pair for the given parameter name.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Parameters.GetParameter">func (*Parameters) <a href="/target/ParametersImpl.go?s=3178:3235#L89">GetParameter</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) GetParameter(name <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="Parameters.GetParameterNames">func (*Parameters) <a href="/target/ParametersImpl.go?s=3881:3935#L112">GetParameterNames</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) GetParameterNames() *<a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="Parameters.GetParameterValue">func (*Parameters) <a href="/target/ParametersImpl.go?s=3541:3603#L101">GetParameterValue</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) GetParameterValue(name <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Return the parameter as an object (dont convert to string).
+</p>
+<pre>*
+*@param name is the name of the parameter to get.
+*@return the object associated with the name.
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Parameters.GetParameters">func (*Parameters) <a href="/target/ParametersImpl.go?s=9980:10040#L325">GetParameters</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) GetParameters() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a></pre>
+				<p>
+*
+</p>
+<pre>* get the parameter list.
+* @return parameter list
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Parameters.HasParameter">func (*Parameters) <a href="/target/ParametersImpl.go?s=9602:9666#L310">HasParameter</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) HasParameter(parameterName <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Return true if has a parameter.
+</p>
+<pre>*
+*@param paramName is the name of the parameter.
+*
+*@return true if the parameter exists and false if not.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Parameters.HasParameters">func (*Parameters) <a href="/target/ParametersImpl.go?s=4144:4188#L121">HasParameters</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) HasParameters() <a href="/pkg/builtin/#bool">bool</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="Parameters.RemoveParameter">func (*Parameters) <a href="/target/ParametersImpl.go?s=4531:4584#L133">RemoveParameter</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) RemoveParameter(name <a href="/pkg/builtin/#string">string</a>)</pre>
+				
+				
+				
+			
+				
+				<h3 id="Parameters.RemoveParameters">func (*Parameters) <a href="/target/ParametersImpl.go?s=9784:9826#L317">RemoveParameters</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) RemoveParameters()</pre>
+				<p>
+*
+</p>
+<pre>*Remove all parameters.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Parameters.SetParameter">func (*Parameters) <a href="/target/ParametersImpl.go?s=5172:5253#L156">SetParameter</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) SetParameter(name, value <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets the value of the specified parameter. If the parameter already had
+*
+* a value it will be overwritten. A zero-length String indicates flag
+*
+* parameter.
+*
+*
+*
+* @param name - a String specifying the parameter name
+*
+* @param value - a String specifying the parameter value
+*
+* @throws ParseException which signals that an error has been reached
+*
+* unexpectedly while parsing the parameter name or value.
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Parameters.SetParameters">func (*Parameters) <a href="/target/ParametersImpl.go?s=10556:10627#L342">SetParameters</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) SetParameters(parameters *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a>)</pre>
+				<p>
+* Set the parameter list.
+</p>
+<pre>*
+*@param nameValueList - the name value list to set as the parameter list.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Parameters.SetQuotedParameter">func (*Parameters) <a href="/target/ParametersImpl.go?s=6016:6080#L185">SetQuotedParameter</a></h3>
+				<pre>func (this *<a href="#Parameters">Parameters</a>) SetQuotedParameter(name, value <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets the value of the specified parameter. If the parameter already had
+*
+* a value it will be overwritten. A zero-length String indicates flag
+*
+* parameter.
+*
+*
+*
+* @param name - a String specifying the parameter name
+*
+* @param value - a String specifying the parameter value
+*
+* @throws ParseException which signals that an error has been reached
+*
+* unexpectedly while parsing the parameter name or value.
+*
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="ParametersHeader">type <a href="/target/ParametersHeader.go?s=67:613#L1">ParametersHeader</a></h2>
+			<pre>type ParametersHeader interface {
+    GetParameter(name <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a>
+    GetParameterValue(name <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a> <span class="comment">//interface{}</span>
+    GetParameterNames() *<a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a>
+    HasParameters() <a href="/pkg/builtin/#bool">bool</a>
+    RemoveParameter(name <a href="/pkg/builtin/#string">string</a>)
+    SetParameter(name, value <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+    SetQuotedParameter(name, value <a href="/pkg/builtin/#string">string</a>)
+    HasParameter(parameterName <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a>
+    RemoveParameters()
+    GetParameters() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a>
+    SetParameters(parameters *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a>)
+    GetNameValue(parameterName <a href="/pkg/builtin/#string">string</a>) *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValue">NameValue</a>
+    EncodeBody() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Protocol">type <a href="/target/ProtocolImpl.go?s=100:388#L1">Protocol</a></h2>
+			<pre>type Protocol struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+*  Protocol name and version.
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewProtocol">func <a href="/target/ProtocolImpl.go?s=428:456#L18">NewProtocol</a></h3>
+				<pre>func NewProtocol() *<a href="#Protocol">Protocol</a></pre>
+				<p>
+*
+</p>
+<pre>* Default constructor.
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="Protocol.GetProtocolName">func (*Protocol) <a href="/target/ProtocolImpl.go?s=2010:2056#L70">GetProtocolName</a></h3>
+				<pre>func (this *<a href="#Protocol">Protocol</a>) GetProtocolName() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* get the protocol name
+</p>
+<pre>* @return String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Protocol.GetProtocolVersion">func (*Protocol) <a href="/target/ProtocolImpl.go?s=2211:2260#L77">GetProtocolVersion</a></h3>
+				<pre>func (this *<a href="#Protocol">Protocol</a>) GetProtocolVersion() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* get the protocol version
+</p>
+<pre>* @return String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Protocol.GetTransport">func (*Protocol) <a href="/target/ProtocolImpl.go?s=2408:2451#L84">GetTransport</a></h3>
+				<pre>func (this *<a href="#Protocol">Protocol</a>) GetTransport() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* get the transport
+</p>
+<pre>* @return String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Protocol.SetProtocolName">func (*Protocol) <a href="/target/ProtocolImpl.go?s=2607:2655#L92">SetProtocolName</a></h3>
+				<pre>func (this *<a href="#Protocol">Protocol</a>) SetProtocolName(p <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the protocolName member
+* @param p String to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Protocol.SetProtocolVersion">func (*Protocol) <a href="/target/ProtocolImpl.go?s=2815:2866#L100">SetProtocolVersion</a></h3>
+				<pre>func (this *<a href="#Protocol">Protocol</a>) SetProtocolVersion(p <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the protocolVersion member
+* @param p String to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Protocol.SetTransport">func (*Protocol) <a href="/target/ProtocolImpl.go?s=3023:3068#L108">SetTransport</a></h3>
+				<pre>func (this *<a href="#Protocol">Protocol</a>) SetTransport(t <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the transport member
+* @param t String to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Protocol.String">func (*Protocol) <a href="/target/ProtocolImpl.go?s=1633:1670#L59">String</a></h3>
+				<pre>func (this *<a href="#Protocol">Protocol</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Return canonical form.
+* @return String
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="SIPHeader">type <a href="/target/SIPHeader.go?s=35:293#L1">SIPHeader</a></h2>
+			<pre>type SIPHeader interface {
+    EncodeBody() <a href="/pkg/builtin/#string">string</a>
+    GetHeaderName() <a href="/pkg/builtin/#string">string</a>
+    GetHeaderValue() <a href="/pkg/builtin/#string">string</a>
+    GetName() <a href="/pkg/builtin/#string">string</a>
+    GetValue() <a href="/pkg/builtin/#string">string</a>
+    IsHeaderList() <a href="/pkg/builtin/#bool">bool</a>
+    SetHeaderName(hdrname <a href="/pkg/builtin/#string">string</a>)
+    String() <a href="/pkg/builtin/#string">string</a>
+    Clone() interface{}
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="SIPHeaderImpl">type <a href="/target/SIPHeaderImpl.go?s=145:333#L3">SIPHeaderImpl</a></h2>
+			<pre>type SIPHeaderImpl struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+*  Root class from which all SIPHeader objects are subclassed.
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewSIPHeaderImpl">func <a href="/target/SIPHeaderImpl.go?s=455:506#L17">NewSIPHeaderImpl</a></h3>
+				<pre>func NewSIPHeaderImpl(hname <a href="/pkg/builtin/#string">string</a>) *<a href="#SIPHeaderImpl">SIPHeaderImpl</a></pre>
+				<p>
+* Constructor
+</p>
+<pre>* @param hname String to set
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="SIPHeaderImpl.Clone">func (*SIPHeaderImpl) <a href="/target/SIPHeaderImpl.go?s=2280:2326#L94">Clone</a></h3>
+				<pre>func (this *<a href="#SIPHeaderImpl">SIPHeaderImpl</a>) Clone() interface{}</pre>
+				
+				
+				
+			
+				
+				<h3 id="SIPHeaderImpl.EncodeBody">func (*SIPHeaderImpl) <a href="/target/SIPHeaderImpl.go?s=2495:2541#L101">EncodeBody</a></h3>
+				<pre>func (this *<a href="#SIPHeaderImpl">SIPHeaderImpl</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Encode the body of this header (the stuff that follows headerName).
+</p>
+<pre>* A.K.A headerValue.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SIPHeaderImpl.GetHeaderName">func (*SIPHeaderImpl) <a href="/target/SIPHeaderImpl.go?s=761:810#L29">GetHeaderName</a></h3>
+				<pre>func (this *<a href="#SIPHeaderImpl">SIPHeaderImpl</a>) GetHeaderName() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Name of the SIPHeader
+* @return String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SIPHeaderImpl.GetHeaderValue">func (*SIPHeaderImpl) <a href="/target/SIPHeaderImpl.go?s=1377:1427#L59">GetHeaderValue</a></h3>
+				<pre>func (this *<a href="#SIPHeaderImpl">SIPHeaderImpl</a>) GetHeaderValue() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Get the header value (i.e. what follows the name:).
+</p>
+<pre>* This merely goes through and lops off the portion that follows
+* the headerName:
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SIPHeaderImpl.GetName">func (*SIPHeaderImpl) <a href="/target/SIPHeaderImpl.go?s=927:970#L38">GetName</a></h3>
+				<pre>func (this *<a href="#SIPHeaderImpl">SIPHeaderImpl</a>) GetName() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Alias for getHaderName above.
+</p>
+<pre>*
+*@return String headerName
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SIPHeaderImpl.GetValue">func (*SIPHeaderImpl) <a href="/target/SIPHeaderImpl.go?s=2638:2682#L108">GetValue</a></h3>
+				<pre>func (this *<a href="#SIPHeaderImpl">SIPHeaderImpl</a>) GetValue() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Alias for getHeaderValue.
+</p>
+
+				
+				
+			
+				
+				<h3 id="SIPHeaderImpl.IsHeaderList">func (*SIPHeaderImpl) <a href="/target/SIPHeaderImpl.go?s=1957:2003#L83">IsHeaderList</a></h3>
+				<pre>func (this *<a href="#SIPHeaderImpl">SIPHeaderImpl</a>) IsHeaderList() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Return false if this is not a header list
+</p>
+<pre>* (SIPHeaderList overrrides this method).
+*@return false
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SIPHeaderImpl.SetHeaderName">func (*SIPHeaderImpl) <a href="/target/SIPHeaderImpl.go?s=1127:1184#L50">SetHeaderName</a></h3>
+				<pre>func (this *<a href="#SIPHeaderImpl">SIPHeaderImpl</a>) SetHeaderName(hdrname <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the name of the header .
+* @param hdrname String to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SIPHeaderImpl.String">func (*SIPHeaderImpl) <a href="/target/SIPHeaderImpl.go?s=2083:2125#L89">String</a></h3>
+				<pre>func (this *<a href="#SIPHeaderImpl">SIPHeaderImpl</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Encode this header into canonical form.
+</p>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="SIPHeaderList">type <a href="/target/SIPHeaderListImpl.go?s=462:530#L10">SIPHeaderList</a></h2>
+			<pre>type SIPHeaderList struct {
+    <a href="#SIPHeaderImpl">SIPHeaderImpl</a>
+    <a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a>
+}</pre>
+			<p>
+*
+</p>
+<pre>*  This is the root class for all lists of SIP headers.
+*  It imbeds a SIPObjectList object and extends SIPHeader
+*  Lists of ContactSIPObjects etc. derive from this class.
+*  This supports homogeneous  lists (all elements in the list are of
+*  the same class). We use this for building type homogeneous lists of
+*  SIPObjects that appear in SIPHeaders
+*
+*
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewSIPHeaderList">func <a href="/target/SIPHeaderListImpl.go?s=644:694#L18">NewSIPHeaderList</a></h3>
+				<pre>func NewSIPHeaderList(hname <a href="/pkg/builtin/#string">string</a>) *<a href="#SIPHeaderList">SIPHeaderList</a></pre>
+				<p>
+* Constructor
+</p>
+<pre>* @param hl SIPObjectList to set
+* @param hname String to set
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="SIPHeaderList.Clone">func (*SIPHeaderList) <a href="/target/SIPHeaderListImpl.go?s=930:976#L32">Clone</a></h3>
+				<pre>func (this *<a href="#SIPHeaderList">SIPHeaderList</a>) Clone() interface{}</pre>
+				<p>
+*
+</p>
+<pre>* Implement the clone method.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SIPHeaderList.Concatenate">func (*SIPHeaderList) <a href="/target/SIPHeaderListImpl.go?s=1084:1142#L41">Concatenate</a></h3>
+				<pre>func (this *<a href="#SIPHeaderList">SIPHeaderList</a>) Concatenate(shl *<a href="#SIPHeaderList">SIPHeaderList</a>)</pre>
+				
+				
+				
+			
+				
+				<h3 id="SIPHeaderList.EncodeBody">func (*SIPHeaderList) <a href="/target/SIPHeaderListImpl.go?s=3403:3449#L100">EncodeBody</a></h3>
+				<pre>func (this *<a href="#SIPHeaderList">SIPHeaderList</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Encode the body of this header (the stuff that follows headerName).
+</p>
+<pre>* A.K.A headerValue. This will not give a reasonable result for
+*WWW-Authenticate, Authorization, Proxy-Authenticate and
+*Proxy-Authorization and hence this is protected.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SIPHeaderList.IsHeaderList">func (*SIPHeaderList) <a href="/target/SIPHeaderListImpl.go?s=3984:4030#L117">IsHeaderList</a></h3>
+				<pre>func (this *<a href="#SIPHeaderList">SIPHeaderList</a>) IsHeaderList() <a href="/pkg/builtin/#bool">bool</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="SIPHeaderList.String">func (*SIPHeaderList) <a href="/target/SIPHeaderListImpl.go?s=1795:1837#L65">String</a></h3>
+				<pre>func (this *<a href="#SIPHeaderList">SIPHeaderList</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Encode a list of sip headers.
+* Headers are returned in cannonical form.
+* @return String encoded string representation of this list of
+* 	 headers. (Contains string append of each encoded header).
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="To">type <a href="/target/ToImpl.go?s=133:214#L7">To</a></h2>
+			<pre>type To struct {
+    <a href="#AddressParameters">AddressParameters</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewTo">func <a href="/target/ToImpl.go?s=267:283#L12">NewTo</a></h3>
+				<pre>func NewTo() *<a href="#To">To</a></pre>
+				<p>
+* default Constructor.
+</p>
+
+				
+			
+
+			
+				
+				<h3 id="To.CloneFrom">func (*To) <a href="/target/ToImpl.go?s=542:580#L24">CloneFrom</a></h3>
+				<pre>func (this *<a href="#To">To</a>) CloneFrom(from *<a href="#From">From</a>)</pre>
+				<p>
+* Generate a TO header from a FROM header
+</p>
+
+				
+				
+			
+				
+				<h3 id="To.EncodeBody">func (*To) <a href="/target/ToImpl.go?s=1716:1751#L66">EncodeBody</a></h3>
+				<pre>func (this *<a href="#To">To</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Encode the header content into a String.
+* @return String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="To.GetDisplayName">func (*To) <a href="/target/ToImpl.go?s=2976:3015#L105">GetDisplayName</a></h3>
+				<pre>func (this *<a href="#To">To</a>) GetDisplayName() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the display name from the address.
+* @return Display name
+</pre>
+
+				
+				
+			
+				
+				<h3 id="To.GetHostPort">func (*To) <a href="/target/ToImpl.go?s=2634:2687#L93">GetHostPort</a></h3>
+				<pre>func (this *<a href="#To">To</a>) GetHostPort() (*<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#HostPort">HostPort</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Conveniance accessor function to get the hostPort field from the address.
+* Warning -- this assumes that the embedded URI is a SipURL.
+*
+* @return hostport field
+</pre>
+
+				
+				
+			
+				
+				<h3 id="To.GetTag">func (*To) <a href="/target/ToImpl.go?s=3238:3269#L116">GetTag</a></h3>
+				<pre>func (this *<a href="#To">To</a>) GetTag() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the tag parameter from the address parm list.
+* @return tag field
+</pre>
+
+				
+				
+			
+				
+				<h3 id="To.GetUserAtHostPort">func (*To) <a href="/target/ToImpl.go?s=4484:4526#L162">GetUserAtHostPort</a></h3>
+				<pre>func (this *<a href="#To">To</a>) GetUserAtHostPort() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Get the user@host port string.
+</p>
+
+				
+				
+			
+				
+				<h3 id="To.HasTag">func (*To) <a href="/target/ToImpl.go?s=3483:3512#L126">HasTag</a></h3>
+				<pre>func (this *<a href="#To">To</a>) HasTag() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Boolean function
+</p>
+<pre>* @return true if the Tag exist
+</pre>
+
+				
+				
+			
+				
+				<h3 id="To.RemoveTag">func (*To) <a href="/target/ToImpl.go?s=3697:3724#L135">RemoveTag</a></h3>
+				<pre>func (this *<a href="#To">To</a>) RemoveTag()</pre>
+				<p>
+* remove Tag member
+</p>
+
+				
+				
+			
+				
+				<h3 id="To.SetTag">func (*To) <a href="/target/ToImpl.go?s=3991:4047#L146">SetTag</a></h3>
+				<pre>func (this *<a href="#To">To</a>) SetTag(t <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the tag member. This should be set to null for the initial request
+* in a dialog.
+* @param t tag String to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="To.String">func (*To) <a href="/target/ToImpl.go?s=1437:1468#L58">String</a></h3>
+				<pre>func (this *<a href="#To">To</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Encode the header into a String.
+* @since 1.0
+* @return String
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="ToHeader">type <a href="/target/ToHeader.go?s=4656:6050#L77">ToHeader</a></h2>
+			<pre>type ToHeader interface {
+    <a href="#Header">Header</a>
+    <a href="#HeaderAddress">HeaderAddress</a>
+    <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Parameters">Parameters</a>
+
+    <span class="comment">/**
+     * Sets the tag parameter of the ToHeader. The tag in the To field of a
+     * request identifies the peer of the dialog. If no dialog is established,
+     * no tag is present.
+     * &lt;p&gt;
+     * The To Header MUST contain a new &#34;tag&#34; parameter. When acting as a UAC
+     * the To &#34;tag&#34; is maintained by the SipProvider from the dialog layer,
+     * however whan acting as a UAS the To &#34;tag&#34; is assigned by the application.
+     * That is the tag assignment for outbound responses for messages in a
+     * dialog is only the responsibility of the application for the first
+     * outbound response. After dialog establishment, the stack will take care
+     * of the tag assignment.
+     *
+     * @param tag - the new tag of the To Header
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the Tag value.
+     */</span>
+    SetTag(tag <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets tag of ToHeader. The Tag parameter identified the Peer of the
+     * dialogue.
+     *
+     * @return the tag parameter of the ToHeader. Returns null if no Tag is
+     * present, i.e no dialogue is established.
+     */</span>
+    GetTag() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			<p>
+*
+</p>
+<pre>* The To header field first and foremost specifies the desired &#34;logical&#34;
+* recipient of the request, or the address-of-record of the user or resource
+* that is the target of this request.  This may or may not be the ultimate
+* recipient of the request. Requests and Responses must contain a ToHeader,
+* indicating the desired recipient of the Request. The UAS or redirect server
+* copies the ToHeader into its Response.
+* &lt;p&gt;
+* The To header field MAY contain a SIP or SIPS URI, but it may also make use
+* of other URI schemes i.e the telURL, when appropriate. All SIP
+* implementations MUST support the SIP URI scheme.  Any implementation that
+* supports TLS MUST support the SIPS URI scheme. Like the From header field,
+* it contains a URI and optionally a display name, encapsulated in a
+* {@link javax.sip.address.Address}.
+* &lt;p&gt;
+* A UAC may learn how to populate the To header field for a particular request
+* in a number of ways.  Usually the user will suggest the To header field
+* through a human interface, perhaps inputting the URI manually or selecting
+* it from some sort of address book.  Using the string to form the user part
+* of a SIP URI implies that the User Agent wishes the name to be resolved in the
+* domain to the right-hand side (RHS) of the at-sign in the SIP URI.  Using
+* the string to form the user part of a SIPS URI implies that the User Agent wishes to
+* communicate securely, and that the name is to be resolved in the domain to
+* the RHS of the at-sign. The RHS will frequently be the home domain of the
+* requestor, which allows for the home domain to process the outgoing request.
+* This is useful for features like &#34;speed dial&#34; that require interpretation of
+* the user part in the home domain.
+* &lt;p&gt;
+* The telURL may be used when the User Agent does not wish to specify the domain that
+* should interpret a telephone number that has been input by the user. Rather,
+* each domain through which the request passes would be given that opportunity.
+* As an example, a user in an airport might log in and send requests through
+* an outbound proxy in the airport.  If they enter &#34;411&#34; (this is the phone
+* number for local directory assistance in the United States), that needs to
+* be interpreted and processed by the outbound proxy in the airport, not the
+* user&#39;s home domain.  In this case, tel:411 would be the right choice.
+* &lt;p&gt;
+* Two To header fields are equivalent if their URIs match, and their
+* parameters match. Extension parameters in one header field, not present in
+* the other are ignored for the purposes of comparison. This means that the
+* display name and presence or absence of angle brackets do not affect
+* matching.
+* &lt;ul&gt;
+* &lt;li&gt; The &#34;Tag&#34; parameter - is used in the To and From header fields of SIP
+* messages.  It serves as a general mechanism to identify a dialog, which is
+* the combination of the Call-ID along with two tags, one from each
+* participant in the dialog.  When a UA sends a request outside of a dialog,
+* it contains a From tag only, providing &#34;half&#34; of the dialog ID. The dialog
+* is completed from the response(s), each of which contributes the second half
+* in the To header field. When a tag is generated by a UA for insertion into
+* a request or response, it MUST be globally unique and cryptographically
+* random with at least 32 bits of randomness. Besides the requirement for
+* global uniqueness, the algorithm for generating a tag is implementation
+* specific.  Tags are helpful in fault tolerant systems, where a dialog is to
+* be recovered on an alternate server after a failure.  A UAS can select the
+* tag in such a way that a backup can recognize a request as part of a dialog
+* on the failed server, and therefore determine that it should attempt to
+* recover the dialog and any other state associated with it.
+* &lt;/ul&gt;
+* A request outside of a dialog MUST NOT contain a To tag; the tag in the To
+* field of a request identifies the peer of the dialog.  Since no dialog is
+* established, no tag is present.
+* &lt;p&gt;
+* For Example:&lt;br&gt;
+* &lt;code&gt;To: Carol sip:carol@jcp.org&lt;br&gt;
+* To: Duke sip:duke@jcp.org;tag=287447&lt;/code&gt;
+*
+* @see HeaderAddress
+* @version 1.1
+* @author Sun Microsystems
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Via">type <a href="/target/ViaImpl.go?s=187:484#L7">Via</a></h2>
+			<pre>type Via struct {
+    <a href="#Parameters">Parameters</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewVia">func <a href="/target/ViaImpl.go?s=537:555#L25">NewVia</a></h3>
+				<pre>func NewVia() *<a href="#Via">Via</a></pre>
+				<p>
+* Default constructor
+</p>
+
+				
+			
+
+			
+				
+				<h3 id="Via.EncodeBody">func (*Via) <a href="/target/ViaImpl.go?s=4940:4976#L199">EncodeBody</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) EncodeBody() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Encode the body of this header (the stuff that follows headerName).
+</p>
+<pre>* A.K.A headerValue.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetBranch">func (*Via) <a href="/target/ViaImpl.go?s=13199:13234#L450">GetBranch</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetBranch() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Gets the branch paramater of the ViaHeader. Returns null if branch
+* does not exist.
+*
+* @return the string branch value of ViaHeader
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetComment">func (*Via) <a href="/target/ViaImpl.go?s=2461:2497#L99">GetComment</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetComment() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Accessor for the comment field.
+* @return comment field.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetHost">func (*Via) <a href="/target/ViaImpl.go?s=6719:6752#L252">GetHost</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetHost() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Returns the host part of this ViaHeader.
+*
+* @return  the string value of the host
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetMAddr">func (*Via) <a href="/target/ViaImpl.go?s=11174:11208#L394">GetMAddr</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetMAddr() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Returns the value of the &lt;code&gt;maddr&lt;/code&gt; parameter, or null if this
+* is not set.
+*
+* @return the string value of the maddr parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetMaddr">func (*Via) <a href="/target/ViaImpl.go?s=2678:2716#L108">GetMaddr</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetMaddr() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#Host">Host</a></pre>
+				<p>
+*
+</p>
+<pre>*  Get the maddr parameter if it exists.
+* @return maddr parameter.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetPort">func (*Via) <a href="/target/ViaImpl.go?s=7541:7571#L284">GetPort</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetPort() <a href="/pkg/builtin/#int">int</a></pre>
+				<p>
+*
+</p>
+<pre>* Returns the port part of this ViaHeader.
+*
+* @return the integer value of the port
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetProtocol">func (*Via) <a href="/target/ViaImpl.go?s=9051:9088#L333">GetProtocol</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetProtocol() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Returns the value of the protocol used.
+*
+* @return the string value of the protocol paramter of the ViaHeader
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetProtocolVersion">func (*Via) <a href="/target/ViaImpl.go?s=1531:1575#L63">GetProtocolVersion</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetProtocolVersion() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* get the Protocol Version
+</p>
+<pre>* @return String
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetReceived">func (*Via) <a href="/target/ViaImpl.go?s=12307:12344#L425">GetReceived</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetReceived() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Gets the received paramater of the ViaHeader. Returns null if received
+* does not exist.
+*
+* @return the string received value of ViaHeader
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetSentBy">func (*Via) <a href="/target/ViaImpl.go?s=2047:2090#L83">GetSentBy</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetSentBy() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#HostPort">HostPort</a></pre>
+				<p>
+*
+</p>
+<pre>* Accessor for the sentBy field
+*@return SentBy field
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetSentProtocol">func (*Via) <a href="/target/ViaImpl.go?s=1846:1890#L75">GetSentProtocol</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetSentProtocol() *<a href="#Protocol">Protocol</a></pre>
+				<p>
+*
+</p>
+<pre>* Accessor for the sentProtocol field.
+* @return Protocol field
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetTTL">func (*Via) <a href="/target/ViaImpl.go?s=10148:10177#L365">GetTTL</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetTTL() <a href="/pkg/builtin/#int">int</a></pre>
+				<p>
+*
+</p>
+<pre>* Returns the value of the ttl parameter, or -1 if this is not set.
+*
+* @return the integer value of the &lt;code&gt;ttl&lt;/code&gt; parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetTransport">func (*Via) <a href="/target/ViaImpl.go?s=7857:7895#L298">GetTransport</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetTransport() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Returns the value of the transport parameter.
+*
+* @return the string value of the transport paramter of the ViaHeader
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.GetViaParms">func (*Via) <a href="/target/ViaImpl.go?s=2252:2302#L91">GetViaParms</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) GetViaParms() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a></pre>
+				<p>
+*
+</p>
+<pre>* Accessor for the parameters field
+* @return parameters field
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.HasComment">func (*Via) <a href="/target/ViaImpl.go?s=3220:3254#L128">HasComment</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) HasComment() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* comment of the Via Header.
+</p>
+<pre>*
+* @return false if comment does not exist and true otherwise.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.HasPort">func (*Via) <a href="/target/ViaImpl.go?s=2935:2966#L117">HasPort</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) HasPort() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* port of the Via Header.
+</p>
+<pre>* @return true if Port exists.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.RemoveComment">func (*Via) <a href="/target/ViaImpl.go?s=3504:3536#L141">RemoveComment</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) RemoveComment()</pre>
+				<p>
+* remove the comment field.
+</p>
+
+				
+				
+			
+				
+				<h3 id="Via.RemovePort">func (*Via) <a href="/target/ViaImpl.go?s=3369:3398#L135">RemovePort</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) RemovePort()</pre>
+				<p>
+* remove the port.
+</p>
+
+				
+				
+			
+				
+				<h3 id="Via.SetBranch">func (*Via) <a href="/target/ViaImpl.go?s=13641:13706#L462">SetBranch</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetBranch(branch <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets the branch parameter of the ViaHeader to the newly supplied
+* branch value.
+*
+* @param branch - the new string branch parmameter of the ViaHeader.
+* @throws ParseException which signals that an error has been reached
+* unexpectedly while parsing the branch value.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetComment">func (*Via) <a href="/target/ViaImpl.go?s=4736:4774#L192">SetComment</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetComment(c <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the comment member
+* @param c String to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetHost">func (*Via) <a href="/target/ViaImpl.go?s=4030:4072#L161">SetHost</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetHost(host *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#Host">Host</a>)</pre>
+				<p>
+* set the Host of the Via Header
+</p>
+<pre>* @param host String to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetHostFromString">func (*Via) <a href="/target/ViaImpl.go?s=6185:6256#L233">SetHostFromString</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetHostFromString(host <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the host part of this ViaHeader to the newly supplied &lt;code&gt;host&lt;/code&gt;
+* parameter.
+*
+* @return host - the new interger value of the host of this ViaHeader
+* @throws ParseException which signals that an error has been reached
+* unexpectedly while parsing the host value.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetMAddr">func (*Via) <a href="/target/ViaImpl.go?s=11740:11803#L408">SetMAddr</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetMAddr(mAddr <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets the value of the &lt;code&gt;maddr&lt;/code&gt; parameter of this ViaHeader. The
+* maddr parameter indicates the server address to be contacted for this
+* user, overriding any address derived from the host field.
+*
+* @param  method - new value of the &lt;code&gt;maddr&lt;/code&gt; parameter
+* @throws ParseException which signals that an error has been reached
+* unexpectedly while parsing the mAddr value.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetPort">func (*Via) <a href="/target/ViaImpl.go?s=7235:7270#L271">SetPort</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetPort(port <a href="/pkg/builtin/#int">int</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the port part of this ViaHeader to the newly supplied &lt;code&gt;port&lt;/code&gt;
+* parameter.
+*
+* @param port - the new interger value of the port of this ViaHeader
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetProtocol">func (*Via) <a href="/target/ViaImpl.go?s=9576:9645#L348">SetProtocol</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetProtocol(protocol <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets the value of the protocol parameter. This parameter specifies
+* which protocol is used, for example &#34;SIP/2.0&#34;.
+*
+* @param protocol - new value for the protocol parameter
+* @throws ParseException which signals that an error has been reached
+* unexpectedly while parsing the protocol value.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetProtocolVersion">func (*Via) <a href="/target/ViaImpl.go?s=3685:3745#L149">SetProtocolVersion</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetProtocolVersion(protocolVersion <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* set the Protocol Version
+</p>
+<pre>* @param protocolVersion String to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetReceived">func (*Via) <a href="/target/ViaImpl.go?s=12696:12766#L436">SetReceived</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetReceived(received <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets the received parameter of ViaHeader.
+*
+* @param received - the newly supplied received parameter.
+* @throws ParseException which signals that an error has been reached
+* unexpectedly while parsing the received value.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetSentBy">func (*Via) <a href="/target/ViaImpl.go?s=4537:4582#L183">SetSentBy</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetSentBy(s *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#HostPort">HostPort</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the sentBy member
+* @param s HostPort to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetSentProtocol">func (*Via) <a href="/target/ViaImpl.go?s=4331:4377#L173">SetSentProtocol</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetSentProtocol(s *<a href="#Protocol">Protocol</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the sentProtocol member
+* @param s Protocol to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Via.SetTTL">func (*Via) <a href="/target/ViaImpl.go?s=10667:10733#L379">SetTTL</a></h3>
+				<pre>func (this *<a href="#Via">Via</a>) SetTTL(ttl <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets the value of the ttl parameter. The ttl parameter specifies the
+* time-to-live value when packets are sent using UDP multicast.
+*
+* @param ttl - new value of the ttl parameter
+* @throws InvalidArgumentException if supplied value is less than zero or
+* greater than 255, excluding -1 the default not set value.
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="ViaHeader">type <a href="/target/ViaHeader.go?s=7608:12821#L121">ViaHeader</a></h2>
+			<pre>type ViaHeader interface {
+    <a href="#Header">Header</a>
+    <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Parameters">Parameters</a>
+
+    <span class="comment">/**
+     * Set the host part of this ViaHeader to the newly supplied &lt;code&gt;host&lt;/code&gt;
+     * parameter.
+     *
+     * @return host - the new interger value of the host of this ViaHeader
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the host value.
+     */</span>
+    SetHost(host <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the host part of this ViaHeader.
+     *
+     * @return  the string value of the host
+     */</span>
+    GetHost() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Set the port part of this ViaHeader to the newly supplied &lt;code&gt;port&lt;/code&gt;
+     * parameter.
+     *
+     * @param port - the new interger value of the port of this ViaHeader
+     */</span>
+    SetPort(port <a href="/pkg/builtin/#int">int</a>)
+
+    <span class="comment">/**
+     * Returns the port part of this ViaHeader.
+     *
+     * @return the integer value of the port
+     */</span>
+    GetPort() <a href="/pkg/builtin/#int">int</a>
+
+    <span class="comment">/**
+     * Returns the value of the transport parameter.
+     *
+     * @return the string value of the transport paramter of the ViaHeader
+     */</span>
+    GetTransport() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the value of the transport. This parameter specifies
+     * which transport protocol to use for sending requests and responses to
+     * this entity. The following values are defined: &#34;udp&#34;, &#34;tcp&#34;, &#34;sctp&#34;,
+     * &#34;tls&#34;, but other values may be used also.
+     *
+     * @param transport - new value for the transport parameter
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the transport value.
+     */</span>
+    SetTransport(transport <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the value of the protocol used.
+     *
+     * @return the string value of the protocol paramter of the ViaHeader
+     */</span>
+    GetProtocol() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the value of the protocol parameter. This parameter specifies
+     * which protocol is used, for example &#34;SIP/2.0&#34;.
+     *
+     * @param protocol - new value for the protocol parameter
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the protocol value.
+     */</span>
+    SetProtocol(protocol <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the value of the ttl parameter, or -1 if this is not set.
+     *
+     * @return the integer value of the &lt;code&gt;ttl&lt;/code&gt; parameter
+     */</span>
+    GetTTL() <a href="/pkg/builtin/#int">int</a>
+
+    <span class="comment">/**
+     * Sets the value of the ttl parameter. The ttl parameter specifies the
+     * time-to-live value when packets are sent using UDP multicast.
+     *
+     * @param ttl - new value of the ttl parameter
+     * @throws InvalidArgumentException if supplied value is less than zero or
+     * greater than 255, excluding -1 the default not set value.
+     */</span>
+    SetTTL(ttl <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the value of the &lt;code&gt;maddr&lt;/code&gt; parameter, or null if this
+     * is not set.
+     *
+     * @return the string value of the maddr parameter
+     */</span>
+    GetMAddr() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the value of the &lt;code&gt;maddr&lt;/code&gt; parameter of this ViaHeader. The
+     * maddr parameter indicates the server address to be contacted for this
+     * user, overriding any address derived from the host field.
+     *
+     * @param  method - new value of the &lt;code&gt;maddr&lt;/code&gt; parameter
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the mAddr value.
+     */</span>
+    SetMAddr(mAddr <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#string">string</a>)
+
+    <span class="comment">/**
+     * Gets the received paramater of the ViaHeader. Returns null if received
+     * does not exist.
+     *
+     * @return the string received value of ViaHeader
+     */</span>
+    GetReceived() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the received parameter of ViaHeader.
+     *
+     * @param received - the newly supplied received parameter.
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the received value.
+     */</span>
+    SetReceived(received <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets the branch paramater of the ViaHeader. Returns null if branch
+     * does not exist.
+     *
+     * @return the string branch value of ViaHeader
+     */</span>
+    GetBranch() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the branch parameter of the ViaHeader to the newly supplied
+     * branch value. Note that when sending a Request within a transaction,
+     * branch id management will be the responsibility of the SipProvider;
+     * that is the application should not set this value. This method should
+     * only be used by the application when sending Requests outside of a
+     * transaction.
+     *
+     * @param branch - the new string branch parmameter of the ViaHeader.
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the branch value.
+     */</span>
+    SetBranch(branch <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+}</pre>
+			<p>
+*
+</p>
+<pre>* The Via header field indicates the transport used for the transaction and
+* identifies the location where the response is to be sent. A Via header
+* field value is added only after the transport that will be used to reach
+* the next hop has been selected. When the UAC creates a request, it MUST
+* insert a Via into that request. The protocol name and protocol version in
+* the header field MUST be SIP and 2.0, respectively. The Via header field
+* value MUST contain a branch parameter. This parameter is used to identify
+* the transaction created by that request. This parameter is used by both the
+* client and the server.
+* &lt;p&gt;
+* &lt;b&gt;Branch Paramater:&lt;br&gt;&lt;/b&gt;
+* The branch parameter value MUST be unique across space and time for all
+* requests sent by the User Agent. The exceptions to this rule are CANCEL and ACK for
+* non-2xx responses. A CANCEL request will have the same value of the branch
+* parameter as the request it cancels. An ACK for a non-2xx response will also
+* have the same branch ID as the INVITE whose response it acknowledges.
+* &lt;p&gt;
+* The uniqueness property of the branch ID parameter, to facilitate its use as
+* a transaction ID, was not part of RFC 2543. The branch ID inserted by an
+* element compliant with this specification MUST always begin with the
+* characters &#34;z9hG4bK&#34;. These 7 characters are used as a magic cookie (7 is
+* deemed sufficient to ensure that an older RFC 2543 implementation would not
+* pick such a value), so that servers receiving the request can determine that
+* the branch ID was constructed in the fashion described by this specification
+* (that is, globally unique). Beyond this requirement, the precise format of
+* the branch token is implementation-defined. JAIN SIP defines a convenience
+* function to generate unique branch idenifiers at
+* {@link javax.sip.Transaction#getBranchId()}
+* &lt;p&gt;
+* A common way to create the branch value is to compute a cryptographic hash
+* of the To tag, From tag, Call-ID header field, the Request-URI of the
+* request received (before translation), the topmost Via header, and the
+* sequence number from the CSeq header field, in addition to any Proxy-Require
+* and Proxy-Authorization header fields that may be present. The algorithm
+* used to compute the hash is implementation-dependent.
+* &lt;p&gt;
+* &lt;b&gt;Via Processing Rules&lt;/b&gt;
+* &lt;ul&gt;
+* &lt;li&gt;Generating Requests (UAC): The client originating the Request must insert
+* into the Request a ViaHeader containing its host name or network address
+* and, if not the default port number, the port number at which it wishes to
+* receive Responses. (Note that this port number can differ from the UDP
+* source port number of the Request.) A fully-qualified domain name is
+* recommended.
+* &lt;li&gt;Request Forwarding by Proxies: The proxy MUST insert a Via header field
+* value into the copy before the existing Via header field values. This
+* implies that the proxy will compute its own branch parameter, which will be
+* globally unique for that branch, and contain the requisite magic cookie. Note
+* that this implies that the branch parameter will be different for different
+* instances of a spiraled or looped request through a proxy. If a proxy server
+* receives a Request which contains its own address in a ViaHeader, it must
+* respond with a 482 (Loop Detected) Response. A proxy server must not forward
+* a Request to a multicast group which already appears in any of the ViaHeaders.
+* This prevents a malfunctioning proxy server from causing loops. Also, it
+* cannot be guaranteed that a proxy server can always detect that the address
+* returned by a location service refers to a host listed in the ViaHeader list,
+* as a single host may have aliases or several network interfaces.
+* &lt;li&gt;Response processing by UAC and proxies:
+* &lt;ul&gt;
+* &lt;li&gt;The first ViaHeader should indicate the proxy or client processing this
+* Response. If it does not, discard the Response. Otherwise, remove this
+* ViaHeader.
+* &lt;li&gt;If there is no second ViaHeader, this Response is destined for this
+* client. Otherwise, the processing depends on whether the ViaHeader contains
+* a maddr parameter or is a receiver-tagged field.
+* &lt;li&gt;If the second ViaHeader contains a maddr parameter, send the Response to
+* the multicast address listed there, using the port indicated in &#34;sent-by&#34;,
+* or port 5060 if none is present. The Response should be sent using the TTL
+* indicated in the ttl parameter, or with a TTL of 1 if that parameter is not
+* present. For robustness, Responses must be sent to the address indicated in
+* the maddr parameter even if it is not a multicast address.
+* &lt;li&gt;If the second ViaHeader does not contain a maddr parameter and is a
+* receiver-tagged ViaHeader, send the Response to the address in the received
+* parameter, using the port indicated in the port value, or using port 5060
+* if none is present.
+* &lt;li&gt;If neither of the previous cases apply, send the Response to the address
+* indicated by the host value in the second ViaHeader.
+* &lt;/ul&gt;
+* &lt;li&gt;Sending Responses (UAS):
+* &lt;ul&gt;
+* &lt;li&gt;If the first ViaHeader in the Request contains a maddr parameter, send
+* the Response to the multicast address listed there, using the port indicated,
+* or port 5060 if none is present. The Response should be sent using the TTL
+* indicated in the ttl parameter, or with a TTL of 1 if that parameter is not
+* present. For robustness, Responses must be sent to the address indicated in
+* the maddr parameter even if it is not a multicast address.
+* &lt;li&gt;If the address in the first ViaHeader differs from the source address of
+* the packet, send the Response to the actual packet source address, similar
+* to the treatment for receiver-tagged ViaHeaders.
+* &lt;li&gt;If neither of these conditions is true, send the Response to the address
+* contained in the host value. If the Request was sent using TCP, use the
+* existing TCP connection if available.
+* &lt;/ul&gt;
+* &lt;/ul&gt;
+* &lt;b&gt;Via Parameters:&lt;/b&gt;
+* A Via header field value contains the transport protocol used to send the
+* message, the client&#39;s host name or network address, and possibly the port
+* number at which it wishes to receive responses. Transport protocols defined
+* here are &#34;UDP&#34;, &#34;TCP&#34;, &#34;TLS&#34;, and &#34;SCTP&#34;. &#34;TLS&#34; means TLS over TCP. When a
+* request is sent to a SIPS URI, the protocol still indicates &#34;SIP&#34;, and the
+* transport protocol is TLS. A Via header field value can also contain
+* parameters such as &#34;maddr&#34;, &#34;ttl&#34;, &#34;received&#34;, and &#34;branch&#34;. A proxy sending
+* a Request to a multicast address must add the maddr parameter to its
+* ViaHeader, and should add the ttl parameter. If a server receives a Request
+* which contained an maddr parameter in the topmost ViaHeader, it should send
+* the Response to the multicast address listed in the maddr parameter. The
+* received parameter is added only for receiver-added ViaHeaders.
+* &lt;p&gt;
+* Two Via header fields are equal if their sent-protocol and sent-by fields
+* are equal, both have the same set of parameters, and the values of all
+* parameters are equal.
+*
+* @version 1.1
+* @author Sun Microsystems
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="ViaList">type <a href="/target/ViaListImpl.go?s=119:184#L2">ViaList</a></h2>
+			<pre>type ViaList struct {
+    <a href="#SIPHeaderList">SIPHeaderList</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewViaList">func <a href="/target/ViaListImpl.go?s=269:295#L12">NewViaList</a></h3>
+				<pre>func NewViaList() *<a href="#ViaList">ViaList</a></pre>
+				<p>
+*
+</p>
+<pre>* Default Constructor.
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="ViaList.Clone">func (*ViaList) <a href="/target/ViaListImpl.go?s=789:829#L31">Clone</a></h3>
+				<pre>func (this *<a href="#ViaList">ViaList</a>) Clone() interface{}</pre>
+				<p>
+*
+</p>
+<pre>         * make a clone of this header list. This supercedes the parent
+         * function of the same signature - here for speed. Cloning based
+	 * on introspection is slower.
+	  *
+         * @return clone of this Header list.
+</pre>
+
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+

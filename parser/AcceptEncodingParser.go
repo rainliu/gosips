@@ -65,9 +65,9 @@ func (this *AcceptEncodingParser) Parse() (sh header.SIPHeader, ParseException e
 	//try {
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_ACCEPT_ENCODING)
-	
+
 	//println(lexer.GetRest());
-	
+
 	// empty body is fine for this header.
 	if ch, _ = lexer.LookAheadK(0); ch == '\n' {
 		acceptEncoding := header.NewAcceptEncoding()
