@@ -45,7 +45,7 @@ func (this *AcceptParser) superFromLexer(lexer core.Lexer) {
  * @return SIPHeader (AcceptList  object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *AcceptParser) Parse() (s header.SIPHeader, ParseException error) {
+func (this *AcceptParser) Parse() (sh header.SIPHeader, ParseException error) {
 
 	//if (debug) dbg_enter("AcceptParser.parse");
 	acceptList := header.NewAcceptList()
