@@ -51,7 +51,7 @@ func (this *AuthenticationInfo) EncodeBody() string {
  *  list.
  */
 
-func (this *AuthenticationInfo) getAuthInfo(name string) *core.NameValue {
+func (this *AuthenticationInfo) GetAuthInfo(name string) *core.NameValue {
 	return this.parameters.GetNameValue(name)
 }
 
