@@ -4,14 +4,14 @@ import (
 	"testing"
 )
 
-func TestContentEncodingParserParser(t *testing.T) {
-	var contentEncodingParser = []string{
+func TestContentEncodingParser(t *testing.T) {
+	var contentEncoding = []string{
 		"Content-Encoding: gzip \n",
 		"Content-Encoding: gzip, tar \n",
 	}
 
-	for i := 0; i < len(contentEncodingParser); i++ {
-		shp := NewContentEncodingParser(contentEncodingParser[i])
+	for i := 0; i < len(contentEncoding); i++ {
+		shp := NewContentEncodingParser(contentEncoding[i])
 		testHeaderParser(t, shp)
 	}
 }

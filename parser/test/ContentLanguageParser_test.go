@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestContentLanguageParserParser(t *testing.T) {
+func TestContentLanguageParser(t *testing.T) {
 	var contentLanguage = []string{
 		"Content-Language: fr \n",
 		"Content-Language: fr , he \n",
