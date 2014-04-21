@@ -66,12 +66,12 @@ func (this *Accept) EncodeBody() string {
 	//String s="";
 	var encoding bytes.Buffer
 	if this.mediaRange != nil {
-		encoding.WriteString(this.mediaRange.Encode())
+		encoding.WriteString(this.mediaRange.String())
 	}
 	if this.parameters != nil && this.parameters.Len() > 0 {
 		encoding.WriteString(core.SIPSeparatorNames_SEMICOLON)
 		encoding.WriteString(this.parameters.String())
-		//core.SIPSeparatorNames_SP + ";" + 
+		//core.SIPSeparatorNames_SP + ";" +
 	}
 	return encoding.String()
 }

@@ -2,16 +2,11 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Module Name   : GoSIP Specification
  * File Name     : ContentTypeHeader.go
- * Author        : Rain Liu 
+ * Author        : Rain Liu
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
- 
+
 package header
-
-import (
-	"gosip/address"
-)
-
 
 /**
  * The Content-Type header field indicates the media type of the message-body
@@ -34,13 +29,12 @@ import (
 
 type ContentTypeHeader interface{
 	Header
-	address.Parameters
+	ParametersHeader
 	MediaType
-	
-    /**
-     * Name of ContentTypeHeader
-     */
-    //public final static String NAME = "Content-Type";
+
+	/**
+	 * Name of ContentTypeHeader
+	 */
+	//public final static String NAME = "Content-Type";
 
 }
-

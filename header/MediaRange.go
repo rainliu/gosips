@@ -2,7 +2,7 @@ package header
 
 import (
 	"gosip/core"
-)	
+)
 
 /**
 *   Media Range
@@ -75,7 +75,7 @@ func (this *MediaRange) SetSubtype(s string) {
  * Encode the object.
  * @return String
  */
-func (this *MediaRange) Encode() string {
+func (this *MediaRange) String() string {
 	encoding := this.mtype + core.SIPSeparatorNames_SLASH + this.subtype
 	return encoding
 }
