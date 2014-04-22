@@ -51,6 +51,11 @@ func (this *Allow) SetMethod(method string) { //throws ParseException{
 	this.method = method
 }
 
+func (this *Allow) String() string {
+	return this.headerName + core.SIPSeparatorNames_COLON +
+		core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE
+}
+
 /** Return body encoded in canonical form.
  * @return body encoded as a string.
  */

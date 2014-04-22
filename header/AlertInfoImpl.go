@@ -1,9 +1,9 @@
 package header
 
 import (
+	"bytes"
 	"gosip/address"
 	"gosip/core"
-	"bytes"
 )
 
 /**
@@ -28,6 +28,11 @@ func NewAlertInfo() *AlertInfo {
 	this := &AlertInfo{}
 	this.Parameters.super(core.SIPHeaderNames_ALERT_INFO)
 	return this
+}
+
+func (this *AlertInfo) String() string {
+	return this.headerName + core.SIPSeparatorNames_COLON +
+		core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE
 }
 
 /**
