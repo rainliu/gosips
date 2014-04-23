@@ -168,7 +168,7 @@ func (this *HeaderParserImpl) Parse() (sh header.SIPHeaderHeader, ParseException
 	body := strings.TrimSpace(lexer.GetLine())
 	// we dont set any fields because the header is
 	// ok
-	retval := header.NewExtensionHeaderImpl(name)
+	retval := header.NewExtension(name)
 	retval.SetValue(body)
 	return retval, nil
 

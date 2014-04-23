@@ -22,7 +22,7 @@ type SIPHeader struct { //implements SIPHeaderNames, javax.sip.header.Header {
 /** Constructor
  * @param hname String to set
  */
-func NewSIPHeaderImpl(hname string) *SIPHeader {
+func NewSIPHeader(hname string) *SIPHeader {
 	return &SIPHeader{headerName: hname}
 }
 
