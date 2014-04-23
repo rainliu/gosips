@@ -30,7 +30,7 @@ func NewContentLengthParserFromLexer(lexer core.Lexer) *ContentLengthParser {
 	return this
 }
 
-func (this *ContentLengthParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *ContentLengthParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 	// if (debug) dbg_enter("ContentLengthParser.enter");
 	//      try {
 	contentLength := header.NewContentLength()

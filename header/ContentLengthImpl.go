@@ -6,7 +6,7 @@ import (
 )
 
 /**
-* ContentLength SIPHeader (of which there can be only one in a SIPMessage).
+* ContentLength SIPHeaderHeader (of which there can be only one in a SIPMessage).
 *<pre>
 *Fielding, et al.            Standards Track                   [Page 119]
 *RFC 2616                        HTTP/1.1                       June 1999
@@ -45,7 +45,7 @@ import (
 *@author Olivier Deruelle <deruelle@nist.gov><br/>
  */
 type ContentLength struct {
-	SIPHeaderImpl //implements
+	SIPHeader //implements
 	//javax.sip.header.ContentLengthHeader {
 
 	/** contentLength field.
@@ -57,7 +57,7 @@ type ContentLength struct {
  */
 func NewContentLength() *ContentLength {
 	this := &ContentLength{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_CONTENT_LENGTH)
+	this.SIPHeader.super(core.SIPHeaderNames_CONTENT_LENGTH)
 	return this
 }
 
@@ -66,7 +66,7 @@ func NewContentLength() *ContentLength {
  */
 func NewContentLengthFromInt(length int) *ContentLength {
 	this := &ContentLength{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_CONTENT_LENGTH)
+	this.SIPHeader.super(core.SIPHeaderNames_CONTENT_LENGTH)
 	this.contentLength = length
 	return this
 }

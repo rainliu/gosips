@@ -39,10 +39,10 @@ func NewMinExpiresParserFromLexer(lexer core.Lexer) *MinExpiresParser {
 }
 
 /** parse the String message
- * @return SIPHeader (MinExpiresParser)
+ * @return SIPHeaderHeader (MinExpiresParser)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *MinExpiresParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *MinExpiresParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 
 	// if (debug) dbg_enter("MinExpiresParser.parse");
 	minExpires := header.NewMinExpires()

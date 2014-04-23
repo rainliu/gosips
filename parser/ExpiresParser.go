@@ -40,7 +40,7 @@ func NewExpiresParserFromLexer(lexer core.Lexer) *ExpiresParser {
 
 /** Parse the header.
  */
-func (this *ExpiresParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *ExpiresParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 	expires := header.NewExpires()
 	// if (debug) dbg_enter("parse");
 	//        try {

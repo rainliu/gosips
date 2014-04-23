@@ -3,15 +3,13 @@
  *
  * Module Name   : GoSIP Specification
  * File Name     : ContactHeader.go
- * Author        : Phelim O'Doherty  
+ * Author        : Phelim O'Doherty
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
- 
+
 package header
 
-import (
-	"gosip/address"
-)
+import ()
 
 /**
  * A Contact header field value provides a URI whose meaning depends on
@@ -77,121 +75,111 @@ import (
  * @author Sun Microsystems
  */
 
+type ContactHeader interface {
+	HeaderAddress
+	ParametersHeader
+	Header
 
+	/**
+	 * Returns the value of the <code>expires</code> parameter as delta-seconds.
+	 * When a client sends a REGISTER request, it MAY suggest an expiration
+	 * interval that indicates how long the client would like the registration
+	 * to be valid for a specific address. There are two ways in which a client
+	 * can suggest an expiration interval for a binding:
+	 * <ul>
+	 * <li>through an Expires header field
+	 * <li>an "expires" Contact header parameter.
+	 * </ul>
+	 * The latter allows expiration intervals to be suggested on a per-binding
+	 * basis when more than one binding is given in a single REGISTER request,
+	 * whereas the former suggests an expiration interval for all Contact
+	 * header field values that do not contain the "expires" parameter. If
+	 * neither mechanism for expressing a suggested expiration time is present
+	 * in a REGISTER, the client is indicating its desire for the server to
+	 * choose.
+	 * <p>
+	 * A User Agent requests the immediate removal of a binding by specifying an
+	 * expiration interval of "0" for that contact address in a REGISTER
+	 * request.  User Agents SHOULD support this mechanism so that bindings can be
+	 * removed before their expiration interval has passed. The
+	 * REGISTER-specific Contact header field value of "*" applies to all
+	 * registrations, but it MUST NOT be used unless the Expires header
+	 * field is present with a value of "0". The "*" value can be determined
+	 * if "this.getNameAddress().isWildcard() = = true".
+	 *
+	 * @param seconds - new relative value of the expires parameter.
+	 * 0 implies removal of Registration specified in Contact Header.
+	 * @throws InvalidArgumentException if supplied value is less than zero.
+	 * @since v1.1
+	 */
 
-type  ContactHeader interface {
- 	HeaderAddress
- 	address.Parameters
- 	Header
+	SetExpires(expires int) (InvalidArgumentException error)
 
-    /**
-     * Returns the value of the <code>expires</code> parameter as delta-seconds.
-     * When a client sends a REGISTER request, it MAY suggest an expiration
-     * interval that indicates how long the client would like the registration
-     * to be valid for a specific address. There are two ways in which a client
-     * can suggest an expiration interval for a binding:
-     * <ul>
-     * <li>through an Expires header field
-     * <li>an "expires" Contact header parameter.
-     * </ul>
-     * The latter allows expiration intervals to be suggested on a per-binding
-     * basis when more than one binding is given in a single REGISTER request,
-     * whereas the former suggests an expiration interval for all Contact
-     * header field values that do not contain the "expires" parameter. If
-     * neither mechanism for expressing a suggested expiration time is present
-     * in a REGISTER, the client is indicating its desire for the server to
-     * choose.
-     * <p>
-     * A User Agent requests the immediate removal of a binding by specifying an
-     * expiration interval of "0" for that contact address in a REGISTER
-     * request.  User Agents SHOULD support this mechanism so that bindings can be
-     * removed before their expiration interval has passed. The
-     * REGISTER-specific Contact header field value of "*" applies to all
-     * registrations, but it MUST NOT be used unless the Expires header
-     * field is present with a value of "0". The "*" value can be determined
-     * if "this.getNameAddress().isWildcard() = = true".
-     *
-     * @param seconds - new relative value of the expires parameter.
-     * 0 implies removal of Registration specified in Contact Header.
-     * @throws InvalidArgumentException if supplied value is less than zero.
-     * @since v1.1
-     */
+	/**
+	 * Returns the value of the <code>expires</code> parameter.
+	 *
+	 * @return value of the <code>expires</code> parameter measured in
+	 * delta-seconds, O implies removal of Registration specified in Contact
+	 * Header.
+	 * @since v1.1
+	 */
 
-    SetExpires(expires int) (InvalidArgumentException error);
+	GetExpires() int
 
+	/**
 
+	 * Sets the <code>qValue</code> value of the Name Address. If more than
 
-    /**
-     * Returns the value of the <code>expires</code> parameter.
-     *
-     * @return value of the <code>expires</code> parameter measured in
-     * delta-seconds, O implies removal of Registration specified in Contact 
-     * Header.
-     * @since v1.1
-     */
+	 * one Contact is sent in a REGISTER request, the registering UA intends
 
-    GetExpires() int;
+	 * to associate all of the URIs in these Contact header field values with
 
+	 * the address-of-record present in the To field.  This list can be
 
+	 * prioritized with the "q" parameter in the Contact header field.  The "q"
 
-    /**
+	 * parameter indicates a relative preference for the particular Contact
 
-     * Sets the <code>qValue</code> value of the Name Address. If more than
+	 * header field value compared to other bindings for this address-of-record.
 
-     * one Contact is sent in a REGISTER request, the registering UA intends
+	 * A value of <code>-1</code> indicates the <code>qValue</code> paramater
 
-     * to associate all of the URIs in these Contact header field values with
+	 * is not set.
+	 *
+	 * @param qValue - the new float value of the q-value parameter.
+	 * @throws InvalidArgumentException if the q-value parameter value is not
+	 * <code>-1</code> or between <code>0 and 1</code>.
+	 * @since v1.1
+	 */
+	SetQValue(qValue float32) (InvalidArgumentException error)
 
-     * the address-of-record present in the To field.  This list can be
+	/**
 
-     * prioritized with the "q" parameter in the Contact header field.  The "q"
+	 * Returns the value of the <code>q-value</code> parameter of this
 
-     * parameter indicates a relative preference for the particular Contact
+	 * ContactHeader. The <code>q-value</code> parameter indicates the relative
 
-     * header field value compared to other bindings for this address-of-record.
+	 * preference amongst a set of locations. <code>q-values</code> are
 
-     * A value of <code>-1</code> indicates the <code>qValue</code> paramater
+	 * decimal numbers from 0 to 1, with higher values indicating higher
 
-     * is not set.
-     *
-     * @param qValue - the new float value of the q-value parameter.
-     * @throws InvalidArgumentException if the q-value parameter value is not
-     * <code>-1</code> or between <code>0 and 1</code>.
-     * @since v1.1
-     */
-    SetQValue(qValue float32) (InvalidArgumentException error);
+	 * preference.
 
+	 *
 
+	 * @return the <code>q-value</code> parameter of this ContactHeader, -1 if
 
-    /**
+	 * the q-value is not set.
 
-     * Returns the value of the <code>q-value</code> parameter of this
+	 * @since v1.1
 
-     * ContactHeader. The <code>q-value</code> parameter indicates the relative
+	 */
 
-     * preference amongst a set of locations. <code>q-values</code> are
+	GetQValue() float32
 
-     * decimal numbers from 0 to 1, with higher values indicating higher
+	/**
 
-     * preference.
+	 * Name of ContactHeader
 
-     *
-
-     * @return the <code>q-value</code> parameter of this ContactHeader, -1 if
-
-     * the q-value is not set.
-
-     * @since v1.1
-
-     */
-
-    GetQValue() float32;
-
-
-
-    /**
-
-     * Name of ContactHeader
-
-     */
+	 */
 }

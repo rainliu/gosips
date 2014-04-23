@@ -51,7 +51,7 @@ import (
 *</pre>
  */
 type ContentLanguage struct {
-	SIPHeaderImpl //implements
+	SIPHeader //implements
 	//javax.sip.header.ContentLanguageHeader{
 
 	/** languageTag field.
@@ -61,7 +61,7 @@ type ContentLanguage struct {
 
 func NewContentLanguage() *ContentLanguage {
 	this := &ContentLanguage{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_CONTENT_LANGUAGE)
+	this.SIPHeader.super(core.SIPHeaderNames_CONTENT_LANGUAGE)
 	return this
 
 }
@@ -71,7 +71,7 @@ func NewContentLanguage() *ContentLanguage {
  */
 func NewContentLanguageFromString(languageTag string) *ContentLanguage {
 	this := &ContentLanguage{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_CONTENT_LANGUAGE)
+	this.SIPHeader.super(core.SIPHeaderNames_CONTENT_LANGUAGE)
 	this.locale = languageTag
 	return this
 }

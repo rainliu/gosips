@@ -39,10 +39,10 @@ func NewAllowEventsParserFromLexer(lexer core.Lexer) *AllowEventsParser {
 }
 
 /** parse the AllowEvents String header
- * @return SIPHeader (AllowEventsList object)
+ * @return SIPHeaderHeader (AllowEventsList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *AllowEventsParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *AllowEventsParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 
 	//if (debug) dbg_enter("AllowEventsParser.parse");
 	allowEventsList := header.NewAllowEventsList()

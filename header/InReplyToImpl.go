@@ -14,7 +14,7 @@ import "gosip/core"
 *
  */
 type InReplyTo struct {
-	SIPHeaderImpl
+	SIPHeader
 	//implements InReplyToHeader{
 
 	callId *CallIdentifier
@@ -24,7 +24,7 @@ type InReplyTo struct {
  */
 func NewInReplyTo() *InReplyTo {
 	this := &InReplyTo{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_IN_REPLY_TO)
+	this.SIPHeader.super(core.SIPHeaderNames_IN_REPLY_TO)
 	return this
 }
 
@@ -33,7 +33,7 @@ func NewInReplyTo() *InReplyTo {
  */
 func NewInReplyToFromCallIdentifier(cid *CallIdentifier) *InReplyTo {
 	this := &InReplyTo{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_IN_REPLY_TO)
+	this.SIPHeader.super(core.SIPHeaderNames_IN_REPLY_TO)
 	this.callId = cid
 	return this
 }

@@ -2,15 +2,13 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Module Name   : GoSIP Specification
  * File Name     : ViaHeader.go
- * Author        : Rain Liu  
+ * Author        : Rain Liu
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
- 
+
 package header
 
-import (
-	"gosip/address"
-)
+import ()
 
 /**
  * The Via header field indicates the transport used for the transaction and
@@ -38,8 +36,8 @@ import (
  * pick such a value), so that servers receiving the request can determine that
  * the branch ID was constructed in the fashion described by this specification
  * (that is, globally unique). Beyond this requirement, the precise format of
- * the branch token is implementation-defined. JAIN SIP defines a convenience 
- * function to generate unique branch idenifiers at 
+ * the branch token is implementation-defined. JAIN SIP defines a convenience
+ * function to generate unique branch idenifiers at
  * {@link javax.sip.Transaction#getBranchId()}
  * <p>
  * A common way to create the branch value is to compute a cryptographic hash
@@ -128,160 +126,156 @@ import (
  * @version 1.1
  * @author Sun Microsystems
  */
-type ViaHeader interface{
+type ViaHeader interface {
 	Header
-	address.Parameters
+	ParametersHeader
 
-    /**
-     * Set the host part of this ViaHeader to the newly supplied <code>host</code> 
-     * parameter.
-     *
-     * @return host - the new interger value of the host of this ViaHeader
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the host value.
-     */  
-    SetHost(host string) (ParseException error);
+	/**
+	 * Set the host part of this ViaHeader to the newly supplied <code>host</code>
+	 * parameter.
+	 *
+	 * @return host - the new interger value of the host of this ViaHeader
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the host value.
+	 */
+	SetHost(host string) (ParseException error)
 
-     /**
-     * Returns the host part of this ViaHeader.
-     *
-     * @return  the string value of the host
-     */     
-    GetHost() string;
-    
-    /**
-     * Set the port part of this ViaHeader to the newly supplied <code>port</code> 
-     * parameter.
-     *
-     * @param port - the new interger value of the port of this ViaHeader
-     */
-    SetPort(port int);     
+	/**
+	 * Returns the host part of this ViaHeader.
+	 *
+	 * @return  the string value of the host
+	 */
+	GetHost() string
 
-    /**
-     * Returns the port part of this ViaHeader.
-     *
-     * @return the integer value of the port
-     */    
-    GetPort() int;  
+	/**
+	 * Set the port part of this ViaHeader to the newly supplied <code>port</code>
+	 * parameter.
+	 *
+	 * @param port - the new interger value of the port of this ViaHeader
+	 */
+	SetPort(port int)
 
-  
-    /**
-     * Returns the value of the transport parameter. 
-     *
-     * @return the string value of the transport paramter of the ViaHeader
-     */
-    GetTransport() string;
+	/**
+	 * Returns the port part of this ViaHeader.
+	 *
+	 * @return the integer value of the port
+	 */
+	GetPort() int
 
-    /**
-     * Sets the value of the transport. This parameter specifies
-     * which transport protocol to use for sending requests and responses to
-     * this entity. The following values are defined: "udp", "tcp", "sctp",
-     * "tls", but other values may be used also. 
-     *
-     * @param transport - new value for the transport parameter
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the transport value.
-     */
-    SetTransport(transport string) (ParseException error);
+	/**
+	 * Returns the value of the transport parameter.
+	 *
+	 * @return the string value of the transport paramter of the ViaHeader
+	 */
+	GetTransport() string
 
-    /**
-     * Returns the value of the protocol used. 
-     *
-     * @return the string value of the protocol paramter of the ViaHeader
-     */
-    GetProtocol() string;
+	/**
+	 * Sets the value of the transport. This parameter specifies
+	 * which transport protocol to use for sending requests and responses to
+	 * this entity. The following values are defined: "udp", "tcp", "sctp",
+	 * "tls", but other values may be used also.
+	 *
+	 * @param transport - new value for the transport parameter
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the transport value.
+	 */
+	SetTransport(transport string) (ParseException error)
 
-    /**
-     * Sets the value of the protocol parameter. This parameter specifies
-     * which protocol is used, for example "SIP/2.0".
-     *
-     * @param protocol - new value for the protocol parameter
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the protocol value.
-     */
-    SetProtocol(protocol string) (ParseException error);    
-    
-    /**
-     * Returns the value of the ttl parameter, or -1 if this is not set.
-     *
-     * @return the integer value of the <code>ttl</code> parameter
-     */
-    GetTTL() int;
+	/**
+	 * Returns the value of the protocol used.
+	 *
+	 * @return the string value of the protocol paramter of the ViaHeader
+	 */
+	GetProtocol() string
 
-    /**
-     * Sets the value of the ttl parameter. The ttl parameter specifies the 
-     * time-to-live value when packets are sent using UDP multicast. 
-     *
-     * @param ttl - new value of the ttl parameter
-     * @throws InvalidArgumentException if supplied value is less than zero or 
-     * greater than 255, excluding -1 the default not set value.
-     */
-    SetTTL(ttl int) (InvalidArgumentException error);    
+	/**
+	 * Sets the value of the protocol parameter. This parameter specifies
+	 * which protocol is used, for example "SIP/2.0".
+	 *
+	 * @param protocol - new value for the protocol parameter
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the protocol value.
+	 */
+	SetProtocol(protocol string) (ParseException error)
 
-    /**
-     * Returns the value of the <code>maddr</code> parameter, or null if this
-     * is not set.
-     *
-     * @return the string value of the maddr parameter
-     */
-    GetMAddr() string;
+	/**
+	 * Returns the value of the ttl parameter, or -1 if this is not set.
+	 *
+	 * @return the integer value of the <code>ttl</code> parameter
+	 */
+	GetTTL() int
 
-    /**
-     * Sets the value of the <code>maddr</code> parameter of this ViaHeader. The
-     * maddr parameter indicates the server address to be contacted for this
-     * user, overriding any address derived from the host field. 
-     *
-     * @param  method - new value of the <code>maddr</code> parameter
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the mAddr value.
-     */
-    SetMAddr(mAddr string) (ParseException string);
+	/**
+	 * Sets the value of the ttl parameter. The ttl parameter specifies the
+	 * time-to-live value when packets are sent using UDP multicast.
+	 *
+	 * @param ttl - new value of the ttl parameter
+	 * @throws InvalidArgumentException if supplied value is less than zero or
+	 * greater than 255, excluding -1 the default not set value.
+	 */
+	SetTTL(ttl int) (InvalidArgumentException error)
 
-    /**
-     * Gets the received paramater of the ViaHeader. Returns null if received
-     * does not exist.
-     *
-     * @return the string received value of ViaHeader
-     */
-    GetReceived() string;
+	/**
+	 * Returns the value of the <code>maddr</code> parameter, or null if this
+	 * is not set.
+	 *
+	 * @return the string value of the maddr parameter
+	 */
+	GetMAddr() string
 
-    /**
-     * Sets the received parameter of ViaHeader.
-     *
-     * @param received - the newly supplied received parameter.
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the received value.
-     */
-    SetReceived(received string) (ParseException error);
+	/**
+	 * Sets the value of the <code>maddr</code> parameter of this ViaHeader. The
+	 * maddr parameter indicates the server address to be contacted for this
+	 * user, overriding any address derived from the host field.
+	 *
+	 * @param  method - new value of the <code>maddr</code> parameter
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the mAddr value.
+	 */
+	SetMAddr(mAddr string) (ParseException string)
 
-    /**
-     * Gets the branch paramater of the ViaHeader. Returns null if branch
-     * does not exist.
-     *
-     * @return the string branch value of ViaHeader
-     */
-    GetBranch() string;
+	/**
+	 * Gets the received paramater of the ViaHeader. Returns null if received
+	 * does not exist.
+	 *
+	 * @return the string received value of ViaHeader
+	 */
+	GetReceived() string
 
-    /**
-     * Sets the branch parameter of the ViaHeader to the newly supplied
-     * branch value. Note that when sending a Request within a transaction, 
-     * branch id management will be the responsibility of the SipProvider; 
-     * that is the application should not set this value. This method should 
-     * only be used by the application when sending Requests outside of a 
-     * transaction.
-     *
-     * @param branch - the new string branch parmameter of the ViaHeader.
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the branch value.
-     */
-    SetBranch(branch string) (ParseException error);
+	/**
+	 * Sets the received parameter of ViaHeader.
+	 *
+	 * @param received - the newly supplied received parameter.
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the received value.
+	 */
+	SetReceived(received string) (ParseException error)
 
-      
-    /**
-     * Name of ViaHeader
-     */
-    //public final static String NAME = "Via";
+	/**
+	 * Gets the branch paramater of the ViaHeader. Returns null if branch
+	 * does not exist.
+	 *
+	 * @return the string branch value of ViaHeader
+	 */
+	GetBranch() string
+
+	/**
+	 * Sets the branch parameter of the ViaHeader to the newly supplied
+	 * branch value. Note that when sending a Request within a transaction,
+	 * branch id management will be the responsibility of the SipProvider;
+	 * that is the application should not set this value. This method should
+	 * only be used by the application when sending Requests outside of a
+	 * transaction.
+	 *
+	 * @param branch - the new string branch parmameter of the ViaHeader.
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the branch value.
+	 */
+	SetBranch(branch string) (ParseException error)
+
+	/**
+	 * Name of ViaHeader
+	 */
+	//public final static String NAME = "Via";
 
 }
-
-

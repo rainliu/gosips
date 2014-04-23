@@ -2,15 +2,13 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Module Name   : GoSIP Specification
  * File Name     : FromHeader.go
- * Author        : Rain Liu  
+ * Author        : Rain Liu
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
- 
+
 package header
 
-import (
-	"gosip/address"
-)
+import ()
 
 /**
  * The From header field indicates the logical identity of the initiator
@@ -114,60 +112,50 @@ import (
  * @version 1.1
  * @author Sun Microsystems
  */
-type FromHeader interface{
-	Header 
-	address.Parameters
+type FromHeader interface {
+	Header
+	ParametersHeader
 	HeaderAddress
 
+	/**
 
-    /**
+	 * Sets the tag parameter of the FromHeader. The tag in the From field of a
+	 * request identifies the peer of the dialog. When a UA sends a request
+	 * outside of a dialog, it contains a From tag only, providing "half" of
+	 * the dialog Identifier.
+	 * <p>
+	 * The From Header MUST contain a new "tag" parameter, chosen by the UAC
+	 * applicaton. Once the initial From "tag" is assigned it should not be
+	 * manipulated by the application. That is on the client side for outbound
+	 * requests the application is responsible for Tag assigmennment, after
+	 * dialog establishment the stack will take care of Tag assignment.
+	 *
+	 * @param tag - the new tag of the FromHeader
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the Tag value.
+	 */
+	SetTag(tag string) (ParseException error)
 
-     * Sets the tag parameter of the FromHeader. The tag in the From field of a
-     * request identifies the peer of the dialog. When a UA sends a request
-     * outside of a dialog, it contains a From tag only, providing "half" of
-     * the dialog Identifier.
-     * <p>
-     * The From Header MUST contain a new "tag" parameter, chosen by the UAC 
-     * applicaton. Once the initial From "tag" is assigned it should not be 
-     * manipulated by the application. That is on the client side for outbound 
-     * requests the application is responsible for Tag assigmennment, after 
-     * dialog establishment the stack will take care of Tag assignment.
-     *
-     * @param tag - the new tag of the FromHeader
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the Tag value.
-     */
-    SetTag(tag string) (ParseException error);
+	/**
 
+	 * Gets the tag of FromHeader. The Tag parameter identified the Peer of the
 
+	 * dialogue and must always be present.
 
+	 *
 
+	 * @return the tag parameter of the FromHeader.
 
-    /**
+	 */
 
-     * Gets the tag of FromHeader. The Tag parameter identified the Peer of the
+	GetTag() string
 
-     * dialogue and must always be present.
+	/**
 
-     *
+	 * Name of FromHeader
 
-     * @return the tag parameter of the FromHeader.
+	 */
 
-     */
-
-    GetTag() string;
-
-
-
-
-
-    /**
-
-     * Name of FromHeader
-
-     */
-
-    //public final static String NAME = "From";
+	//public final static String NAME = "From";
 
 }
-

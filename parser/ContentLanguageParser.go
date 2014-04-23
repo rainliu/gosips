@@ -40,10 +40,10 @@ func NewContentLanguageParserFromLexer(lexer core.Lexer) *ContentLanguageParser 
 }
 
 /** parse the ContentLanguageHeader String header
- * @return SIPHeader (ContentLanguageList object)
+ * @return SIPHeaderHeader (ContentLanguageList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *ContentLanguageParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *ContentLanguageParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 
 	// if (debug) dbg_enter("ContentLanguageParser.parse");
 	contentLanguageList := header.NewContentLanguageList()

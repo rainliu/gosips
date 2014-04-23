@@ -30,7 +30,7 @@ func NewContentTypeParserFromLexer(lexer core.Lexer) *ContentTypeParser {
 	return this
 }
 
-func (this *ContentTypeParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *ContentTypeParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 
 	contentType := header.NewContentType()
 	//if (debug) dbg_enter("ContentTypeParser.parse");

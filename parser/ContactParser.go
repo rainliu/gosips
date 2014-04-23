@@ -25,7 +25,7 @@ func NewContactParserFromLexer(lexer core.Lexer) *ContactParser {
 	return this
 }
 
-func (this *ContactParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *ContactParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 	retval := header.NewContactList()
 	// past the header name and the colon.
 	lexer := this.GetLexer()

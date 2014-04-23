@@ -16,7 +16,7 @@ import (
 *
  */
 type Expires struct {
-	SIPHeaderImpl //implements javax.sip.header.ExpiresHeader {
+	SIPHeader //implements javax.sip.header.ExpiresHeader {
 
 	/** expires field
 	 */
@@ -27,7 +27,7 @@ type Expires struct {
  */
 func NewExpires() *Expires {
 	this := &Expires{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_EXPIRES)
+	this.SIPHeader.super(core.SIPHeaderNames_EXPIRES)
 	return this
 }
 

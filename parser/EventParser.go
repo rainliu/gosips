@@ -40,10 +40,10 @@ func NewEventParserFromLexer(lexer core.Lexer) *EventParser {
 }
 
 /** parse the String message
- * @return SIPHeader (Event object)
+ * @return SIPHeaderHeader (Event object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *EventParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *EventParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 
 	//if (debug) dbg_enter("EventParser.parse");
 

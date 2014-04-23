@@ -2,23 +2,20 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Module Name   : GoSIP Specification
  * File Name     : ToHeader.go
- * Author        : Rain Liu    
+ * Author        : Rain Liu
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
- 
+
 package header
 
-import (
-	"gosip/address"
-)
-
+import ()
 
 /**
  * The To header field first and foremost specifies the desired "logical"
  * recipient of the request, or the address-of-record of the user or resource
  * that is the target of this request.  This may or may not be the ultimate
  * recipient of the request. Requests and Responses must contain a ToHeader,
- * indicating the desired recipient of the Request. The UAS or redirect server 
+ * indicating the desired recipient of the Request. The UAS or redirect server
  * copies the ToHeader into its Response.
  * <p>
  * The To header field MAY contain a SIP or SIPS URI, but it may also make use
@@ -86,40 +83,39 @@ import (
  */
 type ToHeader interface {
 	Header
-	HeaderAddress 
-	address.Parameters
+	HeaderAddress
+	ParametersHeader
 
-    /**
-     * Sets the tag parameter of the ToHeader. The tag in the To field of a
-     * request identifies the peer of the dialog. If no dialog is established,
-     * no tag is present.
-     * <p>
-     * The To Header MUST contain a new "tag" parameter. When acting as a UAC 
-     * the To "tag" is maintained by the SipProvider from the dialog layer, 
-     * however whan acting as a UAS the To "tag" is assigned by the application.
-     * That is the tag assignment for outbound responses for messages in a 
-     * dialog is only the responsibility of the application for the first 
-     * outbound response. After dialog establishment, the stack will take care 
-     * of the tag assignment. 
-     *
-     * @param tag - the new tag of the To Header
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the Tag value.
-     */
-    SetTag(tag string) (ParseException error);
+	/**
+	 * Sets the tag parameter of the ToHeader. The tag in the To field of a
+	 * request identifies the peer of the dialog. If no dialog is established,
+	 * no tag is present.
+	 * <p>
+	 * The To Header MUST contain a new "tag" parameter. When acting as a UAC
+	 * the To "tag" is maintained by the SipProvider from the dialog layer,
+	 * however whan acting as a UAS the To "tag" is assigned by the application.
+	 * That is the tag assignment for outbound responses for messages in a
+	 * dialog is only the responsibility of the application for the first
+	 * outbound response. After dialog establishment, the stack will take care
+	 * of the tag assignment.
+	 *
+	 * @param tag - the new tag of the To Header
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the Tag value.
+	 */
+	SetTag(tag string) (ParseException error)
 
-    /**
-     * Gets tag of ToHeader. The Tag parameter identified the Peer of the
-     * dialogue.
-     *
-     * @return the tag parameter of the ToHeader. Returns null if no Tag is
-     * present, i.e no dialogue is established.
-     */
-    GetTag() string;
+	/**
+	 * Gets tag of ToHeader. The Tag parameter identified the Peer of the
+	 * dialogue.
+	 *
+	 * @return the tag parameter of the ToHeader. Returns null if no Tag is
+	 * present, i.e no dialogue is established.
+	 */
+	GetTag() string
 
-    /**
-     * Name of the ToHeader
-     */
-    //public final static String NAME = "To";
+	/**
+	 * Name of the ToHeader
+	 */
+	//public final static String NAME = "To";
 }
-

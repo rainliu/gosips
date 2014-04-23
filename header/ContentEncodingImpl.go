@@ -50,7 +50,7 @@ import (
 *@author Olivier Deruelle <deruelle@nist.gov><br/>
  */
 type ContentEncoding struct {
-	SIPHeaderImpl
+	SIPHeader
 	//implements 	javax.sip.header.ContentEncodingHeader {
 
 	/** contentEncoding field.
@@ -62,7 +62,7 @@ type ContentEncoding struct {
  */
 func NewContentEncoding() *ContentEncoding {
 	this := &ContentEncoding{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_CONTENT_ENCODING)
+	this.SIPHeader.super(core.SIPHeaderNames_CONTENT_ENCODING)
 	return this
 }
 
@@ -71,7 +71,7 @@ func NewContentEncoding() *ContentEncoding {
  */
 func NewContentEncodingFromString(enc string) *ContentEncoding {
 	this := &ContentEncoding{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_CONTENT_ENCODING)
+	this.SIPHeader.super(core.SIPHeaderNames_CONTENT_ENCODING)
 	this.contentEncoding = enc
 	return this
 }

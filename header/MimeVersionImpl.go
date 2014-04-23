@@ -17,7 +17,7 @@ import (
 *
  */
 type MimeVersion struct {
-	SIPHeaderImpl
+	SIPHeader
 	//implements MimeVersionHeader{
 
 	/** mimeVersion field
@@ -33,7 +33,7 @@ type MimeVersion struct {
  */
 func NewMimeVersion() *MimeVersion {
 	this := &MimeVersion{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_MIME_VERSION)
+	this.SIPHeader.super(core.SIPHeaderNames_MIME_VERSION)
 	return this
 }
 

@@ -29,7 +29,7 @@ func NewFromParserFromLexer(lexer core.Lexer) *FromParser {
 	return this
 }
 
-func (this *FromParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *FromParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 	from := header.NewFrom()
 	this.HeaderName(TokenTypes_FROM)
 	this.AddressParametersParser.Parse(from)

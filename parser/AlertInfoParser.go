@@ -41,10 +41,10 @@ func (this *AlertInfoParser) superFromLexer(lexer core.Lexer) {
 }
 
 /** parse the AlertInfo  String header
- * @return SIPHeader (AlertInfoList  object)
+ * @return SIPHeaderHeader (AlertInfoList  object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *AlertInfoParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *AlertInfoParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 
 	//if (debug) dbg_enter("AlertInfoParser.parse");
 	alertInfoList := header.NewAlertInfoList()
@@ -61,7 +61,7 @@ func (this *AlertInfoParser) Parse() (sh header.SIPHeader, ParseException error)
 		lexer.SPorHT()
 		lexer.Match('<')
 		urlParser := NewURLParserFromLexer(lexer)
-		uri,_ := urlParser.UriReference()
+		uri, _ := urlParser.UriReference()
 		alertInfo.SetAlertInfo(uri)
 		lexer.Match('>')
 		lexer.SPorHT()
@@ -78,7 +78,7 @@ func (this *AlertInfoParser) Parse() (sh header.SIPHeader, ParseException error)
 			lexer.SPorHT()
 			lexer.Match('<')
 			urlParser = NewURLParserFromLexer(lexer)
-			uri,_ = urlParser.UriReference()
+			uri, _ = urlParser.UriReference()
 			alertInfo.SetAlertInfo(uri)
 			lexer.Match('>')
 			lexer.SPorHT()

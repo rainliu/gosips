@@ -5,7 +5,7 @@
  * Author        : Rain Liu
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
- 
+
 package address
 
 import (
@@ -15,9 +15,9 @@ import (
 /**
  * This class represents SIP URIs, that may have either a <code>sip:</code> or
  * <code>sips:</code> scheme. All SIP implementations MUST support the sip:
- * URI scheme. 
+ * URI scheme.
  * <p>
- * SIP and SIPS URIs are used for addressing. They are similar to email 
+ * SIP and SIPS URIs are used for addressing. They are similar to email
  * addresses in that they are of the form
  * <code>user@host</code> where user is either a user name or telephone number,
  * and host is a host or domain name, or a numeric IP address. Additionally,
@@ -96,261 +96,292 @@ import (
 
 type SipURI interface {
 	URI
-	Parameters
 
-    /**
-     * Sets the user of SipURI. The identifier of a particular resource at
-     * the host being addressed. The user and the user password including the 
-     * '@' sign make up the user-info.
-     *
-     * @param user - the new String value of the user.
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the user value.
-     */
-    SetUser(user string) (ParseException error);
+	/**
+	 * Returns the value of the named parameter, or null if it is not set. A
+	 * zero-length String indicates flag parameter.
+	 *
+	 * @param <var>name</var> name of parameter to retrieve
+	 * @return the value of specified parameter
+	 */
+	GetParameter(name string) string
 
-    /**
-     * Returns the user part of this SipURI.
-     *
-     * @return  the user part of this SipURI
-     */
-    GetUser() string;
+	/**
+	 * Sets the value of the specified parameter. If the parameter already had
+	 * a value it will be overwritten. A zero-length String indicates flag
+	 * parameter.
+	 *
+	 * @param name - a String specifying the parameter name
+	 * @param value - a String specifying the parameter value
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the parameter name or value.
+	 */
+	SetParameter(name, value string) (ParseException error)
 
-    /**
-     * Sets the user password associated with the user of SipURI. While the SIP and
-     * SIPS URI syntax allows this field to be present, its use is NOT
-     * RECOMMENDED, because the passing of authentication information in clear
-     * text (such as URIs) has proven to be a security risk in almost every
-     * case where it has been used. The user password and the user including
-     * the @ sign make up the user-info.
-     *
-     * @param userPassword - the new String value of the user password
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the userPassword value.
-     */
-    SetUserPassword(userPassword string) (ParseException error);
+	/**
+	 * Returns an Iterator over the names (Strings) of all parameters present
+	 * in this ParametersHeader.
+	 *
+	 * @return an Iterator over all the parameter names
+	 */
+	GetParameterNames() *list.List //Iterator
 
-    /**
-     * Gets user password of SipURI, or null if it is not set.
-     *
-     * @return the user password of this SipURI
-     */
-    GetUserPassword() string;
+	/**
+	 * Removes the specified parameter from Parameters of this ParametersHeader.
+	 * This method returns silently if the parameter is not part of the
+	 * ParametersHeader.
+	 *
+	 * @param name - a String specifying the parameter name
+	 */
+	RemoveParameter(name string)
 
-    /**
-     * Returns true if this SipURI is secure i.e. if this SipURI represents a
-     * sips URI. A sip URI returns false.
-     *
-     * @return  <code>true</code> if this SipURI represents a sips URI, and
-     * <code>false</code> if it represents a sip URI.
-     */
-    IsSecure() bool;
+	/**
+	 * Sets the user of SipURI. The identifier of a particular resource at
+	 * the host being addressed. The user and the user password including the
+	 * '@' sign make up the user-info.
+	 *
+	 * @param user - the new String value of the user.
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the user value.
+	 */
+	SetUser(user string) (ParseException error)
 
-    /**
-     * Sets the scheme of this URI to sip or sips depending on whether the
-     * argument is true or false. The default value is false.
-     *
-     * @param secure - the boolean value indicating if the SipURI is secure.
-     */
-    SetSecure(secure bool);
+	/**
+	 * Returns the user part of this SipURI.
+	 *
+	 * @return  the user part of this SipURI
+	 */
+	GetUser() string
 
-    /**
-     * Set the host part of this SipURI to the newly supplied <code>host</code> 
-     * parameter.
-     *
-     * @return host - the new interger value of the host of this SipURI
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the host value.
-     */  
-    SetHost(host string) (ParseException error);
+	/**
+	 * Sets the user password associated with the user of SipURI. While the SIP and
+	 * SIPS URI syntax allows this field to be present, its use is NOT
+	 * RECOMMENDED, because the passing of authentication information in clear
+	 * text (such as URIs) has proven to be a security risk in almost every
+	 * case where it has been used. The user password and the user including
+	 * the @ sign make up the user-info.
+	 *
+	 * @param userPassword - the new String value of the user password
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the userPassword value.
+	 */
+	SetUserPassword(userPassword string) (ParseException error)
 
-     /**
-     * Returns the host part of this SipURI.
-     *
-     * @return  the host part of this SipURI
-     */     
-    GetHost() string;
-    
-    /**
-     * Set the port part of this SipURI to the newly supplied port 
-     * parameter.
-     *
-     * @param port - the new interger value of the port of this SipURI
-     */
-    SetPort(port int);     
+	/**
+	 * Gets user password of SipURI, or null if it is not set.
+	 *
+	 * @return the user password of this SipURI
+	 */
+	GetUserPassword() string
 
-    /**
-     * Returns the port part of this SipURI.
-     *
-     * @return  the port part of this SipURI
-     */    
-    GetPort() int;    
+	/**
+	 * Returns true if this SipURI is secure i.e. if this SipURI represents a
+	 * sips URI. A sip URI returns false.
+	 *
+	 * @return  <code>true</code> if this SipURI represents a sips URI, and
+	 * <code>false</code> if it represents a sip URI.
+	 */
+	IsSecure() bool
 
-    /**
-     * Removes the port part of this SipURI. If no port is specified the 
-     * stack will assume the default port.
-     *
-     */    
-    RemovePort();     
+	/**
+	 * Sets the scheme of this URI to sip or sips depending on whether the
+	 * argument is true or false. The default value is false.
+	 *
+	 * @param secure - the boolean value indicating if the SipURI is secure.
+	 */
+	SetSecure(secure bool)
 
-// header manipulation methods
+	/**
+	 * Set the host part of this SipURI to the newly supplied <code>host</code>
+	 * parameter.
+	 *
+	 * @return host - the new interger value of the host of this SipURI
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the host value.
+	 */
+	SetHost(host string) (ParseException error)
 
-    /**
-     * Returns the value of the named header, or null if it is not set.
-     * SIP/SIPS URIs may specify headers. As an example, the URI
-     * sip:jimmy@jcp.org?priority=urgent has a header "priority" whose
-     * value is "urgent".
-     *
-     * @param <var>name</var> name of header to retrieve
-     * @return the value of specified header
-     */
-    GetHeader(name string) string;
+	/**
+	 * Returns the host part of this SipURI.
+	 *
+	 * @return  the host part of this SipURI
+	 */
+	GetHost() string
 
-    /**
-     * Sets the value of the specified header fields to be included in a
-     * request constructed from the URI. If the header already had a value it
-     * will be overwritten.
-     *
-     * @param name - a String specifying the header name
-     * @param value - a String specifying the header value
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the name or value parameters.
-     */
-    SetHeader(name, value string) (ParseException error);
+	/**
+	 * Set the port part of this SipURI to the newly supplied port
+	 * parameter.
+	 *
+	 * @param port - the new interger value of the port of this SipURI
+	 */
+	SetPort(port int)
 
+	/**
+	 * Returns the port part of this SipURI.
+	 *
+	 * @return  the port part of this SipURI
+	 */
+	GetPort() int
 
-    /**
-     * Returns an Iterator over the String names of all headers present
-     * in this SipURI.
-     *
-     * @return an Iterator over all the header names
-     */
-    GetHeaderNames() *list.List;//Iterator
+	/**
+	 * Removes the port part of this SipURI. If no port is specified the
+	 * stack will assume the default port.
+	 *
+	 */
+	RemovePort()
 
-//Param Covenience methods
+	// header manipulation methods
 
+	/**
+	 * Returns the value of the named header, or null if it is not set.
+	 * SIP/SIPS URIs may specify headers. As an example, the URI
+	 * sip:jimmy@jcp.org?priority=urgent has a header "priority" whose
+	 * value is "urgent".
+	 *
+	 * @param <var>name</var> name of header to retrieve
+	 * @return the value of specified header
+	 */
+	GetHeader(name string) string
 
-    /**
-     * Returns the value of the "transport" parameter, or null if this is not
-     * set. This is equivalent to getParameter("transport").
-     *
-     * @return the transport paramter of the SipURI
-     */
-    GetTransportParam() string;
+	/**
+	 * Sets the value of the specified header fields to be included in a
+	 * request constructed from the URI. If the header already had a value it
+	 * will be overwritten.
+	 *
+	 * @param name - a String specifying the header name
+	 * @param value - a String specifying the header value
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the name or value parameters.
+	 */
+	SetHeader(name, value string) (ParseException error)
 
-    /**
-     * Sets the value of the "transport" parameter. This parameter specifies
-     * which transport protocol to use for sending requests and responses to
-     * this entity. The following values are defined: "udp", "tcp", "sctp",
-     * "tls", but other values may be used also. This method is equivalent to
-     * setParameter("transport", transport). Transport parameter constants
-     * are defined in the {@link javax.sip.ListeningPoint}.
-     *
-     * @param transport - new value for the "transport" parameter
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the transport value.
-     */
-    SetTransportParam(transport string) (ParseException error);
+	/**
+	 * Returns an Iterator over the String names of all headers present
+	 * in this SipURI.
+	 *
+	 * @return an Iterator over all the header names
+	 */
+	GetHeaderNames() *list.List //Iterator
 
-    /**
-     * Returns the value of the "ttl" parameter, or -1 if this is not set.
-     * This method is equivalent to getParameter("ttl").
-     *
-     * @return the value of the <code>ttl</code> parameter
-     */
-    GetTTLParam() int;
+	//Param Covenience methods
 
-    /**
-     * Sets the value of the <code>ttl</code> parameter. The ttl parameter
-     * specifies the time-to-live value when packets are sent using UDP
-     * multicast. This is equivalent to setParameter("ttl", ttl).
-     *
-     * @param ttl - new value of the <code>ttl</code> parameter
-     * @throws InvalidArgumentException if supplied value is less than zero, 
-     * excluding -1 the default not set value.
-     */
-    SetTTLParam(ttl int) (InvalidArgumentException error);
+	/**
+	 * Returns the value of the "transport" parameter, or null if this is not
+	 * set. This is equivalent to getParameter("transport").
+	 *
+	 * @return the transport paramter of the SipURI
+	 */
+	GetTransportParam() string
 
-    /**
-     * Returns the value of the <code>method</code> parameter, or null if this
-     * is not set. This is equivalent to getParameter("method").
-     *
-     * @return  the value of the <code>method</code> parameter
-     */
-    GetMethodParam() string;
+	/**
+	 * Sets the value of the "transport" parameter. This parameter specifies
+	 * which transport protocol to use for sending requests and responses to
+	 * this entity. The following values are defined: "udp", "tcp", "sctp",
+	 * "tls", but other values may be used also. This method is equivalent to
+	 * setParameter("transport", transport). Transport parameter constants
+	 * are defined in the {@link javax.sip.ListeningPoint}.
+	 *
+	 * @param transport - new value for the "transport" parameter
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the transport value.
+	 */
+	SetTransportParam(transport string) (ParseException error)
 
-    /**
-     * Sets the value of the <code>method</code> parameter. This specifies
-     * which SIP method to use in requests directed at this URI. This is
-     * equivalent to setParameter("method", method).
-     *
-     * @param  method - new value String value of the method parameter
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the method value.
-     */
-    SetMethodParam(method string) (ParseException error);
+	/**
+	 * Returns the value of the "ttl" parameter, or -1 if this is not set.
+	 * This method is equivalent to getParameter("ttl").
+	 *
+	 * @return the value of the <code>ttl</code> parameter
+	 */
+	GetTTLParam() int
 
-    /**
-     * Sets the value of the user parameter. The user URI parameter exists to
-     * distinguish telephone numbers from user names that happen to look like
-     * telephone numbers.  This is equivalent to setParameter("user", user).
-     *
-     * @param  userParam - new value String value of the method parameter
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the userParam value.
-     */
-    SetUserParam(userParam string) (ParseException error);
+	/**
+	 * Sets the value of the <code>ttl</code> parameter. The ttl parameter
+	 * specifies the time-to-live value when packets are sent using UDP
+	 * multicast. This is equivalent to setParameter("ttl", ttl).
+	 *
+	 * @param ttl - new value of the <code>ttl</code> parameter
+	 * @throws InvalidArgumentException if supplied value is less than zero,
+	 * excluding -1 the default not set value.
+	 */
+	SetTTLParam(ttl int) (InvalidArgumentException error)
 
-    /**
-     * Returns the value of the <code>userParam</code>, or null if this is not
-     * set.
-     * <p>
-     * This is equivalent to getParameter("user").
-     *
-     * @return the value of the <code>userParam</code> of the SipURI
-     */
-    GetUserParam() string;
+	/**
+	 * Returns the value of the <code>method</code> parameter, or null if this
+	 * is not set. This is equivalent to getParameter("method").
+	 *
+	 * @return  the value of the <code>method</code> parameter
+	 */
+	GetMethodParam() string
 
+	/**
+	 * Sets the value of the <code>method</code> parameter. This specifies
+	 * which SIP method to use in requests directed at this URI. This is
+	 * equivalent to setParameter("method", method).
+	 *
+	 * @param  method - new value String value of the method parameter
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the method value.
+	 */
+	SetMethodParam(method string) (ParseException error)
 
-    /**
-     * Returns the value of the <code>maddr</code> parameter, or null if this
-     * is not set. This is equivalent to getParameter("maddr").
-     *
-     * @return the value of the <code>maddr</code> parameter
-     */
-    GetMAddrParam() string;
+	/**
+	 * Sets the value of the user parameter. The user URI parameter exists to
+	 * distinguish telephone numbers from user names that happen to look like
+	 * telephone numbers.  This is equivalent to setParameter("user", user).
+	 *
+	 * @param  userParam - new value String value of the method parameter
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the userParam value.
+	 */
+	SetUserParam(userParam string) (ParseException error)
 
-    /**
-     * Sets the value of the <code>maddr</code> parameter of this SipURI. The
-     * maddr parameter indicates the server address to be contacted for this
-     * user, overriding any address derived from the host field. This is
-     * equivalent to setParameter("maddr", maddr).
-     *
-     * @param  method - new value of the <code>maddr</code> parameter
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the mAddr value.
-     */
-    SetMAddrParam(mAddr string) (ParseException error);
+	/**
+	 * Returns the value of the <code>userParam</code>, or null if this is not
+	 * set.
+	 * <p>
+	 * This is equivalent to getParameter("user").
+	 *
+	 * @return the value of the <code>userParam</code> of the SipURI
+	 */
+	GetUserParam() string
 
-    /**
-     * Returns whether the the <code>lr</code> parameter is set. This is 
-     * equivalent to hasParameter("lr"). This interface has no getLrParam as 
-     * RFC3261 does not specify any values for the "lr" paramater.
-     *
-     * @return true if the "lr" parameter is set, false otherwise.
-     */
-    HasLrParam() bool;
+	/**
+	 * Returns the value of the <code>maddr</code> parameter, or null if this
+	 * is not set. This is equivalent to getParameter("maddr").
+	 *
+	 * @return the value of the <code>maddr</code> parameter
+	 */
+	GetMAddrParam() string
 
-    /**
-     * Sets the value of the <code>lr</code> parameter of this SipURI. The lr
-     * parameter, when present, indicates that the element responsible for
-     * this resource implements the routing mechanisms specified in RFC 3261.
-     * This parameter will be used in the URIs proxies place in the
-     * Record-Route header field values, and may appear in the URIs in a
-     * pre-existing route set.
-     */
-    SetLrParam();
-    
+	/**
+	 * Sets the value of the <code>maddr</code> parameter of this SipURI. The
+	 * maddr parameter indicates the server address to be contacted for this
+	 * user, overriding any address derived from the host field. This is
+	 * equivalent to setParameter("maddr", maddr).
+	 *
+	 * @param  method - new value of the <code>maddr</code> parameter
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the mAddr value.
+	 */
+	SetMAddrParam(mAddr string) (ParseException error)
+
+	/**
+	 * Returns whether the the <code>lr</code> parameter is set. This is
+	 * equivalent to hasParameter("lr"). This interface has no getLrParam as
+	 * RFC3261 does not specify any values for the "lr" paramater.
+	 *
+	 * @return true if the "lr" parameter is set, false otherwise.
+	 */
+	HasLrParam() bool
+
+	/**
+	 * Sets the value of the <code>lr</code> parameter of this SipURI. The lr
+	 * parameter, when present, indicates that the element responsible for
+	 * this resource implements the routing mechanisms specified in RFC 3261.
+	 * This parameter will be used in the URIs proxies place in the
+	 * Record-Route header field values, and may appear in the URIs in a
+	 * pre-existing route set.
+	 */
+	SetLrParam()
 }
-
-

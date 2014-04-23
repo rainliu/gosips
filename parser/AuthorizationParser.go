@@ -30,10 +30,10 @@ func NewAuthorizationParserFromLexer(lexer core.Lexer) *AuthorizationParser {
 }
 
 /** parse the String message
- * @return SIPHeader (Authorization object)
+ * @return SIPHeaderHeader (Authorization object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *AuthorizationParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *AuthorizationParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 	//dbg_enter("parse");
 	// try {
 	this.HeaderName(TokenTypes_AUTHORIZATION)

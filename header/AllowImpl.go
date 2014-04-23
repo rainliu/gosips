@@ -5,10 +5,10 @@ import (
 )
 
 /**
-* Allow SIPHeader.
+* Allow SIPHeaderHeader.
  */
 type Allow struct {
-	SIPHeaderImpl // implements javax.sip.header.AllowHeader {
+	SIPHeader // implements javax.sip.header.AllowHeader {
 
 	/** method field
 	 */
@@ -19,7 +19,7 @@ type Allow struct {
  */
 func NewAllow() *Allow {
 	this := &Allow{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_ALLOW)
+	this.SIPHeader.super(core.SIPHeaderNames_ALLOW)
 	return this
 }
 
@@ -28,7 +28,7 @@ func NewAllow() *Allow {
  */
 func NewAllowFromString(m string) *Allow {
 	this := &Allow{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_ALLOW)
+	this.SIPHeader.super(core.SIPHeaderNames_ALLOW)
 	this.method = m
 	return this
 }

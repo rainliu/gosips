@@ -12,7 +12,7 @@ import (
  */
 
 type CSeq struct { //implements javax.sip.header.CSeqHeader{
-	SIPHeaderImpl
+	SIPHeader
 
 	/** seqno field
 	 */
@@ -39,7 +39,7 @@ type CSeq struct { //implements javax.sip.header.CSeqHeader{
 func NewCSeq(seqno int, method string) *CSeq {
 	this := &CSeq{}
 
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_CSEQ)
+	this.SIPHeader.super(core.SIPHeaderNames_CSEQ)
 
 	this.seqno = seqno
 	this.method = method
@@ -48,7 +48,7 @@ func NewCSeq(seqno int, method string) *CSeq {
 }
 
 func (this *CSeq) super(seqno int, method string) {
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_CSEQ)
+	this.SIPHeader.super(core.SIPHeaderNames_CSEQ)
 
 	this.seqno = seqno
 	this.method = method

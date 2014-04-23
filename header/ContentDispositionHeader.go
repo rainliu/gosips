@@ -5,12 +5,10 @@
  * Author        : Rain Liu
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
- 
+
 package header
 
-import (
-	"gosip/address"
-)
+import ()
 
 /**
  * The Content-Disposition header field describes how the message body or,
@@ -50,76 +48,74 @@ import (
  * @since 1.1
  * @author Sun Microsystems
  */
-type ContentDispositionHeader interface{
+type ContentDispositionHeader interface {
 	Header
-	address.Parameters
+	ParametersHeader
 
-    /**
-     * Sets the interpretation value of the message body or message body part
-     * for this ContentDispositionHeader.
-     *
-     * @param <var>dispositiontype</var> the new String value of the
-     * disposition type.
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the dispositionType parameter.
-     */
-    SetDispositionType(dispositionType string) (ParseException error);
+	/**
+	 * Sets the interpretation value of the message body or message body part
+	 * for this ContentDispositionHeader.
+	 *
+	 * @param <var>dispositiontype</var> the new String value of the
+	 * disposition type.
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the dispositionType parameter.
+	 */
+	SetDispositionType(dispositionType string) (ParseException error)
 
-    /**
-     * Gets the interpretation of the message body or message body part of
-     * this ContentDispositionHeader.
-     *
-     * @return interpretation of the message body or message body part
-     */
-    GetDispositionType() string;
+	/**
+	 * Gets the interpretation of the message body or message body part of
+	 * this ContentDispositionHeader.
+	 *
+	 * @return interpretation of the message body or message body part
+	 */
+	GetDispositionType() string
 
+	/**
+	 * The handling parameter describes how the UAS should react if it
+	 * receives a message body whose content type or disposition type it
+	 * does not understand.  The parameter has defined values of "optional"
+	 * and "required".  If the handling parameter is missing, the value
+	 * "required" SHOULD be assumed.
+	 *
+	 * @param <var>handling</var> the new String value either "optional"
+	 * or "required".
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the handling parameter.
+	 */
+	SetHandling(handling string) (ParseException error)
 
-    /**
-     * The handling parameter describes how the UAS should react if it
-     * receives a message body whose content type or disposition type it
-     * does not understand.  The parameter has defined values of "optional"
-     * and "required".  If the handling parameter is missing, the value
-     * "required" SHOULD be assumed.
-     *
-     * @param <var>handling</var> the new String value either "optional"
-     * or "required".
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the handling parameter.
-     */
-    SetHandling(handling string) (ParseException error);
+	/**
+	 * Gets the handling information of the unknown content disposition of the
+	 * ContentDispositionHeader.
+	 *
+	 * @return handling information for unknown content dispositions.
+	 */
+	GetHandling() string
 
-    /**
-     * Gets the handling information of the unknown content disposition of the
-     * ContentDispositionHeader.
-     *
-     * @return handling information for unknown content dispositions.
-     */
-    GetHandling() string;
+	/**
+	 * Name of ContentDispositionHeader
+	 */
+	//public final static String NAME = "Content-Disposition";
 
-    /**
-     * Name of ContentDispositionHeader
-     */
-    //public final static String NAME = "Content-Disposition";
+	/**
+	 * Session Disposition Type Constant
+	 */
+	//public final static String SESSION = "Session";
 
-    /**
-     * Session Disposition Type Constant
-     */
-    //public final static String SESSION = "Session";    
+	/**
+	 * Render Disposition Type Constant
+	 */
+	//public final static String RENDER = "Render";
 
-    /**
-     * Render Disposition Type Constant
-     */
-    //public final static String RENDER = "Render";    
-    
-    /**
-     * Icon Disposition Type Constant
-     */
-    //public final static String ICON = "Icon";    
-    
-    /**
-     * Alert Disposition Type Constant
-     */
-    //public final static String ALERT = "Alert";        
-    
+	/**
+	 * Icon Disposition Type Constant
+	 */
+	//public final static String ICON = "Icon";
+
+	/**
+	 * Alert Disposition Type Constant
+	 */
+	//public final static String ALERT = "Alert";
+
 }
-

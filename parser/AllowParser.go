@@ -31,10 +31,10 @@ func NewAllowParserFromLexer(lexer core.Lexer) *AllowParser {
 }
 
 /** parse the Allow String header
- * @return SIPHeader (AllowList object)
+ * @return SIPHeaderHeader (AllowList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *AllowParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *AllowParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 
 	//if (debug) dbg_enter("AllowParser.parse");
 	allowList := header.NewAllowList()

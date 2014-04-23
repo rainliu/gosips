@@ -14,7 +14,7 @@ import "gosip/core"
 *
  */
 type Organization struct {
-	SIPHeaderImpl
+	SIPHeader
 	//implements OrganizationHeader {
 
 	/** organization field
@@ -26,7 +26,7 @@ type Organization struct {
  */
 func NewOrganization() *Organization {
 	this := &Organization{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_ORGANIZATION)
+	this.SIPHeader.super(core.SIPHeaderNames_ORGANIZATION)
 	return this
 }
 

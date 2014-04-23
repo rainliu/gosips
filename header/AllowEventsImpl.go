@@ -5,11 +5,11 @@ import (
 )
 
 /**
-* AllowEvents SIPHeader.
+* AllowEvents SIPHeaderHeader.
 *@version JAIN-SIP-1.1
  */
 type AllowEvents struct {
-	SIPHeaderImpl
+	SIPHeader
 	//implements javax.sip.header.AllowEventsHeader {
 
 	/** method field
@@ -21,7 +21,7 @@ type AllowEvents struct {
  */
 func NewAllowEvents() *AllowEvents {
 	this := &AllowEvents{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_ALLOW_EVENTS)
+	this.SIPHeader.super(core.SIPHeaderNames_ALLOW_EVENTS)
 	return this
 }
 
@@ -30,7 +30,7 @@ func NewAllowEvents() *AllowEvents {
  */
 func NewAllowEventsFromString(m string) *AllowEvents {
 	this := &AllowEvents{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_ALLOW_EVENTS)
+	this.SIPHeader.super(core.SIPHeaderNames_ALLOW_EVENTS)
 	this.eventType = m
 	return this
 }

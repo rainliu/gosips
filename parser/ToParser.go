@@ -26,7 +26,7 @@ func NewToParserFromLexer(lexer core.Lexer) *ToParser {
 	return this
 }
 
-func (this *ToParser) Parse() (sh header.SIPHeader, ParseException error) {
+func (this *ToParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 	to := header.NewTo()
 	this.HeaderName(TokenTypes_TO)
 	this.AddressParametersParser.Parse(to)

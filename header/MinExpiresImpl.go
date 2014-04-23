@@ -17,7 +17,7 @@ import (
 *
  */
 type MinExpires struct {
-	SIPHeaderImpl // implements MinExpiresHeader {
+	SIPHeader // implements MinExpiresHeader {
 
 	/** expires field
 	 */
@@ -28,7 +28,7 @@ type MinExpires struct {
  */
 func NewMinExpires() *MinExpires {
 	this := &MinExpires{}
-	this.SIPHeaderImpl.super(core.SIPHeaderNames_MIN_EXPIRES)
+	this.SIPHeader.super(core.SIPHeaderNames_MIN_EXPIRES)
 	return this
 }
 
