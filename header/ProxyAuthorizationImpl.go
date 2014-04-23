@@ -3,7 +3,7 @@ package header
 import "gosip/core"
 
 /**
-* Authorization SIP header.
+* ProxyAuthorization SIP header.
 *
 * @see ProxyAuthorization
 *
@@ -12,14 +12,14 @@ import "gosip/core"
 *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
 *
  */
-type Authorization struct {
+type ProxyAuthorization struct {
 	Authentication
 }
 
 /** Default constructor.
  */
-func NewAuthorization() *Authorization {
-	this := &Authorization{}
-	this.Authentication.super(core.SIPHeaderNames_AUTHORIZATION)
+func NewProxyAuthorization() *ProxyAuthorization {
+	this := &ProxyAuthorization{}
+	this.Authentication.super(core.SIPHeaderNames_PROXY_AUTHORIZATION)
 	return this
 }
