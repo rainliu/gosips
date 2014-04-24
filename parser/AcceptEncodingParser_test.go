@@ -15,6 +15,6 @@ func TestAcceptEncodingParser(t *testing.T) {
 
 	for i := 0; i < len(acceptEncodings); i++ {
 		shp := NewAcceptEncodingParser(acceptEncodings[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }

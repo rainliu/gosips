@@ -13,6 +13,6 @@ func TestAcceptParser(t *testing.T) {
 
 	for i := 0; i < len(accept); i++ {
 		shp := NewAcceptParser(accept[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }

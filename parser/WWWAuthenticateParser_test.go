@@ -13,6 +13,6 @@ func TestWWWAuthenticateParser(t *testing.T) {
 
 	for i := 0; i < len(inputs); i++ {
 		shp := NewWWWAuthenticateParser(inputs[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }

@@ -24,6 +24,6 @@ func TestContactParser(t *testing.T) {
 
 	for i := 0; i < len(contacts); i++ {
 		shp := NewContactParser(contacts[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }

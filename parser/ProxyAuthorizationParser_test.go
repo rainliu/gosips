@@ -16,7 +16,7 @@ func TestProxyAuthorizationParser(t *testing.T) {
 
 	for i := 0; i < len(inputs); i++ {
 		shp := NewProxyAuthorizationParser(inputs[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }
 

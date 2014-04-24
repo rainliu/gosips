@@ -10,14 +10,14 @@ import (
  */
 
 type AddressParser struct {
-	ParserParser
+	Parser
 }
 
 func NewAddressParser(addr string) *AddressParser {
 	this := &AddressParser{}
 
-	this.ParserParser.super(addr)
-	this.ParserParser.GetLexer().SetLexerName("charLexer")
+	this.Parser.super(addr)
+	this.Parser.GetLexer().SetLexerName("charLexer")
 
 	return this
 }
@@ -32,8 +32,8 @@ func NewAddressParserFromLexer(lexer core.Lexer) *AddressParser {
 }
 
 func (this *AddressParser) super(addr string) {
-	this.ParserParser.super(addr)
-	this.ParserParser.GetLexer().SetLexerName("charLexer")
+	this.Parser.super(addr)
+	this.Parser.GetLexer().SetLexerName("charLexer")
 }
 
 func (this *AddressParser) superFromLexer(lexer core.Lexer) {

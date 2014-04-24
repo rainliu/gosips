@@ -14,7 +14,7 @@ func TestContentTypeParser(t *testing.T) {
 
 	for i := 0; i < len(contentType); i++ {
 		shp := NewContentTypeParser(contentType[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }
 

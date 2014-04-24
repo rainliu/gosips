@@ -15,6 +15,6 @@ func TestFromParser(t *testing.T) {
 
 	for i := 0; i < len(froms); i++ {
 		shp := NewFromParser(froms[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }

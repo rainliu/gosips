@@ -13,7 +13,7 @@ func TestEventParser(t *testing.T) {
 
 	for i := 0; i < len(event); i++ {
 		shp := NewEventParser(event[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }
 

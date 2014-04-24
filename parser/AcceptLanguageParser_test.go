@@ -31,6 +31,6 @@ func TestAcceptLanguageParser(t *testing.T) {
 
 	for i := 0; i < len(acceptLanguages); i++ {
 		shp := NewAcceptLanguageParser(acceptLanguages[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }

@@ -12,7 +12,7 @@ func TestErrorInfoParser(t *testing.T) {
 
 	for i := 0; i < len(errorInfo); i++ {
 		shp := NewErrorInfoParser(errorInfo[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }
 

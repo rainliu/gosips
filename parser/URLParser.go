@@ -11,19 +11,19 @@ import (
 /** Parser For SIP and Tel URLs. Other kinds of URL's are handled by the
  */
 type URLParser struct {
-	ParserParser
+	Parser
 }
 
 func NewURLParser(url string) *URLParser {
 	this := &URLParser{}
-	this.ParserParser.SetLexer(NewLexer("sip_urlLexer", url))
+	this.Parser.SetLexer(NewLexer("sip_urlLexer", url))
 	return this
 }
 
 func NewURLParserFromLexer(lexer core.Lexer) *URLParser {
 	this := &URLParser{}
-	this.ParserParser.SetLexer(lexer)
-	this.ParserParser.GetLexer().SelectLexer("sip_urlLexer")
+	this.Parser.SetLexer(lexer)
+	this.Parser.GetLexer().SelectLexer("sip_urlLexer")
 	return this
 }
 

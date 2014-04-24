@@ -13,7 +13,7 @@ func TestContentLengthParser(t *testing.T) {
 
 	for i := 0; i < len(contentLength); i++ {
 		shp := NewContentLengthParser(contentLength[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }
 

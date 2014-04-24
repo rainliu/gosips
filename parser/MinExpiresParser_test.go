@@ -11,7 +11,7 @@ func TestMinExpiresParser(t *testing.T) {
 
 	for i := 0; i < len(minexpires); i++ {
 		shp := NewMinExpiresParser(minexpires[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }
 

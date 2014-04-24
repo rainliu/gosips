@@ -12,7 +12,7 @@ func TestContentDispositionParser(t *testing.T) {
 
 	for i := 0; i < len(contentDisposition); i++ {
 		shp := NewContentDispositionParser(contentDisposition[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }
 

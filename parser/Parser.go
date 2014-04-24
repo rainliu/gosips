@@ -3,7 +3,6 @@ package parser
 import (
 	"errors"
 	"gosip/core"
-	"gosip/header"
 )
 
 const TokenTypes_START = core.LexerCore_START
@@ -116,10 +115,6 @@ const TokenTypes_QUESTION = (int)('?')
 const TokenTypes_AND = (int)('&')
 const TokenTypes_UNDERSCORE = (int)('_')
 
-type Parser interface {
-	Parse() (sh header.SIPHeaderHeader, ParseException error)
-}
-
 /** Base parser class.
 *
 *@version  JAIN-SIP-1.1
@@ -130,12 +125,12 @@ type Parser interface {
 *
  */
 
-type ParserParser struct {
+type Parser struct {
 	core.ParserCore //implements TokenTypes {
 }
 
-func NewParserParser(buffer string) *ParserParser {
-	this := &ParserParser{}
+func NewParser(buffer string) *Parser {
+	this := &Parser{}
 
 	this.ParserCore.Super(buffer)
 	this.ParserCore.SetLexer(NewLexer("CharLexer", buffer))
@@ -143,20 +138,20 @@ func NewParserParser(buffer string) *ParserParser {
 	return this
 }
 
-func (this *ParserParser) super(buffer string) {
+func (this *Parser) super(buffer string) {
 	this.ParserCore.Super(buffer)
 	this.ParserCore.SetLexer(NewLexer("CharLexer", buffer))
 }
 
-func (this *ParserParser) CreateParseException(exceptionString string) (ParseException error) {
+func (this *Parser) CreateParseException(exceptionString string) (ParseException error) {
 	return errors.New("ParseException: " + this.GetLexer().GetBuffer() + ":" + exceptionString) // + this.GetLexer().GetPtr());
 }
 
-/*func (this *ParserParser) GetLexer() Lexer {
+/*func (this *Parser) GetLexer() Lexer {
 	return this.GetLexer();
 }*/
 
-func (this *ParserParser) SipVersion() (s string, ParseException error) {
+func (this *Parser) SipVersion() (s string, ParseException error) {
 	if core.Debug.ParserDebug {
 		this.Dbg_enter("sipVersion")
 		defer this.Dbg_leave("sipVersion")
@@ -181,7 +176,7 @@ func (this *ParserParser) SipVersion() (s string, ParseException error) {
 
 /** parses a method. Consumes if a valid method has been found.
  */
-func (this *ParserParser) Method() (s string, ParseException error) {
+func (this *Parser) Method() (s string, ParseException error) {
 	if core.Debug.ParserDebug {
 		this.Dbg_enter("method")
 		defer this.Dbg_leave("method")

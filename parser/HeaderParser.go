@@ -6,13 +6,17 @@ import (
 	"strings"
 )
 
+type IHeaderParser interface {
+	Parse() (sh header.SIPHeaderHeader, ParseException error)
+}
+
 /** Generic header parser class. The parsers for various headers extend this
 * class. To create a parser for a new header, extend this class and change
 * the createParser class.
  */
 
 type HeaderParser struct {
-	ParserParser
+	Parser
 }
 
 /** Creates new HeaderParser
@@ -21,8 +25,8 @@ type HeaderParser struct {
 func NewHeaderParser(header string) *HeaderParser {
 	this := &HeaderParser{}
 
-	this.ParserParser.super(header)
-	this.ParserParser.GetLexer().SetLexerName("command_keywordLexer")
+	this.Parser.super(header)
+	this.Parser.GetLexer().SetLexerName("command_keywordLexer")
 
 	return this
 }
@@ -30,20 +34,20 @@ func NewHeaderParser(header string) *HeaderParser {
 func NewHeaderParserFromLexer(lexer core.Lexer) *HeaderParser {
 	this := &HeaderParser{}
 
-	this.ParserParser.SetLexer(lexer)
-	this.ParserParser.GetLexer().SetLexerName("command_keywordLexer")
+	this.Parser.SetLexer(lexer)
+	this.Parser.GetLexer().SetLexerName("command_keywordLexer")
 
 	return this
 }
 
 func (this *HeaderParser) super(header string) {
-	this.ParserParser.super(header)
-	this.ParserParser.GetLexer().SetLexerName("command_keywordLexer")
+	this.Parser.super(header)
+	this.Parser.GetLexer().SetLexerName("command_keywordLexer")
 }
 
 func (this *HeaderParser) superFromLexer(lexer core.Lexer) {
 	this.SetLexer(lexer)
-	this.ParserParser.GetLexer().SetLexerName("command_keywordLexer")
+	this.Parser.GetLexer().SetLexerName("command_keywordLexer")
 }
 
 /** Parse the weekday field

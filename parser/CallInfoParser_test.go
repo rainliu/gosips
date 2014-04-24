@@ -13,7 +13,7 @@ func TestCallInfoParser(t *testing.T) {
 
 	for i := 0; i < len(call); i++ {
 		shp := NewCallInfoParser(call[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }
 

@@ -12,7 +12,7 @@ func TestProxyRequireParser(t *testing.T) {
 
 	for i := 0; i < len(inputs); i++ {
 		shp := NewProxyRequireParser(inputs[i])
-		testParser(t, shp)
+		testHeaderParser(t, shp)
 	}
 }
 
