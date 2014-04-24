@@ -5,7 +5,7 @@ import (
 )
 
 func TestContactParser(t *testing.T) {
-	var contacts = []string{
+	var tvs = []string{
 		"Contact:<sip:utente@127.0.0.1:5000;transport=udp>;expires=3600\n",
 		"Contact:BigGuy<sip:utente@127.0.0.1:5000>;expires=3600\n",
 		"Contact: sip:4855@166.35.224.216:5060\n",
@@ -22,8 +22,8 @@ func TestContactParser(t *testing.T) {
 		"Contact:BigGuy<sip:utente@127.0.0.1;5000>;Expires=3600\n",
 	}
 
-	for i := 0; i < len(contacts); i++ {
-		shp := NewContactParser(contacts[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewContactParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }

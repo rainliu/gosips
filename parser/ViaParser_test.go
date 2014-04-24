@@ -5,7 +5,7 @@ import (
 )
 
 func TestViaParser(t *testing.T) {
-	var vias = []string{
+	var tvs = []string{
 		"Via: SIP/2.0/UDP 135.180.130.133\n",
 		"Via: SIP/2.0/UDP 166.34.120.100;branch=0000045d-00000001" +
 			",SIP/2.0/UDP 166.35.224.216:5000\n",
@@ -27,8 +27,8 @@ func TestViaParser(t *testing.T) {
 			";maddr=224.2.0.1 ;branch=a7c6a8dlze.1 (Acme server)\n",
 	}
 
-	for i := 0; i < len(vias); i++ {
-		shp := NewViaParser(vias[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewViaParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }

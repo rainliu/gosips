@@ -5,15 +5,15 @@ import (
 )
 
 func TestEventParser(t *testing.T) {
-	var event = []string{
+	var tvs = []string{
 		"Event: presence\n",
 		"Event: foo; param=abcd; id=1234\n",
 		"Event: foo.foo1; param=abcd; id=1234\n",
 	}
 
-	for i := 0; i < len(event); i++ {
-		shp := NewEventParser(event[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewEventParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }
 

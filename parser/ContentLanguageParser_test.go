@@ -5,14 +5,14 @@ import (
 )
 
 func TestContentLanguageParser(t *testing.T) {
-	var contentLanguage = []string{
+	var tvs = []string{
 		"Content-Language: fr \n",
-		"Content-Language: fr , he \n",
+		"Content-Language: fr,he \n",
 	}
 
-	for i := 0; i < len(contentLanguage); i++ {
-		shp := NewContentLanguageParser(contentLanguage[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewContentLanguageParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }
 

@@ -5,16 +5,16 @@ import (
 )
 
 func TestContentTypeParser(t *testing.T) {
-	var contentType = []string{
+	var tvs = []string{
 		"c: text/html; charset=ISO-8859-4\n",
 		"Content-Type: text/html; charset=ISO-8859-4\n",
 		"Content-Type: application/sdp\n",
 		"Content-Type: application/sdp; o=we ;l=ek ; i=end \n",
 	}
 
-	for i := 0; i < len(contentType); i++ {
-		shp := NewContentTypeParser(contentType[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewContentTypeParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }
 

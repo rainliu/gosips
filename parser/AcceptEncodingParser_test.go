@@ -5,7 +5,7 @@ import (
 )
 
 func TestAcceptEncodingParser(t *testing.T) {
-	var acceptEncodings = []string{
+	var tvs = []string{
 		"Accept-Encoding: compress, gzip\n",
 		"Accept-Encoding   :\n",
 		"Accept-Encoding	 : *\n",
@@ -13,8 +13,8 @@ func TestAcceptEncodingParser(t *testing.T) {
 		"Accept-Encoding  : gzip;q=1.0, identity; q=0.5, *;q=0\n",
 	}
 
-	for i := 0; i < len(acceptEncodings); i++ {
-		shp := NewAcceptEncodingParser(acceptEncodings[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewAcceptEncodingParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }

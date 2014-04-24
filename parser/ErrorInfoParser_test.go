@@ -5,14 +5,14 @@ import (
 )
 
 func TestErrorInfoParser(t *testing.T) {
-	var errorInfo = []string{
+	var tvs = []string{
 		"Error-Info: <sip:not-in-service-recording@atlanta.com>\n",
 		"Error-Info: <sip:not-in-service-recording@atlanta.com>;param1=oli\n",
 	}
 
-	for i := 0; i < len(errorInfo); i++ {
-		shp := NewErrorInfoParser(errorInfo[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewErrorInfoParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }
 

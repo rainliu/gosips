@@ -5,7 +5,7 @@ import (
 )
 
 func TestCallIdParser(t *testing.T) {
-	var call = []string{
+	var tvs = []string{
 		"Call-ID :  f0b40bcc-3485-49e7-ad1a-f1dfad2e39c9@10.5.0.53\n",
 		"Call-ID	: 	f81d4fae-7dec-11d0-a765-00a0c91e6bf6@foo.bar.com\n",
 		"i:f81d4fae-7dec-11d0-a765-00a0c91e6bf6@foo.bar.com\n",
@@ -14,8 +14,8 @@ func TestCallIdParser(t *testing.T) {
 		"Call-Id: 281794\n",
 	}
 
-	for i := 0; i < len(call); i++ {
-		shp := NewCallIDParser(call[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewCallIDParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }

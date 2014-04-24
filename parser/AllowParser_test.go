@@ -5,14 +5,14 @@ import (
 )
 
 func TestAllowParser(t *testing.T) {
-	var allow = []string{
+	var tvs = []string{
 		"Allow		: INVITE, 		ACK,	   OPTIONS, CANCEL, BYE\n",
 		"Allow	 :	  INVITE\n",
 	}
 
-	for i := 0; i < len(allow); i++ {
-		shp := NewAllowParser(allow[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewAllowParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }
 

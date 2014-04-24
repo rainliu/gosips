@@ -5,14 +5,14 @@ import (
 )
 
 func TestAllowEventsParser(t *testing.T) {
-	var allowEvents = []string{
+	var tvs = []string{
 		"Allow-Events  : pack1.pack2, 		pack3 , pack4\n",
 		"Allow-Events			: 		pack1\n",
 	}
 
-	for i := 0; i < len(allowEvents); i++ {
-		shp := NewAllowEventsParser(allowEvents[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewAllowEventsParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }
 

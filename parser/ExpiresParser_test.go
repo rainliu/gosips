@@ -5,13 +5,13 @@ import (
 )
 
 func TestExpiresParser(t *testing.T) {
-	var expires = []string{
+	var tvs = []string{
 		"Expires: 1000\n",
 	}
 
-	for i := 0; i < len(expires); i++ {
-		shp := NewExpiresParser(expires[i])
-		testHeaderParser(t, shp)
+	for i := 0; i < len(tvs); i++ {
+		shp := NewExpiresParser(tvs[i])
+		testHeaderParser(t, shp, tvs[i])
 	}
 }
 
