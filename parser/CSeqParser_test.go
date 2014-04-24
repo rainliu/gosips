@@ -15,6 +15,6 @@ func TestCSeqParser(t *testing.T) {
 
 	for i := 0; i < len(cseq); i++ {
 		shp := NewCSeqParser(cseq[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }

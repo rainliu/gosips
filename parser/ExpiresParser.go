@@ -17,7 +17,7 @@ import (
 *
  */
 type ExpiresParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** protected constructor.
@@ -25,7 +25,7 @@ type ExpiresParser struct {
  */
 func NewExpiresParser(text string) *ExpiresParser {
 	this := &ExpiresParser{}
-	this.HeaderParserImpl.super(text)
+	this.HeaderParser.super(text)
 	return this
 }
 
@@ -34,7 +34,7 @@ func NewExpiresParser(text string) *ExpiresParser {
  */
 func NewExpiresParserFromLexer(lexer core.Lexer) *ExpiresParser {
 	this := &ExpiresParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

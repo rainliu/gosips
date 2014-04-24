@@ -16,6 +16,6 @@ func TestCallIdParser(t *testing.T) {
 
 	for i := 0; i < len(call); i++ {
 		shp := NewCallIDParser(call[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }

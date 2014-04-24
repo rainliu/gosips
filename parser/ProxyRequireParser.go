@@ -17,7 +17,7 @@ import (
 * @version 1.0
  */
 type ProxyRequireParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** Creates a new instance of ProxyRequireParser
@@ -25,7 +25,7 @@ type ProxyRequireParser struct {
  */
 func NewProxyRequireParser(require string) *ProxyRequireParser {
 	this := &ProxyRequireParser{}
-	this.HeaderParserImpl.super(require)
+	this.HeaderParser.super(require)
 	return this
 }
 
@@ -34,7 +34,7 @@ func NewProxyRequireParser(require string) *ProxyRequireParser {
  */
 func NewProxyRequireParserFromLexer(lexer core.Lexer) *ProxyRequireParser {
 	this := &ProxyRequireParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

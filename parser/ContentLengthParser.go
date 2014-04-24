@@ -15,18 +15,18 @@ import (
 *
  */
 type ContentLengthParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 func NewContentLengthParser(contentLength string) *ContentLengthParser {
 	this := &ContentLengthParser{}
-	this.HeaderParserImpl.super(contentLength)
+	this.HeaderParser.super(contentLength)
 	return this
 }
 
 func NewContentLengthParserFromLexer(lexer core.Lexer) *ContentLengthParser {
 	this := &ContentLengthParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

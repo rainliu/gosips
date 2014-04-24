@@ -11,7 +11,7 @@ func TestPriorityParser(t *testing.T) {
 
 	for i := 0; i < len(inputs); i++ {
 		shp := NewPriorityParser(inputs[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }
 

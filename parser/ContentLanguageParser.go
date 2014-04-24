@@ -17,7 +17,7 @@ import (
 * @version 1.0
  */
 type ContentLanguageParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /**
@@ -26,7 +26,7 @@ type ContentLanguageParser struct {
  */
 func NewContentLanguageParser(contentLanguage string) *ContentLanguageParser {
 	this := &ContentLanguageParser{}
-	this.HeaderParserImpl.super(contentLanguage)
+	this.HeaderParser.super(contentLanguage)
 	return this
 }
 
@@ -35,7 +35,7 @@ func NewContentLanguageParser(contentLanguage string) *ContentLanguageParser {
  */
 func NewContentLanguageParserFromLexer(lexer core.Lexer) *ContentLanguageParser {
 	this := &ContentLanguageParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

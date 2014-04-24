@@ -11,7 +11,7 @@ func TestOrganizationParser(t *testing.T) {
 
 	for i := 0; i < len(organization); i++ {
 		shp := NewOrganizationParser(organization[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }
 

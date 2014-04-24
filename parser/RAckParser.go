@@ -17,7 +17,7 @@ import (
 * @version 1.0
  */
 type RAckParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** Creates a new instance of RAckParser
@@ -25,7 +25,7 @@ type RAckParser struct {
  */
 func NewRAckParser(rack string) *RAckParser {
 	this := &RAckParser{}
-	this.HeaderParserImpl.super(rack)
+	this.HeaderParser.super(rack)
 	return this
 }
 
@@ -34,7 +34,7 @@ func NewRAckParser(rack string) *RAckParser {
  */
 func NewRAckParserFromLexer(lexer core.Lexer) *RAckParser {
 	this := &RAckParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

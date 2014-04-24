@@ -17,7 +17,7 @@ import (
 * @version 1.0
  */
 type ContentEncodingParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /**
@@ -26,7 +26,7 @@ type ContentEncodingParser struct {
  */
 func NewContentEncodingParser(contentEncoding string) *ContentEncodingParser {
 	this := &ContentEncodingParser{}
-	this.HeaderParserImpl.super(contentEncoding)
+	this.HeaderParser.super(contentEncoding)
 	return this
 }
 
@@ -35,7 +35,7 @@ func NewContentEncodingParser(contentEncoding string) *ContentEncodingParser {
  */
 func NewContentEncodingParserFromLexer(lexer core.Lexer) *ContentEncodingParser {
 	this := &ContentEncodingParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

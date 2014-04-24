@@ -1,9 +1,8 @@
 package parser
 
 import (
-    "testing"
+	"testing"
 )
-
 
 func TestAcceptParser(t *testing.T) {
 	var accept = []string{
@@ -14,6 +13,6 @@ func TestAcceptParser(t *testing.T) {
 
 	for i := 0; i < len(accept); i++ {
 		shp := NewAcceptParser(accept[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }

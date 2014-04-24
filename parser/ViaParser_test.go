@@ -29,6 +29,6 @@ func TestViaParser(t *testing.T) {
 
 	for i := 0; i < len(vias); i++ {
 		shp := NewViaParser(vias[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }

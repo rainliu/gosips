@@ -9,7 +9,7 @@ import (
 /** Parser for CALL ID header.
  */
 type CallIDParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** Creates new CallIDParser
@@ -18,13 +18,13 @@ type CallIDParser struct {
 func NewCallIDParser(callId string) *CallIDParser {
 	this := &CallIDParser{}
 
-	this.HeaderParserImpl.super(callId)
+	this.HeaderParser.super(callId)
 
 	return this
 }
 
 func (this *CallIDParser) super(callId string) {
-	this.HeaderParserImpl.super(callId)
+	this.HeaderParser.super(callId)
 }
 
 /** Constructor
@@ -33,7 +33,7 @@ func (this *CallIDParser) super(callId string) {
 func NewCallIDParserFromLexer(lexer core.Lexer) *CallIDParser {
 	this := &CallIDParser{}
 
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 
 	return this
 }

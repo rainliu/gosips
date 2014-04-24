@@ -17,7 +17,7 @@ import (
  */
 
 type ChallengeParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** Constructor
@@ -25,7 +25,7 @@ type ChallengeParser struct {
  */
 func NewChallengeParser(challenge string) *ChallengeParser {
 	this := &ChallengeParser{}
-	this.HeaderParserImpl.super(challenge)
+	this.HeaderParser.super(challenge)
 	return this
 }
 
@@ -34,16 +34,16 @@ func NewChallengeParser(challenge string) *ChallengeParser {
  */
 func NewChallengeParserFromLexer(lexer core.Lexer) *ChallengeParser {
 	this := &ChallengeParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 
 func (this *ChallengeParser) super(buffer string) {
-	this.HeaderParserImpl.super(buffer)
+	this.HeaderParser.super(buffer)
 }
 
 func (this *ChallengeParser) superFromLexer(lexer core.Lexer) {
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 }
 
 /** Get the parameter of the challenge string

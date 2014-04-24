@@ -8,7 +8,7 @@ import (
 /** Parser for Allow header.
  */
 type AllowParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /**
@@ -17,7 +17,7 @@ type AllowParser struct {
  */
 func NewAllowParser(allow string) *AllowParser {
 	this := &AllowParser{}
-	this.HeaderParserImpl.super(allow)
+	this.HeaderParser.super(allow)
 	return this
 }
 
@@ -26,7 +26,7 @@ func NewAllowParser(allow string) *AllowParser {
  */
 func NewAllowParserFromLexer(lexer core.Lexer) *AllowParser {
 	this := &AllowParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

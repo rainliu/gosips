@@ -6,54 +6,50 @@ import (
 	"strings"
 )
 
-type HeaderParser interface {
-	Parse() (sh header.SIPHeaderHeader, ParseException error)
-}
-
 /** Generic header parser class. The parsers for various headers extend this
 * class. To create a parser for a new header, extend this class and change
 * the createParser class.
  */
 
-type HeaderParserImpl struct {
-	ParserImpl
+type HeaderParser struct {
+	ParserParser
 }
 
 /** Creates new HeaderParser
  * @param String to parse.
  */
-func NewHeaderParserImpl(header string) *HeaderParserImpl {
-	this := &HeaderParserImpl{}
+func NewHeaderParser(header string) *HeaderParser {
+	this := &HeaderParser{}
 
-	this.ParserImpl.super(header)
-	this.ParserImpl.GetLexer().SetLexerName("command_keywordLexer")
-
-	return this
-}
-
-func NewHeaderParserImplFromLexer(lexer core.Lexer) *HeaderParserImpl {
-	this := &HeaderParserImpl{}
-
-	this.ParserImpl.SetLexer(lexer)
-	this.ParserImpl.GetLexer().SetLexerName("command_keywordLexer")
+	this.ParserParser.super(header)
+	this.ParserParser.GetLexer().SetLexerName("command_keywordLexer")
 
 	return this
 }
 
-func (this *HeaderParserImpl) super(header string) {
-	this.ParserImpl.super(header)
-	this.ParserImpl.GetLexer().SetLexerName("command_keywordLexer")
+func NewHeaderParserFromLexer(lexer core.Lexer) *HeaderParser {
+	this := &HeaderParser{}
+
+	this.ParserParser.SetLexer(lexer)
+	this.ParserParser.GetLexer().SetLexerName("command_keywordLexer")
+
+	return this
 }
 
-func (this *HeaderParserImpl) superFromLexer(lexer core.Lexer) {
+func (this *HeaderParser) super(header string) {
+	this.ParserParser.super(header)
+	this.ParserParser.GetLexer().SetLexerName("command_keywordLexer")
+}
+
+func (this *HeaderParser) superFromLexer(lexer core.Lexer) {
 	this.SetLexer(lexer)
-	this.ParserImpl.GetLexer().SetLexerName("command_keywordLexer")
+	this.ParserParser.GetLexer().SetLexerName("command_keywordLexer")
 }
 
 /** Parse the weekday field
  * @return an integer with the calendar content for wkday.
  */
-func (this *HeaderParserImpl) Wkday() (wk int, ParseException error) {
+func (this *HeaderParser) Wkday() (wk int, ParseException error) {
 	this.Dbg_enter("wkday")
 	defer this.Dbg_leave("wkday")
 	//try {
@@ -160,7 +156,7 @@ func (this *HeaderParserImpl) Wkday() (wk int, ParseException error) {
  * structure.
  *@throws ParseException if there was an error parsing.
  */
-func (this *HeaderParserImpl) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *HeaderParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
 	lexer := this.GetLexer()
 
 	name := lexer.GetNextTokenByDelim(':')
@@ -176,7 +172,7 @@ func (this *HeaderParserImpl) Parse() (sh header.SIPHeaderHeader, ParseException
 
 /** Parse the header name until the colon  and chew WS after that.
  */
-func (this *HeaderParserImpl) HeaderName(tok int) {
+func (this *HeaderParser) HeaderName(tok int) {
 	this.GetLexer().Match(tok)
 	this.GetLexer().SPorHT()
 	this.GetLexer().Match(':')

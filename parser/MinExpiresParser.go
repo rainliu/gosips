@@ -17,7 +17,7 @@ import (
 * @version 1.0
  */
 type MinExpiresParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** protected constructor.
@@ -25,7 +25,7 @@ type MinExpiresParser struct {
  */
 func NewMinExpiresParser(minExpires string) *MinExpiresParser {
 	this := &MinExpiresParser{}
-	this.HeaderParserImpl.super(minExpires)
+	this.HeaderParser.super(minExpires)
 	return this
 }
 
@@ -34,7 +34,7 @@ func NewMinExpiresParser(minExpires string) *MinExpiresParser {
  */
 func NewMinExpiresParserFromLexer(lexer core.Lexer) *MinExpiresParser {
 	this := &MinExpiresParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

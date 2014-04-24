@@ -17,7 +17,7 @@ import (
 * @version 1.0
  */
 type MimeVersionParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** Creates a new instance of MimeVersionParser
@@ -25,7 +25,7 @@ type MimeVersionParser struct {
  */
 func NewMimeVersionParser(mimeVersion string) *MimeVersionParser {
 	this := &MimeVersionParser{}
-	this.HeaderParserImpl.super(mimeVersion)
+	this.HeaderParser.super(mimeVersion)
 	return this
 }
 
@@ -34,7 +34,7 @@ func NewMimeVersionParser(mimeVersion string) *MimeVersionParser {
  */
 func NewMimeVersionParserFromLexer(lexer core.Lexer) *MimeVersionParser {
 	this := &MimeVersionParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

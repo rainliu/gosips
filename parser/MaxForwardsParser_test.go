@@ -13,6 +13,6 @@ func TestMaxForwardsParser(t *testing.T) {
 
 	for i := 0; i < len(maxforwards); i++ {
 		shp := NewMaxForwardsParser(maxforwards[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }

@@ -12,7 +12,7 @@ func TestInReplyToParser(t *testing.T) {
 
 	for i := 0; i < len(inReplyTo); i++ {
 		shp := NewInReplyToParser(inReplyTo[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }
 

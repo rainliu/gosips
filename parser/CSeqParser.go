@@ -8,22 +8,22 @@ import (
 /** Parser for CSeq headers.
  */
 type CSeqParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 func NewCSeqParser(cseq string) *CSeqParser {
 	this := &CSeqParser{}
-	this.HeaderParserImpl.super(cseq)
+	this.HeaderParser.super(cseq)
 	return this
 }
 
 func (this *CSeqParser) super(cseq string) {
-	this.HeaderParserImpl.super(cseq)
+	this.HeaderParser.super(cseq)
 }
 
 func NewCSeqParserFromLexer(lexer core.Lexer) *CSeqParser {
 	this := &CSeqParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

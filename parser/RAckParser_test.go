@@ -11,7 +11,7 @@ func TestRAckParser(t *testing.T) {
 
 	for i := 0; i < len(inputs); i++ {
 		shp := NewRAckParser(inputs[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }
 

@@ -11,7 +11,7 @@ func TestExpiresParser(t *testing.T) {
 
 	for i := 0; i < len(expires); i++ {
 		shp := NewExpiresParser(expires[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }
 

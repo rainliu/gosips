@@ -17,7 +17,7 @@ import (
 * @version 1.0
  */
 type RequireParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** Creates a new instance of RequireParser
@@ -25,7 +25,7 @@ type RequireParser struct {
  */
 func NewRequireParser(require string) *RequireParser {
 	this := &RequireParser{}
-	this.HeaderParserImpl.super(require)
+	this.HeaderParser.super(require)
 	return this
 }
 
@@ -34,7 +34,7 @@ func NewRequireParser(require string) *RequireParser {
  */
 func NewRequireParserFromLexer(lexer core.Lexer) *RequireParser {
 	this := &RequireParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

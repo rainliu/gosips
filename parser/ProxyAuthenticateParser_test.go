@@ -16,7 +16,7 @@ func TestProxyAuthenticateParser(t *testing.T) {
 
 	for i := 0; i < len(inputs); i++ {
 		shp := NewProxyAuthenticateParser(inputs[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }
 

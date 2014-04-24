@@ -14,7 +14,7 @@ func TestAuthorizationParser(t *testing.T) {
 
 	for i := 0; i < len(auth); i++ {
 		shp := NewAuthorizationParser(auth[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }
 

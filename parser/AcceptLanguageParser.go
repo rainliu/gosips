@@ -26,7 +26,7 @@ import (
  */
 
 type AcceptLanguageParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** Constructor
@@ -34,7 +34,7 @@ type AcceptLanguageParser struct {
  */
 func NewAcceptLanguageParser(acceptLanguage string) *AcceptLanguageParser {
 	this := &AcceptLanguageParser{}
-	this.HeaderParserImpl.super(acceptLanguage)
+	this.HeaderParser.super(acceptLanguage)
 	return this
 }
 
@@ -43,7 +43,7 @@ func NewAcceptLanguageParser(acceptLanguage string) *AcceptLanguageParser {
  */
 func NewAcceptLanguageParserFromLexer(lexer core.Lexer) *AcceptLanguageParser {
 	this := &AcceptLanguageParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

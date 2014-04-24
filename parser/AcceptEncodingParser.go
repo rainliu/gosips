@@ -32,7 +32,7 @@ import (
 *
  */
 type AcceptEncodingParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** Constructor
@@ -40,7 +40,7 @@ type AcceptEncodingParser struct {
  */
 func NewAcceptEncodingParser(acceptEncoding string) *AcceptEncodingParser {
 	this := &AcceptEncodingParser{}
-	this.HeaderParserImpl.super(acceptEncoding)
+	this.HeaderParser.super(acceptEncoding)
 	return this
 }
 
@@ -49,7 +49,7 @@ func NewAcceptEncodingParser(acceptEncoding string) *AcceptEncodingParser {
  */
 func NewAcceptEncodingParserFromLexer(lexer core.Lexer) *AcceptEncodingParser {
 	this := &AcceptEncodingParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

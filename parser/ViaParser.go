@@ -10,18 +10,18 @@ import (
 /** Parser for via headers.
  */
 type ViaParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 func NewViaParser(via string) *ViaParser {
 	this := &ViaParser{}
-	this.HeaderParserImpl.super(via)
+	this.HeaderParser.super(via)
 	return this
 }
 
 func NewViaParserFromLexer(lexer core.Lexer) *ViaParser {
 	this := &ViaParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

@@ -12,7 +12,7 @@ func TestAuthenticationInfoParser(t *testing.T) {
 
 	for i := 0; i < len(auth); i++ {
 		shp := NewAuthenticationInfoParser(auth[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }
 

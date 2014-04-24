@@ -12,7 +12,7 @@ func TestRequireParser(t *testing.T) {
 
 	for i := 0; i < len(inputs); i++ {
 		shp := NewRequireParser(inputs[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }
 

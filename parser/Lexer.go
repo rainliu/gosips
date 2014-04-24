@@ -8,19 +8,19 @@ import (
 /** Lexer class for the parser.
  */
 
-type LexerImpl struct {
+type Lexer struct {
 	core.LexerCore
 }
 
-func NewLexerImpl(lexerName, buffer string) *LexerImpl {
-	this := &LexerImpl{}
+func NewLexer(lexerName, buffer string) *Lexer {
+	this := &Lexer{}
 	this.LexerCore.Super(lexerName, buffer)
 	this.SelectLexer(lexerName)
 
 	return this
 }
 
-func (this *LexerImpl) super(lexerName, buffer string) {
+func (this *Lexer) super(lexerName, buffer string) {
 	this.LexerCore.Super(lexerName, buffer)
 	this.SelectLexer(lexerName)
 }
@@ -28,7 +28,7 @@ func (this *LexerImpl) super(lexerName, buffer string) {
 /** get the header name of the line
  *  @return String
  */
-func (this *LexerImpl) GetHeaderName(line string) string {
+func (this *Lexer) GetHeaderName(line string) string {
 	if line == "" {
 		return ""
 	}
@@ -49,7 +49,7 @@ func (this *LexerImpl) GetHeaderName(line string) string {
 /** get the header value of the line
  *  @return String
  */
-func (this *LexerImpl) GetHeaderValue(line string) string {
+func (this *Lexer) GetHeaderValue(line string) string {
 	if line == "" {
 		return ""
 	}
@@ -63,7 +63,7 @@ func (this *LexerImpl) GetHeaderValue(line string) string {
 	//}
 	return headerValue
 }
-func (this *LexerImpl) SelectLexer(lexerName string) {
+func (this *Lexer) SelectLexer(lexerName string) {
 	//this.currentLexer = this.lexerTables[lexerName];
 	this.LexerCore.SelectLexer(lexerName) //this.currentLexerName = lexerName;
 	if this.CurrentLexer() == nil {

@@ -17,7 +17,7 @@ import (
 * @version 1.0
  */
 type PriorityParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** Creates a new instance of PriorityParser
@@ -25,7 +25,7 @@ type PriorityParser struct {
  */
 func NewPriorityParser(priority string) *PriorityParser {
 	this := &PriorityParser{}
-	this.HeaderParserImpl.super(priority)
+	this.HeaderParser.super(priority)
 	return this
 }
 
@@ -34,7 +34,7 @@ func NewPriorityParser(priority string) *PriorityParser {
  */
 func NewPriorityParserFromLexer(lexer core.Lexer) *PriorityParser {
 	this := &PriorityParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

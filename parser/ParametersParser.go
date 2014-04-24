@@ -8,27 +8,27 @@ import (
 /** parameters parser header.
  */
 type ParametersParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 func NewParametersParserFromLexer(lexer core.Lexer) *ParametersParser {
 	this := &ParametersParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 
 func NewParametersParser(buffer string) *ParametersParser {
 	this := &ParametersParser{}
-	this.HeaderParserImpl.super(buffer)
+	this.HeaderParser.super(buffer)
 	return this
 }
 
 func (this *ParametersParser) super(buffer string) {
-	this.HeaderParserImpl.super(buffer)
+	this.HeaderParser.super(buffer)
 }
 
 func (this *ParametersParser) superFromLexer(lexer core.Lexer) {
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 }
 
 func (this *ParametersParser) Parse(parametersHeader header.ParametersHeader) (ParseException error) {

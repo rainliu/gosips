@@ -17,7 +17,7 @@ import (
 * @version 1.0
  */
 type InReplyToParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /** Creates a new instance of InReplyToParser
@@ -25,7 +25,7 @@ type InReplyToParser struct {
  */
 func NewInReplyToParser(inReplyTo string) *InReplyToParser {
 	this := &InReplyToParser{}
-	this.HeaderParserImpl.super(inReplyTo)
+	this.HeaderParser.super(inReplyTo)
 	return this
 }
 
@@ -34,7 +34,7 @@ func NewInReplyToParser(inReplyTo string) *InReplyToParser {
  */
 func NewInReplyToParserFromLexer(lexer core.Lexer) *InReplyToParser {
 	this := &InReplyToParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

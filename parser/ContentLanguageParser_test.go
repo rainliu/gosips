@@ -12,7 +12,7 @@ func TestContentLanguageParser(t *testing.T) {
 
 	for i := 0; i < len(contentLanguage); i++ {
 		shp := NewContentLanguageParser(contentLanguage[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }
 

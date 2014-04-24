@@ -16,7 +16,7 @@ import (
 * @version 1.0
  */
 type AllowEventsParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /**
@@ -25,7 +25,7 @@ type AllowEventsParser struct {
  */
 func NewAllowEventsParser(allowEvents string) *AllowEventsParser {
 	this := &AllowEventsParser{}
-	this.HeaderParserImpl.super(allowEvents)
+	this.HeaderParser.super(allowEvents)
 	return this
 }
 
@@ -34,7 +34,7 @@ func NewAllowEventsParser(allowEvents string) *AllowEventsParser {
  */
 func NewAllowEventsParserFromLexer(lexer core.Lexer) *AllowEventsParser {
 	this := &AllowEventsParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

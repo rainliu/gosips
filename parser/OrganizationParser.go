@@ -18,7 +18,7 @@ import (
 * @version 1.0
  */
 type OrganizationParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 /**  Creates a new instance of OrganizationParser
@@ -26,7 +26,7 @@ type OrganizationParser struct {
  */
 func NewOrganizationParser(organization string) *OrganizationParser {
 	this := &OrganizationParser{}
-	this.HeaderParserImpl.super(organization)
+	this.HeaderParser.super(organization)
 	return this
 }
 
@@ -35,7 +35,7 @@ func NewOrganizationParser(organization string) *OrganizationParser {
  */
 func NewOrganizationParserFromLexer(lexer core.Lexer) *OrganizationParser {
 	this := &OrganizationParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 

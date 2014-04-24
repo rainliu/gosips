@@ -7,23 +7,23 @@ import (
 
 /** Parser for Max Forwards Header.*/
 type MaxForwardsParser struct {
-	HeaderParserImpl
+	HeaderParser
 }
 
 func NewMaxForwardsParser(contentLength string) *MaxForwardsParser {
 	this := &MaxForwardsParser{}
-	this.HeaderParserImpl.super(contentLength)
+	this.HeaderParser.super(contentLength)
 	return this
 }
 
 func NewMaxForwardsParserFromLexer(lexer core.Lexer) *MaxForwardsParser {
 	this := &MaxForwardsParser{}
-	this.HeaderParserImpl.superFromLexer(lexer)
+	this.HeaderParser.superFromLexer(lexer)
 	return this
 }
 
 func (this *MaxForwardsParser) super(hname string) {
-	this.HeaderParserImpl.super(hname)
+	this.HeaderParser.super(hname)
 }
 
 func (this *MaxForwardsParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {

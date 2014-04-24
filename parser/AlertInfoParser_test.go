@@ -1,7 +1,7 @@
 package parser
 
 import (
-    "testing"
+	"testing"
 )
 
 func TestAlertInfoParser(t *testing.T) {
@@ -14,6 +14,6 @@ func TestAlertInfoParser(t *testing.T) {
 
 	for i := 0; i < len(alertInfo); i++ {
 		shp := NewAlertInfoParser(alertInfo[i])
-		testHeaderParser(t, shp)
+		testParser(t, shp)
 	}
 }

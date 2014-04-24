@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func testHeaderParser(t *testing.T, hp HeaderParser) {
+func testParser(t *testing.T, hp Parser) {
 	if sh, err := hp.Parse(); err != nil {
 		t.Log(err)
 		t.Fail()
