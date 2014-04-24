@@ -34,7 +34,7 @@ func (this *FromParser) Parse() (sh header.SIPHeaderHeader, ParseException error
 	this.HeaderName(TokenTypes_FROM)
 	this.AddressParametersParser.Parse(from)
 	this.GetLexer().Match('\n')
-	addr, _ := from.GetAddress().(*address.AddressImpl)
+	addr := from.GetAddress() //.(*address.AddressImpl)
 	if addr.GetAddressType() == address.ADDRESS_SPEC {
 		// the parameters are header parameters.
 		if from.GetAddress().GetURI().IsSipURI() {
