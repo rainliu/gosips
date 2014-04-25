@@ -141,6 +141,9 @@ func (this *SubscriptionState) EncodeBody() string {
 	if this.reasonCode != "" {
 		encoding.WriteString(";reason=" + this.reasonCode)
 	}
+	if this.retryAfter != -1 {
+		encoding.WriteString(";retry-after=" + strconv.Itoa(this.retryAfter))
+	}
 	if this.expires != -1 {
 		encoding.WriteString(";expires=" + strconv.Itoa(this.expires))
 	}

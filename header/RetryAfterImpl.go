@@ -54,7 +54,9 @@ func (this *RetryAfter) EncodeBody() string {
 		encoding.WriteString(strconv.Itoa(this.retryAfter))
 	}
 	if this.comment != "" {
+		encoding.WriteString(core.SIPSeparatorNames_SP + "(")
 		encoding.WriteString(this.comment)
+		encoding.WriteString(")")
 	}
 
 	if this.parameters != nil && this.parameters.Len() > 0 {

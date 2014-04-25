@@ -51,6 +51,7 @@ func (this *Warning) String() string {
  *@return the string encoding of the header value.
  */
 func (this *Warning) EncodeBody() string {
+	//print(this.code)
 	if this.text != "" {
 		return strconv.Itoa(this.code) + core.SIPSeparatorNames_SP + this.agent +
 			core.SIPSeparatorNames_SP + core.SIPSeparatorNames_DOUBLE_QUOTE + this.text + core.SIPSeparatorNames_DOUBLE_QUOTE
@@ -89,9 +90,11 @@ func (this *Warning) GetText() string {
  * @throws SipParseException if code is not accepted by implementation
  */
 func (this *Warning) SetCode(code int) { //throws InvalidArgumentException {
-	if this.code >= 300 && this.code < 400 {
+	//println(code)
+	if code >= 300 && code < 400 {
 		this.code = code
 	}
+	//println(this.code)
 	// else throw new InvalidArgumentException
 	// ("Code parameter in the Warning header is invalid: code="+code);
 }
