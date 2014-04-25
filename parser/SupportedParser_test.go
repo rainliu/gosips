@@ -5,18 +5,18 @@ import (
 )
 
 func TestSupportedParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Supported: 100rel \n",
 		"Supported: foo1, foo2 ,foo3 , foo4 \n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Supported: 100rel \n",
 		"Supported: foo1,foo2,foo3,foo4 \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewSupportedParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewSupportedParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

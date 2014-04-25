@@ -5,20 +5,20 @@ import (
 )
 
 func TestContentLengthParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"l: 345\n",
 		"Content-Length: 3495\n",
 		"Content-Length: 0 \n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Content-Length: 345\n",
 		"Content-Length: 3495\n",
 		"Content-Length: 0 \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewContentLengthParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewContentLengthParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

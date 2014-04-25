@@ -5,14 +5,14 @@ import (
 )
 
 func TestServerParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Server: Softphone/Beta1.5 \n",
 		"Server: HomeServer v2\n",
 		"Server: Nist/Beta1 (beta version) \n",
 		"Server: Nist proxy (beta version)\n",
 		"Server: Nist1.0/Beta2 UbiServer/vers.1.0 (new stuff) (Cool) \n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Server: Softphone/Beta1.5 \n",
 		"Server: HomeServer v2\n",
 		"Server: Nist/Beta1 (beta version) \n",
@@ -20,9 +20,9 @@ func TestServerParser(t *testing.T) {
 		"Server: Nist1.0/Beta2 UbiServer/vers.1.0 (new stuff) (Cool) \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewServerParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewServerParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

@@ -5,7 +5,7 @@ import (
 )
 
 func TestContactParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Contact:<sip:utente@127.0.0.1:5000;transport=udp>;expires=3600\n",
 		"Contact:BigGuy<sip:utente@127.0.0.1:5000>;expires=3600\n",
 		"Contact: sip:4855@166.35.224.216:5060\n",
@@ -21,7 +21,7 @@ func TestContactParser(t *testing.T) {
 		"Contact:*\n",
 		"Contact:BigGuy<sip:utente@127.0.0.1;5000>;Expires=3600\n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Contact: <sip:utente@127.0.0.1:5000;transport=udp>;expires=3600\n",
 		"Contact: \"BigGuy\" <sip:utente@127.0.0.1:5000>;expires=3600\n",
 		"Contact: <sip:4855@166.35.224.216:5060>\n",
@@ -38,8 +38,8 @@ func TestContactParser(t *testing.T) {
 		"Contact: \"BigGuy\" <sip:utente@127.0.0.1;5000>;Expires=3600\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewContactParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewContactParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }

@@ -5,18 +5,18 @@ import (
 )
 
 func TestUnsupportedParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Unsupported: foo \n",
 		"Unsupported: foo1, foo2 ,foo3 , foo4\n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Unsupported: foo \n",
 		"Unsupported: foo1,foo2,foo3,foo4\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewUnsupportedParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewUnsupportedParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

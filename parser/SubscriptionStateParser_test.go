@@ -5,14 +5,14 @@ import (
 )
 
 func TestSubscriptionStateParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Subscription-State: active \n",
 		"Subscription-State: terminated;reason=rejected \n",
 		"Subscription-State: pending;reason=probation;expires=36\n",
 		"Subscription-State: pending;retry-after=10;expires=36\n",
 		"Subscription-State: pending;generic=void\n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Subscription-State: active \n",
 		"Subscription-State: terminated;reason=rejected \n",
 		"Subscription-State: pending;reason=probation;expires=36\n",
@@ -20,9 +20,9 @@ func TestSubscriptionStateParser(t *testing.T) {
 		"Subscription-State: pending;generic=void\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewSubscriptionStateParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewSubscriptionStateParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

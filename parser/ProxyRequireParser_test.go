@@ -5,14 +5,18 @@ import (
 )
 
 func TestProxyRequireParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Proxy-Require: foo \n",
+		"Proxy-Require: foo1,foo2,389\n",
+	}
+	var tvo = []string{
 		"Proxy-Require: foo \n",
 		"Proxy-Require: foo1,foo2,389\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewProxyRequireParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewProxyRequireParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

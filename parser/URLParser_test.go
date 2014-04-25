@@ -6,7 +6,7 @@ import (
 )
 
 func TestURLParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"sip:conference=1234@sip.convedia.com;xyz=pqd",
 		"sip:herbivore.ncsl.nist.gov:5070;maddr=129.6.55.251;lc",
 		"sip:1-301-975-3664@foo.bar.com;user=phone",
@@ -24,16 +24,17 @@ func TestURLParser(t *testing.T) {
 		"sip:annc@10.10.30.186:6666;early=no;play=http://10.10.30.186:8080/examples/pin.vxml",
 		"tel:+463-1701-4291",
 		"tel:46317014291",
-		"http://10.10.30.186:8080/examples/pin.vxml"}
+		"http://10.10.30.186:8080/examples/pin.vxml",
+	}
 
-	for i := 0; i < len(tvs); i++ {
-		hp := NewURLParser(tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		hp := NewURLParser(tvi[i])
 		if sh, err := hp.Parse(); err != nil {
 			t.Log(err)
 			t.Fail()
 		} else {
 			d := sh.String()
-			if d != tvs[i] {
+			if d != tvi[i] {
 				t.Log("failed" + strconv.Itoa(i) + " = " + d)
 				t.Fail()
 			} else {

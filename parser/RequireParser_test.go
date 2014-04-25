@@ -5,14 +5,18 @@ import (
 )
 
 func TestRequireParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Require: 100rel \n",
+		"Require: 100rel,200ok,389\n",
+	}
+	var tvo = []string{
 		"Require: 100rel \n",
 		"Require: 100rel,200ok,389\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewRequireParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewRequireParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

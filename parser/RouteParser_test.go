@@ -5,20 +5,20 @@ import (
 )
 
 func TestRouteParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Route: <sip:alice@atlanta.com>\n",
 		"Route: sip:bob@biloxi.com \n",
 		"Route: sip:alice@atlanta.com, sip:bob@biloxi.com, sip:carol@chicago.com\n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Route: <sip:alice@atlanta.com>\n",
 		"Route: sip:bob@biloxi.com\n",
 		"Route: sip:alice@atlanta.com,sip:bob@biloxi.com,sip:carol@chicago.com\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewRouteParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewRouteParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

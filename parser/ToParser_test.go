@@ -5,14 +5,14 @@ import (
 )
 
 func TestToParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"To: <sip:+1-650-555-2222@ss1.wcom.com;user=phone>;tag=5617\n",
 		"To: T. A. Watson <sip:watson@bell-telephone.com>\n",
 		"To: LittleGuy <sip:UserB@there.com>\n",
 		"To: sip:mranga@120.6.55.9\n",
 		"To: sip:mranga@129.6.55.9 ; tag=696928473514.129.6.55.9\n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"To: <sip:+1-650-555-2222@ss1.wcom.com;user=phone>;tag=5617\n",
 		"To: \"T. A. Watson\" <sip:watson@bell-telephone.com>\n",
 		"To: \"LittleGuy\" <sip:UserB@there.com>\n",
@@ -20,8 +20,8 @@ func TestToParser(t *testing.T) {
 		"To: <sip:mranga@129.6.55.9>;tag=696928473514.129.6.55.9\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewToParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewToParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }

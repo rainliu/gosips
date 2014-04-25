@@ -5,14 +5,18 @@ import (
 )
 
 func TestContentDispositionParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Content-Disposition: session\n",
+		"Content-Disposition: render;handling=hand;optional=opt\n",
+	}
+	var tvo = []string{
 		"Content-Disposition: session\n",
 		"Content-Disposition: render;handling=hand;optional=opt\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewContentDispositionParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewContentDispositionParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

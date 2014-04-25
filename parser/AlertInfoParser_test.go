@@ -5,12 +5,15 @@ import (
 )
 
 func TestAlertInfoParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Alert-Info: <http://www.example.com/sounds/moo.wav>\n",
+	}
+	var tvo = []string{
 		"Alert-Info: <http://www.example.com/sounds/moo.wav>\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewAlertInfoParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewAlertInfoParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }

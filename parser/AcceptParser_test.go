@@ -5,12 +5,15 @@ import (
 )
 
 func TestAcceptParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Accept: application/sdp;level=1,application/x-private,text/html\n",
+	}
+	var tvo = []string{
 		"Accept: application/sdp;level=1,application/x-private,text/html\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewAcceptParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewAcceptParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }

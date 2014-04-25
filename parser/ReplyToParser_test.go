@@ -5,16 +5,16 @@ import (
 )
 
 func TestReplyToParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Reply-To: Bob <sip:bob@biloxi.com>\n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Reply-To: \"Bob\" <sip:bob@biloxi.com>\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewReplyToParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewReplyToParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

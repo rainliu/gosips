@@ -5,13 +5,16 @@ import (
 )
 
 func TestPriorityParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Priority: emergency\n",
+	}
+	var tvo = []string{
 		"Priority: emergency\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewPriorityParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewPriorityParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

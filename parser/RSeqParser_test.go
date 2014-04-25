@@ -5,16 +5,16 @@ import (
 )
 
 func TestRSeqParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"RSeq: 988789 \n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"RSeq: 988789 \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewRSeqParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewRSeqParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

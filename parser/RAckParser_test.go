@@ -5,13 +5,16 @@ import (
 )
 
 func TestRAckParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"RAck: 776656 1 INVITE\n",
+	}
+	var tvo = []string{
 		"RAck: 776656 1 INVITE\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewRAckParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewRAckParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

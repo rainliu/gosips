@@ -5,22 +5,22 @@ import (
 )
 
 func TestUserAgentParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"User-Agent: Softphone/Beta1.5 \n",
 		"User-Agent: Nist/Beta1 (beta version) \n",
 		"User-Agent: Nist UA (beta version)\n",
 		"User-Agent: Nist1.0/Beta2 Ubi/vers.1.0 (very cool) \n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"User-Agent: Softphone/Beta1.5 \n",
 		"User-Agent: Nist/Beta1 (beta version) \n",
 		"User-Agent: Nist UA (beta version)\n",
 		"User-Agent: Nist1.0/Beta2 Ubi/vers.1.0 (very cool) \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewUserAgentParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewUserAgentParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

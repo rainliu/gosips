@@ -5,7 +5,7 @@ import (
 )
 
 func TestRecordRouteParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Record-Route: <sip:bob@biloxi.com;maddr=10.1.1.1>," +
 			"<sip:bob@biloxi.com;maddr=10.2.1.1>\n",
 		"Record-Route: <sip:UserB@there.com;maddr=ss2.wcom.com>\n",
@@ -14,7 +14,7 @@ func TestRecordRouteParser(t *testing.T) {
 		"Record-Route: <sip:UserB@there.com;maddr=ss2.wcom.com>," +
 			"<sip:UserB@there.com;maddr=ss1.wcom.com>\n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Record-Route: <sip:bob@biloxi.com;maddr=10.1.1.1>," +
 			"<sip:bob@biloxi.com;maddr=10.2.1.1>\n",
 		"Record-Route: <sip:UserB@there.com;maddr=ss2.wcom.com>\n",
@@ -24,9 +24,9 @@ func TestRecordRouteParser(t *testing.T) {
 			"<sip:UserB@there.com;maddr=ss1.wcom.com>\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewRecordRouteParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewRecordRouteParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

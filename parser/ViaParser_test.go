@@ -5,7 +5,7 @@ import (
 )
 
 func TestViaParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Via: SIP/2.0/UDP 135.180.130.133\n",
 		"Via: SIP/2.0/UDP 166.34.120.100;branch=0000045d-00000001" +
 			",SIP/2.0/UDP 166.35.224.216:5000\n",
@@ -26,7 +26,7 @@ func TestViaParser(t *testing.T) {
 		"Via: SIP/2.0/UDP first.example.com:4000;ttl=16" +
 			";maddr=224.2.0.1 ;branch=a7c6a8dlze.1 (Acme server)\n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Via: SIP/2.0/UDP 135.180.130.133:5060\n",
 		"Via: SIP/2.0/UDP 166.34.120.100:5060;branch=0000045d-00000001" +
 			",SIP/2.0/UDP 166.35.224.216:5000\n",
@@ -48,8 +48,8 @@ func TestViaParser(t *testing.T) {
 			";maddr=224.2.0.1;branch=a7c6a8dlze.1\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewViaParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewViaParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }

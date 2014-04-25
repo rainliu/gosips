@@ -5,18 +5,18 @@ import (
 )
 
 func TestSubjectParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Subject: Where is the Moscone?\n",
 		"Subject: Need more boxes\n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Subject: Where is the Moscone?\n",
 		"Subject: Need more boxes\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewSubjectParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewSubjectParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

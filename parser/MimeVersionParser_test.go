@@ -5,13 +5,16 @@ import (
 )
 
 func TestMimeVersionParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"MIME-Version: 1.0 \n",
+	}
+	var tvo = []string{
 		"MIME-Version: 1.0 \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewMimeVersionParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewMimeVersionParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

@@ -5,7 +5,7 @@ import (
 )
 
 func TestReasonParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Reason: SIP ;cause=200 ;text=\"Call completed elsewhere\"\n",
 		"Reason: Q.850 ;cause=16 ;text=\"Terminated\"\n",
 		"Reason: SIP ;cause=600 ;text=\"Busy Everywhere\"\n",
@@ -13,7 +13,7 @@ func TestReasonParser(t *testing.T) {
 			"SIP ;cause=530 ;text=\"Pre Failure\"\n",
 		"Reason: SIP \n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Reason: SIP;cause=200;text=\"Call completed elsewhere\"\n",
 		"Reason: Q.850;cause=16;text=\"Terminated\"\n",
 		"Reason: SIP;cause=600;text=\"Busy Everywhere\"\n",
@@ -22,9 +22,9 @@ func TestReasonParser(t *testing.T) {
 		"Reason: SIP \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewReasonParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewReasonParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

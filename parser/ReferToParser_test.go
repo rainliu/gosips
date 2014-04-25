@@ -5,14 +5,14 @@ import (
 )
 
 func TestReferToParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Refer-To: <sip:+1-650-555-2222@ss1.wcom.com;user=phone>;tag=5617\n",
 		"Refer-To: T. A. Watson <sip:watson@bell-telephone.com>\n",
 		"Refer-To: LittleGuy <sip:UserB@there.com>\n",
 		"Refer-To: sip:mranga@120.6.55.9\n",
 		"Refer-To: sip:mranga@129.6.55.9 ; tag=696928473514.129.6.55.9\n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Refer-To: <sip:+1-650-555-2222@ss1.wcom.com;user=phone>;tag=5617\n",
 		"Refer-To: \"T. A. Watson\" <sip:watson@bell-telephone.com>\n",
 		"Refer-To: \"LittleGuy\" <sip:UserB@there.com>\n",
@@ -20,9 +20,9 @@ func TestReferToParser(t *testing.T) {
 		"Refer-To: <sip:mranga@129.6.55.9>;tag=696928473514.129.6.55.9\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewReferToParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewReferToParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

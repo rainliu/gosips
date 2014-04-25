@@ -5,14 +5,18 @@ import (
 )
 
 func TestInReplyToParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"In-Reply-To: 70710@saturn.bell-tel.com,17320@saturn.bell-tel.com\n",
+		"In-Reply-To: 70710 \n",
+	}
+	var tvo = []string{
 		"In-Reply-To: 70710@saturn.bell-tel.com,17320@saturn.bell-tel.com\n",
 		"In-Reply-To: 70710 \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewInReplyToParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewInReplyToParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

@@ -5,7 +5,14 @@ import (
 )
 
 func TestCSeqParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"CSeq: 17 INVITE\n",
+		"CSeq: 17 ACK\n",
+		"CSeq: 18 BYE\n",
+		"CSeq: 1 CANCEL\n",
+		"CSeq: 3 BYE\n",
+	}
+	var tvo = []string{
 		"CSeq: 17 INVITE\n",
 		"CSeq: 17 ACK\n",
 		"CSeq: 18 BYE\n",
@@ -13,8 +20,8 @@ func TestCSeqParser(t *testing.T) {
 		"CSeq: 3 BYE\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewCSeqParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewCSeqParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }

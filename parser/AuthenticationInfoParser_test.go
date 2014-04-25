@@ -5,14 +5,18 @@ import (
 )
 
 func TestAuthenticationInfoParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Authentication-Info: nextnonce=\"47364c23432d2e131a5fb210812c\"\n",
+		"Authentication-Info: nextnonce=\"47364c23432d2e131a5fb210812c\",rspauth=\"hello\"\n",
+	}
+	var tvo = []string{
 		"Authentication-Info: nextnonce=\"47364c23432d2e131a5fb210812c\"\n",
 		"Authentication-Info: nextnonce=\"47364c23432d2e131a5fb210812c\",rspauth=\"hello\"\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewAuthenticationInfoParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewAuthenticationInfoParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

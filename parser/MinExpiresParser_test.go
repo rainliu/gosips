@@ -5,13 +5,16 @@ import (
 )
 
 func TestMinExpiresParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Min-Expires: 60 \n",
+	}
+	var tvo = []string{
 		"Min-Expires: 60 \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewMinExpiresParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewMinExpiresParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

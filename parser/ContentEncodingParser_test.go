@@ -5,14 +5,18 @@ import (
 )
 
 func TestContentEncodingParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Content-Encoding: gzip \n",
+		"Content-Encoding: gzip,tar \n",
+	}
+	var tvo = []string{
 		"Content-Encoding: gzip \n",
 		"Content-Encoding: gzip,tar \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewContentEncodingParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewContentEncodingParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

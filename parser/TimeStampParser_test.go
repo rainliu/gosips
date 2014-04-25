@@ -5,18 +5,18 @@ import (
 )
 
 func TestTimeStampParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
 		"Timestamp: 54 \n",
 		"Timestamp: 52.34 34.5 \n",
 	}
-	var tvs_o = []string{
+	var tvo = []string{
 		"Timestamp: 54 \n",
 		"Timestamp: 52.34 34.5 \n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewTimeStampParser(tvs[i])
-		testHeaderParser(t, shp, tvs_o[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewTimeStampParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

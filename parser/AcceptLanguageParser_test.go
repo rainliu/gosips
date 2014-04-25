@@ -5,15 +5,20 @@ import (
 )
 
 func TestAcceptLanguageParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Accept-Language: da    \n",
+		"Accept-Language: 	\n",
+		"Accept-Language: da,en-gb;q=0.8\n",
+		"Accept-Language: *		\n"}
+	var tvo = []string{
 		"Accept-Language: da    \n",
 		"Accept-Language: 	\n",
 		"Accept-Language: da,en-gb;q=0.8\n",
 		"Accept-Language: *		\n"}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewAcceptLanguageParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewAcceptLanguageParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 

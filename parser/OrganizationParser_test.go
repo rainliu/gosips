@@ -5,13 +5,16 @@ import (
 )
 
 func TestOrganizationParser(t *testing.T) {
-	var tvs = []string{
+	var tvi = []string{
+		"Organization: Boxes by Bob\n",
+	}
+	var tvo = []string{
 		"Organization: Boxes by Bob\n",
 	}
 
-	for i := 0; i < len(tvs); i++ {
-		shp := NewOrganizationParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+	for i := 0; i < len(tvi); i++ {
+		shp := NewOrganizationParser(tvi[i])
+		testHeaderParser(t, shp, tvo[i])
 	}
 }
 
