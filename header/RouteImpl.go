@@ -83,12 +83,12 @@ func (this *Route) String() string {
  */
 func (this *Route) EncodeBody() string {
 	var encoding bytes.Buffer //  = new StringBuffer();
-	//addr, _ := this.addr.(*address.AddressImpl)
-	if this.addr.GetAddressType() == address.NAME_ADDR {
+	addr, _ := this.addr.(*address.AddressImpl)
+	if addr.GetAddressType() == address.NAME_ADDR {
 		encoding.WriteString(core.SIPSeparatorNames_LESS_THAN)
 	}
 	encoding.WriteString(this.addr.String())
-	if this.addr.GetAddressType() == address.NAME_ADDR {
+	if addr.GetAddressType() == address.NAME_ADDR {
 		encoding.WriteString(core.SIPSeparatorNames_GREATER_THAN)
 	}
 

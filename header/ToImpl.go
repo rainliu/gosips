@@ -77,12 +77,12 @@ func (this *To) EncodeBody() string {
 		return ""
 	}
 	var retval bytes.Buffer
-	//addr,_:=this.addr.(*address.AddressImpl);
-	if this.addr.GetAddressType() == address.ADDRESS_SPEC {
+	addr, _ := this.addr.(*address.AddressImpl)
+	if addr.GetAddressType() == address.ADDRESS_SPEC {
 		retval.WriteString(core.SIPSeparatorNames_LESS_THAN)
 	}
 	retval.WriteString(this.addr.String())
-	if this.addr.GetAddressType() == address.ADDRESS_SPEC {
+	if addr.GetAddressType() == address.ADDRESS_SPEC {
 		retval.WriteString(core.SIPSeparatorNames_GREATER_THAN)
 	}
 

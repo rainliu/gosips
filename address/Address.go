@@ -7,8 +7,6 @@
  */
 package address
 
-import "gosip/core"
-
 /**
  * This interface represents a user's display name and URI address. The display
  * name of an address is optional but if included can be displayed to an end-user.
@@ -89,17 +87,4 @@ type Address interface { // extends Cloneable, Serializable{
 	 * @return true if this address is a wildcard, false otherwise.
 	 */
 	IsWildcard() bool
-
-	GetAddressType() int
-
-	/**
-	 * Set the address type. The address can be NAME_ADDR, ADDR_SPEC or
-	 * WILD_CARD
-	 *
-	 * @param atype int to set
-	 *
-	 */
-	SetAddressType(t int)
-
-	GetHostPort() (hp *core.HostPort, RuntimeException error)
 }

@@ -66,9 +66,9 @@ func (this *Contact) EncodeBody() string {
 		encoding.WriteString("*")
 		return encoding.String()
 	}
-	//addr,_:=this.addr.(*address.AddressImpl);
+	addr, _ := this.addr.(*address.AddressImpl)
 	// Bug report by Joao Paulo
-	if this.addr.GetAddressType() == address.NAME_ADDR {
+	if addr.GetAddressType() == address.NAME_ADDR {
 		encoding.WriteString(this.addr.String())
 	} else {
 		// Encoding in canonical form must have <> around address.
