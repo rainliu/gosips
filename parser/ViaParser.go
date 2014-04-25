@@ -29,6 +29,7 @@ func NewViaParserFromLexer(lexer core.Lexer) *ViaParser {
  */
 func (this *ViaParser) ParseVia(v *header.Via) (ParseException error) {
 	lexer := this.GetLexer()
+
 	// The protocol
 	lexer.Match(TokenTypes_ID)
 	protocolName := lexer.GetNextToken()
@@ -68,8 +69,8 @@ func (this *ViaParser) ParseVia(v *header.Via) (ParseException error) {
 
 	var la byte
 	// parameters
-	la, _ = lexer.LookAheadK(0)
-	for la == ';' {
+
+	for la, _ = lexer.LookAheadK(0); la == ';'; la, _ = lexer.LookAheadK(0) {
 		lexer.Match(';')
 		lexer.SPorHT()
 		nameValue, _ := this.NameValue()
@@ -134,7 +135,7 @@ func (this *ViaParser) NameValue() (nv *core.NameValue, ParseException error) {
 		lexer.ConsumeK(1)
 		lexer.SPorHT()
 		var str string
-		if strings.ToLower(name.GetTokenValue()) != core.SIPParameters_RECEIVED { //bug?
+		if strings.ToLower(name.GetTokenValue()) == core.SIPParameters_RECEIVED {
 			// Allow for IPV6 Addresses.
 			// these could have : in them!
 			str = lexer.ByteStringNoSemicolon()
@@ -182,6 +183,8 @@ func (this *ViaParser) Parse() (sh header.SIPHeaderHeader, ParseException error)
 		v := header.NewVia()
 		this.ParseVia(v)
 		viaList.PushBack(v)
+		//println(lexer.GetRest())
+		//println(v.String())
 		lexer.SPorHT() // eat whitespace.
 		if la, _ := lexer.LookAheadK(0); la == ',' {
 			lexer.ConsumeK(1) // Consume the comma

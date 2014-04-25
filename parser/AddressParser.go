@@ -52,7 +52,7 @@ func (this *AddressParser) NameAddr() (addr *address.AddressImpl, ParseException
 
 	if ch, _ = lexer.LookAheadK(0); ch == '<' {
 		lexer.Match('<')
-		//lexer.SelectLexer("sip_urlLexer")
+		lexer.SelectLexer("sip_urlLexer")
 		lexer.SPorHT()
 		uriParser := NewURLParserFromLexer(lexer)
 		uri, _ := uriParser.UriReference()
