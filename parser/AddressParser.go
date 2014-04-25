@@ -48,11 +48,11 @@ func (this *AddressParser) NameAddr() (addr *address.AddressImpl, ParseException
 	//var err error;
 	lexer := this.GetLexer()
 
-	//println("AddressParser::NameAddr():"+lexer.GetRest());
+	//println("AddressParser::NameAddr():" + lexer.GetRest())
 
 	if ch, _ = lexer.LookAheadK(0); ch == '<' {
 		lexer.Match('<')
-		lexer.SelectLexer("sip_urlLexer")
+		//lexer.SelectLexer("sip_urlLexer")
 		lexer.SPorHT()
 		uriParser := NewURLParserFromLexer(lexer)
 		uri, _ := uriParser.UriReference()
@@ -77,7 +77,6 @@ func (this *AddressParser) NameAddr() (addr *address.AddressImpl, ParseException
 		lexer.SPorHT()
 		uriParser := NewURLParserFromLexer(lexer)
 		uri, _ := uriParser.UriReference()
-		addr = address.NewAddressImpl()
 		addr.SetAddressType(address.NAME_ADDR)
 		addr.SetURI(uri)
 		lexer.SPorHT()
@@ -98,7 +97,7 @@ func (this *AddressParser) Address() (retval *address.AddressImpl, ParseExceptio
 	//var err error
 	lexer := this.GetLexer()
 	k := 0
-	//println(lexer.GetRest());
+	//println(lexer.GetRest())
 	for lexer.HasMoreChars() {
 		if ch, _ = lexer.LookAheadK(k); ch == '<' ||
 			ch == '"' ||
@@ -111,6 +110,7 @@ func (this *AddressParser) Address() (retval *address.AddressImpl, ParseExceptio
 			k++
 		}
 	}
+	//println(lexer.GetRest())
 	if ch, _ = lexer.LookAheadK(k); ch == '<' ||
 		ch == '"' {
 		retval, _ = this.NameAddr()

@@ -14,8 +14,8 @@ func TestReferToParser(t *testing.T) {
 	}
 	var tvs_o = []string{
 		"Refer-To: <sip:+1-650-555-2222@ss1.wcom.com;user=phone>;tag=5617\n",
-		"Refer-To: T. A. Watson <sip:watson@bell-telephone.com>\n",
-		"Refer-To: LittleGuy <sip:UserB@there.com>\n",
+		"Refer-To: \"T. A. Watson\" <sip:watson@bell-telephone.com>\n",
+		"Refer-To: \"LittleGuy\" <sip:UserB@there.com>\n",
 		"Refer-To: <sip:mranga@120.6.55.9>\n",
 		"Refer-To: <sip:mranga@129.6.55.9>;tag=696928473514.129.6.55.9\n",
 	}

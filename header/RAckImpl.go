@@ -42,7 +42,7 @@ func (this *RAck) String() string {
  * A.K.A headerValue.
  */
 func (this *RAck) EncodeBody() string {
-	return strconv.Itoa(this.cSeqNumber) + core.SIPSeparatorNames_SP + strconv.Itoa(this.rSeqNumber) +
+	return strconv.Itoa(this.rSeqNumber) + core.SIPSeparatorNames_SP + strconv.Itoa(this.cSeqNumber) +
 		core.SIPSeparatorNames_SP + this.method
 
 }

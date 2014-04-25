@@ -74,8 +74,8 @@ func (this *ViaParser) ParseVia(v *header.Via) (ParseException error) {
 		lexer.SPorHT()
 		nameValue, _ := this.NameValue()
 		name := nameValue.GetName()
-		nameValue.SetName(strings.ToLower(name))
-		v.SetParameter(nameValue.GetName(), nameValue.GetValue().(string))
+		value := nameValue.GetValue().(string)
+		v.SetParameter(strings.ToLower(name), strings.TrimSpace(value))
 		lexer.SPorHT()
 		la, _ = lexer.LookAheadK(0)
 	}

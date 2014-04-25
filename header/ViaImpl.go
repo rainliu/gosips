@@ -394,8 +394,9 @@ func (this *Via) SetMAddr(mAddr string) (ParseException error) {
 	if mAddr == "" {
 		errors.New("NullPointerException: GoSIP Exception, Via, setMAddr(), the mAddr parameter is null.")
 	}
-	host := core.NewHost("")
-	host.SetAddress(mAddr)
+	host := core.NewHost(mAddr)
+	//host.SetAddress(mAddr)
+	//println(host.String())
 	this.SetParameter(ParameterNames_MADDR, host.String())
 	return nil
 }

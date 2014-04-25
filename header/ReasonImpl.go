@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"gosip/core"
 	"strconv"
+	"strings"
 )
 
 /**
@@ -115,4 +116,26 @@ func (this *Reason) EncodeBody() string {
 		encoding.WriteString(this.parameters.String())
 	}
 	return encoding.String()
+}
+
+func (this *Reason) SetParameter(name, value string) error {
+	//throws ParseException {
+	//if (name == null) throw new NullPointerException("null name");
+	nv := this.parameters.GetNameValue(strings.ToLower(name))
+	if nv == nil {
+		nv = core.NewNameValue(name, value)
+		if strings.ToLower(name) == (ParameterNames_TEXT) {
+			// if (value ==
+			//     throw new NullPointerException("null value");
+			// if (value.startsWith(Separators.DOUBLE_QUOTE))
+			//     throw new ParseException
+			//     (value + " : Unexpected DOUBLE_QUOTE",0);
+			nv.SetQuotedValue()
+		}
+		this.parameters.SetNameValue(nv)
+	} else {
+		nv.SetValue(value)
+	}
+
+	return nil
 }

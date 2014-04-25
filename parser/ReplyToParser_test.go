@@ -9,7 +9,7 @@ func TestReplyToParser(t *testing.T) {
 		"Reply-To: Bob <sip:bob@biloxi.com>\n",
 	}
 	var tvs_o = []string{
-		"Reply-To: Bob <sip:bob@biloxi.com>\n",
+		"Reply-To: \"Bob\" <sip:bob@biloxi.com>\n",
 	}
 
 	for i := 0; i < len(tvs); i++ {
