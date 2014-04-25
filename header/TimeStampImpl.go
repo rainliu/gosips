@@ -63,8 +63,7 @@ func (this *TimeStamp) EncodeBody() string {
 	//    return new Float(timeStamp).toString()+ SP+ new Float(delay).toString();
 	//  else  return new Float(timeStamp).toString();
 	if this.delay != -1 {
-		return strconv.FormatFloat(float64(this.timeStamp), 'f', -1, 32) + core.SIPSeparatorNames_SP +
-			strconv.FormatFloat(float64(this.delay), 'f', -1, 32)
+		return strconv.FormatFloat(float64(this.timeStamp), 'f', -1, 32) + core.SIPSeparatorNames_SP + strconv.FormatFloat(float64(this.delay), 'f', -1, 32)
 	} else {
 		return strconv.FormatFloat(float64(this.timeStamp), 'f', -1, 32)
 	}

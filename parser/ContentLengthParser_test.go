@@ -10,10 +10,15 @@ func TestContentLengthParser(t *testing.T) {
 		"Content-Length: 3495\n",
 		"Content-Length: 0 \n",
 	}
+	var tvs_o = []string{
+		"Content-Length: 345\n",
+		"Content-Length: 3495\n",
+		"Content-Length: 0 \n",
+	}
 
 	for i := 0; i < len(tvs); i++ {
 		shp := NewContentLengthParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+		testHeaderParser(t, shp, tvs_o[i])
 	}
 }
 

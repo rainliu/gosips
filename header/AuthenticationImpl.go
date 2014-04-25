@@ -82,6 +82,7 @@ func (this *Authentication) SetParameter(name, value string) error {
 			strings.ToLower(name) == (ParameterNames_OPAQUE) ||
 			strings.ToLower(name) == (ParameterNames_NEXT_NONCE) ||
 			strings.ToLower(name) == (ParameterNames_URI) ||
+			strings.ToLower(name) == (ParameterNames_ALGORITHM) ||
 			strings.ToLower(name) == (ParameterNames_RESPONSE) {
 			// if (value ==
 			//     throw new NullPointerException("null value");

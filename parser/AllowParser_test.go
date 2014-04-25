@@ -6,8 +6,8 @@ import (
 
 func TestAllowParser(t *testing.T) {
 	var tvs = []string{
-		"Allow		: INVITE, 		ACK,	   OPTIONS, CANCEL, BYE\n",
-		"Allow	 :	  INVITE\n",
+		"Allow: INVITE,ACK,OPTIONS,CANCEL,BYE\n",
+		"Allow: INVITE\n",
 	}
 
 	for i := 0; i < len(tvs); i++ {

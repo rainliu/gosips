@@ -47,7 +47,6 @@ func (this *AcceptLanguage) String() string {
 func (this *AcceptLanguage) EncodeBody() string {
 	var encoding bytes.Buffer //  = new StringBuffer();
 	if this.languageRange != "" {
-		encoding.WriteString(core.SIPSeparatorNames_SP)
 		encoding.WriteString(this.languageRange)
 	}
 	if this.parameters.Len() > 0 {

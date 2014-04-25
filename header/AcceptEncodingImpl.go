@@ -1,9 +1,9 @@
 package header
 
 import (
-	"gosip/core"
 	"bytes"
 	"errors"
+	"gosip/core"
 	"strconv"
 )
 
@@ -58,7 +58,7 @@ func (this *AcceptEncoding) String() string {
 /** Encode the value of this header.
 *@return the value of this header encoded into a string.
  */
-func (this *AcceptEncoding) EncodeBody() string{
+func (this *AcceptEncoding) EncodeBody() string {
 	var encoding bytes.Buffer //= new StringBuffer();
 	if this.contentCoding != "" {
 		encoding.WriteString(this.contentCoding)
@@ -94,7 +94,7 @@ func (this *AcceptEncoding) SetQValue(q float32) (InvalidArgumentException error
 	if q < 0.0 || q > 1.0 {
 		return errors.New("qvalue out of range!")
 	}
-	this.Parameters.SetParameter("q", strconv.FormatFloat(float64(q), 'f', -1, 32));
+	this.Parameters.SetParameter("q", strconv.FormatFloat(float64(q), 'f', -1, 32))
 	return nil
 }
 

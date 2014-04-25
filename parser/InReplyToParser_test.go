@@ -6,7 +6,7 @@ import (
 
 func TestInReplyToParser(t *testing.T) {
 	var tvs = []string{
-		"In-Reply-To: 70710@saturn.bell-tel.com, 17320@saturn.bell-tel.com\n",
+		"In-Reply-To: 70710@saturn.bell-tel.com,17320@saturn.bell-tel.com\n",
 		"In-Reply-To: 70710 \n",
 	}
 

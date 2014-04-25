@@ -6,10 +6,10 @@ import (
 
 func TestAcceptLanguageParser(t *testing.T) {
 	var tvs = []string{
-		"Accept-Language	: da    \n",
-		"Accept-Language	 : 	\n",
-		"Accept-Language  : da, en-gb;q=0.8\n",
-		"Accept-Language : *		\n"}
+		"Accept-Language: da    \n",
+		"Accept-Language: 	\n",
+		"Accept-Language: da,en-gb;q=0.8\n",
+		"Accept-Language: *		\n"}
 
 	for i := 0; i < len(tvs); i++ {
 		shp := NewAcceptLanguageParser(tvs[i])

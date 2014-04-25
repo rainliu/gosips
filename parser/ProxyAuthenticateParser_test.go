@@ -13,10 +13,18 @@ func TestProxyAuthenticateParser(t *testing.T) {
 		"Proxy-Authenticate: Digest realm=\"MCI WorldCom SIP\"," +
 			"qop=\"auth\" , nonce-value=\"oli\"\n",
 	}
+	var tvs_o = []string{
+		"Proxy-Authenticate: Digest realm=\"MCI WorldCom SIP\"," +
+			"domain=\"sip:ss2.wcom.com\",nonce=\"ea9c8e88df84f1cec4341ae6cbe5a359\"," +
+			"opaque=\"\",stale=FALSE,algorithm=\"MD5\"\n",
+
+		"Proxy-Authenticate: Digest realm=\"MCI WorldCom SIP\"," +
+			"qop=\"auth\",nonce-value=oli\n",
+	}
 
 	for i := 0; i < len(tvs); i++ {
 		shp := NewProxyAuthenticateParser(tvs[i])
-		testHeaderParser(t, shp, tvs[i])
+		testHeaderParser(t, shp, tvs_o[i])
 	}
 }
 

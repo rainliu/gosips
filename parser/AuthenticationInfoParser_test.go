@@ -7,7 +7,7 @@ import (
 func TestAuthenticationInfoParser(t *testing.T) {
 	var tvs = []string{
 		"Authentication-Info: nextnonce=\"47364c23432d2e131a5fb210812c\"\n",
-		"Authentication-Info  :   nextnonce   =     \"47364c23432d2e131a5fb210812c\"  ,       rspauth=\"hello\"\n",
+		"Authentication-Info: nextnonce=\"47364c23432d2e131a5fb210812c\",rspauth=\"hello\"\n",
 	}
 
 	for i := 0; i < len(tvs); i++ {

@@ -7,8 +7,8 @@ import (
 func TestEventParser(t *testing.T) {
 	var tvs = []string{
 		"Event: presence\n",
-		"Event: foo; param=abcd; id=1234\n",
-		"Event: foo.foo1; param=abcd; id=1234\n",
+		"Event: foo;param=abcd;id=1234\n",
+		"Event: foo.foo1;param=abcd;id=1234\n",
 	}
 
 	for i := 0; i < len(tvs); i++ {

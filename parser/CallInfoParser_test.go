@@ -6,9 +6,9 @@ import (
 
 func TestCallInfoParser(t *testing.T) {
 	var tvs = []string{
-		"Call-Info		: 	<http://wwww.example.com/alice/photo.jpg> ;purpose=icon," +
-			"<http://www.example.com/alice/> ;purpose=info\n",
-		"Call-Info		 :  <http://wwww.example.com/alice/photo1.jpg>\n",
+		"Call-Info: <http://wwww.example.com/alice/photo.jpg>;purpose=icon," +
+			"<http://www.example.com/alice/>;purpose=info\n",
+		"Call-Info: <http://wwww.example.com/alice/photo1.jpg>\n",
 	}
 
 	for i := 0; i < len(tvs); i++ {

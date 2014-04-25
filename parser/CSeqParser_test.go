@@ -8,8 +8,8 @@ func TestCSeqParser(t *testing.T) {
 	var tvs = []string{
 		"CSeq: 17 INVITE\n",
 		"CSeq: 17 ACK\n",
-		"CSeq : 18   BYE\n",
-		"CSeq:1 CANCEL\n",
+		"CSeq: 18 BYE\n",
+		"CSeq: 1 CANCEL\n",
 		"CSeq: 3 BYE\n",
 	}
 

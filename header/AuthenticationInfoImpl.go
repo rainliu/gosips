@@ -202,6 +202,7 @@ func (this *AuthenticationInfo) SetParameter(name, value string) error {
 			strings.ToLower(name) == (ParameterNames_USERNAME) ||
 			strings.ToLower(name) == (ParameterNames_DOMAIN) ||
 			strings.ToLower(name) == (ParameterNames_NEXT_NONCE) ||
+			strings.ToLower(name) == (ParameterNames_ALGORITHM) ||
 			strings.ToLower(name) == (ParameterNames_RESPONSE_AUTH) {
 			// if (value ==
 			//     throw new NullPointerException("null value");
