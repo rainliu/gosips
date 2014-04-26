@@ -59,6 +59,19 @@ const ParameterNames_TEXT = "text"
 const ParameterNames_CAUSE = "cause"
 const ParameterNames_ID = "id"
 
+const SIPConstants_DEFAULT_PORT = 5060
+
+/** Prefix for the branch parameter that identifies
+ * BIS 09 compatible branch strings. This indicates
+ * that the branch may be as a global identifier for
+ * identifying transactions.
+ */
+const SIPConstants_BRANCH_MAGIC_COOKIE = "z9hG4bK"
+
+/** constant SIP_VERSION_STRING
+ */
+const SIPConstants_SIP_VERSION_STRING = "SIP/2.0"
+
 /**
 * Parameters header. Suitable for extension by headers that have parameters.
  */
