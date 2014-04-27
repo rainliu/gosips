@@ -39,10 +39,10 @@ func NewMimeVersionParserFromLexer(lexer core.Lexer) *MimeVersionParser {
 }
 
 /** parse the String message
- * @return SIPHeaderHeader (MimeVersion object)
+ * @return ISIPHeader (MimeVersion object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *MimeVersionParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *MimeVersionParser) Parse() (sh header.ISIPHeader, ParseException error) {
 
 	// if (debug) dbg_enter("MimeVersionParser.parse");
 	mimeVersion := header.NewMimeVersion()

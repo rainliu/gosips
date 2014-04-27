@@ -39,10 +39,10 @@ func NewCallInfoParserFromLexer(lexer core.Lexer) *CallInfoParser {
 }
 
 /** parse the CallInfo String header
- * @return SIPHeaderHeader (CallInfoList object)
+ * @return ISIPHeader (CallInfoList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *CallInfoParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *CallInfoParser) Parse() (sh header.ISIPHeader, ParseException error) {
 
 	// if (debug) dbg_enter("CallInfoParser.parse");
 	callInfoList := header.NewCallInfoList()

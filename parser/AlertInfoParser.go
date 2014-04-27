@@ -41,10 +41,10 @@ func (this *AlertInfoParser) superFromLexer(lexer core.Lexer) {
 }
 
 /** parse the AlertInfo  String header
- * @return SIPHeaderHeader (AlertInfoList  object)
+ * @return ISIPHeader (AlertInfoList  object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *AlertInfoParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *AlertInfoParser) Parse() (sh header.ISIPHeader, ParseException error) {
 
 	//if (debug) dbg_enter("AlertInfoParser.parse");
 	alertInfoList := header.NewAlertInfoList()

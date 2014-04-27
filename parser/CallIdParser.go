@@ -39,10 +39,10 @@ func NewCallIDParserFromLexer(lexer core.Lexer) *CallIDParser {
 }
 
 /** parse the String message
- * @return SIPHeaderHeader (CallID object)
+ * @return ISIPHeader (CallID object)
  * @throws ParseException if the message does not respect the spec.
  */
-func (this *CallIDParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *CallIDParser) Parse() (sh header.ISIPHeader, ParseException error) {
 	if core.Debug.Debug {
 		this.Dbg_enter("parse")
 		defer this.Dbg_leave("parse")

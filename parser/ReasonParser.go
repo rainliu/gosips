@@ -42,7 +42,7 @@ func NewReasonParserFromLexer(lexer core.Lexer) *ReasonParser {
  * @return SIPHeader (ReasonParserList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *ReasonParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *ReasonParser) Parse() (sh header.ISIPHeader, ParseException error) {
 	reasonList := header.NewReasonList()
 	//if (debug) dbg_enter("ReasonParser.parse");
 

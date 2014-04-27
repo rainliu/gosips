@@ -48,10 +48,10 @@ func NewAcceptLanguageParserFromLexer(lexer core.Lexer) *AcceptLanguageParser {
 }
 
 /** parse the String message
- * @return SIPHeaderHeader (AcceptLanguage object)
+ * @return ISIPHeader (AcceptLanguage object)
  * @throws ParseException if the message does not respect the spec.
  */
-func (this *AcceptLanguageParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *AcceptLanguageParser) Parse() (sh header.ISIPHeader, ParseException error) {
 
 	acceptLanguageList := header.NewAcceptLanguageList()
 	//if (debug) dbg_enter("AcceptLanguageParser.parse");

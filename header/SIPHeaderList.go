@@ -6,9 +6,33 @@ import (
 	"gosip/core"
 )
 
+type IList interface {
+	Back() *list.Element
+	Front() *list.Element
+	Init() *list.List
+	InsertAfter(v interface{}, mark *list.Element) *list.Element
+	InsertBefore(v interface{}, mark *list.Element) *list.Element
+	Len() int
+	MoveAfter(e, mark *list.Element)
+	MoveBefore(e, mark *list.Element)
+	MoveToBack(e *list.Element)
+	MoveToFront(e *list.Element)
+	PushBack(v interface{}) *list.Element
+	PushBackList(other *list.List)
+	PushFront(v interface{}) *list.Element
+	PushFrontList(other *list.List)
+	Remove(e *list.Element) interface{}
+}
+
+type ISIPHeaderList interface {
+	ISIPHeader
+	IList
+	GetHeadersAsEncodedStrings() *list.List
+}
+
 /**
  *  This is the root class for all lists of SIP headers.
- *  It imbeds a SIPObjectList object and extends SIPHeaderHeader
+ *  It imbeds a SIPObjectList object and extends ISIPHeader
  *  Lists of ContactSIPObjects etc. derive from this class.
  *  This supports homogeneous  lists (all elements in the list are of
  *  the same class). We use this for building type homogeneous lists of
@@ -47,22 +71,21 @@ func (this *SIPHeaderList) Clone() interface{} {
 	return retval
 }
 
-func (this *SIPHeaderList) Concatenate(shl *SIPHeaderList) { //, topFlag bool) {
+func (this *SIPHeaderList) Concatenate(shl ISIPHeaderList, topFlag bool) {
 	if shl == nil {
 		return
 	}
 
-	//if !topFlag {
-	for e := shl.Front(); e != nil; e = e.Next() {
-		this.PushBack(e)
+	if !topFlag {
+		for e := shl.Front(); e != nil; e = e.Next() {
+			this.PushBack(e)
+		}
+	} else {
+		//add given items to the end of the list.
+		for e := shl.Front(); e != nil; e = e.Next() {
+			this.PushFront(e)
+		}
 	}
-	/*} else {
-	    // add given items to the end of the list.
-	    first := this.Front()
-	    for e := objList.Front(); e != nil; e = e.Next() {
-	        this.InsertBefore(e, first)
-	    }
-	}*/
 }
 
 /**
@@ -86,7 +109,7 @@ func (this *SIPHeaderList) String() string {
 		//this instanceof ExtensionHeaderList ) {
 		//ListIterator li = hlist.listIterator();
 		for e := this.Front(); e != nil; e = e.Next() {
-			if sh, ok := e.Value.(SIPHeaderHeader); ok {
+			if sh, ok := e.Value.(ISIPHeader); ok {
 				encoding.WriteString(sh.String())
 			} else {
 				encoding.WriteString(e.Value.(string))
@@ -110,7 +133,7 @@ func (this *SIPHeaderList) EncodeBody() string {
 	var encoding bytes.Buffer // = new StringBuffer();
 	//ListIterator iterator = this.listIterator();
 	for e := this.Front(); e != nil; e = e.Next() {
-		if sh, ok := e.Value.(SIPHeaderHeader); ok {
+		if sh, ok := e.Value.(ISIPHeader); ok {
 			encoding.WriteString(sh.EncodeBody())
 		} else {
 			encoding.WriteString(e.Value.(string))
@@ -125,4 +148,20 @@ func (this *SIPHeaderList) EncodeBody() string {
 
 func (this *SIPHeaderList) IsHeaderList() bool {
 	return true
+}
+
+//    /** Get the headers as a linked list of encoded Strings
+//     *@return a linked list with each element of the list containing a
+//     * string encoded header in canonical form.
+//     */
+func (this *SIPHeaderList) GetHeadersAsEncodedStrings() *list.List {
+	retval := list.New()
+	//synchronized (headers) {
+
+	for li := this.Front(); li != nil; li = li.Next() {
+		sipHeader := li.Value.(ISIPHeader)
+		retval.PushBack(sipHeader.String())
+	}
+	//}
+	return retval
 }

@@ -40,7 +40,7 @@ func NewProxyAuthorizationParserFromLexer(lexer core.Lexer) *ProxyAuthorizationP
  * @return SIPHeader (ProxyAuthenticate object)
  * @throws ParseException if the message does not respect the spec.
  */
-func (this *ProxyAuthorizationParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *ProxyAuthorizationParser) Parse() (sh header.ISIPHeader, ParseException error) {
 	this.HeaderName(TokenTypes_PROXY_AUTHORIZATION)
 	proxyAuth := header.NewProxyAuthorization()
 	this.ChallengeParser.Parse(proxyAuth)

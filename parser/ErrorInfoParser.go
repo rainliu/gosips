@@ -42,10 +42,10 @@ func NewErrorInfoParserFromLexer(lexer core.Lexer) *ErrorInfoParser {
 }
 
 /** parse the ErrorInfo String header
- * @return SIPHeaderHeader (ErrorInfoList object)
+ * @return ISIPHeader (ErrorInfoList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *ErrorInfoParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *ErrorInfoParser) Parse() (sh header.ISIPHeader, ParseException error) {
 
 	// if (debug) dbg_enter("ErrorInfoParser.parse");
 	errorInfoList := header.NewErrorInfoList()

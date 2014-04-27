@@ -7,7 +7,7 @@ import (
 )
 
 type IHeaderParser interface {
-	Parse() (sh header.SIPHeaderHeader, ParseException error)
+	Parse() (sh header.ISIPHeader, ParseException error)
 }
 
 /** Generic header parser class. The parsers for various headers extend this
@@ -160,7 +160,7 @@ func (this *HeaderParser) Wkday() (wk int, ParseException error) {
  * structure.
  *@throws ParseException if there was an error parsing.
  */
-func (this *HeaderParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *HeaderParser) Parse() (sh header.ISIPHeader, ParseException error) {
 	lexer := this.GetLexer()
 
 	name := lexer.GetNextTokenByDelim(':')

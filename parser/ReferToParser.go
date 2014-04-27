@@ -33,7 +33,7 @@ func NewReferToParserFromLexer(lexer core.Lexer) *ReferToParser {
 	return this
 }
 
-func (this *ReferToParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *ReferToParser) Parse() (sh header.ISIPHeader, ParseException error) {
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_REFER_TO)
 	referTo := header.NewReferTo()

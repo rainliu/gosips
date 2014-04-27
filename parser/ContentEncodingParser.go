@@ -40,10 +40,10 @@ func NewContentEncodingParserFromLexer(lexer core.Lexer) *ContentEncodingParser 
 }
 
 /** parse the ContentEncodingHeader String header
- * @return SIPHeaderHeader (ContentEncodingList object)
+ * @return ISIPHeader (ContentEncodingList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *ContentEncodingParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *ContentEncodingParser) Parse() (sh header.ISIPHeader, ParseException error) {
 
 	//if (debug) dbg_enter("ContentEncodingParser.parse");
 	contentEncodingList := header.NewContentEncodingList()

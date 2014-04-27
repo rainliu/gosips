@@ -43,7 +43,7 @@ func NewSubscriptionStateParserFromLexer(lexer core.Lexer) *SubscriptionStatePar
  * @return SIPHeader (SubscriptionState  object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *SubscriptionStateParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *SubscriptionStateParser) Parse() (sh header.ISIPHeader, ParseException error) {
 
 	// if (debug) dbg_enter("SubscriptionStateParser.parse");
 

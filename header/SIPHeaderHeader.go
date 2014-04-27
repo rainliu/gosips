@@ -1,8 +1,6 @@
 package header
 
-import ()
-
-type SIPHeaderHeader interface {
+type ISIPHeader interface {
 	EncodeBody() string
 	GetHeaderName() string
 	GetHeaderValue() string

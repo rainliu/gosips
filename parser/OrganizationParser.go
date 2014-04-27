@@ -40,10 +40,10 @@ func NewOrganizationParserFromLexer(lexer core.Lexer) *OrganizationParser {
 }
 
 /** parse the String header
- * @return SIPHeaderHeader (Organization object)
+ * @return ISIPHeader (Organization object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *OrganizationParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *OrganizationParser) Parse() (sh header.ISIPHeader, ParseException error) {
 
 	//if (debug) dbg_enter("OrganizationParser.parse");
 	organization := header.NewOrganization()

@@ -43,7 +43,7 @@ func NewWarningParserFromLexer(lexer core.Lexer) *WarningParser {
  * @return SIPHeader (WarningList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *WarningParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *WarningParser) Parse() (sh header.ISIPHeader, ParseException error) {
 	warningList := header.NewWarningList()
 	// if (debug) dbg_enter("WarningParser.parse");
 

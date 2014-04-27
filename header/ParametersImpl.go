@@ -59,6 +59,7 @@ const ParameterNames_TEXT = "text"
 const ParameterNames_CAUSE = "cause"
 const ParameterNames_ID = "id"
 
+const SIPConstants_DEFAULT_ENCODING = "UTF-8"
 const SIPConstants_DEFAULT_PORT = 5060
 
 /** Prefix for the branch parameter that identifies

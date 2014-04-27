@@ -7,7 +7,7 @@ import (
 )
 
 /**
-* MaxForwards SIPHeaderHeader
+* MaxForwards ISIPHeader
  */
 type MaxForwards struct { //implements MaxForwardsHeader {
 	SIPHeader
@@ -71,8 +71,9 @@ func (this *MaxForwards) HasReachedZero() bool {
 
 /** decrement MaxForwards field one by one.
  */
-func (this *MaxForwards) DecrementMaxForwards() {
+func (this *MaxForwards) DecrementMaxForwards() error {
 	if this.maxForwards >= 0 {
 		this.maxForwards--
 	}
+	return nil
 }

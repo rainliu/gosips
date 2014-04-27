@@ -42,7 +42,7 @@ func NewUnsupportedParserFromLexer(lexer core.Lexer) *UnsupportedParser {
  * @return SIPHeader (Unsupported object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *UnsupportedParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *UnsupportedParser) Parse() (sh header.ISIPHeader, ParseException error) {
 	unsupportedList := header.NewUnsupportedList()
 	//if (debug) dbg_enter("UnsupportedParser.parse");
 

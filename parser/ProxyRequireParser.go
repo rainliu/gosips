@@ -42,7 +42,7 @@ func NewProxyRequireParserFromLexer(lexer core.Lexer) *ProxyRequireParser {
  * @return SIPHeader (ProxyRequireList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *ProxyRequireParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *ProxyRequireParser) Parse() (sh header.ISIPHeader, ParseException error) {
 	proxyRequireList := header.NewProxyRequireList()
 	// if (debug) dbg_enter("ProxyRequireParser.parse");
 

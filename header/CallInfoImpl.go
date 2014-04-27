@@ -7,7 +7,7 @@ import (
 )
 
 /**
-* CallInfo SIPHeaderHeader.
+* CallInfo ISIPHeader.
 *
 *@author "M. Ranganathan" <mranga@nist.gov> <br/>
 *

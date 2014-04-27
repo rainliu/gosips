@@ -5,7 +5,7 @@ import (
 )
 
 /**
-* Allow SIPHeaderHeader.
+* Allow ISIPHeader.
  */
 type Allow struct {
 	SIPHeader // implements javax.sip.header.AllowHeader {

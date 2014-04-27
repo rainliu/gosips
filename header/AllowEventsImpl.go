@@ -5,7 +5,7 @@ import (
 )
 
 /**
-* AllowEvents SIPHeaderHeader.
+* AllowEvents ISIPHeader.
 *@version JAIN-SIP-1.1
  */
 type AllowEvents struct {

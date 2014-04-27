@@ -42,7 +42,7 @@ func NewSupportedParserFromLexer(lexer core.Lexer) *SupportedParser {
  * @return SIPHeader (Supported object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *SupportedParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *SupportedParser) Parse() (sh header.ISIPHeader, ParseException error) {
 	supportedList := header.NewSupportedList()
 	//if (debug) dbg_enter("SupportedParser.parse");
 

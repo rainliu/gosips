@@ -5,7 +5,7 @@ import (
 )
 
 /**
-* Call ID SIPHeaderHeader.
+* Call ID ISIPHeader.
  */
 
 type CallID struct { // implements javax.sip.header.CallIdHeader {
@@ -20,7 +20,7 @@ type CallID struct { // implements javax.sip.header.CallIdHeader {
  */
 /*func NewCallID () *CallID {
 			this := &CallID{};
-			this.SIPHeaderHeader.headerName = CALL_ID;
+			this.ISIPHeader.headerName = CALL_ID;
 			return this;
         }*/
 

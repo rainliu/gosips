@@ -6,7 +6,7 @@ import (
 )
 
 /**
-* ContentLength SIPHeaderHeader (of which there can be only one in a SIPMessage).
+* ContentLength ISIPHeader (of which there can be only one in a SIPMessage).
 *<pre>
 *Fielding, et al.            Standards Track                   [Page 119]
 *RFC 2616                        HTTP/1.1                       June 1999
@@ -82,10 +82,11 @@ func (this *ContentLength) GetContentLength() int {
  * Set the contentLength member
  * @param contentLength int to Set
  */
-func (this *ContentLength) SetContentLength(contentLength int) { //throws InvalidArgumentException{
+func (this *ContentLength) SetContentLength(contentLength int) error { //throws InvalidArgumentException{
 	//if (contentLength<0) throw new InvalidArgumentException("JAIN-SIP Exception"+
 	//", ContentLength, SetContentLength(), the contentLength parameter is <0");
 	this.contentLength = contentLength
+	return nil
 }
 
 func (this *ContentLength) String() string {

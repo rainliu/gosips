@@ -39,7 +39,7 @@ func NewRouteParserFromLexer(lexer core.Lexer) *RouteParser {
  * @return SIPHeader the Route List object
  * @throws SIPParseException if errors occur during the parsing
  */
-func (this *RouteParser) Parse() (sh header.SIPHeaderHeader, ParseException error) {
+func (this *RouteParser) Parse() (sh header.ISIPHeader, ParseException error) {
 	routeList := header.NewRouteList()
 	//if (debug) dbg_enter("parse");
 
