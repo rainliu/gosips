@@ -872,55 +872,55 @@ func (this *SIPMessage) RemoveHeader(headerName string) {
 //     *  requests (i.e. an outgoing request and its matching response have
 //     *	the same computed transaction identifier).
 //     */
-// func (this *SIPMessage) GetTransactionId() string {
-// 	var topVia *header.Via
-// 	if this.GetViaHeaders().Len() > 0 {
-// 		topVia = this.GetViaHeaders().Front().Value.(*header.Via)
-// 	}
-// 	// Have specified a branch Identifier so we can use it to identify
-// 	// the transaction. BranchId is not case sensitive.
-// 	// Branch Id prefix is not case sensitive.
-// 	if topVia != nil && topVia.GetBranch() != "" &&
-// 		strings.Contains(strings.ToUpper(topVia.GetBranch()),
-// 			strings.ToUpper(header.SIPConstants_BRANCH_MAGIC_COOKIE)) {
-// 		// Bis 09 compatible branch assignment algorithm.
-// 		// implies that the branch id can be used as a transaction
-// 		// identifier.
-// 		return strings.ToLower(topVia.GetBranch())
-// 	} else {
-// 		// Old style client so construct the transaction identifier
-// 		// from various fields of the request.
-// 		var retval bytes.Buffer
-// 		from := this.GetFrom()
-// 		to := this.GetTo()
-// 		hpFrom := from.GetUserAtHostPort()
-// 		retval.WriteString(hpFrom + ":")
-// 		if from.HasTag() {
-// 			retval.WriteString(from.GetTag() + ":")
-// 		}
-// 		hpTo := to.GetUserAtHostPort()
-// 		retval.WriteString(hpTo + ":")
-// 		cid := this.callIdHeader.GetCallId()
-// 		retval.WriteString(cid + ":")
-// 		retval.WriteRune(rune(this.cSeqHeader.GetSequenceNumber()))
-// 		retval.WriteString(":" + this.cSeqHeader.GetMethod())
-// 		if topVia != nil {
-// 			retval.WriteString(":" + topVia.GetSentBy().String())
-// 			if !topVia.GetSentBy().HasPort() {
-// 				retval.WriteString(":")
-// 				retval.WriteRune(5060)
-// 			}
-// 		}
-// 		hc := core.ToHexString([]byte(strings.ToLower(retval.String())))
-// 		if len(hc) < 32 {
-// 			return hc
-// 		} else {
-// 			return hc[len(hc)-32 : len(hc)]
-// 		}
-// 	}
-// 	// Convert to lower case -- bug fix as a result of a bug report
-// 	// from Chris Mills of Nortel Networks.
-// }
+func (this *SIPMessage) GetTransactionId() string {
+	var topVia *header.Via
+	if this.GetViaHeaders().Len() > 0 {
+		topVia = this.GetViaHeaders().Front().Value.(*header.Via)
+	}
+	// Have specified a branch Identifier so we can use it to identify
+	// the transaction. BranchId is not case sensitive.
+	// Branch Id prefix is not case sensitive.
+	if topVia != nil && topVia.GetBranch() != "" &&
+		strings.Contains(strings.ToUpper(topVia.GetBranch()),
+			strings.ToUpper(header.SIPConstants_BRANCH_MAGIC_COOKIE)) {
+		// Bis 09 compatible branch assignment algorithm.
+		// implies that the branch id can be used as a transaction
+		// identifier.
+		return strings.ToLower(topVia.GetBranch())
+	} else {
+		// Old style client so construct the transaction identifier
+		// from various fields of the request.
+		var retval bytes.Buffer
+		from := this.GetFrom().(*header.From)
+		to := this.GetTo().(*header.To)
+		hpFrom := from.GetUserAtHostPort()
+		retval.WriteString(hpFrom + ":")
+		if from.HasTag() {
+			retval.WriteString(from.GetTag() + ":")
+		}
+		hpTo := to.GetUserAtHostPort()
+		retval.WriteString(hpTo + ":")
+		cid := this.callIdHeader.GetCallId()
+		retval.WriteString(cid + ":")
+		retval.WriteRune(rune(this.cSeqHeader.GetSequenceNumber()))
+		retval.WriteString(":" + this.cSeqHeader.GetMethod())
+		if topVia != nil {
+			retval.WriteString(":" + topVia.GetSentBy().String())
+			if !topVia.GetSentBy().HasPort() {
+				retval.WriteString(":")
+				retval.WriteRune(5060)
+			}
+		}
+		hc := core.ToHexString([]byte(strings.ToLower(retval.String())))
+		if len(hc) < 32 {
+			return hc
+		} else {
+			return hc[len(hc)-32 : len(hc)]
+		}
+	}
+	// Convert to lower case -- bug fix as a result of a bug report
+	// from Chris Mills of Nortel Networks.
+}
 
 //    /** Return true if this message has a body.
 //     */

@@ -1,9 +1,11 @@
 package parser
 
 import (
+	"errors"
 	"gosip/core"
 	"gosip/header"
 	"strings"
+	"time"
 )
 
 type IHeaderParser interface {
@@ -86,75 +88,73 @@ func (this *HeaderParser) Wkday() (wk int, ParseException error) {
 /** parse and return a date field.
  *@return a date structure with the parsed value.
  */
-/*protected Calendar date() throws ParseException {
-    try  {
-        Calendar retval =
-        Calendar.getInstance(TimeZone.getTimeZone("GMT"));
-        String s1 = lexer.number();
-        int day = Integer.parseInt(s1);
-        if (day <= 0 || day >= 31)
-            throw createParseException("Bad day ");
-        retval.set(Calendar.DAY_OF_MONTH,day);
-        lexer.match(' ');
-        String month = lexer.ttoken().toLowerCase();
-        if (month.equals("jan"))  {
-            retval.set(Calendar.MONTH,Calendar.JANUARY);
-        } else if (month.equals("feb")) {
-            retval.set(Calendar.MONTH,Calendar.FEBRUARY);
-        } else if (month.equals("mar")) {
-            retval.set(Calendar.MONTH,Calendar.MARCH);
-        } else if (month.equals("apr")) {
-            retval.set(Calendar.MONTH,Calendar.APRIL);
-        } else if (month.equals("may")) {
-            retval.set(Calendar.MONTH,Calendar.MAY);
-        } else if (month.equals("jun")) {
-            retval.set(Calendar.MONTH,Calendar.JUNE);
-        } else if (month.equals("jul")) {
-            retval.set(Calendar.MONTH,Calendar.JULY);
-        } else if (month.equals("aug")) {
-            retval.set(Calendar.MONTH,Calendar.AUGUST);
-        } else if (month.equals("sep")) {
-            retval.set(Calendar.MONTH,Calendar.SEPTEMBER);
-        } else if (month.equals("oct")) {
-            retval.set(Calendar.MONTH,Calendar.OCTOBER);
-        } else if (month.equals("nov")) {
-            retval.set(Calendar.MONTH,Calendar.NOVEMBER);
-        } else if (month.equals("dec")) {
-            retval.set(Calendar.MONTH,Calendar.DECEMBER);
-        }
-        lexer.match(' ');
-        String s2 = lexer.number();
-        int yr = Integer.parseInt(s2);
-        retval.set(Calendar.YEAR,yr);
-        return retval;
+func (this *HeaderParser) Date() (t *time.Time, ParseException error) {
+	//try  {
+	//Calendar retval =  Calendar.getInstance(TimeZone.getTimeZone("GMT"));
+	lexer := this.GetLexer()
+	day, _ := lexer.Number()
+	if day <= 0 || day >= 31 {
+		return nil, errors.New("Bad day ")
+	}
+	lexer.Match(' ')
+	month := strings.ToLower(lexer.Ttoken())
+	var mon time.Month
+	if month == "jan" {
+		mon = time.January
+	} else if month == "feb" {
+		mon = time.February
+	} else if month == "mar" {
+		mon = time.March
+	} else if month == "apr" {
+		mon = time.April
+	} else if month == "may" {
+		mon = time.May
+	} else if month == "jun" {
+		mon = time.June
+	} else if month == "jul" {
+		mon = time.July
+	} else if month == "aug" {
+		mon = time.August
+	} else if month == "sep" {
+		mon = time.September
+	} else if month == "oct" {
+		mon = time.October
+	} else if month == "nov" {
+		mon = time.November
+	} else if month == "dec" {
+		mon = time.December
+	}
+	lexer.Match(' ')
+	yr, _ := lexer.Number()
 
-    } catch (Exception ex) {
-        throw createParseException("bad date field" );
-    }
+	t2 := time.Date(yr, mon, day, 0, 0, 0, 0, nil)
+	return &t2, nil
+	// } catch (Exception ex) {
+	//     throw createParseException("bad date field" );
+	// }
 
-}*/
+}
 
 /** Set the time field. This has the format hour:minute:second
  */
-/*protected void time(Calendar calendar) throws ParseException {
-    try {
-        String s = lexer.number();
-        int hour = Integer.parseInt(s);
-        calendar.set(Calendar.HOUR_OF_DAY,hour);
-        lexer.match(':');
-        s = lexer.number();
-        int min = Integer.parseInt(s);
-        calendar.set(Calendar.MINUTE,min);
-        lexer.match(':');
-        s = lexer.number();
-        int sec = Integer.parseInt(s);
-        calendar.set(Calendar.SECOND,sec);
-    } catch (Exception ex) {
-        throw createParseException ("error processing time " );
+func (this *HeaderParser) Time(t *time.Time) (c *time.Time, ParseException error) {
+	//try {
+	lexer := this.GetLexer()
+	hour, _ := lexer.Number()
+	lexer.Match(':')
+	min, _ := lexer.Number()
+	lexer.Match(':')
+	sec, _ := lexer.Number()
+	lexer.Match(' ')
+	tzone := strings.ToLower(lexer.Ttoken())
+	loc, _ := time.LoadLocation(tzone)
 
-    }
-
-}*/
+	t2 := time.Date(t.Year(), t.Month(), t.Day(), hour, min, sec, 0, loc)
+	return &t2, nil
+	// } catch (Exception ex) {
+	//     throw createParseException ("error processing time " );
+	// }
+}
 
 /** Parse the SIP header from the buffer and return a parsed
  * structure.

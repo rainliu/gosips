@@ -1,5 +1,7 @@
 package header
 
+import "time"
+
 /**
  * The Date header field reflects the time when the request or response is
  * first sent. Retransmissions have the same Date header field value as the
@@ -33,7 +35,7 @@ type DateHeader interface {
 
 	 */
 
-	SetDate(date string)
+	SetDate(date *time.Time)
 
 	/**
 
@@ -47,7 +49,7 @@ type DateHeader interface {
 
 	 */
 
-	GetDate() string
+	GetDate() *time.Time
 
 	/**
 
