@@ -71,6 +71,13 @@ func NewSIPMessage() *SIPMessage {
 	return this
 }
 
+func (this *SIPMessage) super() {
+	this.unrecognizedHeaders = list.New()
+	this.headers = list.New()
+	this.nameTable = make(map[string]header.ISIPHeader)
+	this.AttachHeader2(header.NewContentLengthFromInt(0), false)
+}
+
 /** Return true if the header belongs only in a Request.
  *
  *@param sipHeader is the header to test.
