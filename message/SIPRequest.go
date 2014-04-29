@@ -573,53 +573,50 @@ func (this *SIPRequest) CreateResponse2(statusCode int, reasonPhrase string) *SI
 // * from this request except for Require, ProxyRequire.
 // */
 
-// public SIPRequest createCancelRequest() {
-// 	SIPRequest	newRequest;
-// 	Iterator	headerIterator;
-// 	SIPHeader	nextHeader;
+func (this *SIPRequest) CreateCancelRequest() *SIPRequest {
+	//SIPRequest	newRequest;
+	//Iterator	headerIterator;
+	//SIPHeader	nextHeader;
 
-// 	newRequest = new SIPRequest();
-// 	newRequest.SetRequestLine
-// 		((RequestLine)this.requestLine.clone());
-// 	newRequest.SetMethod(Request.CANCEL);
-// 	headerIterator = GetHeaders();
-// 	while(headerIterator.hasNext()){
-// 		nextHeader = (SIPHeader)headerIterator.next();
-// 		if (nextHeader instanceof RequireList)
-// 			continue;
-// 		else if (nextHeader instanceof ProxyRequireList)
-// 			continue;
-// 		else if (nextHeader instanceof ContentLength)
-// 			continue;
-// 		else if (nextHeader instanceof ContentType)
-// 			continue;
+	newRequest := NewSIPRequest()
+	newRequest.SetRequestLine(this.requestLine)
+	newRequest.SetMethod(CANCEL)
 
-// 		if (nextHeader instanceof ViaList) {
-// 		/**
-// 		   SIPHeader sipHeader =
-// 			(SIPHeader)
-// 		       ((ViaList) nextHeader).GetFirst().clone() ;
-// 		   nextHeader = new ViaList();
-// 		   ((ViaList)nextHeader).add(sipHeader);
-// 		 **/
-// 		 nextHeader = (ViaList) ((ViaList) nextHeader).clone();
-// 		}
-
-// 		// CSeq method for a cancel request must be cancel.
-// 		if (nextHeader instanceof CSeq) {
-// 			CSeq cseq = (CSeq) nextHeader.clone();
-// 			try{cseq.SetMethod(Request.CANCEL);}
-// 				catch(ParseException e){}
-// 		        nextHeader = cseq;
-// 		}
-// 		try {
-// 			newRequest.attachHeader(nextHeader, false);
-// 		} catch(SIPDuplicateHeaderException e){
-// 			e.printStackTrace();
-// 		}
-// 	}
-// 	return newRequest;
-// }
+	for headerIterator := this.GetHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
+		nextHeader := headerIterator.Value.(header.ISIPHeader)
+		if _, ok := nextHeader.(*header.RequireList); ok {
+			continue
+		} else if _, ok := nextHeader.(*header.ProxyRequireList); ok {
+			continue
+		} else if _, ok := nextHeader.(*header.ContentLength); ok {
+			continue
+		} else if _, ok := nextHeader.(*header.ContentType); ok {
+			continue
+		} else if _, ok := nextHeader.(*header.ViaList); ok {
+			/**
+			   SIPHeader sipHeader =
+				(SIPHeader)
+			       ((ViaList) nextHeader).GetFirst().clone() ;
+			   nextHeader = new ViaList();
+			   ((ViaList)nextHeader).add(sipHeader);
+			 **/
+			//nextHeader = (ViaList) ((ViaList) nextHeader).clone();
+		} else if cseq, ok := nextHeader.(*header.CSeq); ok { // CSeq method for a cancel request must be cancel.
+			//CSeq cseq = (CSeq) nextHeader.clone();
+			//try{
+			cseq.SetMethod(CANCEL)
+			//}
+			//catch(ParseException e){}
+			nextHeader = cseq
+		}
+		//try {
+		newRequest.AttachHeader2(nextHeader, false)
+		// } catch(SIPDuplicateHeaderException e){
+		// 	e.printStackTrace();
+		// }
+	}
+	return newRequest
+}
 
 // /** Creates a default ACK SIPRequest message for this original request.
 // * Note that the defaultACK SIPRequest does not include the
@@ -632,76 +629,76 @@ func (this *SIPRequest) CreateResponse2(statusCode int, reasonPhrase string) *SI
 // *
 // *@return A SIPRequest with an ACK method.
 // */
-// public SIPRequest createAckRequest(To responSetoHeader) {
-// 	SIPRequest	newRequest;
-// 	Iterator	headerIterator;
-// 	SIPHeader	nextHeader;
+func (this *SIPRequest) CreateAckRequest(responseToHeader *header.To) *SIPRequest {
+	// SIPRequest	newRequest;
+	// Iterator	headerIterator;
+	// SIPHeader	nextHeader;
 
-// 	newRequest = new SIPRequest();
-// 	newRequest.SetRequestLine
-// 		((RequestLine)this.requestLine.clone());
-// 	newRequest.SetMethod(Request.ACK);
-// 	headerIterator = GetHeaders();
-// 	while(headerIterator.hasNext()){
-// 		nextHeader = (SIPHeader)headerIterator.next();
-// 		if (nextHeader instanceof RouteList ) {
-// 		   // Ack and cancel do not Get ROUTE headers.
-// 		   // Route header for ACK is assigned by the
-// 		   // Dialog if necessary.
-// 		   continue;
-// 	        } else if (nextHeader instanceof ProxyAuthorization) {
-// 		   // Remove proxy auth header.
-// 		   // Assigned by the Dialog if necessary.
-// 		  continue;
-// 		} else if (nextHeader instanceof ContentLength){
-// 			// Adding content is responsibility of user.
-// 			nextHeader = (SIPHeader) nextHeader.clone();
-// 			try{
-// 			((ContentLength)nextHeader).SetContentLength(0);
-// 			}
-// 			catch(InvalidArgumentException e){}
-// 		} else if (nextHeader instanceof ContentType )  {
-// 			// Content type header is removed since
-// 			// content length is 0. Bug fix from
-// 			// Antonis Kyardis.
-// 			continue;
-// 		} else if (nextHeader instanceof CSeq) {
-// 		      // The CSeq header field in the
-// 		      // ACK MUST contain the same value for the
-// 		      // sequence number as was present in the
-// 		      // original request, but the method parameter
-// 		      // MUST be equal to "ACK".
-// 			CSeq cseq = (CSeq) nextHeader.clone();
-// 			try{cseq.SetMethod(Request.ACK);}
-// 				catch(ParseException e){}
-// 			nextHeader = cseq;
-// 		} else if(nextHeader instanceof To) {
-// 		   if (responSetoHeader != nil)  {
-// 		       nextHeader = responSetoHeader;
-// 		   }  else {
-// 		     nextHeader = (SIPHeader) nextHeader.clone();
-// 		   }
-// 		} else if (nextHeader instanceof ViaList) {
-// 		   // Bug reported by Gianluca Martinello
-// 		   //The ACK MUST contain a single Via header field,
-// 		   // and this MUST be equal to the top Via header
-// 		   // field of the original
-//                           // request.
+	newRequest := NewSIPRequest()
+	newRequest.SetRequestLine(this.requestLine)
+	newRequest.SetMethod(ACK)
+	for headerIterator := this.GetHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
+		nextHeader := headerIterator.Value.(header.ISIPHeader)
+		if _, ok := nextHeader.(*header.RouteList); ok {
+			// Ack and cancel do not Get ROUTE headers.
+			// Route header for ACK is assigned by the
+			// Dialog if necessary.
+			continue
+		} else if _, ok := nextHeader.(*header.ProxyAuthorization); ok {
+			// Remove proxy auth header.
+			// Assigned by the Dialog if necessary.
+			continue
+		} else if cl, ok := nextHeader.(*header.ContentLength); ok {
+			// Adding content is responsibility of user.
+			//nextHeader = nextHeader.(*header.ContentLength)
+			//try{
+			cl.SetContentLength(0)
+			nextHeader = cl
+			//}
+			//catch(InvalidArgumentException e){}
+		} else if _, ok := nextHeader.(*header.ContentType); ok {
+			// Content type header is removed since
+			// content length is 0. Bug fix from
+			// Antonis Kyardis.
+			continue
+		} else if cseq, ok := nextHeader.(*header.CSeq); ok {
+			// The CSeq header field in the
+			// ACK MUST contain the same value for the
+			// sequence number as was present in the
+			// original request, but the method parameter
+			// MUST be equal to "ACK".
+			//nextHeader = nextHeader.(*header.CSeq)
+			//try{
+			cseq.SetMethod(ACK)
+			nextHeader = cseq
+			//catch(ParseException e){}
+			// = cseq;
+		} else if _, ok := nextHeader.(*header.To); ok {
+			if responseToHeader != nil {
+				nextHeader = responseToHeader
+			} else {
+				//nextHeader = (SIPHeader) nextHeader.clone();
+			}
+		} else if vl, ok := nextHeader.(*header.ViaList); ok {
+			// Bug reported by Gianluca Martinello
+			//The ACK MUST contain a single Via header field,
+			// and this MUST be equal to the top Via header
+			// field of the original
+			// request.
 
-// 		    nextHeader =(SIPHeader)
-// 			((ViaList)nextHeader).GetFirst().clone();
-// 		} else {
-// 		    nextHeader = (SIPHeader) nextHeader.clone();
-// 		}
+			nextHeader = vl.Front().Value.(header.ISIPHeader)
+		} else {
+			//nextHeader = (SIPHeader) nextHeader.clone();
+		}
 
-// 		try {
-// 			newRequest.attachHeader(nextHeader, false);
-// 		} catch(SIPDuplicateHeaderException e){
-// 			e.printStackTrace();
-// 		}
-// 	}
-// 	return newRequest;
-// }
+		//try {
+		newRequest.AttachHeader2(nextHeader, false)
+		// } catch(SIPDuplicateHeaderException e){
+		// 	e.printStackTrace();
+		// }
+	}
+	return newRequest
+}
 
 // /** Create a new default SIPRequest from the original request. Warning:
 // * the newly created SIPRequest, shares the headers of
@@ -743,159 +740,168 @@ func (this *SIPRequest) CreateResponse2(statusCode int, reasonPhrase string) *SI
 // *@return a new Default SIP Request which has the requestLine specified.
 // *
 // */
-// public SIPRequest createSIPRequest( RequestLine requestLine,
-// 	boolean switchHeaders ) {
-// 	SIPRequest newRequest = new SIPRequest();
-// 	newRequest.requestLine = requestLine;
-// 	Iterator headerIterator  = this.GetHeaders();
-// 	while(headerIterator.hasNext()){
-// 		SIPHeader nextHeader = (SIPHeader)headerIterator.next();
-// 		// For BYE and cancel Set the CSeq header to the
-// 		// appropriate method.
-// 		if (nextHeader instanceof CSeq ) {
-// 		   CSeq newCseq = (CSeq) nextHeader.clone();
-// 		   nextHeader = newCseq;
-//                   try{newCseq.SetMethod(requestLine.GetMethod());}
-//                   catch(ParseException e){}
-// 		} else if ( nextHeader instanceof ViaList ) {
-// 		      Via via =  (Via)
-// 			     (((ViaList)nextHeader).GetFirst().clone());
-// 		      via.removeParameter("branch");
-// 		      nextHeader = via;
-// 		    // Cancel and ACK preserve the branch ID.
-// 		} else if (nextHeader instanceof To) {
-// 		   To to = (To) nextHeader;
-// 		   if ( switchHeaders) {
-// 			nextHeader = new From(to);
-// 			((From) nextHeader).removeTag();
-// 		    } else  {
-// 			nextHeader = (SIPHeader) to.clone();
-// 		        ((To) nextHeader).removeTag();
-// 		    }
-// 		} else if (nextHeader instanceof From) {
-// 			From from = (From) nextHeader;
-// 			if ( switchHeaders) {
-// 			   nextHeader = new To(from);
-// 			   ((To) nextHeader).removeTag();
-// 			} else  {
-// 			   nextHeader = (SIPHeader) from.clone();
-// 			   ((From) nextHeader).removeTag();
-// 			}
-// 		} else  if (nextHeader instanceof ContentLength){
-// 			ContentLength cl  =
-// 				(ContentLength) nextHeader.clone();
-// 			try{
-// 				cl.SetContentLength(0);
-// 			}
-// 			catch(InvalidArgumentException e){}
-// 			nextHeader = cl;
-// 		} else if ( !( nextHeader instanceof CallID ) 	&&
-// 			    !( nextHeader instanceof MaxForwards) ) {
-// 			// Route is kept by dialog.
-// 			// RR is added by the caller.
-// 			// Contact is added by the Caller
-// 			// Any extension headers must be added
-// 			// by the caller.
-// 			continue;
-// 		}
-// 		try {
-// 			newRequest.attachHeader(nextHeader, false);
-// 		} catch(SIPDuplicateHeaderException e){
-// 			e.printStackTrace();
-// 		}
-// 	}
-// 	return newRequest;
+func (this *SIPRequest) CreateSIPRequest(requestLine *header.RequestLine, switchHeaders bool) *SIPRequest {
+	newRequest := NewSIPRequest()
+	newRequest.requestLine = this.requestLine
+	for headerIterator := this.GetHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
+		nextHeader := headerIterator.Value.(header.ISIPHeader)
+		// For BYE and cancel Set the CSeq header to the
+		// appropriate method.
+		if newCseq, ok := nextHeader.(*header.CSeq); ok {
+			// CSeq newCseq = (CSeq) nextHeader.clone();
+			nextHeader = newCseq
+			//try{
+			newCseq.SetMethod(this.requestLine.GetMethod())
+			//}
+			//catch(ParseException e){}
+		} else if vl, ok := nextHeader.(*header.ViaList); ok {
+			via := vl.Front().Value.(*header.Via)
+			via.RemoveParameter("branch")
+			nextHeader = via
+			// Cancel and ACK preserve the branch ID.
+		} else if to, ok := nextHeader.(*header.To); ok {
+			if switchHeaders {
+				from := header.NewFrom()
+				from.CloneTo(to)
+				from.RemoveTag()
+				nextHeader = from
+			} else {
+				//to2 := to.Clone()
+				to.RemoveTag()
+				nextHeader = to
+			}
+		} else if from, ok := nextHeader.(*header.From); ok {
+			if switchHeaders {
+				to := header.NewTo()
+				to.CloneFrom(from)
+				to.RemoveTag()
+				nextHeader = to
+			} else {
+				//from2 := from.Clone()
+				from.RemoveTag()
+				nextHeader = from
+			}
+		} else if cl, ok := nextHeader.(*header.ContentLength); ok {
+			//ContentLength cl  =
+			//	(ContentLength) nextHeader.clone();
+			//try{
+			cl.SetContentLength(0)
+			//}
+			//catch(InvalidArgumentException e){}
+			nextHeader = cl
+		} else {
+			_, ok1 := nextHeader.(*header.CallID)
+			_, ok2 := nextHeader.(*header.MaxForwards)
+			if !ok1 && !ok2 {
+				// Route is kept by dialog.
+				// RR is added by the caller.
+				// Contact is added by the Caller
+				// Any extension headers must be added
+				// by the caller.
+				continue
+			}
+		}
+		//try {
+		newRequest.AttachHeader2(nextHeader, false)
+		//} catch(SIPDuplicateHeaderException e){
+		//	e.printStackTrace();
+		//}
+	}
+	return newRequest
 
-// }
+}
 
-// /** Create a BYE request from this request.
-//  *
-//  *@param switchHeaders is a boolean flag that causes from and
-//  *	isServerTransaction to headers to be swapped. Set this
-//  *	to true if you are the server of the dialog and are generating
-//  *      a BYE request for the dialog.
-//  *@return a new default BYE request.
-//  */
-// public SIPRequest createBYERequest( boolean switchHeaders) {
-// 	RequestLine requestLine =
-// 		(RequestLine) this.requestLine.clone();
-// 	requestLine.SetMethod("BYE");
-// 	return this.createSIPRequest(requestLine, switchHeaders);
-// }
+/** Create a BYE request from this request.
+ *
+ *@param switchHeaders is a boolean flag that causes from and
+ *	isServerTransaction to headers to be swapped. Set this
+ *	to true if you are the server of the dialog and are generating
+ *      a BYE request for the dialog.
+ *@return a new default BYE request.
+ */
+func (this *SIPRequest) CreateBYERequest(switchHeaders bool) *SIPRequest {
+	requestLine := this.requestLine //.clone();
+	requestLine.SetMethod("BYE")
+	return this.CreateSIPRequest(requestLine, switchHeaders)
+}
 
-// /** Create an ACK request from this request. This is suitable for
-// * generating an ACK for an INVITE  client transaction.
-// *
-// *@return an ACK request that is generated from this request.
-// *
-// */
-// public SIPRequest createACKRequest() {
-// 	RequestLine requestLine =
-// 		(RequestLine) this.requestLine.clone();
-// 	requestLine.SetMethod(Request.ACK);
-// 	return this.createSIPRequest(requestLine, false);
-// }
+/** Create an ACK request from this request. This is suitable for
+* generating an ACK for an INVITE  client transaction.
+*
+*@return an ACK request that is generated from this request.
+*
+ */
+func (this *SIPRequest) CreateACKRequest() *SIPRequest {
+	requestLine := this.requestLine //.clone();
+	requestLine.SetMethod(ACK)
+	return this.CreateSIPRequest(requestLine, false)
+}
 
-// /**
-// * Get the host from the topmost via header.
-// *
-// *@return the string representation of the host from the topmost via
-// * header.
-// */
-// public String GetViaHost() {
-// 	Via via = (Via) this.GetViaHeaders().GetFirst();
-// 	return via.GetHost();
+/**
+* Get the host from the topmost via header.
+*
+*@return the string representation of the host from the topmost via
+* header.
+ */
+func (this *SIPRequest) GetViaHost() string {
+	via := this.GetViaHeaders().Front().Value.(*header.Via)
+	return via.GetHost()
+}
 
-// }
+/**
+* Get the port from the topmost via header.
+*
+*@return the port from the topmost via header (5060 if there is
+*  no port indicated).
+ */
+func (this *SIPRequest) GetViaPort() int {
+	via := this.GetViaHeaders().Front().Value.(*header.Via)
+	if via.HasPort() {
+		return via.GetPort()
+	} else {
+		return 5060
+	}
+}
 
-// /**
-// * Get the port from the topmost via header.
-// *
-// *@return the port from the topmost via header (5060 if there is
-// *  no port indicated).
-// */
-// public int GetViaPort() {
-// 	Via via = (Via) this.GetViaHeaders().GetFirst();
-// 	if (via.hasPort()) return via.GetPort();
-// 	else return 5060;
-// }
+/**
+* Get the first line encoded.
+*
+*@return a string containing the encoded request line.
+ */
+func (this *SIPRequest) GetFirstLine() string {
+	if this.requestLine == nil {
+		return ""
+	} else {
+		return this.requestLine.String()
+	}
+}
 
-// /**
-// * Get the first line encoded.
-// *
-// *@return a string containing the encoded request line.
-// */
-// public String GetFirstLine() {
-// 	if (requestLine == nil) return nil;
-// 	else return this.requestLine.encode();
-// }
+/** Set the sip version.
+*
+*@param sipVerison -- the sip version to Set.
+ */
 
-// /** Set the sip version.
-// *
-// *@param sipVerison -- the sip version to Set.
-// */
+func (this *SIPRequest) SetSIPVersion(sipVersion string) {
+	//throws ParseException {
+	//if (sipVersion == nil || !sipVersion.equals("SIP/2.0"))
+	//	throw new ParseException ("sipVersion" , 0);
+	this.requestLine.SetSIPVersion(sipVersion)
+}
 
-// public void SetSIPVersion(String sipVersion)
-// throws ParseException {
-// 	if (sipVersion == nil || !sipVersion.equals("SIP/2.0"))
-// 		throw new ParseException ("sipVersion" , 0);
-// 	this.requestLine.SetSIPVersion(sipVersion);
-// }
+/** Get the SIP version.
+*
+*@return the SIP version from the request line.
+ */
+func (this *SIPRequest) GetSIPVersion() string {
+	return this.requestLine.GetSipVersion()
+}
 
-// /** Get the SIP version.
-// *
-// *@return the SIP version from the request line.
-// */
-// public String GetSIPVersion() {
-// 	return this.requestLine.GetSipVersion();
-// }
+func (this *SIPRequest) GetTransaction() core.GenericObject {
+	// Return an opaque pointer to the transaction object.
+	// This is for consistency checking and quick lookup.
+	return this.transactionPointer
+}
 
-//      public Object GetTransaction() {
-// // Return an opaque pointer to the transaction object.
-// // This is for consistency checking and quick lookup.
-// return this.transactionPointer;
-//     }
-
-//     public void SetTransaction( Object transaction) {
-// 	this.transactionPointer = transaction;
-//     }
+func (this *SIPRequest) SetTransaction(transaction core.GenericObject) {
+	this.transactionPointer = transaction
+}
