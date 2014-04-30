@@ -1563,20 +1563,23 @@ func (this *SIPMessage) AddUnparsed(unparsed string) {
 	this.unrecognizedHeaders.PushBack(unparsed)
 }
 
-//    /** Add a SIP header.
+//    /** Add a SIP header. remove it due to ring-package import
 //     *@param sipHeader -- string version of SIP header to add.
 //     */
 
-// func (this *SIPMessage) AddHeaderFromString( sipHeader string)  {
-//      hdrString := strings.TrimSpace(sipHeader) + "\n";
-//    // try {
-//         HeaderParser parser =
-//         ParserFactory.createParser(sipHeader);
-//         SIPHeader sh = parser.parse();
-//         this.attachHeader(sh,false);
-//     // } catch (ParseException ex) {
-//     //     this.unrecognizedHeaders.add(hdrString);
-//     // }
+// func (this *SIPMessage) AddHeaderFromString(sipHeader string) {
+// 	hdrString := strings.TrimSpace(sipHeader) + "\n"
+// 	// try {
+// 	p := parser.CreateParser(sipHeader)
+// 	sh, err := p.Parse()
+// 	if err != nil {
+// 		this.unrecognizedHeaders.PushBack(hdrString)
+// 	} else {
+// 		this.AttachHeader2(sh, false)
+// 	}
+// 	// } catch (ParseException ex) {
+// 	//
+// 	// }
 // }
 
 //    /** Get a list containing the unrecognized headers.

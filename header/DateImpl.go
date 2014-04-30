@@ -40,7 +40,7 @@ func (this *Date) String() string {
  * @return String
  */
 func (this *Date) EncodeBody() string {
-	return this.date.String()
+	return this.date.Format(time.RFC1123)
 }
 
 /**
