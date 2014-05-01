@@ -8,6 +8,7 @@ import (
 	"gosip/core"
 	"gosip/header"
 	"gosip/message"
+	"strconv"
 	"strings"
 )
 
@@ -212,7 +213,7 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 		return nil, nil
 	}
 
-	//println("I am here")
+	println("0:" + string(msgBuffer) + strconv.Itoa(s))
 
 	// Find the end of the SIP message.
 	var f int
@@ -245,7 +246,8 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 	var messageString string
 	//try {
 	messageString = string(msgBuffer[s : f-s]) //, "UTF-8");
-	//
+	println("1:" + string(messageString) + strconv.Itoa(f))
+
 	this.bufferPointer = f
 	message := []byte(messageString)
 	length := len(message)
@@ -256,7 +258,7 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 			length--
 		}
 	}
-	//println("1:" + string(message[:length]))
+	println("1:" + string(message[:length]))
 
 	// if (Parser.debug) {
 	//     for (int k = 0 ; k < length; k++) {
@@ -285,7 +287,8 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 	length = strings.Index(message1, "\n\n") + 2
 	var cooked_message1 bytes.Buffer
 
-	//println("2:" + string(message1[:length]))
+	println("2:" + string(message1[:length]))
+	println("2.x:" + string(message1))
 
 	// Handle continuations - look for a space or a tab at the start
 	// of the line and append it to the previous line.
@@ -323,7 +326,7 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 	cooked_message1.WriteString("\n\n")
 	cooked_message1.WriteString(message1[length:])
 
-	//println("3:" + cooked_message1.String())
+	println("3:" + cooked_message1.String())
 
 	// Separate the string out into substrings for
 	// error reporting.
