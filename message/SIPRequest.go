@@ -516,7 +516,7 @@ func (this *SIPRequest) CreateResponse2(statusCode int, reasonPhrase string) *SI
 		newResponse.SetReasonPhrase(newResponse.GetReasonPhraseFromInt(statusCode))
 	}
 
-	for headerIterator := this.GetHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
+	for headerIterator := this.getHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
 		nextHeader := headerIterator.Value.(header.ISIPHeader)
 		if _, ok := nextHeader.(*header.From); ok {
 			newResponse.AttachHeader2(nextHeader, false)
@@ -582,7 +582,7 @@ func (this *SIPRequest) CreateCancelRequest() *SIPRequest {
 	newRequest.SetRequestLine(this.requestLine)
 	newRequest.SetMethod(CANCEL)
 
-	for headerIterator := this.GetHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
+	for headerIterator := this.getHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
 		nextHeader := headerIterator.Value.(header.ISIPHeader)
 		if _, ok := nextHeader.(*header.RequireList); ok {
 			continue
@@ -637,7 +637,7 @@ func (this *SIPRequest) CreateAckRequest(responseToHeader *header.To) *SIPReques
 	newRequest := NewSIPRequest()
 	newRequest.SetRequestLine(this.requestLine)
 	newRequest.SetMethod(ACK)
-	for headerIterator := this.GetHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
+	for headerIterator := this.getHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
 		nextHeader := headerIterator.Value.(header.ISIPHeader)
 		if _, ok := nextHeader.(*header.RouteList); ok {
 			// Ack and cancel do not Get ROUTE headers.
@@ -743,7 +743,7 @@ func (this *SIPRequest) CreateAckRequest(responseToHeader *header.To) *SIPReques
 func (this *SIPRequest) CreateSIPRequest(requestLine *header.RequestLine, switchHeaders bool) *SIPRequest {
 	newRequest := NewSIPRequest()
 	newRequest.requestLine = this.requestLine
-	for headerIterator := this.GetHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
+	for headerIterator := this.getHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
 		nextHeader := headerIterator.Value.(header.ISIPHeader)
 		// For BYE and cancel Set the CSeq header to the
 		// appropriate method.

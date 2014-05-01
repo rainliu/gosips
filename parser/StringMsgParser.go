@@ -2,6 +2,7 @@ package parser
 
 import (
 	//"bytes"
+	"bytes"
 	"errors"
 	"gosip/address"
 	"gosip/core"
@@ -190,135 +191,152 @@ func (this *StringMsgParser) IsBodyString() bool {
  *			the rest of the buffer is discarded).
  * @see ParseExceptionListener
  */
-// func (this *StringMsgParser) ParseSIPMessage(msgBuffer []byte) (*message.SIPMessage, error) {
-// 	//throws ParseException {
-// 	this.bufferPointer = 0
-// 	this.bodyIsString = false
-// 	//retval := new Vector();
-// 	this.currentMessageBytes = msgBuffer
-// 	var s int
-// 	// Squeeze out leading CRLF
-// 	// Squeeze out the leading nulls (otherwise the parser will crash)
-// 	// Bug noted by Will Sullin of Callcast
-// 	for s = this.bufferPointer; s < len(msgBuffer); s++ {
-// 		if msgBuffer[s] != '\r' && msgBuffer[s] != '\n' {
-// 			// msgBuffer[s] != '\0' {
-// 			break
-// 		}
-// 	}
+func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.Message, error) {
+	//throws ParseException {
+	this.bufferPointer = 0
+	this.bodyIsString = false
+	//retval := new Vector();
+	this.currentMessageBytes = msgBuffer
+	var s int
+	// Squeeze out leading CRLF
+	// Squeeze out the leading nulls (otherwise the parser will crash)
+	// Bug noted by Will Sullin of Callcast
+	for s = this.bufferPointer; s < len(msgBuffer); s++ {
+		if msgBuffer[s] != '\r' && msgBuffer[s] != '\n' {
+			// msgBuffer[s] != '\0' {
+			break
+		}
+	}
 
-// 	if s == len(msgBuffer) {
-// 		return nil, nil
-// 	}
+	if s == len(msgBuffer) {
+		return nil, nil
+	}
 
-// 	// Find the end of the SIP message.
-// 	var f int
-// 	for f = s; f < len(msgBuffer)-4; f++ {
-// 		if msgBuffer[f] == '\r' &&
-// 			msgBuffer[f+1] == '\n' &&
-// 			msgBuffer[f+2] == '\r' &&
-// 			msgBuffer[f+3] == '\n' {
-// 			break
-// 		}
-// 	}
-// 	if f < len(msgBuffer) {
-// 		f += 4
-// 	} else {
-// 		// Could not find CRLFCRLF end of message so look for LFLF
-// 		for f = s; f < len(msgBuffer)-2; f++ {
-// 			if msgBuffer[f] == '\n' &&
-// 				msgBuffer[f] == '\n' {
-// 				break
-// 			}
-// 		}
-// 		if f < len(msgBuffer) {
-// 			f += 2
-// 		} else {
-// 			return nil, errors.New("ParseException: Message not terminated")
-// 		}
-// 	}
+	//println("I am here")
 
-// 	// Encode the body as a UTF-8 string.
-// 	var messageString string
-// 	//try {
-// 	messageString = string(msgBuffer[s : f-s]) //, "UTF-8");
-// 	//
-// 	this.bufferPointer = f
-// 	message := []byte(messageString)
-// 	length := len(message)
-// 	// Get rid of CR to make it uniform for the parser.
-// 	for k := 0; k < length; k++ {
-// 		if message[k] == '\r' {
-// 			copy(message[k:length-1], message[k+1:length])
-// 			length--
-// 		}
-// 	}
+	// Find the end of the SIP message.
+	var f int
+	for f = s; f < len(msgBuffer)-4; f++ {
+		if msgBuffer[f] == '\r' &&
+			msgBuffer[f+1] == '\n' &&
+			msgBuffer[f+2] == '\r' &&
+			msgBuffer[f+3] == '\n' {
+			break
+		}
+	}
+	if f < len(msgBuffer) {
+		f += 4
+	} else {
+		// Could not find CRLFCRLF end of message so look for LFLF
+		for f = s; f < len(msgBuffer)-2; f++ {
+			if msgBuffer[f] == '\n' &&
+				msgBuffer[f] == '\n' {
+				break
+			}
+		}
+		if f < len(msgBuffer) {
+			f += 2
+		} else {
+			return nil, errors.New("ParseException: Message not terminated")
+		}
+	}
 
-// 	// if (Parser.debug) {
-// 	//     for (int k = 0 ; k < length; k++) {
-// 	//         rawMessage1 = rawMessage1 + "[" + message.charAt(k) +"]";
-// 	//     }
-// 	// }
+	// Encode the body as a UTF-8 string.
+	var messageString string
+	//try {
+	messageString = string(msgBuffer[s : f-s]) //, "UTF-8");
+	//
+	this.bufferPointer = f
+	message := []byte(messageString)
+	length := len(message)
+	// Get rid of CR to make it uniform for the parser.
+	for k := 0; k < length; k++ {
+		if message[k] == '\r' {
+			copy(message[k:length-1], message[k+1:length])
+			length--
+		}
+	}
+	//println("1:" + string(message[:length]))
 
-// 	// The following can be written more efficiently in a single pass
-// 	// but it is somewhat tricky.
-// 	tokenizer := core.NewStringTokenizer(string(message[:length])) //,"\n",true);
-// 	var cooked_message bytes.Buffer                                //= new StringBuffer();
-// 	//try {
-// 	for tokenizer.HasMoreChars() { //hasMoreElements() ) {
-// 		nexttok := tokenizer.GetNextTokenByDelim('\n') //nextToken();
-// 		// Ignore blank lines with leading spaces or tabs.
-// 		if strings.TrimSpace(nexttok) == "" {
-// 			cooked_message.WriteString("\n")
-// 		} else {
-// 			cooked_message.WriteString(nexttok)
-// 		}
-// 	}
-// 	// } catch (NoSuchElementException ex) {
-// 	// }
+	// if (Parser.debug) {
+	//     for (int k = 0 ; k < length; k++) {
+	//         rawMessage1 = rawMessage1 + "[" + message.charAt(k) +"]";
+	//     }
+	// }
 
-// 	message1 := cooked_message.String()
-// 	length = message1.indexOf("\n\n") + 2
+	// The following can be written more efficiently in a single pass
+	// but it is somewhat tricky.
+	tokenizer := core.NewStringTokenizer(string(message[:length])) //,"\n",true);
+	var cooked_message bytes.Buffer                                //= new StringBuffer();
+	//try {
+	for tokenizer.HasMoreChars() { //hasMoreElements() ) {
+		nexttok := tokenizer.NextToken() //nextToken();
+		//println("1.x:" + nexttok)
+		// Ignore blank lines with leading spaces or tabs.
+		if strings.TrimSpace(nexttok) == "" {
+			cooked_message.WriteString("\n")
+		} else {
+			cooked_message.WriteString(nexttok)
+		}
+	}
+	// } catch (NoSuchElementException ex) {
+	// }
+	message1 := cooked_message.String()
+	length = strings.Index(message1, "\n\n") + 2
+	var cooked_message1 bytes.Buffer
 
-// 	// Handle continuations - look for a space or a tab at the start
-// 	// of the line and append it to the previous line.
+	//println("2:" + string(message1[:length]))
 
-// 	for k := 0; k < length-1; {
-// 		if cooked_message[k] == '\n' {
-// 			if cooked_message[k+1] == '\t' || cooked_message[k+1] == ' ' {
-// 				cooked_message.deleteCharAt(k)
-// 				cooked_message.deleteCharAt(k)
-// 				length--
-// 				length--
-// 				if k == length {
-// 					break
-// 				} else {
-// 					continue
-// 				}
-// 			}
+	// Handle continuations - look for a space or a tab at the start
+	// of the line and append it to the previous line.
+	for k := 0; k < length-1; {
+		if message1[k] == '\n' {
+			if message1[k+1] == '\t' || message1[k+1] == ' ' {
+				//cooked_message.deleteCharAt(k)
+				//cooked_message.deleteCharAt(k)
+				//length--
+				//length--
+				k++
+				k++
+				if k == length {
+					break
+				} else {
+					continue
+				}
+			} else {
+				//print(string(message1[k]))
+				cooked_message1.WriteByte(message1[k])
+			}
 
-// 			if cooked_message[k+1] == '\n' {
-// 				cooked_message.insert(k, '\n')
-// 				length++
-// 				k++
-// 			}
-// 		}
-// 		k++
-// 	}
-// 	cooked_message.WriteString("\n\n")
+			if message1[k+1] == '\n' {
+				//print(string('\n'))
+				cooked_message1.WriteByte('\n')
+				//length++
+				//k++
+			}
+		} else {
+			//print(string(message1[k]))
+			cooked_message1.WriteByte(message1[k])
+		}
+		k++
+	}
+	cooked_message1.WriteString("\n\n")
+	cooked_message1.WriteString(message1[length:])
 
-// 	// Separate the string out into substrings for
-// 	// error reporting.
-// 	this.currentMessage = cooked_message.String()
-// 	sipmsg := this.ParseMessage(this.currentMessage)
-// 	if this.readBody && sipmsg.GetContentLength() != null && sipmsg.GetContentLength().GetContentLength() != 0 {
-// 		this.contentLength = sipmsg.GetContentLength().GetContentLength()
-// 		body := this.GetBodyAsBytes()
-// 		sipmsg.SetMessageContent(body)
-// 	}
-// 	// System.out.println("Parsed = " + sipmsg);
-// 	return sipmsg, nil
-// }
+	//println("3:" + cooked_message1.String())
+
+	// Separate the string out into substrings for
+	// error reporting.
+	this.currentMessage = cooked_message1.String()
+	sipmsg, _ := this.ParseMessage(this.currentMessage)
+	if this.readBody && sipmsg.GetContentLength() != nil && sipmsg.GetContentLength().GetContentLength() != 0 {
+		this.contentLength = sipmsg.GetContentLength().GetContentLength()
+		body := this.GetBodyAsBytes()
+		sipmsg.SetMessageContentFromByte(body)
+	}
+	// System.out.println("Parsed = " + sipmsg);
+	return sipmsg, nil
+}
 
 //     /**
 //      * Parse a buffer containing one or more SIP Messages  and return an array of
@@ -458,9 +476,9 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
 	this.messageHeaders = make(map[int]string)           // new Vector(); // A list of headers for error reporting
 	//try {
 	for tokenizer.HasMoreChars() { //hasMoreElements() ) {
-		nexttok := tokenizer.GetNextTokenByDelim('\n') //nextToken();
+		nexttok := tokenizer.NextToken() //nextToken();
 		if nexttok == "\n" {
-			nextnexttok := tokenizer.GetNextTokenByDelim('\n') //nextToken();
+			nextnexttok := tokenizer.NextToken() //nextToken();
 			if nextnexttok == "\n" {
 				break
 			} else {
@@ -478,7 +496,7 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
 	firstLine := this.currentHeader
 	// System.out.println("first Line " + firstLine);
 
-	if !strings.Contains(firstLine, header.SIPConstants_SIP_VERSION_STRING) {
+	if !strings.HasPrefix(firstLine, header.SIPConstants_SIP_VERSION_STRING) {
 		sipmsg = message.NewSIPRequest()
 		//try {
 		rl, _ := NewRequestLineParser(firstLine + "\n").Parse()
@@ -703,64 +721,9 @@ func (this *StringMsgParser) GetCurrentHeader() string {
 	return this.currentHeader
 }
 
-//     /**
-//      * Get the current line number.
-//      */
-//     public int GetCurrentLineNumber() { return currentLine; }
-
-/*
-    public static void main(String[] args) throws ParseException {
-        String messages[] = {
-"SIP/2.0 180 Ringing\r\n"+
-"Via: SIP/2.0/UDP 172.18.1.29:5060;branch=z9hG4bK43fc10fb4446d55fc5c8f969607991f4\r\n"+
-"To: \"0440\" <sip:0440@212.209.220.131>;tag=2600\r\n"+
-"From: \"Andreas\" <sip:andreas@e-horizon.se>;tag=8524\r\n"+
-"Call-ID: f51a1851c5f570606140f14c8eb64fd3@172.18.1.29\r\n"+
-"CSeq: 1 INVITE\r\n" +
-"Max-Forwards: 70\r\n"+
-"Record-Route: <sip:212.209.220.131:5060>\r\n"+
-"Content-Length: 0\r\n\r\n",
-
-"REGISTER sip:nist.gov SIP/2.0\r\n"+
-"Via: SIP/2.0/UDP 129.6.55.182:14826\r\n"+
-"Max-Forwards: 70\r\n"+
-"From: <sip:mranga@nist.gov>;tag=6fcd5c7ace8b4a45acf0f0cd539b168b;epid=0d4c418ddf\r\n"+
-"To: <sip:mranga@nist.gov>\r\n"+
-"Call-ID: c5679907eb954a8da9f9dceb282d7230@129.6.55.182\r\n"+
-"CSeq: 1 REGISTER\r\n"+
-"Contact: <sip:129.6.55.182:14826>;methods=\"INVITE, MESSAGE, INFO, SUBSCRIBE, OPTIONS, BYE, CANCEL, NOTIFY, ACK, REFER\"\r\n"+
-"User-Agent: RTC/(Microsoft RTC)\r\n"+
-"Event:  registration\r\n"+
-"Allow-Events: presence\r\n"+
-"Content-Length: 0\r\n\r\n"+
-
-    "INVITE sip:littleguy@there.com:5060 SIP/2.0\r\n"+
-    "Via: SIP/2.0/UDP 65.243.118.100:5050\r\n" +
-    "From: M. Ranganathan  <sip:M.Ranganathan@sipbakeoff.com>;tag=1234\r\n"+
-    "To: \"littleguy@there.com\" <sip:littleguy@there.com:5060> \r\n" +
-    "Call-ID: Q2AboBsaGn9!?x6@sipbakeoff.com \r\n" +
-    "CSeq: 1 INVITE \r\n" +
-    "Content-Length: 247\r\n\r\n"+
-    "v=0\r\n"+
-    "o=4855 13760799956958020 13760799956958020 IN IP4  129.6.55.78\r\n"+
-    "s=mysession session\r\n"+
-    "p=+46 8 52018010\r\n"+
-    "c=IN IP4  129.6.55.78\r\n"+
-    "t=0 0\r\n"+
-    "m=audio 6022 RTP/AVP 0 4 18\r\n"+
-    "a=rtpmap:0 PCMU/8000\r\n"+
-    "a=rtpmap:4 G723/8000\r\n"+
-    "a=rtpmap:18 G729A/8000\r\n"+
-    "a=ptime:20\r\n"
-
-        };
-
-        for (int i = 0; i < messages.length; i++) {
-            StringMsgParser smp = new StringMsgParser();
-            SIPMessage sipMessage = smp.parseSIPMessage(messages[i]);
-            System.out.println("encoded " + sipMessage.toString());
-	    System.out.println("dialog id = " + sipMessage.GetDialogId(false));
-        }
-
-
-    }*/
+/**
+ * Get the current line number.
+ */
+func (this *StringMsgParser) GetCurrentLineNumber() int {
+	return this.currentLine
+}

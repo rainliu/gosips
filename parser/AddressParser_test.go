@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -11,6 +12,12 @@ func TestAddressParser(t *testing.T) {
 		"<sip:+1-650-555-2222@ss1.wcom.com;user=phone>",
 		"M. Ranganathan <sip:mranga@nist.gov>",
 	}
+	var tvo = []string{
+		"<sip:user@example.com?Route=%3csip:sip.example.com%3e>",
+		"\"M. Ranganathan\" <sip:mranga@nist.gov>",
+		"<sip:+1-650-555-2222@ss1.wcom.com;user=phone>",
+		"\"M. Ranganathan\" <sip:mranga@nist.gov>",
+	}
 
 	for i := 0; i < len(tvi); i++ {
 		addressParser := NewAddressParser(tvi[i])
@@ -18,7 +25,14 @@ func TestAddressParser(t *testing.T) {
 			t.Log(err)
 			t.Fail()
 		} else {
-			t.Log("encoded = " + addr.String())
+			d := addr.String()
+			s := tvo[i]
+
+			if strings.TrimSpace(d) != strings.TrimSpace(s) {
+				t.Log("origin = " + s)
+				t.Log("failed = " + d)
+				t.Fail()
+			}
 		}
 	}
 }

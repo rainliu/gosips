@@ -94,7 +94,7 @@ type Message interface { //extends Cloneable, Serializable
 	 * the Message, this method returns an empty ListIterator if no Headers
 	 * exist of this header type.
 	 */
-	GetHeadersFromString(headerName string) header.IList //*list.List //ListIterator;
+	GetHeaders(headerName string) header.IList //*list.List //ListIterator;
 
 	/**
 	 * Gets the Header of the specified name in this Message. If multiple
@@ -325,4 +325,6 @@ type Message interface { //extends Cloneable, Serializable
 	 * representing the same SIP Message as this, <code>false</code> otherwise.
 	 */
 	//Equals(object interface{}) bool
+
+	SetMessageContentFromByte(content []byte)
 }

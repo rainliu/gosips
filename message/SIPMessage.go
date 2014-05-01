@@ -931,7 +931,7 @@ func (this *SIPMessage) HasContent() bool {
 //    /**Return an iterator for the list of headers in this message.
 //     *@return an Iterator for the headers of this message.
 //     */
-func (this *SIPMessage) GetHeaders() header.IList {
+func (this *SIPMessage) getHeaders() header.IList {
 	return this.headers
 }
 
@@ -1409,7 +1409,7 @@ func (this *SIPMessage) RemoveContent() {
 //     *@param headerName is the name of the header to Get.
 //     *@return a header or header list that contians the retrieved header.
 //     */
-func (this *SIPMessage) GetHeadersFromString(headerName string) header.IList {
+func (this *SIPMessage) GetHeaders(headerName string) header.IList {
 	// if (headerName == nil)
 	//     throw new NullPointerException
 	//     ("nil headerName");
