@@ -1,6 +1,14 @@
 package parser
 
-import "gosip/header"
+import (
+	//"bytes"
+	"errors"
+	"gosip/address"
+	"gosip/core"
+	"gosip/header"
+	"gosip/message"
+	"strings"
+)
 
 /**
  * Parse SIP message and parts of SIP messages such as URI's etc
@@ -38,7 +46,7 @@ type StringMsgParser struct {
 	// the message being parsed. (for error reporting)
 	//private ParseExceptionListener parseExceptionListener;
 
-	messageHeaders map[header.ISIPHeader]header.ISIPHeader // Message headers
+	messageHeaders map[int]string //header.ISIPHeader // Message headers
 
 	bufferPointer int
 
@@ -182,127 +190,135 @@ func (this *StringMsgParser) IsBodyString() bool {
  *			the rest of the buffer is discarded).
  * @see ParseExceptionListener
  */
-//  func (this *StringMsgParser) ParseSIPMessage(byte[] msgBuffer) (*message.SIPMessage, error){
-//  //throws ParseException {
-//      this.bufferPointer = 0;
-//      this.bodyIsString = false;
-//       retval := new Vector();
-//      this.currentMessageBytes = msgBuffer;
-//          var s int;
-//          // Squeeze out leading CRLF
-//          // Squeeze out the leading nulls (otherwise the parser will crash)
-//          // Bug noted by Will Sullin of Callcast
-//          for (s = bufferPointer; s < msgBuffer.length  ; s++) {
-//              if ((char)msgBuffer[s] != '\r'  &&
-//              (char)msgBuffer[s] != '\n'  &&
-//              (char)msgBuffer[s] != '\0' ) break;
-//          }
+// func (this *StringMsgParser) ParseSIPMessage(msgBuffer []byte) (*message.SIPMessage, error) {
+// 	//throws ParseException {
+// 	this.bufferPointer = 0
+// 	this.bodyIsString = false
+// 	//retval := new Vector();
+// 	this.currentMessageBytes = msgBuffer
+// 	var s int
+// 	// Squeeze out leading CRLF
+// 	// Squeeze out the leading nulls (otherwise the parser will crash)
+// 	// Bug noted by Will Sullin of Callcast
+// 	for s = this.bufferPointer; s < len(msgBuffer); s++ {
+// 		if msgBuffer[s] != '\r' && msgBuffer[s] != '\n' {
+// 			// msgBuffer[s] != '\0' {
+// 			break
+// 		}
+// 	}
 
-//          if (s == msgBuffer.length) return null;
+// 	if s == len(msgBuffer) {
+// 		return nil, nil
+// 	}
 
-//          // Find the end of the SIP message.
-//          int  f;
-//          for (f = s ; f < msgBuffer.length -4 ; f ++) {
-//              if ( (char) msgBuffer[f]   == '\r' &&
-//              (char) msgBuffer[f+1] == '\n' &&
-//              (char) msgBuffer[f+2] == '\r' &&
-//              (char) msgBuffer[f+3] == '\n') {
-//                  break;
-//              }
-//          }
-//          if (f < msgBuffer.length) f +=4;
-//          else {
-//              // Could not find CRLFCRLF end of message so look for LFLF
-//              for (f = s; f < msgBuffer.length -2 ; f++) {
-//                  if ((char)msgBuffer[f] == '\n' &&
-//                  (char)msgBuffer[f] == '\n') break;
-//              }
-//              if (f < msgBuffer.length) f += 2;
-//              else throw new ParseException("Message not terminated" , 0 );
-//          }
+// 	// Find the end of the SIP message.
+// 	var f int
+// 	for f = s; f < len(msgBuffer)-4; f++ {
+// 		if msgBuffer[f] == '\r' &&
+// 			msgBuffer[f+1] == '\n' &&
+// 			msgBuffer[f+2] == '\r' &&
+// 			msgBuffer[f+3] == '\n' {
+// 			break
+// 		}
+// 	}
+// 	if f < len(msgBuffer) {
+// 		f += 4
+// 	} else {
+// 		// Could not find CRLFCRLF end of message so look for LFLF
+// 		for f = s; f < len(msgBuffer)-2; f++ {
+// 			if msgBuffer[f] == '\n' &&
+// 				msgBuffer[f] == '\n' {
+// 				break
+// 			}
+// 		}
+// 		if f < len(msgBuffer) {
+// 			f += 2
+// 		} else {
+// 			return nil, errors.New("ParseException: Message not terminated")
+// 		}
+// 	}
 
-//          // Encode the body as a UTF-8 string.
-//          String messageString = null;
-//          try {
-//              messageString = new String(msgBuffer,s, f - s, "UTF-8");
-//          } catch( UnsupportedEncodingException ex) {
-//              throw new ParseException("Bad message encoding!",0);
-//          }
-//          bufferPointer = f;
-//          StringBuffer message = new StringBuffer(messageString);
-//          int length = message.length();
-//          // Get rid of CR to make it uniform for the parser.
-//          for ( int k = 0; k < length ; k++ ) {
-//              if (message.charAt(k) == '\r' ) {
-//                  message.deleteCharAt(k);
-//                  length --;
-//              }
-//          }
+// 	// Encode the body as a UTF-8 string.
+// 	var messageString string
+// 	//try {
+// 	messageString = string(msgBuffer[s : f-s]) //, "UTF-8");
+// 	//
+// 	this.bufferPointer = f
+// 	message := []byte(messageString)
+// 	length := len(message)
+// 	// Get rid of CR to make it uniform for the parser.
+// 	for k := 0; k < length; k++ {
+// 		if message[k] == '\r' {
+// 			copy(message[k:length-1], message[k+1:length])
+// 			length--
+// 		}
+// 	}
 
-//          if (Parser.debug) {
-//              for (int k = 0 ; k < length; k++) {
-//                  rawMessage1 = rawMessage1 + "[" + message.charAt(k) +"]";
-//              }
-//          }
+// 	// if (Parser.debug) {
+// 	//     for (int k = 0 ; k < length; k++) {
+// 	//         rawMessage1 = rawMessage1 + "[" + message.charAt(k) +"]";
+// 	//     }
+// 	// }
 
-//          // The following can be written more efficiently in a single pass
-//          // but it is somewhat tricky.
-//          java.util.StringTokenizer tokenizer = new java.util.StringTokenizer
-//          (message.toString(),"\n",true);
-//          StringBuffer cooked_message = new StringBuffer();
-//          try {
-//              while( tokenizer.hasMoreElements() ) {
-//                  String nexttok = tokenizer.nextToken();
-//                  // Ignore blank lines with leading spaces or tabs.
-//                  if (nexttok.trim().equals("")) cooked_message.append("\n");
-//                  else cooked_message.append(nexttok);
-//              }
-//          } catch (NoSuchElementException ex) {
-//          }
+// 	// The following can be written more efficiently in a single pass
+// 	// but it is somewhat tricky.
+// 	tokenizer := core.NewStringTokenizer(string(message[:length])) //,"\n",true);
+// 	var cooked_message bytes.Buffer                                //= new StringBuffer();
+// 	//try {
+// 	for tokenizer.HasMoreChars() { //hasMoreElements() ) {
+// 		nexttok := tokenizer.GetNextTokenByDelim('\n') //nextToken();
+// 		// Ignore blank lines with leading spaces or tabs.
+// 		if strings.TrimSpace(nexttok) == "" {
+// 			cooked_message.WriteString("\n")
+// 		} else {
+// 			cooked_message.WriteString(nexttok)
+// 		}
+// 	}
+// 	// } catch (NoSuchElementException ex) {
+// 	// }
 
-//          String message1 = cooked_message.toString();
-//          length = message1.indexOf("\n\n") + 2;
+// 	message1 := cooked_message.String()
+// 	length = message1.indexOf("\n\n") + 2
 
-//          // Handle continuations - look for a space or a tab at the start
-//          // of the line and append it to the previous line.
+// 	// Handle continuations - look for a space or a tab at the start
+// 	// of the line and append it to the previous line.
 
-//          for ( int k = 0 ; k < length - 1 ;  ) {
-//              if (cooked_message.charAt(k) == '\n') {
-//                  if ( cooked_message.charAt(k+1) == '\t' ||
-//                  cooked_message.charAt(k+1) == ' ') {
-//                      cooked_message.deleteCharAt(k);
-//                      cooked_message.deleteCharAt(k);
-//                      length --;
-//                      length --;
-//                      if ( k == length) break;
-//                      continue;
-//                  }
+// 	for k := 0; k < length-1; {
+// 		if cooked_message[k] == '\n' {
+// 			if cooked_message[k+1] == '\t' || cooked_message[k+1] == ' ' {
+// 				cooked_message.deleteCharAt(k)
+// 				cooked_message.deleteCharAt(k)
+// 				length--
+// 				length--
+// 				if k == length {
+// 					break
+// 				} else {
+// 					continue
+// 				}
+// 			}
 
-//                  if ( cooked_message.charAt(k+1) == '\n') {
-//                      cooked_message.insert(k,'\n');
-//                      length ++;
-//                      k ++;
-//                  }
-//              }
-//              k++;
-//          }
-//          cooked_message.append("\n\n");
+// 			if cooked_message[k+1] == '\n' {
+// 				cooked_message.insert(k, '\n')
+// 				length++
+// 				k++
+// 			}
+// 		}
+// 		k++
+// 	}
+// 	cooked_message.WriteString("\n\n")
 
-//          // Separate the string out into substrings for
-//          // error reporting.
-//          currentMessage = cooked_message.toString();
-//          SIPMessage sipmsg = this.parseMessage(currentMessage);
-//   if (readBody && sipmsg.GetContentLength() != null
-//       && sipmsg.GetContentLength().GetContentLength() != 0) {
-//       this.contentLength =
-// sipmsg.GetContentLength().GetContentLength();
-//       byte body[] = GetBodyAsBytes();
-//       sipmsg.SetMessageContent(body);
-//   }
-//   // System.out.println("Parsed = " + sipmsg);
-//   return sipmsg;
-
-//  }
+// 	// Separate the string out into substrings for
+// 	// error reporting.
+// 	this.currentMessage = cooked_message.String()
+// 	sipmsg := this.ParseMessage(this.currentMessage)
+// 	if this.readBody && sipmsg.GetContentLength() != null && sipmsg.GetContentLength().GetContentLength() != 0 {
+// 		this.contentLength = sipmsg.GetContentLength().GetContentLength()
+// 		body := this.GetBodyAsBytes()
+// 		sipmsg.SetMessageContent(body)
+// 	}
+// 	// System.out.println("Parsed = " + sipmsg);
+// 	return sipmsg, nil
+// }
 
 //     /**
 //      * Parse a buffer containing one or more SIP Messages  and return an array of
@@ -424,262 +440,268 @@ func (this *StringMsgParser) IsBodyString() bool {
 
 //     }
 
-//     /** This is called repeatedly by parseSIPMessage to parse
-//      * the contents of a message buffer. This assumes the message
-//      * already has continuations etc. taken care of.
-//      * prior to its being called.
-//      */
-//     private SIPMessage parseMessage(String currentMessage )
-//     throws  ParseException {
-//         // position line counter at the end of the
-//         // sip messages.
-// 	// System.out.println("parsing " + currentMessage);
+/** This is called repeatedly by parseSIPMessage to parse
+ * the contents of a message buffer. This assumes the message
+ * already has continuations etc. taken care of.
+ * prior to its being called.
+ */
+func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Message, error) {
+	//throws  ParseException {
+	// position line counter at the end of the
+	// sip messages.
+	// System.out.println("parsing " + currentMessage);
 
-//         int sip_message_size = 0; // # of lines in the sip message
-//         SIPMessage sipmsg = null ;
-//         java.util.StringTokenizer tokenizer = new java.util.StringTokenizer
-//         (currentMessage,"\n",true);
-//         messageHeaders = new Vector(); // A list of headers for error reporting
-//         try {
-//             while( tokenizer.hasMoreElements() ) {
-//                 String nexttok = tokenizer.nextToken();
-//                 if (nexttok.equals("\n")) {
-//                     String nextnexttok = tokenizer.nextToken();
-//                     if (nextnexttok.equals("\n") ) {
-// 			break;
-//                     } else messageHeaders.add(nextnexttok);
-//                 } else messageHeaders.add(nexttok);
-//                 sip_message_size ++;
-//             }
-//         } catch (NoSuchElementException ex) {
-//         }
-//         currentLine = 0;
-//         currentHeader = (String) messageHeaders.elementAt(currentLine);
-//         String firstLine = currentHeader;
-//         // System.out.println("first Line " + firstLine);
+	sip_message_size := 0 // # of lines in the sip message
+	var sipmsg message.Message
 
-//         if (!firstLine.startsWith(SIPConstants.SIP_VERSION_STRING))  {
-//             sipmsg = new SIPRequest();
-//             try {
-//                 RequestLine rl =
-//                 new RequestLineParser(firstLine+ "\n").parse();
-//                 ((SIPRequest) sipmsg).SetRequestLine(rl);
-//             } catch (ParseException ex) {
-//                     if (this.parseExceptionListener != null)
-//                         this.parseExceptionListener.handleException
-//                         (ex,sipmsg, RequestLine.class,
-//                         firstLine,currentMessage);
-//                     else throw ex;
+	tokenizer := core.NewStringTokenizer(currentMessage) //,"\n",true);
+	this.messageHeaders = make(map[int]string)           // new Vector(); // A list of headers for error reporting
+	//try {
+	for tokenizer.HasMoreChars() { //hasMoreElements() ) {
+		nexttok := tokenizer.GetNextTokenByDelim('\n') //nextToken();
+		if nexttok == "\n" {
+			nextnexttok := tokenizer.GetNextTokenByDelim('\n') //nextToken();
+			if nextnexttok == "\n" {
+				break
+			} else {
+				this.messageHeaders[sip_message_size] = nextnexttok
+			}
+		} else {
+			this.messageHeaders[sip_message_size] = nexttok
+		}
+		sip_message_size++
+	}
+	// } catch (NoSuchElementException ex) {
+	// }
+	this.currentLine = 0
+	this.currentHeader = this.messageHeaders[this.currentLine]
+	firstLine := this.currentHeader
+	// System.out.println("first Line " + firstLine);
 
-//             }
-//         } else {
-//             sipmsg = new SIPResponse();
-//             try {
-//                 StatusLine sl = new StatusLineParser(firstLine + "\n").parse();
-//                 ((SIPResponse) sipmsg).SetStatusLine(sl);
-//             } catch (ParseException ex) {
-//                     if (this.parseExceptionListener != null)   {
-//                         this.parseExceptionListener.handleException
-//                         (ex,sipmsg,
-//                         StatusLine.class,
-//                         firstLine,currentMessage);
-//                     } else throw ex;
+	if !strings.Contains(firstLine, header.SIPConstants_SIP_VERSION_STRING) {
+		sipmsg = message.NewSIPRequest()
+		//try {
+		rl, _ := NewRequestLineParser(firstLine + "\n").Parse()
+		sipmsg.(*message.SIPRequest).SetRequestLine(rl)
+		// } catch (ParseException ex) {
+		//         if (this.parseExceptionListener != null)
+		//             this.parseExceptionListener.handleException
+		//             (ex,sipmsg, RequestLine.class,
+		//             firstLine,currentMessage);
+		//         else throw ex;
 
-//             }
-//         }
+		// }
+	} else {
+		sipmsg = message.NewSIPResponse()
+		//try {
+		sl, _ := NewStatusLineParser(firstLine + "\n").Parse()
+		sipmsg.(*message.SIPResponse).SetStatusLine(sl)
+		// } catch (ParseException ex) {
+		//         if (this.parseExceptionListener != null)   {
+		//             this.parseExceptionListener.handleException
+		//             (ex,sipmsg,
+		//             StatusLine.class,
+		//             firstLine,currentMessage);
+		//         } else throw ex;
 
-//         for (int i = 1;  i < messageHeaders.size(); i++){
-//             String hdrstring = (String) messageHeaders.elementAt(i);
-//             if (hdrstring == null || hdrstring.trim().equals("")) continue;
-// 	    HeaderParser hdrParser = null;
-// 	    try {
-//                  hdrParser = ParserFactory.createParser(hdrstring + "\n");
-//             } catch (ParseException ex)  {
-//                 this.parseExceptionListener.handleException
-//                   ( ex, sipmsg,  null , hdrstring,currentMessage);
-// 		continue;
-// 	    }
-//             try {
-//                 SIPHeader sipHeader = hdrParser.parse();
-//                 sipmsg.attachHeader(sipHeader,false);
-//             } catch (ParseException ex) {
-//                 if (this.parseExceptionListener != null) {
-//                     String hdrName = Lexer.GetHeaderName(hdrstring);
-//                     Class hdrClass = NameMap.GetClassFromName(hdrName);
-//                     try {
-//                         if (hdrClass == null) {
-//                             hdrClass = Class.forName
-//                             (PackageNames.SIPHEADERS_PACKAGE
-//                             + ".ExtensionHeaderImpl");
-//                         }
-//                         this.parseExceptionListener.handleException
-//                         (ex,sipmsg, hdrClass,
-//                         hdrstring,currentMessage);
-//                     } catch (ClassNotFoundException ex1) {
-//                         InternalErrorHandler.handleException(ex1);
-//                     }
-//                 }
+		// }
+	}
 
-//             }
-//         }
+	for i := 1; i < len(this.messageHeaders); i++ {
+		hdrstring := this.messageHeaders[i]
+		if hdrstring == "" || strings.TrimSpace(hdrstring) == "" {
+			continue
+		}
+		///try {
+		hdrParser := CreateParser(hdrstring + "\n")
+		//           } catch (ParseException ex)  {
+		//               this.parseExceptionListener.handleException
+		//                 ( ex, sipmsg,  null , hdrstring,currentMessage);
+		// continue;
+		//    }
+		//try {
+		sipHeader, _ := hdrParser.Parse()
+		if _, ok := sipmsg.(*message.SIPRequest); ok {
+			sipmsg.(*message.SIPRequest).AttachHeader2(sipHeader, false)
+		} else {
+			sipmsg.(*message.SIPResponse).AttachHeader2(sipHeader, false)
+		}
+		// } catch (ParseException ex) {
+		//     if (this.parseExceptionListener != null) {
+		//         String hdrName = Lexer.GetHeaderName(hdrstring);
+		//         Class hdrClass = NameMap.GetClassFromName(hdrName);
+		//         try {
+		//             if (hdrClass == null) {
+		//                 hdrClass = Class.forName
+		//                 (PackageNames.SIPHEADERS_PACKAGE
+		//                 + ".ExtensionHeaderImpl");
+		//             }
+		//             this.parseExceptionListener.handleException
+		//             (ex,sipmsg, hdrClass,
+		//             hdrstring,currentMessage);
+		//         } catch (ClassNotFoundException ex1) {
+		//             InternalErrorHandler.handleException(ex1);
+		//         }
+		//     }
 
-//         return sipmsg;
+		// }
+	}
+	return sipmsg, nil
+}
 
-//     }
+/**
+ * Parse an address (nameaddr or address spec)  and return and address
+ * structure.
+ * @param address is a String containing the address to be parsed.
+ * @return a parsed address structure.
+ * @since v1.0
+ * @exception  ParseException when the address is badly formatted.
+ */
 
-//     /**
-//      * Parse an address (nameaddr or address spec)  and return and address
-//      * structure.
-//      * @param address is a String containing the address to be parsed.
-//      * @return a parsed address structure.
-//      * @since v1.0
-//      * @exception  ParseException when the address is badly formatted.
-//      */
+func (this *StringMsgParser) ParseAddress(address string) (*address.AddressImpl, error) {
+	//throws ParseException {
+	addressParser := NewAddressParser(address)
+	return addressParser.Address()
+}
 
-//     public AddressImpl parseAddress(String address)
-//     throws ParseException {
-//         AddressParser addressParser = new AddressParser(address);
-//         return addressParser.address();
-//     }
+/**
+ * Parse a host:port and return a parsed structure.
+ * @param hostport is a String containing the host:port to be parsed
+ * @return a parsed address structure.
+ * @since v1.0
+ * @exception throws a ParseException when the address is badly formatted.
+ */
+func (this *StringMsgParser) ParseHostPort(hostport string) (*core.HostPort, error) {
+	//throws ParseException {
+	lexer := NewLexer("charLexer", hostport)
+	return core.NewHostNameParserFromLexer(lexer).GetHostPort()
+}
 
-//     /**
-//      * Parse a host:port and return a parsed structure.
-//      * @param hostport is a String containing the host:port to be parsed
-//      * @return a parsed address structure.
-//      * @since v1.0
-//      * @exception throws a ParseException when the address is badly formatted.
-//      */
-//     public HostPort parseHostPort(String hostport )
-//     throws ParseException {
-// 	Lexer lexer = new Lexer("charLexer",hostport);
-//         return new HostNameParser(lexer).hostPort();
+/**
+ * Parse a host name and return a parsed structure.
+ * @param host is a String containing the host name to be parsed
+ * @return a parsed address structure.
+ * @since v1.0
+ * @exception throws a ParseException when the hostname is badly formatted.
+ */
+func (this *StringMsgParser) ParseHost(host string) (*core.Host, error) {
+	//throws ParseException {
+	lexer := NewLexer("charLexer", host)
+	return core.NewHostNameParserFromLexer(lexer).GetHost()
+}
 
-//     }
+/**
+ * Parse a telephone number return a parsed structure.
+ * @param telphone_number is a String containing
+ * the telephone # to be parsed
+ * @return a parsed address structure.
+ * @since v1.0
+ * @exception throws a ParseException when the address is badly formatted.
+ */
+func (this *StringMsgParser) ParSetelephoneNumber(telephone_number string) (*core.TelephoneNumber, error) {
+	//throws ParseException {
+	// Bug fix contributed by Will Scullin
+	return NewURLParser(telephone_number).ParseTelephoneNumber()
+}
 
-//     /**
-//      * Parse a host name and return a parsed structure.
-//      * @param host is a String containing the host name to be parsed
-//      * @return a parsed address structure.
-//      * @since v1.0
-//      * @exception throws a ParseException when the hostname is badly formatted.
-//      */
-//     public Host parseHost(String host )
-//     throws ParseException {
-// 	Lexer lexer = new Lexer("charLexer",host);
-//         return new HostNameParser(lexer).host();
+/**
+ * Parse a  SIP url from a string and return a URI structure for it.
+ * @param url a String containing the URI structure to be parsed.
+ * @return A parsed URI structure
+ * @exception ParseException  if there was an error parsing the message.
+ */
+func (this *StringMsgParser) ParseSIPUrl(url string) (*address.SipUri, error) {
+	//throws ParseException {
+	//try {
+	sipuri, err := NewURLParser(url).Parse()
+	return sipuri.(*address.SipUri), err
+	//} catch (ClassCastException ex) {
+	//    throw new ParseException(url + " Not a SIP URL ",0);
+	//}
+}
 
-//     }
+/**
+ * Parse a  uri from a string and return a URI structure for it.
+ * @param url a String containing the URI structure to be parsed.
+ * @return A parsed URI structure
+ * @exception ParseException  if there was an error parsing the message.
+ */
+func (this *StringMsgParser) ParseUrl(url string) (*address.GenericURI, error) {
+	//throws ParseException {
+	guri, err := NewURLParser(url).Parse()
+	return guri.(*address.GenericURI), err
+}
 
-//     /**
-//      * Parse a telephone number return a parsed structure.
-//      * @param telphone_number is a String containing
-//      * the telephone # to be parsed
-//      * @return a parsed address structure.
-//      * @since v1.0
-//      * @exception throws a ParseException when the address is badly formatted.
-//      */
-//     public TelephoneNumber parSetelephoneNumber(String telephone_number )
-//     throws ParseException {
-//         // Bug fix contributed by Will Scullin
-//         return new URLParser(telephone_number).parSetelephoneNumber();
+/**
+ * Parse an individual SIP message header from a string.
+ * @param header String containing the SIP header.
+ * @return a SIPHeader structure.
+ * @exception ParseException  if there was an error parsing the message.
+ */
+func (this *StringMsgParser) ParseSIPHeader(h string) (*header.SIPHeader, error) {
+	//throws ParseException {
+	h += "\n\n"
+	// Handle line folding.
+	var nmessage string
+	//counter := 0
+	// eat leading spaces and carriage returns (necessary??)
+	i := 0
+	for h[i] == '\n' || h[i] == '\t' || h[i] == ' ' {
+		i++
+	}
+	for ; i < len(h); i++ {
+		if i < len(h)-1 && (h[i] == '\n' && (h[i+1] == '\t' || h[i+1] == ' ')) {
+			nmessage += " "
+			i++
+		} else {
+			nmessage += string(h[i])
+		}
+	}
 
-//     }
+	nmessage += "\n"
 
-//     /**
-//      * Parse a  SIP url from a string and return a URI structure for it.
-//      * @param url a String containing the URI structure to be parsed.
-//      * @return A parsed URI structure
-//      * @exception ParseException  if there was an error parsing the message.
-//      */
+	hp := CreateParser(nmessage)
+	if hp == nil {
+		return nil, errors.New("ParseException: could not create parser")
+	}
 
-//     public SipUri parseSIPUrl(String url)
-//     throws ParseException {
-//         try {
-//             return (SipUri) new URLParser(url).parse();
-//         } catch (ClassCastException ex) {
-//             throw new ParseException(url + " Not a SIP URL ",0);
-//         }
-//     }
+	shp, err := hp.Parse()
+	return shp.(*header.SIPHeader), err
+}
 
-//     /**
-//      * Parse a  uri from a string and return a URI structure for it.
-//      * @param url a String containing the URI structure to be parsed.
-//      * @return A parsed URI structure
-//      * @exception ParseException  if there was an error parsing the message.
-//      */
+/**
+ * Parse the SIP Request Line
+ * @param  requestLine a String  containing the request line to be parsed.
+ * @return  a RequestLine structure that has the parsed RequestLine
+ * @exception ParseException  if there was an error parsing the requestLine.
+ */
 
-//     public GenericURI parseUrl(String url)
-//     throws ParseException {
-//         return new URLParser(url).parse();
-//     }
+func (this *StringMsgParser) ParseSIPRequestLine(requestLine string) (*header.RequestLine, error) {
+	//throws ParseException {
+	requestLine += "\n"
+	return NewRequestLineParser(requestLine).Parse()
+}
 
-//     /**
-//      * Parse an individual SIP message header from a string.
-//      * @param header String containing the SIP header.
-//      * @return a SIPHeader structure.
-//      * @exception ParseException  if there was an error parsing the message.
-//      */
-//     public SIPHeader parseSIPHeader(String header )
-//     throws ParseException {
-//         header += "\n\n";
-//         // Handle line folding.
-//         String nmessage = "";
-//         int counter = 0;
-//         // eat leading spaces and carriage returns (necessary??)
-//         int i = 0;
-//         while( header.charAt(i) == '\n' || header.charAt(i) == '\t'
-//         || header.charAt(i) == ' ') i++;
-//         for ( ; i < header.length(); i++) {
-//             if ( i < header.length() - 1 &&
-//             ( header.charAt(i) == '\n' && ( header.charAt(i+1) == '\t'
-//             || header.charAt(i+1) == ' ') ) ) {
-//                 nmessage += ' ';
-//                 i++;
-//             } else {
-//                 nmessage += header.charAt(i);
-//             }
-//         }
+/**
+ * Parse the SIP Response message status line
+ * @param statusLine a String containing the Status line to be parsed.
+ * @return StatusLine class corresponding to message
+ * @exception ParseException  if there was an error parsing
+ * @see StatusLine
+ */
 
-//         nmessage += "\n";
+func (this *StringMsgParser) ParseSIPStatusLine(statusLine string) (*header.StatusLine, error) {
+	//throws ParseException {
+	statusLine += "\n"
+	return NewStatusLineParser(statusLine).Parse()
+}
 
-//         HeaderParser hp = ParserFactory.createParser(nmessage);
-//         if (hp == null) throw new ParseException("could not create parser",0);
-//         return hp.parse();
-//     }
-
-//     /**
-//      * Parse the SIP Request Line
-//      * @param  requestLine a String  containing the request line to be parsed.
-//      * @return  a RequestLine structure that has the parsed RequestLine
-//      * @exception ParseException  if there was an error parsing the requestLine.
-//      */
-
-//     public RequestLine parseSIPRequestLine( String requestLine)
-//     throws ParseException {
-//         requestLine += "\n";
-//         return new RequestLineParser(requestLine).parse();
-//     }
-
-//     /**
-//      * Parse the SIP Response message status line
-//      * @param statusLine a String containing the Status line to be parsed.
-//      * @return StatusLine class corresponding to message
-//      * @exception ParseException  if there was an error parsing
-//      * @see StatusLine
-//      */
-
-//     public StatusLine parseSIPStatusLine(String statusLine)
-//     throws ParseException {
-//         statusLine  += "\n";
-//         return new StatusLineParser(statusLine).parse();
-//     }
-
-//     /**
-//      * Get the current header.
-//      */
-//     public String GetCurrentHeader() {
-//         return currentHeader;
-//     }
+/**
+ * Get the current header.
+ */
+func (this *StringMsgParser) GetCurrentHeader() string {
+	return this.currentHeader
+}
 
 //     /**
 //      * Get the current line number.

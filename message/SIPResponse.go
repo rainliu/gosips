@@ -628,7 +628,7 @@ func (this *SIPResponse) GetFirstLine() string {
 	}
 }
 
-func (this *SIPResponse) SetSIPVersionFromString(sipVersion string) {
+func (this *SIPResponse) SetSIPVersion(sipVersion string) {
 	this.statusLine.SetSipVersion(sipVersion)
 }
 
