@@ -363,116 +363,116 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
  * @see ParseExceptionListener
  */
 
-//   func (this *StringMsgParser) ParseSIPMessage(sipMessages string) (message.Message, error) {
-//   //throws ParseException {
-//       // Handle line folding and evil DOS CR-LF sequences
-//       this.rawMessage = sipMessages;
-//       //Vector retval = new Vector();
-//        pmessage := strings.TrimSpace(sipMessages);
-//       this.bodyIsString = true;
+func (this *StringMsgParser) ParseSIPMessage(sipMessage string) (message.Message, error) {
+	return this.ParseSIPMessageFromByte([]byte(sipMessage))
+	//throws ParseException {
+	// Handle line folding and evil DOS CR-LF sequences
+	//       this.rawMessage = sipMessages;
+	//       //Vector retval = new Vector();
+	//        pmessage := strings.TrimSpace(sipMessages);
+	//       this.bodyIsString = true;
 
-//           this.contentLength = 0;
-//           if pmessage=="" {
-//           	return nil, nil;
-//           }
+	//           this.contentLength = 0;
+	//           if pmessage=="" {
+	//           	return nil, nil;
+	//           }
 
-//           pmessage += "\n\n";
-//           this.bufferPointer = 0;
-//           message := []byte(pmessage);
-//           // squeeze out the leading crlf sequences.
-//           for message[this.bufferPointer] == '\r' || message[this.bufferPointer] == '\n' {
-//               this.bufferPointer ++;
-//               //message.deleteCharAt(0);
-//           }
+	//           pmessage += "\n\n";
+	//           this.bufferPointer = 0;
+	//           message := []byte(pmessage);
+	//           // squeeze out the leading crlf sequences.
+	//           for message[this.bufferPointer] == '\r' || message[this.bufferPointer] == '\n' {
+	//               this.bufferPointer ++;
+	//               //message.deleteCharAt(0);
+	//           }
 
-//           // squeeze out the crlf sequences and make them uniformly CR
-//           message1 := string(message[this.bufferPointer:]);
-//           length := strings.Index(message1, "\r\n\r\n");
-//           if length > 0  {
-//           	length += 4;
-//           }
-//           if length == -1 {
-//               length = strings.Index(message1, "\n\n");
-//               if length == -1{
-//                   return nil, errors.New("ParseException: no trailing crlf");
-//               }
-//           } else {
-//           	length += 2;
-//           }
+	//           // squeeze out the crlf sequences and make them uniformly CR
+	//           message1 := string(message[this.bufferPointer:]);
+	//           length := strings.Index(message1, "\r\n\r\n");
+	//           if length > 0  {
+	//           	length += 4;
+	//           }
+	//           if length == -1 {
+	//               length = strings.Index(message1, "\n\n");
+	//               if length == -1{
+	//                   return nil, errors.New("ParseException: no trailing crlf");
+	//               }
+	//           } else {
+	//           	length += 2;
+	//           }
 
-//           // Get rid of CR to make it uniform.
-//           for k := 0; k < length; k++ {
-// 		if message1[k] == '\r' {
-// 			copy(message1[k:length-1], message1[k+1:length])
-// 			length--
-// 		}
-// 	}
+	//           // Get rid of CR to make it uniform.
+	//           for k := 0; k < length; k++ {
+	// 		if message1[k] == '\r' {
+	// 			copy(message1[k:length-1], message1[k+1:length])
+	// 			length--
+	// 		}
+	// 	}
 
-//           // if (debugFlag ) {
-//           //     for (int k = 0 ; k < length; k++) {
-//           //         rawMessage1 = rawMessage1 + "[" + message.charAt(k) +"]";
-//           //     }
-//           // }
+	//           // if (debugFlag ) {
+	//           //     for (int k = 0 ; k < length; k++) {
+	//           //         rawMessage1 = rawMessage1 + "[" + message.charAt(k) +"]";
+	//           //     }
+	//           // }
 
-//           // The following can be written more efficiently in a single pass
-//           // but it is somewhat tricky.
-//           java.util.StringTokenizer tokenizer = new java.util.StringTokenizer
-//           (message.toString(),"\n",true);
-//           StringBuffer cooked_message = new StringBuffer();
-//           try {
-//               while( tokenizer.hasMoreElements() ) {
-//                   String nexttok = tokenizer.nextToken();
-//                   // Ignore blank lines with leading spaces or tabs.
-//                   if (nexttok.trim().equals("")) cooked_message.append("\n");
-//                   else cooked_message.append(nexttok);
-//               }
-//           } catch (NoSuchElementException ex) {
-//           }
+	//           // The following can be written more efficiently in a single pass
+	//           // but it is somewhat tricky.
+	//           java.util.StringTokenizer tokenizer = new java.util.StringTokenizer
+	//           (message.toString(),"\n",true);
+	//           StringBuffer cooked_message = new StringBuffer();
+	//           try {
+	//               while( tokenizer.hasMoreElements() ) {
+	//                   String nexttok = tokenizer.nextToken();
+	//                   // Ignore blank lines with leading spaces or tabs.
+	//                   if (nexttok.trim().equals("")) cooked_message.append("\n");
+	//                   else cooked_message.append(nexttok);
+	//               }
+	//           } catch (NoSuchElementException ex) {
+	//           }
 
-//           message1 = cooked_message.toString();
-//           length = message1.indexOf("\n\n") + 2;
+	//           message1 = cooked_message.toString();
+	//           length = message1.indexOf("\n\n") + 2;
 
-//           // Handle continuations - look for a space or a tab at the start
-//           // of the line and append it to the previous line.
+	//           // Handle continuations - look for a space or a tab at the start
+	//           // of the line and append it to the previous line.
 
-//           for ( int k = 0 ; k < length - 1 ;  ) {
-//               if (cooked_message.charAt(k) == '\n') {
-//                   if ( cooked_message.charAt(k+1) == '\t' ||
-//                   cooked_message.charAt(k+1) == ' ') {
-//                       cooked_message.deleteCharAt(k);
-//                       cooked_message.deleteCharAt(k);
-//                       length --;
-//                       length --;
-//                       if ( k == length) break;
-//                       continue;
-//                   }
-//                   if ( cooked_message.charAt(k+1) == '\n') {
-//                       cooked_message.insert(k,'\n');
-//                       length ++;
-//                       k ++;
-//                   }
-//               }
-//               k++;
-//           }
-//           cooked_message.append("\n\n");
+	//           for ( int k = 0 ; k < length - 1 ;  ) {
+	//               if (cooked_message.charAt(k) == '\n') {
+	//                   if ( cooked_message.charAt(k+1) == '\t' ||
+	//                   cooked_message.charAt(k+1) == ' ') {
+	//                       cooked_message.deleteCharAt(k);
+	//                       cooked_message.deleteCharAt(k);
+	//                       length --;
+	//                       length --;
+	//                       if ( k == length) break;
+	//                       continue;
+	//                   }
+	//                   if ( cooked_message.charAt(k+1) == '\n') {
+	//                       cooked_message.insert(k,'\n');
+	//                       length ++;
+	//                       k ++;
+	//                   }
+	//               }
+	//               k++;
+	//           }
+	//           cooked_message.append("\n\n");
 
-//           // Separate the string out into substrings for
-//           // error reporting.
+	//           // Separate the string out into substrings for
+	//           // error reporting.
 
-//           currentMessage = cooked_message.toString();
-//           if (Parser.debug) Debug.println(currentMessage);
-//           bufferPointer = currentMessage.indexOf("\n\n") + 3 ;
-//           SIPMessage sipmsg = this.parseMessage(currentMessage);
-//    if (readBody && sipmsg.GetContentLength() != null &&
-// sipmsg.GetContentLength().GetContentLength() != 0) {
-// this.contentLength =
-//      sipmsg.GetContentLength().GetContentLength();
-// String body = this.GetMessageBody();
-// sipmsg.SetMessageContent(body);
-//    }
-//    return sipmsg;
-
-//   }
+	//           currentMessage = cooked_message.toString();
+	//           if (Parser.debug) Debug.println(currentMessage);
+	//           bufferPointer = currentMessage.indexOf("\n\n") + 3 ;
+	//           SIPMessage sipmsg = this.parseMessage(currentMessage);
+	//    if (readBody && sipmsg.GetContentLength() != null &&
+	// sipmsg.GetContentLength().GetContentLength() != 0) {
+	// this.contentLength =
+	//      sipmsg.GetContentLength().GetContentLength();
+	// String body = this.GetMessageBody();
+	// sipmsg.SetMessageContent(body);
+	//    }
+	//    return sipmsg;
+}
 
 /** This is called repeatedly by parseSIPMessage to parse
  * the contents of a message buffer. This assumes the message

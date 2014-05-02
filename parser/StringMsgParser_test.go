@@ -95,7 +95,7 @@ func TestStringMsgParser(t *testing.T) {
 
 	for i := 0; i < len(tvi); i++ {
 		smp := NewStringMsgParser()
-		if sm, err := smp.ParseSIPMessageFromByte([]byte(tvi[i])); err != nil {
+		if sm, err := smp.ParseSIPMessage(tvi[i]); err != nil {
 			t.Log(err)
 			t.Fail()
 		} else {
