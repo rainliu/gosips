@@ -8,8 +8,6 @@
 
 package header
 
-import ()
-
 /**
  * The Via header field indicates the transport used for the transaction and
  * identifies the location where the response is to be sent. A Via header
@@ -127,7 +125,7 @@ import ()
  * @author Sun Microsystems
  */
 type ViaHeader interface {
-	Header
+	//Header
 	ParametersHeader
 
 	/**

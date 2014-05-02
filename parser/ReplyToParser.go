@@ -42,7 +42,7 @@ func NewReplyToParserFromLexer(lexer core.Lexer) *ReplyToParser {
  * @return SIPHeader the ReplyTo List object
  * @throws SIPParseException if errors occur during the parsing
  */
-func (this *ReplyToParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *ReplyToParser) Parse() (sh header.Header, ParseException error) {
 	replyTo := header.NewReplyTo()
 	//if (debug) dbg_enter("ReplyTo.parse");
 

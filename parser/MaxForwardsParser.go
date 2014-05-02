@@ -26,7 +26,7 @@ func (this *MaxForwardsParser) super(hname string) {
 	this.HeaderParser.super(hname)
 }
 
-func (this *MaxForwardsParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *MaxForwardsParser) Parse() (sh header.Header, ParseException error) {
 	//if (debug) dbg_enter("MaxForwardsParser.enter");
 	//    try {
 	contentLength := header.NewMaxForwards()

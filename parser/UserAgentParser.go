@@ -45,7 +45,7 @@ func NewUserAgentParserFromLexer(lexer core.Lexer) *UserAgentParser {
  * @return SIPHeader (UserAgent object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *UserAgentParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *UserAgentParser) Parse() (sh header.Header, ParseException error) {
 
 	// if (debug) dbg_enter("UserAgentParser.parse");
 	userAgent := header.NewUserAgent()

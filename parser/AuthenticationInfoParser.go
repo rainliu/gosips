@@ -32,10 +32,10 @@ func NewAuthenticationInfoParserFromLexer(lexer core.Lexer) *AuthenticationInfoP
 }
 
 /** parse the AuthenticationInfo String header
- * @return ISIPHeader (AuthenticationInfoList object)
+ * @return Header (AuthenticationInfoList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *AuthenticationInfoParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *AuthenticationInfoParser) Parse() (sh header.Header, ParseException error) {
 
 	// if (debug) dbg_enter("AuthenticationInfoParser.parse");
 

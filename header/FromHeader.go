@@ -8,8 +8,6 @@
 
 package header
 
-import ()
-
 /**
  * The From header field indicates the logical identity of the initiator
 
@@ -113,7 +111,7 @@ import ()
  * @author Sun Microsystems
  */
 type FromHeader interface {
-	Header
+	//Header
 	ParametersHeader
 	HeaderAddress
 

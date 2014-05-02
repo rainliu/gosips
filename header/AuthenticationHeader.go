@@ -30,7 +30,7 @@ import "gosip/address"
 
 type AuthenticationHeader interface {
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Sets the scheme of the Response information for this AuthorizationHeader.

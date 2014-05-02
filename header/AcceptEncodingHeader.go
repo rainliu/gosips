@@ -22,7 +22,7 @@ package header
 type AcceptEncodingHeader interface {
 	ParametersHeader
 	Encoding
-	Header
+	//Header
 
 	/**
 	 * Gets q-value of the encoding in this encoding value. A value of

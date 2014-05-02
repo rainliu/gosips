@@ -36,7 +36,7 @@ package header
 
 type SubscriptionStateHeader interface {
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Sets the relative expires value of the SubscriptionStateHeader. The

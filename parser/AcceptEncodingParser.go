@@ -54,10 +54,10 @@ func NewAcceptEncodingParserFromLexer(lexer core.Lexer) *AcceptEncodingParser {
 }
 
 /** parse the String message
- * @return ISIPHeader (AcceptEncoding object)
+ * @return Header (AcceptEncoding object)
  * @throws ParseException if the message does not respect the spec.
  */
-func (this *AcceptEncodingParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *AcceptEncodingParser) Parse() (sh header.Header, ParseException error) {
 
 	acceptEncodingList := header.NewAcceptEncodingList()
 	//if (debug) dbg_enter("AcceptEncodingParser.parse");

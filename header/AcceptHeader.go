@@ -1,7 +1,5 @@
 package header
 
-import ()
-
 /**
 
  * This interface represents an Accept request-header. It can be used in to
@@ -50,7 +48,7 @@ import ()
 type AcceptHeader interface {
 	MediaType
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Sets q-value for media-range in AcceptHeader. Q-values allow the user to

@@ -14,7 +14,7 @@ package header
  */
 type AuthenticationInfoHeader interface {
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Sets the NextNonce of the AuthenticationInfoHeader to the <var>nextNonce</var>

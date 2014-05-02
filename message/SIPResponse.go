@@ -583,7 +583,7 @@ func (this *SIPResponse) CreateRequest(requestURI address.SipURI, via *header.Vi
 	newRequest.SetHeader(cseq)
 
 	for headerIterator := this.getHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
-		nextHeader := headerIterator.Value.(header.ISIPHeader)
+		nextHeader := headerIterator.Value.(header.Header)
 		// Some headers do not belong in a Request ....
 		if this.IsResponseHeader(nextHeader) {
 			continue

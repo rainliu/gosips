@@ -27,7 +27,7 @@ import (
 
 type AlertInfoHeader interface {
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Sets the AlertInfo of the AlertInfoHeader to the <var>alertInfo</var>

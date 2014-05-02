@@ -517,7 +517,7 @@ func (this *SIPRequest) CreateResponse2(statusCode int, reasonPhrase string) *SI
 	}
 
 	for headerIterator := this.getHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
-		nextHeader := headerIterator.Value.(header.ISIPHeader)
+		nextHeader := headerIterator.Value.(header.Header)
 		if _, ok := nextHeader.(*header.From); ok {
 			newResponse.AttachHeader2(nextHeader, false)
 		}
@@ -583,7 +583,7 @@ func (this *SIPRequest) CreateCancelRequest() *SIPRequest {
 	newRequest.SetMethod(CANCEL)
 
 	for headerIterator := this.getHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
-		nextHeader := headerIterator.Value.(header.ISIPHeader)
+		nextHeader := headerIterator.Value.(header.Header)
 		if _, ok := nextHeader.(*header.RequireList); ok {
 			continue
 		} else if _, ok := nextHeader.(*header.ProxyRequireList); ok {
@@ -638,7 +638,7 @@ func (this *SIPRequest) CreateAckRequest(responseToHeader *header.To) *SIPReques
 	newRequest.SetRequestLine(this.requestLine)
 	newRequest.SetMethod(ACK)
 	for headerIterator := this.getHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
-		nextHeader := headerIterator.Value.(header.ISIPHeader)
+		nextHeader := headerIterator.Value.(header.Header)
 		if _, ok := nextHeader.(*header.RouteList); ok {
 			// Ack and cancel do not Get ROUTE headers.
 			// Route header for ACK is assigned by the
@@ -686,7 +686,7 @@ func (this *SIPRequest) CreateAckRequest(responseToHeader *header.To) *SIPReques
 			// field of the original
 			// request.
 
-			nextHeader = vl.Front().Value.(header.ISIPHeader)
+			nextHeader = vl.Front().Value.(header.Header)
 		} else {
 			//nextHeader = (SIPHeader) nextHeader.clone();
 		}
@@ -744,7 +744,7 @@ func (this *SIPRequest) CreateSIPRequest(requestLine *header.RequestLine, switch
 	newRequest := NewSIPRequest()
 	newRequest.requestLine = this.requestLine
 	for headerIterator := this.getHeaders().Front(); headerIterator != nil; headerIterator = headerIterator.Next() {
-		nextHeader := headerIterator.Value.(header.ISIPHeader)
+		nextHeader := headerIterator.Value.(header.Header)
 		// For BYE and cancel Set the CSeq header to the
 		// appropriate method.
 		if newCseq, ok := nextHeader.(*header.CSeq); ok {

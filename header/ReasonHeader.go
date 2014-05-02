@@ -45,7 +45,7 @@ package header
 
 type ReasonHeader interface {
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Gets the cause value of the ReasonHeader

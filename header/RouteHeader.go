@@ -24,7 +24,7 @@ package header
 type RouteHeader interface {
 	HeaderAddress
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Name of RouteHeader

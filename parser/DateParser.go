@@ -33,7 +33,7 @@ func NewDateParserFromLexer(lexer core.Lexer) *DateParser {
  * @throws ParseException
  * @return  the parsed Date header/
  */
-func (this *DateParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *DateParser) Parse() (sh header.Header, ParseException error) {
 	//if (debug) dbg_enter("DateParser.parse");
 	//try {
 	lexer := this.GetLexer()

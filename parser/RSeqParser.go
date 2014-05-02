@@ -42,7 +42,7 @@ func NewRSeqParserFromLexer(lexer core.Lexer) *RSeqParser {
  * @return SIPHeader ( RSeq object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *RSeqParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *RSeqParser) Parse() (sh header.Header, ParseException error) {
 
 	//if (debug) dbg_enter("RSeqParser.parse");
 	rseq := header.NewRSeq()

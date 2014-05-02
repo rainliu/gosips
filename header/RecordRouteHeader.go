@@ -37,7 +37,7 @@ package header
 type RecordRouteHeader interface {
 	HeaderAddress
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Name of RecordRouteHeader

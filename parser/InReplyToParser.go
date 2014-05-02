@@ -39,10 +39,10 @@ func NewInReplyToParserFromLexer(lexer core.Lexer) *InReplyToParser {
 }
 
 /** parse the String message
- * @return ISIPHeader (InReplyToList object)
+ * @return Header (InReplyToList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *InReplyToParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *InReplyToParser) Parse() (sh header.Header, ParseException error) {
 
 	// if (debug) dbg_enter("InReplyToParser.parse");
 	inReplyToList := header.NewInReplyToList()

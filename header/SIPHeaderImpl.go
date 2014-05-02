@@ -6,7 +6,7 @@ import (
 )
 
 /**
-*  Root class from which all ISIPHeader objects are subclassed.
+*  Root class from which all Header objects are subclassed.
  */
 type SIPHeader struct { //implements SIPHeaderNames, javax.sip.header.Header {
 	// SIPObject
@@ -31,7 +31,7 @@ func (this *SIPHeader) super(hname string) {
 }
 
 /**
- * Name of the ISIPHeader
+ * Name of the Header
  * @return String
  */
 func (this *SIPHeader) GetHeaderName() string {

@@ -5,7 +5,7 @@ import (
 )
 
 /**
-* AlertInfo ISIPHeader - there can be several AlertInfo headers.
+* AlertInfo Header - there can be several AlertInfo headers.
 *
 *@author M. Ranganathan <mranga@nist.gov>  <br/>
 *

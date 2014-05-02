@@ -45,7 +45,7 @@ package header
 
 type EventHeader interface {
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Sets the eventType to the newly supplied eventType string.

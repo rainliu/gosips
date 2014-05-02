@@ -8,8 +8,6 @@
 
 package header
 
-import ()
-
 /**
  * The Content-Disposition header field describes how the message body or,
  * for multipart messages, a message body part is to be interpreted by the
@@ -49,7 +47,7 @@ import ()
  * @author Sun Microsystems
  */
 type ContentDispositionHeader interface {
-	Header
+	//Header
 	ParametersHeader
 
 	/**

@@ -6,7 +6,7 @@ import (
 )
 
 /**
-* ContentLength ISIPHeader (of which there can be only one in a SIPMessage).
+* ContentLength Header (of which there can be only one in a SIPMessage).
 *<pre>
 *Fielding, et al.            Standards Track                   [Page 119]
 *RFC 2616                        HTTP/1.1                       June 1999

@@ -8,8 +8,6 @@
 
 package header
 
-import ()
-
 /**
  * The To header field first and foremost specifies the desired "logical"
  * recipient of the request, or the address-of-record of the user or resource
@@ -82,7 +80,7 @@ import ()
  * @author Sun Microsystems
  */
 type ToHeader interface {
-	Header
+	//Header
 	HeaderAddress
 	ParametersHeader
 

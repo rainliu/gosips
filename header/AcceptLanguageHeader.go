@@ -1,7 +1,5 @@
 package header
 
-import ()
-
 /**
 
  * The Accept-Language header field is used in requests to indicate the
@@ -30,7 +28,7 @@ import ()
 
 type AcceptLanguageHeader interface {
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 

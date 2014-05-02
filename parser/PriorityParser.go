@@ -42,7 +42,7 @@ func NewPriorityParserFromLexer(lexer core.Lexer) *PriorityParser {
  * @return SIPHeader (Priority object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *PriorityParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *PriorityParser) Parse() (sh header.Header, ParseException error) {
 
 	//if (debug) dbg_enter("PriorityParser.parse");
 	priority := header.NewPriority()

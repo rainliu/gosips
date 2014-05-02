@@ -17,8 +17,8 @@ func NewAcceptLanguageList() *AcceptLanguageList {
 	return this
 }
 
-func (this *AcceptLanguageList) GetFirst() ISIPHeader {
-	retval := this.SIPHeaderList.Front().Value.(ISIPHeader) //super.getFirst();
+func (this *AcceptLanguageList) GetFirst() Header {
+	retval := this.SIPHeaderList.Front().Value.(Header) //super.getFirst();
 	if retval != nil {
 		return retval
 	} else {
@@ -26,8 +26,8 @@ func (this *AcceptLanguageList) GetFirst() ISIPHeader {
 	}
 }
 
-func (this *AcceptLanguageList) GetLast() ISIPHeader {
-	retval := this.SIPHeaderList.Back().Value.(ISIPHeader) //ISIPHeader retval = super.getLast();
+func (this *AcceptLanguageList) GetLast() Header {
+	retval := this.SIPHeaderList.Back().Value.(Header) //Header retval = super.getLast();
 	if retval != nil {
 		return retval
 	} else {

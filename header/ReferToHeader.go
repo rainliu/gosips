@@ -16,7 +16,7 @@ package header
 type ReferToHeader interface {
 	HeaderAddress
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Name of ReferToHeader

@@ -37,7 +37,7 @@ package header
 type ReplyToHeader interface {
 	HeaderAddress
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 

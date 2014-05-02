@@ -34,7 +34,7 @@ import (
 
 type CallInfoHeader interface {
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Sets the Information parameter of this CallInfoHeader. The Information

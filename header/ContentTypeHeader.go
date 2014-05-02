@@ -27,8 +27,8 @@ package header
  * @author Sun Microsystems
  */
 
-type ContentTypeHeader interface{
-	Header
+type ContentTypeHeader interface {
+	//Header
 	ParametersHeader
 	MediaType
 

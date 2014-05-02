@@ -43,7 +43,7 @@ func NewTimeStampParserFromLexer(lexer core.Lexer) *TimeStampParser {
  * @return SIPHeader (TimeStamp object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *TimeStampParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *TimeStampParser) Parse() (sh header.Header, ParseException error) {
 
 	//if (debug) dbg_enter("TimeStampParser.parse");
 	timeStamp := header.NewTimeStamp()

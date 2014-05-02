@@ -41,7 +41,7 @@ func NewRetryAfterParserFromLexer(lexer core.Lexer) *RetryAfterParser {
  * @return SIPHeader (RetryAfter object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *RetryAfterParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *RetryAfterParser) Parse() (sh header.Header, ParseException error) {
 
 	//if (debug) dbg_enter("RetryAfterParser.parse");
 

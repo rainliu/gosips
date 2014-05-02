@@ -7,7 +7,7 @@ import (
 )
 
 /**
-* MaxForwards ISIPHeader
+* MaxForwards Header
  */
 type MaxForwards struct { //implements MaxForwardsHeader {
 	SIPHeader

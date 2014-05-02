@@ -26,7 +26,7 @@ import "gosip/address"
 
 type WWWAuthenticateHeader interface {
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Sets the scheme of the challenge information for this WWWAuthenticateHeader.

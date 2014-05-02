@@ -10,7 +10,7 @@ import (
 )
 
 /**
-* Via ISIPHeader (these are strung together in a ViaList).
+* Via Header (these are strung together in a ViaList).
  */
 
 type Via struct { //implements javax.sip.header.ViaHeader {

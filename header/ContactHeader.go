@@ -9,8 +9,6 @@
 
 package header
 
-import ()
-
 /**
  * A Contact header field value provides a URI whose meaning depends on
  * the type of request or response it is in. A Contact header field value
@@ -78,7 +76,7 @@ import ()
 type ContactHeader interface {
 	HeaderAddress
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 	 * Returns the value of the <code>expires</code> parameter as delta-seconds.

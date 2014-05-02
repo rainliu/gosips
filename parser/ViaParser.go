@@ -167,7 +167,7 @@ func (this *ViaParser) NameValue() (nv *core.NameValue, ParseException error) {
 	  }*/
 }
 
-func (this *ViaParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *ViaParser) Parse() (sh header.Header, ParseException error) {
 	//  if (debug) dbg_enter("parse");
 	//  try {
 	lexer := this.GetLexer()

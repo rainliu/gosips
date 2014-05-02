@@ -50,7 +50,7 @@ import "gosip/address"
 
 type ErrorInfoHeader interface {
 	ParametersHeader
-	Header
+	//Header
 
 	/**
 

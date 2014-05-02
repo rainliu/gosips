@@ -51,7 +51,7 @@ package header
  */
 
 type RetryAfterHeader interface {
-	Header
+	//Header
 	ParametersHeader
 
 	/**

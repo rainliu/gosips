@@ -27,7 +27,7 @@ func NewCSeqParserFromLexer(lexer core.Lexer) *CSeqParser {
 	return this
 }
 
-func (this *CSeqParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *CSeqParser) Parse() (sh header.Header, ParseException error) {
 	//try {
 	//c:= header.NewCSeq();
 	lexer := this.GetLexer()

@@ -42,10 +42,10 @@ func (this *AcceptParser) superFromLexer(lexer core.Lexer) {
 }
 
 /** parse the Accept  String header
- * @return ISIPHeader (AcceptList  object)
+ * @return Header (AcceptList  object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *AcceptParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *AcceptParser) Parse() (sh header.Header, ParseException error) {
 
 	//if (debug) dbg_enter("AcceptParser.parse");
 	acceptList := header.NewAcceptList()

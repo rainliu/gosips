@@ -49,7 +49,7 @@ type StringMsgParser struct {
 	// the message being parsed. (for error reporting)
 	//private ParseExceptionListener parseExceptionListener;
 
-	messageHeaders map[int]string //header.ISIPHeader // Message headers
+	messageHeaders map[int]string //header.Header // Message headers
 
 	bufferPointer int
 

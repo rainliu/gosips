@@ -49,7 +49,7 @@ type SIPMessage struct { // MessageObject
 	messageContentObject interface{}
 
 	// Table of headers indexed by name.
-	nameTable map[string]header.ISIPHeader
+	nameTable map[string]header.Header
 }
 
 //    /**
@@ -64,7 +64,7 @@ func NewSIPMessage() *SIPMessage {
 	this := &SIPMessage{}
 	this.unrecognizedHeaders = list.New()
 	this.headers = list.New()
-	this.nameTable = make(map[string]header.ISIPHeader)
+	this.nameTable = make(map[string]header.Header)
 	//try {
 	this.AttachHeader2(header.NewContentLengthFromInt(0), false)
 	//} catch (Exception ex) {}
@@ -74,7 +74,7 @@ func NewSIPMessage() *SIPMessage {
 func (this *SIPMessage) super() {
 	this.unrecognizedHeaders = list.New()
 	this.headers = list.New()
-	this.nameTable = make(map[string]header.ISIPHeader)
+	this.nameTable = make(map[string]header.Header)
 	this.AttachHeader2(header.NewContentLengthFromInt(0), false)
 }
 
@@ -82,7 +82,7 @@ func (this *SIPMessage) super() {
  *
  *@param sipHeader is the header to test.
  */
-func (this *SIPMessage) IsRequestHeader(sipHeader header.ISIPHeader) bool {
+func (this *SIPMessage) IsRequestHeader(sipHeader header.Header) bool {
 	var ok bool
 	if _, ok = sipHeader.(*header.AlertInfo); ok {
 		return true
@@ -125,7 +125,7 @@ func (this *SIPMessage) IsRequestHeader(sipHeader header.ISIPHeader) bool {
 //     *
 //     *@param sipHeader is the header to test.
 //     */
-func (this *SIPMessage) IsResponseHeader(sipHeader header.ISIPHeader) bool {
+func (this *SIPMessage) IsResponseHeader(sipHeader header.Header) bool {
 	var ok bool
 	if _, ok = sipHeader.(*header.ErrorInfo); ok {
 		return true
@@ -161,8 +161,8 @@ func (this *SIPMessage) GetMessageAsEncodedStrings() *list.List {
 	//synchronized (headers) {
 
 	for li := this.headers.Front(); li != nil; li = li.Next() {
-		sipHeader := li.Value.(header.ISIPHeader)
-		if shl, ok := sipHeader.(header.ISIPHeaderList); ok {
+		sipHeader := li.Value.(header.Header)
+		if shl, ok := sipHeader.(header.SIPHeaderLister); ok {
 			//SIPHeaderList shl = (SIPHeaderList) sipHeader;
 			retval.PushBackList(shl.GetHeadersAsEncodedStrings())
 		} else {
@@ -366,7 +366,7 @@ func (this *SIPMessage) String() string {
 	// noticed by Lamine Brahimi.
 	//synchronized(this.headers) {
 	for it := this.headers.Front(); it != nil; it = it.Next() {
-		siphdr := it.Value.(header.ISIPHeader)
+		siphdr := it.Value.(header.Header)
 		if _, ok := siphdr.(*header.ContentLength); !ok {
 			encoding.WriteString(siphdr.String())
 		}
@@ -593,10 +593,10 @@ func (this *SIPMessage) EncodeAsBytes() []byte {
 //     * Attach a header and die if you Get a duplicate header exception.
 //     * @param h SIPHeader to attach.
 //     */
-func (this *SIPMessage) AttachHeader(h header.ISIPHeader) {
+func (this *SIPMessage) AttachHeader(h header.Header) {
 	//if h == nil) throw new IllegalArgumentException("nil header!");
 	//try {
-	if hl, ok := h.(header.ISIPHeaderList); ok {
+	if hl, ok := h.(header.SIPHeaderLister); ok {
 		//SIPHeaderList hl = (SIPHeaderList) h;
 		if hl.Len() == 0 {
 			return
@@ -613,11 +613,11 @@ func (this *SIPMessage) AttachHeader(h header.ISIPHeader) {
 //     * @param header SIPHeader that replaces a header of the same type.
 //     */
 func (this *SIPMessage) SetHeader(sipHeader header.Header) {
-	h, _ := sipHeader.(header.ISIPHeader)
+	h, _ := sipHeader.(header.Header)
 	// if (header == nil)
 	//     throw new IllegalArgumentException("nil header!");
 	// try {
-	if hl, ok := sipHeader.(header.ISIPHeaderList); ok {
+	if hl, ok := sipHeader.(header.SIPHeaderLister); ok {
 		//SIPHeaderList hl = (SIPHeaderList) header;
 		// Ignore empty lists.
 		if hl.Len() == 0 {
@@ -639,7 +639,7 @@ func (this *SIPMessage) SetHeader(sipHeader header.Header) {
 func (this *SIPMessage) SetHeaders(headers *list.List) {
 
 	for listIterator := headers.Front(); listIterator != nil; listIterator = listIterator.Next() {
-		sipHeader := listIterator.Value.(header.ISIPHeader)
+		sipHeader := listIterator.Value.(header.Header)
 		//try {
 		this.AttachHeader2(sipHeader, false)
 		// } catch (SIPDuplicateHeaderException ex) {}
@@ -659,7 +659,7 @@ func (this *SIPMessage) SetHeaders(headers *list.List) {
 //     * @throws SIPDuplicateHeaderException If replaceFlag is false and
 //     * only a singleton header is allowed (fpr example CSeq).
 //     */
-func (this *SIPMessage) AttachHeader2(h header.ISIPHeader, replaceflag bool) {
+func (this *SIPMessage) AttachHeader2(h header.Header, replaceflag bool) {
 	//throws SIPDuplicateHeaderException {
 	this.AttachHeader3(h, replaceflag, false)
 }
@@ -678,7 +678,7 @@ func (this *SIPMessage) AttachHeader2(h header.ISIPHeader, replaceflag bool) {
 //     * greater than the number of headers that are in this message.
 //     */
 
-func (this *SIPMessage) AttachHeader3(h header.ISIPHeader, replaceFlag, top bool) {
+func (this *SIPMessage) AttachHeader3(h header.Header, replaceFlag, top bool) {
 	//throws SIPDuplicateHeaderException {
 	// if (header == nil) {
 	//     throw new NullPointerException("nil header");
@@ -699,7 +699,7 @@ func (this *SIPMessage) AttachHeader3(h header.ISIPHeader, replaceFlag, top bool
 		delete(this.nameTable, strings.ToLower(h.GetName()))
 	} else {
 		if _, present := this.nameTable[strings.ToLower(h.GetName())]; present {
-			if _, ok := h.(header.ISIPHeaderList); !ok {
+			if _, ok := h.(header.SIPHeaderLister); !ok {
 				if cl, ok := h.(*header.ContentLength); ok {
 					this.contentLengthHeader.SetContentLength(cl.GetContentLength())
 				}
@@ -714,7 +714,7 @@ func (this *SIPMessage) AttachHeader3(h header.ISIPHeader, replaceFlag, top bool
 	// Delete the original sh from our list structure.
 	if originalHeader != nil {
 		for li := this.headers.Front(); li != nil; li = li.Next() {
-			next := li.Value.(header.ISIPHeader)
+			next := li.Value.(header.Header)
 			if next == originalHeader {
 				this.headers.Remove(li)
 			}
@@ -725,7 +725,7 @@ func (this *SIPMessage) AttachHeader3(h header.ISIPHeader, replaceFlag, top bool
 		this.nameTable[strings.ToLower(h.GetName())] = h
 		this.headers.PushBack(h)
 	} else {
-		if hs, ok := h.(header.ISIPHeaderList); ok {
+		if hs, ok := h.(header.SIPHeaderLister); ok {
 			hdrlist := this.nameTable[strings.ToLower(h.GetName())].(*header.SIPHeaderList)
 			if hdrlist != nil {
 				hdrlist.Concatenate(hs, top)
@@ -770,7 +770,7 @@ func (this *SIPMessage) RemoveHeader2(headerName string, top bool) {
 		return
 	}
 
-	if hdrList, ok := toRemove.(header.ISIPHeaderList); ok {
+	if hdrList, ok := toRemove.(header.SIPHeaderLister); ok {
 		if top {
 			first := hdrList.Front()
 			hdrList.Remove(first)
@@ -781,7 +781,7 @@ func (this *SIPMessage) RemoveHeader2(headerName string, top bool) {
 		// Clean up empty list
 		if hdrList.Len() == 0 {
 			for li := this.headers.Front(); li != nil; li = li.Next() {
-				sipHeader := li.Value.(header.ISIPHeader)
+				sipHeader := li.Value.(header.Header)
 				if strings.ToLower(sipHeader.GetName()) == strings.ToLower(headerName) {
 					this.headers.Remove(li)
 				}
@@ -805,7 +805,7 @@ func (this *SIPMessage) RemoveHeader2(headerName string, top bool) {
 		}
 
 		for li := this.headers.Front(); li != nil; li = li.Next() {
-			sipHeader := li.Value.(header.ISIPHeader)
+			sipHeader := li.Value.(header.Header)
 			if strings.ToLower(sipHeader.GetName()) == strings.ToLower(headerName) {
 				this.headers.Remove(li)
 			}
@@ -844,7 +844,7 @@ func (this *SIPMessage) RemoveHeader(headerName string) {
 	}
 
 	for li := this.headers.Front(); li != nil; li = li.Next() {
-		sipHeader := li.Value.(header.ISIPHeader)
+		sipHeader := li.Value.(header.Header)
 		if strings.ToLower(sipHeader.GetName()) == strings.ToLower(headerName) {
 			this.headers.Remove(li)
 		}
@@ -931,7 +931,7 @@ func (this *SIPMessage) HasContent() bool {
 //    /**Return an iterator for the list of headers in this message.
 //     *@return an Iterator for the headers of this message.
 //     */
-func (this *SIPMessage) getHeaders() header.IList {
+func (this *SIPMessage) getHeaders() header.Lister {
 	return this.headers
 }
 
@@ -942,7 +942,7 @@ func (this *SIPMessage) getHeaders() header.IList {
 func (this *SIPMessage) GetHeader(headerName string) header.Header {
 	// if headerName == nil) throw new NullPointerException("bad name");
 	sipHeader := this.nameTable[strings.ToLower(headerName)]
-	if sl, ok := sipHeader.(header.ISIPHeaderList); ok {
+	if sl, ok := sipHeader.(header.SIPHeaderLister); ok {
 		return sl.Front().Value.(header.Header)
 	} else {
 		return sipHeader
@@ -1013,7 +1013,7 @@ func (this *SIPMessage) SetVia(viaList *header.ViaList) {
 //     *@param headerList a headerList to Set
 //     */
 
-func (this *SIPMessage) SetHeaderFromSIPHeaderList(sipHeaderList header.ISIPHeaderList) {
+func (this *SIPMessage) SetHeaderFromSIPHeaderList(sipHeaderList header.SIPHeaderLister) {
 	this.SetHeader(sipHeaderList)
 }
 
@@ -1409,18 +1409,18 @@ func (this *SIPMessage) RemoveContent() {
 //     *@param headerName is the name of the header to Get.
 //     *@return a header or header list that contians the retrieved header.
 //     */
-func (this *SIPMessage) GetHeaders(headerName string) header.IList {
+func (this *SIPMessage) GetHeaders(headerName string) header.Lister {
 	// if (headerName == nil)
 	//     throw new NullPointerException
 	//     ("nil headerName");
-	var sipHeader header.ISIPHeader
+	var sipHeader header.Header
 	var present bool
-	if sipHeader, present = this.nameTable[strings.ToLower(headerName)].(header.ISIPHeader); !present {
+	if sipHeader, present = this.nameTable[strings.ToLower(headerName)].(header.Header); !present {
 		// empty iterator
 		return list.New()
 	}
 
-	if shl, ok := sipHeader.(header.ISIPHeaderList); ok {
+	if shl, ok := sipHeader.(header.SIPHeaderLister); ok {
 		return shl
 	} else {
 		l := list.New()
@@ -1429,15 +1429,15 @@ func (this *SIPMessage) GetHeaders(headerName string) header.IList {
 	}
 }
 
-func (this *SIPMessage) GetSIPHeaderList(headerName string) header.ISIPHeaderList {
-	return this.nameTable[strings.ToLower(headerName)].(header.ISIPHeaderList)
+func (this *SIPMessage) GetSIPHeaderList(headerName string) header.SIPHeaderLister {
+	return this.nameTable[strings.ToLower(headerName)].(header.SIPHeaderLister)
 }
 
-func (this *SIPMessage) GetHeaderList(headerName string) header.IList {
+func (this *SIPMessage) GetHeaderList(headerName string) header.Lister {
 	sipHeader := this.nameTable[strings.ToLower(headerName)]
 	if sipHeader == nil {
 		return nil
-	} else if shl, ok := sipHeader.(header.ISIPHeaderList); ok {
+	} else if shl, ok := sipHeader.(header.SIPHeaderLister); ok {
 		return shl
 	} else {
 		ll := list.New()
@@ -1539,7 +1539,7 @@ func (this *SIPMessage) GetToTag() string {
 //     */
 func (this *SIPMessage) AddHeader(sipHeader header.Header) {
 	// Content length is never stored. Just computed.
-	sh := sipHeader.(header.ISIPHeader)
+	sh := sipHeader.(header.Header)
 	//try {
 	if _, ok := sipHeader.(header.ViaHeader); ok {
 		this.AttachHeader3(sh, false, true)

@@ -42,7 +42,7 @@ func NewRequireParserFromLexer(lexer core.Lexer) *RequireParser {
  * @return SIPHeader (RequireList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *RequireParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *RequireParser) Parse() (sh header.Header, ParseException error) {
 	requireList := header.NewRequireList()
 	//if (debug) dbg_enter("RequireParser.parse");
 

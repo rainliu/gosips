@@ -40,10 +40,10 @@ func NewContentDispositionParserFromLexer(lexer core.Lexer) *ContentDispositionP
 }
 
 /** parse the ContentDispositionHeader String header
- * @return ISIPHeader (ContentDispositionList object)
+ * @return Header (ContentDispositionList object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *ContentDispositionParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *ContentDispositionParser) Parse() (sh header.Header, ParseException error) {
 
 	//if (debug) dbg_enter("ContentDispositionParser.parse");
 

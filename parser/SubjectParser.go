@@ -43,7 +43,7 @@ func NewSubjectParserFromLexer(lexer core.Lexer) *SubjectParser {
  * @return SIPHeader (Subject object)
  * @throws SIPParseException if the message does not respect the spec.
  */
-func (this *SubjectParser) Parse() (sh header.ISIPHeader, ParseException error) {
+func (this *SubjectParser) Parse() (sh header.Header, ParseException error) {
 	subject := header.NewSubject()
 	//if (debug) dbg_enter("SubjectParser.parse");
 
