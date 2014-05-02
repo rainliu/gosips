@@ -389,7 +389,7 @@ func (this *SIPMessage) String() string {
 		if this.messageContent != "" {
 			content = this.messageContent
 		} else {
-			content = string(this.messageContentBytes) + header.SIPConstants_DEFAULT_ENCODING
+			content = string(this.messageContentBytes) // + header.SIPConstants_DEFAULT_ENCODING
 		}
 		// } catch (UnsupportedEncodingException ex) {
 		//     content = "";

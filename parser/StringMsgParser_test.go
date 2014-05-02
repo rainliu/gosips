@@ -7,7 +7,7 @@ import (
 
 func TestStringMsgParser(t *testing.T) {
 	var tvi = []string{
-		/*"SIP/2.0 180 Ringing\r\n" +
+		"SIP/2.0 180 Ringing\r\n" +
 			"Via: SIP/2.0/UDP 172.18.1.29:5060;branch=z9hG4bK43fc10fb4446d55fc5c8f969607991f4\r\n" +
 			"To: \"0440\" <sip:0440@212.209.220.131>;tag=2600\r\n" +
 			"From: \"Andreas\" <sip:andreas@e-horizon.se>;tag=8524\r\n" +
@@ -28,7 +28,7 @@ func TestStringMsgParser(t *testing.T) {
 			"User-Agent: RTC/(Microsoft RTC)\r\n" +
 			"Event:  registration\r\n" +
 			"Allow-Events: presence\r\n" +
-			"Content-Length: 0\r\n\r\n",*/
+			"Content-Length: 0\r\n\r\n",
 
 		"INVITE sip:littleguy@there.com:5060 SIP/2.0\r\n" +
 			"Via: SIP/2.0/UDP 65.243.118.100:5050\r\n" +
@@ -50,7 +50,7 @@ func TestStringMsgParser(t *testing.T) {
 			"a=ptime:20\r\n",
 	}
 	var tvo = []string{
-		/*"SIP/2.0 180 Ringing\r\n" +
+		"SIP/2.0 180 Ringing\r\n" +
 			"Via: SIP/2.0/UDP 172.18.1.29:5060;branch=z9hG4bK43fc10fb4446d55fc5c8f969607991f4\r\n" +
 			"To: \"0440\" <sip:0440@212.209.220.131>;tag=2600\r\n" +
 			"From: \"Andreas\" <sip:andreas@e-horizon.se>;tag=8524\r\n" +
@@ -71,14 +71,14 @@ func TestStringMsgParser(t *testing.T) {
 			"User-Agent: RTC/(Microsoft RTC)\r\n" +
 			"Event: registration\r\n" +
 			"Allow-Events: presence\r\n" +
-			"Content-Length: 0\r\n\r\n",*/
+			"Content-Length: 0\r\n\r\n",
 
 		"INVITE sip:littleguy@there.com:5060 SIP/2.0\r\n" +
 			"Via: SIP/2.0/UDP 65.243.118.100:5050\r\n" +
-			"From: M. Ranganathan  <sip:M.Ranganathan@sipbakeoff.com>;tag=1234\r\n" +
-			"To: \"littleguy@there.com\" <sip:littleguy@there.com:5060> \r\n" +
-			"Call-ID: Q2AboBsaGn9!?x6@sipbakeoff.com \r\n" +
-			"CSeq: 1 INVITE \r\n" +
+			"From: \"M. Ranganathan\" <sip:M.Ranganathan@sipbakeoff.com>;tag=1234\r\n" +
+			"To: \"littleguy@there.com\" <sip:littleguy@there.com:5060>\r\n" +
+			"Call-ID: Q2AboBsaGn9!?x6@sipbakeoff.com\r\n" +
+			"CSeq: 1 INVITE\r\n" +
 			"Content-Length: 247\r\n\r\n" +
 			"v=0\r\n" +
 			"o=4855 13760799956958020 13760799956958020 IN IP4  129.6.55.78\r\n" +
@@ -105,6 +105,13 @@ func TestStringMsgParser(t *testing.T) {
 			if strings.TrimSpace(d) != strings.TrimSpace(s) {
 				t.Log("origin = " + s)
 				t.Log("failed = " + d)
+
+				// for j := 0; j < len(s); j++ {
+				// 	if d[j] != s[j] {
+				// 		t.Logf("%d:%c vs %c", j, d[j], s[j])
+				// 	}
+				// }
+
 				t.Fail()
 			}
 		}
