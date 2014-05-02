@@ -1,0 +1,2902 @@
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "gosip/address"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>
+*
+</p>
+<pre>* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Module Name   : GoSIP Specification
+* File Name     : Address.go
+* Author        : Rain Liu
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+<p>
+*
+</p>
+<pre>* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Module Name   : GoSIP Specification
+* File Name     : TelURL.go
+* Author        : Rain Liu
+*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</pre>
+
+			</div>
+		</div>
+		
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+				<dd><a href="#pkg-constants">Constants</a></dd>
+			
+			
+			
+			
+				
+				<dd><a href="#Address">type Address</a></dd>
+				
+				
+			
+				
+				<dd><a href="#AddressFactory">type AddressFactory</a></dd>
+				
+				
+			
+				
+				<dd><a href="#AddressImpl">type AddressImpl</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewAddressImpl">func NewAddressImpl() *AddressImpl</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.GetAddressType">func (this *AddressImpl) GetAddressType() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.GetDisplayName">func (this *AddressImpl) GetDisplayName() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.GetHost">func (this *AddressImpl) GetHost() (string, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.GetHostPort">func (this *AddressImpl) GetHostPort() (hp *core.HostPort, RuntimeException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.GetPort">func (this *AddressImpl) GetPort() (int, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.GetURI">func (this *AddressImpl) GetURI() URI</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.GetUserAtHostPort">func (this *AddressImpl) GetUserAtHostPort() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.HasDisplayName">func (this *AddressImpl) HasDisplayName() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.IsSIPAddress">func (this *AddressImpl) IsSIPAddress() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.IsWildcard">func (this *AddressImpl) IsWildcard() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.RemoveDisplayName">func (this *AddressImpl) RemoveDisplayName()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.RemoveParameter">func (this *AddressImpl) RemoveParameter(parameterName string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.SetAddess">func (this *AddressImpl) SetAddess(address URI)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.SetAddressType">func (this *AddressImpl) SetAddressType(atype int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.SetDisplayName">func (this *AddressImpl) SetDisplayName(displayName string) (ParseException error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.SetURI">func (this *AddressImpl) SetURI(address URI)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.SetUser">func (this *AddressImpl) SetUser(user string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.SetWildCardFlag">func (this *AddressImpl) SetWildCardFlag()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#AddressImpl.String">func (this *AddressImpl) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#GenericURI">type GenericURI</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewGenericURI">func NewGenericURI(uriString string) *GenericURI</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#GenericURI.Clone">func (this *GenericURI) Clone() interface{}</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#GenericURI.GetScheme">func (this *GenericURI) GetScheme() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#GenericURI.IsSipURI">func (this *GenericURI) IsSipURI() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#GenericURI.String">func (this *GenericURI) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#Hop">type Hop</a></dd>
+				
+				
+			
+				
+				<dd><a href="#SipURI">type SipURI</a></dd>
+				
+				
+			
+				
+				<dd><a href="#SipUri">type SipUri</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewSipUri">func NewSipUri() *SipUri</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.ClearPassword">func (this *SipUri) ClearPassword()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.ClearQheaders">func (this *SipUri) ClearQheaders()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.ClearUriParms">func (this *SipUri) ClearUriParms()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.Clone">func (this *SipUri) Clone() interface{}</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetAuthority">func (this *SipUri) GetAuthority() *core.Authority</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetHeader">func (this *SipUri) GetHeader(name string) string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetHeaderNames">func (this *SipUri) GetHeaderNames() *core.NameValueList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetHost">func (this *SipUri) GetHost() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetHostPort">func (this *SipUri) GetHostPort() *core.HostPort</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetLrParam">func (this *SipUri) GetLrParam() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetMAddrParam">func (this *SipUri) GetMAddrParam() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetMethod">func (this *SipUri) GetMethod() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetMethodParam">func (this *SipUri) GetMethodParam() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetParameter">func (this *SipUri) GetParameter(name string) string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetParameterNames">func (this *SipUri) GetParameterNames() *list.List</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetParm">func (this *SipUri) GetParm(parmname string) interface{}</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetPort">func (this *SipUri) GetPort() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetQheaders">func (this *SipUri) GetQheaders() *core.NameValueList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetScheme">func (this *SipUri) GetScheme() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetTTLParam">func (this *SipUri) GetTTLParam() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetTelephoneSubscriber">func (this *SipUri) GetTelephoneSubscriber() *core.TelephoneNumber</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetTransportParam">func (this *SipUri) GetTransportParam() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetUriParms">func (this *SipUri) GetUriParms() *core.NameValueList</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetUser">func (this *SipUri) GetUser() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetUserAtHost">func (this *SipUri) GetUserAtHost() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetUserAtHostPort">func (this *SipUri) GetUserAtHostPort() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetUserParam">func (this *SipUri) GetUserParam() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetUserPassword">func (this *SipUri) GetUserPassword() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.GetUserType">func (this *SipUri) GetUserType() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.HasLrParam">func (this *SipUri) HasLrParam() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.HasParameter">func (this *SipUri) HasParameter(name string) bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.HasTransport">func (this *SipUri) HasTransport() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.IsSecure">func (this *SipUri) IsSecure() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.IsSipURI">func (this *SipUri) IsSipURI() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.IsUserTelephoneSubscriber">func (this *SipUri) IsUserTelephoneSubscriber() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemoveHeader">func (this *SipUri) RemoveHeader(name string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemoveHeaders">func (this *SipUri) RemoveHeaders()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemoveMAddr">func (this *SipUri) RemoveMAddr()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemoveMethod">func (this *SipUri) RemoveMethod()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemoveParameter">func (this *SipUri) RemoveParameter(name string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemovePort">func (this *SipUri) RemovePort()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemoveTTL">func (this *SipUri) RemoveTTL()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemoveTransport">func (this *SipUri) RemoveTransport()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemoveUriParms">func (this *SipUri) RemoveUriParms()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemoveUser">func (this *SipUri) RemoveUser()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.RemoveUserType">func (this *SipUri) RemoveUserType()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetAuthority">func (this *SipUri) SetAuthority(authority *core.Authority)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetDefaultParm">func (this *SipUri) SetDefaultParm(name string, value interface{})</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetHeader">func (this *SipUri) SetHeader(name, value string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetHost">func (this *SipUri) SetHost(h *core.Host)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetHostPort">func (this *SipUri) SetHostPort(hostPort *core.HostPort)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetHostString">func (this *SipUri) SetHostString(host string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetIsdnSubAddress">func (this *SipUri) SetIsdnSubAddress(isdnSubAddress string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetLrParam">func (this *SipUri) SetLrParam()</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetMAddr">func (this *SipUri) SetMAddr(mAddr string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetMAddrParam">func (this *SipUri) SetMAddrParam(maddr string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetMethod">func (this *SipUri) SetMethod(method string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetMethodParam">func (this *SipUri) SetMethodParam(method string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetParameter">func (this *SipUri) SetParameter(name, value string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetPort">func (this *SipUri) SetPort(p int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetQHeader">func (this *SipUri) SetQHeader(nameValue *core.NameValue)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetQheaders">func (this *SipUri) SetQheaders(parms *core.NameValueList)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetScheme">func (this *SipUri) SetScheme(scheme string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetSecure">func (this *SipUri) SetSecure(secure bool)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetTTLParam">func (this *SipUri) SetTTLParam(ttl int)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetTelephoneSubscriber">func (this *SipUri) SetTelephoneSubscriber(tel *core.TelephoneNumber)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetTransportParam">func (this *SipUri) SetTransportParam(transport string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetUriParameter">func (this *SipUri) SetUriParameter(nameValue *core.NameValue)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetUriParm">func (this *SipUri) SetUriParm(name string, value interface{})</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetUriParms">func (this *SipUri) SetUriParms(parms *core.NameValueList)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetUser">func (this *SipUri) SetUser(uname string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetUserParam">func (this *SipUri) SetUserParam(usertype string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.SetUserPassword">func (this *SipUri) SetUserPassword(password string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#SipUri.String">func (this *SipUri) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#TelURL">type TelURL</a></dd>
+				
+				
+			
+				
+				<dd><a href="#TelURLImpl">type TelURLImpl</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#NewTelURLImpl">func NewTelURLImpl() *TelURLImpl</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.Clone">func (this *TelURLImpl) Clone() interface{}</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.GetIsdnSubAddress">func (this *TelURLImpl) GetIsdnSubAddress() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.GetParameter">func (this *TelURLImpl) GetParameter(parameterName string) string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.GetParameterNames">func (this *TelURLImpl) GetParameterNames() *list.List</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.GetPhoneNumber">func (this *TelURLImpl) GetPhoneNumber() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.GetPostDial">func (this *TelURLImpl) GetPostDial() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.GetScheme">func (this *TelURLImpl) GetScheme() string</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.IsGlobal">func (this *TelURLImpl) IsGlobal() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.IsSipURI">func (this *TelURLImpl) IsSipURI() bool</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.RemoveParameter">func (this *TelURLImpl) RemoveParameter(name string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.SetGlobal">func (this *TelURLImpl) SetGlobal(global bool)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.SetIsdnSubAddress">func (this *TelURLImpl) SetIsdnSubAddress(isdnSubAddress string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.SetParameter">func (this *TelURLImpl) SetParameter(name, value string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.SetPhoneNumber">func (this *TelURLImpl) SetPhoneNumber(telephoneNumber string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.SetPostDial">func (this *TelURLImpl) SetPostDial(postDial string)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.SetTelephoneNumber">func (this *TelURLImpl) SetTelephoneNumber(telephoneNumber *core.TelephoneNumber)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TelURLImpl.String">func (this *TelURLImpl) String() string</a></dd>
+				
+			
+				
+				<dd><a href="#URI">type URI</a></dd>
+				
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h4>Package files</h4>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="/target/Address.go">Address.go</a>
+			
+				<a href="/target/AddressFactory.go">AddressFactory.go</a>
+			
+				<a href="/target/AddressImpl.go">AddressImpl.go</a>
+			
+				<a href="/target/Hop.go">Hop.go</a>
+			
+				<a href="/target/SipURI.go">SipURI.go</a>
+			
+				<a href="/target/SipURIImpl.go">SipURIImpl.go</a>
+			
+				<a href="/target/TelURL.go">TelURL.go</a>
+			
+				<a href="/target/TelURLImpl.go">TelURLImpl.go</a>
+			
+				<a href="/target/URI.go">URI.go</a>
+			
+				<a href="/target/URIImpl.go">URIImpl.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				<pre>const (
+    <span id="NAME_ADDR">NAME_ADDR</span> = <a href="/pkg/builtin/#iota">iota</a> <span class="comment">//0;</span>
+
+    <span class="comment">/** constant field.
+     */</span>
+    <span id="ADDRESS_SPEC">ADDRESS_SPEC</span> <span class="comment">//1;</span>
+
+    <span class="comment">/** Constant field.
+     */</span>
+    <span id="WILD_CARD">WILD_CARD</span> <span class="comment">//2;</span>
+)</pre>
+				<p>
+*
+</p>
+<pre>* Address structure. Imbeds a URI and adds a display name.
+*
+*@author M. Ranganathan &lt;mranga@nist.gov&gt;  &lt;br/&gt;
+*
+*&lt;a href=&#34;{@docRoot}/uncopyright.html&#34;&gt;This code is in the public domain.&lt;/a&gt;
+*
+*@version JAIN-SIP-1.1
+*
+</pre>
+<p>
+* Constant field.
+</p>
+
+			
+		
+		
+		
+		
+			
+			
+			<h2 id="Address">type <a href="/target/Address.go?s=810:2850#L16">Address</a></h2>
+			<pre>type Address interface {
+
+    <span class="comment">/**
+     * Sets the display name of the Address. The display name is an
+     * additional user friendly personalized text that accompanies the address.
+     *
+     * @param displayName - the new string value of the display name.
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the displayName value.
+     */</span>
+    SetDisplayName(displayName <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets the display name of this Address, or null if the attribute is
+     * not set.
+     *
+     * @return the display name of this Address
+     */</span>
+    GetDisplayName() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the URI of this Address. The URI can be either a TelURL or a SipURI.
+     *
+     * @param uri - the new URI value of this Address.
+     */</span>
+    SetURI(uri <a href="#URI">URI</a>)
+
+    <span class="comment">/**
+     * Returns the URI  of this Address. The type of URI can be
+     * determined by the scheme.
+     *
+     * @return URI parmater of the Address object
+     */</span>
+    GetURI() <a href="#URI">URI</a>
+
+    <span class="comment">/**
+     * Returns a string representation of this Address.
+     *
+     * @return the stringified representation of the Address
+     */</span>
+    String() <a href="/pkg/builtin/#string">string</a> <span class="comment">//ToString() string;</span>
+
+    <span class="comment">/**
+     * This determines if this address is a wildcard address. That is
+     * &lt;code&gt;((SipURI)Address.getURI()).getUser() == *;&lt;/code&gt;. This method
+     * is specific to SIP and SIPS schemes.
+     *
+     * @return true if this address is a wildcard, false otherwise.
+     */</span>
+    IsWildcard() <a href="/pkg/builtin/#bool">bool</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="AddressFactory">type <a href="/target/AddressFactory.go?s=635:4098#L11">AddressFactory</a></h2>
+			<pre>type AddressFactory interface {
+
+    <span class="comment">/**
+     * Creates a URI based on given URI string. The URI string is parsed in
+     * order to create the new URI instance. Depending on the scheme the
+     * returned may or may not be a SipURI or TelURL cast as a URI.
+     *
+     * @param uri - the new string value of the URI.
+     * @throws ParseException if the URI string is malformed.
+     */</span>
+    CreateURI(uriStr <a href="/pkg/builtin/#string">string</a>) (uri <a href="#URI">URI</a>, ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Creates a SipURI based on the given user and host components. The user
+     * component may be null.
+     * &lt;p&gt;
+     * This create method first builds a URI in string form using the given
+     * components as follows:
+     * &lt;ul&gt;
+     * &lt;li&gt;Initially, the result string is empty.
+     * &lt;li&gt;The scheme followed by a colon character (&#39;sip:&#39;) is appended to
+     * the result.
+     * &lt;li&gt;The user and host are then appended. Any character that is not a
+     * legal URI character is quoted.
+     * &lt;/ul&gt;
+     * &lt;br&gt;
+     * The resulting URI string is then parsed in order to create the new
+     * SipURI instance as if by invoking the createURI(String) constructor;
+     * this may cause a URISyntaxException to be thrown.
+     * &lt;p&gt;
+     * An application that wishes to create a &#39;sips&#39; URI should call the
+     * {@link SipURI#setSecure(boolean)} with an argument of &#39;true&#39; on the
+     * returned SipURI.
+     *
+     * @param user - the new string value of the user, this value may be null.
+     * @param host - the new string value of the host.
+     * @throws ParseException if the URI string is malformed.
+     */</span>
+    CreateSipURI(user, host <a href="/pkg/builtin/#string">string</a>) (sipuri <a href="#SipURI">SipURI</a>, ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Creates a TelURL based on given URI string. The scheme or &#39;+&#39; should
+     * not be included in the phoneNumber string argument.
+     *
+     * @param uri - the new string value of the phoneNumber.
+     * @throws ParseException if the URI string is malformed.
+     */</span>
+    CreateTelURL(phoneNumber <a href="/pkg/builtin/#string">string</a>) (telurl <a href="#TelURL">TelURL</a>, ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Creates an Address with the new address string value. The address
+     * string is parsed in order to create the new Address instance. Create
+     * with a String value of &#34;*&#34; creates a wildcard address. The wildcard
+     * can be determined if &lt;code&gt;((SipURI)Address.getURI).getUser() == *;&lt;/code&gt;.
+     *
+     * @param address - the new string value of the address.
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the address value.
+     */</span>
+    CreateAddressFromString(addrStr <a href="/pkg/builtin/#string">string</a>) (addr <a href="#Address">Address</a>, ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Creates an Address with the new URI attribute value.
+     *
+     * @param uri - the URI value of the address.
+     */</span>
+    CreateAddressFromURI(uri <a href="#URI">URI</a>) (addr <a href="#Address">Address</a>)
+
+    <span class="comment">/**
+     * Creates an Address with the new display name and URI attribute
+     * values.
+     *
+     * @param displayName - the new string value of the display name of the
+     * address. A &lt;code&gt;null&lt;/code&gt; value does not set the display name.
+     * @param uri - the new URI value of the address.
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the displayName value.
+     */</span>
+    CreateAddressFromURIWithDisplayName(displayName <a href="/pkg/builtin/#string">string</a>, uri <a href="#URI">URI</a>) (addr <a href="#Address">Address</a>, ParseException <a href="/pkg/builtin/#error">error</a>)
+}</pre>
+			<p>
+*
+</p>
+<pre>* This interface provides factory methods that allow an application to create
+* Address objects, URI&#39;s, SipURI&#39;s and TelURL&#39;s from a particular
+* implementation of this specification. This class is a singleton and can be
+* retrieved from the {@link javax.sip.SipFactory#createAddressFactory()}.
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="AddressImpl">type <a href="/target/AddressImpl.go?s=474:669#L23">AddressImpl</a></h2>
+			<pre>type AddressImpl struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewAddressImpl">func <a href="/target/AddressImpl.go?s=673:707#L37">NewAddressImpl</a></h3>
+				<pre>func NewAddressImpl() *<a href="#AddressImpl">AddressImpl</a></pre>
+				
+				
+			
+
+			
+				
+				<h3 id="AddressImpl.GetAddressType">func (*AddressImpl) <a href="/target/AddressImpl.go?s=4347:4392#L168">GetAddressType</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) GetAddressType() <a href="/pkg/builtin/#int">int</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the address type;
+* @return int
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.GetDisplayName">func (*AddressImpl) <a href="/target/AddressImpl.go?s=4704:4752#L189">GetDisplayName</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) GetDisplayName() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* get the display name
+*
+* @return String
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.GetHost">func (*AddressImpl) <a href="/target/AddressImpl.go?s=2645:2695#L110">GetHost</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) GetHost() (<a href="/pkg/builtin/#string">string</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+* Get the host name from the address.
+</p>
+<pre>*
+*@return the host name.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.GetHostPort">func (*AddressImpl) <a href="/target/AddressImpl.go?s=1557:1639#L71">GetHostPort</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) GetHostPort() (hp *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#HostPort">HostPort</a>, RuntimeException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+* Get the host port portion of the address spec.
+</p>
+<pre>*@return host:port in a HostPort structure.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.GetPort">func (*AddressImpl) <a href="/target/AddressImpl.go?s=1972:2019#L85">GetPort</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) GetPort() (<a href="/pkg/builtin/#int">int</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+* Get the port from the imbedded URI. This assumes that a SIP URL
+</p>
+<pre>* is encapsulated in this address object.
+*
+*@return the port from the address.
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.GetURI">func (*AddressImpl) <a href="/target/AddressImpl.go?s=6399:6436#L266">GetURI</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) GetURI() <a href="#URI">URI</a></pre>
+				<p>
+* Returns the URI address of this Address. The type of URI can be
+</p>
+<pre>* determined by the scheme.
+*
+* @return address parmater of the Address object
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.GetUserAtHostPort">func (*AddressImpl) <a href="/target/AddressImpl.go?s=2396:2447#L99">GetUserAtHostPort</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) GetUserAtHostPort() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Get the user@host:port for the address field. This assumes
+</p>
+<pre>* that the encapsulated object is a SipUri.
+*
+* BUG Fix from Antonis Kadris.
+*
+*@return string containing user@host:port.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.HasDisplayName">func (*AddressImpl) <a href="/target/AddressImpl.go?s=5822:5868#L241">HasDisplayName</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) HasDisplayName() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* return true if DisplayName exist.
+</p>
+<pre>*
+* @return boolean
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.IsSIPAddress">func (*AddressImpl) <a href="/target/AddressImpl.go?s=6142:6186#L256">IsSIPAddress</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) IsSIPAddress() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Return true if the imbedded URI is a sip URI.
+</p>
+<pre>*
+* @return true if the imbedded URI is a SIP URI.
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.IsWildcard">func (*AddressImpl) <a href="/target/AddressImpl.go?s=6670:6712#L275">IsWildcard</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) IsWildcard() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* This determines if this address is a wildcard address. That is
+</p>
+<pre>* &lt;code&gt;Address.getAddress.getUserInfo() == *;&lt;/code&gt;
+*
+* @return true if this name address is a wildcard, false otherwise.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.RemoveDisplayName">func (*AddressImpl) <a href="/target/AddressImpl.go?s=5950:5994#L247">RemoveDisplayName</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) RemoveDisplayName()</pre>
+				<p>
+* remove the displayName field
+</p>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.RemoveParameter">func (*AddressImpl) <a href="/target/AddressImpl.go?s=3002:3064#L122">RemoveParameter</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) RemoveParameter(parameterName <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Remove a parameter from the address.
+</p>
+<pre>*
+*@param parameterName is the name of the parameter to remove.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.SetAddess">func (*AddressImpl) <a href="/target/AddressImpl.go?s=5118:5165#L211">SetAddess</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) SetAddess(address <a href="#URI">URI</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the address field
+*
+* @param address SipUri to set
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.SetAddressType">func (*AddressImpl) <a href="/target/AddressImpl.go?s=4556:4606#L179">SetAddressType</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) SetAddressType(atype <a href="/pkg/builtin/#int">int</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the address type. The address can be NAME_ADDR, ADDR_SPEC or
+* WILD_CARD
+*
+* @param atype int to set
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.SetDisplayName">func (*AddressImpl) <a href="/target/AddressImpl.go?s=4873:4955#L199">SetDisplayName</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) SetDisplayName(displayName <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the displayName member
+*
+* @param displayName String to set
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.SetURI">func (*AddressImpl) <a href="/target/AddressImpl.go?s=6928:6972#L284">SetURI</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) SetURI(address <a href="#URI">URI</a>)</pre>
+				<p>
+* Sets the URI address of this Address. The URI can be either a
+</p>
+<pre>* TelURL or a SipURI.
+*
+* @param address - the new URI address value of this NameAddress.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.SetUser">func (*AddressImpl) <a href="/target/AddressImpl.go?s=7117:7162#L292">SetUser</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) SetUser(user <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Set the user name for the imbedded URI.
+</p>
+<pre>*
+*@param user -- user name to set for the imbedded URI.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.SetWildCardFlag">func (*AddressImpl) <a href="/target/AddressImpl.go?s=7293:7335#L300">SetWildCardFlag</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) SetWildCardFlag()</pre>
+				<p>
+* Mark this a wild card address type.
+</p>
+
+				
+				
+			
+				
+				<h3 id="AddressImpl.String">func (*AddressImpl) <a href="/target/AddressImpl.go?s=3449:3489#L138">String</a></h3>
+				<pre>func (this *<a href="#AddressImpl">AddressImpl</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Encode the address as a string and return it.
+* @return String canonical encoded version of this address.
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="GenericURI">type <a href="/target/URIImpl.go?s=266:417#L6">GenericURI</a></h2>
+			<pre>type GenericURI struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewGenericURI">func <a href="/target/URIImpl.go?s=688:736#L23">NewGenericURI</a></h3>
+				<pre>func NewGenericURI(uriString <a href="/pkg/builtin/#string">string</a>) *<a href="#GenericURI">GenericURI</a></pre>
+				<p>
+* Constructor given the URI string
+</p>
+<pre>* @param uriString The imbedded URI string.
+* @throws URISyntaxException When there is a syntaz error in the imbedded URI.
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="GenericURI.Clone">func (*GenericURI) <a href="/target/URIImpl.go?s=1376:1419#L51">Clone</a></h3>
+				<pre>func (this *<a href="#GenericURI">GenericURI</a>) Clone() interface{}</pre>
+				<p>
+* Overrides the base clone method
+</p>
+<pre>* @return The Cloned strucutre,
+</pre>
+
+				
+				
+			
+				
+				<h3 id="GenericURI.GetScheme">func (*GenericURI) <a href="/target/URIImpl.go?s=1823:1865#L66">GetScheme</a></h3>
+				<pre>func (this *<a href="#GenericURI">GenericURI</a>) GetScheme() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the value of the &#34;scheme&#34; of
+</p>
+<pre>* this URI, for example &#34;sip&#34;, &#34;sips&#34; or &#34;tel&#34;.
+*
+* @return the scheme paramter of the URI
+</pre>
+
+				
+				
+			
+				
+				<h3 id="GenericURI.IsSipURI">func (*GenericURI) <a href="/target/URIImpl.go?s=2094:2133#L75">IsSipURI</a></h3>
+				<pre>func (this *<a href="#GenericURI">GenericURI</a>) IsSipURI() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* This method determines if this is a URI with a scheme of
+</p>
+<pre>* &#34;sip&#34; or &#34;sips&#34;.
+*
+* @return true if the scheme is &#34;sip&#34; or &#34;sips&#34;, false otherwise.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="GenericURI.String">func (*GenericURI) <a href="/target/URIImpl.go?s=1012:1051#L35">String</a></h3>
+				<pre>func (this *<a href="#GenericURI">GenericURI</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Encode the URI.
+</p>
+<pre>* @return The encoded URI
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="Hop">type <a href="/target/Hop.go?s=650:1284#L18">Hop</a></h2>
+			<pre>type Hop interface {
+
+    <span class="comment">/**
+     * Returns the host part of this Hop.
+     *
+     * @return  the string value of the host.
+     */</span>
+    GetHost() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Returns the port part of this Hop.
+     *
+     * @return  the integer value of the port.
+     */</span>
+    GetPort() <a href="/pkg/builtin/#int">int</a>
+
+    <span class="comment">/**
+     * Returns the transport part of this Hop.
+     *
+     * @return the string value of the transport.
+     */</span>
+    GetTransport() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * This method returns the Hop as a string.
+     *
+     * @return the stringified version of the Hop
+     */</span>
+    ToString() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="SipURI">type <a href="/target/SipURI.go?s=4863:14765#L87">SipURI</a></h2>
+			<pre>type SipURI interface {
+    <a href="#URI">URI</a>
+
+    <span class="comment">/**
+     * Returns the value of the named parameter, or null if it is not set. A
+     * zero-length String indicates flag parameter.
+     *
+     * @param &lt;var&gt;name&lt;/var&gt; name of parameter to retrieve
+     * @return the value of specified parameter
+     */</span>
+    GetParameter(name <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the value of the specified parameter. If the parameter already had
+     * a value it will be overwritten. A zero-length String indicates flag
+     * parameter.
+     *
+     * @param name - a String specifying the parameter name
+     * @param value - a String specifying the parameter value
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the parameter name or value.
+     */</span>
+    SetParameter(name, value <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns an Iterator over the names (Strings) of all parameters present
+     * in this ParametersHeader.
+     *
+     * @return an Iterator over all the parameter names
+     */</span>
+    GetParameterNames() *<a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a> <span class="comment">//Iterator</span>
+
+    <span class="comment">/**
+     * Removes the specified parameter from Parameters of this ParametersHeader.
+     * This method returns silently if the parameter is not part of the
+     * ParametersHeader.
+     *
+     * @param name - a String specifying the parameter name
+     */</span>
+    RemoveParameter(name <a href="/pkg/builtin/#string">string</a>)
+
+    <span class="comment">/**
+     * Sets the user of SipURI. The identifier of a particular resource at
+     * the host being addressed. The user and the user password including the
+     * &#39;@&#39; sign make up the user-info.
+     *
+     * @param user - the new String value of the user.
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the user value.
+     */</span>
+    SetUser(user <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the user part of this SipURI.
+     *
+     * @return  the user part of this SipURI
+     */</span>
+    GetUser() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the user password associated with the user of SipURI. While the SIP and
+     * SIPS URI syntax allows this field to be present, its use is NOT
+     * RECOMMENDED, because the passing of authentication information in clear
+     * text (such as URIs) has proven to be a security risk in almost every
+     * case where it has been used. The user password and the user including
+     * the @ sign make up the user-info.
+     *
+     * @param userPassword - the new String value of the user password
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the userPassword value.
+     */</span>
+    SetUserPassword(userPassword <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Gets user password of SipURI, or null if it is not set.
+     *
+     * @return the user password of this SipURI
+     */</span>
+    GetUserPassword() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Returns true if this SipURI is secure i.e. if this SipURI represents a
+     * sips URI. A sip URI returns false.
+     *
+     * @return  &lt;code&gt;true&lt;/code&gt; if this SipURI represents a sips URI, and
+     * &lt;code&gt;false&lt;/code&gt; if it represents a sip URI.
+     */</span>
+    IsSecure() <a href="/pkg/builtin/#bool">bool</a>
+
+    <span class="comment">/**
+     * Sets the scheme of this URI to sip or sips depending on whether the
+     * argument is true or false. The default value is false.
+     *
+     * @param secure - the boolean value indicating if the SipURI is secure.
+     */</span>
+    SetSecure(secure <a href="/pkg/builtin/#bool">bool</a>)
+
+    <span class="comment">/**
+     * Set the host part of this SipURI to the newly supplied &lt;code&gt;host&lt;/code&gt;
+     * parameter.
+     *
+     * @return host - the new interger value of the host of this SipURI
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the host value.
+     */</span>
+    SetHost(host <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the host part of this SipURI.
+     *
+     * @return  the host part of this SipURI
+     */</span>
+    GetHost() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Set the port part of this SipURI to the newly supplied port
+     * parameter.
+     *
+     * @param port - the new interger value of the port of this SipURI
+     */</span>
+    SetPort(port <a href="/pkg/builtin/#int">int</a>)
+
+    <span class="comment">/**
+     * Returns the port part of this SipURI.
+     *
+     * @return  the port part of this SipURI
+     */</span>
+    GetPort() <a href="/pkg/builtin/#int">int</a>
+
+    <span class="comment">/**
+     * Removes the port part of this SipURI. If no port is specified the
+     * stack will assume the default port.
+     *
+     */</span>
+    RemovePort()
+
+    <span class="comment">/**
+     * Returns the value of the named header, or null if it is not set.
+     * SIP/SIPS URIs may specify headers. As an example, the URI
+     * sip:jimmy@jcp.org?priority=urgent has a header &#34;priority&#34; whose
+     * value is &#34;urgent&#34;.
+     *
+     * @param &lt;var&gt;name&lt;/var&gt; name of header to retrieve
+     * @return the value of specified header
+     */</span>
+    GetHeader(name <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the value of the specified header fields to be included in a
+     * request constructed from the URI. If the header already had a value it
+     * will be overwritten.
+     *
+     * @param name - a String specifying the header name
+     * @param value - a String specifying the header value
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the name or value parameters.
+     */</span>
+    SetHeader(name, value <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns an Iterator over the String names of all headers present
+     * in this SipURI.
+     *
+     * @return an Iterator over all the header names
+     */</span>
+    GetHeaderNames() *<a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a> <span class="comment">//Iterator</span>
+
+    <span class="comment">/**
+     * Returns the value of the &#34;transport&#34; parameter, or null if this is not
+     * set. This is equivalent to getParameter(&#34;transport&#34;).
+     *
+     * @return the transport paramter of the SipURI
+     */</span>
+    GetTransportParam() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the value of the &#34;transport&#34; parameter. This parameter specifies
+     * which transport protocol to use for sending requests and responses to
+     * this entity. The following values are defined: &#34;udp&#34;, &#34;tcp&#34;, &#34;sctp&#34;,
+     * &#34;tls&#34;, but other values may be used also. This method is equivalent to
+     * setParameter(&#34;transport&#34;, transport). Transport parameter constants
+     * are defined in the {@link javax.sip.ListeningPoint}.
+     *
+     * @param transport - new value for the &#34;transport&#34; parameter
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the transport value.
+     */</span>
+    SetTransportParam(transport <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the value of the &#34;ttl&#34; parameter, or -1 if this is not set.
+     * This method is equivalent to getParameter(&#34;ttl&#34;).
+     *
+     * @return the value of the &lt;code&gt;ttl&lt;/code&gt; parameter
+     */</span>
+    GetTTLParam() <a href="/pkg/builtin/#int">int</a>
+
+    <span class="comment">/**
+     * Sets the value of the &lt;code&gt;ttl&lt;/code&gt; parameter. The ttl parameter
+     * specifies the time-to-live value when packets are sent using UDP
+     * multicast. This is equivalent to setParameter(&#34;ttl&#34;, ttl).
+     *
+     * @param ttl - new value of the &lt;code&gt;ttl&lt;/code&gt; parameter
+     * @throws InvalidArgumentException if supplied value is less than zero,
+     * excluding -1 the default not set value.
+     */</span>
+    SetTTLParam(ttl <a href="/pkg/builtin/#int">int</a>) (InvalidArgumentException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the value of the &lt;code&gt;method&lt;/code&gt; parameter, or null if this
+     * is not set. This is equivalent to getParameter(&#34;method&#34;).
+     *
+     * @return  the value of the &lt;code&gt;method&lt;/code&gt; parameter
+     */</span>
+    GetMethodParam() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the value of the &lt;code&gt;method&lt;/code&gt; parameter. This specifies
+     * which SIP method to use in requests directed at this URI. This is
+     * equivalent to setParameter(&#34;method&#34;, method).
+     *
+     * @param  method - new value String value of the method parameter
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the method value.
+     */</span>
+    SetMethodParam(method <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Sets the value of the user parameter. The user URI parameter exists to
+     * distinguish telephone numbers from user names that happen to look like
+     * telephone numbers.  This is equivalent to setParameter(&#34;user&#34;, user).
+     *
+     * @param  userParam - new value String value of the method parameter
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the userParam value.
+     */</span>
+    SetUserParam(userParam <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the value of the &lt;code&gt;userParam&lt;/code&gt;, or null if this is not
+     * set.
+     * &lt;p&gt;
+     * This is equivalent to getParameter(&#34;user&#34;).
+     *
+     * @return the value of the &lt;code&gt;userParam&lt;/code&gt; of the SipURI
+     */</span>
+    GetUserParam() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Returns the value of the &lt;code&gt;maddr&lt;/code&gt; parameter, or null if this
+     * is not set. This is equivalent to getParameter(&#34;maddr&#34;).
+     *
+     * @return the value of the &lt;code&gt;maddr&lt;/code&gt; parameter
+     */</span>
+    GetMAddrParam() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the value of the &lt;code&gt;maddr&lt;/code&gt; parameter of this SipURI. The
+     * maddr parameter indicates the server address to be contacted for this
+     * user, overriding any address derived from the host field. This is
+     * equivalent to setParameter(&#34;maddr&#34;, maddr).
+     *
+     * @param  method - new value of the &lt;code&gt;maddr&lt;/code&gt; parameter
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the mAddr value.
+     */</span>
+    SetMAddrParam(mAddr <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns whether the the &lt;code&gt;lr&lt;/code&gt; parameter is set. This is
+     * equivalent to hasParameter(&#34;lr&#34;). This interface has no getLrParam as
+     * RFC3261 does not specify any values for the &#34;lr&#34; paramater.
+     *
+     * @return true if the &#34;lr&#34; parameter is set, false otherwise.
+     */</span>
+    HasLrParam() <a href="/pkg/builtin/#bool">bool</a>
+
+    <span class="comment">/**
+     * Sets the value of the &lt;code&gt;lr&lt;/code&gt; parameter of this SipURI. The lr
+     * parameter, when present, indicates that the element responsible for
+     * this resource implements the routing mechanisms specified in RFC 3261.
+     * This parameter will be used in the URIs proxies place in the
+     * Record-Route header field values, and may appear in the URIs in a
+     * pre-existing route set.
+     */</span>
+    SetLrParam()
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="SipUri">type <a href="/target/SipURIImpl.go?s=250:635#L9">SipUri</a></h2>
+			<pre>type SipUri struct {
+    <a href="#GenericURI">GenericURI</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+* The SipUri structure.
+*
+*@author Rain Liu  &lt;br/&gt;
+*
+*&lt;a href=&#34;{@docRoot}/uncopyright.html&#34;&gt;This code is in the public domain.&lt;/a&gt;
+*
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewSipUri">func <a href="/target/SipURIImpl.go?s=645:669#L32">NewSipUri</a></h3>
+				<pre>func NewSipUri() *<a href="#SipUri">SipUri</a></pre>
+				
+				
+			
+
+			
+				
+				<h3 id="SipUri.ClearPassword">func (*SipUri) <a href="/target/SipURIImpl.go?s=1673:1708#L74">ClearPassword</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) ClearPassword()</pre>
+				<p>
+*
+</p>
+<pre>*Clear the password from the user part if it exists.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.ClearQheaders">func (*SipUri) <a href="/target/SipURIImpl.go?s=2058:2093#L93">ClearQheaders</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) ClearQheaders()</pre>
+				<p>
+*
+</p>
+<pre>* Clear all Qheaders.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.ClearUriParms">func (*SipUri) <a href="/target/SipURIImpl.go?s=1497:1532#L68">ClearUriParms</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) ClearUriParms()</pre>
+				<p>
+*
+</p>
+<pre>* clear all URI Parameters.
+* @since v1.0
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.Clone">func (*SipUri) <a href="/target/SipURIImpl.go?s=18723:18762#L640">Clone</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) Clone() interface{}</pre>
+				<p>
+* clone this.
+</p>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetAuthority">func (*SipUri) <a href="/target/SipURIImpl.go?s=1905:1955#L85">GetAuthority</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetAuthority() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#Authority">Authority</a></pre>
+				<p>
+* Get the authority.
+</p>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetHeader">func (*SipUri) <a href="/target/SipURIImpl.go?s=19734:19784#L670">GetHeader</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetHeader(name <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the value of the named header, or null if it is not set.
+</p>
+<pre>* SIP/SIPS URIs may specify headers. As an example, the URI
+* sip:joe@jcp.org?priority=urgent has a header &#34;priority&#34; whose
+* value is &#34;urgent&#34;.
+*
+* @param &lt;var&gt;name&lt;/var&gt; name of header to retrieve
+* @return the value of specified header
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetHeaderNames">func (*SipUri) <a href="/target/SipURIImpl.go?s=20096:20152#L684">GetHeaderNames</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetHeaderNames() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a></pre>
+				<p>
+* Returns an Iterator over the names (Strings) of all headers present
+</p>
+<pre>* in this SipURI.
+*
+* @return an Iterator over all the header names
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetHost">func (*SipUri) <a href="/target/SipURIImpl.go?s=9016:9052#L338">GetHost</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetHost() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Get the host protion of the URI.
+</p>
+<pre>* @return the host portion of the url.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetHostPort">func (*SipUri) <a href="/target/SipURIImpl.go?s=8485:8533#L315">GetHostPort</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetHostPort() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#HostPort">HostPort</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the host and port of the server.
+* @return Get the host:port part of the url parsed into a
+* structure.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetLrParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=20415:20454#L693">GetLrParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetLrParam() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the value of the &lt;code&gt;lr&lt;/code&gt; parameter, or null if this
+</p>
+<pre>* is not Set. This is equivalent to GetParameter(&#34;lr&#34;).
+*
+* @return the value of the &lt;code&gt;lr&lt;/code&gt; parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetMAddrParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=20801:20843#L705">GetMAddrParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetMAddrParam() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the value of the &lt;code&gt;maddr&lt;/code&gt; parameter, or null if this
+</p>
+<pre>* is not Set. This is equivalent to GetParameter(&#34;maddr&#34;).
+*
+* @return the value of the &lt;code&gt;maddr&lt;/code&gt; parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetMethod">func (*SipUri) <a href="/target/SipURIImpl.go?s=6195:6233#L234">GetMethod</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetMethod() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the method parameter.
+* @return Method parameter.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetMethodParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=21251:21294#L718">GetMethodParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetMethodParam() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the value of the &lt;code&gt;method&lt;/code&gt; parameter, or null if this
+</p>
+<pre>* is not Set. This is equivalent to GetParameter(&#34;method&#34;).
+*
+* @return  the value of the &lt;code&gt;method&lt;/code&gt; parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetParameter">func (*SipUri) <a href="/target/SipURIImpl.go?s=21690:21742#L734">GetParameter</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetParameter(name <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Returns the value of the named parameter, or null if it is not Set. A
+*
+* zero-length String indicates flag parameter.
+*
+*
+*
+* @param &lt;var&gt;name&lt;/var&gt; name of parameter to retrieve
+*
+* @return the value of specified parameter
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetParameterNames">func (*SipUri) <a href="/target/SipURIImpl.go?s=22179:22229#L755">GetParameterNames</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetParameterNames() *<a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a></pre>
+				<p>
+*
+</p>
+<pre>* Returns an Iterator over the names (Strings) of all parameters present
+*
+* in this ParametersHeader.
+*
+*
+*
+* @return an Iterator over all the parameter names
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetParm">func (*SipUri) <a href="/target/SipURIImpl.go?s=5967:6024#L225">GetParm</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetParm(parmname <a href="/pkg/builtin/#string">string</a>) interface{}</pre>
+				<p>
+*
+</p>
+<pre>* Get the parameter (do a name lookup) and return null if none exists.
+* @param parmname Name of the parameter to Get.
+* @return Parameter of the given name (null if none exists).
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetPort">func (*SipUri) <a href="/target/SipURIImpl.go?s=8790:8823#L327">GetPort</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetPort() <a href="/pkg/builtin/#int">int</a></pre>
+				<p>
+* Get the port from the authority field.
+</p>
+<pre>*
+*@return the port from the authority field.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetQheaders">func (*SipUri) <a href="/target/SipURIImpl.go?s=6868:6921#L259">GetQheaders</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetQheaders() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a></pre>
+				<p>
+*
+</p>
+<pre>* Accessor forSIPObjects
+* @return Get the query headers (that appear after the ? in
+* the URL)
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetScheme">func (*SipUri) <a href="/target/SipURIImpl.go?s=1332:1370#L58">GetScheme</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetScheme() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Get the scheme.
+</p>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetTTLParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=22500:22537#L764">GetTTLParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetTTLParam() <a href="/pkg/builtin/#int">int</a></pre>
+				<p>
+* Returns the value of the &#34;ttl&#34; parameter, or -1 if this is not Set.
+</p>
+<pre>* This method is equivalent to GetParameter(&#34;ttl&#34;).
+*
+* @return the value of the &lt;code&gt;ttl&lt;/code&gt; parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetTelephoneSubscriber">func (*SipUri) <a href="/target/SipURIImpl.go?s=8095:8161#L303">GetTelephoneSubscriber</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetTelephoneSubscriber() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#TelephoneNumber">TelephoneNumber</a></pre>
+				<p>
+*
+</p>
+<pre>* Returns the stucture corresponding to the telephone number
+* provided that the user is a telephone subscriber.
+* @return TelephoneNumber part of the url (only makes sense
+* when user = phone is specified)
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetTransportParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=22903:22949#L777">GetTransportParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetTransportParam() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the value of the &#34;transport&#34; parameter, or null if this is not
+</p>
+<pre>* Set. This is equivalent to GetParameter(&#34;transport&#34;).
+*
+* @return the transport paramter of the SipURI
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetUriParms">func (*SipUri) <a href="/target/SipURIImpl.go?s=6453:6506#L243">GetUriParms</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetUriParms() *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a></pre>
+				<p>
+*
+</p>
+<pre>* Accessor for URI parameters
+* @return A name-value list containing the parameters.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetUser">func (*SipUri) <a href="/target/SipURIImpl.go?s=23371:23407#L791">GetUser</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetUser() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the value of the &lt;code&gt;userParam&lt;/code&gt;,
+</p>
+<pre>*or null if this is not Set.
+* &lt;p&gt;
+* This is equivalent to GetParameter(&#34;user&#34;).
+*
+* @return the value of the &lt;code&gt;userParam&lt;/code&gt; of the SipURI
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetUserAtHost">func (*SipUri) <a href="/target/SipURIImpl.go?s=4748:4791#L188">GetUserAtHost</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetUserAtHost() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* GetUser@host
+* @return user@host portion of the uri (null if none exists).
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetUserAtHostPort">func (*SipUri) <a href="/target/SipURIImpl.go?s=5080:5127#L198">GetUserAtHostPort</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetUserAtHostPort() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* GetUser@host
+* @return user@host portion of the uri (null if none exists).
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetUserParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=29796:29837#L967">GetUserParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetUserParam() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the user part of this SipURI, or null if it is not Set.
+</p>
+<pre>*
+* @return  the user part of this SipURI
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetUserPassword">func (*SipUri) <a href="/target/SipURIImpl.go?s=7373:7417#L280">GetUserPassword</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetUserPassword() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the password of the user.
+* @return User password when it embedded as part of the uri
+* ( a very bad idea).
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.GetUserType">func (*SipUri) <a href="/target/SipURIImpl.go?s=7084:7124#L269">GetUserType</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) GetUserType() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Get the urse parameter.
+* @return User parameter (user= phone or user=ip).
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.HasLrParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=30210:30247#L978">HasLrParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) HasLrParam() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Returns whether the the &lt;code&gt;lr&lt;/code&gt; parameter is Set. This is
+</p>
+<pre>* equivalent to hasParameter(&#34;lr&#34;). This interface has no GetLrParam as
+* RFC3261 does not specify any values for the &#34;lr&#34; paramater.
+*
+* @return true if the &#34;lr&#34; parameter is Set, false otherwise.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.HasParameter">func (*SipUri) <a href="/target/SipURIImpl.go?s=17282:17333#L593">HasParameter</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) HasParameter(name <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Boolean to check if a parameter of a given name exists.
+</p>
+<pre>* @param name Name of the parameter to check on.
+* @return a boolean indicating whether the parameter exists.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.HasTransport">func (*SipUri) <a href="/target/SipURIImpl.go?s=18032:18071#L615">HasTransport</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) HasTransport() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Return true if the transport parameter is defined.
+</p>
+<pre>* @return true if transport appears as a parameter and false otherwise.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.IsSecure">func (*SipUri) <a href="/target/SipURIImpl.go?s=23746:23781#L801">IsSecure</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) IsSecure() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Returns true if this SipURI is secure i.e. if this SipURI represents a
+</p>
+<pre>* sips URI. A sip URI returns false.
+*
+* @return  &lt;code&gt;true&lt;/code&gt; if this SipURI represents a sips URI, and
+* &lt;code&gt;false&lt;/code&gt; if it represents a sip URI.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.IsSipURI">func (*SipUri) <a href="/target/SipURIImpl.go?s=24054:24089#L809">IsSipURI</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) IsSipURI() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* This method determines if this is a URI with a scheme of &#34;sip&#34; or &#34;sips&#34;.
+</p>
+<pre>*
+* @return true if the scheme is &#34;sip&#34; or &#34;sips&#34;, false otherwise.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.IsUserTelephoneSubscriber">func (*SipUri) <a href="/target/SipURIImpl.go?s=10482:10534#L369">IsUserTelephoneSubscriber</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) IsUserTelephoneSubscriber() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+*
+</p>
+<pre>* returns true if the user is a telephone subscriber.
+*  If the host is an Internet telephony
+* gateway, a telephone-subscriber field MAY be used instead
+* of a user field. The telephone-subscriber field uses the
+* notation of RFC 2806 [19]. Any characters of the un-escaped
+* &#34;telephone-subscriber&#34; that are not either in the set
+* &#34;unreserved&#34; or &#34;user-unreserved&#34; MUST be escaped. The set
+* of characters not reserved in the RFC 2806 description of
+* telephone-subscriber contains a number of characters in
+* various syntax elements that need to be escaped when used
+* in SIP URLs, for example quotation marks (%22), hash (%23),
+* colon (%3a), at-sign (%40) and the &#34;unwise&#34; characters,
+* i.e., punctuation of %5b and above.
+*
+* The telephone number is a special case of a user name and
+* cannot be distinguished by a BNF. Thus, a URL parameter,
+* user, is added to distinguish telephone numbers from user
+* names.
+*
+* The user parameter value &#34;phone&#34; indicates that the user
+* part contains a telephone number. Even without this
+* parameter, recipients of SIP URLs MAY interpret the pre-@
+* part as a telephone number if local restrictions on the
+* @return true if the user is a telephone subscriber.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemoveHeader">func (*SipUri) <a href="/target/SipURIImpl.go?s=11556:11601#L407">RemoveHeader</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemoveHeader(name <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Remove a header given its name (provided it exists).
+</p>
+<pre>* @param name name of the header to Remove.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemoveHeaders">func (*SipUri) <a href="/target/SipURIImpl.go?s=11750:11785#L415">RemoveHeaders</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemoveHeaders()</pre>
+				<p>
+* Remove all headers.
+</p>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemoveMAddr">func (*SipUri) <a href="/target/SipURIImpl.go?s=11060:11093#L389">RemoveMAddr</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemoveMAddr()</pre>
+				<p>
+*
+</p>
+<pre>*Remove the maddr param if it exists.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemoveMethod">func (*SipUri) <a href="/target/SipURIImpl.go?s=12251:12285#L438">RemoveMethod</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemoveMethod()</pre>
+				<p>
+*
+</p>
+<pre>* Remove the Method.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemoveParameter">func (*SipUri) <a href="/target/SipURIImpl.go?s=18266:18315#L623">RemoveParameter</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemoveParameter(name <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Remove a parameter given its name
+* @param name -- name of the parameter to Remove.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemovePort">func (*SipUri) <a href="/target/SipURIImpl.go?s=12119:12151#L431">RemovePort</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemovePort()</pre>
+				<p>
+*
+</p>
+<pre>*Remove the port setting.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemoveTTL">func (*SipUri) <a href="/target/SipURIImpl.go?s=10846:10877#L380">RemoveTTL</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemoveTTL()</pre>
+				<p>
+*
+</p>
+<pre>*Remove the ttl value from the parameter list if it exists.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemoveTransport">func (*SipUri) <a href="/target/SipURIImpl.go?s=11269:11306#L398">RemoveTransport</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemoveTransport()</pre>
+				<p>
+*
+</p>
+<pre>*Delete the transport string.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemoveUriParms">func (*SipUri) <a href="/target/SipURIImpl.go?s=6603:6639#L250">RemoveUriParms</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemoveUriParms()</pre>
+				<p>
+* Remove the URI parameters.
+</p>
+<pre>*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemoveUser">func (*SipUri) <a href="/target/SipURIImpl.go?s=13033:13065#L463">RemoveUser</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemoveUser()</pre>
+				<p>
+* Remove the user.
+</p>
+
+				
+				
+			
+				
+				<h3 id="SipUri.RemoveUserType">func (*SipUri) <a href="/target/SipURIImpl.go?s=11907:11943#L422">RemoveUserType</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) RemoveUserType()</pre>
+				<p>
+*
+</p>
+<pre>* Set the user type.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetAuthority">func (*SipUri) <a href="/target/SipURIImpl.go?s=13738:13798#L484">SetAuthority</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetAuthority(authority *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#Authority">Authority</a>)</pre>
+				<p>
+* Set the authority member
+</p>
+<pre>* @param authority Authority to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetDefaultParm">func (*SipUri) <a href="/target/SipURIImpl.go?s=13398:13465#L473">SetDefaultParm</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetDefaultParm(name <a href="/pkg/builtin/#string">string</a>, value interface{})</pre>
+				<p>
+* Set the default parameters for this URI.
+</p>
+<pre>* Do nothing if the parameter is already set to some value.
+* Otherwise set it to the given value.
+* @param name Name of the parameter to set.
+* @param value value of the parameter to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetHeader">func (*SipUri) <a href="/target/SipURIImpl.go?s=24448:24499#L820">SetHeader</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetHeader(name, value <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Sets the value of the specified header fields to be included in a
+</p>
+<pre>* request constructed from the URI. If the header already had a value it
+* will be overwritten.
+*
+* @param name - a String specifying the header name
+* @param value - a String specifying the header value
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetHost">func (*SipUri) <a href="/target/SipURIImpl.go?s=13928:13970#L491">SetHost</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetHost(h *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#Host">Host</a>)</pre>
+				<p>
+* Set the host for this URI.
+</p>
+<pre>* @param h host to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetHostPort">func (*SipUri) <a href="/target/SipURIImpl.go?s=18490:18547#L630">SetHostPort</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetHostPort(hostPort *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#HostPort">HostPort</a>)</pre>
+				<p>
+* Set the hostPort field of the imbedded authority field.
+</p>
+<pre>*@param hostPort is the hostPort to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetHostString">func (*SipUri) <a href="/target/SipURIImpl.go?s=24874:24921#L834">SetHostString</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetHostString(host <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Returns the host part of this SipURI.
+</p>
+<pre>*
+* @return  the host part of this SipURI
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetIsdnSubAddress">func (*SipUri) <a href="/target/SipURIImpl.go?s=16353:16414#L563">SetIsdnSubAddress</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetIsdnSubAddress(isdnSubAddress <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets ISDN subaddress of SipURL
+* @param &lt;var&gt;isdnSubAddress&lt;/var&gt; ISDN subaddress
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetLrParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=25414:25446#L846">SetLrParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetLrParam()</pre>
+				<p>
+* Sets the value of the &lt;code&gt;lr&lt;/code&gt; parameter of this SipURI. The lr
+</p>
+<pre>* parameter, when present, indicates that the element responsible for
+* this resource implements the routing mechanisms specified in RFC 3261.
+* This parameter will be used in the URIs proxies place in the
+* Record-Route header field values, and may appear in the URIs in a
+* pre-existing route Set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetMAddr">func (*SipUri) <a href="/target/SipURIImpl.go?s=15057:15100#L528">SetMAddr</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetMAddr(mAddr <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Set the MADDR parameter .
+* @param mAddr Host Name to set
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetMAddrParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=25984:26032#L861">SetMAddrParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetMAddrParam(maddr <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Sets the value of the &lt;code&gt;maddr&lt;/code&gt; parameter of this SipURI. The
+</p>
+<pre>* maddr parameter indicates the server address to be contacted for this
+* user, overriding any address derived from the host field. This is
+* equivalent to SetParameter(&#34;maddr&#34;, maddr).
+*
+* @param  method - new value of the &lt;code&gt;maddr&lt;/code&gt; parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetMethod">func (*SipUri) <a href="/target/SipURIImpl.go?s=16098:16143#L555">SetMethod</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetMethod(method <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* set the Method
+</p>
+<pre>* @param method method parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetMethodParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=26476:26526#L875">SetMethodParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetMethodParam(method <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Sets the value of the &lt;code&gt;method&lt;/code&gt; parameter. This specifies
+</p>
+<pre>* which SIP method to use in requests directed at this URI. This is
+* equivalent to SetParameter(&#34;method&#34;, method).
+*
+* @param  method - new value String value of the method parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetParameter">func (*SipUri) <a href="/target/SipURIImpl.go?s=27131:27185#L897">SetParameter</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetParameter(name, value <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+*
+</p>
+<pre>* Sets the value of the specified parameter. If the parameter already had
+*
+* a value it will be overwritten. A zero-length String indicates flag
+*
+* parameter.
+*
+*
+*
+* @param name - a String specifying the parameter name
+*
+* @param value - a String specifying the parameter value
+*
+* @throws ParseException which signals that an error has been reached
+*
+* unexpectedly while parsing the parameter name or value.
+*
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetPort">func (*SipUri) <a href="/target/SipURIImpl.go?s=16923:16958#L582">SetPort</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetPort(p <a href="/pkg/builtin/#int">int</a>)</pre>
+				<p>
+* set the port to a given value.
+</p>
+<pre>* @param p Port to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetQHeader">func (*SipUri) <a href="/target/SipURIImpl.go?s=17549:17607#L601">SetQHeader</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetQHeader(nameValue *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValue">NameValue</a>)</pre>
+				<p>
+* Set the query header when provided as a name-value pair.
+</p>
+<pre>*@param qHeader - qeuery header provided as a name,value pair.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetQheaders">func (*SipUri) <a href="/target/SipURIImpl.go?s=14840:14899#L519">SetQheaders</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetQheaders(parms *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a>)</pre>
+				<p>
+* Set the qheaders member
+</p>
+<pre>* @param parms query headers to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetScheme">func (*SipUri) <a href="/target/SipURIImpl.go?s=1012:1057#L47">SetScheme</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetScheme(scheme <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Constructor given the scheme.
+</p>
+<pre>* The scheme must be either Sip or Sips
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetSecure">func (*SipUri) <a href="/target/SipURIImpl.go?s=27667:27710#L914">SetSecure</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetSecure(secure <a href="/pkg/builtin/#bool">bool</a>)</pre>
+				<p>
+* Sets the scheme of this URI to sip or sips depending on whether the
+</p>
+<pre>* argument is true or false. The default value is false.
+*
+* @param secure - the boolean value indicating if the SipURI is secure.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetTTLParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=28193:28234#L928">SetTTLParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetTTLParam(ttl <a href="/pkg/builtin/#int">int</a>)</pre>
+				<p>
+* Sets the value of the &lt;code&gt;ttl&lt;/code&gt; parameter. The ttl parameter
+</p>
+<pre>* specifies the time-to-live value when packets are sent using UDP
+* multicast. This is equivalent to SetParameter(&#34;ttl&#34;, ttl).
+*
+* @param ttl - new value of the &lt;code&gt;ttl&lt;/code&gt; parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetTelephoneSubscriber">func (*SipUri) <a href="/target/SipURIImpl.go?s=16712:16782#L573">SetTelephoneSubscriber</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetTelephoneSubscriber(tel *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#TelephoneNumber">TelephoneNumber</a>)</pre>
+				<p>
+* Set the telephone subscriber field.
+</p>
+<pre>* @param tel Telephone subscriber field to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetTransportParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=29114:29170#L950">SetTransportParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetTransportParam(transport <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Sets the value of the &#34;transport&#34; parameter. This parameter specifies
+</p>
+<pre>* which transport protocol to use for sending requests and responses to
+* this entity. The following values are defined: &#34;udp&#34;, &#34;tcp&#34;, &#34;sctp&#34;,
+* &#34;tls&#34;, but other values may be used also. This method is equivalent to
+* SetParameter(&#34;transport&#34;, transport). Transport parameter constants
+* are defined in the {@link javax.sip.ListeningPoint}.
+*
+* @param transport - new value for the &#34;transport&#34; parameter
+* @see javax.sip.ListeningPoint
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetUriParameter">func (*SipUri) <a href="/target/SipURIImpl.go?s=17758:17821#L608">SetUriParameter</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetUriParameter(nameValue *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValue">NameValue</a>)</pre>
+				<p>
+* Set the parameter as given.
+</p>
+<pre>*@param nameValue - parameter to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetUriParm">func (*SipUri) <a href="/target/SipURIImpl.go?s=14576:14639#L511">SetUriParm</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetUriParm(name <a href="/pkg/builtin/#string">string</a>, value interface{})</pre>
+				<p>
+*
+</p>
+<pre>         * Set a given URI parameter. Note - parameter must be properly
+	 *  encoded before the function is called.
+         * @param name Name of the parameter to set.
+         * @param value value of the parameter to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetUriParms">func (*SipUri) <a href="/target/SipURIImpl.go?s=14214:14272#L501">SetUriParms</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetUriParms(parms *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#NameValueList">NameValueList</a>)</pre>
+				<p>
+* Set the uriParms member
+</p>
+<pre>* @param parms URI parameters to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetUser">func (*SipUri) <a href="/target/SipURIImpl.go?s=12819:12862#L453">SetUser</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetUser(uname <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Sets the user of SipURI. The identifier of a particular resource at
+</p>
+<pre>* the host being addressed. The user and the user password including the
+* &#34;at&#34; sign make up the user-info.
+*
+* @param user - the new String value of the user.
+* @throws ParseException which signals that an error has been reached
+* unexpectedly while parsing the user value.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetUserParam">func (*SipUri) <a href="/target/SipURIImpl.go?s=15817:15868#L547">SetUserParam</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetUserParam(usertype <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Sets the value of the user parameter. The user URI parameter exists to
+</p>
+<pre>* distinguish telephone numbers from user names that happen to look like
+* telephone numbers.  This is equivalent to setParameter(&#34;user&#34;, user).
+*
+* @param  userParam - new value String value of the method parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.SetUserPassword">func (*SipUri) <a href="/target/SipURIImpl.go?s=7631:7683#L290">SetUserPassword</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) SetUserPassword(password <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Set the user password.
+</p>
+<pre>*@param password - password to set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="SipUri.String">func (*SipUri) <a href="/target/SipURIImpl.go?s=3776:3811#L156">String</a></h3>
+				<pre>func (this *<a href="#SipUri">SipUri</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* Construct a URL from the parsed structure.
+* @return String
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="TelURL">type <a href="/target/TelURL.go?s=2132:6011#L40">TelURL</a></h2>
+			<pre>type TelURL interface {
+    <a href="#URI">URI</a>
+
+    <span class="comment">/**
+     * Returns the value of the named parameter, or null if it is not set. A
+     * zero-length String indicates flag parameter.
+     *
+     * @param &lt;var&gt;name&lt;/var&gt; name of parameter to retrieve
+     * @return the value of specified parameter
+     */</span>
+    GetParameter(name <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets the value of the specified parameter. If the parameter already had
+     * a value it will be overwritten. A zero-length String indicates flag
+     * parameter.
+     *
+     * @param name - a String specifying the parameter name
+     * @param value - a String specifying the parameter value
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the parameter name or value.
+     */</span>
+    SetParameter(name, value <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns an Iterator over the names (Strings) of all parameters present
+     * in this ParametersHeader.
+     *
+     * @return an Iterator over all the parameter names
+     */</span>
+    GetParameterNames() *<a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a> <span class="comment">//Iterator</span>
+
+    <span class="comment">/**
+     * Removes the specified parameter from Parameters of this ParametersHeader.
+     * This method returns silently if the parameter is not part of the
+     * ParametersHeader.
+     *
+     * @param name - a String specifying the parameter name
+     */</span>
+    RemoveParameter(name <a href="/pkg/builtin/#string">string</a>)
+
+    <span class="comment">/**
+     * Returns &lt;code&gt;true&lt;/code&gt; if this TelURL is global i.e. if the TelURI
+     * has a global phone user.
+     *
+     * @return &lt;code&gt;true&lt;/code&gt; if this TelURL represents a global phone user,
+     * and &lt;code&gt;false&lt;/code&gt; otherwise.
+     */</span>
+    IsGlobal() <a href="/pkg/builtin/#bool">bool</a>
+
+    <span class="comment">/**
+     * Sets phone user of this TelURL to be either global or local. The default
+     * value is false, hence the TelURL is defaulted to local.
+     *
+     * @param global - the boolean value indicating if the TelURL has a global
+     * phone user.
+     */</span>
+    SetGlobal(global <a href="/pkg/builtin/#bool">bool</a>)
+
+    <span class="comment">/**
+     * Sets post dial of this TelURL. The post-dial sequence describes what and
+     * when the local entity should send to the phone line.
+     *
+     * @param postDial - new value of the &lt;code&gt;postDial&lt;/code&gt; parameter
+     * @throws ParseException  which signals that an error has been reached
+     * unexpectedly while parsing the postDial value.
+     */</span>
+    SetPostDial(postDial <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the value of the &lt;code&gt;postDial&lt;/code&gt; parameter, or null if it
+     * is not set.
+     *
+     * @return  the value of the &lt;code&gt;postDial&lt;/code&gt; parameter
+     */</span>
+    GetPostDial() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets phone number of this TelURL. The phone number may either be local or
+     * global determined by the isGlobal method in this interface. The phoneNumber
+     * argument should not contain the &#34;+&#34; associated with telephone numbers.
+     *
+     * @param phoneNumber - new value of the &lt;code&gt;phoneNumber&lt;/code&gt; parameter
+     * @throws ParseException  which signals that an error has been reached
+     * unexpectedly while parsing the phoneNumber value.
+     */</span>
+    SetPhoneNumber(phoneNumber <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the value of the &lt;code&gt;phoneNumber&lt;/code&gt; parameter. This method
+     * will not return the &#34;+&#34; associated with telephone numbers.
+     *
+     * @return  the value of the &lt;code&gt;phoneNumber&lt;/code&gt; parameter
+     */</span>
+    GetPhoneNumber() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets ISDN subaddress of this TelURL. If a subaddress is present, it is
+     * appended to the phone number after &#34;;isub=&#34;.
+     *
+     * @param isdnSubAddress - new value of the &lt;code&gt;isdnSubAddress&lt;/code&gt;
+     * parameter
+     * @throws ParseException which signals that an error has been reached
+     * unexpectedly while parsing the isdnSubAddress value.
+     */</span>
+    SetIsdnSubAddress(isdnSubAddress <a href="/pkg/builtin/#string">string</a>) (ParseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the value of the &lt;code&gt;isdnSubAddress&lt;/code&gt; parameter, or null
+     * if it is not set.
+     *
+     * @return  the value of the &lt;code&gt;isdnSubAddress&lt;/code&gt; parameter
+     */</span>
+    GetIsdnSubAddress() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TelURLImpl">type <a href="/target/TelURLImpl.go?s=201:291#L3">TelURLImpl</a></h2>
+			<pre>type TelURLImpl struct {
+    <a href="#GenericURI">GenericURI</a>
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+* Implementation of the TelURL interface.
+*&lt;a href=&#34;{@docRoot}/uncopyright.html&#34;&gt;This code is in the public domain.&lt;/a&gt;
+*
+</p>
+
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="NewTelURLImpl">func <a href="/target/TelURLImpl.go?s=352:384#L10">NewTelURLImpl</a></h3>
+				<pre>func NewTelURLImpl() *<a href="#TelURLImpl">TelURLImpl</a></pre>
+				<p>
+* Creates a new instance of TelURLImpl
+</p>
+
+				
+			
+
+			
+				
+				<h3 id="TelURLImpl.Clone">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=4283:4326#L135">Clone</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) Clone() interface{}</pre>
+				<p>
+* Deep copy clone operation.
+</p>
+<pre>*
+*@return -- a cloned version of this telephone number.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.GetIsdnSubAddress">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=941:991#L33">GetIsdnSubAddress</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) GetIsdnSubAddress() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the value of the &lt;code&gt;isdnSubAddress&lt;/code&gt; parameter, or null
+</p>
+<pre>* if it is not Set.
+*
+* @return  the value of the &lt;code&gt;isdnSubAddress&lt;/code&gt; parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.GetParameter">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=4555:4620#L145">GetParameter</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) GetParameter(parameterName <a href="/pkg/builtin/#string">string</a>) <a href="/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="TelURLImpl.GetParameterNames">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=4816:4870#L153">GetParameterNames</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) GetParameterNames() *<a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="TelURLImpl.GetPhoneNumber">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=3719:3766#L114">GetPhoneNumber</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) GetPhoneNumber() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Get the telephone number.
+</p>
+<pre>*
+*@return -- the telephone number.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.GetPostDial">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=1254:1298#L42">GetPostDial</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) GetPostDial() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the value of the &lt;code&gt;postDial&lt;/code&gt; parameter, or null if it
+</p>
+<pre>* is not Set.
+*
+* @return  the value of the &lt;code&gt;postDial&lt;/code&gt; parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.GetScheme">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=1535:1577#L51">GetScheme</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) GetScheme() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+* Returns the value of the &#34;scheme&#34; of this URI, for example &#34;sip&#34;, &#34;sips&#34;
+</p>
+<pre>* or &#34;tel&#34;.
+*
+* @return the scheme paramter of the URI
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.IsGlobal">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=1879:1918#L61">IsGlobal</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) IsGlobal() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* Returns &lt;code&gt;true&lt;/code&gt; if this TelURL is global i.e. if the TelURI
+</p>
+<pre>* has a global phone user.
+*
+* @return &lt;code&gt;true&lt;/code&gt; if this TelURL represents a global phone user,
+* and &lt;code&gt;false&lt;/code&gt; otherwise.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.IsSipURI">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=2160:2199#L69">IsSipURI</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) IsSipURI() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+* This method determines if this is a URI with a scheme of &#34;sip&#34; or &#34;sips&#34;.
+</p>
+<pre>*
+* @return true if the scheme is &#34;sip&#34; or &#34;sips&#34;, false otherwise.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.RemoveParameter">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=4936:4989#L157">RemoveParameter</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) RemoveParameter(name <a href="/pkg/builtin/#string">string</a>)</pre>
+				
+				
+				
+			
+				
+				<h3 id="TelURLImpl.SetGlobal">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=2506:2552#L79">SetGlobal</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) SetGlobal(global <a href="/pkg/builtin/#bool">bool</a>)</pre>
+				<p>
+* Sets phone user of this TelURL to be either global or local. The default
+</p>
+<pre>* value is false, hence the TelURL is defaulted to local.
+*
+* @param global - the boolean value indicating if the TelURL has a global
+* phone user.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.SetIsdnSubAddress">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=2867:2931#L89">SetIsdnSubAddress</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) SetIsdnSubAddress(isdnSubAddress <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Sets ISDN subaddress of this TelURL. If a subaddress is present, it is
+</p>
+<pre>* appended to the phone number after &#34;;isub=&#34;.
+*
+* @param isdnSubAddress - new value of the &lt;code&gt;isdnSubAddress&lt;/code&gt;
+* parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.SetParameter">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=4695:4751#L149">SetParameter</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) SetParameter(name, value <a href="/pkg/builtin/#string">string</a>)</pre>
+				
+				
+				
+			
+				
+				<h3 id="TelURLImpl.SetPhoneNumber">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=3484:3546#L106">SetPhoneNumber</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) SetPhoneNumber(telephoneNumber <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Set the telephone number.
+</p>
+<pre>* @param telphoneNumber -- long phone number to Set.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.SetPostDial">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=3252:3304#L98">SetPostDial</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) SetPostDial(postDial <a href="/pkg/builtin/#string">string</a>)</pre>
+				<p>
+* Sets post dial of this TelURL. The post-dial sequence describes what and
+</p>
+<pre>* when the local entity should send to the phone line.
+*
+* @param postDial - new value of the &lt;code&gt;postDial&lt;/code&gt; parameter
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TelURLImpl.SetTelephoneNumber">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=598:679#L23">SetTelephoneNumber</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) SetTelephoneNumber(telephoneNumber *<a href="/pkg/gosip/core/">core</a>.<a href="/pkg/gosip/core/#TelephoneNumber">TelephoneNumber</a>)</pre>
+				
+				
+				
+			
+				
+				<h3 id="TelURLImpl.String">func (*TelURLImpl) <a href="/target/TelURLImpl.go?s=4047:4086#L126">String</a></h3>
+				<pre>func (this *<a href="#TelURLImpl">TelURLImpl</a>) String() <a href="/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+			
+		
+			
+			
+			<h2 id="URI">type <a href="/target/URI.go?s=720:1826#L20">URI</a></h2>
+			<pre>type URI interface {
+
+    <span class="comment">/**
+     * Returns the value of the &#34;scheme&#34; of this URI, for example &#34;sip&#34;, &#34;sips&#34;
+     * or &#34;tel&#34;.
+     *
+     * @return the scheme paramter of the URI
+     */</span>
+    GetScheme() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Creates and returns a deep copy of the URI. This methods must ensure a
+     * deep copy of the URI, so that when a URI is cloned the URI can be
+     * modified without effecting the original URI. This provides useful
+     * functionality for proxying Requests and Responses. This method overrides
+     * the clone method in java.lang.Object.
+     *
+     * @return a deep copy of URI
+     */</span>
+    Clone() interface{}
+
+    <span class="comment">/**
+     * This method determines if this is a URI with a scheme of &#34;sip&#34; or &#34;sips&#34;.
+     *
+     * @return true if the scheme is &#34;sip&#34; or &#34;sips&#34;, false otherwise.
+     */</span>
+    IsSipURI() <a href="/pkg/builtin/#bool">bool</a>
+
+    <span class="comment">/**
+     * This method returns the URI as a string.
+     *
+     * @return String The stringified version of the URI
+     */</span>
+    String() <a href="/pkg/builtin/#string">string</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+	
+
+	
+
+
+
+
+

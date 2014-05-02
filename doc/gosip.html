@@ -1,0 +1,2506 @@
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "gosip"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+				<dd><a href="#pkg-subdirectories">Subdirectories</a></dd>
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+			</div>
+		</div>
+		
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+				<dd><a href="#pkg-constants">Constants</a></dd>
+			
+			
+				<dd><a href="#pkg-variables">Variables</a></dd>
+			
+			
+			
+				
+				<dd><a href="#ClientTransaction">type ClientTransaction</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Dialog">type Dialog</a></dd>
+				
+				
+			
+				
+				<dd><a href="#DialogState">type DialogState</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#GetDialogState">func GetDialogState(dialogState int) (*DialogState, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#DialogState.GetValue">func (this *DialogState) GetValue() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#DialogState.ToString">func (this *DialogState) ToString() string</a></dd>
+				
+			
+				
+				<dd><a href="#ListeningPoint">type ListeningPoint</a></dd>
+				
+				
+			
+				
+				<dd><a href="#RequestEvent">type RequestEvent</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#RequestEvent.GetRequest">func (this *RequestEvent) GetRequest() message.Request</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#RequestEvent.GetServerTransaction">func (this *RequestEvent) GetServerTransaction() ServerTransaction</a></dd>
+				
+			
+				
+				<dd><a href="#ResponseEvent">type ResponseEvent</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ResponseEvent.GetClientTransaction">func (this *ResponseEvent) GetClientTransaction() ClientTransaction</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#ResponseEvent.GetResponse">func (this *ResponseEvent) GetResponse() message.Response</a></dd>
+				
+			
+				
+				<dd><a href="#ServerTransaction">type ServerTransaction</a></dd>
+				
+				
+			
+				
+				<dd><a href="#SipListener">type SipListener</a></dd>
+				
+				
+			
+				
+				<dd><a href="#SipProvider">type SipProvider</a></dd>
+				
+				
+			
+				
+				<dd><a href="#SipStack">type SipStack</a></dd>
+				
+				
+			
+				
+				<dd><a href="#Timeout">type Timeout</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#GetTimeout">func GetTimeout(timeout int) (*Timeout, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Timeout.GetValue">func (this *Timeout) GetValue() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#Timeout.ToString">func (this *Timeout) ToString() string</a></dd>
+				
+			
+				
+				<dd><a href="#TimeoutEvent">type TimeoutEvent</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TimeoutEvent.GetClientTransaction">func (this *TimeoutEvent) GetClientTransaction() ClientTransaction</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TimeoutEvent.GetServerTransaction">func (this *TimeoutEvent) GetServerTransaction() ServerTransaction</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TimeoutEvent.GetTimeout">func (this *TimeoutEvent) GetTimeout() Timeout</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TimeoutEvent.IsServerTransaction">func (this *TimeoutEvent) IsServerTransaction() bool</a></dd>
+				
+			
+				
+				<dd><a href="#Transaction">type Transaction</a></dd>
+				
+				
+			
+				
+				<dd><a href="#TransactionState">type TransactionState</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#GetTransactionState">func GetTransactionState(transactionState int) (*TransactionState, error)</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TransactionState.GetValue">func (this *TransactionState) GetValue() int</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="#TransactionState.ToString">func (this *TransactionState) ToString() string</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h4>Package files</h4>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="/target/ClientTransaction.go">ClientTransaction.go</a>
+			
+				<a href="/target/Dialog.go">Dialog.go</a>
+			
+				<a href="/target/DialogState.go">DialogState.go</a>
+			
+				<a href="/target/ListeningPoint.go">ListeningPoint.go</a>
+			
+				<a href="/target/RequestEvent.go">RequestEvent.go</a>
+			
+				<a href="/target/ResponseEvent.go">ResponseEvent.go</a>
+			
+				<a href="/target/ServerTransaction.go">ServerTransaction.go</a>
+			
+				<a href="/target/SipListener.go">SipListener.go</a>
+			
+				<a href="/target/SipProvider.go">SipProvider.go</a>
+			
+				<a href="/target/SipStack.go">SipStack.go</a>
+			
+				<a href="/target/Timeout.go">Timeout.go</a>
+			
+				<a href="/target/TimeoutEvent.go">TimeoutEvent.go</a>
+			
+				<a href="/target/Transaction.go">Transaction.go</a>
+			
+				<a href="/target/TransactionState.go">TransactionState.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+			<h2 id="pkg-constants">Constants</h2>
+			
+				<pre>const <span id="PORT_5060">PORT_5060</span> = 5060</pre>
+				<p>
+*
+</p>
+<pre>* Port Constant: Default port 5060. This constant should only be used
+* when the transport of the ListeningPoint is set to UDP, TCP or SCTP.
+*
+* @since v1.1
+</pre>
+
+			
+				<pre>const <span id="PORT_5061">PORT_5061</span> = 5061</pre>
+				<p>
+*
+</p>
+<pre>* Port Constant: Default port 5061. This constant should only be used
+* when the transport of the Listening Point is set to TLS over TCP or TCP
+* assuming the scheme is &#34;sips&#34;.
+*
+* @since v1.1
+</pre>
+
+			
+				<pre>const <span id="SCTP">SCTP</span> = &#34;SCTP&#34;</pre>
+				<p>
+*
+</p>
+<pre>* Transport constant: SCTP
+*
+* @since v1.1
+</pre>
+
+			
+				<pre>const <span id="TCP">TCP</span> = &#34;TCP&#34;</pre>
+				<p>
+*
+</p>
+<pre>* Transport constant: TCP
+</pre>
+
+			
+				<pre>const <span id="TLS">TLS</span> = &#34;TLS&#34;</pre>
+				<p>
+*
+</p>
+<pre>* Transport constant: TLS over TCP
+*
+* @since v1.1
+</pre>
+
+			
+				<pre>const <span id="UDP">UDP</span> = &#34;UDP&#34;</pre>
+				<p>
+*
+</p>
+<pre>* Transport constant: UDP
+</pre>
+
+			
+		
+		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				<pre>var <span id="DIALOGSTATE_COMPLETED">DIALOGSTATE_COMPLETED</span> = m_dialogStateArray[_DIALOGSTATE_COMPLETED]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates that the dialog state is &#34;Completed&#34;.
+</pre>
+
+			
+				<pre>var <span id="DIALOGSTATE_CONFIRMED">DIALOGSTATE_CONFIRMED</span> = m_dialogStateArray[_DIALOGSTATE_CONFIRMED]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates that the dialog state is &#34;Confirmed&#34;.
+</pre>
+
+			
+				<pre>var <span id="DIALOGSTATE_EARLY">DIALOGSTATE_EARLY</span> = m_dialogStateArray[_DIALOGSTATE_EARLY]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates that the dialog state is &#34;Early&#34;.
+</pre>
+
+			
+				<pre>var <span id="DIALOGSTATE_TERMINATED">DIALOGSTATE_TERMINATED</span> = m_dialogStateArray[_DIALOGSTATE_TERMINATED]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates that the dialog state is &#34;Terminated&#34;.
+</pre>
+
+			
+				<pre>var <span id="TIMEOUT_RETRANSMIT">TIMEOUT_RETRANSMIT</span> = m_timeoutArray[_TIMEOUT_RETRANSMIT]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates the &#34;Retransmit&#34; timeout.
+</pre>
+
+			
+				<pre>var <span id="TIMEOUT_TRANSACTION">TIMEOUT_TRANSACTION</span> = m_timeoutArray[_TIMEOUT_TRANSACTION]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates the &#34;Transaction&#34; timeout.
+</pre>
+
+			
+				<pre>var <span id="TRANSACTIONSTATE_CALLING">TRANSACTIONSTATE_CALLING</span> = m_transStateArray[_TRANSACTIONSTATE_CALLING]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates that the transaction state is &#34;Calling&#34;.
+</pre>
+
+			
+				<pre>var <span id="TRANSACTIONSTATE_COMPLETED">TRANSACTIONSTATE_COMPLETED</span> = m_transStateArray[_TRANSACTIONSTATE_COMPLETED]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates that the transaction state is &#34;Completed&#34;.
+</pre>
+
+			
+				<pre>var <span id="TRANSACTIONSTATE_CONFIRMED">TRANSACTIONSTATE_CONFIRMED</span> = m_transStateArray[_TRANSACTIONSTATE_CONFIRMED]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates that the transaction state is &#34;Confirmed&#34;.
+</pre>
+
+			
+				<pre>var <span id="TRANSACTIONSTATE_PROCEEDING">TRANSACTIONSTATE_PROCEEDING</span> = m_transStateArray[_TRANSACTIONSTATE_PROCEEDING]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates that the transaction state is &#34;Proceeding&#34;.
+</pre>
+
+			
+				<pre>var <span id="TRANSACTIONSTATE_TERMINATED">TRANSACTIONSTATE_TERMINATED</span> = m_transStateArray[_TRANSACTIONSTATE_TERMINATED]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates that the transaction state is &#34;Terminated&#34;.
+</pre>
+
+			
+				<pre>var <span id="TRANSACTIONSTATE_TRYING">TRANSACTIONSTATE_TRYING</span> = m_transStateArray[_TRANSACTIONSTATE_TRYING]</pre>
+				<p>
+*
+</p>
+<pre>* This constant value indicates that the transaction state is &#34;Trying&#34;.
+</pre>
+
+			
+		
+		
+		
+			
+			
+			<h2 id="ClientTransaction">type <a href="/target/ClientTransaction.go?s=2284:6653#L42">ClientTransaction</a></h2>
+			<pre>type ClientTransaction interface {
+    <a href="#Transaction">Transaction</a>
+
+    <span class="comment">/**
+     * Sends the Request which created this ClientTransaction. When an
+     * application wishes to send a Request message, it creates a Request from
+     * the {@link javax.sip.message.MessageFactory} and then creates a new
+     * ClientTransaction from
+     * {@link SipProvider#getNewClientTransaction(Request)}. Calling this method
+     * on the ClientTransaction sends the Request onto the network. The Request
+     * message gets sent via the ListeningPoint information of the SipProvider
+     * that is associated to this ClientTransaction.
+     * &lt;p&gt;
+     * This method assumes that the Request is sent out of Dialog. It uses
+     * the Router to determine the next hop. If the Router returns a empty
+     * iterator, and a Dialog is associated with the outgoing request of the
+     * Transaction then the Dialog route set is used to send the outgoing
+     * request.
+     * &lt;p&gt;
+     * This method implies that the application is functioning as either a UAC
+     * or a stateful proxy, hence the underlying implementation acts statefully.
+     *
+     * @throws SipException if the SipProvider cannot send the Request for any
+     * reason.
+     * @see Request
+     */</span>
+    SendRequest() (SipException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Creates a new Cancel message from the Request associated with this client
+     * transaction. The CANCEL request, is used to cancel the previous request
+     * sent by this client transaction. Specifically, it asks the UAS to cease
+     * processing the request and to generate an error response to that request.
+     * A CANCEL request constitutes its own transaction, but also references
+     * the transaction to be cancelled. CANCEL has no effect on a request to
+     * which a UAS has already given a final response.
+     * &lt;p&gt;
+     * Note that both the transaction corresponding to the original request and
+     * the CANCEL transaction will complete independently.  However, a UAC
+     * canceling a request cannot rely on receiving a 487 (Request Terminated)
+     * response for the original request, as an RFC 2543 compliant UAS will
+     * not generate such a response. Therefore if there is no final response for
+     * the original request the application will receieve a TimeoutEvent with
+     * {@link javax.sip.Timeout#TRANSACTION} and the client should then consider the
+     * original transaction cancelled.
+     * &lt;ul&gt;
+     * &lt;li&gt; UAC - A UAC should not send a CANCEL request to any request explicitly
+     * supported by this specification other than INVITE request. The reason
+     * being requests other than INVITE are responded to immediately and sending
+     * a CANCEL for a non-INVITE request would always create a race condition.
+     * CANCELs are useful as a UAC can not send a BYE request on a dialog
+     * until receipt of 2xx final response to the INVITE request. The CANCEL
+     * attempts to force a non-2xx response to the INVITE, therefore if a UAC
+     * wishes to give up on its call attempt entirely it can send a CANCEL.
+     * &lt;li&gt;Stateful proxies - A stateful proxy may generate CANCEL requests
+     * for:
+     * &lt;ul&gt;
+     * &lt;li&gt;INVITE Requests - A CANCEL can be sent on pending INVITE client
+     * transactions based on the period specified in the INVITE&#39;s Expires
+     * header field elapsing.  However, this is generally unnecessary since
+     * the endpoints involved will take care of signaling the end of the
+     * transaction.
+     * &lt;li&gt; Other Requests - A CANCEL can be sent on any other request the proxy
+     * has generated at any time, subject to receiving a provisional response
+     * to that request.
+     * &lt;/ul&gt;
+     * &lt;/ul&gt;
+     *
+     * @return the new cancel Request specific to the Request of this client
+     * transaction.
+     * @throws SipException if this method is called to cancel a request that
+     * can&#39;t be cancelled i.e. ACK.
+     */</span>
+    CreateCancel() (r <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Request">Request</a>, SipException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Creates a new Ack message from the Request associated with this client
+     * transaction. This ACK can be used to acknowledge the response to the
+     * request sent by this transaction. It is recommended that a
+     * ClientTransaction be created to send the ACK.
+     *
+     * @return the new ACK Request specific to the Request of this client
+     * transaction.
+     * @throws SipException if this method is called before a final response
+     * is received for the transaction.
+     */</span>
+    CreateAck() (r <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Request">Request</a>, SipException <a href="/pkg/builtin/#error">error</a>)
+}</pre>
+			<p>
+*
+</p>
+<pre>* A client transaction is used by a User Agent Client application to send
+* Request messages to a User Agent Server application.
+* The client transaction is also used to match Responses from the User Agent
+* Server to fire Response events to the SipListener for a specific client
+* transaction. This interfaces enables an application to send a
+* {@link javax.sip.message.Request}&#39;s statefully. A new client transaction
+* is generated by the application calling the
+* {@link SipProvider#getNewClientTransaction(Request)} method.
+* &lt;p&gt;
+* A client transaction of the transaction layer is represented by a finite
+* state machine that is constructed to process a particular request under
+* the covers of a stateful SipProvider. The transaction layer handles
+* application-layer retransmissions, matching of responses to requests, and
+* application-layer timeouts. Any task that a User Agent Client
+* accomplishes takes place using a series of transactions.
+* &lt;p&gt;
+* The client transaction must be unique within the underlying
+* implementation. A common way to create this value is to compute a
+* cryptographic hash of the To tag, From tag, Call-ID header field, the
+* Request-URI of the request received (before translation), the topmost Via
+* header, and the sequence number from the CSeq header field, in addition to
+* any Proxy-Require and Proxy-Authorization header fields that may be present.
+* The algorithm used to compute the hash is implementation-dependent.
+* &lt;p&gt;
+* For the detailed client transaction state machines refer to Chapter
+* 17 of &lt;a href=&#34;<a href="http://www.ietf.org/rfc/rfc3261.txt">http://www.ietf.org/rfc/rfc3261.txt</a>&#34;&gt;RFC 3261&lt;/a&gt;, the
+* allowable transitions are summarized below:
+* &lt;p&gt;
+* &lt;b&gt;Invite Transaction:&lt;/b&gt;&lt;br&gt;
+* Calling --&gt; Proceeding --&gt; Completed --&gt; Terminated
+* &lt;p&gt;
+* &lt;b&gt;Non-Invite Transaction:&lt;/b&gt;&lt;br&gt;
+* Trying --&gt; Proceeding --&gt; Completed --&gt; Terminated
+*
+* @author  Rain Liu
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Dialog">type <a href="/target/Dialog.go?s=2486:19551#L50">Dialog</a></h2>
+			<pre>type Dialog interface {
+
+    <span class="comment">/**
+     * Returns the Address identifying the local party. This is the value of
+     * the From header of locally initiated requests in this dialog when
+     * acting as an User Agent Client.
+     * &lt;p&gt;
+     * This is the value of the To header of recieved responses in this
+     * dialog when acting as an User Agent Server.
+     *
+     * @return the address object of the local party.
+     */</span>
+    GetLocalParty() <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a>
+
+    <span class="comment">/**
+     * Returns the Address identifying the remote party. This is the value of
+     * the To header of locally initiated requests in this dialog when
+     * acting as an User Agent Client.
+     * &lt;p&gt;
+     * This is the value of the From header of recieved responses in this
+     * dialog when acting as an User Agent Server.
+     *
+     *@return the address object of the remote party.
+     */</span>
+    GetRemoteParty() <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a>
+
+    <span class="comment">/**
+     * Returns the Address identifying the remote target. This is the value of
+     * the Contact header of recieved Responses for Requests or refresh Requests
+     * in this dialog when acting as an User Agent Client.
+     * &lt;p&gt;
+     * This is the value of the Contact header of recieved Requests or refresh
+     * Requests in this dialog when acting as an User Agent Server.
+     *
+     * @return the address object of the remote target.
+     */</span>
+    GetRemoteTarget() <a href="/pkg/gosip/address/">address</a>.<a href="/pkg/gosip/address/#Address">Address</a>
+
+    <span class="comment">/**
+     * Get the dialog identifer of this dialog. A dialog Id is
+     * associated with all responses and with any request that contains a tag
+     * in the To field.  The rules for computing the dialog Id of a message
+     * depends on whether the SIP element is a User Agent Client or User Agent
+     * Server and applies to both requests and responses.
+     * &lt;ul&gt;
+     * &lt;li&gt;User Agent Client - the Call-Id value of the dialog Id is set to the
+     * Call-Id of the message, the remote tag is set to the tag in the To field
+     * of the message, and the local tag is set to the tag in the From field of
+     * the message.
+     * &lt;li&gt;User Agent Server - the Call-Id value of the dialog Id is set to the
+     * Call-Id of the message, the remote tag is set to the tag in the From
+     * field of the message, and the local tag is set to the tag in the To
+     * field of the message.
+     * &lt;/ul&gt;
+     *
+     * @return the string identifier for this dialog.
+     */</span>
+    GetDialogId() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Returns the Call-Id for this SipSession. This is the value of the
+     * Call-Id header for all messages belonging to this session.
+     *
+     * @return the Call-Id for this dialog
+     */</span>
+    GetCallId() <a href="/pkg/gosip/header/">header</a>.<a href="/pkg/gosip/header/#CallIdHeader">CallIdHeader</a>
+
+    <span class="comment">/**
+     * The local sequence number is used to order requests from this
+     * User Agent Client to its peer User Agent Server. The local sequence
+     * number MUST be set to the value of the sequence number in the CSeq
+     * header field of the request. The remote sequence number MUST be empty as
+     * it is established when the remote User Agent sends a request within the
+     * dialog.
+     * &lt;p&gt;
+     * Requests within a dialog MUST contain strictly monotonically increasing
+     * and contiguous CSeq sequence numbers (increasing-by-one) in each
+     * direction (excepting ACK and CANCEL, whose numbers equal the requests
+     * being acknowledged or cancelled). Therefore, if the local sequence number
+     * is not empty, the value of the local sequence number MUST be incremented
+     * by one, and this value MUST be placed into the CSeq header field. If the
+     * local sequence number is empty, an initial value MUST be chosen.
+     *
+     *@return the integer value of the local sequence number, returns zero if
+     * not set.
+     */</span>
+    GetLocalSequenceNumber() <a href="/pkg/builtin/#int">int</a>
+
+    <span class="comment">/**
+     * The remote sequence number is used to order requests from its
+     * peer User Agent Client to this User Agent Server. When acting an User
+     * Agent Server the remote sequence number MUST be set to the value of the
+     * sequence number in the CSeq header field of the request from the User
+     * Agent Client. The local sequence number MUST be empty.
+     * &lt;p&gt;
+     * If the remote sequence number is empty, it MUST be set to the value of
+     * the sequence number in the CSeq header field value in the request. If
+     * the remote sequence number was not empty, but the sequence number of the
+     * request is lower than the remote sequence number, the request is out of
+     * order and MUST be rejected with a 500 (Server Internal Error) response.
+     * If the remote sequence number was not empty, and the sequence number of
+     * the request is greater than the remote sequence number, the request is
+     * in order.
+     *
+     *@return the integer value of the remote sequence number, return zero if
+     * not set.
+     */</span>
+    GetRemoteSequenceNumber() <a href="/pkg/builtin/#int">int</a>
+
+    <span class="comment">/**
+     * When acting as an User Agent Server
+     * the routeset MUST be set to the list of URIs in the Record-Route header
+     * field from the request, taken in order and preserving all URI parameters.
+     * When acting as an User Agent Client the route set MUST be set to the list
+     * of URIs in the Record-Route header field from the response, taken in
+     * reverse order and preserving all URI parameters. If no Record-Route
+     * header field is present in the request or response, the route set MUST
+     * be set to the empty set. This route set, even if empty, overrides any
+     * pre-existing route set for future requests in this dialog.
+     * &lt;p&gt;
+     * Requests within a dialog MAY contain Record-Route and Contact header
+     * fields. However, these requests do not cause the dialog&#39;s route set to be
+     * modified.
+     * &lt;p&gt;
+     * The User Agent Client uses the remote target and route set to build the
+     * Request-URI and Route header field of the request.
+     *
+     * @return an Iterator containing a list of route headers to be used for
+     * forwarding.
+     */</span>
+    GetRouteSet() *<a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a> <span class="comment">//Iterator;</span>
+
+    <span class="comment">/**
+     * Returns true if this Dialog is secure i.e. if the request was sent over
+     * a &#34;sips:&#34; scheme, or a &#34;sip:&#34; scheme over TLS.
+     *
+     * @return &lt;code&gt;true&lt;/code&gt; if this dialog was secure, and
+     * &lt;code&gt;false&lt;/code&gt; otherwise.
+     */</span>
+    IsSecure() <a href="/pkg/builtin/#bool">bool</a>
+
+    <span class="comment">/**
+     * Returns whether this Dialog is a server dialog. A proxy may wish to keep
+     * an associated sets of dialogs for forking, i.e. a single server dialog is
+     * associated with multiple client dialogs.
+     *
+     * @return &lt;code&gt;true&lt;/code&gt; if this is a server dialog and &lt;code&gt;false&lt;/code&gt;
+     * if it is a client dialog.
+     */</span>
+    IsServer() <a href="/pkg/builtin/#bool">bool</a>
+
+    <span class="comment">/**
+     * This method may be used to increment the local sequence number of the
+     * dialog when an application wishes to switch from dialog stateful mode
+     * to transaction stateful mode for client transactions and back again
+     * to dialog stateful mode. Note, the Dialog layer automatically
+     * increments the local sequence number when a request is sent out via
+     * the Dialog. However in special circumstances applications may wish to
+     * send a request (from a sequence of dialog requests) outside of the
+     * Dialog using the {@link ClientTransaction#sendRequest()} method. When sending
+     * a request using the Transaction the Dialog state is unaffected.
+     */</span>
+    IncrementLocalSequenceNumber()
+
+    <span class="comment">/**
+     * Creates a new Request message based on the dialog creating request.
+     * This method should be used for but not limited to creating Bye&#39;s,
+     * Refer&#39;s and re-Invite&#39;s on the Dialog. The returned Request will be
+     * correctly formatted that is the Dialog implementation is responsible
+     * for assigning the following:
+     * &lt;ul&gt;
+     * &lt;li&gt; RequestURI
+     * &lt;li&gt; FromHeader
+     * &lt;li&gt; ToHeader
+     * &lt;li&gt; CallIdHeader
+     * &lt;li&gt; RouteHeaders
+     * &lt;/ul&gt;
+     * The CSeqHeader will be set when the message is sent. If this method
+     * returns a CSeqHeader in the Request it may be overwritten again by
+     * the {@link Dialog#sendRequest(ClientTransaction)} method. Therefore
+     * any Request created by this method must be sent via the
+     * {@link Dialog#sendRequest(ClientTransaction)} method and not via its
+     * {@link ClientTransaction#sendRequest()} method.
+     * &lt;p&gt;
+     * All other headers including any Authentication related headers, and
+     * record route headers should be assigned by the application to the
+     * generated request. The  assignment of the topmost via header for the
+     * outgoing request may be deferred until the application creates a
+     * ClientTransaction to send the request out. This method does not
+     * increment the dialog sequence number.
+     *
+     * @param method the string value that determines if the request to be
+     * created.
+     * @return the newly created Request message on this Dialog.
+     * @throws SipException if the Dialog is not yet established (i.e.
+     * dialog state equals null) or is terminated.
+     */</span>
+    CreateRequest(method <a href="/pkg/builtin/#string">string</a>) (r <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Request">Request</a>, SipException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Sends a Request to the remote party of this dialog. When an application
+     * wishes to send a Request message on this dialog, it creates a Request
+     * and creates a new ClientTransaction to handle this request from
+     * {@link SipProvider#getNewClientTransaction(Request)}. This
+     * ClientTransaction is passed to this method to send the request. The Request
+     * message gets sent via the ListeningPoint information of the SipProvider
+     * that is associated to this ClientTransaction.
+     *&lt;p&gt;
+     * This method implies that the application is functioning as UAC hence the
+     * underlying SipProvider acts statefully. This method is useful for
+     * sending Bye&#39;s to terminate a dialog or Re-Invites/Refers on the
+     * Dialog for third party call control, call hold etc.
+     * &lt;p&gt;
+     * This methods will set the From and the To tags for the outgoing
+     * request. This method increments the dialog sequence number and sets
+     * the correct sequence number to the outgoing Request and associates
+     * the client transaction with this dialog.
+     * Note that any tags assigned by the user will be over-written by this
+     * method. If the caller sets no RouteHeader in the Request to be sent out,
+     * the implementation of this method will add the RouteHeader from the
+     * routes that are mantained in the dialog. If the caller sets the
+     * RouteHeader&#39;s, the implementation will leave the route headers
+     * unaltered. This allows the application to manage its own route set if
+     * so desired.
+     * &lt;p&gt;
+     * The User Agent traditionally must not send a BYE on a confirmed INVITE until it has
+     * received an ACK for its 2xx response or until the server transaction
+     * timeout is received.
+     * &lt;p&gt;
+     * When the {@link SipStack#isRetransmissionFilterActive()} is &lt;code&gt;true&lt;/code&gt;,
+     * that is the SipProvider takes care of all retransmissions for the
+     * application, and the SipProvider can not deliver the Request after
+     * multiple retransmits the SipListener will be notified with a
+     * {@link TimeoutEvent} when the transaction expires.
+     *
+     * @param clientTransaction - the new ClientTransaction object identifying
+     * this transaction, this clientTransaction should be requested from
+     * {@link SipProvider#getNewClientTransaction(Request)}
+     * @throws TransactionDoesNotExistException if the clientTransaction does
+     * not correspond to any existing client transaction.
+     * @throws SipException if implementation cannot send the Request for
+     * any reason.
+     */</span>
+    SendRequest(clientTransaction <a href="#ClientTransaction">ClientTransaction</a>) (SipException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Sends ACK Request to the remote party of this dialog. This method
+     * implies that the application is functioning as User Agent Client hence
+     * the underlying SipProvider acts statefully. This method does not
+     * increment the local sequence number.
+     *
+     * @param ackRequest - the new ACK Request message to send.
+     * @throws SipException if implementation cannot send the ACK Request for
+     * any reason
+     */</span>
+    SendAck(ackRequest <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Request">Request</a>) (SipException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns the current state of the dialog. A dialog that is created but
+     * not yet mapped to any state must return null, multiple requests can be
+     * generated on the Dialog in a null state, e.g. pseudo dialog&#39;s. The
+     * dialog states are:
+     * &lt;ul&gt;
+     * &lt;li&gt; Early - A dialog is in the &#34;early&#34; state, which occurs when it is
+     * created when a provisional response is recieved to the INVITE Request.
+     * &lt;li&gt; Confirmed - A dialog transitions to the &#34;confirmed&#34; state when a 2xx
+     * final response is received to the INVITE Request.
+     * &lt;li&gt; Completed - A dialog transitions to the &#34;completed&#34; state when a BYE
+     * request is sent or received by the User Agent Client.
+     * &lt;li&gt; Terminated - A dialog transitions to the &#34;terminated&#34; state when it
+     * can be garbage collection.
+     * &lt;/ul&gt;
+     * Independent of the method, if a request outside of a dialog generates a
+     * non-2xx final response, any early dialogs created through provisional
+     * responses to that request are &#34;terminated&#34;. If no response arrives at all
+     * on the early dialog it is also &#34;terminated&#34;.
+     *
+     * @return a DialogState determining the current state of the dialog.
+     * @see DialogState
+     */</span>
+    GetState() *<a href="#DialogState">DialogState</a>
+
+    <span class="comment">/**
+     * This method will release all resources associated with this dialog
+     * that are tracked by the SipProvider. Further references to the dialog by
+     * incoming messages will result in a mismatch. This delete method is provided
+     * for future use and extension methods that do not require a BYE to
+     * terminate a dialog. The basic case of the INVITE and all dialogs
+     * that we are aware of today it is expected that BYE requests will end the
+     * dialog.
+     */</span>
+    Delete()
+
+    <span class="comment">/**
+     * This method retrieves the transaction which resulted in the creation of
+     * this Dialog. The transaction type either server or client can be determined
+     * based on whether this is a server or client Dialog, see
+     * {@link Dialog#isServer()}.
+     *
+     * @return the Transaction that created the Dialog.
+     */</span>
+    GetFirstTransaction() <a href="#Transaction">Transaction</a>
+
+    <span class="comment">/**
+     * Get the Local Tag of this Dialog. On the client side, this tag is
+     * assigned to outgoing From headers for Requests within the dialog and
+     * To headers for responses within the dialog. On the server side, this
+     * tag is associated with outgoing To headers for responses within the
+     * dialog.
+     */</span>
+    GetLocalTag() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Gets the Remote Tag of this Dialog. On the client side, this tag is
+     * associated with outgoing To headers for Requests within the dialog. On
+     * the server side, this tag is associated with incoming From headers for
+     * requests within the dialog.
+     */</span>
+    GetRemoteTag() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Sets application specific data to this dialog. This specification
+     * does not define the format of this data. This is the responsibility
+     * of the application and is dependent upon the application. This method
+     * can be used to link the call state of this dialog to other state, SIP
+     * or otherwise in the system. For example this method could be used by
+     * a SIP-to-H323 interworking node that would associate the H323 call state
+     * associated with a call on the H323 side with this dialog that
+     * represents this call on the SIP side. Or a dialog stateful proxy can
+     * associate the UAS dialog to the UAC dialog and vice versa.
+     *
+     * @param applicationData the new object containing application specific
+     * data.
+     */</span>
+    SetApplicationData(applicationData interface{})
+
+    <span class="comment">/**
+     * Gets the application specific data specific to this dialog. This
+     * specification does not define the format of this application specific
+     * data. This is the responsibility of the application.
+     *
+     * @return the object representation of the application specific data.
+     */</span>
+    GetApplicationData() interface{}
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="DialogState">type <a href="/target/DialogState.go?s=2225:2338#L64">DialogState</a></h2>
+			<pre>type DialogState struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="GetDialogState">func <a href="/target/DialogState.go?s=2536:2594#L75">GetDialogState</a></h3>
+				<pre>func GetDialogState(dialogState <a href="/pkg/builtin/#int">int</a>) (*<a href="#DialogState">DialogState</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* This method returns the object value of the DialogState
+*
+* @return  The DialogState Object
+* @param timeout The integer value of the DialogState
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="DialogState.GetValue">func (*DialogState) <a href="/target/DialogState.go?s=3015:3054#L89">GetValue</a></h3>
+				<pre>func (this *<a href="#DialogState">DialogState</a>) GetValue() <a href="/pkg/builtin/#int">int</a></pre>
+				<p>
+*
+</p>
+<pre>* This method returns the integer value of the DialogState
+*
+* @return The integer value of the DialogState
+</pre>
+
+				
+				
+			
+				
+				<h3 id="DialogState.ToString">func (*DialogState) <a href="/target/DialogState.go?s=3881:3923#L114">ToString</a></h3>
+				<pre>func (this *<a href="#DialogState">DialogState</a>) ToString() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* This method returns a string version of this class.
+* @return The string version of the DialogState
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="ListeningPoint">type <a href="/target/ListeningPoint.go?s=2366:3932#L74">ListeningPoint</a></h2>
+			<pre>type ListeningPoint interface {
+
+    <span class="comment">/**
+     * Gets the port of the ListeningPoint. The default port of a ListeningPoint
+     * is dependent on the scheme and transport.  For example:
+     * &lt;ul&gt;
+     * &lt;li&gt;The default port is 5060, if the transport UDP and the scheme is
+     * &lt;i&gt;sip:&lt;/i&gt;.
+     * &lt;li&gt;The default port is 5060, if the transport is TCP and the scheme
+     * is &lt;i&gt;sip:&lt;/i&gt;.
+     * &lt;li&gt;The default port is 5060, if the transport is SCTP and the scheme
+     * is &lt;i&gt;sip:&lt;/i&gt;.
+     * &lt;li&gt;The default port is 5061, if the transport is TLS over TCP and the
+     * scheme is &lt;i&gt;sip:&lt;/i&gt;.
+     * &lt;li&gt;The default port is 5061, if the transport is TCP and the scheme
+     * is &lt;i&gt;sips:&lt;/i&gt;.
+     * &lt;/ul&gt;
+     *
+     * @return the integer value of the port.
+     */</span>
+    GetPort() <a href="/pkg/builtin/#int">int</a>
+
+    <span class="comment">/**
+     * Gets the transport of the ListeningPoint.
+     *
+     * @return the string value of the transport.
+     */</span>
+    GetTransport() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * This method indicates whether the specified object is equal to this
+     * Listening Point. The specified object is equal to this ListeningPoint
+     * if the specified object is a ListeningPoint and the transport and port
+     * in the specified Listening Point is the same as this Listening Point.
+     *
+     * @param obj - the object with which to compare this ListeningPoint.
+     * @return true if this ListeningPoint is &#34;equal to&#34; the obj argument;
+     * false otherwise.
+     */</span>
+    Equals(obj interface{}) <a href="/pkg/builtin/#bool">bool</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="RequestEvent">type <a href="/target/RequestEvent.go?s=1613:1771#L35">RequestEvent</a></h2>
+			<pre>type RequestEvent struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+</p>
+<pre>* This class represents an Request event that is passed from a SipProvider to
+* its SipListener. This specification handles the passing of request messages to the
+* application use the event model. An application (SipListener) will register
+* with the SIP protocol stack (SipProvider) and listen for Request events
+* from the SipProvider.
+* &lt;p&gt;
+* This specification defines a single Request event object to handle all Request
+* messages. The Request event encapsulates the Request message that can be
+* retrieved from {@link RequestEvent#getRequest()}. Therefore the event type
+* of a Request event can be determined as follows:
+* &lt;p&gt;
+* &lt;i&gt;eventType == RequestEvent.getRequest().getMethod();&lt;/i&gt;
+* &lt;p&gt;
+* A Request event also encapsulates the server transaction which handles the
+* Request.
+* &lt;p&gt;
+* RequestEvent contains the following elements:
+* &lt;ul&gt;
+* &lt;li&gt;source - the source of the event i.e. the SipProvider sending the
+* RequestEvent
+* &lt;li&gt;serverTransaction - the server transaction this RequestEvent is
+* associated with.
+* &lt;li&gt;Request - the Request message received on the SipProvider
+* that needs passed to the application encapsulated in a RequestEvent.
+* &lt;/ul&gt;
+*
+* @author Sun Microsystems
+* @since v1.1
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="RequestEvent.GetRequest">func (*RequestEvent) <a href="/target/RequestEvent.go?s=2947:3001#L70">GetRequest</a></h3>
+				<pre>func (this *<a href="#RequestEvent">RequestEvent</a>) GetRequest() <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Request">Request</a></pre>
+				<p>
+*
+</p>
+<pre>* Gets the Request message associated with this RequestEvent.
+*
+* @return the message associated with this RequestEvent.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="RequestEvent.GetServerTransaction">func (*RequestEvent) <a href="/target/RequestEvent.go?s=2676:2742#L61">GetServerTransaction</a></h3>
+				<pre>func (this *<a href="#RequestEvent">RequestEvent</a>) GetServerTransaction() <a href="#ServerTransaction">ServerTransaction</a></pre>
+				<p>
+*
+</p>
+<pre>* Gets the server transaction associated with this RequestEvent
+*
+* @return the server transaction associated with this RequestEvent
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="ResponseEvent">type <a href="/target/ResponseEvent.go?s=1746:1909#L36">ResponseEvent</a></h2>
+			<pre>type ResponseEvent struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+</p>
+<pre>* This class represents a Response event that is passed from a SipProvider to
+* its SipListener. This specification handles the passing of Response messages
+* to the application with the event model. An application (SipListener)
+* registers with the SIP protocol stack (SipProvider) and listens for Response
+* events from the SipProvider.
+* &lt;p&gt;
+* This specification defines a single Response event object to handle all
+* Response messages. The Response event encapsulates the Response message
+* that can be retrieved from {@link javax.sip.ResponseEvent#getResponse()}.
+* Therefore the event type of a Response event can be determined as follows:
+* &lt;p&gt;
+* &lt;i&gt;eventType == ResponseEvent.getResponse().getStatusCode();&lt;/i&gt;
+* &lt;p&gt;
+* A Response event also encapsulates the client transaction upon which the
+* Response is correlated, i.e. the client transaction of the Request
+* message upon which this is a Response.
+* &lt;p&gt;
+* ResponseEvent contains the following elements:
+* &lt;ul&gt;
+* &lt;li&gt;source - the source of the event i.e. the SipProvider sending the
+* ResponseEvent.
+* &lt;li&gt;clientTransaction - the client transaction this ResponseEvent is
+* associated with.
+* &lt;li&gt;Response - the Response message received on the SipProvider
+* that needs passed to the application encapsulated in a ResponseEvent.
+* &lt;/ul&gt;
+*
+* @author Sun Microsystems
+* @since v1.1
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="ResponseEvent.GetClientTransaction">func (*ResponseEvent) <a href="/target/ResponseEvent.go?s=2842:2909#L64">GetClientTransaction</a></h3>
+				<pre>func (this *<a href="#ResponseEvent">ResponseEvent</a>) GetClientTransaction() <a href="#ClientTransaction">ClientTransaction</a></pre>
+				<p>
+*
+</p>
+<pre>* Gets the client transaction associated with this ResponseEvent
+*
+* @return client transaction associated with this ResponseEvent
+</pre>
+
+				
+				
+			
+				
+				<h3 id="ResponseEvent.GetResponse">func (*ResponseEvent) <a href="/target/ResponseEvent.go?s=3118:3175#L73">GetResponse</a></h3>
+				<pre>func (this *<a href="#ResponseEvent">ResponseEvent</a>) GetResponse() <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Response">Response</a></pre>
+				<p>
+*
+</p>
+<pre>* Gets the Response message encapsulated in this ResponseEvent.
+*
+* @return the response associated with this ResponseEvent.
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="ServerTransaction">type <a href="/target/ServerTransaction.go?s=2536:4305#L49">ServerTransaction</a></h2>
+			<pre>type ServerTransaction interface {
+    <a href="#Transaction">Transaction</a>
+
+    <span class="comment">/**
+     * Sends the Response to a Request which is identified by this
+     * ServerTransaction. When an application wishes to send a Response, it
+     * creates a Response from the {@link javax.sip.message.MessageFactory} and
+     * then passes that Response to this method. The Response message gets sent out on
+     * the network via the ListeningPoint information that is associated to
+     * the SipProvider of this ServerTransaction.
+     * &lt;p&gt;
+     * This method implies that the application is functioning as either a UAS
+     * or a stateful proxy, hence the underlying implementation acts statefully.
+     * When a UAS sends a 2xx response to an INVITE, the server transaction is
+     * destroyed, by the underlying implementation. This means that
+     * when the ACK sent by the corresponding UAC arrives at the UAS, there will
+     * be no matching server transaction for the ACK, and based on this rule,
+     * the ACK is passed to the UAS application, where it is processed. This
+     * ensures that the three way handsake of an INVITE is managed by the UAS
+     * application and not the implementation. However when the
+     * {@link SipStack#isRetransmissionFilterActive()} is turned ON for User Agent&#39;s
+     * the implementation will take care of this behaviour for the application and
+     * notify the application of an error with a {@link Timeout#TRANSACTION}
+     * Event.
+     *
+     * @param response the Response to send to the Request.
+     * @throws SipException if the SipProvider cannot send the Response for any
+     * other reason.
+     * @see Response
+     */</span>
+    SendResponse(response <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Response">Response</a>) (SipException <a href="/pkg/builtin/#error">error</a>)
+}</pre>
+			<p>
+*
+</p>
+<pre>* A server transaction is used by a SipProvider to handle incoming Request
+* messages to fire Request events to the SipListener on a specific server
+* transaction and by a User Agent Server application to send Response
+* messages to a User Agent Client application. This interfaces enables an
+* application to send a {@link javax.sip.message.Response} to a recently
+* received Request statefully.
+* &lt;p&gt;
+* A new server transaction is generated in the following ways:
+* &lt;ul&gt;
+* &lt;li&gt; By the application by invoking the
+* {@link SipProvider#getNewServerTransaction(Request)} for Dialog-Creating
+* Requests that the application wishes to handle.
+* &lt;li&gt; By the SipProvider by automatically populating the server transaction
+* of a RequestEvent for Incoming Requests in an existing Dialog handled by
+* the application.
+* &lt;/ul&gt;
+* A server transaction of the transaction layer is represented by a finite
+* state machine that is constructed to process a particular request under
+* the covers of a stateful SipProvider. The transaction layer handles
+* application-layer retransmissions, matching of responses to requests, and
+* application-layer timeouts.
+* &lt;p&gt;
+* The server transaction must be unique within the underlying
+* implementation. A common way to create this value is to compute a
+* cryptographic hash of the To tag, From tag, Call-ID header field, the
+* Request-URI of the request received (before translation), the topmost Via
+* header, and the sequence number from the CSeq header field, in addition to
+* any Proxy-Require and Proxy-Authorization header fields that may be present.
+* The algorithm used to compute the hash is implementation-dependent.
+* &lt;p&gt;
+* For the detailed server transaction state machines refer to Chapter
+* 17 of &lt;a href=&#34;<a href="http://www.ietf.org/rfc/rfc3261.txt">http://www.ietf.org/rfc/rfc3261.txt</a>&#34;&gt;RFC 3261&lt;/a&gt;, the
+* allowable transitions are summarized below:
+* &lt;p&gt;
+* &lt;b&gt;Invite Transaction:&lt;/b&gt;&lt;br&gt;
+* Proceeding --&gt; Completed --&gt; Confirmed --&gt; Terminated
+* &lt;p&gt;
+* &lt;b&gt;Non-Invite Transaction:&lt;/b&gt;&lt;br&gt;
+* Trying --&gt; Proceeding --&gt; Completed --&gt; Terminated
+*
+* @author  Sun Microsystems
+* @since v1.1
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="SipListener">type <a href="/target/SipListener.go?s=5693:20064#L102">SipListener</a></h2>
+			<pre>type SipListener interface {
+
+    <span class="comment">/**
+     * Processes a Request received on a SipProvider upon which this SipListener
+     * is registered.
+     * &lt;p&gt;
+     * &lt;b&gt;Handling Requests:&lt;/b&gt;&lt;br&gt;
+     * When the application receives a RequestEvent from the SipProvider the
+     * RequestEvent may or may not belong to an existing dialog of the application.
+     * The application can be determine if the RequestEvent belongs to an
+     * existing dialog by checking the server transaction of the RequestEvent.
+     * &lt;ul&gt;
+     * &lt;li&gt;If the server transaction equals &lt;code&gt;null&lt;/code&gt; the RequestEvent does
+     * not belong to an existing dialog and the application must determine how
+     * to handle the RequestEvent. If the application decides to forward the
+     * Request statelessly no transactional support is required and it can simply
+     * pass the Request of the RequestEvent as an argument to the
+     * {@link SipProvider#sendRequest(Request)} method. However if the
+     * application determines to respond to a Request statefully it must request
+     * a new server transaction from the
+     * {@link SipProvider#getNewServerTransaction(Request)} method and use this
+     * server transaction to send the Response based on the content of the Request.
+     * If the SipProvider throws TransactionAlreadyExistsException when the
+     * application requests a new server transaction to handle a Request the
+     * current RequestEvent is a retransmission of the initial request from which
+     * the application hadn&#39;t requested a server transaction to handle it, i.e.
+     * this exception handles the race condition of an application informing the
+     * SipProvider that it will handle a Request and the receipt of a
+     * retransmission of the Request from the network to the SipProvider.
+     * &lt;li&gt;If the server transaction &lt;b&gt;does NOT&lt;/b&gt; equal &lt;code&gt;null&lt;/code&gt; the
+     * application determines its action to the RequestEvent based on the
+     * content of the Request information.
+     * &lt;/ul&gt;
+     * &lt;p&gt;
+     * &lt;b&gt;User Agent Server (UAS) Behaviour:&lt;/b&gt;&lt;br&gt;
+     * A UAS application decides whether to accept the an invitation from a
+     * UAC. The UAS application can accept the invitation by sending a 2xx
+     * response to the UAC, a 2xx response to an INVITE transaction establishes
+     * a session. For 2xx responses, the processing is done by the UAS
+     * application, to guarantee the three way handshake of an INVITE
+     * transaction. This specification defines a utility thats enables the
+     * SipProvider to handle the 2XX processing for an INVITE transaction, see
+     * the {@link SipStack#isRetransmissionFilterActive()} method. If the
+     * invitation is not accepted, a 3xx, 4xx, 5xx or 6xx response is sent by
+     * the application, depending on the reason for
+     * the rejection. Alternatively before sending a final response, the UAS
+     * can also send provisional responses (1xx) to advise the UAC of progress
+     * in contacting the called user. A UAS that receives a CANCEL request for
+     * an INVITE, but has not yet sent a final response, would &#34;stop ringing&#34;
+     * and then respond to the INVITE with a specific 487 Error response.
+     * &lt;p&gt;
+     * &lt;b&gt;General Proxy behaviour:&lt;/b&gt;&lt;br&gt;
+     * In some circumstances, a proxy application MAY forward requests using
+     * stateful transports without being transaction stateful,
+     * i.e. using the {@link SipProvider#sendRequest(Request)} method,
+     * but using TCP as a transport.  For example, a proxy application MAY
+     * forward a request from one TCP connection to another transaction
+     * statelessly as long as it places enough information in the message to be
+     * able to forward the response down the same connection the request arrived
+     * on. This is the responsibility of the application and not the SipProvider.
+     * Requests forwarded between different types of transports where the
+     * proxy application takes an active role in ensuring reliable delivery on
+     * one of the transports must be forwarded using the stateful send methods
+     * on the SipProvider.
+     * &lt;p&gt;
+     * &lt;b&gt;Stateful Proxies:&lt;/b&gt;&lt;br&gt;
+     * A stateful proxy MUST create a new server transaction for each new
+     * request received, either automatically generated by the SipProvider,
+     * if the request matches an existing dialog or by the an
+     * application call on the SipProvider if it decides to respond to the
+     * request statefully. The proxy application determines where to
+     * route the request, choosing one or more next-hop locations. An outgoing
+     * request for each next-hop location is processed by its own associated
+     * client transaction.  The proxy application collects the responses from
+     * the client transactions and uses them to send responses to the server
+     * transaction. When an application receives a CANCEL request that matches
+     * a server transaction, a stateful proxy cancels any pending client
+     * transactions associated with a response context. A stateful proxy
+     * responds to the CANCEL rather than simply forwarding a response it would
+     * receive from a downstream element.
+     * &lt;p&gt;
+     * For all new Requests, including any with unknown methods, an element
+     * intending to stateful proxy the Request determines the target(s) of the
+     * request. A stateful proxy MAY process the targets in any order.
+     * A stateful proxy must have a mechanism to maintain the target set as
+     * responses are received and associate the responses to each forwarded
+     * request with the original request. For each target, the proxy forwards
+     * the request following these steps:
+     * &lt;ul&gt;
+     * &lt;li&gt;Make a copy of the received request.
+     * &lt;li&gt;Update the Request-URI.
+     * &lt;li&gt;Update the Max-Forwards header.
+     * &lt;li&gt;Optionally add a Record-route header.
+     * &lt;li&gt;Optionally add additional headers.
+     * &lt;li&gt;Postprocess routing information.
+     * &lt;li&gt;Determine the next-hop address, port, and transport.
+     * &lt;li&gt;Add a Via header.
+     * &lt;li&gt;Add a Content-Length header if necessary.
+     * &lt;li&gt;Forward the new request using the
+     * {@link ClientTransaction#sendRequest()} method.
+     * &lt;li&gt;Process all responses recieved on the
+     * {@link SipListener#processResponse(ResponseEvent)} method.
+     * &lt;li&gt;NOT generate 100 (Trying) responses to non-INVITE requests.
+     * &lt;/ul&gt;
+     * &lt;p&gt;
+     * A stateful proxy MAY transition to stateless operation at any time
+     * during the processing of a request, as long as it did nothing that
+     * would prevent it from being stateless initially i.e. forking or
+     * generation of a 100 response. When performing such a transition, any
+     * state already stored is simply discarded.
+     * &lt;p&gt;
+     * &lt;b&gt;Forking Requests:&lt;/b&gt;&lt;br&gt;
+     * A stateful proxy application MAY choose to &#34;fork&#34; a request, routing it
+     * to multiple destinations. Any request that is forwarded to more than
+     * one location MUST be forwarded using the stateful send methods on the
+     * SipProvider.
+     * &lt;p&gt;
+     * &lt;b&gt;Stateless Proxies:&lt;/b&gt;&lt;br&gt;
+     * As a stateless proxy does not have any notion of a transaction, or of
+     * the response context used to describe stateful proxy behavior,
+     * &lt;code&gt;requestEvent.getServerTransaction() == null;&lt;/code&gt;
+     * always return &lt;var&gt;true&lt;/var&gt;. The transaction layer of the SipProvider
+     * implementation is by-passed.  For all requests including any with
+     * unknown methods, an application intending to stateless proxy the request
+     * MUST:
+     * &lt;ul&gt;
+     * &lt;li&gt;Validate the request.
+     * &lt;li&gt;Preprocess routing information.
+     * &lt;li&gt;Determine a single target(s) for the request.
+     * &lt;li&gt;Forward the request to the target using the
+     * {@link SipProvider#sendRequest(Request)} method.
+     * &lt;li&gt;NOT perform special processing for CANCEL requests.
+     * &lt;/ul&gt;
+     *
+     * @since v1.1
+     * @param requestEvent - requestEvent fired from the SipProvider to
+     * the SipListener representing a Request received from the network.
+     */</span>
+    ProcessRequest(requestEvent <a href="#RequestEvent">RequestEvent</a>)
+
+    <span class="comment">/**
+     * Processes a Response received on a SipProvider upon which this
+     * SipListener is registered.
+     * &lt;p&gt;
+     * &lt;b&gt;Handling Responses:&lt;/b&gt;&lt;br&gt;
+     * When the application receives a ResponseEvent from the SipProvider the
+     * ResponseEvent may or may not correlate to an existing Request of the
+     * application. The application can be determine if the ResponseEvent belongs
+     * to an existing Request by checking the client transaction of the
+     * ResponseEvent.
+     * &lt;ul&gt;
+     * &lt;li&gt;If the the client transaction equals &lt;code&gt;null&lt;/code&gt; the
+     * ResponseEvent does not belong to an existing Request and the Response is
+     * considered stray, i.e. stray response can be identitied, if
+     * &lt;code&gt;responseEvent.getClientTransaction() == null;&lt;/code&gt;. Handling of
+     * these &#34;stray&#34; responses is dependent on the application i.e. a proxy will
+     * forward them statelessly using the
+     * {@link SipProvider#sendResponse(Response)} method, while a User
+     * Agent will discard them.
+     * &lt;li&gt;If the client transaction &lt;b&gt;does NOT&lt;/b&gt; equal &lt;code&gt;null&lt;/code&gt; the
+     * application determines it action to the ResponseEvent based on the
+     * content of the Response information.
+     * &lt;/ul&gt;
+     * &lt;p&gt;
+     * &lt;b&gt;User Agent Client (UAC) behaviour:&lt;/b&gt;&lt;br&gt;
+     * After possibly receiving one or more provisional responses (1xx) to a
+     * Request, the UAC will get one or more 2xx responses or one non-2xx final
+     * response. Because of the protracted amount of time it can take to receive
+     * final responses to an INVITE, the reliability mechanisms for INVITE
+     * transactions differ from those of other requests.
+     * A UAC needs to send an ACK for every final Response it receives, however
+     * the procedure for sending the ACK depends on the type of Response. For
+     * final responses between 300 and 699, the ACK processing is done by the
+     * transaction layer i.e. handled by the implementation. For 2xx responses, the
+     * ACK processing is done by the UAC application, to guarantee the three way
+     * handshake of an INVITE transaction. This specification defines a utility
+     * thats enables the SipProvider to handle the ACK processing for an INVITE
+     * transaction, see the {@link SipStack#isRetransmissionFilterActive()} method.
+     * &lt;br&gt;
+     * A 2xx response to an INVITE establishes a session, and it also
+     * creates a dialog between the UAC that issued the INVITE and the UAS
+     * that generated the 2xx response. Therefore, when multiple 2xx responses
+     * are received from different remote User Agents, i.e. the INVITE forked,
+     * each 2xx establishes a different dialog and all these dialogs are part of
+     * the same call. If an INVITE client transaction returns a {@link TimeoutEvent}
+     * rather than a response the UAC acts as if a 408 (Request Timeout)
+     * response had been received from the UAS.
+     * &lt;p&gt;
+     * &lt;b&gt;Stateful Proxies:&lt;/b&gt;&lt;br&gt;
+     * A proxy application that handles a response statefully must do the
+     * following processing:
+     * &lt;ul&gt;
+     * &lt;li&gt;Find the appropriate response context.
+     * &lt;li&gt;Remove the topmost Via header.
+     * &lt;li&gt;Add the response to the response context.
+     * &lt;li&gt;Check to determine if this response should be forwarded immediately.
+     * &lt;li&gt;When necessary, choose the best final response from the
+     * response context. If no final response has been forwarded after every
+     * client transaction associated with the response context has been
+     * terminated, the proxy must choose and forward the &#34;best&#34; response
+     * from those it has seen so far.
+     * &lt;/ul&gt;
+     * &lt;p&gt;
+     * Additionally the following processing MUST be performed on each response
+     * that is forwarded.
+     * &lt;ul&gt;
+     * &lt;li&gt;Aggregate authorization header values if necessary.
+     * &lt;li&gt;Optionally rewrite Record-Route header values.
+     * &lt;li&gt;Forward the response using the
+     * {@link ServerTransaction#sendResponse(Response)} method.
+     * &lt;li&gt;Generate any necessary CANCEL requests.
+     * &lt;/ul&gt;
+     * &lt;p&gt;
+     * &lt;b&gt;Stateless Proxies:&lt;/b&gt;&lt;br&gt;
+     * As a stateless proxy does not have any notion of transactions, or of
+     * the response context used to describe stateful proxy behavior,
+     * &lt;code&gt;responseEvent.getClientTransaction == null;&lt;/code&gt;
+     * always return &lt;var&gt;true&lt;/var&gt;. Response processing does not apply, the
+     * transaction layer of the SipProvider implementation is by-passed. An
+     * application intending to stateless proxy the Response MUST:
+     * &lt;ul&gt;
+     * &lt;li&gt;Inspect the sent-by value in the first Via header.
+     * &lt;li&gt;If that address matches the proxy, the proxy MUST remove that header
+     * from the response.
+     * &lt;li&gt;Forward the resulting response to the location indicated in the
+     * next Via header using the
+     * {@link SipProvider#sendResponse(Response)} method.
+     * &lt;/ul&gt;
+     *
+     * @since v1.1
+     * @param responseEvent - the responseEvent fired from the SipProvider to
+     * the SipListener representing a Response received from the network.
+     */</span>
+    ProcessResponse(responseEvent <a href="#ResponseEvent">ResponseEvent</a>)
+
+    <span class="comment">/**
+     * Processes a retransmit or expiration Timeout of an underlying
+     * {@link Transaction} handled by this SipListener. This Event notifies the
+     * application that a retransmission or transaction Timer expired in the
+     * SipProvider&#39;s transaction state machine. The TimeoutEvent encapsulates
+     * the specific timeout type and the transaction identifier either client
+     * or server upon which the timeout occured. The type of Timeout can by
+     * determined by:
+     * &lt;code&gt;timeoutType = timeoutEvent.getTimeout().getValue();&lt;/code&gt;
+     *
+     * @param timeoutEvent - the timeoutEvent received indicating either the
+     * message retransmit or transaction timed out.
+     */</span>
+    ProcessTimeout(timeoutEvent <a href="#TimeoutEvent">TimeoutEvent</a>)
+}</pre>
+			<p>
+*
+</p>
+<pre>* This interface represents the application view to a SIP stack
+* therefore defines the application&#39;s communication channel to the SIP stack.
+* This interface defines the methods required by an applications to receive
+* and process Events that are emitted by an object implementing the
+* {@link javax.sip.SipProvider} interface.
+* &lt;p&gt;
+* The Events accepted by a SipListener may be one of three types:
+* &lt;ul&gt;
+* &lt;li&gt; {@link RequestEvent} - these are request messages emitted
+* as events by the SipProvider. Request events represent
+* request messages i.e. INVITE, that are received from the network to the
+* application via the underlying stack implementation.
+* &lt;li&gt; {@link ResponseEvent} - these are response messages emitted
+* as events by the SipProvider. Response events represent
+* Response messages i.e. 2XX&#39;s, that are received from the network to the
+* application via the underlying stack implementation.
+* &lt;li&gt; {@link TimeoutEvent} - these are timeout notifications
+* emitted as events by the SipProvider. Timeout events represent
+* timers expiring in the underlying SipProvider transaction state machine.
+* These timeout&#39;s events notify the application that a retranmission is
+* required or a transaction has timed out.
+* &lt;/ul&gt;
+* &lt;p&gt;
+* An application will only receive Request, Response and Timeout
+* events once it has registered as an EventListener of a SipProvider.
+* The application registers with the SipProvider by invoking the
+* {@link SipProvider#addSipListener(SipListener)} passing itself as an argument.
+* &lt;p&gt;
+* &lt;b&gt;Architecture:&lt;/b&gt;&lt;br&gt;
+* This specification mandates a single SipListener per SipStack/per IP Address,
+* and a unicast event model i.e. a SipProvider can only have one SipListener
+* registered with it. This specification allows multiple SipProviders per
+* SipStack and as such a SipListener can register with multiple SipProviders
+* i.e there is a one-to-many relationship between a SipListener and a
+* SipProvider.
+* &lt;p&gt;
+* Note: An application that implements the SipListener interface, may act as a
+* proxy object and pass all events to higher level core application
+* programming logic that is outside the scope of this specification. For
+* example a SIP Servlet, JAIN SLEE or an EJB SIP implementation can implement
+* the UAS, UAC and Proxy core application respectively in there respective
+* container environments utilizing this specification to talk to the
+* SIP network.
+* &lt;p&gt;
+* &lt;b&gt;Messaging Model:&lt;/b&gt;&lt;br&gt;
+* An application can send messages by passing
+* {@link javax.sip.message.Request} and {@link javax.sip.message.Response}
+* messages to that the following object:
+* &lt;ul&gt;
+* &lt;li&gt;Request and response messages can be sent statelessly via the
+* SipProvider using the sendXXX methods on the {@link javax.sip.SipProvider}.
+* &lt;li&gt;Request messages can be sent transaction stateful via the
+* ClientTransaction using the
+* {@link ClientTransaction#sendRequest()} method.
+* &lt;li&gt;Response messages can be sent transaction stateful via the
+* ServerTransaction using the
+* {@link ServerTransaction#sendResponse(Response)} method.
+* &lt;li&gt;Request messages can be sent dialog stateful via the
+* Dialog using the
+* {@link Dialog#sendRequest(ClientTransaction)} method.
+* &lt;/ul&gt;
+* Although this specification provides the capabilities to send messages both
+* statelessly and statefully it is mandated that an application will not send
+* the same message both statefully and statelessly.&lt;br&gt;
+* The messages sent by the application are not Event&#39;s as the event model is
+* uni-directional from the SipProvider to the SipListener, i.e. the
+* SipListener listens for Events from the SipProvider, but the SipProvider does
+* not listen for Events on the SipListener. The rationale is the application
+* knows when to initiate requests and responses i.e setup a call or respond to
+* a network event, however an application doesn&#39;t know when it will receive a
+* network event, hence the application must listen for these network events.
+* The traditional way to do this in Java is the Java event model.
+* &lt;p&gt;
+* &lt;b&gt;Session Negotiation&lt;/b&gt;&lt;br&gt;
+* There are special rules for message bodies of Request and Responses that
+* contain a session description. SIP uses an offer/answer model where one User
+* Agent sends a session description, called the offer, which contains a proposed
+* description of the session. The other User Agent responds with another session
+* description, called the answer, which indicates which communications means
+* are accepted. In this specification, offers and answers can only appear in
+* INVITE requests and Responses, and ACK. The Session Description Protocol (SDP)
+* &lt;a href = &#34;<a href="http://www.ietf.org/rfc/rfc2327.txt">http://www.ietf.org/rfc/rfc2327.txt</a>&#34;&gt;RFC2327&lt;/a&gt; MUST be
+* supported by all user agents as a means to describe sessions, and its usage
+* for constructing offers and answers MUST follow the procedures defined in
+* &lt;a href = &#34;<a href="http://www.ietf.org/rfc/rfc3261.txt">http://www.ietf.org/rfc/rfc3261.txt</a>&#34;&gt;RFC3261&lt;/a&gt;. The SDP protocol
+* is described in Java by
+* &lt;a href = &#34;<a href="http://www.jcp.org/en/jsr/detail?id=141">http://www.jcp.org/en/jsr/detail?id=141</a>&#34;&gt;JSR 141&lt;/a&gt;
+*
+* @see SipProvider
+* @see RequestEvent
+* @see ResponseEvent
+* @see TimeoutEvent
+*
+* @author Sun Microsystems
+* @version 1.1
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="SipProvider">type <a href="/target/SipProvider.go?s=9776:17730#L178">SipProvider</a></h2>
+			<pre>type SipProvider interface {
+
+    <span class="comment">/**
+     * This method registers the SipListener object to this SipProvider, once
+     * registered the SIP Listener recieve events emitted from the SipProvider.
+     * This specification restricts a unicast Listener model, that is only one
+     * Listener may be registered on the SipProvider concurrently. If an
+     * attempt is made to re-register the existing registered SipListener this
+     * method returns silently, however a SipListener must be removed from the
+     * SipProvider before a different SipListener can be registered to the
+     * SipProvider.
+     *
+     * @param sipListener the SipListener to be registered with the SipProvider.
+     * @throws TooManyListenersException when a new SipListener attempts to
+     * register with the SipProvider when another SipListener is already
+     * registered with this SipProvider.
+     */</span>
+    AddSipListener(sipListener <a href="#SipListener">SipListener</a>) (TooManyListenersException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Removes the specified SipListener from this SipProvider. This method
+     * returns silently if the SipListener is not registered with the SipProvider.
+     *
+     * @param SipListener the SipListener to be removed from this SipProvider.
+     */</span>
+    RemoveSipListener(sipListener <a href="#SipListener">SipListener</a>)
+
+    <span class="comment">/**
+     * Returns the SipStack that created this SipProvider. A SipProvider
+     * can only be attached to a single SipStack object that belongs to the same
+     * implementation as this SipProvider.
+     *
+     * @see SipStack
+     * @return the SipStack that created this SipProvider.
+     */</span>
+    GetSipStack() <a href="#SipStack">SipStack</a>
+
+    <span class="comment">/**
+     * Returns the ListeningPoint of this SipProvider. A SipProvider has a single
+     * Listening Point at any specific point in time.
+     *
+     * @see ListeningPoint
+     * @return the ListeningPoint of this SipProvider.
+     */</span>
+    GetListeningPoint() <a href="#ListeningPoint">ListeningPoint</a>
+
+    <span class="comment">/**
+     * This method sets the ListeningPoint of the SipProvider. A SipProvider can
+     * only have a single ListeningPoint at any specific time, i.e. multiple
+     * SipProviders are prohibited to listen on the same ListeningPoint. This
+     * method returns silently if the same ListeningPoint argument is re-set on
+     * the SipProvider.
+     *
+     * @param listeningPoint the ListeningPoint of this SipProvider.
+     * @throws ObjectInUseException when an application invokes this method
+     * with a ListeningPoint that is being used by another SipProvider in the
+     * system.
+     * @see ListeningPoint
+     * @since v1.1
+     */</span>
+    SetListeningPoint(listeningPoint <a href="#ListeningPoint">ListeningPoint</a>) (ObjectInUseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns a unique CallIdHeader for identifying dialogues between two
+     * SIP applications.
+     *
+     * @return the new CallIdHeader unique within the SipProvider.
+     */</span>
+    GetNewCallId() <a href="/pkg/gosip/header/">header</a>.<a href="/pkg/gosip/header/#CallIdHeader">CallIdHeader</a>
+
+    <span class="comment">/**
+     * Before an application can send a new request it must first request
+     * a new client transaction to handle that Request. This method is called
+     * by the application to create the new client transaction befores it sends
+     * the Request on that transaction. This methods returns
+     * a new unique client transaction that can be passed to send Requests
+     * statefully.
+     *
+     * @param request the new Request message that is to handled statefully by
+     * the ClientTransaction.
+     * @return a new unique client transaction.
+     * @throws TransactionUnavailableException if a new transaction can not be created, for example
+     * the next hop of the request can not be determined.
+     * @see ClientTransaction
+     * @since v1.1
+     */</span>
+    GetNewClientTransaction(request <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Request">Request</a>) (ct <a href="#ClientTransaction">ClientTransaction</a>, TransactionUnavailableException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * An application has the responsibility of deciding to respond to a
+     * Request that does not match an existing server transaction. This method
+     * is called by an application that decides to respond to an unmatched
+     * Request statefully. This methods return a new unique server transaction
+     * that can be used to respond to the request statefully.
+     *
+     * @param request the Request message that the doesn&#39;t match an existing
+     * transaction that the application decides to handle statefully.
+     * @return a new unique server transaction.
+     * @throws TransactionAlreadyExistsException if a transaction already exists
+     * that is already handling this Request. This may happen if the application
+     * gets retransmits of the same request before the initial transaction is
+     * allocated.
+     * @throws TransactionUnavailableException if a new transaction can not be created, for example
+     * the next hop of the request can not be determined.
+     * @see ServerTransaction
+     * @since v1.1
+     */</span>
+    GetNewServerTransaction(request <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Request">Request</a>) (st <a href="#ServerTransaction">ServerTransaction</a>, TransactionException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Sends the Request statelessly, that is no transaction record is
+     * associated with this action. This method implies that the application is
+     * functioning as a stateless proxy, hence the underlying SipProvider acts
+     * statelessly. A stateless proxy simply forwards every request it receives
+     * downstream and discards information about the Request message once the
+     * message has been forwarded. A stateless proxy does not have any notion
+     * of a transaction.
+     * &lt;p&gt;
+     * Once the Request message has been passed to this method, the SipProvider
+     * will forget about this Request. No transaction semantics will be
+     * associated with the Request and the SipProvider will not handle
+     * retranmissions for the Request. If these semantics are required it is the
+     * responsibility of the application not the SipProvider.
+     *
+     * @since v1.1
+     * @see Request
+     * @param request the Request message to send statelessly
+     * @throws SipException if the SipProvider cannot send the Request for any
+     * reason.
+     */</span>
+    SendRequest(request <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Request">Request</a>) (SipException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Sends the Response statelessly, that is no transaction record is
+     * associated with this action. This method implies that the application is
+     * functioning as either a stateless proxy or a stateless UAS.
+     * &lt;ul&gt;
+     *  &lt;li&gt; Stateless proxy - A stateless proxy simply forwards every response
+     *  it receives upstream and discards information about the response message
+     *  once the message has been forwarded. A stateless proxy does not
+     *  have any notion of a transaction.
+     *  &lt;li&gt;Stateless UAS - A stateless UAS does not maintain
+     *  transaction state. It replies to requests normally, but discards
+     *  any state that would ordinarily be retained by a UAS after a response
+     *  has been sent.  If a stateless UAS receives a retransmission of a
+     *  request, it regenerates the response and resends it, just as if it
+     *  were replying to the first instance of the request. A UAS cannot be
+     *  stateless unless the request processing for that method would always
+     *  result in the same response if the requests are identical. Stateless
+     *  UAS&#39;s do not use a transaction layer; they receive requests directly
+     *  from the transport layer and send responses directly to the transport
+     *  layer.
+     * &lt;/ul&gt;
+     *
+     * @see Response
+     * @param response the Response to send statelessly.
+     * @throws SipException if the SipProvider cannot send the Response for any
+     * reason.
+     * @see Response
+     * @since v1.1
+     */</span>
+    SendResponse(response <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Response">Response</a>) (SipException <a href="/pkg/builtin/#error">error</a>)
+}</pre>
+			<p>
+*
+</p>
+<pre>* This interface represents the messaging entity of a SIP stack and as
+* such is the interface that defines the messaging and transactional
+* component view of the SIP stack. It must be implemented by any object
+* representing a SIP stack compliant to this specification that interacts
+* directly with a proprietary implementation of a SIP stack.
+* This interface defines the methods that enable any registered
+* application implementing the {@link javax.sip.SipListener} interface to:
+* &lt;ul&gt;
+*    &lt;li&gt; Register a {@link javax.sip.SipListener} to the SipProvider. Once
+*    the SipListener is registered with the SipProvider it will get notified
+*    of Events representing either Request, Responce or Timeout messages.
+*    &lt;li&gt; De-register a {@link javax.sip.SipListener} from the SipProvider.
+*    Once a SipListener is de-registered, it will no longer receive any Events
+*    from that SipProvider.
+*    &lt;li&gt; Send {@link javax.sip.message.Request}&#39;s statelessly.
+*    &lt;li&gt; Send {@link javax.sip.message.Response}&#39;s statelessly.
+*    &lt;li&gt; Client and Server Transaction creation methods.
+*    &lt;li&gt; Listening Point manipulation methods.
+*    &lt;li&gt; New CallIdHeader accessor method.
+*    &lt;li&gt; SipStack object accessor method.
+* &lt;/ul&gt;
+* &lt;p&gt;
+* &lt;b&gt;Architecture:&lt;/b&gt;&lt;br&gt;
+* This specification defines a many-to-one relationship between a SipProvider
+* and a SipStack, a one-to-one relationship between a SipProvider and a
+* ListeningPoint and a many-to-one relationship between a SipProvider
+* and a SipListener.
+* &lt;p&gt;
+* A SipProvider has the capability to behave transaction statefully, dialog
+* statefully and statelessly. The transaction stateful methods are defined
+* on the ClientTransaction and ServerTransaction respectfully. The transaction
+* stateful method defined specifically for UAC and stateful proxy
+* applications is:
+* &lt;ul&gt;
+* &lt;li&gt; {@link ClientTransaction#sendRequest()}
+* &lt;/ul&gt;
+* &lt;p&gt;
+* The stateful (transactional) convenience method defined specifically for
+* UAS and stateful proxy applications is:
+* &lt;ul&gt;
+* &lt;li&gt; {@link ServerTransaction#sendResponse(Response)}
+* &lt;/ul&gt;
+* &lt;p&gt;
+* The dialog stateful methods defined specifically for UAC and stateful
+* proxy applications are:
+* &lt;ul&gt;
+* &lt;li&gt; {@link Dialog#sendRequest(ClientTransaction)}
+* &lt;li&gt; {@link Dialog#sendAck(Request)}
+* &lt;/ul&gt;
+* &lt;p&gt;
+* The stateless methods (non-transactional) defined on the SipProvider
+* are:
+* &lt;ul&gt;
+* &lt;li&gt; {@link SipProvider#sendResponse(Response)}
+* &lt;li&gt; {@link SipProvider#sendRequest(Request)}
+* &lt;/ul&gt;
+* &lt;p&gt;
+* &lt;b&gt;Transaction Model:&lt;/b&gt;&lt;br&gt;
+* This specification supports stateful and stateless applications on a per
+* message basis, hence transactional semantics are not mandated for all
+* messages. This specification defines two types of transactions, server
+* transactions and client transactions. A stateless proxy does not contain a
+* client or server transaction, stateless proxies are effectively transparent
+* with respect to transactions.
+* &lt;p&gt;
+* Client Transaction:&lt;br&gt;
+* A client transaction exists between a UAC and a UAS specific to Request
+* messages and a server transaction exists between a UAS and a UAC specific
+* to Response messages. A transaction either server or client identifies
+* messages sent between two SIP entities. The purpose of a client transaction
+* is to identify a Request sent by an application that will reliably deliver
+* the Request to a server transaction on
+* the responding SIP entity. The purpose of a server transaction is to
+* identify a Response sent by an application that will reliably deliver the
+* Response to the request initiator.
+* &lt;p&gt;
+* Server Transaction:&lt;br&gt;
+* A new server transaction is required for each response that an application
+* decides to respond to statefully, as follows:
+* &lt;ul&gt;
+* &lt;li&gt;Dialog-Creating Requests: A server transaction is not automatically
+* generated by a SipProvider implementation upon receipt of every
+* Dialog-Creating Request i.e. INVITE. Instead the
+* server transaction is set to &lt;code&gt;null&lt;/code&gt; in the RequestEvent and
+* the RequestEvent also containing the Request is passed to the application.
+* It is then the responsibility of the application to decide to handle the
+* Dialog-Creating Request statefully or statelessly, using the appropriate
+* send methods on the SipProvider and the ServerTransaction. If a retransmission of the initial Request
+* request is recieved by the SipProvider the following procedures should be
+* adhered to:
+* &lt;ul&gt;
+* &lt;li&gt;Determine if an exisiting transaction is already handling this Request.
+* &lt;li&gt;If a transaction exists do not pass the Request to the application via a
+* RequestEvent.
+* &lt;li&gt;If a transaction doesn&#39;t exist pass the retransmitted request to the
+* application as a RequestEvent.
+* &lt;/ul&gt;
+* &lt;li&gt;Non-Dialog-Creating Requests - When the SipProvider receives a
+* Non-Dialog-Creating Request upon which this application has already
+* responded to the Dialog-Creating Request of the same dialogue the server
+* transaction is automatically placed to the RequestEvent and passed up to
+* the application upon which it can respond. Note that the server transaction
+* may be null in a stateful implementation if the incoming request does not
+* match any dialog but must be part of one. That is for requests that must
+* have state but for which the stack cannot find that state, the application
+* can still handle these requests statelessly. The application cannot create
+* a new server transaction for such requests.
+* &lt;/ul&gt;
+* &lt;p&gt;
+* &lt;b&gt;Sending Requests:&lt;/b&gt;&lt;br&gt;
+* The client side of the transport layer is responsible for sending the
+* request. The application passes the the Request to the ClientTransaction
+* Dialog or the SipProvider that will send the Request over the ListeningPoint&#39;s
+* port and transport. See section 18.1.1 of
+* &lt;a href = &#34;<a href="http://www.ietf.org/rfc/rfc3261.txt">http://www.ietf.org/rfc/rfc3261.txt</a>&#34;&gt;RFC3261&lt;/a&gt;.
+* &lt;p&gt;
+* &lt;b&gt;Sending Responses:&lt;/b&gt;&lt;br&gt;
+* The server side of the transport layer is responsible for sending the
+* responses. The application passes the Response to the ServerTransaction
+* or the SipProvider that will send the Response over the ListeningPoint&#39;s port and transport.
+* See section 18.2.2 of
+* &lt;a href = &#34;<a href="http://www.ietf.org/rfc/rfc3261.txt">http://www.ietf.org/rfc/rfc3261.txt</a>&#34;&gt;RFC3261&lt;/a&gt;.
+* &lt;p&gt;
+* &lt;b&gt;Receiving Requests:&lt;/b&gt;&lt;br&gt;
+* A SipProvider should be prepared to receive requests on any IP address,
+* port and transport combination encapsulated in a ListeningPoint that can be
+* the result of a DNS lookup on a SIP or SIPS URI that is handed out for the
+* purposes of communicating with that server. It is also recommended that a
+* SipProvider listen for requests on the default SIP ports on all public
+* interfaces. When the SipProvider receives a request over any transport, it
+* must examine the value of the &#34;sent-by&#34; parameter in the top Via
+* header.  If the host portion of the &#34;sent-by&#34; parameter contains a
+* domain name, or if it contains an IP address that differs
+* from the packet source address, the server must add a &#34;received&#34;
+* parameter to that Via header field value.  This parameter must
+* contain the source address from which the packet was received.  This
+* is to assist the SipProvider in sending the response, since it must
+* be sent to the source IP address from which the request came.
+* Next, the SipProvider attempts to match the request to a server
+* transaction.  If there are any server transactions in existence, the server
+* transport uses the matching procedures of Chapter 17 of
+* &lt;a href = &#34;<a href="http://www.ietf.org/rfc/rfc3261.txt">http://www.ietf.org/rfc/rfc3261.txt</a>&#34;&gt;RFC3261&lt;/a&gt; to attempt to
+* match the response to an existing transaction.  If a matching server
+* transaction is found, the request is passed to that transaction, encapsulated
+* into a RequestEvent and fired to the application for processing. If no match
+* is found, the request is passed to the application, which may decide to
+* construct a new server transaction for that request.
+* &lt;p&gt;
+* &lt;b&gt;Receiving Responses&lt;/b&gt;&lt;br&gt;
+* Responses are first processed by the transport layer and then passed
+* up to the transaction layer.  The transaction layer performs its
+* processing and then passes the response up to the application.
+* When a response is received, the SipProvider examines the top
+* Via header. If the value of the &#34;sent-by&#34; parameter in that header field
+* value does not correspond to a value that the client transport is configured
+* to insert into requests, the response MUST be silently discarded. If there
+* are any client transactions in existence, the client transport uses the
+* matching procedures of Chapter 17 of
+* &lt;a href = &#34;<a href="http://www.ietf.org/rfc/rfc3261.txt">http://www.ietf.org/rfc/rfc3261.txt</a>&#34;&gt;RFC3261&lt;/a&gt; to attempt to
+* match the response to an existing transaction.  If there is a
+* match, the response must be passed to that transaction, encapsulated into a
+* ResponseEvent and fired to the application.  Otherwise, the response is stray
+* and must be passed to the application to determine its outcome i.e. a proxy
+* will forward them, while a User Agent will discard.
+*
+* @see SipListener
+* @see SipStack
+*
+* @author Sun Microsystems
+* @version 1.1
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="SipStack">type <a href="/target/SipStack.go?s=7821:14395#L162">SipStack</a></h2>
+			<pre>type SipStack interface {
+
+    <span class="comment">/**
+     * Creates a new peer SipProvider on this SipStack on a specified
+     * ListeningPoint and returns a reference to the newly created SipProvider
+     * object. The newly created SipProvider is implicitly attached to this
+     * SipStack upon execution of this method, by adding the SipProvider to the
+     * list of SipProviders of this SipStack once it has been successfully
+     * created.
+     *
+     * @return the SipProvider attached to this SipStack on the specified
+     * ListeningPoint.
+     * @param listeningPoint the ListeningPoint the SipProvider is to be
+     * attached to in order to send and receive messages.
+     * @throws ObjectInUseException if another SipProvider is
+     * already using the ListeningPoint.
+     */</span>
+    CreateSipProvider(listeningPoint <a href="#ListeningPoint">ListeningPoint</a>) (sp <a href="#SipProvider">SipProvider</a>, ObjectInUseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Deletes the specified peer SipProvider attached to this SipStack. The
+     * specified SipProvider is implicitly detached from this SipStack upon
+     * execution of this method, by removing the SipProvider from the
+     * SipProviders list of this SipStack. Deletion of a SipProvider does not
+     * automatically delete the SipProvider&#39;s ListeningPoint from the SipStack.
+     *
+     * @param sipProvider the peer SipProvider to be deleted from this
+     * SipStack.
+     * @throws ObjectInUseException if the specified SipProvider cannot be
+     * deleted because the SipProvider is currently in use.
+     *
+     */</span>
+    DeleteSipProvider(sipProvider <a href="#SipProvider">SipProvider</a>) (ObjectInUseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns an Iterator of existing SipProviders that have been
+     * created by this SipStack. All of the SipProviders of this SipStack will
+     * belong to the same stack vendor.
+     *
+     * @return an Iterator containing all existing SipProviders created
+     * by this SipStack. Returns an empty Iterator if no SipProviders exist.
+     */</span>
+    GetSipProviders() *<a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a> <span class="comment">//Iterator</span>
+
+    <span class="comment">/**
+     * Creates a new ListeningPoint on this SipStack on a specified
+     * port and transport, and returns a reference to the newly created
+     * ListeningPoint object. The newly created ListeningPoint is implicitly
+     * attached to this SipStack upon execution of this method, by adding the
+     * ListeningPoint to the List of ListeningPoints of this SipStack once it
+     * has been successfully created.
+     *
+     * @return the ListeningPoint attached to this SipStack.
+     * @param port the port of the new ListeningPoint.
+     * @param transport the transport of the new ListeningPoint.
+     * @throws TansportNotSupportedException if the specified
+     * transport is not supported by this SipStack.
+     * @throws InvalidArgumentException if the specified port is invalid.
+     * @since v1.1
+     */</span>
+    CreateListeningPoint(port <a href="/pkg/builtin/#int">int</a>, transport <a href="/pkg/builtin/#string">string</a>) (<a href="#ListeningPoint">ListeningPoint</a>, <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Deletes the specified ListeningPoint attached to this SipStack. The
+     * specified ListeningPoint is implicitly detached from this SipStack upon
+     * execution of this method, by removing the ListeningPoint from the
+     * ListeningPoints list of this SipStack.
+     *
+     * @param listeningPoint the SipProvider to be deleted from this SipStack.
+     * @throws ObjectInUseException if the specified ListeningPoint cannot be
+     * deleted because the ListeningPoint is currently in use.
+     *
+     * @since v1.1
+     */</span>
+    DeleteListeningPoint(listeningPoint <a href="#ListeningPoint">ListeningPoint</a>) (ObjectInUseException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns an Iterator of existing ListeningPoints created by this
+     * SipStack. All of the ListeningPoints of this SipStack belong to the
+     * same stack vendor.
+     *
+     * @return an Iterator containing all existing ListeningPoints created
+     * by this SipStack. Returns an empty Iterator if no ListeningPoints exist.
+     */</span>
+    GetListeningPoints() *<a href="/pkg/container/list/">list</a>.<a href="/pkg/container/list/#List">List</a> <span class="comment">//Iterator</span>
+
+    <span class="comment">/**
+     * Gets the user friendly name that identifies this SipStack instance. This
+     * value is set using the Properties object passed to the
+     * {@link SipFactory#createSipStack(Properties)} method upon creation of
+     * the SipStack object.
+     *
+     * @return a string identifing the stack instance
+     */</span>
+    GetStackName() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Gets the IP Address that identifies this SipStack instance. Every
+     * SipStack object must have an IP Address and only one SipStack object
+     * can service an IP Address. This value is set using the Properties
+     * object passed to the {@link SipFactory#createSipStack(Properties)} method upon
+     * creation of the SipStack object.
+     *
+     * @return a string identifing the IP Address
+     * @since v1.1
+     */</span>
+    GetIPAddress() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Gets the Router object that identifies the default Router information
+     * of this SipStack, including the outbound proxy. This value is set using
+     * the Properties object passed to the
+     * {@link SipFactory#createSipStack(Properties)} method upon creation of
+     * the SipStack object.
+     *
+     * @return the Router object identifying the Router information.
+     * @since v1.1
+     */</span>
+    GetRouter() <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Router">Router</a>
+
+    <span class="comment">/**
+     * This method returns the value of the retransmission filter helper
+     * function for User Agent applications. This value is set using the
+     * Properties object passed to the
+     * {@link SipFactory#createSipStack(Properties)} method upon creation of
+     * the SipStack object.
+     * &lt;p&gt;
+     * The default value of the retransmission filter boolean is &lt;var&gt;false&lt;/var&gt;.
+     * When this value is set to &lt;code&gt;true&lt;/code&gt;, retransmissions of ACK&#39;s and
+     * 2XX responses to an INVITE transaction are handled
+     * by the SipProvider, hence the application will not receive
+     * {@link Timeout#RETRANSMIT} notifications encapsulated in
+     * {@link javax.sip.TimeoutEvent}&#39;s, however an application will be
+     * notified if the underlying transaction expires with a
+     * {@link Timeout#TRANSACTION} notification encapsulated in a TimeoutEvent.
+     *
+     * @return the value of the retransmission filter, &lt;code&gt;true&lt;/code&gt; if the
+     * filter is set, &lt;code&gt;false&lt;/code&gt; otherwise.
+     * @since v1.1
+     */</span>
+    IsRetransmissionFilterActive() <a href="/pkg/builtin/#bool">bool</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="Timeout">type <a href="/target/Timeout.go?s=6294:6398#L112">Timeout</a></h2>
+			<pre>type Timeout struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="GetTimeout">func <a href="/target/Timeout.go?s=6824:6870#L132">GetTimeout</a></h3>
+				<pre>func GetTimeout(timeout <a href="/pkg/builtin/#int">int</a>) (*<a href="#Timeout">Timeout</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				<p>
+*
+</p>
+<pre>* This method returns the object value of the Timeout
+*
+* @return  The Timeout Object
+* @param timeout The integer value of the Timeout
+</pre>
+
+				
+			
+
+			
+				
+				<h3 id="Timeout.GetValue">func (*Timeout) <a href="/target/Timeout.go?s=7259:7294#L146">GetValue</a></h3>
+				<pre>func (this *<a href="#Timeout">Timeout</a>) GetValue() <a href="/pkg/builtin/#int">int</a></pre>
+				<p>
+*
+</p>
+<pre>* This method returns the integer value of the Timeout
+*
+* @return The integer value of the Timeout
+</pre>
+
+				
+				
+			
+				
+				<h3 id="Timeout.ToString">func (*Timeout) <a href="/target/Timeout.go?s=8108:8146#L171">ToString</a></h3>
+				<pre>func (this *<a href="#Timeout">Timeout</a>) ToString() <a href="/pkg/builtin/#string">string</a></pre>
+				<p>
+*
+</p>
+<pre>* This method returns a string version of this class.
+*
+* @return The string version of the Timeout
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="TimeoutEvent">type <a href="/target/TimeoutEvent.go?s=1543:1781#L34">TimeoutEvent</a></h2>
+			<pre>type TimeoutEvent struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			<p>
+*
+</p>
+<pre>* This class represents an Timeout event that is passed from a SipProvider to
+* its SipListener. A specific message may need retransmitted on a specific
+* transaction numerous times before it is acknowledged by the receiver. If the
+* message is not acknowledged after a specified period in the underlying
+* implementation the transaction will expire, this occurs usually
+* after seven retransmissions. The mechanism to alert an application that a
+* message for a an underlying transaction needs retransmitted (i.e. 200OK) or
+* an underlying transaction has expired is a Timeout Event.
+* &lt;p&gt;
+* A Timeout Event can be of two different types, namely:
+* &lt;ul&gt;
+* &lt;li&gt;{@link Timeout#RETRANSMIT}
+* &lt;li&gt;{@link Timeout#TRANSACTION}
+* &lt;/ul&gt;
+* A TimeoutEvent contains the following information:
+* &lt;ul&gt;
+* &lt;li&gt;source - the SipProvider that sent the TimeoutEvent.
+* &lt;li&gt;transaction - the transaction that this Timeout applies to.
+* &lt;li&gt;isServerTransaction - boolean indicating whether the transaction refers to
+* a client or server transaction.
+* &lt;li&gt;timeout - indicates what type of {@link Timeout} occurred.
+* &lt;/ul&gt;
+*
+* @see Timeout
+*
+* @author Sun Microsystems
+* @since v1.1
+</pre>
+
+
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="TimeoutEvent.GetClientTransaction">func (*TimeoutEvent) <a href="/target/TimeoutEvent.go?s=3575:3641#L92">GetClientTransaction</a></h3>
+				<pre>func (this *<a href="#TimeoutEvent">TimeoutEvent</a>) GetClientTransaction() <a href="#ClientTransaction">ClientTransaction</a></pre>
+				<p>
+*
+</p>
+<pre>* Gets the client transaction associated with this TimeoutEvent.
+*
+* @return client transaction associated with this TimeoutEvent, or null if
+* this event is specific to a server transaction.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TimeoutEvent.GetServerTransaction">func (*TimeoutEvent) <a href="/target/TimeoutEvent.go?s=3219:3285#L81">GetServerTransaction</a></h3>
+				<pre>func (this *<a href="#TimeoutEvent">TimeoutEvent</a>) GetServerTransaction() <a href="#ServerTransaction">ServerTransaction</a></pre>
+				<p>
+*
+</p>
+<pre>* Gets the server transaction associated with this TimeoutEvent.
+*
+* @return server transaction associated with this TimeoutEvent, or null if this
+* event is specific to a client transaction.
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TimeoutEvent.GetTimeout">func (*TimeoutEvent) <a href="/target/TimeoutEvent.go?s=4361:4407#L117">GetTimeout</a></h3>
+				<pre>func (this *<a href="#TimeoutEvent">TimeoutEvent</a>) GetTimeout() <a href="#Timeout">Timeout</a></pre>
+				<p>
+*
+</p>
+<pre>* Gets the event type of this TimeoutEvent. The event type can be used to
+* determine if this Timeout Event is one of the following types:
+* &lt;ul&gt;
+* &lt;li&gt;{@link Timeout#TRANSACTION}
+* &lt;li&gt;{@link Timeout#RETRANSMIT}
+* &lt;/ul&gt;
+*
+* @return the event type of this TimeoutEvent
+</pre>
+
+				
+				
+			
+				
+				<h3 id="TimeoutEvent.IsServerTransaction">func (*TimeoutEvent) <a href="/target/TimeoutEvent.go?s=3922:3974#L103">IsServerTransaction</a></h3>
+				<pre>func (this *<a href="#TimeoutEvent">TimeoutEvent</a>) IsServerTransaction() <a href="/pkg/builtin/#bool">bool</a></pre>
+				<p>
+*
+</p>
+<pre>* Indicates if the transaction associated with this TimeoutEvent is a server
+* transaction.
+*
+* @return returns true if a server transaction or false if a client
+* transaction.
+</pre>
+
+				
+				
+			
+		
+			
+			
+			<h2 id="Transaction">type <a href="/target/Transaction.go?s=1057:5248#L21">Transaction</a></h2>
+			<pre>type Transaction interface {
+
+    <span class="comment">/**
+     * Gets the dialog object of this transaction object. A dialog only
+     * exists for a transaction when a session is setup between a User Agent
+     * Client and a User Agent Server, either by a 1xx Provisional Response
+     * for an early dialog or a 200OK Response for a committed dialog.
+     * &lt;p&gt;
+     * An implementation must always associate a dialog with a transaction
+     * which may result in the creation of a &#39;dummy&#39; dialog so that the
+     * application may always query the dialog  from the Transaction. However
+     * if a dialog is not yet initialized, the Dialog.getState() must return
+     * null to indicate that the dialog has been created but is not yet
+     * mapped by the stack to any specific state.
+     *
+     * @return the dialog object of this transaction object.
+     * @see Dialog
+     */</span>
+    GetDialog() <a href="#Dialog">Dialog</a>
+
+    <span class="comment">/**
+     * Returns the current state of the transaction. The allowable states for
+     * client and server transactions are defined in their respective objects.
+     *
+     * @return a TransactionState object determining the current state of the
+     * transaction.
+     */</span>
+    GetState() <a href="#TransactionState">TransactionState</a>
+
+    <span class="comment">/**
+     * Returns the current value of the retransmit timer in milliseconds used
+     * to retransmit messages over unreliable transports for this transaction.
+     *
+     * @return the integer value of the retransmit timer in milliseconds.
+     * @throws UnsupportedOperationException if this method is not supported
+     * by the underlying implementation.
+     */</span>
+    GetRetransmitTimer() (retransmitTimer <a href="/pkg/builtin/#int">int</a>, UnsupportedOperationException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Sets the value of the retransmit timer to the newly supplied timer value.
+     * The retransmit timer is expressed in milliseconds and its default value
+     * is 500ms. This method allows the application to change the transaction
+     * retransmit behavior for different networks. For example the gateway proxy,
+     * the internal intranet is likely to be relatively uncongested
+     * and the endpoints will be relatively close. The external network is the
+     * general Internet. This functionality allows different retransmit times
+     * for either side.
+     *
+     * @param retransmitTimer - the new integer value of the retransmit timer
+     * in milliseconds.
+     * @throws UnsupportedOperationException if this method is not supported
+     * by the underlying implementation.
+     */</span>
+    SetRetransmitTimer(retransmitTimer <a href="/pkg/builtin/#int">int</a>) (UnsupportedOperationException <a href="/pkg/builtin/#error">error</a>)
+
+    <span class="comment">/**
+     * Returns a unique branch identifer that identifies this transaction. The
+     * branch identifier is used in the ViaHeader. The uniqueness property of
+     * the branch ID parameter to facilitate its use as a transaction ID, was
+     * not part of RFC 2543. The branch ID inserted by an element compliant
+     * with the RFC3261 specification MUST always begin with the characters
+     * &#34;z9hG4bK&#34;. These 7 characters are used as a magic cookie, so that
+     * servers receiving the request can determine that the branch ID was
+     * constructed to be globally unique. The precise format of the branch
+     * token is implementation-defined. This method should always return the
+     * same branch identifier for the same transaction.
+     *
+     * @return the new branch that uniquely identifies this transaction.
+     */</span>
+    GetBranchId() <a href="/pkg/builtin/#string">string</a>
+
+    <span class="comment">/**
+     * Returns the request that created this transaction. The transaction state
+     * machine needs to keep the Request that resulted in the creation of this
+     * transaction while the transaction is still alive. Applications also need
+     * to access this information, e.g. a forking proxy server may wish to
+     * retrieve the original Invite request to cancel branches of a fork when
+     * a final Response has been received by one branch.
+     *
+     * @return the Request message that created this transaction.
+     */</span>
+    GetRequest() <a href="/pkg/gosip/message/">message</a>.<a href="/pkg/gosip/message/#Request">Request</a>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+		
+			
+			
+			<h2 id="TransactionState">type <a href="/target/TransactionState.go?s=7522:7648#L236">TransactionState</a></h2>
+			<pre>type TransactionState struct {
+    <span class="comment">// contains filtered or unexported fields</span>
+}</pre>
+			
+
+			
+
+			
+
+			
+
+			
+				
+				<h3 id="GetTransactionState">func <a href="/target/TransactionState.go?s=7875:7948#L254">GetTransactionState</a></h3>
+				<pre>func GetTransactionState(transactionState <a href="/pkg/builtin/#int">int</a>) (*<a href="#TransactionState">TransactionState</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+				
+				
+			
+
+			
+				
+				<h3 id="TransactionState.GetValue">func (*TransactionState) <a href="/target/TransactionState.go?s=8411:8455#L275">GetValue</a></h3>
+				<pre>func (this *<a href="#TransactionState">TransactionState</a>) GetValue() <a href="/pkg/builtin/#int">int</a></pre>
+				
+				
+				
+			
+				
+				<h3 id="TransactionState.ToString">func (*TransactionState) <a href="/target/TransactionState.go?s=9371:9418#L320">ToString</a></h3>
+				<pre>func (this *<a href="#TransactionState">TransactionState</a>) ToString() <a href="/pkg/builtin/#string">string</a></pre>
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
+	
+	
+		<h2 id="pkg-subdirectories">Subdirectories</h2>
+	
+	<table class="dir">
+	<tr>
+	<th>Name</th>
+	<th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+	<th style="text-align: left; width: auto">Synopsis</th>
+	</tr>
+	
+		<tr>
+		<td><a href="..">..</a></td>
+		</tr>
+	
+	
+		
+			<tr>
+			<td class="name"><a href="address/">address</a></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: auto"></td>
+			</tr>
+		
+	
+		
+			<tr>
+			<td class="name"><a href="core/">core</a></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: auto"></td>
+			</tr>
+		
+	
+		
+			<tr>
+			<td class="name"><a href="header/">header</a></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: auto"></td>
+			</tr>
+		
+	
+		
+			<tr>
+			<td class="name"><a href="message/">message</a></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: auto"></td>
+			</tr>
+		
+	
+		
+			<tr>
+			<td class="name"><a href="parser/">parser</a></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td style="width: auto"></td>
+			</tr>
+		
+	
+	</table>
+	
+
