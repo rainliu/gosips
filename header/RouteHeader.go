@@ -14,7 +14,7 @@ package header
  * the initial Route of the message.
  *
  * @see RecordRouteHeader
- * @see HeaderAddress
+ * @see AddressHeader
  * @see Parameters
  *
  * @version 1.1
@@ -22,7 +22,7 @@ package header
  *
  */
 type RouteHeader interface {
-	HeaderAddress
+	AddressHeader
 	ParametersHeader
 	//Header
 

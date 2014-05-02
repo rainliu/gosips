@@ -75,13 +75,13 @@ package header
  * <code>To: Carol sip:carol@jcp.org<br>
  * To: Duke sip:duke@jcp.org;tag=287447</code>
  *
- * @see HeaderAddress
+ * @see AddressHeader
  * @version 1.1
  * @author Sun Microsystems
  */
 type ToHeader interface {
 	//Header
-	HeaderAddress
+	AddressHeader
 	ParametersHeader
 
 	/**

@@ -113,7 +113,7 @@ package header
 type FromHeader interface {
 	//Header
 	ParametersHeader
-	HeaderAddress
+	AddressHeader
 
 	/**
 

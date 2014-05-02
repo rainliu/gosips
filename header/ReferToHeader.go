@@ -14,7 +14,7 @@ package header
  * @author Sun Microsystems
  */
 type ReferToHeader interface {
-	HeaderAddress
+	AddressHeader
 	ParametersHeader
 	//Header
 

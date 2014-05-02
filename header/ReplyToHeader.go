@@ -20,7 +20,7 @@ package header
 
  *
 
- * @see HeaderAddress
+ * @see AddressHeader
 
  * @see Parameters
 
@@ -35,7 +35,7 @@ package header
  */
 
 type ReplyToHeader interface {
-	HeaderAddress
+	AddressHeader
 	ParametersHeader
 	//Header
 

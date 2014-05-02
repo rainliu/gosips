@@ -66,7 +66,7 @@ package header
  * <code> Contact: "Mr. Watson" sip:watson@worcester.jcp.org;
  * q=0.7; expires=3600, "Mr. Watson" mailto:watson@jcp.org.com; q=0.1
  *
- * @see HeaderAddress
+ * @see AddressHeader
  * @see Parameters
  *
  * @version v1.1
@@ -74,7 +74,7 @@ package header
  */
 
 type ContactHeader interface {
-	HeaderAddress
+	AddressHeader
 	ParametersHeader
 	//Header
 

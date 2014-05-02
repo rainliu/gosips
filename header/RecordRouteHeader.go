@@ -28,14 +28,14 @@ package header
  * sip:bigbox3.duke.jcp.org;lr</code>
  *
  * @see RouteHeader
- * @see HeaderAddress
+ * @see AddressHeader
  * @see Parameters
  *
  * @version 1.1
  * @author Sun Microsystems
  */
 type RecordRouteHeader interface {
-	HeaderAddress
+	AddressHeader
 	ParametersHeader
 	//Header
 
