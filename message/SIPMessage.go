@@ -703,9 +703,10 @@ func (this *SIPMessage) AttachHeader3(h header.Header, replaceFlag, top bool) {
 				if cl, ok := h.(*header.ContentLength); ok {
 					this.contentLengthHeader.SetContentLength(cl.GetContentLength())
 				}
+				// Just ignore duplicate header.
+				//println(h.GetName())
+				return
 			}
-			// Just ignore duplicate header.
-			return
 		}
 	}
 
@@ -726,7 +727,7 @@ func (this *SIPMessage) AttachHeader3(h header.Header, replaceFlag, top bool) {
 		this.headers.PushBack(h)
 	} else {
 		if hs, ok := h.(header.SIPHeaderLister); ok {
-			hdrlist := this.nameTable[strings.ToLower(h.GetName())].(*header.SIPHeaderList)
+			hdrlist := this.nameTable[strings.ToLower(h.GetName())].(header.SIPHeaderLister)
 			if hdrlist != nil {
 				hdrlist.Concatenate(hs, top)
 			} else {

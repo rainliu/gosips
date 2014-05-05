@@ -28,6 +28,7 @@ type SIPHeaderLister interface {
 	Header
 	Lister
 	GetHeadersAsEncodedStrings() *list.List
+	Concatenate(shl SIPHeaderLister, topFlag bool)
 }
 
 /**
@@ -78,12 +79,12 @@ func (this *SIPHeaderList) Concatenate(shl SIPHeaderLister, topFlag bool) {
 
 	if !topFlag {
 		for e := shl.Front(); e != nil; e = e.Next() {
-			this.PushBack(e)
+			this.PushBack(e.Value.(Header))
 		}
 	} else {
 		//add given items to the end of the list.
 		for e := shl.Front(); e != nil; e = e.Next() {
-			this.PushFront(e)
+			this.PushFront(e.Value.(Header))
 		}
 	}
 }

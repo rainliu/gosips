@@ -377,7 +377,7 @@ var torture3_o = []string{
 		"\r\n",
 
 	"INVITE sip:user@company.com SIP/2.0\r\n" +
-		"Contact: <sip:caller@host25.example.net>\r\n" +
+		"Contact: <sip:caller@host25.example.net>,<sip:caller@host36.example.net>\r\n" +
 		"Via: SIP/2.0/UDP 192.0.2.25;branch=z9hG4bKkdjuw\r\n" +
 		"Max-Forwards: 70\r\n" +
 		"CSeq: 5 INVITE\r\n" +
@@ -390,7 +390,6 @@ var torture3_o = []string{
 		//"From: <sip:caller@example.net>;tag=2923420123\r\n" +
 		"Content-Type: application/sdp\r\n" +
 		"Content-Length: 152\r\n" +
-		//"Contact: <sip:caller@host36.example.net>\r\n" +
 		//"Max-Forwards: 5\r\n" +
 		"\r\n" +
 		"v=0\r\n" +
@@ -416,8 +415,7 @@ var torture3_o = []string{
 		"There\r\n",
 
 	"SIP/2.0 200 OK\r\n" +
-		"Via: SIP/2.0/UDP 192.0.2.198;branch=z9hG4bK1324923\r\n" +
-		"Via: SIP/2.0/UDP 255.255.255.255;branch=z9hG4bK1saber23\r\n" +
+		"Via: SIP/2.0/UDP 192.0.2.198;branch=z9hG4bK1324923,SIP/2.0/UDP 255.255.255.255;branch=z9hG4bK1saber23\r\n" +
 		"Call-ID: bcast.0384840201234ksdfak3j2erwedfsASdf\r\n" +
 		"CSeq: 35 INVITE\r\n" +
 		"From: <sip:user@example.com>;tag=11141343\r\n" +
