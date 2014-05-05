@@ -32,7 +32,7 @@ func TestTorture3(t *testing.T) {
 	tvi := torture3_i
 	tvo := torture3_o
 
-	for i := 0; i < 11; /*len(tvi)*/ i++ {
+	for i := 0; i < len(tvi); i++ {
 		smp := NewStringMsgParser()
 		if sm, err := smp.ParseSIPMessage(tvi[i]); err != nil {
 			t.Log(err)
@@ -45,10 +45,10 @@ func TestTorture3(t *testing.T) {
 				t.Log("origin = " + s)
 				t.Log("failed = " + d)
 
-				for j := 0; j < len(d); j++ {
+				for j := 0; j < len(s); j++ {
 					if d[j] != s[j] {
 						t.Logf("%d:%c vs %c", j, d[j], s[j])
-						break
+						//break
 					}
 				}
 
@@ -434,8 +434,8 @@ var torture3_o = []string{
 		"a=rtpmap:31 LPC\r\n",
 
 	"OPTIONS sip:user@example.com SIP/2.0\r\n" +
-		"To: sip:user@example.com\r\n" +
-		"From: sip:caller@example.net;tag=3ghsd41\r\n" +
+		"To: <sip:user@example.com>\r\n" +
+		"From: <sip:caller@example.net>;tag=3ghsd41\r\n" +
 		"Call-ID: zeromf.jfasdlfnm2o2l43r5u0asdfas\r\n" +
 		"CSeq: 39234321 OPTIONS\r\n" +
 		"Via: SIP/2.0/UDP host1.example.com;branch=z9hG4bKkdjuw2349i\r\n" +
@@ -446,47 +446,47 @@ var torture3_o = []string{
 	"REGISTER sip:example.com SIP/2.0\r\n" +
 		"Via: SIP/2.0/TCP saturn.example.com:5060;branch=z9hG4bKkdjuw\r\n" +
 		"Max-Forwards: 70\r\n" +
-		"From: sip:watson@example.com;tag=DkfVgjkrtMwaerKKpe\r\n" +
-		"To: sip:watson@example.com\r\n" +
+		"From: <sip:watson@example.com>;tag=DkfVgjkrtMwaerKKpe\r\n" +
+		"To: <sip:watson@example.com>\r\n" +
 		"Call-ID: cparam01.70710@saturn.example.com\r\n" +
 		"CSeq: 2 REGISTER\r\n" +
-		"Contact: sip:+19725552222@gw1.example.net;unknownparam\r\n" +
-		"l: 0\r\n" +
+		"Contact: <sip:+19725552222@gw1.example.net;unknownparam>\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"REGISTER sip:example.com SIP/2.0\r\n" +
 		"Via: SIP/2.0/TCP saturn.example.com:5060;branch=z9hG4bKkdjuw\r\n" +
 		"Max-Forwards: 70\r\n" +
-		"From: sip:watson@example.com;tag=838293\r\n" +
-		"To: sip:watson@example.com\r\n" +
+		"From: <sip:watson@example.com>;tag=838293\r\n" +
+		"To: <sip:watson@example.com>\r\n" +
 		"Call-ID: cparam02.70710@saturn.example.com\r\n" +
 		"CSeq: 3 REGISTER\r\n" +
 		"Contact: <sip:+19725552222@gw1.example.net;unknownparam>\r\n" +
-		"l: 0\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"REGISTER sip:example.com SIP/2.0\r\n" +
-		"To: sip:user@example.com\r\n" +
-		"From: sip:user@example.com;tag=8\r\n" +
+		"To: <sip:user@example.com>\r\n" +
+		"From: <sip:user@example.com>;tag=8\r\n" +
 		"Max-Forwards: 70\r\n" +
 		"Call-ID: regescrt.k345asrl3fdbv@192.0.2.1\r\n" +
 		"CSeq: 14398234 REGISTER\r\n" +
 		"Via: SIP/2.0/TCP host5.example.com;branch=z9hG4bKkdjuw\r\n" +
-		"M: <sip:user@example.com?Route=%3Csip:sip.example.com%3E>\r\n" +
-		"L:0\r\n" +
+		"Contact: <sip:user@example.com?Route=%3Csip:sip.example.com%3E>\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"INVITE sip:user@example.com SIP/2.0\r\n" +
-		"To: sip:j_user@example.com\r\n" +
+		"To: <sip:j_user@example.com>\r\n" +
 		"Contact: <sip:caller@host15.example.net>\r\n" +
-		"From: sip:caller@example.net;tag=234\r\n" +
+		"From: <sip:caller@example.net>;tag=234\r\n" +
 		"Max-Forwards: 5\r\n" +
 		"Call-ID: sdp01.ndaksdj9342dasdd\r\n" +
 		"Accept: text/nobodyKnowsThis\r\n" +
 		"CSeq: 8 INVITE\r\n" +
 		"Via: SIP/2.0/UDP 192.0.2.15;branch=z9hG4bKkdjuw\r\n" +
-		"Content-Length: 150\r\n" +
 		"Content-Type: application/sdp\r\n" +
+		"Content-Length: 150\r\n" +
 		"\r\n" +
 		"v=0\r\n" +
 		"o=mhandley 29739 7272939 IN IP4 192.0.2.5\r\n" +
