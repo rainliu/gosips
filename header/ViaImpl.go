@@ -199,10 +199,10 @@ func (this *Via) EncodeBody() string {
 	encoding.WriteString(core.SIPSeparatorNames_SP)
 	encoding.WriteString(this.sentBy.String())
 	// Add the default port if there is no port specified.
-	if !this.sentBy.HasPort() {
-		encoding.WriteString(core.SIPSeparatorNames_COLON)
-		encoding.WriteString("5060")
-	}
+	// if !this.sentBy.HasPort() {
+	// 	encoding.WriteString(core.SIPSeparatorNames_COLON)
+	// 	encoding.WriteString("5060")
+	// }
 	if this.comment != "" {
 		encoding.WriteString(core.SIPSeparatorNames_SP)
 		encoding.WriteString(core.SIPSeparatorNames_LPAREN)

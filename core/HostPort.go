@@ -1,9 +1,9 @@
 package core
 
 import (
-    "bytes"
-    "net"
-    "strconv"
+	"bytes"
+	"net"
+	"strconv"
 )
 
 /**
@@ -13,23 +13,25 @@ import (
  */
 
 type HostPort struct {
-    //GenericObjectImpl
+	//GenericObjectImpl
 
-    // host / ipv4/ ipv6/
-    /** host field
-     */
-    host *Host
+	// host / ipv4/ ipv6/
+	/** host field
+	 */
+	host *Host
 
-    /** port field
-     *
-     */
-    port int
+	/** port field
+	 *
+	 */
+	port int
 }
 
 /** Default constructor
  */
 func NewHostPort() *HostPort {
-	return &HostPort{}; // marker for not set.
+	this := &HostPort{} // marker for not set.
+	this.port = -1
+	return this
 }
 
 /**
@@ -39,14 +41,14 @@ func NewHostPort() *HostPort {
  * @return String
  */
 func (this *HostPort) String() string {
-    var retval bytes.Buffer //= new StringBuffer();
-    if this.host!=nil {
-        retval.WriteString(this.host.String())
-        if this.port != -1 {
-            retval.WriteString(SIPSeparatorNames_COLON+strconv.Itoa(this.port))
-        }
-    }
-    return retval.String()
+	var retval bytes.Buffer //= new StringBuffer();
+	if this.host != nil {
+		retval.WriteString(this.host.String())
+		if this.port != -1 {
+			retval.WriteString(SIPSeparatorNames_COLON + strconv.Itoa(this.port))
+		}
+	}
+	return retval.String()
 }
 
 /** returns true if the two objects are equals, false otherwise.
@@ -70,14 +72,14 @@ func (this *HostPort) String() string {
  * @return host field
  */
 func (this *HostPort) GetHost() *Host {
-    return this.host
+	return this.host
 }
 
 /** get the port field
  * @return int
  */
 func (this *HostPort) GetPort() int {
-    return this.port
+	return this.port
 }
 
 /**
@@ -85,13 +87,13 @@ func (this *HostPort) GetPort() int {
  * @return boolean value indicating if Header has port
  */
 func (this *HostPort) HasPort() bool {
-    return this.port != -1
+	return this.port != -1
 }
 
 /** remove port.
  */
 func (this *HostPort) RemovePort() {
-    this.port = -1
+	this.port = -1
 }
 
 /**
@@ -99,7 +101,7 @@ func (this *HostPort) RemovePort() {
  * @param h Host to set
  */
 func (this *HostPort) SetHost(h *Host) {
-    this.host = h
+	this.host = h
 }
 
 /**
@@ -107,8 +109,8 @@ func (this *HostPort) SetHost(h *Host) {
  * @param p int to set
  */
 func (this *HostPort) SetPort(p int) {
-    // -1 is same as remove port.
-    this.port = p
+	// -1 is same as remove port.
+	this.port = p
 }
 
 /** Return the internet address corresponding to the host.
@@ -116,19 +118,19 @@ func (this *HostPort) SetPort(p int) {
  *@return the inet address for the host.
  */
 func (this *HostPort) GetInetAddress() net.IP {
-    if this.host == nil {
-        return nil
-    }
-    return net.ParseIP(this.host.GetHostName())
+	if this.host == nil {
+		return nil
+	}
+	return net.ParseIP(this.host.GetHostName())
 }
 
 func (this *HostPort) Clone() interface{} {
-    retval := &HostPort{}
-    if this.host!=nil {
-        retval.host = this.host.Clone().(*Host)
-    }else{
-        retval.host = nil;
-    }
-    retval.port = this.port
-    return retval
+	retval := &HostPort{}
+	if this.host != nil {
+		retval.host = this.host.Clone().(*Host)
+	} else {
+		retval.host = nil
+	}
+	retval.port = this.port
+	return retval
 }
