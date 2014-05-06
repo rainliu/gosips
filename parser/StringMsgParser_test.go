@@ -1,10 +1,6 @@
 package parser
 
-import (
-	"strings"
-	"testing"
-)
-
+/*
 func TestStringMsgParser(t *testing.T) {
 	var tvi = []string{
 		"SIP/2.0 180 Ringing\r\n" +
@@ -119,6 +115,7 @@ func TestStringMsgParser(t *testing.T) {
 		//println("dialog id = " + sipMessage.GetDialogId(false))
 	}
 }
+*/
 
 /*
     public static void main(String[] args) throws ParseException {

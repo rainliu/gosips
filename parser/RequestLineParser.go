@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"gosip/address"
 	"gosip/core"
 	"gosip/header"
 )
@@ -34,18 +35,31 @@ func NewRequestLineParserFromLexer(lexer core.Lexer) *RequestLineParser {
 func (this *RequestLineParser) Parse() (rl *header.RequestLine, ParseException error) {
 	// if (debug) dbg_enter("parse");
 	// try {
+	var m, v string
+	var err error
+	var url address.URI
+
 	retval := header.NewRequestLine()
 	lexer := this.GetLexer()
-	m, _ := this.Method()
+	//println(lexer.GetRest())
+	if m, err = this.Method(); err != nil {
+		return nil, err
+	}
+	//println(lexer.GetRest())
 	lexer.SPorHT()
 	retval.SetMethod(m)
 	lexer.SelectLexer("sip_urlLexer")
 	urlParser := NewURLParserFromLexer(this.GetLexer())
-	url, _ := urlParser.UriReference()
+	if url, err = urlParser.UriReference(); err != nil {
+		return nil, err
+	}
 	lexer.SPorHT()
 	retval.SetUri(url)
 	lexer.SelectLexer("request_lineLexer")
-	v, _ := this.SipVersion()
+	//println(lexer.GetRest())
+	if v, err = this.SipVersion(); err != nil {
+		return nil, err
+	}
 	retval.SetSipVersion(v)
 	lexer.SPorHT()
 	lexer.Match('\n')

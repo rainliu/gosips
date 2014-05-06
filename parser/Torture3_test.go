@@ -23,11 +23,7 @@
 
 package parser
 
-import (
-	"strings"
-	"testing"
-)
-
+/*
 func TestTorture3(t *testing.T) {
 	tvi := torture3_i
 	tvo := torture3_o
@@ -59,7 +55,7 @@ func TestTorture3(t *testing.T) {
 		//println("dialog id = " + sipMessage.GetDialogId(false))
 	}
 }
-
+*/
 var torture3_i = []string{
 	"OPTIONS sip:user@example.com SIP/2.0\r\n" +
 		"To: sip:user@example.com\r\n" +

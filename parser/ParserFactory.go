@@ -24,7 +24,7 @@ import (
  */
 func CreateParser(line string) IHeaderParser { //, ParseException error) {
 	var lexer Lexer
-	headerName := strings.ToLower(lexer.GetHeaderName(line))
+	headerName := strings.TrimSpace(strings.ToLower(lexer.GetHeaderName(line)))
 	headerValue := lexer.GetHeaderValue(line)
 	if headerName == "" || headerValue == "" {
 		return nil //errors.New("ParseException: The header name or value is null")
@@ -106,6 +106,8 @@ func CreateParser(line string) IHeaderParser { //, ParseException error) {
 		return NewServerParser(line)
 	case strings.ToLower(core.SIPHeaderNames_SUBJECT):
 		return NewSubjectParser(line)
+	case "s":
+		return NewSubjectParser(line)
 	case strings.ToLower(core.SIPHeaderNames_SUBSCRIPTION_STATE):
 		return NewSubscriptionStateParser(line)
 	case strings.ToLower(core.SIPHeaderNames_MAX_FORWARDS):
@@ -161,6 +163,8 @@ func CreateParser(line string) IHeaderParser { //, ParseException error) {
 	default:
 		// Just generate a generic SIPHeader. We define
 		// parsers only for the above.
+		//println(line)
+
 		return NewHeaderParser(line)
 	}
 
