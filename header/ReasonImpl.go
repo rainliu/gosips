@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"gosip/core"
 	"strconv"
-	"strings"
 )
 
 /**
@@ -118,6 +117,7 @@ func (this *Reason) EncodeBody() string {
 	return encoding.String()
 }
 
+/*
 func (this *Reason) SetParameter(name, value string) error {
 	//throws ParseException {
 	//if (name == null) throw new NullPointerException("null name");
@@ -138,4 +138,4 @@ func (this *Reason) SetParameter(name, value string) error {
 	}
 
 	return nil
-}
+}*/

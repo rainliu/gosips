@@ -6,6 +6,7 @@ import (
 
 func TestFromParser(t *testing.T) {
 	var tvi = []string{
+		"From: token1~` token2'+_ token3*%!.- <sip:mundane@example.com>;fromParam''~+*_!.-%=\"работающий\";tag=_token~1'+`*%!-.\n",
 		"From: foobar at com<sip:4855@166.34.120.100 >;tag=1024181795\n",
 		"From: sip:user@company.com\n",
 		"From: sip:caller@university.edu\n",
@@ -13,6 +14,7 @@ func TestFromParser(t *testing.T) {
 		"From: \"A. G. Bell\" <sip:agb@bell-telephone.com> ;tag=a48s\n",
 	}
 	var tvo = []string{
+		"From: \"token1~` token2'+_ token3*%!.-\" <sip:mundane@example.com>;fromParam''~+*_!.-%=\"работающий\";tag=_token~1'+`*%!-.\n",
 		"From: \"foobar at com\" <sip:4855@166.34.120.100>;tag=1024181795\n",
 		"From: <sip:user@company.com>\n",
 		"From: <sip:caller@university.edu>\n",

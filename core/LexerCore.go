@@ -227,6 +227,7 @@ func (this *LexerCore) Match(tok int) (t *Token, ParseException error) {
 		if tok == LexerCore_ID {
 			// Generic ID sought.
 			if !this.StartsId() {
+				//println("ParseException: ID expected")
 				return nil, errors.New("ParseException: ID expected")
 			}
 			id := this.GetNextId()

@@ -37,6 +37,7 @@ func (this *AddressParametersParser) Parse(addressParametersHeader header.Addres
 	addressParser := NewAddressParserFromLexer(this.GetLexer())
 	addr, _ := addressParser.Address()
 	//println(addr.GetDisplayName())
+	//println(this.GetLexer().GetRest())
 	addressParametersHeader.SetAddress(addr)
 	this.ParametersParser.Parse(addressParametersHeader)
 	//} finally {

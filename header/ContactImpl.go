@@ -7,7 +7,6 @@ import (
 	"gosip/address"
 	"gosip/core"
 	"strconv"
-	"strings"
 )
 
 /**
@@ -42,6 +41,7 @@ func (this *Contact) super(hname string) {
 
 /** Set a parameter.
  */
+/*
 func (this *Contact) SetParameter(name, value string) (ParseException error) {
 	nv := this.parameters.GetNameValue(name)
 	if nv != nil {
@@ -54,7 +54,7 @@ func (this *Contact) SetParameter(name, value string) (ParseException error) {
 		this.parameters.AddNameValue(nv)
 	}
 	return nil
-}
+}*/
 
 /**
  * Encode body of the header into a cannonical String.
