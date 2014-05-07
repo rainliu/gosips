@@ -93,7 +93,7 @@ func (this *URLParser) ParamNameOrValue() (s string, ParseException error) {
 			retval.WriteByte(next)
 			this.GetLexer().ConsumeK(1)
 		} else if this.IsEscaped() {
-			esc := this.GetLexer().CharAsString(3)
+			esc := this.GetLexer().NCharAsString(3)
 			this.GetLexer().ConsumeK(3)
 			retval.WriteString(esc)
 		} else {
@@ -207,7 +207,7 @@ func (this *URLParser) Uric() string {
 		this.GetLexer().ConsumeK(1)
 		return this.GetLexer().CharAsString(la)
 	} else if this.IsEscaped() {
-		retval := this.GetLexer().CharAsString(3)
+		retval := this.GetLexer().NCharAsString(3)
 		this.GetLexer().ConsumeK(3)
 		return retval
 	} else {
@@ -629,7 +629,9 @@ func (this *URLParser) User() (s string, ParseException error) {
 			retval.WriteByte(la)
 			this.GetLexer().ConsumeK(1)
 		} else if this.IsEscaped() {
-			esc := this.GetLexer().CharAsString(3)
+			//print(this.GetLexer().GetRest())
+			esc := this.GetLexer().NCharAsString(3)
+			//print(esc)
 			this.GetLexer().ConsumeK(3)
 			retval.WriteString(esc)
 		} else {
@@ -651,7 +653,7 @@ func (this *URLParser) Password() (s string, ParseException error) {
 			retval.WriteByte(la)
 			this.GetLexer().ConsumeK(1)
 		} else if this.IsEscaped() {
-			esc := this.GetLexer().CharAsString(3)
+			esc := this.GetLexer().NCharAsString(3)
 			retval.WriteString(esc)
 		} else {
 			break

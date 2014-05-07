@@ -31,7 +31,7 @@ func TestTorture1(t *testing.T) {
 	tvi := torture1_i
 	tvo := torture1_o
 
-	for i := 0; i < 2; /*len(tvi)*/ i++ {
+	for i := 0; i < 3; /*len(tvi)*/ i++ {
 		smp := NewStringMsgParser()
 		if sm, err := smp.ParseSIPMessage(tvi[i]); err != nil {
 			t.Log(err)
@@ -397,15 +397,14 @@ var torture1_o = []string{
 		"\r\n",
 
 	"INVITE sip:sips%3Auser%40example.com@example.net SIP/2.0\r\n" +
-		"To: sip:%75se%72@example.com\r\n" +
+		"To: <sip:%75se%72@example.com>\r\n" +
 		"From: <sip:I%20have%20spaces@example.net>;tag=938\r\n" +
 		"Max-Forwards: 87\r\n" +
-		"i: esc01.239409asdfakjkn23onasd0-3234\r\n" +
+		"Call-ID: esc01.239409asdfakjkn23onasd0-3234\r\n" +
 		"CSeq: 234234 INVITE\r\n" +
 		"Via: SIP/2.0/UDP host5.example.net;branch=z9hG4bKkdjuw\r\n" +
-		"C: application/sdp\r\n" +
-		"Contact:\r\n" +
-		"    <sip:cal%6Cer@host5.example.net;%6C%72;n%61me=v%61lue%25%34%31>\r\n" +
+		"Content-Type: application/sdp\r\n" +
+		"Contact: <sip:cal%6Cer@host5.example.net;%6C%72;n%61me=v%61lue%25%34%31>\r\n" +
 		"Content-Length: 150\r\n" +
 		"\r\n" +
 		"v=0\r\n" +
