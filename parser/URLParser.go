@@ -1,8 +1,8 @@
 package parser
 
 import (
-	//"fmt"
 	"bytes"
+	//"fmt"
 	"gosip/address"
 	"gosip/core"
 	"strings"
@@ -59,14 +59,13 @@ func (this *URLParser) IsReservedNoSlash(next byte) bool {
 // at SIPIT 13 by Bob Johnson and Scott Holben.
 func (this *URLParser) IsUserUnreserved(la byte) bool {
 	return la == '&' ||
-		la == '?' ||
+		la == '=' ||
 		la == '+' ||
 		la == '$' ||
-		la == '#' ||
-		la == '/' ||
 		la == ',' ||
-		la == '.' ||
-		la == '='
+		la == ';' ||
+		la == '?' ||
+		la == '/'
 }
 
 func (this *URLParser) Unreserved() (s string, ParseException error) {
@@ -484,36 +483,39 @@ func (this *URLParser) SipURL() (sipurl *address.SipUri, ParseException error) {
 	this.GetLexer().Match(':')
 	retval.SetScheme(core.SIPTransportNames_SIP) //TokenNames_SIP);
 	//m := this.GetLexer().MarkInputPosition();
-	//println("sipulr"+this.GetLexer().GetRest());
+	//println("sipulr" + this.GetLexer().GetRest())
 
 	buffer := this.GetLexer().GetRest()
 	if n := strings.Index(buffer, "@"); n == -1 {
 		// hostPort
-		//fmt.Printf("0:%s\n",this.GetLexer().GetRest());
+		//fmt.Printf("0:%s\n", this.GetLexer().GetRest())
 		hnp := core.NewHostNameParserFromLexer(this.GetLexer())
 		hp, _ := hnp.GetHostPort()
 		retval.SetHostPort(hp)
 	} else {
 		if n = strings.Index(buffer, ":"); n == -1 {
 			// name@hostPort
-			//fmt.Printf("1:%s\n",this.GetLexer().GetRest());
+			//fmt.Printf("1:%s\n", this.GetLexer().GetRest())
 			user, _ := this.User()
-			//fmt.Printf("1.1:%s\n",this.GetLexer().GetRest());
+			//fmt.Printf("1.1:%s\n", this.GetLexer().GetRest())
 			this.GetLexer().Match('@')
-			//fmt.Printf("1.2:%s\n",this.GetLexer().GetRest());
+			//fmt.Printf("1.2:%s\n", this.GetLexer().GetRest())
 			hnp := core.NewHostNameParserFromLexer(this.GetLexer())
 			hp, _ := hnp.GetHostPort()
 			//fmt.Printf("1.3:%s, %s\n",this.GetLexer().GetRest(), hp.String());
 			retval.SetUser(user)
 			retval.SetHostPort(hp)
 		} else {
-			//fmt.Printf("2:%s\n",this.GetLexer().GetRest());
+			//fmt.Printf("2:%s\n", this.GetLexer().GetRest())
 			user, _ := this.User()
 			//la,_ := this.GetLexer().LookAheadK(0);
 			// name:password@hostPort
+			//fmt.Printf("3:%s\n", this.GetLexer().GetRest())
 			this.GetLexer().Match(':')
 			password, _ := this.Password()
+			//fmt.Printf("4:%s\n", this.GetLexer().GetRest())
 			this.GetLexer().Match('@')
+			//fmt.Printf("5:%s\n", this.GetLexer().GetRest())
 			hnp := core.NewHostNameParserFromLexer(this.GetLexer())
 			hp, _ := hnp.GetHostPort()
 			retval.SetUser(user)
