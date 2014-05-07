@@ -1,20 +1,22 @@
 package parser
 
 import (
-	"strings"
+	//"strings"
 	"testing"
 )
 
 func TestStatusLineParser(t *testing.T) {
 	var tvi = []string{
+		"SIP/2.0 100\x20\n",
 		"SIP/2.0 200 OK\n",
 		//"BOO 200 OK\n",
 		"SIP/2.0 500 OK bad things happened \n",
 	}
 	var tvo = []string{
-		"SIP/2.0 200 OK\n",
+		"SIP/2.0 100\x20\r\n",
+		"SIP/2.0 200 OK\r\n",
 		//"BOO 200 OK\n",
-		"SIP/2.0 500 OK bad things happened \n",
+		"SIP/2.0 500 OK bad things happened\r\n",
 	}
 
 	for i := 0; i < len(tvi); i++ {
@@ -30,7 +32,7 @@ func testStatusLineParser(t *testing.T, rlp *StatusLineParser, s string) {
 	} else {
 		d := rl.String()
 
-		if strings.TrimSpace(d) != strings.TrimSpace(s) {
+		if (d) != (s) {
 			t.Log("origin = " + s)
 			t.Log("failed = " + d)
 			t.Fail()

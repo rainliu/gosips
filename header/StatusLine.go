@@ -86,9 +86,9 @@ func (this *StatusLine) SetMatchStatusClass(flag bool) {
  */
 func (this *StatusLine) String() string {
 	var encoding bytes.Buffer
-	encoding.WriteString(SIPConstants_SIP_VERSION_STRING + core.SIPSeparatorNames_SP + strconv.Itoa(this.statusCode))
+	encoding.WriteString(SIPConstants_SIP_VERSION_STRING + core.SIPSeparatorNames_SP + strconv.Itoa(this.statusCode) + core.SIPSeparatorNames_SP)
 	if this.reasonPhrase != "" {
-		encoding.WriteString(core.SIPSeparatorNames_SP + this.reasonPhrase)
+		encoding.WriteString(this.reasonPhrase)
 	}
 	encoding.WriteString(core.SIPSeparatorNames_NEWLINE)
 	return encoding.String()

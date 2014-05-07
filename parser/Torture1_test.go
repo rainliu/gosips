@@ -31,7 +31,7 @@ func TestTorture1(t *testing.T) {
 	tvi := torture1_i
 	tvo := torture1_o
 
-	for i := 0; i < 10; /*len(tvi)*/ i++ {
+	for i := 11; i < len(tvi); i++ {
 		smp := NewStringMsgParser()
 		if sm, err := smp.ParseSIPMessage(tvi[i]); err != nil {
 			t.Log(err)
@@ -593,11 +593,11 @@ var torture1_o = []string{
 		"Via: SIP/2.0/UDP 192.0.2.198;branch=z9hG4bK1324923\r\n" +
 		"Call-ID: unreason.1234ksdfak3j2erwedfsASdf\r\n" +
 		"CSeq: 35 INVITE\r\n" +
-		"From: sip:user@example.com;tag=11141343\r\n" +
-		"To: sip:user@example.edu;tag=2229\r\n" +
-		"Content-Length: 154\r\n" +
+		"From: <sip:user@example.com>;tag=11141343\r\n" +
+		"To: <sip:user@example.edu>;tag=2229\r\n" +
 		"Content-Type: application/sdp\r\n" +
 		"Contact: <sip:user@host198.example.com>\r\n" +
+		"Content-Length: 154\r\n" +
 		"\r\n" +
 		"v=0\r\n" +
 		"o=mhandley 29739 7272939 IN IP4 192.0.2.198\r\n" +
@@ -614,7 +614,7 @@ var torture1_o = []string{
 		"CSeq: 35 INVITE\r\n" +
 		"From: <sip:user@example.com>;tag=39ansfi3\r\n" +
 		"To: <sip:user@example.edu>;tag=902jndnke3\r\n" +
-		"Content-Length: 0\r\n" +
 		"Contact: <sip:user@host105.example.com>\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 }
