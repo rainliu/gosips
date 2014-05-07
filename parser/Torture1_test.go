@@ -31,7 +31,7 @@ func TestTorture1(t *testing.T) {
 	tvi := torture1_i
 	tvo := torture1_o
 
-	for i := 0; i < 3; /*len(tvi)*/ i++ {
+	for i := 0; i < 10; /*len(tvi)*/ i++ {
 		smp := NewStringMsgParser()
 		if sm, err := smp.ParseSIPMessage(tvi[i]); err != nil {
 			t.Log(err)
@@ -417,15 +417,14 @@ var torture1_o = []string{
 		"a=rtpmap:31 LPC\r\n",
 
 	"REGISTER sip:example.com SIP/2.0\r\n" +
-		"To: sip:null-%00-null@example.com\r\n" +
-		"From: sip:null-%00-null@example.com;tag=839923423\r\n" +
+		"To: <sip:null-%00-null@example.com>\r\n" +
+		"From: <sip:null-%00-null@example.com>;tag=839923423\r\n" +
 		"Max-Forwards: 70\r\n" +
 		"Call-ID: escnull.39203ndfvkjdasfkq3w4otrq0adsfdfnavd\r\n" +
 		"CSeq: 14398234 REGISTER\r\n" +
 		"Via: SIP/2.0/UDP host5.example.com;branch=z9hG4bKkdjuw\r\n" +
-		"Contact: <sip:%00@host5.example.com>\r\n" +
-		"Contact: <sip:%00%00@host5.example.com>\r\n" +
-		"L:0\r\n" +
+		"Contact: <sip:%00@host5.example.com>,<sip:%00%00@host5.example.com>\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"RE%47IST%45R sip:registrar.example.com SIP/2.0\r\n" +
@@ -435,66 +434,65 @@ var torture1_o = []string{
 		"Via: SIP/2.0/TCP host.example.com;branch=z9hG4bK209%fzsnel234\r\n" +
 		"CSeq: 29344 RE%47IST%45R\r\n" +
 		"Max-Forwards: 70\r\n" +
-		"Contact: <sip:alias1@host1.example.com>\r\n" +
+		"Contact: <sip:alias1@host1.example.com>,<sip:alias3@host3.example.com>\r\n" +
 		"C%6Fntact: <sip:alias2@host2.example.com>\r\n" +
-		"Contact: <sip:alias3@host3.example.com>\r\n" +
-		"l: 0\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"OPTIONS sip:user@example.com SIP/2.0\r\n" +
-		"To: sip:user@example.com\r\n" +
-		"From: caller<sip:caller@example.com>;tag=323\r\n" +
+		"To: <sip:user@example.com>\r\n" +
+		"From: \"caller\" <sip:caller@example.com>;tag=323\r\n" +
 		"Max-Forwards: 70\r\n" +
 		"Call-ID: lwsdisp.1234abcd@funky.example.com\r\n" +
 		"CSeq: 60 OPTIONS\r\n" +
 		"Via: SIP/2.0/UDP funky.example.com;branch=z9hG4bKkdjuw\r\n" +
-		"l: 0\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"INVITE sip:user@example.com SIP/2.0\r\n" +
 		"To: \"I have a user name of extreme extreme extreme extreme extreme extreme extreme extreme extreme extreme proportion\" <sip:user@example.com:6000;unknownparam1=verylonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglongvalue;longparamnamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamename=shortvalue;verylonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglongParameterNameWithNoValue>\r\n" +
-		"F: sip:amazinglylongcallernameamazinglylongcallernameamazinglylongcallernameamazinglylongcallernameamazinglylongcallername@example.net;tag=12982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982424;unknownheaderparamnamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamename=unknowheaderparamvaluevaluevaluevaluevaluevaluevaluevaluevaluevaluevaluevaluevaluevaluevalue;unknownValuelessparamnameparamnameparamnameparamnameparamnameparamnameparamnameparamnameparamnameparamname\r\n" +
+		"From: <sip:amazinglylongcallernameamazinglylongcallernameamazinglylongcallernameamazinglylongcallernameamazinglylongcallername@example.net>;tag=12982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982982424;unknownheaderparamnamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamename=unknowheaderparamvaluevaluevaluevaluevaluevaluevaluevaluevaluevaluevaluevaluevaluevaluevalue;unknownValuelessparamnameparamnameparamnameparamnameparamnameparamnameparamnameparamnameparamnameparamname\r\n" +
 		"Call-ID: longreq.onereallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallyreallylongcallid\r\n" +
 		"CSeq: 3882340 INVITE\r\n" +
-		"Unknown-LongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLong-Name:unknown-longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong-value;unknown-longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong-parameter-name =unknown-longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong-parameter-value\r\n" +
-		"Via: SIP/2.0/TCP sip33.example.com\r\n" +
-		"v: SIP/2.0/TCP sip32.example.com\r\n" +
-		"V: SIP/2.0/TCP sip31.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip30.example.com\r\n" +
-		"ViA: SIP/2.0/TCP sip29.example.com\r\n" +
-		"VIa: SIP/2.0/TCP sip28.example.com\r\n" +
-		"VIA: SIP/2.0/TCP sip27.example.com\r\n" +
-		"via: SIP/2.0/TCP sip26.example.com\r\n" +
-		"viA: SIP/2.0/TCP sip25.example.com\r\n" +
-		"vIa: SIP/2.0/TCP sip24.example.com\r\n" +
-		"vIA: SIP/2.0/TCP sip23.example.com\r\n" +
-		"V :  SIP/2.0/TCP sip22.example.com\r\n" +
-		"v :  SIP/2.0/TCP sip21.example.com\r\n" +
-		"V  : SIP/2.0/TCP sip20.example.com\r\n" +
-		"v  : SIP/2.0/TCP sip19.example.com\r\n" +
-		"Via : SIP/2.0/TCP sip18.example.com\r\n" +
-		"Via  : SIP/2.0/TCP sip17.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip16.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip15.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip14.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip13.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip12.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip11.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip10.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip9.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip8.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip7.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip6.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip5.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip4.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip3.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip2.example.com\r\n" +
-		"Via: SIP/2.0/TCP sip1.example.com\r\n" +
-		"Via: SIP/2.0/TCP host.example.com;received=192.0.2.5;branch=verylonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglongbranchvalue\r\n" +
+		"Unknown-LongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLongLong-Name: unknown-longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong-value;unknown-longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong-parameter-name =unknown-longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong-parameter-value\r\n" +
+		"Via: SIP/2.0/TCP sip33.example.com" +
+		",SIP/2.0/TCP sip32.example.com" +
+		",SIP/2.0/TCP sip31.example.com" +
+		",SIP/2.0/TCP sip30.example.com" +
+		",SIP/2.0/TCP sip29.example.com" +
+		",SIP/2.0/TCP sip28.example.com" +
+		",SIP/2.0/TCP sip27.example.com" +
+		",SIP/2.0/TCP sip26.example.com" +
+		",SIP/2.0/TCP sip25.example.com" +
+		",SIP/2.0/TCP sip24.example.com" +
+		",SIP/2.0/TCP sip23.example.com" +
+		",SIP/2.0/TCP sip22.example.com" +
+		",SIP/2.0/TCP sip21.example.com" +
+		",SIP/2.0/TCP sip20.example.com" +
+		",SIP/2.0/TCP sip19.example.com" +
+		",SIP/2.0/TCP sip18.example.com" +
+		",SIP/2.0/TCP sip17.example.com" +
+		",SIP/2.0/TCP sip16.example.com" +
+		",SIP/2.0/TCP sip15.example.com" +
+		",SIP/2.0/TCP sip14.example.com" +
+		",SIP/2.0/TCP sip13.example.com" +
+		",SIP/2.0/TCP sip12.example.com" +
+		",SIP/2.0/TCP sip11.example.com" +
+		",SIP/2.0/TCP sip10.example.com" +
+		",SIP/2.0/TCP sip9.example.com" +
+		",SIP/2.0/TCP sip8.example.com" +
+		",SIP/2.0/TCP sip7.example.com" +
+		",SIP/2.0/TCP sip6.example.com" +
+		",SIP/2.0/TCP sip5.example.com" +
+		",SIP/2.0/TCP sip4.example.com" +
+		",SIP/2.0/TCP sip3.example.com" +
+		",SIP/2.0/TCP sip2.example.com" +
+		",SIP/2.0/TCP sip1.example.com" +
+		",SIP/2.0/TCP host.example.com;received=192.0.2.5;branch=verylonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglongbranchvalue\r\n" +
 		"Max-Forwards: 70\r\n" +
 		"Contact: <sip:amazinglylongcallernameamazinglylongcallernameamazinglylongcallernameamazinglylongcallernameamazinglylongcallername@host5.example.net>\r\n" +
 		"Content-Type: application/sdp\r\n" +
-		"l: 150\r\n" +
+		"Content-Length: 150\r\n" +
 		"\r\n" +
 		"v=0\r\n" +
 		"o=mhandley 29739 7272939 IN IP4 192.0.2.1\r\n" +
@@ -506,60 +504,40 @@ var torture1_o = []string{
 		"a=rtpmap:31 LPC\r\n",
 
 	"REGISTER sip:example.com SIP/2.0\r\n" +
-		"To: sip:j.user@example.com\r\n" +
-		"From: sip:j.user@example.com;tag=43251j3j324\r\n" +
+		"To: <sip:j.user@example.com>\r\n" +
+		"From: <sip:j.user@example.com>;tag=43251j3j324\r\n" +
 		"Max-Forwards: 8\r\n" +
-		"I: dblreq.0ha0isndaksdj99sdfafnl3lk233412\r\n" +
-		"Contact: sip:j.user@host.example.com\r\n" +
+		"Call-ID: dblreq.0ha0isndaksdj99sdfafnl3lk233412\r\n" +
+		"Contact: <sip:j.user@host.example.com>\r\n" +
 		"CSeq: 8 REGISTER\r\n" +
 		"Via: SIP/2.0/UDP 192.0.2.125;branch=z9hG4bKkdjuw23492\r\n" +
 		"Content-Length: 0\r\n" +
-		"\r\n" +
-		"INVITE sip:joe@example.com SIP/2.0\r\n" +
-		"t: sip:joe@example.com\r\n" +
-		"From: sip:caller@example.net;tag=141334\r\n" +
-		"Max-Forwards: 8\r\n" +
-		"Call-ID: dblreq.0ha0isnda977644900765@192.0.2.15\r\n" +
-		"CSeq: 8 INVITE\r\n" +
-		"Via: SIP/2.0/UDP 192.0.2.15;branch=z9hG4bKkdjuw380234\r\n" +
-		"Content-Type: application/sdp\r\n" +
-		"Content-Length: 150\r\n" +
-		"\r\n" +
-		"v=0\r\n" +
-		"o=mhandley 29739 7272939 IN IP4 192.0.2.15\r\n" +
-		"s=-\r\n" +
-		"c=IN IP4 192.0.2.15\r\n" +
-		"t=0 0\r\n" +
-		"m=audio 49217 RTP/AVP 0 12\r\n" +
-		"m =video 3227 RTP/AVP 31\r\n" +
-		"a=rtpmap:31 LPC\r\n",
+		"\r\n",
 
 	"OPTIONS sip:user;par=u%40example.net@example.com SIP/2.0\r\n" +
-		"To: sip:j_user@example.com\r\n" +
-		"From: sip:caller@example.org;tag=33242\r\n" +
+		"To: <sip:j_user@example.com>\r\n" +
+		"From: <sip:caller@example.org>;tag=33242\r\n" +
 		"Max-Forwards: 3\r\n" +
 		"Call-ID: semiuri.0ha0isndaksdj\r\n" +
 		"CSeq: 8 OPTIONS\r\n" +
-		"Accept: application/sdp, application/pkcs7-mime,\r\n" +
-		"  multipart/mixed, multipart/signed,\r\n" +
-		"  message/sip, message/sipfrag\r\n" +
+		"Accept: application/sdp,application/pkcs7-mime,multipart/mixed,multipart/signed,message/sip,message/sipfrag\r\n" +
 		"Via: SIP/2.0/UDP 192.0.2.1;branch=z9hG4bKkdjuw\r\n" +
-		"l: 0\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"OPTIONS sip:user@example.com SIP/2.0\r\n" +
-		"To: sip:user@example.com\r\n" +
+		"To: <sip:user@example.com>\r\n" +
 		"From: <sip:caller@example.com>;tag=323\r\n" +
 		"Max-Forwards: 70\r\n" +
-		"Call-ID:  transports.kijh4akdnaqjkwendsasfdj\r\n" +
+		"Call-ID: transports.kijh4akdnaqjkwendsasfdj\r\n" +
 		"Accept: application/sdp\r\n" +
 		"CSeq: 60 OPTIONS\r\n" +
-		"Via: SIP/2.0/UDP t1.example.com;branch=z9hG4bKkdjuw\r\n" +
-		"Via: SIP/2.0/SCTP t2.example.com;branch=z9hG4bKklasjdhf\r\n" +
-		"Via: SIP/2.0/TLS t3.example.com;branch=z9hG4bK2980unddj\r\n" +
-		"Via: SIP/2.0/UNKNOWN t4.example.com;branch=z9hG4bKasd0f3en\r\n" +
-		"Via: SIP/2.0/TCP t5.example.com;branch=z9hG4bK0a9idfnee\r\n" +
-		"l: 0\r\n" +
+		"Via: SIP/2.0/UDP t1.example.com;branch=z9hG4bKkdjuw" +
+		",SIP/2.0/SCTP t2.example.com;branch=z9hG4bKklasjdhf" +
+		",SIP/2.0/TLS t3.example.com;branch=z9hG4bK2980unddj" +
+		",SIP/2.0/UNKNOWN t4.example.com;branch=z9hG4bKasd0f3en" +
+		",SIP/2.0/TCP t5.example.com;branch=z9hG4bK0a9idfnee\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"MESSAGE sip:kumiko@example.org SIP/2.0\r\n" +
