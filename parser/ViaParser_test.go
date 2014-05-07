@@ -7,7 +7,7 @@ import (
 func TestViaParser(t *testing.T) {
 	var tvi = []string{
 		"Via: SIP/2.0/UDP 127.0.0.1:5070;branch=z9hG4bK-d87543-4dade06d0bdb11ee-1--d87543-;rport\n",
-		/*"Via: SIP/2.0/UDP 135.180.130.133\n",
+		"Via: SIP/2.0/UDP 135.180.130.133\n",
 		"Via: SIP/2.0/UDP 166.34.120.100;branch=0000045d-00000001" +
 			",SIP/2.0/UDP 166.35.224.216:5000\n",
 		"Via: SIP/2.0/UDP sip33.example.com," +
@@ -25,11 +25,11 @@ func TestViaParser(t *testing.T) {
 			" , SIP/2.0/UDP here.com:5060( Hello the big world) \n",
 		"Via: SIP/2.0/UDP ss1.wcom.com:5060;branch=2d4790.1\n",
 		"Via: SIP/2.0/UDP first.example.com:4000;ttl=16" +
-			";maddr=224.2.0.1 ;branch=a7c6a8dlze.1 (Acme server)\n",*/
+			";maddr=224.2.0.1 ;branch=a7c6a8dlze.1 (Acme server)\n",
 	}
 	var tvo = []string{
 		"Via: SIP/2.0/UDP 127.0.0.1:5070;branch=z9hG4bK-d87543-4dade06d0bdb11ee-1--d87543-;rport\r\n",
-		/*"Via: SIP/2.0/UDP 135.180.130.133\n",
+		"Via: SIP/2.0/UDP 135.180.130.133\n",
 		"Via: SIP/2.0/UDP 166.34.120.100;branch=0000045d-00000001" +
 			",SIP/2.0/UDP 166.35.224.216:5000\n",
 		"Via: SIP/2.0/UDP sip33.example.com," +
@@ -47,7 +47,7 @@ func TestViaParser(t *testing.T) {
 			",SIP/2.0/UDP here.com:5060 ( Hello the big world) \n",
 		"Via: SIP/2.0/UDP ss1.wcom.com:5060;branch=2d4790.1\n",
 		"Via: SIP/2.0/UDP first.example.com:4000 (Acme server);ttl=16" +
-			";maddr=224.2.0.1;branch=a7c6a8dlze.1\n",*/
+			";maddr=224.2.0.1;branch=a7c6a8dlze.1\n",
 	}
 
 	for i := 0; i < len(tvi); i++ {
