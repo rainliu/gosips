@@ -31,7 +31,7 @@ func TestTorture1(t *testing.T) {
 	tvi := torture1_i
 	tvo := torture1_o
 
-	for i := 0; i < 1; /*len(tvi)*/ i++ {
+	for i := 0; i < 2; /*len(tvi)*/ i++ {
 		smp := NewStringMsgParser()
 		if sm, err := smp.ParseSIPMessage(tvi[i]); err != nil {
 			t.Log(err)
@@ -103,14 +103,12 @@ var torture1_i = []string{
 
 	"!interesting-Method0123456789_*+`.%indeed'~ sip:1_unusual.URI~(to-be!sure)&isn't+it$/crazy?,/;;*:&it+has=1,weird!*pas$wo~d_too.(doesn't-it)@example.com SIP/2.0\r\n" +
 		"Via: SIP/2.0/TCP host1.example.com;branch=z9hG4bK-.!%66*_+`'~\r\n" +
-		"To: \"BEL:\\\x07 NUL:\\\x00 DEL:\\\x7F\" <sip:1_unusual.URI~(to-be!sure)&isn't+it$/crazy?,/;;*@example.com>\r\n" +
-		"From: token1~` token2'+_ token3*%!.- <sip:mundane@example.com> ;fromParam''~+*_!.-%=" +
-		"\xD1\x80\xD0\xB0\xD0\xB1\xD0\xBE\xD1\x82\xD0\xB0\xD1\x8E\xD1\x89\xD0\xB8\xD0\xB9" +
-		";tag=_token~1'+`*%!-.\r\n" +
+		"To: \"BEL:\\ NUL:\\\x00 DEL:\\\" <sip:1_unusual.URI~(to-be!sure)&isn't+it$/crazy?,/;;*@example.com>\r\n" +
+		"From: token1~` token2'+_ token3*%!.- <sip:mundane@example.com>;fromParam''~+*_!.-%=\"работающий\";tag=_token~1'+`*%!-.\r\n" +
 		"Call-ID: intmeth.word%ZK-!.*_+'@word`~)(><:\\/\"][?}{\r\n" +
 		"CSeq: 139122385 !interesting-Method0123456789_*+`.%indeed'~\r\n" +
 		"Max-Forwards: 255\r\n" +
-		"extensionHeader-!.%*+_`'~:\xEF\xBB\xBF\xE5\xA4\xA7\xE5\x81\x9C\xE9\x9B\xBB\r\n" +
+		"extensionHeader-!.%*+_`'~:大停電\r\n" +
 		"Content-Length: 0\r\n" +
 		"\r\n",
 
@@ -389,12 +387,12 @@ var torture1_o = []string{
 		"Via: SIP/2.0/TCP host1.example.com;branch=z9hG4bK-.!%66*_+`'~\r\n" +
 		"To: \"BEL:\\\x07 NUL:\\\x00 DEL:\\\x7F\" <sip:1_unusual.URI~(to-be!sure)&isn't+it$/crazy?,/;;*@example.com>\r\n" +
 		"From: \"token1~` token2'+_ token3*%!.-\" <sip:mundane@example.com>;fromParam''~+*_!.-%=" +
-		"\xD1\x80\xD0\xB0\xD0\xB1\xD0\xBE\xD1\x82\xD0\xB0\xD1\x8E\xD1\x89\xD0\xB8\xD0\xB9" +
+		"\"\xD1\x80\xD0\xB0\xD0\xB1\xD0\xBE\xD1\x82\xD0\xB0\xD1\x8E\xD1\x89\xD0\xB8\xD0\xB9\"" +
 		";tag=_token~1'+`*%!-.\r\n" +
 		"Call-ID: intmeth.word%ZK-!.*_+'@word`~)(><:\\/\"][?}{\r\n" +
-		"CSeq: 139122385 !interesting-Method0123456789_*+`.%indeed'~\r\n" +
+		"CSeq: 139122385 !INTERESTING-METHOD0123456789_*+`.%INDEED'~\r\n" +
 		"Max-Forwards: 255\r\n" +
-		"extensionHeader-!.%*+_`'~:\xEF\xBB\xBF\xE5\xA4\xA7\xE5\x81\x9C\xE9\x9B\xBB\r\n" +
+		"extensionHeader-!.%*+_`'~: 大停電\r\n" +
 		"Content-Length: 0\r\n" +
 		"\r\n",
 
