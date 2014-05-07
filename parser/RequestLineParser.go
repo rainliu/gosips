@@ -41,11 +41,11 @@ func (this *RequestLineParser) Parse() (rl *header.RequestLine, ParseException e
 
 	retval := header.NewRequestLine()
 	lexer := this.GetLexer()
-	//println(lexer.GetRest())
+	println(lexer.GetRest())
 	if m, err = this.Method(); err != nil {
 		return nil, err
 	}
-	//println(lexer.GetRest())
+	println(lexer.GetRest())
 	lexer.SPorHT()
 	retval.SetMethod(m)
 	lexer.SelectLexer("sip_urlLexer")
@@ -56,7 +56,7 @@ func (this *RequestLineParser) Parse() (rl *header.RequestLine, ParseException e
 	lexer.SPorHT()
 	retval.SetUri(url)
 	lexer.SelectLexer("request_lineLexer")
-	//println(lexer.GetRest())
+	println(lexer.GetRest())
 	if v, err = this.SipVersion(); err != nil {
 		return nil, err
 	}

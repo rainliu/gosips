@@ -158,12 +158,17 @@ func (this *Parser) SipVersion() (s string, ParseException error) {
 	}
 
 	//try {
-	tok, _ := this.GetLexer().Match(TokenTypes_SIP)
+	var tok *core.Token
+	if tok, ParseException = this.GetLexer().Match(TokenTypes_SIP); ParseException != nil {
+		return "", this.CreateParseException("Expecting SIP")
+	}
 	if tok.GetTokenValue() != "SIP" {
 		return "", this.CreateParseException("Expecting SIP")
 	}
 	this.GetLexer().Match('/')
-	tok, _ = this.GetLexer().Match(TokenTypes_ID)
+	if tok, ParseException = this.GetLexer().Match(TokenTypes_ID); ParseException != nil {
+		return "", this.CreateParseException("Expecting SIP/2.0")
+	}
 	if tok.GetTokenValue() != "2.0" {
 		return "", this.CreateParseException("Expecting SIP/2.0")
 	}
@@ -183,6 +188,7 @@ func (this *Parser) Method() (s string, ParseException error) {
 	}
 	//try {
 	tokens := this.GetLexer().PeekNextTokenK(1)
+	//println(tokens[0].String())
 	token := tokens[0]
 	if token.GetTokenType() == TokenTypes_INVITE ||
 		token.GetTokenType() == TokenTypes_ACK ||

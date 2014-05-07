@@ -7,12 +7,14 @@ import (
 
 func TestRequestLineParser(t *testing.T) {
 	var tvi = []string{
+		//"!interesting-Method0123456789_*+`.%indeed'~ sip:1_unusual.URI~(to-be!sure)&isn't+it$/crazy?,/;;*:&it+has=1,weird!*pas$wo~d_too.(doesn't-it)@example.com SIP/2.0\n",
 		"REGISTER sip:company.com SIP/2.0\n",
 		"INVITE sip:3660@166.35.231.140 SIP/2.0\n",
 		"INVITE sip:user@company.com SIP/2.0\n",
 		"OPTIONS sip:135.180.130.133 SIP/2.0\n",
 	}
 	var tvo = []string{
+		//"!interesting-Method0123456789_*+`.%indeed'~ sip:1_unusual.URI~(to-be!sure)&isn't+it$/crazy?,/;;*:&it+has=1,weird!*pas$wo~d_too.(doesn't-it)@example.com SIP/2.0\n",
 		"REGISTER sip:company.com SIP/2.0\n",
 		"INVITE sip:3660@166.35.231.140 SIP/2.0\n",
 		"INVITE sip:user@company.com SIP/2.0\n",
@@ -35,10 +37,16 @@ func testRequestLineParser(t *testing.T, rlp *RequestLineParser, s string) {
 		if strings.TrimSpace(d) != strings.TrimSpace(s) {
 			t.Log("origin = " + s)
 			t.Log("failed = " + d)
-			t.Fail()
-		} /*else {
-			t.Log("passed = " + d)
-		}*/
+			for j, k := 0, 0; j < len(s); j++ {
+				if d[j] != s[j] {
+					t.Logf("%d:%c vs %c", j, d[j], s[j])
+					k++
+					if k == 10 {
+						break
+					}
+				}
+			}
+		}
 	}
 }
 
