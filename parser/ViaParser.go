@@ -73,12 +73,20 @@ func (this *ViaParser) ParseVia(v *header.Via) (ParseException error) {
 	for la, _ = lexer.LookAheadK(0); la == ';'; la, _ = lexer.LookAheadK(0) {
 		lexer.Match(';')
 		lexer.SPorHT()
+		//println(lexer.GetRest())
 		nameValue, _ := this.NameValue()
+		//println(nameValue.GetValue())
 		name := nameValue.GetName()
-		value := nameValue.GetValue().(string)
-		v.SetParameter(strings.ToLower(name), strings.TrimSpace(value))
+		nameValue.SetName(strings.ToLower(name))
+		v.SetParameterFromNameValue(nameValue)
+		/*if nameValue.GetValue() != nil {
+			value := nameValue.GetValue().(string)
+			v.SetParameter(strings.ToLower(name), strings.TrimSpace(value))
+		} else {
+			v.S
+		}*/
 		lexer.SPorHT()
-		la, _ = lexer.LookAheadK(0)
+		//la, _ = lexer.LookAheadK(0)
 	}
 
 	if la, _ = lexer.LookAheadK(0); la == '(' {

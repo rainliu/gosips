@@ -184,6 +184,15 @@ func (this *Parameters) SetParameter(name, value string) (ParseException error) 
 	return nil
 }
 
+/** Set the parameter given a name and value.
+ *
+ * @param nameValue - the name value of the parameter to set.
+ */
+func (this *Parameters) SetParameterFromNameValue(nameValue *core.NameValue) {
+	//System.out.println("setParameter " + this + " nbv = " + nameValue)
+	this.parameters.AddNameValue(nameValue)
+}
+
 /**
  * Sets the value of the specified parameter. If the parameter already had
  *
@@ -343,15 +352,6 @@ func (this *Parameters) RemoveParameters() {
 func (this *Parameters) GetParameters() *core.NameValueList {
 	return this.parameters
 }
-
-/** Set the parameter given a name and value.
- *
- * @param nameValue - the name value of the parameter to set.
- */
-//func (this *Parameters) SetParameter( nameValue *NameValue) {
-//System.out.println("setParameter " + this + " nbv = " + nameValue);
-//	this.parameters.AddNameValue(nameValue);
-//}
 
 /** Set the parameter list.
  *

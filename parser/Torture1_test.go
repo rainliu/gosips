@@ -31,7 +31,7 @@ func TestTorture1(t *testing.T) {
 	tvi := torture1_i
 	tvo := torture1_o
 
-	for i := 11; i < len(tvi); i++ {
+	for i := 0; i < len(tvi); i++ {
 		smp := NewStringMsgParser()
 		if sm, err := smp.ParseSIPMessage(tvi[i]); err != nil {
 			t.Log(err)
