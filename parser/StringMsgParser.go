@@ -332,7 +332,12 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 	// Separate the string out into substrings for
 	// error reporting.
 	this.currentMessage = cooked_message1.String()
-	sipmsg, _ := this.ParseMessage(this.currentMessage)
+
+	sipmsg, err := this.ParseMessage(this.currentMessage)
+	if err != nil {
+		return nil, err
+	}
+
 	if this.readBody && sipmsg.GetContentLength() != nil && sipmsg.GetContentLength().GetContentLength() != 0 {
 		this.contentLength = sipmsg.GetContentLength().GetContentLength()
 		//println(strconv.Itoa(this.contentLength))
@@ -484,6 +489,7 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
 	// position line counter at the end of the
 	// sip messages.
 	// System.out.println("parsing " + currentMessage);
+	var err error
 
 	sip_message_size := 0 // # of lines in the sip message
 	var sipmsg message.Message
@@ -555,8 +561,10 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
 		// continue;
 		//    }
 		//try {
-
-		sipHeader, _ := hdrParser.Parse()
+		var sipHeader header.Header
+		if sipHeader, err = hdrParser.Parse(); err != nil {
+			return nil, err
+		}
 
 		// if strings.Contains(hdrstring, "Content-Length") {
 		// 	println(hdrstring)

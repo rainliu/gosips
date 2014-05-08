@@ -33,7 +33,9 @@ func (this *MaxForwardsParser) Parse() (sh header.Header, ParseException error) 
 	this.HeaderName(TokenTypes_MAX_FORWARDS)
 	lexer := this.GetLexer()
 	number, _ := lexer.Number()
-	contentLength.SetMaxForwards(number)
+	if err := contentLength.SetMaxForwards(number); err != nil {
+		return nil, err
+	}
 	lexer.SPorHT()
 	lexer.Match('\n')
 	return contentLength, nil

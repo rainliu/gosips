@@ -1,6 +1,7 @@
 package header
 
 import (
+	"errors"
 	"gosip/core"
 	"strconv"
 )
@@ -83,8 +84,9 @@ func (this *ContentLength) GetContentLength() int {
  * @param contentLength int to Set
  */
 func (this *ContentLength) SetContentLength(contentLength int) error { //throws InvalidArgumentException{
-	//if (contentLength<0) throw new InvalidArgumentException("JAIN-SIP Exception"+
-	//", ContentLength, SetContentLength(), the contentLength parameter is <0");
+	if contentLength < 0 {
+		errors.New("InvalidArgumentException: ContentLength.SetContentLength(), the contentLength parameter is <0")
+	}
 	this.contentLength = contentLength
 	return nil
 }
