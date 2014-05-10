@@ -34,7 +34,7 @@ type SipUri struct { //implements javax.sip.address.SipURI{
 
 	/** telephoneSubscriber field
 	 */
-	telephoneSubscriber *core.TelephoneNumber
+	telephoneSubscriber *TelephoneNumber
 }
 
 func NewSipUri() *SipUri {
@@ -292,9 +292,9 @@ func (this *SipUri) SetUserPassword(password string) {
  * @return TelephoneNumber part of the url (only makes sense
  * when user = phone is specified)
  */
-func (this *SipUri) GetTelephoneSubscriber() *core.TelephoneNumber {
+func (this *SipUri) GetTelephoneSubscriber() *TelephoneNumber {
 	if this.telephoneSubscriber == nil {
-		this.telephoneSubscriber = core.NewTelephoneNumber()
+		this.telephoneSubscriber = NewTelephoneNumber()
 	}
 	return this.telephoneSubscriber
 }
@@ -549,7 +549,7 @@ func (this *SipUri) SetMethod(method string) {
  */
 func (this *SipUri) SetIsdnSubAddress(isdnSubAddress string) {
 	if this.telephoneSubscriber == nil {
-		this.telephoneSubscriber = core.NewTelephoneNumber()
+		this.telephoneSubscriber = NewTelephoneNumber()
 	}
 	this.telephoneSubscriber.SetIsdnSubaddress(isdnSubAddress)
 }
@@ -557,7 +557,7 @@ func (this *SipUri) SetIsdnSubAddress(isdnSubAddress string) {
 /** Set the telephone subscriber field.
  * @param tel Telephone subscriber field to set.
  */
-func (this *SipUri) SetTelephoneSubscriber(tel *core.TelephoneNumber) {
+func (this *SipUri) SetTelephoneSubscriber(tel *TelephoneNumber) {
 	this.telephoneSubscriber = tel
 }
 
@@ -637,7 +637,7 @@ func (this *SipUri) Clone() interface{} {
 		retval.qheaders = this.qheaders.Clone().(*core.NameValueList)
 	}
 	if this.telephoneSubscriber != nil {
-		retval.telephoneSubscriber = this.telephoneSubscriber.Clone().(*core.TelephoneNumber)
+		retval.telephoneSubscriber = this.telephoneSubscriber.Clone().(*TelephoneNumber)
 	}
 
 	return retval
@@ -720,7 +720,7 @@ func (this *SipUri) GetParameter(name string) string {
 	if val == nil {
 		return ""
 	}
-	
+
 	return val.(string)
 }
 

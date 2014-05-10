@@ -649,7 +649,7 @@ func (this *StringMsgParser) ParseHost(host string) (*core.Host, error) {
  * @since v1.0
  * @exception throws a ParseException when the address is badly formatted.
  */
-func (this *StringMsgParser) ParSetelephoneNumber(telephone_number string) (*core.TelephoneNumber, error) {
+func (this *StringMsgParser) ParSetelephoneNumber(telephone_number string) (*address.TelephoneNumber, error) {
 	//throws ParseException {
 	// Bug fix contributed by Will Scullin
 	return NewURLParser(telephone_number).ParseTelephoneNumber()

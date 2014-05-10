@@ -2,7 +2,6 @@ package address
 
 import (
 	"container/list"
-	"gosips/core"
 )
 
 /** Implementation of the TelURL interface.
@@ -12,7 +11,7 @@ import (
 type TelURLImpl struct {
 	GenericURI
 
-	telephoneNumber *core.TelephoneNumber
+	telephoneNumber *TelephoneNumber
 }
 
 /** Creates a new instance of TelURLImpl */
@@ -28,7 +27,7 @@ func NewTelURLImpl() *TelURLImpl {
  *@param telephoneNumber -- telephone number to Set.
  */
 
-func (this *TelURLImpl) SetTelephoneNumber(telephoneNumber *core.TelephoneNumber) {
+func (this *TelURLImpl) SetTelephoneNumber(telephoneNumber *TelephoneNumber) {
 	this.telephoneNumber = telephoneNumber
 }
 
@@ -141,7 +140,7 @@ func (this *TelURLImpl) Clone() interface{} {
 	retval := NewTelURLImpl()
 	retval.scheme = this.scheme
 	if this.telephoneNumber != nil {
-		retval.telephoneNumber = this.telephoneNumber.Clone().(*core.TelephoneNumber)
+		retval.telephoneNumber = this.telephoneNumber.Clone().(*TelephoneNumber)
 	}
 	return retval
 }

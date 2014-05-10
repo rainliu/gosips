@@ -364,9 +364,9 @@ func (this *URLParser) Local_number() (s string, ParseException error) {
  *
  *@return the parsed telephone number.
  */
-func (this *URLParser) ParseTelephoneNumber() (tn *core.TelephoneNumber, ParseException error) {
+func (this *URLParser) ParseTelephoneNumber() (tn *address.TelephoneNumber, ParseException error) {
 	//TelephoneNumber tn  ;
-	tn = core.NewTelephoneNumber()
+	tn = address.NewTelephoneNumber()
 	//if (debug) dbg_enter("telephone_subscriber");
 	this.GetLexer().SelectLexer("charLexer")
 	//try {
@@ -388,10 +388,10 @@ func (this *URLParser) ParseTelephoneNumber() (tn *core.TelephoneNumber, ParseEx
 
 }
 
-func (this *URLParser) Global_phone_number() (tn *core.TelephoneNumber, ParseException error) {
+func (this *URLParser) Global_phone_number() (tn *address.TelephoneNumber, ParseException error) {
 	//if (debug) dbg_enter("global_phone_number");
 	//try {
-	tn = core.NewTelephoneNumber()
+	tn = address.NewTelephoneNumber()
 	tn.SetGlobal(true)
 	//var nv NameValueList;
 	this.GetLexer().Match(core.LexerCore_PLUS)
@@ -411,9 +411,9 @@ func (this *URLParser) Global_phone_number() (tn *core.TelephoneNumber, ParseExc
 	//}
 }
 
-func (this *URLParser) Local_phone_number() (tn *core.TelephoneNumber, ParseException error) {
+func (this *URLParser) Local_phone_number() (tn *address.TelephoneNumber, ParseException error) {
 	//if (debug) dbg_enter("local_phone_number");
-	tn = core.NewTelephoneNumber()
+	tn = address.NewTelephoneNumber()
 	tn.SetGlobal(false)
 	//NameValueList nv = null;
 	//String b = null;
