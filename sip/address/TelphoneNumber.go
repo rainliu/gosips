@@ -1,7 +1,8 @@
-package core
+package address
 
 import (
 	"container/list"
+	"gosips/core"
 )
 
 /** Telephone number class.
@@ -19,14 +20,14 @@ type TelephoneNumber struct {
 
 	/** parmeters list
 	 */
-	parms *NameValueList
+	parms *core.NameValueList
 }
 
 /** Creates new TelephoneNumber */
 func NewTelephoneNumber() *TelephoneNumber {
 	this := &TelephoneNumber{}
 
-	this.parms = NewNameValueList("telparms")
+	this.parms = core.NewNameValueList("telparms")
 
 	return this
 }
@@ -49,7 +50,7 @@ func (this *TelephoneNumber) GetPhoneNumber() string {
  * @return String
  */
 func (this *TelephoneNumber) GetPostDial() string {
-	return this.parms.GetValue(SIPTransportNames_POSTDIAL).(string)
+	return this.parms.GetValue(core.SIPTransportNames_POSTDIAL).(string)
 }
 
 /**
@@ -57,14 +58,14 @@ func (this *TelephoneNumber) GetPostDial() string {
  * @return String
  */
 func (this *TelephoneNumber) GetIsdnSubaddress() string {
-	return this.parms.GetValue(SIPTransportNames_ISUB).(string)
+	return this.parms.GetValue(core.SIPTransportNames_ISUB).(string)
 }
 
 /** returns true if th PostDial field exists
  * @return boolean
  */
 func (this *TelephoneNumber) HasPostDial() bool {
-	return this.parms.GetValue(SIPTransportNames_POSTDIAL) != nil
+	return this.parms.GetValue(core.SIPTransportNames_POSTDIAL) != nil
 }
 
 /** return true if this header has parameters.
@@ -80,7 +81,7 @@ func (this *TelephoneNumber) HasParm(pname string) bool {
  * @return boolean
  */
 func (this *TelephoneNumber) HasIsdnSubaddress() bool {
-	return this.HasParm(SIPTransportNames_ISUB)
+	return this.HasParm(core.SIPTransportNames_ISUB)
 }
 
 /**
@@ -94,21 +95,21 @@ func (this *TelephoneNumber) IsGlobal() bool {
 /** remove the PostDial field
  */
 func (this *TelephoneNumber) RemovePostDial() {
-	this.parms.Delete(SIPTransportNames_POSTDIAL)
+	this.parms.Delete(core.SIPTransportNames_POSTDIAL)
 }
 
 /**
  * Remove the isdn subaddress (if it exists).
  */
 func (this *TelephoneNumber) RemoveIsdnSubaddress() {
-	this.DeleteParm(SIPTransportNames_ISUB)
+	this.DeleteParm(core.SIPTransportNames_ISUB)
 }
 
 /**
  * Set the list of parameters.
  * @param p NameValueList to set
  */
-func (this *TelephoneNumber) SetParameters(p *NameValueList) {
+func (this *TelephoneNumber) SetParameters(p *core.NameValueList) {
 	this.parms = p
 }
 
@@ -123,7 +124,7 @@ func (this *TelephoneNumber) SetGlobal(g bool) {
  * @param p String to set
  */
 func (this *TelephoneNumber) SetPostDial(p string) {
-	nv := NewNameValue(SIPTransportNames_POSTDIAL, p)
+	nv := core.NewNameValue(core.SIPTransportNames_POSTDIAL, p)
 	this.parms.AddNameValue(nv)
 }
 
@@ -132,7 +133,7 @@ func (this *TelephoneNumber) SetPostDial(p string) {
  * @param value Object to set
  */
 func (this *TelephoneNumber) SetParm(name string, value interface{}) {
-	nv := NewNameValue(name, value)
+	nv := core.NewNameValue(name, value)
 	this.parms.AddNameValue(nv)
 }
 
@@ -141,7 +142,7 @@ func (this *TelephoneNumber) SetParm(name string, value interface{}) {
  * @param isub String to set
  */
 func (this *TelephoneNumber) SetIsdnSubaddress(isub string) {
-	this.SetParm(SIPTransportNames_ISUB, isub)
+	this.SetParm(core.SIPTransportNames_ISUB, isub)
 }
 
 /** set the PhoneNumber field
@@ -156,11 +157,11 @@ func (this *TelephoneNumber) Clone() interface{} {
 
 	retval.isglobal = this.isglobal
 	retval.phoneNumber = this.phoneNumber
-	retval.parms = NewNameValueList("telparms")
+	retval.parms = core.NewNameValueList("telparms")
 
 	for e := this.parms.Front(); e != nil; e = e.Next() {
-		nv := e.Value.(*NameValue)
-		retval.parms.AddNameValue(nv.Clone().(*NameValue))
+		nv := e.Value.(*core.NameValue)
+		retval.parms.AddNameValue(nv.Clone().(*core.NameValue))
 	}
 
 	return retval
@@ -173,7 +174,7 @@ func (this *TelephoneNumber) String() string {
 	}
 	retval += this.phoneNumber
 	if this.parms.Len() != 0 {
-		retval += SIPSeparatorNames_SEMICOLON
+		retval += core.SIPSeparatorNames_SEMICOLON
 		retval += this.parms.String()
 	}
 	return retval
@@ -213,6 +214,6 @@ func (this *TelephoneNumber) RemoveParameter(parameter string) {
 }
 
 func (this *TelephoneNumber) SetParameter(name, value string) {
-	nv := NewNameValue(name, value)
+	nv := core.NewNameValue(name, value)
 	this.parms.AddNameValue(nv)
 }
