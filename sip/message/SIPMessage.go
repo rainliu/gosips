@@ -1314,8 +1314,9 @@ func (this *SIPMessage) SetContent(content interface{}, contentTypeHeader header
 		this.messageContentBytes = b
 		length = len(b)
 	} else {
-		this.messageContentObject = content
-		length = len(content.(core.GenericObject).String())
+		panic("Don't support GenericObject");
+		//this.messageContentObject = content
+		//length = len(content.(core.GenericObject).String())
 	}
 
 	//try {

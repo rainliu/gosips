@@ -8,13 +8,9 @@ import (
 
 /**
 * Holds the hostname:port.
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 
 type HostPort struct {
-	//GenericObjectImpl
-
 	// host / ipv4/ ipv6/
 	/** host field
 	 */

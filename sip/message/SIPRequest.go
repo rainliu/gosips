@@ -33,7 +33,7 @@ type SIPRequest struct {
 	SIPMessage
 	//implements javax.sip.message.Request  {
 
-	transactionPointer core.GenericObject
+	//transactionPointer core.GenericObject
 
 	requestLine *header.RequestLine
 }
@@ -896,12 +896,12 @@ func (this *SIPRequest) GetSIPVersion() string {
 	return this.requestLine.GetSipVersion()
 }
 
-func (this *SIPRequest) GetTransaction() core.GenericObject {
-	// Return an opaque pointer to the transaction object.
-	// This is for consistency checking and quick lookup.
-	return this.transactionPointer
-}
+//func (this *SIPRequest) GetTransaction() core.GenericObject {
+//	// Return an opaque pointer to the transaction object.
+//	// This is for consistency checking and quick lookup.
+//	return this.transactionPointer
+//}
 
-func (this *SIPRequest) SetTransaction(transaction core.GenericObject) {
-	this.transactionPointer = transaction
-}
+//func (this *SIPRequest) SetTransaction(transaction core.GenericObject) {
+//	this.transactionPointer = transaction
+//}

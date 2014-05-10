@@ -7,8 +7,6 @@ import "strings"
 * This is used to convert byte arrays to hex strings etc. Generate
 * tags and branch identifiers and odds and ends.
  */
-//public class Utils
-//{
 /**
  * to hex converter
  */

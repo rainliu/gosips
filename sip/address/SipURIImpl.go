@@ -22,7 +22,7 @@ type SipUri struct { //implements javax.sip.address.SipURI{
 	/** Authority for the uri.
 	 */
 
-	authority *core.Authority
+	authority *Authority
 
 	/** uriParms list
 	 */
@@ -87,7 +87,7 @@ func (this *SipUri) ClearPassword() {
 
 /** Get the authority.
  */
-func (this *SipUri) GetAuthority() *core.Authority {
+func (this *SipUri) GetAuthority() *Authority {
 	return this.authority
 }
 
@@ -281,7 +281,7 @@ func (this *SipUri) GetUserPassword() string {
  */
 func (this *SipUri) SetUserPassword(password string) {
 	if this.authority == nil {
-		this.authority = &core.Authority{}
+		this.authority = NewAuthority()
 	}
 	this.authority.SetPassword(password)
 }
@@ -442,7 +442,7 @@ func (this *SipUri) RemoveMethod() {
  */
 func (this *SipUri) SetUser(uname string) {
 	if this.authority == nil {
-		this.authority = &core.Authority{}
+		this.authority = NewAuthority()
 	}
 
 	this.authority.SetUser(uname)
@@ -470,7 +470,7 @@ func (this *SipUri) SetDefaultParm(name string, value interface{}) {
 /** Set the authority member
  * @param authority Authority to set.
  */
-func (this *SipUri) SetAuthority(authority *core.Authority) {
+func (this *SipUri) SetAuthority(authority *Authority) {
 	this.authority = authority
 }
 
@@ -479,7 +479,7 @@ func (this *SipUri) SetAuthority(authority *core.Authority) {
  */
 func (this *SipUri) SetHost(h *core.Host) {
 	if this.authority == nil {
-		this.authority = &core.Authority{}
+		this.authority = NewAuthority()
 	}
 	this.authority.SetHost(h)
 }
@@ -566,7 +566,7 @@ func (this *SipUri) SetTelephoneSubscriber(tel *core.TelephoneNumber) {
  */
 func (this *SipUri) SetPort(p int) {
 	if this.authority == nil {
-		this.authority = &core.Authority{}
+		this.authority = NewAuthority()
 	}
 	this.authority.SetPort(p)
 }
@@ -613,7 +613,7 @@ func (this *SipUri) RemoveParameter(name string) {
  */
 func (this *SipUri) SetHostPort(hostPort *core.HostPort) {
 	if this.authority == nil {
-		this.authority = &core.Authority{}
+		this.authority = NewAuthority()
 	}
 	this.authority.SetHostPort(hostPort)
 }
@@ -628,7 +628,7 @@ func (this *SipUri) Clone() interface{} {
 	retval.scheme = this.scheme
 
 	if this.authority != nil {
-		retval.authority = this.authority.Clone().(*core.Authority)
+		retval.authority = this.authority.Clone().(*Authority)
 	}
 	if this.uriParms != nil {
 		retval.uriParms = this.uriParms.Clone().(*core.NameValueList)
@@ -720,9 +720,7 @@ func (this *SipUri) GetParameter(name string) string {
 	if val == nil {
 		return ""
 	}
-	if gv, ok := val.(core.GenericObject); ok {
-		return gv.String()
-	}
+	
 	return val.(string)
 }
 

@@ -4,8 +4,6 @@ import "bytes"
 
 /** Generic parser class.
 * All parsers inherit this class.
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type ParserCore struct {
 	//public static final boolean debug = Debug.parserDebug;

@@ -1,7 +1,6 @@
 package core
 
 import (
-	//"fmt"
 	"bytes"
 	"errors"
 	"strconv"
@@ -9,7 +8,6 @@ import (
 )
 
 /** A lexical analyzer that is used by all parsers in our implementation.
- *
  */
 // IMPORTANT - All keyword matches should be between START and END
 const LexerCore_START = 2048
