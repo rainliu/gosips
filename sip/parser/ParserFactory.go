@@ -22,7 +22,7 @@ import (
 //   }
 /** create a parser for a header. This is the parser factory.
  */
-func CreateParser(line string) IHeaderParser { //, ParseException error) {
+func CreateParser(line string) Parser { //, ParseException error) {
 	var lexer SIPLexer
 	headerName := strings.TrimSpace(strings.ToLower(lexer.GetHeaderName(line)))
 	headerValue := lexer.GetHeaderValue(line)

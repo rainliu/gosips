@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-type IHeaderParser interface {
+type Parser interface {
 	Parse() (sh header.Header, ParseException error)
 }
 
