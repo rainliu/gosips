@@ -462,12 +462,12 @@ func (this *Parameters) SetParameters(parameters *core.NameValueList) {
  *@return value of the parameter as a URI or null if the parameter
  *  not present.
  */
-/*protected GenericURI getParameterAsURI(String parameterName) {
+/*protected Uri getParameterAsURI(String parameterName) {
       Object val =   getParameterValue (parameterName);
-	    if (val instanceof GenericURI)  return (GenericURI) val;
+	    if (val instanceof Uri)  return (Uri) val;
 	    else {
                 try{
-                    return new GenericURI((String)val);
+                    return new Uri((String)val);
                 }
                 catch (ParseException ex) {
                 //catch ( URISyntaxException ex) {

@@ -8,8 +8,6 @@ import (
 /** Telephone number class.
  */
 type TelephoneNumber struct {
-	//NetObject
-
 	/** isglobal field
 	 */
 	isglobal bool
@@ -194,7 +192,7 @@ func (this *TelephoneNumber) GetParameter(name string) string {
 	if val == nil {
 		return ""
 	}
-	
+
 	return val.(string)
 }
 

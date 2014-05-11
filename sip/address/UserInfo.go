@@ -1,8 +1,8 @@
 package address
 
 import (
-	"strings"
 	"gosips/core"
+	"strings"
 )
 
 /**
@@ -12,12 +12,10 @@ import (
  */
 const (
 	TELEPHONE_SUBSCRIBER = iota
-	USER                        
+	USER
 )
 
 type UserInfo struct {
-	//NetObject
-
 	/** user field
 	 */
 	user string

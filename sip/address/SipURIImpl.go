@@ -10,14 +10,9 @@ import (
 
 /**
 * The SipUri structure.
-*
-*@author Rain Liu  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
-type SipUri struct { //implements javax.sip.address.SipURI{
-	GenericURI
+type SipUri struct {
+	Uri
 
 	/** Authority for the uri.
 	 */

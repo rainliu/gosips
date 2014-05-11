@@ -1,10 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : Address.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
 package address
 
 /**
@@ -17,14 +10,9 @@ package address
  *
  * @see SipURI
  * @see TelURL
- *
- * @version 1.1
- * @author Sun Microsystems
- *
  */
 
-type Address interface { // extends Cloneable, Serializable{
-
+type Address interface {
 	/**
 	 * Sets the display name of the Address. The display name is an
 	 * additional user friendly personalized text that accompanies the address.

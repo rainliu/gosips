@@ -677,10 +677,10 @@ func (this *StringMsgParser) ParseSIPUrl(url string) (*address.SipUri, error) {
  * @return A parsed URI structure
  * @exception ParseException  if there was an error parsing the message.
  */
-func (this *StringMsgParser) ParseUrl(url string) (*address.GenericURI, error) {
+func (this *StringMsgParser) ParseUrl(url string) (*address.Uri, error) {
 	//throws ParseException {
 	guri, err := NewURLParser(url).Parse()
-	return guri.(*address.GenericURI), err
+	return guri.(*address.Uri), err
 }
 
 /**

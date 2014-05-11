@@ -293,7 +293,7 @@ func (this *URLParser) UriReference() (url address.URI, ParseException error) {
 		//println("i'm UriString()");
 		urlString := this.UricString()
 		//try {
-		retval = address.NewGenericURI(urlString)
+		retval = address.NewUri(urlString)
 		//}
 		//catch (ParseException ex) {
 		//   throw createParseException(ex.getMessage());

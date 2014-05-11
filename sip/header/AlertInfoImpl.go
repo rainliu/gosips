@@ -19,7 +19,7 @@ type AlertInfo struct {
 
 	/** URI field
 	 */
-	uri *address.GenericURI
+	uri *address.Uri
 }
 
 /** Constructor
@@ -58,7 +58,7 @@ func (this *AlertInfo) EncodeBody() string {
  * @param u URI to set
  */
 func (this *AlertInfo) SetAlertInfo(uri address.URI) {
-	this.uri = uri.(*address.GenericURI)
+	this.uri = uri.(*address.Uri)
 }
 
 /**

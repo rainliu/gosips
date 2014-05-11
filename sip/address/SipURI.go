@@ -1,11 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : SipURI.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package address
 
 import (
@@ -88,10 +80,6 @@ import (
  * @see javax.sip.header.ToHeader
  * @see javax.sip.header.ContactHeader
  * @see URI
- *
- * @author Sun Microsystems
- * @since 1.1
- *
  */
 
 type SipURI interface {

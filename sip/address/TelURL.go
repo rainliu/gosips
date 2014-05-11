@@ -1,10 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : TelURL.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
 package address
 
 import (
@@ -42,9 +35,6 @@ import (
  * </ul>
  * See <a href = "http://www.ietf.org/rfc/rfc2806.txt">RFC2806</a> for more
  * information on the use of TelURL's.
- *
- * @author Sun Microsystems
- * @since 1.1
  */
 
 type TelURL interface {

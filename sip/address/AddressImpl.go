@@ -8,30 +8,14 @@ import (
 
 /**
  * Address structure. Imbeds a URI and adds a display name.
- *
- *@author M. Ranganathan <mranga@nist.gov>  <br/>
- *
- *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
- *
- *@version JAIN-SIP-1.1
- *
- */
-/** Constant field.
  */
 const (
-	NAME_ADDR = iota //0;
-
-	/** constant field.
-	 */
-	ADDRESS_SPEC //1;
-
-	/** Constant field.
-	 */
-	WILD_CARD //2;
+	NAME_ADDR = iota
+	ADDRESS_SPEC
+	WILD_CARD
 )
 
-type AddressImpl struct { //implements gosip/address/Address
-
+type AddressImpl struct {
 	addressType int
 
 	/** displayName field
@@ -40,7 +24,7 @@ type AddressImpl struct { //implements gosip/address/Address
 
 	/** address field
 	 */
-	address URI //*GenericURI;
+	address URI //*Uri;
 
 }
 
@@ -150,7 +134,7 @@ func (this *AddressImpl) String() string {
 		return "*"
 	}
 
-	var encoding bytes.Buffer //= new StringBuffer();
+	var encoding bytes.Buffer
 	if this.displayName != "" {
 		encoding.WriteString(core.SIPSeparatorNames_DOUBLE_QUOTE)
 		encoding.WriteString(this.displayName)
@@ -168,8 +152,6 @@ func (this *AddressImpl) String() string {
 	}
 	return encoding.String()
 }
-
-//public AddressImpl() { this.addressType = NAME_ADDR; } init by golang
 
 /**
  * Get the address type;
