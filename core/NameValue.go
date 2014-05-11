@@ -1,16 +1,20 @@
 package core
 
-import ()
-
 type NameValue struct {
 	isQuotedString bool
 	separator      string
 	quotes         string
 	name           string
-	value          interface{}
+	value          interface{} //only accept nil and string
 }
 
 func NewNameValue(n string, v interface{}) *NameValue {
+	if v != nil {
+		if _, ok := v.(string); !ok {
+			panic("value must be nil or string type")
+		}
+	}
+
 	this := &NameValue{}
 
 	this.name = n
@@ -62,6 +66,11 @@ func (this *NameValue) SetName(n string) {
 * Set the value member
  */
 func (this *NameValue) SetValue(v interface{}) {
+	if v != nil {
+		if _, ok := v.(string); !ok {
+			panic("value must be nil or string type")
+		}
+	}
 	this.value = v
 }
 
@@ -79,7 +88,7 @@ func (this *NameValue) String() string {
 		return this.quotes + this.value.(string) + this.quotes
 	} else if this.name != "" && this.value == nil {
 		return this.name
-	}else{
+	} else {
 		return ""
 	}
 }
