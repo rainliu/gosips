@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for ProxyAuthenticate headers.
+/** SIPParser for ProxyAuthenticate headers.
 *
 *@version  JAIN-SIP-1.1
 *
@@ -28,7 +28,7 @@ func NewProxyAuthenticateParser(proxyAuthenticate string) *ProxyAuthenticatePars
 }
 
 /** Cosntructor
- * @param Lexer lexer to set
+ * @param lexer to set
  */
 func NewProxyAuthenticateParserFromLexer(lexer core.Lexer) *ProxyAuthenticateParser {
 	this := &ProxyAuthenticateParser{}

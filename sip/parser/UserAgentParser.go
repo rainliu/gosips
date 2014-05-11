@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-/** Parser for UserAgent header.
+/** SIPParser for UserAgent header.
 *
 *@version  JAIN-SIP-1.1
 *

@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for ProxyAuthorization headers.
+/** SIPParser for ProxyAuthorization headers.
 *
 *@version  JAIN-SIP-1.1
 *
@@ -28,7 +28,7 @@ func NewProxyAuthorizationParser(proxyAuthorization string) *ProxyAuthorizationP
 }
 
 /** Cosntructor
- * @param Lexer lexer to set
+ * @param lexer to set
  */
 func NewProxyAuthorizationParserFromLexer(lexer core.Lexer) *ProxyAuthorizationParser {
 	this := &ProxyAuthorizationParser{}

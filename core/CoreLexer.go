@@ -10,50 +10,50 @@ import (
 /** A lexical analyzer that is used by all parsers in our implementation.
  */
 // IMPORTANT - All keyword matches should be between START and END
-const LexerCore_START = 2048
-const LexerCore_END = LexerCore_START + 2048
-const LexerCore_ID = LexerCore_END - 1 // IMPORTANT -- This should be < END
+const CORELEXER_START = 2048
+const CORELEXER_END = CORELEXER_START + 2048
+const CORELEXER_ID = CORELEXER_END - 1 // IMPORTANT -- This should be < END
 
 // Individial token classes.
-const LexerCore_WHITESPACE = LexerCore_END + 1
-const LexerCore_DIGIT = LexerCore_END + 2
-const LexerCore_ALPHA = LexerCore_END + 3
-const LexerCore_BACKSLASH = (int)('\\')
-const LexerCore_QUOTE = (int)('\'')
-const LexerCore_AT = (int)('@')
-const LexerCore_SP = (int)(' ')
-const LexerCore_HT = (int)('\t')
-const LexerCore_COLON = (int)(':')
-const LexerCore_STAR = (int)('*')
-const LexerCore_DOLLAR = (int)('$')
-const LexerCore_PLUS = (int)('+')
-const LexerCore_POUND = (int)('#')
-const LexerCore_MINUS = (int)('-')
-const LexerCore_DOUBLEQUOTE = (int)('"')
-const LexerCore_TILDE = (int)('~')
-const LexerCore_BACK_QUOTE = (int)('`')
-const LexerCore_NULL = (int)(0) //('\0')	;
-const LexerCore_EQUALS = (int)('=')
-const LexerCore_SEMICOLON = (int)(';')
-const LexerCore_SLASH = (int)('/')
-const LexerCore_L_SQUARE_BRACKET = (int)('[')
-const LexerCore_R_SQUARE_BRACKET = (int)(']')
-const LexerCore_R_CURLY = (int)('}')
-const LexerCore_L_CURLY = (int)('{')
-const LexerCore_HAT = (int)('^')
-const LexerCore_BAR = (int)('|')
-const LexerCore_DOT = (int)('.')
-const LexerCore_EXCLAMATION = (int)('!')
-const LexerCore_LPAREN = (int)('(')
-const LexerCore_RPAREN = (int)(')')
-const LexerCore_GREATER_THAN = (int)('>')
-const LexerCore_LESS_THAN = (int)('<')
-const LexerCore_PERCENT = (int)('%')
-const LexerCore_QUESTION = (int)('?')
-const LexerCore_AND = (int)('&')
-const LexerCore_UNDERSCORE = (int)('_')
+const CORELEXER_WHITESPACE = CORELEXER_END + 1
+const CORELEXER_DIGIT = CORELEXER_END + 2
+const CORELEXER_ALPHA = CORELEXER_END + 3
+const CORELEXER_BACKSLASH = (int)('\\')
+const CORELEXER_QUOTE = (int)('\'')
+const CORELEXER_AT = (int)('@')
+const CORELEXER_SP = (int)(' ')
+const CORELEXER_HT = (int)('\t')
+const CORELEXER_COLON = (int)(':')
+const CORELEXER_STAR = (int)('*')
+const CORELEXER_DOLLAR = (int)('$')
+const CORELEXER_PLUS = (int)('+')
+const CORELEXER_POUND = (int)('#')
+const CORELEXER_MINUS = (int)('-')
+const CORELEXER_DOUBLEQUOTE = (int)('"')
+const CORELEXER_TILDE = (int)('~')
+const CORELEXER_BACK_QUOTE = (int)('`')
+const CORELEXER_NULL = (int)(0) //('\0')	;
+const CORELEXER_EQUALS = (int)('=')
+const CORELEXER_SEMICOLON = (int)(';')
+const CORELEXER_SLASH = (int)('/')
+const CORELEXER_L_SQUARE_BRACKET = (int)('[')
+const CORELEXER_R_SQUARE_BRACKET = (int)(']')
+const CORELEXER_R_CURLY = (int)('}')
+const CORELEXER_L_CURLY = (int)('{')
+const CORELEXER_HAT = (int)('^')
+const CORELEXER_BAR = (int)('|')
+const CORELEXER_DOT = (int)('.')
+const CORELEXER_EXCLAMATION = (int)('!')
+const CORELEXER_LPAREN = (int)('(')
+const CORELEXER_RPAREN = (int)(')')
+const CORELEXER_GREATER_THAN = (int)('>')
+const CORELEXER_LESS_THAN = (int)('<')
+const CORELEXER_PERCENT = (int)('%')
+const CORELEXER_QUESTION = (int)('?')
+const CORELEXER_AND = (int)('&')
+const CORELEXER_UNDERSCORE = (int)('_')
 
-type LexerCore struct {
+type CoreLexer struct {
 	StringTokenizer
 
 	globalSymbolTable map[int]string
@@ -63,8 +63,8 @@ type LexerCore struct {
 	currentMatch      *Token
 }
 
-func NewLexerCore(lexerName string, buffer string) *LexerCore {
-	this := &LexerCore{}
+func NewCoreLexer(lexerName string, buffer string) *CoreLexer {
+	this := &CoreLexer{}
 
 	this.StringTokenizer.super(buffer)
 
@@ -76,7 +76,7 @@ func NewLexerCore(lexerName string, buffer string) *LexerCore {
 	return this
 }
 
-func (this *LexerCore) Super(lexerName, buffer string) {
+func (this *CoreLexer) Super(lexerName, buffer string) {
 	this.StringTokenizer.super(buffer)
 
 	this.globalSymbolTable = make(map[int]string)
@@ -85,30 +85,30 @@ func (this *LexerCore) Super(lexerName, buffer string) {
 	this.currentLexerName = lexerName
 }
 
-func (this *LexerCore) SetLexerName(lexerName string) {
+func (this *CoreLexer) SetLexerName(lexerName string) {
 	this.currentLexerName = lexerName
 }
 
-func (this *LexerCore) GetLexerName() string {
+func (this *CoreLexer) GetLexerName() string {
 	return this.currentLexerName
 }
 
-func (this *LexerCore) AddKeyword(name string, value int) {
+func (this *CoreLexer) AddKeyword(name string, value int) {
 	this.currentLexer[name] = value
 	if _, ok := this.globalSymbolTable[value]; !ok {
 		this.globalSymbolTable[value] = name
 	}
 }
 
-func (this *LexerCore) LookupToken(value int) string {
-	if value > LexerCore_START {
+func (this *CoreLexer) LookupToken(value int) string {
+	if value > CORELEXER_START {
 		return this.globalSymbolTable[value]
 	} else {
 		return strconv.Itoa(value)
 	}
 }
 
-func (this *LexerCore) AddLexer(lexerName string) LexerMap {
+func (this *CoreLexer) AddLexer(lexerName string) LexerMap {
 	var ok bool
 	this.currentLexer, ok = this.lexerTables[lexerName]
 	if !ok {
@@ -118,18 +118,18 @@ func (this *LexerCore) AddLexer(lexerName string) LexerMap {
 	return this.currentLexer
 }
 
-func (this *LexerCore) SelectLexer(lexerName string) {
+func (this *CoreLexer) SelectLexer(lexerName string) {
 	this.currentLexer = this.lexerTables[lexerName]
 	this.currentLexerName = lexerName
 }
 
-func (this *LexerCore) CurrentLexer() LexerMap {
+func (this *CoreLexer) CurrentLexer() LexerMap {
 	return this.currentLexer
 }
 
 /** Peek the next id but dont move the buffer pointer forward.
  */
-func (this *LexerCore) PeekNextId() string {
+func (this *CoreLexer) PeekNextId() string {
 	oldPtr := this.ptr
 	retval := this.Ttoken()
 	this.savedPtr = this.ptr
@@ -139,19 +139,19 @@ func (this *LexerCore) PeekNextId() string {
 
 /** Get the next id.
  */
-func (this *LexerCore) GetNextId() string {
+func (this *CoreLexer) GetNextId() string {
 	return this.Ttoken()
 }
 
 // call this after you call match
-func (this *LexerCore) GetNextToken() *Token {
+func (this *CoreLexer) GetNextToken() *Token {
 	return this.currentMatch
 
 }
 
 /** Look ahead for one token.
  */
-func (this *LexerCore) PeekNextToken() (*Token, error) {
+func (this *CoreLexer) PeekNextToken() (*Token, error) {
 	tok, err := this.PeekNextTokenK(1)
 	if err != nil {
 		return nil, err
@@ -160,7 +160,7 @@ func (this *LexerCore) PeekNextToken() (*Token, error) {
 	}
 }
 
-func (this *LexerCore) PeekNextTokenK(ntokens int) ([]*Token, error) {
+func (this *CoreLexer) PeekNextTokenK(ntokens int) ([]*Token, error) {
 	old := this.ptr
 	retval := make([]*Token, ntokens)
 	var err error
@@ -172,7 +172,7 @@ func (this *LexerCore) PeekNextTokenK(ntokens int) ([]*Token, error) {
 			if _, ok := this.currentLexer[strings.ToUpper(id)]; ok {
 				tok.tokenType = this.currentLexer[strings.ToUpper(id)]
 			} else {
-				tok.tokenType = LexerCore_ID
+				tok.tokenType = CORELEXER_ID
 			}
 		} else {
 			nextChar, err := this.GetNextChar()
@@ -181,9 +181,9 @@ func (this *LexerCore) PeekNextTokenK(ntokens int) ([]*Token, error) {
 			}
 			tok.tokenValue += string(nextChar)
 			if this.IsAlpha(nextChar) {
-				tok.tokenType = LexerCore_ALPHA
+				tok.tokenType = CORELEXER_ALPHA
 			} else if this.IsDigit(nextChar) {
-				tok.tokenType = LexerCore_DIGIT
+				tok.tokenType = CORELEXER_DIGIT
 			} else {
 				tok.tokenType = (int)(nextChar)
 			}
@@ -198,12 +198,12 @@ func (this *LexerCore) PeekNextTokenK(ntokens int) ([]*Token, error) {
 /** Match the given token or throw an exception if no such token
  * can be matched.
  */
-func (this *LexerCore) Match(tok int) (t *Token, ParseException error) {
+func (this *CoreLexer) Match(tok int) (t *Token, ParseException error) {
 	if Debug.ParserDebug {
 		Debug.println("match " + strconv.Itoa(tok))
 	}
-	if tok > LexerCore_START && tok < LexerCore_END {
-		if tok == LexerCore_ID {
+	if tok > CORELEXER_START && tok < CORELEXER_END {
+		if tok == CORELEXER_ID {
 			// Generic ID sought.
 			if !this.StartsId() {
 				return nil, errors.New("ParseException: ID expected")
@@ -211,7 +211,7 @@ func (this *LexerCore) Match(tok int) (t *Token, ParseException error) {
 			id := this.GetNextId()
 			this.currentMatch = &Token{}
 			this.currentMatch.tokenValue = id
-			this.currentMatch.tokenType = LexerCore_ID
+			this.currentMatch.tokenType = CORELEXER_ID
 		} else {
 			nexttok := this.GetNextId()
 			cur, ok := this.currentLexer[strings.ToUpper(nexttok)]
@@ -222,13 +222,13 @@ func (this *LexerCore) Match(tok int) (t *Token, ParseException error) {
 			this.currentMatch.tokenValue = nexttok
 			this.currentMatch.tokenType = tok
 		}
-	} else if tok > LexerCore_END {
+	} else if tok > CORELEXER_END {
 		// Character classes.
 		next, err := this.LookAheadK(0)
 		if err != nil {
 			return nil, errors.New("ParseException: Expecting DIGIT")
 		}
-		if tok == LexerCore_DIGIT {
+		if tok == CORELEXER_DIGIT {
 			if !this.IsDigit(next) {
 				return nil, errors.New("ParseException: Expecting DIGIT")
 			}
@@ -236,7 +236,7 @@ func (this *LexerCore) Match(tok int) (t *Token, ParseException error) {
 			this.currentMatch.tokenValue = string(next)
 			this.currentMatch.tokenType = tok
 			this.ConsumeK(1)
-		} else if tok == LexerCore_ALPHA {
+		} else if tok == CORELEXER_ALPHA {
 			if !this.IsAlpha(next) {
 				return nil, errors.New("ParseException: Expecting ALPHA")
 			}
@@ -264,7 +264,7 @@ func (this *LexerCore) Match(tok int) (t *Token, ParseException error) {
 	return this.currentMatch, nil
 }
 
-func (this *LexerCore) SPorHT() {
+func (this *CoreLexer) SPorHT() {
 	var ch byte
 
 	for ch, _ = this.LookAheadK(0); ch == ' ' || ch == '\t'; ch, _ = this.LookAheadK(0) {
@@ -272,7 +272,7 @@ func (this *LexerCore) SPorHT() {
 	}
 }
 
-func (this *LexerCore) StartsId() bool {
+func (this *CoreLexer) StartsId() bool {
 	nextChar, err := this.LookAheadK(0)
 	if err != nil {
 		return false
@@ -291,7 +291,7 @@ func (this *LexerCore) StartsId() bool {
 		nextChar == '~')
 }
 
-func (this *LexerCore) Ttoken() string {
+func (this *CoreLexer) Ttoken() string {
 	var nextId bytes.Buffer
 
 	for this.HasMoreChars() {
@@ -321,7 +321,7 @@ func (this *LexerCore) Ttoken() string {
 	return nextId.String()
 }
 
-func (this *LexerCore) TtokenAllowSpace() string {
+func (this *CoreLexer) TtokenAllowSpace() string {
 	var nextId bytes.Buffer
 
 	for this.HasMoreChars() {
@@ -355,7 +355,7 @@ func (this *LexerCore) TtokenAllowSpace() string {
 }
 
 // Assume the cursor is at a quote.
-func (this *LexerCore) QuotedString() (s string, err error) {
+func (this *CoreLexer) QuotedString() (s string, err error) {
 	var retval bytes.Buffer
 	var next byte
 
@@ -384,7 +384,7 @@ func (this *LexerCore) QuotedString() (s string, err error) {
 }
 
 // Assume the cursor is at a "("
-func (this *LexerCore) Comment() (s string, err error) {
+func (this *CoreLexer) Comment() (s string, err error) {
 	var retval bytes.Buffer
 	var next byte
 
@@ -416,7 +416,7 @@ func (this *LexerCore) Comment() (s string, err error) {
 	return retval.String(), err
 }
 
-func (this *LexerCore) ByteStringNoSemicolon() string {
+func (this *CoreLexer) ByteStringNoSemicolon() string {
 	var retval bytes.Buffer
 
 	for {
@@ -435,7 +435,7 @@ func (this *LexerCore) ByteStringNoSemicolon() string {
 	return retval.String()
 }
 
-func (this *LexerCore) ByteStringNoComma() string {
+func (this *CoreLexer) ByteStringNoComma() string {
 	var retval bytes.Buffer
 
 	for {
@@ -454,7 +454,7 @@ func (this *LexerCore) ByteStringNoComma() string {
 	return retval.String()
 }
 
-func (this *LexerCore) CharAsString(ch byte) string {
+func (this *CoreLexer) CharAsString(ch byte) string {
 	var retval bytes.Buffer
 	retval.WriteByte(ch)
 	return retval.String()
@@ -463,7 +463,7 @@ func (this *LexerCore) CharAsString(ch byte) string {
 /** Lookahead in the inputBuffer for n chars and return as a string.
  * Do not consume the input.
  */
-func (this *LexerCore) NCharAsString(nchars int) string {
+func (this *CoreLexer) NCharAsString(nchars int) string {
 	var retval bytes.Buffer
 
 	for i := 0; i < nchars; i++ {
@@ -479,7 +479,7 @@ func (this *LexerCore) NCharAsString(nchars int) string {
 
 /** Get and consume the next number.
  */
-func (this *LexerCore) Number() (n int, ParseException error) {
+func (this *CoreLexer) Number() (n int, ParseException error) {
 	var retval bytes.Buffer
 
 	next, err := this.LookAheadK(0)
@@ -511,20 +511,20 @@ func (this *LexerCore) Number() (n int, ParseException error) {
 
 /** Mark the position for backtracking.
  */
-func (this *LexerCore) MarkInputPosition() int {
+func (this *CoreLexer) MarkInputPosition() int {
 	return this.ptr
 }
 
 /** Rewind the input ptr to the marked position.
  */
-func (this *LexerCore) RewindInputPosition(position int) {
+func (this *CoreLexer) RewindInputPosition(position int) {
 	this.ptr = position
 }
 
 /** Get the rest of the String
  * @return String
  */
-func (this *LexerCore) GetRest() string {
+func (this *CoreLexer) GetRest() string {
 	if this.ptr >= len(this.buffer) {
 		return ""
 	} else {
@@ -538,7 +538,7 @@ func (this *LexerCore) GetRest() string {
  * @param char c the character to match
  * @return matching string.
  */
-func (this *LexerCore) GetString(c byte) (s string, err error) {
+func (this *CoreLexer) GetString(c byte) (s string, err error) {
 	var savedPtr int = this.ptr
 	var retval bytes.Buffer
 	var next byte
@@ -572,12 +572,12 @@ func (this *LexerCore) GetString(c byte) (s string, err error) {
 
 /** Get the read pointer.
  */
-func (this *LexerCore) GetPtr() int {
+func (this *CoreLexer) GetPtr() int {
 	return this.ptr
 }
 
 /** Get the buffer.
  */
-func (this *LexerCore) GetBuffer() string {
+func (this *CoreLexer) GetBuffer() string {
 	return this.buffer
 }

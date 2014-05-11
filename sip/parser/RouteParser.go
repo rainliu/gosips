@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for a list of route headers.
+/** SIPParser for a list of route headers.
 *
 *@version  JAIN-SIP-1.1
 *

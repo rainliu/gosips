@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-/** Parser for SIP Expires Parser. Converts from SIP Date to the
+/** SIPParser for SIP Expires SIPParser. Converts from SIP Date to the
 * internal storage (Calendar).
 *
 *@version  JAIN-SIP-1.1

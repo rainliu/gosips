@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for Authentication-Info header.
+/** SIPParser for Authentication-Info header.
  */
 type AuthenticationInfoParser struct {
 	ParametersParser

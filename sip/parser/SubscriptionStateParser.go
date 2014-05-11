@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-/** Parser for SubscriptionState header.
+/** SIPParser for SubscriptionState header.
 *
 *@version  JAIN-SIP-1.1
 *

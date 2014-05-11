@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for authorization headers.
+/** SIPParser for authorization headers.
  */
 type AuthorizationParser struct {
 	ChallengeParser
@@ -21,7 +21,7 @@ func NewAuthorizationParser(authorization string) *AuthorizationParser {
 }
 
 /** Cosntructor
- * @param Lexer lexer to set
+ * @param lexer to set
  */
 func NewAuthorizationParserFromLexer(lexer core.Lexer) *AuthorizationParser {
 	this := &AuthorizationParser{}

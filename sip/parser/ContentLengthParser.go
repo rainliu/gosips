@@ -6,7 +6,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for Content-Length Header.
+/** SIPParser for Content-Length Header.
 *@version  JAIN-SIP-1.1
 *
 *@author Olivier Deruelle  <br/>

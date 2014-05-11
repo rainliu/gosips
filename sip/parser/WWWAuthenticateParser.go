@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for WWW authenitcate header.
+/** SIPParser for WWW authenitcate header.
 *
 *@version  JAIN-SIP-1.1
 *

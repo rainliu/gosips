@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for InReplyTo header.
+/** SIPParser for InReplyTo header.
 *
 *@version  JAIN-SIP-1.1
 *

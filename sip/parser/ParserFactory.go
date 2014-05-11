@@ -23,7 +23,7 @@ import (
 /** create a parser for a header. This is the parser factory.
  */
 func CreateParser(line string) IHeaderParser { //, ParseException error) {
-	var lexer Lexer
+	var lexer SIPLexer
 	headerName := strings.TrimSpace(strings.ToLower(lexer.GetHeaderName(line)))
 	headerValue := lexer.GetHeaderValue(line)
 	if headerName == "" || headerValue == "" {

@@ -45,7 +45,7 @@ func NewAcceptEncodingParser(acceptEncoding string) *AcceptEncodingParser {
 }
 
 /** Cosntructor
- * @param Lexer lexer to set
+ * @param lexer to set
  */
 func NewAcceptEncodingParserFromLexer(lexer core.Lexer) *AcceptEncodingParser {
 	this := &AcceptEncodingParser{}

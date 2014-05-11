@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-/** Parser for via headers.
+/** SIPParser for via headers.
  */
 type ViaParser struct {
 	HeaderParser
@@ -125,7 +125,7 @@ func (this *ViaParser) NameValue() (nv *core.NameValue, ParseException error) {
 	//if (debug) dbg_enter("nameValue");
 	//try {
 	lexer := this.GetLexer()
-	lexer.Match(core.LexerCore_ID)
+	lexer.Match(core.CORELEXER_ID)
 	name := lexer.GetNextToken()
 	// eat white space.
 	lexer.SPorHT()
@@ -148,7 +148,7 @@ func (this *ViaParser) NameValue() (nv *core.NameValue, ParseException error) {
 				str, _ = lexer.QuotedString()
 				quoted = true
 			} else {
-				lexer.Match(core.LexerCore_ID)
+				lexer.Match(core.CORELEXER_ID)
 				value := lexer.GetNextToken()
 				str = value.GetTokenValue()
 			}

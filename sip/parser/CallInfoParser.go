@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for CallInfo header.
+/** SIPParser for CallInfo header.
 *
 *@version  JAIN-SIP-1.1
 *

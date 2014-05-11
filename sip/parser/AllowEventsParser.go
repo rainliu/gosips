@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for AllowEvents header.
+/** SIPParser for AllowEvents header.
 *
 *@version  JAIN-SIP-1.1
 *

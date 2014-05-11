@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for Require header.
+/** SIPParser for Require header.
 *
 *@version  JAIN-SIP-1.1
 *

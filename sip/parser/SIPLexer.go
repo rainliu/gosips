@@ -5,30 +5,30 @@ import (
 	"strings"
 )
 
-/** Lexer class for the parser.
+/** SIPLexer class for the parser.
  */
 
-type Lexer struct {
-	core.LexerCore
+type SIPLexer struct {
+	core.CoreLexer
 }
 
-func NewLexer(lexerName, buffer string) *Lexer {
-	this := &Lexer{}
-	this.LexerCore.Super(lexerName, buffer)
+func NewSIPLexer(lexerName, buffer string) *SIPLexer {
+	this := &SIPLexer{}
+	this.CoreLexer.Super(lexerName, buffer)
 	this.SelectLexer(lexerName)
 
 	return this
 }
 
-func (this *Lexer) super(lexerName, buffer string) {
-	this.LexerCore.Super(lexerName, buffer)
+func (this *SIPLexer) super(lexerName, buffer string) {
+	this.CoreLexer.Super(lexerName, buffer)
 	this.SelectLexer(lexerName)
 }
 
 /** get the header name of the line
  *  @return String
  */
-func (this *Lexer) GetHeaderName(line string) string {
+func (this *SIPLexer) GetHeaderName(line string) string {
 	if line == "" {
 		return ""
 	}
@@ -49,7 +49,7 @@ func (this *Lexer) GetHeaderName(line string) string {
 /** get the header value of the line
  *  @return String
  */
-func (this *Lexer) GetHeaderValue(line string) string {
+func (this *SIPLexer) GetHeaderValue(line string) string {
 	if line == "" {
 		return ""
 	}
@@ -63,9 +63,9 @@ func (this *Lexer) GetHeaderValue(line string) string {
 	//}
 	return headerValue
 }
-func (this *Lexer) SelectLexer(lexerName string) {
+func (this *SIPLexer) SelectLexer(lexerName string) {
 	//this.currentLexer = this.lexerTables[lexerName];
-	this.LexerCore.SelectLexer(lexerName) //this.currentLexerName = lexerName;
+	this.CoreLexer.SelectLexer(lexerName) //this.currentLexerName = lexerName;
 	if this.CurrentLexer() == nil {
 		this.AddLexer(lexerName)
 		if lexerName == "method_keywordLexer" {

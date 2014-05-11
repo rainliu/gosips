@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for RAck header.
+/** SIPParser for RAck header.
 *
 *@version  JAIN-SIP-1.1
 *

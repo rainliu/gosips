@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for ProxyRequire header.
+/** SIPParser for ProxyRequire header.
 *
 *@version  JAIN-SIP-1.1
 *

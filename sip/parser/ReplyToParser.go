@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for a list of RelpyTo headers.
+/** SIPParser for a list of RelpyTo headers.
 *
 *@version  JAIN-SIP-1.1
 *

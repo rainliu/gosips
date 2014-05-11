@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for Max Forwards Header.*/
+/** SIPParser for Max Forwards Header.*/
 type MaxForwardsParser struct {
 	HeaderParser
 }

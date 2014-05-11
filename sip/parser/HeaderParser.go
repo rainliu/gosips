@@ -16,7 +16,7 @@ type IHeaderParser interface {
  */
 
 type HeaderParser struct {
-	Parser
+	SIPParser
 }
 
 /** Creates new HeaderParser
@@ -25,8 +25,8 @@ type HeaderParser struct {
 func NewHeaderParser(header string) *HeaderParser {
 	this := &HeaderParser{}
 
-	this.Parser.super(header)
-	this.Parser.GetLexer().SetLexerName("command_keywordLexer")
+	this.SIPParser.super(header)
+	this.SIPParser.GetLexer().SetLexerName("command_keywordLexer")
 
 	return this
 }
@@ -34,20 +34,20 @@ func NewHeaderParser(header string) *HeaderParser {
 func NewHeaderParserFromLexer(lexer core.Lexer) *HeaderParser {
 	this := &HeaderParser{}
 
-	this.Parser.SetLexer(lexer)
-	this.Parser.GetLexer().SetLexerName("command_keywordLexer")
+	this.SIPParser.SetLexer(lexer)
+	this.SIPParser.GetLexer().SetLexerName("command_keywordLexer")
 
 	return this
 }
 
 func (this *HeaderParser) super(header string) {
-	this.Parser.super(header)
-	this.Parser.GetLexer().SetLexerName("command_keywordLexer")
+	this.SIPParser.super(header)
+	this.SIPParser.GetLexer().SetLexerName("command_keywordLexer")
 }
 
 func (this *HeaderParser) superFromLexer(lexer core.Lexer) {
 	this.SetLexer(lexer)
-	this.Parser.GetLexer().SetLexerName("command_keywordLexer")
+	this.SIPParser.GetLexer().SetLexerName("command_keywordLexer")
 }
 
 /** Parse the SIP header from the buffer and return a parsed

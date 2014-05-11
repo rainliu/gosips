@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-/** Parser for the SIP status line.
+/** SIPParser for the SIP status line.
 *
 *@version  JAIN-SIP-1.1
 *
@@ -17,13 +17,13 @@ import (
  */
 
 type StatusLineParser struct {
-	Parser
+	SIPParser
 }
 
 func NewStatusLineParser(statusLine string) *StatusLineParser {
 	this := &StatusLineParser{}
-	this.ParserCore.Super(statusLine)
-	this.SetLexer(NewLexer("status_lineLexer", statusLine))
+	this.CoreParser.Super(statusLine)
+	this.SetLexer(NewSIPLexer("status_lineLexer", statusLine))
 	return this
 }
 

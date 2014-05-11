@@ -5,16 +5,16 @@ import (
 	"errors"
 )
 
-/** Parser for host names.
+/** SIPParser for host names.
  */
 type HostNameParser struct {
-	ParserCore
+	CoreParser
 }
 
 func NewHostNameParser(hname string) *HostNameParser {
 	this := &HostNameParser{}
 
-	this.lexer = NewLexerCore("charLexer", hname)
+	this.lexer = NewCoreLexer("charLexer", hname)
 
 	return this
 }
@@ -24,8 +24,8 @@ func NewHostNameParser(hname string) *HostNameParser {
 func NewHostNameParserFromLexer(lexer Lexer) *HostNameParser {
 	this := &HostNameParser{}
 
-	this.ParserCore.SetLexer(lexer)
-	this.ParserCore.GetLexer().SelectLexer("charLexer")
+	this.CoreParser.SetLexer(lexer)
+	this.CoreParser.GetLexer().SelectLexer("charLexer")
 
 	return this
 }

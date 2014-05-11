@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for Accept header.
+/** SIPParser for Accept header.
 *
 *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
 *
@@ -15,7 +15,7 @@ type AcceptParser struct {
 }
 
 /**
- * Creates a new instance of Accept Parser
+ * Creates a new instance of Accept SIPParser
  * @param accept  the header to parse
  */
 func NewAcceptParser(accept string) *AcceptParser {

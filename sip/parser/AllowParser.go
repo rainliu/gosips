@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for Allow header.
+/** SIPParser for Allow header.
  */
 type AllowParser struct {
 	HeaderParser

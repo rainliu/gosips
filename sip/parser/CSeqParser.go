@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for CSeq headers.
+/** SIPParser for CSeq headers.
  */
 type CSeqParser struct {
 	HeaderParser

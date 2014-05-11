@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-/** Parser for CALL ID header.
+/** SIPParser for CALL ID header.
  */
 type CallIDParser struct {
 	HeaderParser
@@ -28,7 +28,7 @@ func (this *CallIDParser) super(callId string) {
 }
 
 /** Constructor
- * @param Lexer lexer to set
+ * @param lexer to set
  */
 func NewCallIDParserFromLexer(lexer core.Lexer) *CallIDParser {
 	this := &CallIDParser{}

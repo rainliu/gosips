@@ -261,7 +261,7 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 	}
 	//println("1:" + string(message[:length]))
 
-	// if (Parser.debug) {
+	// if (SIPParser.debug) {
 	//     for (int k = 0 ; k < length; k++) {
 	//         rawMessage1 = rawMessage1 + "[" + message.charAt(k) +"]";
 	//     }
@@ -466,7 +466,7 @@ func (this *StringMsgParser) ParseSIPMessage(sipMessage string) (message.Message
 	//           // error reporting.
 
 	//           currentMessage = cooked_message.toString();
-	//           if (Parser.debug) Debug.println(currentMessage);
+	//           if (SIPParser.debug) Debug.println(currentMessage);
 	//           bufferPointer = currentMessage.indexOf("\n\n") + 3 ;
 	//           SIPMessage sipmsg = this.parseMessage(currentMessage);
 	//    if (readBody && sipmsg.GetContentLength() != null &&
@@ -579,7 +579,7 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
 		}
 		// } catch (ParseException ex) {
 		//     if (this.parseExceptionListener != null) {
-		//         String hdrName = Lexer.GetHeaderName(hdrstring);
+		//         String hdrName = SIPLexer.GetHeaderName(hdrstring);
 		//         Class hdrClass = NameMap.GetClassFromName(hdrName);
 		//         try {
 		//             if (hdrClass == null) {
@@ -624,7 +624,7 @@ func (this *StringMsgParser) ParseAddress(address string) (*address.AddressImpl,
  */
 func (this *StringMsgParser) ParseHostPort(hostport string) (*core.HostPort, error) {
 	//throws ParseException {
-	lexer := NewLexer("charLexer", hostport)
+	lexer := NewSIPLexer("charLexer", hostport)
 	return core.NewHostNameParserFromLexer(lexer).GetHostPort()
 }
 
@@ -637,7 +637,7 @@ func (this *StringMsgParser) ParseHostPort(hostport string) (*core.HostPort, err
  */
 func (this *StringMsgParser) ParseHost(host string) (*core.Host, error) {
 	//throws ParseException {
-	lexer := NewLexer("charLexer", host)
+	lexer := NewSIPLexer("charLexer", host)
 	return core.NewHostNameParserFromLexer(lexer).GetHost()
 }
 

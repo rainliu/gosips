@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for ErrorInfo header.
+/** SIPParser for ErrorInfo header.
 *
 *@version  JAIN-SIP-1.1
 *

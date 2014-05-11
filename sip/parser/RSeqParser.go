@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for RSeq header.
+/** SIPParser for RSeq header.
 *
 *@version  JAIN-SIP-1.1
 *

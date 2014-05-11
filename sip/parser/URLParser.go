@@ -8,22 +8,22 @@ import (
 	"strings"
 )
 
-/** Parser For SIP and Tel URLs. Other kinds of URL's are handled by the
+/** SIPParser For SIP and Tel URLs. Other kinds of URL's are handled by the
  */
 type URLParser struct {
-	Parser
+	SIPParser
 }
 
 func NewURLParser(url string) *URLParser {
 	this := &URLParser{}
-	this.Parser.SetLexer(NewLexer("sip_urlLexer", url))
+	this.SIPParser.SetLexer(NewSIPLexer("sip_urlLexer", url))
 	return this
 }
 
 func NewURLParserFromLexer(lexer core.Lexer) *URLParser {
 	this := &URLParser{}
-	this.Parser.SetLexer(lexer)
-	this.Parser.GetLexer().SelectLexer("sip_urlLexer")
+	this.SIPParser.SetLexer(lexer)
+	this.SIPParser.GetLexer().SelectLexer("sip_urlLexer")
 	return this
 }
 
@@ -305,7 +305,7 @@ func (this *URLParser) UriReference() (url address.URI, ParseException error) {
 	return retval, nil
 }
 
-/** Parser for the base phone number.
+/** SIPParser for the base phone number.
  */
 func (this *URLParser) Base_phone_number() (s string, ParseException error) {
 	var retval bytes.Buffer //new StringBuffer() ;
@@ -331,7 +331,7 @@ func (this *URLParser) Base_phone_number() (s string, ParseException error) {
 	//}
 }
 
-/** Parser for the local phone #.
+/** SIPParser for the local phone #.
  */
 func (this *URLParser) Local_number() (s string, ParseException error) {
 	var retval bytes.Buffer //StringBuffer s = new StringBuffer() ;
@@ -360,7 +360,7 @@ func (this *URLParser) Local_number() (s string, ParseException error) {
 
 }
 
-/** Parser for telephone subscriber.
+/** SIPParser for telephone subscriber.
  *
  *@return the parsed telephone number.
  */
@@ -394,7 +394,7 @@ func (this *URLParser) Global_phone_number() (tn *address.TelephoneNumber, Parse
 	tn = address.NewTelephoneNumber()
 	tn.SetGlobal(true)
 	//var nv NameValueList;
-	this.GetLexer().Match(core.LexerCore_PLUS)
+	this.GetLexer().Match(core.CORELEXER_PLUS)
 	b, _ := this.Base_phone_number()
 	tn.SetPhoneNumber(b)
 	if this.GetLexer().HasMoreChars() {

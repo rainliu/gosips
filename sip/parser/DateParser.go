@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-/** Parser for SIP Date field. Converts from SIP Date to the
+/** SIPParser for SIP Date field. Converts from SIP Date to the
  * internal storage (Calendar)
  */
 type DateParser struct {

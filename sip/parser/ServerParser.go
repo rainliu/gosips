@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-/** Parser for Server header.
+/** SIPParser for Server header.
 *
 *@version  JAIN-SIP-1.1
 *

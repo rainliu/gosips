@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for Reason header.
+/** SIPParser for Reason header.
 *
 *@version  JAIN-SIP-1.1
 *

@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for Priority header.
+/** SIPParser for Priority header.
 *
 *@version  JAIN-SIP-1.1
 *

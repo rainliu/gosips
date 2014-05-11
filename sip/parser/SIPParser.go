@@ -5,10 +5,10 @@ import (
 	"gosips/core"
 )
 
-const TokenTypes_START = core.LexerCore_START
+const TokenTypes_START = core.CORELEXER_START
 
 // Everything under this is reserved
-const TokenTypes_END = core.LexerCore_END
+const TokenTypes_END = core.CORELEXER_END
 
 // End markder.
 
@@ -76,25 +76,25 @@ const TokenTypes_EVENT = TokenTypes_START + 63
 const TokenTypes_AUTHENTICATION_INFO = TokenTypes_START + 64
 const TokenTypes_ALLOW_EVENTS = TokenTypes_START + 65
 const TokenTypes_REFER_TO = TokenTypes_START + 66
-const TokenTypes_ALPHA = core.LexerCore_ALPHA
-const TokenTypes_DIGIT = core.LexerCore_DIGIT
-const TokenTypes_ID = core.LexerCore_ID
-const TokenTypes_WHITESPACE = core.LexerCore_WHITESPACE
-const TokenTypes_BACKSLASH = core.LexerCore_BACKSLASH
-const TokenTypes_QUOTE = core.LexerCore_QUOTE
-const TokenTypes_AT = core.LexerCore_AT
-const TokenTypes_SP = core.LexerCore_SP
-const TokenTypes_HT = core.LexerCore_HT
-const TokenTypes_COLON = core.LexerCore_COLON
-const TokenTypes_STAR = core.LexerCore_STAR
-const TokenTypes_DOLLAR = core.LexerCore_DOLLAR
-const TokenTypes_PLUS = core.LexerCore_PLUS
-const TokenTypes_POUND = core.LexerCore_POUND
-const TokenTypes_MINUS = core.LexerCore_MINUS
-const TokenTypes_DOUBLEQUOTE = core.LexerCore_DOUBLEQUOTE
-const TokenTypes_TILDE = core.LexerCore_TILDE
-const TokenTypes_BACK_QUOTE = core.LexerCore_BACK_QUOTE
-const TokenTypes_NULL = core.LexerCore_NULL
+const TokenTypes_ALPHA = core.CORELEXER_ALPHA
+const TokenTypes_DIGIT = core.CORELEXER_DIGIT
+const TokenTypes_ID = core.CORELEXER_ID
+const TokenTypes_WHITESPACE = core.CORELEXER_WHITESPACE
+const TokenTypes_BACKSLASH = core.CORELEXER_BACKSLASH
+const TokenTypes_QUOTE = core.CORELEXER_QUOTE
+const TokenTypes_AT = core.CORELEXER_AT
+const TokenTypes_SP = core.CORELEXER_SP
+const TokenTypes_HT = core.CORELEXER_HT
+const TokenTypes_COLON = core.CORELEXER_COLON
+const TokenTypes_STAR = core.CORELEXER_STAR
+const TokenTypes_DOLLAR = core.CORELEXER_DOLLAR
+const TokenTypes_PLUS = core.CORELEXER_PLUS
+const TokenTypes_POUND = core.CORELEXER_POUND
+const TokenTypes_MINUS = core.CORELEXER_MINUS
+const TokenTypes_DOUBLEQUOTE = core.CORELEXER_DOUBLEQUOTE
+const TokenTypes_TILDE = core.CORELEXER_TILDE
+const TokenTypes_BACK_QUOTE = core.CORELEXER_BACK_QUOTE
+const TokenTypes_NULL = core.CORELEXER_NULL
 const TokenTypes_EQUALS = (int)('=')
 const TokenTypes_SEMICOLON = (int)(';')
 const TokenTypes_SLASH = (int)('/')
@@ -125,33 +125,33 @@ const TokenTypes_UNDERSCORE = (int)('_')
 *
  */
 
-type Parser struct {
-	core.ParserCore //implements TokenTypes {
+type SIPParser struct {
+	core.CoreParser //implements TokenTypes {
 }
 
-func NewParser(buffer string) *Parser {
-	this := &Parser{}
+func NewSIPParser(buffer string) *SIPParser {
+	this := &SIPParser{}
 
-	this.ParserCore.Super(buffer)
-	this.ParserCore.SetLexer(NewLexer("CharLexer", buffer))
+	this.CoreParser.Super(buffer)
+	this.CoreParser.SetLexer(NewSIPLexer("CharLexer", buffer))
 
 	return this
 }
 
-func (this *Parser) super(buffer string) {
-	this.ParserCore.Super(buffer)
-	this.ParserCore.SetLexer(NewLexer("CharLexer", buffer))
+func (this *SIPParser) super(buffer string) {
+	this.CoreParser.Super(buffer)
+	this.CoreParser.SetLexer(NewSIPLexer("CharLexer", buffer))
 }
 
-func (this *Parser) CreateParseException(exceptionString string) (ParseException error) {
+func (this *SIPParser) CreateParseException(exceptionString string) (ParseException error) {
 	return errors.New("ParseException: " + this.GetLexer().GetBuffer() + ":" + exceptionString) // + this.GetLexer().GetPtr());
 }
 
-/*func (this *Parser) GetLexer() Lexer {
+/*func (this *SIPParser) GetLexer() SIPLexer {
 	return this.GetLexer();
 }*/
 
-func (this *Parser) SipVersion() (s string, ParseException error) {
+func (this *SIPParser) SipVersion() (s string, ParseException error) {
 	if core.Debug.ParserDebug {
 		this.Dbg_enter("sipVersion")
 		defer this.Dbg_leave("sipVersion")
@@ -181,7 +181,7 @@ func (this *Parser) SipVersion() (s string, ParseException error) {
 
 /** parses a method. Consumes if a valid method has been found.
  */
-func (this *Parser) Method() (s string, ParseException error) {
+func (this *SIPParser) Method() (s string, ParseException error) {
 	if core.Debug.ParserDebug {
 		this.Dbg_enter("method")
 		defer this.Dbg_leave("method")

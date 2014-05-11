@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for MinExpires header.
+/** SIPParser for MinExpires header.
 *
 *@version  JAIN-SIP-1.1
 *

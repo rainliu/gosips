@@ -22,7 +22,7 @@ import (
 * @see AcceptLanguageList
  */
 
-/** Parser for Accept Language Headers.
+/** SIPParser for Accept Language Headers.
  */
 
 type AcceptLanguageParser struct {
@@ -39,7 +39,7 @@ func NewAcceptLanguageParser(acceptLanguage string) *AcceptLanguageParser {
 }
 
 /** Cosntructor
- * @param Lexer lexer to set
+ * @param lexer to set
  */
 func NewAcceptLanguageParserFromLexer(lexer core.Lexer) *AcceptLanguageParser {
 	this := &AcceptLanguageParser{}

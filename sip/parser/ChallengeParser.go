@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for the challenge portion of the authentication header.
+/** SIPParser for the challenge portion of the authentication header.
  *
  *@version  JAIN-SIP-1.1
  *

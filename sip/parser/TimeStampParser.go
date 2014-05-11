@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-/** Parser for TimeStamp header.
+/** SIPParser for TimeStamp header.
 *
 *@version  JAIN-SIP-1.1
 *

@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-/** Parser for Organization header.
+/** SIPParser for Organization header.
 *
 *@version  JAIN-SIP-1.1
 *

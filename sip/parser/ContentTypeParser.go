@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for content type header.
+/** SIPParser for content type header.
 *
 *@version  JAIN-SIP-1.1
 *

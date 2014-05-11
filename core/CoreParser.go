@@ -5,38 +5,38 @@ import "bytes"
 /** Generic parser class.
 * All parsers inherit this class.
  */
-type ParserCore struct {
+type CoreParser struct {
 	nesting_level int
 
-	lexer Lexer //*LexerCore
+	lexer Lexer //*CoreLexer
 }
 
-func NewParserCore(buffer string) *ParserCore {
-	this := &ParserCore{}
+func NewCoreParser(buffer string) *CoreParser {
+	this := &CoreParser{}
 
-	this.lexer = NewLexerCore("CharLexer", buffer)
+	this.lexer = NewCoreLexer("CharLexer", buffer)
 
 	return this
 }
 
-func (this *ParserCore) Super(buffer string) {
-	this.lexer = NewLexerCore("CharLexer", buffer)
+func (this *CoreParser) Super(buffer string) {
+	this.lexer = NewCoreLexer("CharLexer", buffer)
 }
 
-func (this *ParserCore) GetLexer() Lexer {
+func (this *CoreParser) GetLexer() Lexer {
 	return this.lexer
 }
-func (this *ParserCore) SetLexer(lexer Lexer) {
+func (this *CoreParser) SetLexer(lexer Lexer) {
 	this.lexer = lexer
 }
 
-func (this *ParserCore) NameValue(separator byte) *NameValue {
+func (this *CoreParser) NameValue(separator byte) *NameValue {
 	if Debug.ParserDebug {
 		this.Dbg_enter("nameValue")
 		defer this.Dbg_leave("nameValue")
 	}
 
-	this.lexer.Match(LexerCore_ID)
+	this.lexer.Match(CORELEXER_ID)
 	name := this.lexer.GetNextToken()
 	// eat white space.
 	this.lexer.SPorHT()
@@ -53,7 +53,7 @@ func (this *ParserCore) NameValue(separator byte) *NameValue {
 			str, _ = this.lexer.QuotedString()
 			quoted = true
 		} else {
-			this.lexer.Match(LexerCore_ID)
+			this.lexer.Match(CORELEXER_ID)
 			value := this.lexer.GetNextToken()
 			str = value.tokenValue
 		}
@@ -68,7 +68,7 @@ func (this *ParserCore) NameValue(separator byte) *NameValue {
 	}
 }
 
-func (this *ParserCore) Dbg_enter(rule string) {
+func (this *CoreParser) Dbg_enter(rule string) {
 	var stringBuffer bytes.Buffer
 	for i := 0; i < this.nesting_level; i++ {
 		stringBuffer.WriteString(">")
@@ -79,7 +79,7 @@ func (this *ParserCore) Dbg_enter(rule string) {
 	this.nesting_level++
 }
 
-func (this *ParserCore) Dbg_leave(rule string) {
+func (this *CoreParser) Dbg_leave(rule string) {
 	var stringBuffer bytes.Buffer
 	for i := 0; i < this.nesting_level; i++ {
 		stringBuffer.WriteString("<")
@@ -90,7 +90,7 @@ func (this *ParserCore) Dbg_leave(rule string) {
 	this.nesting_level--
 }
 
-func (this *ParserCore) PeekLine(rule string) {
+func (this *CoreParser) PeekLine(rule string) {
 	if Debug.ParserDebug {
 		Debug.println(rule + " " + this.lexer.PeekLine())
 	}

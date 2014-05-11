@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for RetryAfter header.
+/** SIPParser for RetryAfter header.
 *
 *@version  JAIN-SIP-1.1
 *

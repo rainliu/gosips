@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-/** Parser for Warning header.
+/** SIPParser for Warning header.
 *
 *@version  JAIN-SIP-1.1
 *

@@ -6,7 +6,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for the SIP request line.
+/** SIPParser for the SIP request line.
 *
 *@version  JAIN-SIP-1.1
 *
@@ -16,13 +16,13 @@ import (
  */
 
 type RequestLineParser struct {
-	Parser
+	SIPParser
 }
 
 func NewRequestLineParser(requestLine string) *RequestLineParser {
 	this := &RequestLineParser{}
-	this.ParserCore.Super(requestLine)
-	this.SetLexer(NewLexer("method_keywordLexer", requestLine))
+	this.CoreParser.Super(requestLine)
+	this.SetLexer(NewSIPLexer("method_keywordLexer", requestLine))
 	return this
 }
 func NewRequestLineParserFromLexer(lexer core.Lexer) *RequestLineParser {

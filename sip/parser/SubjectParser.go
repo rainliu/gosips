@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-/** Parser for Subject  header.
+/** SIPParser for Subject  header.
 *
 *@version  JAIN-SIP-1.1
 *

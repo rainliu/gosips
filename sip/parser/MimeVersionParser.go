@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for MimeVersion header.
+/** SIPParser for MimeVersion header.
 *
 *@version  JAIN-SIP-1.1
 *

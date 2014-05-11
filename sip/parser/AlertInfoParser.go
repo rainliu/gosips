@@ -5,7 +5,7 @@ import (
 	"gosips/sip/header"
 )
 
-/** Parser for AlertInfo header.
+/** SIPParser for AlertInfo header.
 *
 * @version 1.0
  */
@@ -14,7 +14,7 @@ type AlertInfoParser struct {
 }
 
 /**
- * Creates a new instance of AlertInfo Parser
+ * Creates a new instance of AlertInfo SIPParser
  * @param alertInfo  the header to parse
  */
 func NewAlertInfoParser(alertInfo string) *AlertInfoParser {
