@@ -766,7 +766,7 @@ func (this *SIPRequest) CreateSIPRequest(requestLine *header.RequestLine, switch
 				from.RemoveTag()
 				nextHeader = from
 			} else {
-				//to2 := to.Clone()
+				//to2 := to.Clone().(*To)
 				to.RemoveTag()
 				nextHeader = to
 			}
@@ -777,7 +777,7 @@ func (this *SIPRequest) CreateSIPRequest(requestLine *header.RequestLine, switch
 				to.RemoveTag()
 				nextHeader = to
 			} else {
-				//from2 := from.Clone()
+				//from2 := from.Clone().(*From)
 				from.RemoveTag()
 				nextHeader = from
 			}

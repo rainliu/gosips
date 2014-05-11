@@ -59,7 +59,7 @@ type TelURL interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the parameter name or value.
 	 */
-	SetParameter(name, value string) (ParseException error)
+	SetParameter(name, value string)
 
 	/**
 	 * Returns an Iterator over the names (Strings) of all parameters present

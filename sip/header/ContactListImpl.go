@@ -51,7 +51,7 @@ func (this *ContactList) AddContact(contact ContactHeader) (IllegalArgumentExcep
 func (this *ContactList) Clone() interface{} {
 	retval := NewContactList()
 	for c := this.Front(); c != nil; c = c.Next() {
-		newc := c.Value.(ContactHeader).Clone()
+		newc := c.Value.(ContactHeader).Clone().(*Contact)
 		retval.PushBack(newc)
 	}
 	return retval

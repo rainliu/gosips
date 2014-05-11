@@ -1,6 +1,7 @@
 package address
 
 import (
+	"bytes"
 	"container/list"
 	"gosips/core"
 )
@@ -166,16 +167,16 @@ func (this *TelephoneNumber) Clone() interface{} {
 }
 
 func (this *TelephoneNumber) String() string {
-	var retval string //= "";
+	var retval bytes.Buffer
 	if this.isglobal {
-		retval += "+"
+		retval.WriteString("+")
 	}
-	retval += this.phoneNumber
+	retval.WriteString(this.phoneNumber)
 	if this.parms.Len() != 0 {
-		retval += core.SIPSeparatorNames_SEMICOLON
-		retval += this.parms.String()
+		retval.WriteString(core.SIPSeparatorNames_SEMICOLON)
+		retval.WriteString(this.parms.String())
 	}
-	return retval
+	return retval.String()
 }
 
 /**

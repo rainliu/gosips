@@ -3,6 +3,7 @@ package address
 import (
 	"bytes"
 	"container/list"
+	"errors"
 	"gosips/core"
 	"strconv"
 	"strings"
@@ -46,12 +47,13 @@ func NewSipURIImpl() *SipURIImpl {
 /** Constructor given the scheme.
  * The scheme must be either Sip or Sips
  */
-func (this *SipURIImpl) SetScheme(scheme string) {
+func (this *SipURIImpl) SetScheme(scheme string) error {
 	scheme = strings.ToLower(scheme)
 	if scheme != core.SIPTransportNames_SIP && scheme != core.SIPTransportNames_SIPS {
-		return //throw new IllegalArgumentException("bad scheme "+scheme);
+		return errors.New("IllegalArgumentException: bad scheme " + scheme)
 	}
 	this.scheme = scheme
+	return nil
 }
 
 /** Get the scheme.
@@ -166,13 +168,6 @@ func (this *SipURIImpl) String() string {
 	}
 	return retval.String()
 }
-
-/** Return a string representation.
-*
-*@return the String representation of this URI.
-*
- */
-//public String toString() { return this.String(); }
 
 /**
  * GetUser@host
@@ -302,9 +297,9 @@ func (this *SipURIImpl) GetTelephoneSubscriber() *TelephoneNumber {
 func (this *SipURIImpl) GetHostPort() *core.HostPort {
 	if this.authority == nil {
 		return nil
-	} //else {
-	return this.authority.GetHostPort()
-	//}
+	} else {
+		return this.authority.GetHostPort()
+	}
 }
 
 /** Get the port from the authority field.
@@ -835,12 +830,13 @@ func (this *SipURIImpl) SetLrParam() {
  *
  * @param  method - new value of the <code>maddr</code> parameter
  */
-func (this *SipURIImpl) SetMAddrParam(maddr string) {
+func (this *SipURIImpl) SetMAddrParam(maddr string) error {
 	if maddr == "" {
-		//throw new NullPointerException("bad maddr");
-		return
+		return errors.New("NullPointerException: bad maddr")
+
 	}
 	this.SetParameter("maddr", maddr)
+	return nil
 }
 
 /** Sets the value of the <code>method</code> parameter. This specifies
@@ -873,7 +869,6 @@ func (this *SipURIImpl) SetMethodParam(method string) {
  */
 func (this *SipURIImpl) SetParameter(name, value string) {
 	if name == "ttl" {
-		//try {
 		if _, err := strconv.Atoi(value); err != nil {
 			return
 		}
@@ -902,16 +897,17 @@ func (this *SipURIImpl) SetSecure(secure bool) {
  *
  * @param ttl - new value of the <code>ttl</code> parameter
  */
-func (this *SipURIImpl) SetTTLParam(ttl int) {
+func (this *SipURIImpl) SetTTLParam(ttl int) error {
 	if ttl <= 0 {
-		//throw new IllegalArgumentException ("Bad ttl value");
-		return
+		return errors.New("IllegalArgumentException: Bad ttl value")
 	}
 	if this.uriParms != nil {
 		this.uriParms.Delete("ttl")
 		nv := core.NewNameValue("ttl", ttl)
 		this.uriParms.AddNameValue(nv)
 	}
+
+	return nil
 }
 
 /** Sets the value of the "transport" parameter. This parameter specifies
@@ -924,17 +920,19 @@ func (this *SipURIImpl) SetTTLParam(ttl int) {
  * @param transport - new value for the "transport" parameter
  * @see javax.sip.ListeningPoint
  */
-func (this *SipURIImpl) SetTransportParam(transport string) {
+func (this *SipURIImpl) SetTransportParam(transport string) error {
 	if transport == "" {
-		//throw new NullPointerException("null arg");
-		return
+		return errors.New("NullPointerException: null arg")
 	}
 	if strings.ToUpper(transport) == "UDP" ||
 		strings.ToUpper(transport) == "TCP" {
 		nv := core.NewNameValue(core.SIPTransportNames_TRANSPORT, strings.ToLower(transport))
 		this.uriParms.Delete(core.SIPTransportNames_TRANSPORT)
 		this.uriParms.AddNameValue(nv)
-	} // else throw new ParseException ("bad transport " + transport, 0);
+		return nil
+	} else {
+		return errors.New("ParseException: bad transport " + transport)
+	}
 }
 
 /** Returns the user part of this SipURI, or null if it is not Set.

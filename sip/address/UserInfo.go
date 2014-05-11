@@ -5,9 +5,6 @@ import (
 	"strings"
 )
 
-/**
-* User information part of a URL.
- */
 /** Constant field
  */
 const (
@@ -15,6 +12,9 @@ const (
 	USER
 )
 
+/**
+* User information part of a URL.
+ */
 type UserInfo struct {
 	/** user field
 	 */
@@ -78,9 +78,9 @@ func (this *UserInfo) Clone() interface{} {
 func (this *UserInfo) String() string {
 	if this.password != "" {
 		return this.user + core.SIPSeparatorNames_COLON + this.password
-	} //else{
-	return this.user
-	//}
+	} else {
+		return this.user
+	}
 }
 
 /** Clear the password field.

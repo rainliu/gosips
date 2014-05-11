@@ -43,11 +43,9 @@ func (this *Authority) String() string {
 		return this.userInfo.String() + core.SIPSeparatorNames_AT + this.hostPort.String()
 	} else if this.hostPort != nil {
 		return this.hostPort.String()
-	} else if this.userInfo != nil {
-		return this.userInfo.String() + core.SIPSeparatorNames_AT
+	} else {
+		return ""
 	}
-
-	return ""
 }
 
 /** retruns true if the two Objects are equals , false otherwise.
@@ -93,9 +91,9 @@ func (this *Authority) GetUserInfo() *UserInfo {
 func (this *Authority) GetPassword() string {
 	if this.userInfo == nil {
 		return ""
-	} //else{
-	return this.userInfo.GetPassword()
-	//}
+	} else {
+		return this.userInfo.GetPassword()
+	}
 }
 
 /**
@@ -105,9 +103,9 @@ func (this *Authority) GetPassword() string {
 func (this *Authority) GetUser() string {
 	if this.userInfo == nil {
 		return ""
-	} //else{
-	return this.userInfo.GetUser()
-	//}
+	} else {
+		return this.userInfo.GetUser()
+	}
 }
 
 /**
@@ -117,9 +115,9 @@ func (this *Authority) GetUser() string {
 func (this *Authority) GetHost() *core.Host {
 	if this.hostPort == nil {
 		return nil
-	} //else{
-	return this.hostPort.GetHost()
-	//}
+	} else {
+		return this.hostPort.GetHost()
+	}
 }
 
 /**
@@ -129,9 +127,9 @@ func (this *Authority) GetHost() *core.Host {
 func (this *Authority) GetPort() int {
 	if this.hostPort == nil {
 		return -1
-	} //else{
-	return this.hostPort.GetPort()
-	//}
+	} else {
+		return this.hostPort.GetPort()
+	}
 }
 
 /** remove the port.

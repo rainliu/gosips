@@ -38,7 +38,7 @@ func (this *ViaList) Clone() interface{} {
 	vlist := NewViaList()
 	//ListIterator it = this.listIterator();
 	for e := this.Front(); e != nil; e = e.Next() {
-		v := e.Value.(*Via).Clone()
+		v := e.Value.(*Via).Clone().(*Via)
 		vlist.PushBack(v)
 	}
 	return vlist

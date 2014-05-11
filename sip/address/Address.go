@@ -21,7 +21,7 @@ type Address interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the displayName value.
 	 */
-	SetDisplayName(displayName string) (ParseException error)
+	SetDisplayName(displayName string)
 
 	/**
 	 * Gets the display name of this Address, or null if the attribute is

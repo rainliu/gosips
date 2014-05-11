@@ -1,7 +1,5 @@
 package address
 
-import ()
-
 /**
  * The Hop interface defines a location a request can transit on the way to
  * its destination, i.e. a route. It defines the host, port and transport of
@@ -11,9 +9,7 @@ import ()
  * @see Router
  *
  */
-
 type Hop interface {
-
 	/**
 	 * Returns the host part of this Hop.
 	 *
@@ -40,5 +36,5 @@ type Hop interface {
 	 *
 	 * @return the stringified version of the Hop
 	 */
-	ToString() string
+	String() string
 }

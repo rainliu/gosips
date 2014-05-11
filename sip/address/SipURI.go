@@ -81,7 +81,6 @@ import (
  * @see javax.sip.header.ContactHeader
  * @see URI
  */
-
 type SipURI interface {
 	URI
 

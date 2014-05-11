@@ -113,16 +113,12 @@ func (this *AddressImpl) GetHost() (string, error) {
  *
  *@param parameterName is the name of the parameter to remove.
  */
-func (this *AddressImpl) RemoveParameter(parameterName string) {
+func (this *AddressImpl) RemoveParameter(parameterName string) error {
 	if sipuri, ok := this.address.(*SipURIImpl); ok {
 		sipuri.RemoveParameter(parameterName)
+		return nil
 	}
-	/*
-	   if (! (address instanceof SipURIImpl) )
-	       throw new RuntimeException
-	       ("address is not a SipURIImpl");
-	   SipURIImpl uri = (SipURIImpl) address;
-	*/
+	return errors.New("RuntimeException: address is not a SipURIImpl")
 }
 
 /**
@@ -188,10 +184,9 @@ func (this *AddressImpl) GetDisplayName() string {
  * @param displayName String to set
  *
  */
-func (this *AddressImpl) SetDisplayName(displayName string) (ParseException error) {
+func (this *AddressImpl) SetDisplayName(displayName string) {
 	this.displayName = displayName
 	this.addressType = NAME_ADDR
-	return nil
 }
 
 /**
@@ -231,7 +226,7 @@ func (this *AddressImpl) SetAddess(address URI) {
  * @return boolean
  */
 func (this *AddressImpl) HasDisplayName() bool {
-	return (this.displayName != "")
+	return this.displayName != ""
 }
 
 /** remove the displayName field

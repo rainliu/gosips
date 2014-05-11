@@ -6,10 +6,7 @@ import (
 
 /** Implementation of the URI class. This relies on the 1.4 URI class.
  */
-
 type URIImpl struct {
-	/** Imbedded URI
-	 */
 	uriString string
 
 	scheme string
@@ -48,13 +45,7 @@ func (this *URIImpl) String() string {
  * @return The Cloned strucutre,
  */
 func (this *URIImpl) Clone() interface{} {
-	//try {
 	return NewURIImpl(this.uriString)
-
-	//}
-	//catch ( Exception ex){
-	//    throw new RuntimeException(ex.getMessage() + this.uriString);
-	//}
 }
 
 /** Returns the value of the "scheme" of
@@ -74,5 +65,5 @@ func (this *URIImpl) GetScheme() string {
 func (this *URIImpl) IsSipURI() bool {
 	var uri URI = this
 	_, ok := uri.(SipURI)
-	return ok //this instanceof SipURIImpl;
+	return ok
 }
