@@ -167,7 +167,7 @@ func (this *SIPRequest) SetDefaults() {
 	}
 	if method == REGISTER || method == INVITE {
 		if sipUri, ok := u.(address.SipURI); ok {
-			//SipUri sipUri = (SipUri)  u;
+			//SipURIImpl sipUri = (SipURIImpl)  u;
 			sipUri.SetUserParam(DEFAULT_USER)
 			// try {
 			sipUri.SetTransportParam(DEFAULT_TRANSPORT)

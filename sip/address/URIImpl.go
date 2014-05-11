@@ -7,7 +7,7 @@ import (
 /** Implementation of the URI class. This relies on the 1.4 URI class.
  */
 
-type Uri struct {
+type URIImpl struct {
 	/** Imbedded URI
 	 */
 	uriString string
@@ -19,10 +19,10 @@ type Uri struct {
  * @param uriString The imbedded URI string.
  * @throws URISyntaxException When there is a syntaz error in the imbedded URI.
  */
-func NewUri(uriString string) *Uri {
+func NewURIImpl(uriString string) *URIImpl {
 	i := strings.Index(uriString, ":")
 	if i > 0 {
-		return &Uri{uriString: uriString, scheme: uriString[0:i]}
+		return &URIImpl{uriString: uriString, scheme: uriString[0:i]}
 	}
 
 	return nil
@@ -31,7 +31,7 @@ func NewUri(uriString string) *Uri {
 /** Encode the URI.
  * @return The encoded URI
  */
-func (this *Uri) String() string {
+func (this *URIImpl) String() string {
 	return this.uriString
 
 }
@@ -39,7 +39,7 @@ func (this *Uri) String() string {
 /** Encode this URI.
  * @return The encoded URI
  */
-/*func (this *Uri) ToString() string {
+/*func (this *URIImpl) ToString() string {
     return this.Encode();
 
 }*/
@@ -47,9 +47,9 @@ func (this *Uri) String() string {
 /** Overrides the base clone method
  * @return The Cloned strucutre,
  */
-func (this *Uri) Clone() interface{} {
+func (this *URIImpl) Clone() interface{} {
 	//try {
-	return NewUri(this.uriString)
+	return NewURIImpl(this.uriString)
 
 	//}
 	//catch ( Exception ex){
@@ -62,7 +62,7 @@ func (this *Uri) Clone() interface{} {
  *
  * @return the scheme paramter of the URI
  */
-func (this *Uri) GetScheme() string {
+func (this *URIImpl) GetScheme() string {
 	return this.scheme
 }
 
@@ -71,8 +71,8 @@ func (this *Uri) GetScheme() string {
  *
  * @return true if the scheme is "sip" or "sips", false otherwise.
  */
-func (this *Uri) IsSipURI() bool {
+func (this *URIImpl) IsSipURI() bool {
 	var uri URI = this
 	_, ok := uri.(SipURI)
-	return ok //this instanceof SipUri;
+	return ok //this instanceof SipURIImpl;
 }

@@ -24,7 +24,7 @@ type AddressImpl struct {
 
 	/** address field
 	 */
-	address URI //*Uri;
+	address URI //*URIImpl;
 
 }
 
@@ -63,11 +63,11 @@ func NewAddressImpl() *AddressImpl {
  *@return host:port in a HostPort structure.
  */
 func (this *AddressImpl) GetHostPort() (hp *core.HostPort, RuntimeException error) {
-	if sipuri, ok := this.address.(*SipUri); ok {
+	if sipuri, ok := this.address.(*SipURIImpl); ok {
 		return sipuri.GetHostPort(), nil
 	}
 
-	return nil, errors.New("RuntimeException: address is not a SipUri")
+	return nil, errors.New("RuntimeException: address is not a SipURIImpl")
 }
 
 /** Get the port from the imbedded URI. This assumes that a SIP URL
@@ -77,21 +77,21 @@ func (this *AddressImpl) GetHostPort() (hp *core.HostPort, RuntimeException erro
  *
  */
 func (this *AddressImpl) GetPort() (int, error) {
-	if sipuri, ok := this.address.(*SipUri); ok {
+	if sipuri, ok := this.address.(*SipURIImpl); ok {
 		return sipuri.GetHostPort().GetPort(), nil
 	}
-	return -1, errors.New("RuntimeException: address is not a SipUri")
+	return -1, errors.New("RuntimeException: address is not a SipURIImpl")
 }
 
 /** Get the user@host:port for the address field. This assumes
- * that the encapsulated object is a SipUri.
+ * that the encapsulated object is a SipURIImpl.
  *
  * BUG Fix from Antonis Kadris.
  *
  *@return string containing user@host:port.
  */
 func (this *AddressImpl) GetUserAtHostPort() string {
-	if sipuri, ok := this.address.(*SipUri); ok {
+	if sipuri, ok := this.address.(*SipURIImpl); ok {
 		sipuri.GetUserAtHostPort()
 	}
 	return this.address.String()
@@ -102,11 +102,11 @@ func (this *AddressImpl) GetUserAtHostPort() string {
  *@return the host name.
  */
 func (this *AddressImpl) GetHost() (string, error) {
-	if sipuri, ok := this.address.(*SipUri); ok {
+	if sipuri, ok := this.address.(*SipURIImpl); ok {
 		return sipuri.GetHostPort().GetHost().GetHostName(), nil
 	}
 
-	return "", errors.New("RuntimeException: address is not a SipUri")
+	return "", errors.New("RuntimeException: address is not a SipURIImpl")
 }
 
 /** Remove a parameter from the address.
@@ -114,14 +114,14 @@ func (this *AddressImpl) GetHost() (string, error) {
  *@param parameterName is the name of the parameter to remove.
  */
 func (this *AddressImpl) RemoveParameter(parameterName string) {
-	if sipuri, ok := this.address.(*SipUri); ok {
+	if sipuri, ok := this.address.(*SipURIImpl); ok {
 		sipuri.RemoveParameter(parameterName)
 	}
 	/*
-	   if (! (address instanceof SipUri) )
+	   if (! (address instanceof SipURIImpl) )
 	       throw new RuntimeException
-	       ("address is not a SipUri");
-	   SipUri uri = (SipUri) address;
+	       ("address is not a SipURIImpl");
+	   SipURIImpl uri = (SipURIImpl) address;
 	*/
 }
 
@@ -197,7 +197,7 @@ func (this *AddressImpl) SetDisplayName(displayName string) (ParseException erro
 /**
  * Set the address field
  *
- * @param address SipUri to set
+ * @param address SipURIImpl to set
  *
  */
 func (this *AddressImpl) SetAddess(address URI) {
@@ -282,7 +282,7 @@ func (this *AddressImpl) SetURI(address URI) {
  *@param user -- user name to set for the imbedded URI.
  */
 func (this *AddressImpl) SetUser(user string) {
-	if sipuri, ok := this.address.(*SipUri); ok {
+	if sipuri, ok := this.address.(*SipURIImpl); ok {
 		sipuri.SetUser(user)
 	}
 }

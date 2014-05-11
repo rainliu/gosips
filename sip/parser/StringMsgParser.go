@@ -661,11 +661,11 @@ func (this *StringMsgParser) ParSetelephoneNumber(telephone_number string) (*add
  * @return A parsed URI structure
  * @exception ParseException  if there was an error parsing the message.
  */
-func (this *StringMsgParser) ParseSIPUrl(url string) (*address.SipUri, error) {
+func (this *StringMsgParser) ParseSIPUrl(url string) (*address.SipURIImpl, error) {
 	//throws ParseException {
 	//try {
 	sipuri, err := NewURLParser(url).Parse()
-	return sipuri.(*address.SipUri), err
+	return sipuri.(*address.SipURIImpl), err
 	//} catch (ClassCastException ex) {
 	//    throw new ParseException(url + " Not a SIP URL ",0);
 	//}
@@ -677,10 +677,10 @@ func (this *StringMsgParser) ParseSIPUrl(url string) (*address.SipUri, error) {
  * @return A parsed URI structure
  * @exception ParseException  if there was an error parsing the message.
  */
-func (this *StringMsgParser) ParseUrl(url string) (*address.Uri, error) {
+func (this *StringMsgParser) ParseUrl(url string) (*address.URIImpl, error) {
 	//throws ParseException {
 	guri, err := NewURLParser(url).Parse()
-	return guri.(*address.Uri), err
+	return guri.(*address.URIImpl), err
 }
 
 /**

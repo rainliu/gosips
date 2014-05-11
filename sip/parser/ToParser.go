@@ -35,7 +35,7 @@ func (this *ToParser) Parse() (sh header.Header, ParseException error) {
 	if addr.GetAddressType() == address.ADDRESS_SPEC {
 		// the parameters are header parameters.
 		if to.GetAddress().GetURI().IsSipURI() {
-			sipUri, _ := to.GetAddress().GetURI().(*address.SipUri)
+			sipUri, _ := to.GetAddress().GetURI().(*address.SipURIImpl)
 			parms := sipUri.GetUriParms()
 			if parms != nil && parms.Len() > 0 {
 				to.SetParameters(parms)

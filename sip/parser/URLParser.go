@@ -293,7 +293,7 @@ func (this *URLParser) UriReference() (url address.URI, ParseException error) {
 		//println("i'm UriString()");
 		urlString := this.UricString()
 		//try {
-		retval = address.NewUri(urlString)
+		retval = address.NewURIImpl(urlString)
 		//}
 		//catch (ParseException ex) {
 		//   throw createParseException(ex.getMessage());
@@ -475,9 +475,9 @@ func (this *URLParser) TelURL() (telUrl *address.TelURLImpl, ParseException erro
  *@throws ParsException if there was a problem parsing.
  */
 
-func (this *URLParser) SipURL() (sipurl *address.SipUri, ParseException error) {
+func (this *URLParser) SipURL() (sipurl *address.SipURIImpl, ParseException error) {
 	//if (debug) dbg_enter("sipURL");
-	retval := address.NewSipUri()
+	retval := address.NewSipURIImpl()
 	//try{
 	this.GetLexer().Match(TokenTypes_SIP)
 	this.GetLexer().Match(':')

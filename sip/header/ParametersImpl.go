@@ -462,12 +462,12 @@ func (this *Parameters) SetParameters(parameters *core.NameValueList) {
  *@return value of the parameter as a URI or null if the parameter
  *  not present.
  */
-/*protected Uri getParameterAsURI(String parameterName) {
+/*protected URIImpl getParameterAsURI(String parameterName) {
       Object val =   getParameterValue (parameterName);
-	    if (val instanceof Uri)  return (Uri) val;
+	    if (val instanceof URIImpl)  return (URIImpl) val;
 	    else {
                 try{
-                    return new Uri((String)val);
+                    return new URIImpl((String)val);
                 }
                 catch (ParseException ex) {
                 //catch ( URISyntaxException ex) {

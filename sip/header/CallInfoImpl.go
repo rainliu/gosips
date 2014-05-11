@@ -21,7 +21,7 @@ type CallInfo struct {
 	Parameters
 	//implements javax.sip.header.CallInfoHeader {
 
-	info *address.Uri
+	info *address.URIImpl
 }
 
 /** Default constructor
@@ -86,5 +86,5 @@ func (this *CallInfo) SetPurpose(purpose string) {
  * @param info is the URI to set.
  */
 func (this *CallInfo) SetInfo(info address.URI) {
-	this.info = info.(*address.Uri)
+	this.info = info.(*address.URIImpl)
 }

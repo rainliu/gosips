@@ -227,7 +227,7 @@ func (this *Authentication) SetURI(uri address.URI) {
  */
 func (this *Authentication) GetURI() address.URI {
 	url := this.GetParameter(ParameterNames_URI)
-	return address.NewUri(url)
+	return address.NewURIImpl(url)
 }
 
 /**

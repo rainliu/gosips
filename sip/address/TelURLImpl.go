@@ -9,7 +9,7 @@ import (
 *
  */
 type TelURLImpl struct {
-	Uri
+	URIImpl
 
 	telephoneNumber *TelephoneNumber
 }

@@ -9,10 +9,10 @@ import (
 )
 
 /**
-* The SipUri structure.
+* The SipURIImpl structure.
  */
-type SipUri struct {
-	Uri
+type SipURIImpl struct {
+	URIImpl
 
 	/** Authority for the uri.
 	 */
@@ -32,8 +32,8 @@ type SipUri struct {
 	telephoneSubscriber *TelephoneNumber
 }
 
-func NewSipUri() *SipUri {
-	this := &SipUri{}
+func NewSipURIImpl() *SipURIImpl {
+	this := &SipURIImpl{}
 
 	this.scheme = core.SIPTransportNames_SIP
 	this.uriParms = core.NewNameValueList("uriparms")
@@ -46,7 +46,7 @@ func NewSipUri() *SipUri {
 /** Constructor given the scheme.
  * The scheme must be either Sip or Sips
  */
-func (this *SipUri) SetScheme(scheme string) {
+func (this *SipURIImpl) SetScheme(scheme string) {
 	scheme = strings.ToLower(scheme)
 	if scheme != core.SIPTransportNames_SIP && scheme != core.SIPTransportNames_SIPS {
 		return //throw new IllegalArgumentException("bad scheme "+scheme);
@@ -56,7 +56,7 @@ func (this *SipUri) SetScheme(scheme string) {
 
 /** Get the scheme.
  */
-func (this *SipUri) GetScheme() string {
+func (this *SipURIImpl) GetScheme() string {
 	return this.scheme
 }
 
@@ -64,14 +64,14 @@ func (this *SipUri) GetScheme() string {
  * clear all URI Parameters.
  * @since v1.0
  */
-func (this *SipUri) ClearUriParms() {
+func (this *SipURIImpl) ClearUriParms() {
 	this.uriParms = core.NewNameValueList("uriparms")
 }
 
 /**
 *Clear the password from the user part if it exists.
  */
-func (this *SipUri) ClearPassword() {
+func (this *SipURIImpl) ClearPassword() {
 	if this.authority != nil {
 		userInfo := this.authority.GetUserInfo()
 		if userInfo != nil {
@@ -82,14 +82,14 @@ func (this *SipUri) ClearPassword() {
 
 /** Get the authority.
  */
-func (this *SipUri) GetAuthority() *Authority {
+func (this *SipURIImpl) GetAuthority() *Authority {
 	return this.authority
 }
 
 /**
  * Clear all Qheaders.
  */
-func (this *SipUri) ClearQheaders() {
+func (this *SipURIImpl) ClearQheaders() {
 	this.qheaders = core.NewNameValueList("qheaders")
 }
 
@@ -106,7 +106,7 @@ func (this *SipUri) ClearQheaders() {
             return false;
         }
 
-        SipUri other = (SipUri) that;
+        SipURIImpl other = (SipURIImpl) that;
 
 	// Compare the authority portion.
 	if (!this.authority.equals(other.authority)) return false;
@@ -149,7 +149,7 @@ func (this *SipUri) ClearQheaders() {
  * Construct a URL from the parsed structure.
  * @return String
  */
-func (this *SipUri) String() string {
+func (this *SipURIImpl) String() string {
 	var retval bytes.Buffer
 	retval.WriteString(this.scheme)
 	retval.WriteString(core.SIPSeparatorNames_COLON)
@@ -178,7 +178,7 @@ func (this *SipUri) String() string {
  * GetUser@host
  * @return user@host portion of the uri (null if none exists).
  */
-func (this *SipUri) GetUserAtHost() string {
+func (this *SipURIImpl) GetUserAtHost() string {
 	user := this.authority.GetUserInfo().GetUser()
 	host := this.authority.GetHost().String()
 	return user + core.SIPSeparatorNames_AT + host
@@ -188,7 +188,7 @@ func (this *SipUri) GetUserAtHost() string {
  * GetUser@host
  * @return user@host portion of the uri (null if none exists).
  */
-func (this *SipUri) GetUserAtHostPort() string {
+func (this *SipURIImpl) GetUserAtHostPort() string {
 	var user string
 	if this.authority.GetUserInfo() != nil {
 		user = this.authority.GetUserInfo().GetUser()
@@ -215,7 +215,7 @@ func (this *SipUri) GetUserAtHostPort() string {
  * @param parmname Name of the parameter to Get.
  * @return Parameter of the given name (null if none exists).
  */
-func (this *SipUri) GetParm(parmname string) interface{} {
+func (this *SipURIImpl) GetParm(parmname string) interface{} {
 	return this.uriParms.GetValue(parmname)
 }
 
@@ -223,7 +223,7 @@ func (this *SipUri) GetParm(parmname string) interface{} {
  * Get the method parameter.
  * @return Method parameter.
  */
-func (this *SipUri) GetMethod() string {
+func (this *SipURIImpl) GetMethod() string {
 	return this.GetParm(core.SIPTransportNames_METHOD).(string)
 }
 
@@ -231,14 +231,14 @@ func (this *SipUri) GetMethod() string {
  * Accessor for URI parameters
  * @return A name-value list containing the parameters.
  */
-func (this *SipUri) GetUriParms() *core.NameValueList {
+func (this *SipURIImpl) GetUriParms() *core.NameValueList {
 	return this.uriParms
 }
 
 /** Remove the URI parameters.
 *
  */
-func (this *SipUri) RemoveUriParms() {
+func (this *SipURIImpl) RemoveUriParms() {
 	this.uriParms = core.NewNameValueList("uriparms")
 }
 
@@ -247,7 +247,7 @@ func (this *SipUri) RemoveUriParms() {
  * @return Get the query headers (that appear after the ? in
  * the URL)
  */
-func (this *SipUri) GetQheaders() *core.NameValueList {
+func (this *SipURIImpl) GetQheaders() *core.NameValueList {
 	return this.qheaders
 }
 
@@ -255,7 +255,7 @@ func (this *SipUri) GetQheaders() *core.NameValueList {
  * Get the urse parameter.
  * @return User parameter (user= phone or user=ip).
  */
-func (this *SipUri) GetUserType() string {
+func (this *SipURIImpl) GetUserType() string {
 	return this.uriParms.GetValue(core.SIPTransportNames_USER).(string)
 }
 
@@ -264,7 +264,7 @@ func (this *SipUri) GetUserType() string {
  * @return User password when it embedded as part of the uri
  * ( a very bad idea).
  */
-func (this *SipUri) GetUserPassword() string {
+func (this *SipURIImpl) GetUserPassword() string {
 	if this.authority == nil {
 		return ""
 	}
@@ -274,7 +274,7 @@ func (this *SipUri) GetUserPassword() string {
 /** Set the user password.
  *@param password - password to set.
  */
-func (this *SipUri) SetUserPassword(password string) {
+func (this *SipURIImpl) SetUserPassword(password string) {
 	if this.authority == nil {
 		this.authority = NewAuthority()
 	}
@@ -287,7 +287,7 @@ func (this *SipUri) SetUserPassword(password string) {
  * @return TelephoneNumber part of the url (only makes sense
  * when user = phone is specified)
  */
-func (this *SipUri) GetTelephoneSubscriber() *TelephoneNumber {
+func (this *SipURIImpl) GetTelephoneSubscriber() *TelephoneNumber {
 	if this.telephoneSubscriber == nil {
 		this.telephoneSubscriber = NewTelephoneNumber()
 	}
@@ -299,7 +299,7 @@ func (this *SipUri) GetTelephoneSubscriber() *TelephoneNumber {
  * @return Get the host:port part of the url parsed into a
  * structure.
  */
-func (this *SipUri) GetHostPort() *core.HostPort {
+func (this *SipURIImpl) GetHostPort() *core.HostPort {
 	if this.authority == nil {
 		return nil
 	} //else {
@@ -311,7 +311,7 @@ func (this *SipUri) GetHostPort() *core.HostPort {
 *
 *@return the port from the authority field.
  */
-func (this *SipUri) GetPort() int {
+func (this *SipURIImpl) GetPort() int {
 	hp := this.GetHostPort()
 	if hp == nil {
 		return -1
@@ -322,7 +322,7 @@ func (this *SipUri) GetPort() int {
 /** Get the host protion of the URI.
 * @return the host portion of the url.
  */
-func (this *SipUri) GetHost() string {
+func (this *SipURIImpl) GetHost() string {
 	return this.authority.GetHost().String()
 }
 
@@ -352,7 +352,7 @@ func (this *SipUri) GetHost() string {
  * part as a telephone number if local restrictions on the
  * @return true if the user is a telephone subscriber.
  */
-func (this *SipUri) IsUserTelephoneSubscriber() bool {
+func (this *SipURIImpl) IsUserTelephoneSubscriber() bool {
 	usrtype := this.uriParms.GetValue(core.SIPTransportNames_USER).(string)
 	if usrtype == "" {
 		return false
@@ -363,7 +363,7 @@ func (this *SipUri) IsUserTelephoneSubscriber() bool {
 /**
  *Remove the ttl value from the parameter list if it exists.
  */
-func (this *SipUri) RemoveTTL() {
+func (this *SipURIImpl) RemoveTTL() {
 	if this.uriParms != nil {
 		this.uriParms.Delete(core.SIPTransportNames_TTL)
 	}
@@ -372,7 +372,7 @@ func (this *SipUri) RemoveTTL() {
 /**
  *Remove the maddr param if it exists.
  */
-func (this *SipUri) RemoveMAddr() {
+func (this *SipURIImpl) RemoveMAddr() {
 	if this.uriParms != nil {
 		this.uriParms.Delete(core.SIPTransportNames_MADDR)
 	}
@@ -381,7 +381,7 @@ func (this *SipUri) RemoveMAddr() {
 /**
  *Delete the transport string.
  */
-func (this *SipUri) RemoveTransport() {
+func (this *SipURIImpl) RemoveTransport() {
 	if this.uriParms != nil {
 		this.uriParms.Delete(core.SIPTransportNames_TRANSPORT)
 	}
@@ -390,7 +390,7 @@ func (this *SipUri) RemoveTransport() {
 /** Remove a header given its name (provided it exists).
  * @param name name of the header to Remove.
  */
-func (this *SipUri) RemoveHeader(name string) {
+func (this *SipURIImpl) RemoveHeader(name string) {
 	if this.qheaders != nil {
 		this.qheaders.Delete(name)
 	}
@@ -398,14 +398,14 @@ func (this *SipUri) RemoveHeader(name string) {
 
 /** Remove all headers.
  */
-func (this *SipUri) RemoveHeaders() {
+func (this *SipURIImpl) RemoveHeaders() {
 	this.qheaders = core.NewNameValueList("qheaders")
 }
 
 /**
  * Set the user type.
  */
-func (this *SipUri) RemoveUserType() {
+func (this *SipURIImpl) RemoveUserType() {
 	if this.uriParms != nil {
 		this.uriParms.Delete(core.SIPTransportNames_USER)
 	}
@@ -414,14 +414,14 @@ func (this *SipUri) RemoveUserType() {
 /**
  *Remove the port setting.
  */
-func (this *SipUri) RemovePort() {
+func (this *SipURIImpl) RemovePort() {
 	this.authority.RemovePort()
 }
 
 /**
  * Remove the Method.
  */
-func (this *SipUri) RemoveMethod() {
+func (this *SipURIImpl) RemoveMethod() {
 	if this.uriParms != nil {
 		this.uriParms.Delete(core.SIPTransportNames_METHOD)
 	}
@@ -435,7 +435,7 @@ func (this *SipUri) RemoveMethod() {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the user value.
  */
-func (this *SipUri) SetUser(uname string) {
+func (this *SipURIImpl) SetUser(uname string) {
 	if this.authority == nil {
 		this.authority = NewAuthority()
 	}
@@ -445,7 +445,7 @@ func (this *SipUri) SetUser(uname string) {
 
 /** Remove the user.
  */
-func (this *SipUri) RemoveUser() {
+func (this *SipURIImpl) RemoveUser() {
 	this.authority.RemoveUserInfo()
 }
 
@@ -455,7 +455,7 @@ func (this *SipUri) RemoveUser() {
  * @param name Name of the parameter to set.
  * @param value value of the parameter to set.
  */
-func (this *SipUri) SetDefaultParm(name string, value interface{}) {
+func (this *SipURIImpl) SetDefaultParm(name string, value interface{}) {
 	if this.uriParms.GetValue(name) == nil {
 		nv := core.NewNameValue(name, value)
 		this.uriParms.AddNameValue(nv)
@@ -465,14 +465,14 @@ func (this *SipUri) SetDefaultParm(name string, value interface{}) {
 /** Set the authority member
  * @param authority Authority to set.
  */
-func (this *SipUri) SetAuthority(authority *Authority) {
+func (this *SipURIImpl) SetAuthority(authority *Authority) {
 	this.authority = authority
 }
 
 /** Set the host for this URI.
  * @param h host to set.
  */
-func (this *SipUri) SetHost(h *core.Host) {
+func (this *SipURIImpl) SetHost(h *core.Host) {
 	if this.authority == nil {
 		this.authority = NewAuthority()
 	}
@@ -482,7 +482,7 @@ func (this *SipUri) SetHost(h *core.Host) {
 /** Set the uriParms member
  * @param parms URI parameters to set.
  */
-func (this *SipUri) SetUriParms(parms *core.NameValueList) {
+func (this *SipURIImpl) SetUriParms(parms *core.NameValueList) {
 	this.uriParms = parms
 }
 
@@ -492,7 +492,7 @@ func (this *SipUri) SetUriParms(parms *core.NameValueList) {
          * @param name Name of the parameter to set.
          * @param value value of the parameter to set.
 */
-func (this *SipUri) SetUriParm(name string, value interface{}) {
+func (this *SipURIImpl) SetUriParm(name string, value interface{}) {
 	nv := core.NewNameValue(name, value)
 	this.uriParms.AddNameValue(nv)
 }
@@ -500,7 +500,7 @@ func (this *SipUri) SetUriParm(name string, value interface{}) {
 /** Set the qheaders member
  * @param parms query headers to set.
  */
-func (this *SipUri) SetQheaders(parms *core.NameValueList) {
+func (this *SipURIImpl) SetQheaders(parms *core.NameValueList) {
 	this.qheaders = parms
 }
 
@@ -508,7 +508,7 @@ func (this *SipUri) SetQheaders(parms *core.NameValueList) {
  * Set the MADDR parameter .
  * @param mAddr Host Name to set
  */
-func (this *SipUri) SetMAddr(mAddr string) {
+func (this *SipURIImpl) SetMAddr(mAddr string) {
 	nameValue := this.uriParms.GetNameValue(core.SIPTransportNames_MADDR)
 	host := &core.Host{}
 	host.SetAddress(mAddr)
@@ -526,7 +526,7 @@ func (this *SipUri) SetMAddr(mAddr string) {
  *
  * @param  userParam - new value String value of the method parameter
  */
-func (this *SipUri) SetUserParam(usertype string) {
+func (this *SipURIImpl) SetUserParam(usertype string) {
 	this.uriParms.Delete(core.SIPTransportNames_USER)
 	this.uriParms.AddNameAndValue(core.SIPTransportNames_USER, usertype)
 }
@@ -534,7 +534,7 @@ func (this *SipUri) SetUserParam(usertype string) {
 /** set the Method
  * @param method method parameter
  */
-func (this *SipUri) SetMethod(method string) {
+func (this *SipURIImpl) SetMethod(method string) {
 	this.uriParms.AddNameAndValue(core.SIPTransportNames_METHOD, method)
 }
 
@@ -542,7 +542,7 @@ func (this *SipUri) SetMethod(method string) {
  * Sets ISDN subaddress of SipURL
  * @param <var>isdnSubAddress</var> ISDN subaddress
  */
-func (this *SipUri) SetIsdnSubAddress(isdnSubAddress string) {
+func (this *SipURIImpl) SetIsdnSubAddress(isdnSubAddress string) {
 	if this.telephoneSubscriber == nil {
 		this.telephoneSubscriber = NewTelephoneNumber()
 	}
@@ -552,14 +552,14 @@ func (this *SipUri) SetIsdnSubAddress(isdnSubAddress string) {
 /** Set the telephone subscriber field.
  * @param tel Telephone subscriber field to set.
  */
-func (this *SipUri) SetTelephoneSubscriber(tel *TelephoneNumber) {
+func (this *SipURIImpl) SetTelephoneSubscriber(tel *TelephoneNumber) {
 	this.telephoneSubscriber = tel
 }
 
 /** set the port to a given value.
  * @param p Port to set.
  */
-func (this *SipUri) SetPort(p int) {
+func (this *SipURIImpl) SetPort(p int) {
 	if this.authority == nil {
 		this.authority = NewAuthority()
 	}
@@ -570,28 +570,28 @@ func (this *SipUri) SetPort(p int) {
  * @param name Name of the parameter to check on.
  * @return a boolean indicating whether the parameter exists.
  */
-func (this *SipUri) HasParameter(name string) bool {
+func (this *SipURIImpl) HasParameter(name string) bool {
 	return this.uriParms.GetValue(name) != nil
 }
 
 /** Set the query header when provided as a name-value pair.
  *@param qHeader - qeuery header provided as a name,value pair.
  */
-func (this *SipUri) SetQHeader(nameValue *core.NameValue) {
+func (this *SipURIImpl) SetQHeader(nameValue *core.NameValue) {
 	this.qheaders.PushBack(nameValue)
 }
 
 /** Set the parameter as given.
  *@param nameValue - parameter to set.
  */
-func (this *SipUri) SetUriParameter(nameValue *core.NameValue) {
+func (this *SipURIImpl) SetUriParameter(nameValue *core.NameValue) {
 	this.uriParms.PushBack(nameValue)
 }
 
 /** Return true if the transport parameter is defined.
  * @return true if transport appears as a parameter and false otherwise.
  */
-func (this *SipUri) HasTransport() bool {
+func (this *SipURIImpl) HasTransport() bool {
 	return this.HasParameter(core.SIPTransportNames_TRANSPORT)
 }
 
@@ -599,14 +599,14 @@ func (this *SipUri) HasTransport() bool {
  * Remove a parameter given its name
  * @param name -- name of the parameter to Remove.
  */
-func (this *SipUri) RemoveParameter(name string) {
+func (this *SipURIImpl) RemoveParameter(name string) {
 	this.uriParms.Delete(name)
 }
 
 /** Set the hostPort field of the imbedded authority field.
  *@param hostPort is the hostPort to set.
  */
-func (this *SipUri) SetHostPort(hostPort *core.HostPort) {
+func (this *SipURIImpl) SetHostPort(hostPort *core.HostPort) {
 	if this.authority == nil {
 		this.authority = NewAuthority()
 	}
@@ -616,8 +616,8 @@ func (this *SipUri) SetHostPort(hostPort *core.HostPort) {
 /**/
 /** clone this.
  */
-func (this *SipUri) Clone() interface{} {
-	retval := NewSipUri()
+func (this *SipURIImpl) Clone() interface{} {
+	retval := NewSipURIImpl()
 
 	retval.uriString = this.uriString
 	retval.scheme = this.scheme
@@ -646,7 +646,7 @@ func (this *SipUri) Clone() interface{} {
  * @param <var>name</var> name of header to retrieve
  * @return the value of specified header
  */
-func (this *SipUri) GetHeader(name string) string {
+func (this *SipURIImpl) GetHeader(name string) string {
 	if this.qheaders.GetValue(name) == nil {
 		return ""
 	}
@@ -660,7 +660,7 @@ func (this *SipUri) GetHeader(name string) string {
  *
  * @return an Iterator over all the header names
  */
-func (this *SipUri) GetHeaderNames() *core.NameValueList {
+func (this *SipURIImpl) GetHeaderNames() *core.NameValueList {
 	return this.qheaders
 }
 
@@ -669,7 +669,7 @@ func (this *SipUri) GetHeaderNames() *core.NameValueList {
  *
  * @return the value of the <code>lr</code> parameter
  */
-func (this *SipUri) GetLrParam() string {
+func (this *SipURIImpl) GetLrParam() string {
 	if this.HasParameter(core.SIPTransportNames_LR) {
 		return "true"
 	}
@@ -681,7 +681,7 @@ func (this *SipUri) GetLrParam() string {
  *
  * @return the value of the <code>maddr</code> parameter
  */
-func (this *SipUri) GetMAddrParam() string {
+func (this *SipURIImpl) GetMAddrParam() string {
 	maddr := this.uriParms.GetNameValue(core.SIPTransportNames_MADDR)
 	if maddr == nil {
 		return ""
@@ -694,7 +694,7 @@ func (this *SipUri) GetMAddrParam() string {
  *
  * @return  the value of the <code>method</code> parameter
  */
-func (this *SipUri) GetMethodParam() string {
+func (this *SipURIImpl) GetMethodParam() string {
 	return this.GetParameter(core.SIPTransportNames_METHOD)
 }
 
@@ -710,7 +710,7 @@ func (this *SipUri) GetMethodParam() string {
  * @return the value of specified parameter
  *
  */
-func (this *SipUri) GetParameter(name string) string {
+func (this *SipURIImpl) GetParameter(name string) string {
 	val := this.uriParms.GetValue(name)
 	if val == nil {
 		return ""
@@ -729,7 +729,7 @@ func (this *SipUri) GetParameter(name string) string {
  * @return an Iterator over all the parameter names
  *
  */
-func (this *SipUri) GetParameterNames() *list.List {
+func (this *SipURIImpl) GetParameterNames() *list.List {
 	return this.uriParms.GetNames()
 }
 
@@ -738,7 +738,7 @@ func (this *SipUri) GetParameterNames() *list.List {
  *
  * @return the value of the <code>ttl</code> parameter
  */
-func (this *SipUri) GetTTLParam() int {
+func (this *SipURIImpl) GetTTLParam() int {
 	ttl := this.uriParms.GetValue("ttl")
 	if ttl != nil {
 		return ttl.(int)
@@ -751,7 +751,7 @@ func (this *SipUri) GetTTLParam() int {
  *
  * @return the transport paramter of the SipURI
  */
-func (this *SipUri) GetTransportParam() string {
+func (this *SipURIImpl) GetTransportParam() string {
 	if this.uriParms != nil {
 		return this.uriParms.GetValue(core.SIPTransportNames_TRANSPORT).(string)
 	}
@@ -765,7 +765,7 @@ func (this *SipUri) GetTransportParam() string {
  *
  * @return the value of the <code>userParam</code> of the SipURI
  */
-func (this *SipUri) GetUser() string {
+func (this *SipURIImpl) GetUser() string {
 	return this.authority.GetUser()
 }
 
@@ -775,7 +775,7 @@ func (this *SipUri) GetUser() string {
  * @return  <code>true</code> if this SipURI represents a sips URI, and
  * <code>false</code> if it represents a sip URI.
  */
-func (this *SipUri) IsSecure() bool {
+func (this *SipURIImpl) IsSecure() bool {
 	return strings.ToLower(this.GetScheme()) == (core.SIPTransportNames_SIPS)
 }
 
@@ -783,7 +783,7 @@ func (this *SipUri) IsSecure() bool {
  *
  * @return true if the scheme is "sip" or "sips", false otherwise.
  */
-func (this *SipUri) IsSipURI() bool {
+func (this *SipURIImpl) IsSipURI() bool {
 	return true
 }
 
@@ -794,7 +794,7 @@ func (this *SipUri) IsSipURI() bool {
  * @param name - a String specifying the header name
  * @param value - a String specifying the header value
  */
-func (this *SipUri) SetHeader(name, value string) {
+func (this *SipURIImpl) SetHeader(name, value string) {
 	if this.qheaders.GetValue(name) == nil {
 		nv := core.NewNameValue(name, value)
 		this.qheaders.AddNameValue(nv)
@@ -808,7 +808,7 @@ func (this *SipUri) SetHeader(name, value string) {
  *
  * @return  the host part of this SipURI
  */
-func (this *SipUri) SetHostString(host string) {
+func (this *SipURIImpl) SetHostString(host string) {
 	h := core.NewHost(host)
 	this.SetHost(h)
 }
@@ -820,7 +820,7 @@ func (this *SipUri) SetHostString(host string) {
  * Record-Route header field values, and may appear in the URIs in a
  * pre-existing route Set.
  */
-func (this *SipUri) SetLrParam() {
+func (this *SipURIImpl) SetLrParam() {
 	if this.uriParms.GetValue("lr") != nil {
 		return
 	}
@@ -835,7 +835,7 @@ func (this *SipUri) SetLrParam() {
  *
  * @param  method - new value of the <code>maddr</code> parameter
  */
-func (this *SipUri) SetMAddrParam(maddr string) {
+func (this *SipURIImpl) SetMAddrParam(maddr string) {
 	if maddr == "" {
 		//throw new NullPointerException("bad maddr");
 		return
@@ -849,7 +849,7 @@ func (this *SipUri) SetMAddrParam(maddr string) {
  *
  * @param  method - new value String value of the method parameter
  */
-func (this *SipUri) SetMethodParam(method string) {
+func (this *SipURIImpl) SetMethodParam(method string) {
 	this.SetParameter("method", method)
 }
 
@@ -871,7 +871,7 @@ func (this *SipUri) SetMethodParam(method string) {
  * unexpectedly while parsing the parameter name or value.
  *
  */
-func (this *SipUri) SetParameter(name, value string) {
+func (this *SipURIImpl) SetParameter(name, value string) {
 	if name == "ttl" {
 		//try {
 		if _, err := strconv.Atoi(value); err != nil {
@@ -888,7 +888,7 @@ func (this *SipUri) SetParameter(name, value string) {
  *
  * @param secure - the boolean value indicating if the SipURI is secure.
  */
-func (this *SipUri) SetSecure(secure bool) {
+func (this *SipURIImpl) SetSecure(secure bool) {
 	if secure {
 		this.scheme = core.SIPTransportNames_SIPS
 	} else {
@@ -902,7 +902,7 @@ func (this *SipUri) SetSecure(secure bool) {
  *
  * @param ttl - new value of the <code>ttl</code> parameter
  */
-func (this *SipUri) SetTTLParam(ttl int) {
+func (this *SipURIImpl) SetTTLParam(ttl int) {
 	if ttl <= 0 {
 		//throw new IllegalArgumentException ("Bad ttl value");
 		return
@@ -924,7 +924,7 @@ func (this *SipUri) SetTTLParam(ttl int) {
  * @param transport - new value for the "transport" parameter
  * @see javax.sip.ListeningPoint
  */
-func (this *SipUri) SetTransportParam(transport string) {
+func (this *SipURIImpl) SetTransportParam(transport string) {
 	if transport == "" {
 		//throw new NullPointerException("null arg");
 		return
@@ -941,7 +941,7 @@ func (this *SipUri) SetTransportParam(transport string) {
  *
  * @return  the user part of this SipURI
  */
-func (this *SipUri) GetUserParam() string {
+func (this *SipURIImpl) GetUserParam() string {
 	return this.GetParameter("user")
 
 }
@@ -952,6 +952,6 @@ func (this *SipUri) GetUserParam() string {
  *
  * @return true if the "lr" parameter is Set, false otherwise.
  */
-func (this *SipUri) HasLrParam() bool {
+func (this *SipURIImpl) HasLrParam() bool {
 	return this.uriParms.GetNameValue("lr") != nil
 }
