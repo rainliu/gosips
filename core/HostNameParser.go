@@ -7,7 +7,6 @@ import (
 
 /** Parser for host names.
  */
-
 type HostNameParser struct {
 	ParserCore
 }
@@ -22,7 +21,6 @@ func NewHostNameParser(hname string) *HostNameParser {
 
 /** The lexer is initialized with the buffer.
  */
-
 func NewHostNameParserFromLexer(lexer Lexer) *HostNameParser {
 	this := &HostNameParser{}
 
@@ -33,12 +31,12 @@ func NewHostNameParserFromLexer(lexer Lexer) *HostNameParser {
 }
 
 func (this *HostNameParser) DomainLabel() (s string, ParseException error) {
-	var retval bytes.Buffer //= new StringBuffer();
+	var retval bytes.Buffer
 	if Debug.ParserDebug {
 		this.Dbg_enter("domainLabel")
 		defer this.Dbg_leave("domainLabel")
 	}
-	//try {
+
 	for this.lexer.HasMoreChars() {
 		la, err := this.lexer.LookAheadK(0)
 		if err != nil {
@@ -57,21 +55,17 @@ func (this *HostNameParser) DomainLabel() (s string, ParseException error) {
 			break
 		}
 	}
-	//Debug.println("returning " + retval.toString());
+
 	return retval.String(), nil
-	//} finally {
-	//    if (debug) dbg_leave("domainLabel");
-	//}
 }
 
 func (this *HostNameParser) Ipv6Reference() (s string, ParseException error) {
-	var retval bytes.Buffer //= new StringBuffer();
+	var retval bytes.Buffer
 	if Debug.ParserDebug {
 		this.Dbg_enter("ipv6Reference")
 		defer this.Dbg_leave("ipv6Reference")
 	}
 
-	//try {
 	for this.lexer.HasMoreChars() {
 		la, err := this.lexer.LookAheadK(0)
 		if err != nil {
@@ -95,33 +89,38 @@ func (this *HostNameParser) Ipv6Reference() (s string, ParseException error) {
 	}
 
 	return retval.String(), errors.New("ParseException: Illegal Host name")
-	//} finally {
-	//    if (debug) dbg_leave("ipv6Reference");
-	//}
 }
 
-func (this *HostNameParser) GetHost() (h *Host, ParseException error) {
+func (this *HostNameParser) GetHost() (h *Host, err error) {
 	if Debug.ParserDebug {
 		this.Dbg_enter("host")
 		defer this.Dbg_leave("host")
 	}
-	//try {
-	var hname bytes.Buffer //= new StringBuffer();
+
+	var hname bytes.Buffer
+	var next byte
+	var nextToks string
 
 	//IPv6 referene
-	if next, err := this.lexer.LookAheadK(0); err == nil && next == '[' {
-		nextToks, _ := this.Ipv6Reference()
+	if next, err = this.lexer.LookAheadK(0); err == nil && next == '[' {
+		if nextToks, err = this.Ipv6Reference(); err != nil {
+			return nil, err
+		}
 		hname.WriteString(nextToks)
 	} else { //IPv4 address or hostname
-		nextToks, _ := this.DomainLabel()
+		if nextToks, err = this.DomainLabel(); err != nil {
+			return nil, err
+		}
 		hname.WriteString(nextToks)
 		// Bug reported by Stuart Woodsford (used to barf on
 		// more than 4 components to the name).
 		for this.lexer.HasMoreChars() {
 			// Reached the end of the buffer.
-			if nextTok, err := this.lexer.LookAheadK(0); err == nil && nextTok == '.' {
+			if next, err = this.lexer.LookAheadK(0); err == nil && next == '.' {
 				this.lexer.ConsumeK(1)
-				nextToks, err = this.DomainLabel()
+				if nextToks, err = this.DomainLabel(); err != nil {
+					return nil, err
+				}
 				hname.WriteString(".")
 				hname.WriteString(nextToks)
 			} else {
@@ -131,15 +130,12 @@ func (this *HostNameParser) GetHost() (h *Host, ParseException error) {
 	}
 
 	hostname := hname.String()
-	//println(hostname);
+
 	if hostname == "" {
 		return nil, errors.New("ParseException: Illegal Host name")
-	} //else{
-	return NewHost(hostname), nil
-	//}
-	//} finally {
-	//    if (debug) dbg_leave("host");
-	//}
+	} else {
+		return NewHost(hostname), nil
+	}
 }
 
 func (this *HostNameParser) GetHostPort() (hp *HostPort, ParseException error) {
@@ -148,27 +144,23 @@ func (this *HostNameParser) GetHostPort() (hp *HostPort, ParseException error) {
 		defer this.Dbg_leave("hostPort")
 	}
 
-	//try {
-	host, _ := this.GetHost()
+	host, err := this.GetHost()
+	if err != nil {
+		return nil, err
+	}
 	hp = &HostPort{host: host, port: -1}
 	// Has a port?
 	if this.lexer.HasMoreChars() {
 		if next, err := this.lexer.LookAheadK(0); err == nil && next == ':' {
 			this.lexer.ConsumeK(1)
-			//try {
-			port, _ := this.lexer.Number()
-			//p, _ := strconv.Atoi(port)
+
+			port, err := this.lexer.Number()
+			if err != nil {
+				return nil, err
+			}
 			hp.SetPort(port)
-			/*} catch (NumberFormatException nfe) {
-			  throw new ParseException
-			          (lexer.getBuffer() + " :Error parsing port ",
-			                  lexer.getPtr());*/
-		} // else {
-		//   return nil, errors.New("ParseException: Error parsing port")
-		//}
+
+		}
 	}
 	return hp, nil
-	//} finally {
-	//    if (debug) dbg_leave("hostPort");
-	//}
 }

@@ -187,7 +187,7 @@ func (this *Parser) Method() (s string, ParseException error) {
 		defer this.Dbg_leave("method")
 	}
 	//try {
-	tokens := this.GetLexer().PeekNextTokenK(1)
+	tokens, _ := this.GetLexer().PeekNextTokenK(1)
 	//println(tokens[0].String())
 	token := tokens[0]
 	if token.GetTokenType() == TokenTypes_INVITE ||

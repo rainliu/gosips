@@ -151,13 +151,19 @@ func (this *LexerCore) GetNextToken() *Token {
 
 /** Look ahead for one token.
  */
-func (this *LexerCore) PeekNextToken() *Token {
-	return this.PeekNextTokenK(1)[0]
+func (this *LexerCore) PeekNextToken() (*Token, error) {
+	tok, err := this.PeekNextTokenK(1)
+	if err != nil {
+		return nil, err
+	} else {
+		return tok[0], nil
+	}
 }
 
-func (this *LexerCore) PeekNextTokenK(ntokens int) []*Token {
+func (this *LexerCore) PeekNextTokenK(ntokens int) ([]*Token, error) {
 	old := this.ptr
 	retval := make([]*Token, ntokens)
+	var err error
 	for i := 0; i < ntokens; i++ {
 		tok := &Token{}
 		if this.StartsId() {
@@ -169,7 +175,10 @@ func (this *LexerCore) PeekNextTokenK(ntokens int) []*Token {
 				tok.tokenType = LexerCore_ID
 			}
 		} else {
-			nextChar, _ := this.GetNextChar()
+			nextChar, err := this.GetNextChar()
+			if err != nil {
+				break
+			}
 			tok.tokenValue += string(nextChar)
 			if this.IsAlpha(nextChar) {
 				tok.tokenType = LexerCore_ALPHA
@@ -183,7 +192,7 @@ func (this *LexerCore) PeekNextTokenK(ntokens int) []*Token {
 	}
 	this.savedPtr = this.ptr
 	this.ptr = old
-	return retval
+	return retval, err
 }
 
 /** Match the given token or throw an exception if no such token

@@ -22,23 +22,16 @@ type Host struct {
 
 	/** address field
 	 */
-
 	addressType int
 
 	inetAddress net.IP
 }
 
-/** default constructor
- */
-/*public Host() {
-    addressType = HOSTNAME;
-}*/
-
 /** Constructor given host name or IP address.
  */
 func NewHost(hname string) *Host {
 	if hname == "" {
-		return nil //throw new IllegalArgumentException("null host name");
+		return nil
 	}
 
 	this := &Host{}

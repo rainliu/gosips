@@ -268,7 +268,7 @@ func (this *URLParser) UricString() string {
 func (this *URLParser) UriReference() (url address.URI, ParseException error) {
 	///if (debug) dbg_enter("uriReference");
 	var retval address.URI
-	vect := this.GetLexer().PeekNextTokenK(2)
+	vect, _ := this.GetLexer().PeekNextTokenK(2)
 	t1 := vect[0]
 	t2 := vect[1]
 	//try {
@@ -421,7 +421,7 @@ func (this *URLParser) Local_phone_number() (tn *address.TelephoneNumber, ParseE
 	b, _ := this.Local_number()
 	tn.SetPhoneNumber(b)
 	if this.GetLexer().HasMoreChars() {
-		tok := this.GetLexer().PeekNextToken()
+		tok, _ := this.GetLexer().PeekNextToken()
 		switch tok.GetTokenType() {
 		case TokenTypes_SEMICOLON:
 			{
@@ -553,7 +553,7 @@ func (this *URLParser) SipURL() (sipurl *address.SipUri, ParseException error) {
 }
 
 func (this *URLParser) PeekScheme() (s string, ParseException error) {
-	tokens := this.GetLexer().PeekNextTokenK(1)
+	tokens, _ := this.GetLexer().PeekNextTokenK(1)
 	if len(tokens) == 0 {
 		return "", nil
 	}

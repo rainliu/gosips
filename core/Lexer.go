@@ -38,8 +38,8 @@ type Lexer interface {
 	Match(tok int) (t *Token, ParseException error)
 	Number() (n int, ParseException error)
 	PeekNextId() string
-	PeekNextToken() *Token
-	PeekNextTokenK(ntokens int) []*Token
+	PeekNextToken() (*Token, error)
+	PeekNextTokenK(ntokens int) ([]*Token, error)
 	QuotedString() (s string, ParseException error)
 	RewindInputPosition(position int)
 	SPorHT()
