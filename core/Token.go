@@ -1,41 +1,40 @@
 package core
 
 import (
-    "strconv"
+	"strconv"
 )
 
 type Token struct {
-    tokenValue string
-    tokenType  int
+	tokenValue string
+	tokenType  int
 }
 
-func NewToken(tvalue string, ttype int) *Token{
-	return &Token{tokenValue:tvalue, tokenType:ttype};
+func NewToken(tvalue string, ttype int) *Token {
+	return &Token{tokenValue: tvalue, tokenType: ttype}
 }
 
 func (this *Token) GetTokenValue() string {
-    return this.tokenValue
+	return this.tokenValue
 }
 func (this *Token) GetTokenType() int {
-    return this.tokenType
+	return this.tokenType
 }
-func (this *Token) SetTokenValue(tvalue string)  {
-    this.tokenValue = tvalue
+func (this *Token) SetTokenValue(tvalue string) {
+	this.tokenValue = tvalue
 }
 func (this *Token) SetTokenType(ttype int) {
-    this.tokenType = ttype
+	this.tokenType = ttype
 }
 
 func (this *Token) String() string {
-    return "tokenValue = " + this.tokenValue + "/tokenType = " + strconv.Itoa(this.tokenType)
+	return "tokenValue = " + this.tokenValue + " / tokenType = " + strconv.Itoa(this.tokenType)
 }
 
 func (this *Token) Clone() interface{} {
-	retval := &Token{};
-	
-	retval.tokenType = this.tokenType;
-	retval.tokenValue = this.tokenValue;
-	
-    return retval;
-}
+	retval := &Token{}
 
+	retval.tokenType = this.tokenType
+	retval.tokenValue = this.tokenValue
+
+	return retval
+}

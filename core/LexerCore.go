@@ -63,10 +63,6 @@ type LexerCore struct {
 	currentMatch      *Token
 }
 
-/*static{
-    globalSymbolTable  = new Hashtable();
-    lexerTables = new Hashtable();
-}*/
 func NewLexerCore(lexerName string, buffer string) *LexerCore {
 	this := &LexerCore{}
 
@@ -98,9 +94,6 @@ func (this *LexerCore) GetLexerName() string {
 }
 
 func (this *LexerCore) AddKeyword(name string, value int) {
-	// System.out.println("addKeyword " + name + " value = " + value);
-	// new Exception().printStackTrace();
-	//Integer val = new Integer(value);
 	this.currentLexer[name] = value
 	if _, ok := this.globalSymbolTable[value]; !ok {
 		this.globalSymbolTable[value] = name
@@ -110,9 +103,9 @@ func (this *LexerCore) AddKeyword(name string, value int) {
 func (this *LexerCore) LookupToken(value int) string {
 	if value > LexerCore_START {
 		return this.globalSymbolTable[value]
-	} //else {
-	return strconv.Itoa(value)
-	//}
+	} else {
+		return strconv.Itoa(value)
+	}
 }
 
 func (this *LexerCore) AddLexer(lexerName string) LexerMap {
@@ -125,8 +118,6 @@ func (this *LexerCore) AddLexer(lexerName string) LexerMap {
 	return this.currentLexer
 }
 
-//public abstract void selectLexer(String lexerName);
-
 func (this *LexerCore) SelectLexer(lexerName string) {
 	this.currentLexer = this.lexerTables[lexerName]
 	this.currentLexerName = lexerName
@@ -136,26 +127,8 @@ func (this *LexerCore) CurrentLexer() LexerMap {
 	return this.currentLexer
 }
 
-/*protected LexerCore() {
-    this.currentLexer = new Hashtable();
-    this.currentLexerName = "charLexer";
-}*/
-
-/*public LexerCore(String lexerName) {
-	this();
-        this.currentLexerName = lexerName;
-    }*/
-
-/** Initialize the lexer with a buffer.
- */
-/*public LexerCore(String lexerName, String buffer) {
-    this(lexerName);
-    this.buffer =  buffer;
-}*/
-
 /** Peek the next id but dont move the buffer pointer forward.
  */
-
 func (this *LexerCore) PeekNextId() string {
 	oldPtr := this.ptr
 	retval := this.Ttoken()
@@ -184,7 +157,6 @@ func (this *LexerCore) PeekNextToken() *Token {
 
 func (this *LexerCore) PeekNextTokenK(ntokens int) []*Token {
 	old := this.ptr
-	//fmt.Printf("len=%d\n",len(this.currentLexer));
 	retval := make([]*Token, ntokens)
 	for i := 0; i < ntokens; i++ {
 		tok := &Token{}
@@ -225,7 +197,6 @@ func (this *LexerCore) Match(tok int) (t *Token, ParseException error) {
 		if tok == LexerCore_ID {
 			// Generic ID sought.
 			if !this.StartsId() {
-				//println("ParseException: ID expected")
 				return nil, errors.New("ParseException: ID expected")
 			}
 			id := this.GetNextId()
@@ -285,20 +256,14 @@ func (this *LexerCore) Match(tok int) (t *Token, ParseException error) {
 }
 
 func (this *LexerCore) SPorHT() {
-	//try {
 	var ch byte
 
-	ch, _ = this.LookAheadK(0)
-	for ch == ' ' || ch == '\t' {
+	for ch, _ = this.LookAheadK(0); ch == ' ' || ch == '\t'; ch, _ = this.LookAheadK(0) {
 		this.ConsumeK(1)
-		ch, _ = this.LookAheadK(0)
 	}
-	//} catch (ParseException ex) {
-	// Ignore
-	//}
 }
+
 func (this *LexerCore) StartsId() bool {
-	//try {
 	nextChar, err := this.LookAheadK(0)
 	if err != nil {
 		return false
@@ -315,30 +280,17 @@ func (this *LexerCore) StartsId() bool {
 		nextChar == '`' ||
 		nextChar == '\'' ||
 		nextChar == '~')
-	/*
-		nextChar == '_' ||
-		nextChar == '+' ||
-		nextChar == '-' ||
-		nextChar == '!' ||
-		nextChar == '`' ||
-		nextChar == '\'' ||
-		nextChar == '~' ||
-		nextChar == '.' ||
-		nextChar == '*')*/
-	//} catch (ParseException ex) {
-	//return false
-	//}
 }
 
 func (this *LexerCore) Ttoken() string {
-	var nextId bytes.Buffer //=  new StringBuffer();
-	//try {
+	var nextId bytes.Buffer
+
 	for this.HasMoreChars() {
 		nextChar, err := this.LookAheadK(0)
 		if err != nil {
 			break
 		}
-		//Debug.println("nextChar = " + nextChar);
+
 		if this.IsAlpha(nextChar) ||
 			this.IsDigit(nextChar) ||
 			nextChar == '-' ||
@@ -351,16 +303,6 @@ func (this *LexerCore) Ttoken() string {
 			nextChar == '`' ||
 			nextChar == '\'' ||
 			nextChar == '~' {
-			/*
-			   nextChar == '_' ||
-			   nextChar == '+' ||
-			   nextChar == '-' ||
-			   nextChar == '!' ||
-			   nextChar == '`' ||
-			   nextChar == '\'' ||
-			   nextChar == '~' ||
-			   nextChar == '.' ||
-			   nextChar == '*' {*/
 			this.ConsumeK(1)
 			nextId.WriteByte(nextChar)
 		} else {
@@ -368,20 +310,17 @@ func (this *LexerCore) Ttoken() string {
 		}
 	}
 	return nextId.String()
-	//} catch (ParseException ex) {
-	//    return nextId.toString();
-	//}
 }
 
 func (this *LexerCore) TtokenAllowSpace() string {
-	var nextId bytes.Buffer //=  new StringBuffer();
-	//try {
+	var nextId bytes.Buffer
+
 	for this.HasMoreChars() {
 		nextChar, err := this.LookAheadK(0)
 		if err != nil {
 			break
 		}
-		//Debug.println("nextChar = " + nextChar);
+
 		if this.IsAlpha(nextChar) ||
 			this.IsDigit(nextChar) ||
 			nextChar == '-' ||
@@ -396,18 +335,7 @@ func (this *LexerCore) TtokenAllowSpace() string {
 			nextChar == '~' ||
 			nextChar == ' ' ||
 			nextChar == '\t' {
-			/*
-			   nextChar == '_' ||
-			   nextChar == '+' ||
-			   nextChar == '-' ||
-			   nextChar == '!' ||
-			   nextChar == '`' ||
-			   nextChar == '\'' ||
-			   nextChar == '~' ||
-			   nextChar == '.' ||
-			   nextChar == ' ' ||
-			   nextChar == '\t' ||
-			   nextChar == '*' {*/
+
 			nextId.WriteByte(nextChar)
 			this.ConsumeK(1)
 		} else {
@@ -415,28 +343,26 @@ func (this *LexerCore) TtokenAllowSpace() string {
 		}
 	}
 	return nextId.String()
-	//}  catch (ParseException ex) {
-	//    return nextId.toString();
-	//}
 }
 
 // Assume the cursor is at a quote.
-func (this *LexerCore) QuotedString() (s string, ParseException error) {
-	var retval bytes.Buffer //= new StringBuffer();
-	if next, err := this.LookAheadK(0); next != '"' || err != nil {
-		return "", nil
+func (this *LexerCore) QuotedString() (s string, err error) {
+	var retval bytes.Buffer
+	var next byte
+
+	if next, err = this.LookAheadK(0); next != '"' || err != nil {
+		return "", err
 	}
 	this.ConsumeK(1)
 	for {
-		next, err := this.GetNextChar()
-		if err != nil {
+		if next, err = this.GetNextChar(); err != nil {
 			break
 		}
 		if next == '"' {
 			// Got to the terminating quote.
 			break
-		} else if next == 0 { //'\0' {
-			return "", errors.New("ParseException: unexpected EOL")
+			// } else if next == 0 { //'\0' {
+			// 	return "", errors.New("ParseException: unexpected EOL")
 		} else if next == '\\' {
 			retval.WriteByte(next)
 			next, _ = this.GetNextChar()
@@ -445,63 +371,64 @@ func (this *LexerCore) QuotedString() (s string, ParseException error) {
 			retval.WriteByte(next)
 		}
 	}
-	return retval.String(), nil
+	return retval.String(), err
 }
 
 // Assume the cursor is at a "("
-func (this *LexerCore) Comment() (s string, ParseException error) {
-	var retval bytes.Buffer //= new StringBuffer();
-	if next, err := this.LookAheadK(0); next != '(' || err != nil {
-		return "", nil
+func (this *LexerCore) Comment() (s string, err error) {
+	var retval bytes.Buffer
+	var next byte
+
+	if next, err = this.LookAheadK(0); next != '(' || err != nil {
+		return "", err
 	}
 	this.ConsumeK(1)
 	for {
-		next, err := this.GetNextChar()
-		if err != nil {
+		if next, err = this.GetNextChar(); err != nil {
 			break
 		}
 		if next == ')' {
 			break
-		} else if next == 0 { //'\0' {
-			return "", errors.New("ParseException: unexpected EOL")
+			// } else if next == 0 { //'\0' {
+			// 	return "", errors.New("ParseException: unexpected EOL")
 		} else if next == '\\' {
 			retval.WriteByte(next)
-			next, _ = this.GetNextChar()
-			if next == 0 { //'\0'{
-				return "", errors.New("ParseException: unexpected EOL")
+			if next, err = this.GetNextChar(); err != nil {
+				break
 			}
+			// if next == 0 { //'\0'{
+			// 	return "", errors.New("ParseException: unexpected EOL")
+			// }
 			retval.WriteByte(next)
 		} else {
 			retval.WriteByte(next)
 		}
 	}
-	return retval.String(), nil
+	return retval.String(), err
 }
 
 func (this *LexerCore) ByteStringNoSemicolon() string {
-	var retval bytes.Buffer //= new StringBuffer();
-	//try  {
+	var retval bytes.Buffer
+
 	for {
 		next, err := this.LookAheadK(0)
 		if err != nil {
 			break
 		}
-		if next == 0 /*'\0'*/ || next == '\n' || next == ';' {
+		if /*next == 0*/ /*'\0'*/ /*||*/ next == '\n' || next == ';' {
 			break
 		} else {
 			this.ConsumeK(1)
 			retval.WriteByte(next)
 		}
 	}
-	//} catch (ParseException ex) {
-	//    return retval.toString();
-	//}
+
 	return retval.String()
 }
 
 func (this *LexerCore) ByteStringNoComma() string {
-	var retval bytes.Buffer //= new StringBuffer();
-	//try {
+	var retval bytes.Buffer
+
 	for {
 		next, err := this.LookAheadK(0)
 		if err != nil {
@@ -514,8 +441,7 @@ func (this *LexerCore) ByteStringNoComma() string {
 			retval.WriteByte(next)
 		}
 	}
-	//} catch (ParseException ex) {
-	//}
+
 	return retval.String()
 }
 
@@ -529,8 +455,8 @@ func (this *LexerCore) CharAsString(ch byte) string {
  * Do not consume the input.
  */
 func (this *LexerCore) NCharAsString(nchars int) string {
-	var retval bytes.Buffer // new StringBuffer();
-	//try {
+	var retval bytes.Buffer
+
 	for i := 0; i < nchars; i++ {
 		next, err := this.LookAheadK(i)
 		if err != nil {
@@ -538,17 +464,15 @@ func (this *LexerCore) NCharAsString(nchars int) string {
 		}
 		retval.WriteByte(next)
 	}
+
 	return retval.String()
-	//} catch (ParseException ex) {
-	//    return retval.toString();
-	//}
 }
 
 /** Get and consume the next number.
  */
 func (this *LexerCore) Number() (n int, ParseException error) {
-	var retval bytes.Buffer //= new StringBuffer();
-	//try {
+	var retval bytes.Buffer
+
 	next, err := this.LookAheadK(0)
 	if err != nil {
 		return -1, err
@@ -574,9 +498,6 @@ func (this *LexerCore) Number() (n int, ParseException error) {
 	} else {
 		return n, nil
 	}
-	//} catch (ParseException ex) {
-	//    return retval.toString();
-	//}
 }
 
 /** Mark the position for backtracking.
@@ -597,9 +518,9 @@ func (this *LexerCore) RewindInputPosition(position int) {
 func (this *LexerCore) GetRest() string {
 	if this.ptr >= len(this.buffer) {
 		return ""
-	} //else {
-	return this.buffer[this.ptr:]
-	//}
+	} else {
+		return this.buffer[this.ptr:]
+	}
 }
 
 /** Get the sub-String until the character is encountered.
@@ -608,36 +529,36 @@ func (this *LexerCore) GetRest() string {
  * @param char c the character to match
  * @return matching string.
  */
-func (this *LexerCore) GetString(c byte) (s string, ParseException error) {
+func (this *LexerCore) GetString(c byte) (s string, err error) {
 	var savedPtr int = this.ptr
-	var retval bytes.Buffer // = new StringBuffer();
-	for {
-		next, _ := this.LookAheadK(0)
-		//System.out.println(" next = [" + next + ']' + "ptr = " + ptr);
-		//System.out.println(next == '\0');
+	var retval bytes.Buffer
+	var next byte
 
-		if next == 0 { //'\0'   {
+	for {
+		next, err = this.LookAheadK(0)
+
+		if err != nil /*next == 0*/ { //'\0'
 			this.ptr = savedPtr
-			return "", errors.New("ParseException: unexpected EOL")
+			break //return "", errors.New("ParseException: unexpected EOL")
 		} else if next == c {
 			this.ConsumeK(1)
 			break
 		} else if next == '\\' {
 			this.ConsumeK(1)
-			nextchar, _ := this.LookAheadK(0)
-			if nextchar == 0 { //'\0'  {
+			next, err = this.LookAheadK(0)
+			if err != nil /*nextchar == 0*/ { //'\0'  {
 				this.ptr = savedPtr
-				return "", errors.New("ParseException: unexpected EOL")
+				break //return "", errors.New("ParseException: unexpected EOL")
 			} else {
 				this.ConsumeK(1)
-				retval.WriteByte(nextchar)
+				retval.WriteByte(next)
 			}
 		} else {
 			this.ConsumeK(1)
 			retval.WriteByte(next)
 		}
 	}
-	return retval.String(), nil
+	return retval.String(), err
 }
 
 /** Get the read pointer.
@@ -651,9 +572,3 @@ func (this *LexerCore) GetPtr() int {
 func (this *LexerCore) GetBuffer() string {
 	return this.buffer
 }
-
-/** Create a parse exception.
- */
-/*public ParseException createParseException() {
-	  return new ParseException(this.buffer,this.ptr);
-     }*/

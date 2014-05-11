@@ -55,11 +55,12 @@ func (this *ServerParser) Parse() (sh header.Header, ParseException error) {
 	if ch, _ = lexer.LookAheadK(0); ch == '\n' {
 		return nil, errors.New("empty header")
 	}
+
 	//  mandatory token: product[/product-version] | (comment)
-	for ch, _ = lexer.LookAheadK(0); ch != '\n'; ch, _ = lexer.LookAheadK(0) {
+	for ch, ParseException = lexer.LookAheadK(0); ch != '\n' && ParseException == nil; ch, ParseException = lexer.LookAheadK(0) {
 		//while (this.lexer.lookAhead(0) != '\n'
 		//&& this.lexer.lookAhead(0) != '\0') {
-		if ch, _ = lexer.LookAheadK(0); ch == '(' {
+		if ch == '(' {
 			comment, _ := lexer.Comment()
 			server.AddProductToken("(" + comment + ")")
 		} else {

@@ -565,7 +565,7 @@ func (this *URLParser) PeekScheme() (s string, ParseException error) {
  * after the ?).
  */
 func (this *URLParser) Qheader() (nv *core.NameValue, ParseException error) {
-	name := this.GetLexer().GetNextTokenByDelim('=')
+	name, _ := this.GetLexer().GetNextTokenByDelim('=')
 	this.GetLexer().ConsumeK(1)
 	value, _ := this.Hvalue()
 	return core.NewNameValue(name, value), nil

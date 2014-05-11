@@ -1,7 +1,5 @@
 package core
 
-import ()
-
 type LexerMap map[string]int
 
 type Lexer interface {
@@ -16,7 +14,7 @@ type Lexer interface {
 	LookAheadK(k int) (byte, error)
 	PeekLine() string
 	GetLine() string
-	GetNextTokenByDelim(delim byte) string
+	GetNextTokenByDelim(delim byte) (string, error)
 
 	//Lexer
 	SetLexerName(lexerName string)

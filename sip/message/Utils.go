@@ -1,4 +1,4 @@
-package core
+package message
 
 import "strings"
 
@@ -76,7 +76,7 @@ func ReduceString(input string) string {
 //                String cidString = Utils.toHexString(cid);
 //                return cidString + "@" + address;
 //            } catch ( NoSuchAlgorithmException ex ) {
-//                LogWriter.logException(ex);
+//                LogWrite.logException(ex);
 //                return null;
 //            }
 
@@ -110,8 +110,8 @@ func ReduceString(input string) string {
 //              return 	SIPConstants.BRANCH_MAGIC_COOKIE +
 // 		Utils.toHexString(bid);
 //           } catch ( NoSuchAlgorithmException ex ) {
-//       if (LogWriter.needsLogging)
-//                 LogWriter.logMessage("Algorithm not found " + ex);
+//       if (LogWrite.needsLogging)
+//                 LogWrite.logMessage("Algorithm not found " + ex);
 //       return null;
 //           }
 // }

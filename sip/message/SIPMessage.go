@@ -912,7 +912,7 @@ func (this *SIPMessage) GetTransactionId() string {
 				retval.WriteRune(5060)
 			}
 		}
-		hc := core.ToHexString([]byte(strings.ToLower(retval.String())))
+		hc := ToHexString([]byte(strings.ToLower(retval.String())))
 		if len(hc) < 32 {
 			return hc
 		} else {
@@ -1314,7 +1314,7 @@ func (this *SIPMessage) SetContent(content interface{}, contentTypeHeader header
 		this.messageContentBytes = b
 		length = len(b)
 	} else {
-		panic("Don't support GenericObject");
+		panic("Don't support GenericObject")
 		//this.messageContentObject = content
 		//length = len(content.(core.GenericObject).String())
 	}

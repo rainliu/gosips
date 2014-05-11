@@ -70,7 +70,7 @@ func (this *AddressParser) NameAddr() (addr *address.AddressImpl, ParseException
 			name, _ = lexer.QuotedString()
 			lexer.SPorHT()
 		} else {
-			name = lexer.GetNextTokenByDelim('<')
+			name, _ = lexer.GetNextTokenByDelim('<')
 		}
 		addr.SetDisplayName(strings.TrimSpace(name))
 		lexer.Match('<')
@@ -99,12 +99,12 @@ func (this *AddressParser) Address() (retval *address.AddressImpl, ParseExceptio
 	k := 0
 	//println(lexer.GetRest())
 	for lexer.HasMoreChars() {
-		if ch, _ = lexer.LookAheadK(k); ch == '<' ||
+		if ch, ParseException = lexer.LookAheadK(k); ch == '<' ||
 			ch == '"' ||
 			ch == ':' ||
 			ch == '/' {
 			break
-		} else if ch == 0 { //'\0'
+		} else if ParseException != nil /*ch == 0*/ { //'\0'
 			return nil, this.CreateParseException("unexpected EOL")
 		} else {
 			k++

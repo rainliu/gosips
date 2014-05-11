@@ -63,7 +63,7 @@ func (this *ChallengeParser) ParseParameter(h header.AuthorizationHeader) { //} 
  * @return Challenge object
  * @throws ParseException if the message does not respect the spec.
  */
-func (this *ChallengeParser) Parse(h header.AuthorizationHeader) error { //throws ParseException {
+func (this *ChallengeParser) Parse(h header.AuthorizationHeader) (ParseException error) { //throws ParseException {
 	var ch byte
 	lexer := this.GetLexer()
 	// the Scheme:
@@ -77,7 +77,7 @@ func (this *ChallengeParser) Parse(h header.AuthorizationHeader) error { //throw
 	for ch, _ = lexer.LookAheadK(0); ch != '\n'; ch, _ = lexer.LookAheadK(0) {
 		this.ParseParameter(h)
 		lexer.SPorHT()
-		if ch, _ = lexer.LookAheadK(0); ch == '\n' { //||ch=='\0'
+		if ch, ParseException = lexer.LookAheadK(0); ch == '\n' || ParseException != nil { //||ch=='\0'
 			break
 		}
 		lexer.Match(',')

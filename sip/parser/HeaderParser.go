@@ -57,7 +57,7 @@ func (this *HeaderParser) superFromLexer(lexer core.Lexer) {
 func (this *HeaderParser) Parse() (sh header.Header, ParseException error) {
 	lexer := this.GetLexer()
 
-	name := lexer.GetNextTokenByDelim(':')
+	name, _ := lexer.GetNextTokenByDelim(':')
 	lexer.ConsumeK(1)
 	body := strings.TrimSpace(lexer.GetLine())
 	// we dont set any fields because the header is

@@ -158,9 +158,9 @@ func (this *To) SetTag(t string) (ParseException error) {
 	} else if strings.TrimSpace(t) == "" {
 		return errors.New("ParseException: bad tag")
 	}
-	/*if (LogWriter.needsLogging) {
-		LogWriter.logMessage("To:setTag " + t);
-		LogWriter.logStackTrace();
+	/*if (LogWrite.needsLogging) {
+		LogWrite.logMessage("To:setTag " + t);
+		LogWrite.logStackTrace();
 	}*/
 	this.SetParameter(ParameterNames_TAG, t)
 	return nil

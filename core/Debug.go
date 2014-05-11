@@ -1,26 +1,24 @@
 package core
 
-import ()
-
 /**
 *   A class to do debug printfs
  */
 
-type DebugObject struct {
+type Debugger struct {
 	Debug       bool
 	ParserDebug bool
 }
 
-var Debug = DebugObject{true, false}
+var Debug = Debugger{true, false}
 
-func (this *DebugObject) print(s string) {
+func (this *Debugger) print(s string) {
 	if this.Debug {
-		LogWriter.LogMessage(s)
+		LogWrite.LogMessage(s)
 	}
 }
 
-func (this *DebugObject) println(s string) {
+func (this *Debugger) println(s string) {
 	if this.Debug {
-		LogWriter.LogMessage(s + "\n")
+		LogWrite.LogMessage(s + "\n")
 	}
 }
