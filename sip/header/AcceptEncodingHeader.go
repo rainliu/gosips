@@ -22,14 +22,13 @@ package header
 type AcceptEncodingHeader interface {
 	ParametersHeader
 	Encoding
-	//Header
 
 	/**
 	 * Gets q-value of the encoding in this encoding value. A value of
 	 * <code>-1</code> indicates the<code>q-value</code> is not set.
 	 *
 	 * @return q-value of encoding value, -1 if q-value is not set.
-	 * @since v1.1
+	 *
 	 */
 	GetQValue() float32
 
@@ -39,17 +38,9 @@ type AcceptEncodingHeader interface {
 	 * using the qvalue scale from 0 to 1. If no q-value is present, the
 	 * encoding should be treated as having a q-value of 1.
 	 *
-	 * @param qValue - the new float value of the q-value, a value of -1 resets
-	 * the qValue.
-	 * @throws InvalidArgumentException if the q parameter value is not
-	 * <code>-1</code> or between <code>0 and 1</code>.
-	 * @since v1.1
+	 * @param qValue - the new float value of the q-value
+	 * @throws InvalidArgumentException if the q parameter value is not between <code>0 and 1</code>.
+	 *
 	 */
 	SetQValue(qValue float32) (InvalidArgumentException error)
-
-	/**
-	 * Name of AcceptEncodingHeader
-	 */
-	//public final static String NAME = "Accept-Encoding";
-
 }

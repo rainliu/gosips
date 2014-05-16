@@ -2,6 +2,7 @@ package header
 
 import (
 	"container/list"
+	"errors"
 	"gosips/core"
 )
 
@@ -32,8 +33,6 @@ func NewAllowList() *AllowList {
  *
  * AllowHeader.
  *
- * @since JAIN SIP v1.1
- *
  */
 
 func (this *AllowList) GetMethods() *list.List {
@@ -57,15 +56,21 @@ func (this *AllowList) GetMethods() *list.List {
  *
  * unexpectedly while parsing the Strings defining the methods supported.
  *
- * @since JAIN SIP v1.1
- *
  */
 
-func (this *AllowList) SetMethods(methods *list.List) { // throws ParseException {
+func (this *AllowList) SetMethods(methods *list.List) (ParseException error) {
 
 	for e := methods.Front(); e != nil; e = e.Next() {
 		allow := NewAllow()
-		allow.SetMethod(e.Value.(string))
+		if str, ok := e.Value.(string); ok {
+			if ParseException = allow.SetMethod(str); ParseException != nil {
+				return ParseException
+			}
+		} else {
+			return errors.New("ParseException: the method parameter is not string")
+		}
+
 		this.PushBack(allow)
 	}
+	return nil
 }

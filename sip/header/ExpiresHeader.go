@@ -2,15 +2,13 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Module Name   : JAIN SIP Specification
  * File Name     : ExpiresHeader.java
- * Author        : Phelim O'Doherty 
+ * Author        : Phelim O'Doherty
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
- 
+
 package header
 
-import (
-
-)
+import ()
 
 /**
 
@@ -80,38 +78,33 @@ import (
 
  */
 
-
-
 type ExpiresHeader interface {
 	Header
 
-    /**
-     * Sets the relative expires value of the ExpiresHeader. The expires value
-     * MUST be between zero and (2**31)-1.
-     *
-     * @param expires - the new expires value of this ExpiresHeader
-     * @throws InvalidArgumentException if supplied value is less than zero.
-     * @since v1.1
-     */
+	/**
+	 * Sets the relative expires value of the ExpiresHeader. The expires value
+	 * MUST be between zero and (2**31)-1.
+	 *
+	 * @param expires - the new expires value of this ExpiresHeader
+	 * @throws InvalidArgumentException if supplied value is less than zero.
+	 *
+	 */
 
-    SetExpires(expires int) (InvalidArgumentException error);
+	SetExpires(expires int) (InvalidArgumentException error)
 
-    /**
-     * Gets the expires value of the ExpiresHeader. This expires value is
-     * relative time.
-     *
-     * @return the expires value of the ExpiresHeader.
-     * @since v1.1
-     */
+	/**
+	 * Gets the expires value of the ExpiresHeader. This expires value is
+	 * relative time.
+	 *
+	 * @return the expires value of the ExpiresHeader.
+	 *
+	 */
 
-    GetExpires() int;
+	GetExpires() int
 
-    /**
-     * Name of ExpiresHeader
-     */
-    //public final static String NAME = "Expires";
-
-
+	/**
+	 * Name of ExpiresHeader
+	 */
+	//public final static String NAME = "Expires";
 
 }
-

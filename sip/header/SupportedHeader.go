@@ -24,7 +24,7 @@ package header
 
  * @see UnsupportedHeader
 
- * @since v1.1
+ *
 
  * @author Sun Microsystems
 

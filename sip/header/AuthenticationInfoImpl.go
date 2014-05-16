@@ -73,7 +73,7 @@ func (this *AuthenticationInfo) GetAuthenticationInfo() string {
  *
  * @return the String representing the cNonce information, null if value is
  * not set.
- * @since v1.1
+ *
  */
 func (this *AuthenticationInfo) GetCNonce() string {
 	return this.GetParameter(ParameterNames_CNONCE)
@@ -83,7 +83,7 @@ func (this *AuthenticationInfo) GetCNonce() string {
  *
  * @return the String representing the nextNonce
  * information, null if value is not set.
- * @since v1.1
+ *
  */
 func (this *AuthenticationInfo) GetNextNonce() string {
 	return this.GetParameter(ParameterNames_NEXT_NONCE)
@@ -93,7 +93,7 @@ func (this *AuthenticationInfo) GetNextNonce() string {
  *
  * @return the integer representing the nonceCount information, -1 if value is
  * not set.
- * @since v1.1
+ *
  */
 func (this *AuthenticationInfo) GetNonceCount() int {
 	s := this.GetParameter(ParameterNames_NONCE_COUNT)
@@ -105,7 +105,7 @@ func (this *AuthenticationInfo) GetNonceCount() int {
  *
  * @return the string representing the messageQop information, null if the
  * value is not set.
- * @since v1.1
+ *
  */
 func (this *AuthenticationInfo) GetQop() string {
 	return this.GetParameter(ParameterNames_QOP)
@@ -114,7 +114,7 @@ func (this *AuthenticationInfo) GetQop() string {
 /** Returns the Response value of this AuthenticationInfoHeader.
  *
  * @return the String representing the Response information.
- * @since v1.1
+ *
  */
 func (this *AuthenticationInfo) GetResponse() string {
 	return this.GetParameter(ParameterNames_RESPONSE_AUTH)
@@ -126,7 +126,7 @@ func (this *AuthenticationInfo) GetResponse() string {
  * @param cNonce - the new cNonce String of this AuthenticationInfoHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the cNonce value.
- * @since v1.1
+ *
  */
 func (this *AuthenticationInfo) SetCNonce(cNonce string) { //throws ParseException {
 	this.SetParameter(ParameterNames_CNONCE, cNonce)
@@ -138,7 +138,7 @@ func (this *AuthenticationInfo) SetCNonce(cNonce string) { //throws ParseExcepti
  * @param nextNonce - the new nextNonce String of this AuthenticationInfoHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the nextNonce value.
- * @since v1.1
+ *
  */
 func (this *AuthenticationInfo) SetNextNonce(nextNonce string) { //throws ParseException {
 	this.SetParameter(ParameterNames_NEXT_NONCE, nextNonce)
@@ -150,7 +150,7 @@ func (this *AuthenticationInfo) SetNextNonce(nextNonce string) { //throws ParseE
  * @param nonceCount - the new nonceCount integer of this AuthenticationInfoHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the nonceCount value.
- * @since v1.1
+ *
  */
 func (this *AuthenticationInfo) SetNonceCount(nonceCount int) { //throws ParseException {
 	//if (nonceCount  < 0 ) throw new ParseException("bad value",0);
@@ -167,7 +167,7 @@ func (this *AuthenticationInfo) SetNonceCount(nonceCount int) { //throws ParseEx
  * @param qop - the new Qop string of this AuthenticationInfoHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the Qop value.
- * @since v1.1
+ *
  */
 func (this *AuthenticationInfo) SetQop(qop string) { // throws ParseException {
 	this.SetParameter(ParameterNames_QOP, qop)
@@ -181,7 +181,7 @@ func (this *AuthenticationInfo) SetQop(qop string) { // throws ParseException {
  * AuthenticationInfoHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the Response.
- * @since v1.1
+ *
  */
 func (this *AuthenticationInfo) SetResponse(response string) { //throws ParseException {
 	this.SetParameter(ParameterNames_RESPONSE, response)

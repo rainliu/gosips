@@ -54,7 +54,7 @@ import (
  * Trying --> Proceeding --> Completed --> Terminated
  *
  * @author  Sun Microsystems
- * @since v1.1
+ *
  */
 type ServerTransaction interface {
 	Transaction

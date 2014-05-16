@@ -56,13 +56,9 @@ type AcceptLanguageHeader interface {
 
 	 *
 
-	 * @param qValue - the new float value of the q-value, a value of -1 resets
+	 * @param qValue - the new float value of the q-value
 
-	 * the qValue.
-
-	 * @throws InvalidArgumentException if the q parameter value is not
-
-	 * <code>-1</code> or between <code>0 and 1</code>.
+	 * @throws InvalidArgumentException if the q parameter value is not between <code>0 and 1</code>.
 
 	 */
 
@@ -78,7 +74,7 @@ type AcceptLanguageHeader interface {
 
 	 */
 
-	GetAcceptLanguage() string //Locale
+	GetAcceptLanguage() string
 
 	/**
 
@@ -91,14 +87,5 @@ type AcceptLanguageHeader interface {
 	 * AcceptLanguageHeader
 	 */
 
-	SetAcceptLanguage(language string /*Locale*/)
-
-	/**
-
-	 * Name of AcceptLanguageHeader
-
-	 */
-
-	//public final static String NAME = "Accept-Language";
-
+	SetAcceptLanguage(language string)
 }

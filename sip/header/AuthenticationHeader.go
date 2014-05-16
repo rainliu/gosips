@@ -23,14 +23,11 @@ import "gosips/sip/address"
  * @see Parameters
  * @see WWWAuthenticateHeader
  * @see ProxyAuthorizationHeader
- * @version 1.1
- * @author Sun Microsystems
  *
  */
 
 type AuthenticationHeader interface {
 	ParametersHeader
-	//Header
 
 	/**
 	 * Sets the scheme of the Response information for this AuthorizationHeader.
@@ -38,7 +35,6 @@ type AuthenticationHeader interface {
 	 *
 	 * @param scheme - the new string value that identifies the response
 	 * information scheme.
-	 * @since v1.1
 	 */
 	SetScheme(scheme string)
 
@@ -46,7 +42,6 @@ type AuthenticationHeader interface {
 	 * Returns the scheme of the Response information for this AuthorizationHeader.
 	 *
 	 * @return the string value of the response information.
-	 * @since v1.1
 	 */
 	GetScheme() string
 
@@ -60,7 +55,6 @@ type AuthenticationHeader interface {
 	 * @param realm the new Realm String of this AuthorizationHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the realm.
-	 * @since v1.1
 	 */
 	SetRealm(realm string) // throws ParseException;
 
@@ -70,7 +64,6 @@ type AuthenticationHeader interface {
 	 *
 	 * @return the String representing the Realm information, null if value is
 	 * not Set.
-	 * @since v1.1
 	 */
 	GetRealm() string
 
@@ -81,7 +74,6 @@ type AuthenticationHeader interface {
 	 * @param username the new Username String of this AuthorizationHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the username.
-	 * @since v1.1
 	 */
 	SetUsername(username string) //throws ParseException;
 
@@ -91,7 +83,6 @@ type AuthenticationHeader interface {
 	 *
 	 * @return the String representing the Username information, null if value is
 	 * not Set.
-	 * @since v1.1
 	 */
 	GetUsername() string
 
@@ -102,7 +93,6 @@ type AuthenticationHeader interface {
 	 * @param nonce - the new nonce String of this AuthorizationHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the nonce value.
-	 * @since v1.1
 	 */
 	SetNonce(nonce string) //throws ParseException;
 
@@ -111,7 +101,6 @@ type AuthenticationHeader interface {
 	 *
 	 * @return the String representing the nonce information, null if value is
 	 * not Set.
-	 * @since v1.1
 	 */
 	GetNonce() string
 
@@ -120,7 +109,6 @@ type AuthenticationHeader interface {
 	 * parameter value.
 	 *
 	 * @param uri - the new URI of this AuthorizationHeader.
-	 * @since v1.1
 	 */
 	SetURI(uri address.URI)
 
@@ -129,7 +117,6 @@ type AuthenticationHeader interface {
 	 *
 	 * @return the URI representing the URI information, null if value is
 	 * not Set.
-	 * @since v1.1
 	 */
 	GetURI() address.URI
 
@@ -140,7 +127,7 @@ type AuthenticationHeader interface {
 	 * @param response - the new response String of this AuthorizationHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the Response.
-	 * @since v1.1
+	 *
 	 */
 	SetResponse(response string) //throws ParseException;
 
@@ -148,7 +135,7 @@ type AuthenticationHeader interface {
 	 * Returns the Response value of this AuthorizationHeader.
 	 *
 	 * @return the String representing the Response information.
-	 * @since v1.1
+	 *
 	 */
 	GetResponse() string
 
@@ -159,7 +146,7 @@ type AuthenticationHeader interface {
 	 * @param algorithm - the new algorithm String of this AuthorizationHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the algorithm value.
-	 * @since v1.1
+	 *
 	 */
 	SetAlgorithm(algorithm string) //throws ParseException;
 
@@ -168,7 +155,7 @@ type AuthenticationHeader interface {
 	 *
 	 * @return the String representing the Algorithm information, null if the
 	 * value is not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetAlgorithm() string
 
@@ -179,7 +166,7 @@ type AuthenticationHeader interface {
 	 * @param cNonce - the new cNonce String of this AuthorizationHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the cNonce value.
-	 * @since v1.1
+	 *
 	 */
 	SetCNonce(cNonce string) //throws ParseException;
 
@@ -188,7 +175,7 @@ type AuthenticationHeader interface {
 	 *
 	 * @return the String representing the cNonce information, null if value is
 	 * not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetCNonce() string
 
@@ -199,7 +186,7 @@ type AuthenticationHeader interface {
 	 * @param opaque - the new Opaque string of this AuthorizationHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the opaque value.
-	 * @since v1.1
+	 *
 	 */
 	SetOpaque(opaque string) // throws ParseException;
 
@@ -208,7 +195,7 @@ type AuthenticationHeader interface {
 	 *
 	 * @return the String representing the Opaque information, null if the
 	 * value is not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetOpaque() string
 
@@ -219,7 +206,7 @@ type AuthenticationHeader interface {
 	 * @param qop - the new Qop string of this AuthorizationHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the Qop value.
-	 * @since v1.1
+	 *
 	 */
 	SetQop(qop string) //throws ParseException;
 
@@ -228,7 +215,7 @@ type AuthenticationHeader interface {
 	 *
 	 * @return the string representing the Qop information, null if the
 	 * value is not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetQop() string
 
@@ -239,7 +226,7 @@ type AuthenticationHeader interface {
 	 * @param nonceCount - the new nonceCount integer of this AuthorizationHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the nonceCount value.
-	 * @since v1.1
+	 *
 	 */
 	SetNonceCount(nonceCount int) //throws ParseException;
 
@@ -248,13 +235,7 @@ type AuthenticationHeader interface {
 	 *
 	 * @return the integer representing the nonceCount information, -1 if value is
 	 * not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetNonceCount() int
-
-	/**
-	 * Name of AuthorizationHeader
-	 */
-	//public final static String NAME = "Authorization";
-
 }

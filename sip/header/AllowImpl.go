@@ -1,6 +1,7 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 )
 
@@ -8,7 +9,7 @@ import (
 * Allow Header.
  */
 type Allow struct {
-	SIPHeader // implements javax.sip.header.AllowHeader {
+	SIPHeader
 
 	/** method field
 	 */
@@ -44,11 +45,12 @@ func (this *Allow) GetMethod() string {
  * Set the method member
  * @param method method to set.
  */
-func (this *Allow) SetMethod(method string) { //throws ParseException{
-	//if (method==null)
-	//throw new  NullPointerException("JAIN-SIP Exception"+
-	//", Allow, setMethod(), the method parameter is null.");
+func (this *Allow) SetMethod(method string) (ParseException error) {
+	if method == "" {
+		errors.New("NullPointerException: the method parameter is null")
+	}
 	this.method = method
+	return nil
 }
 
 func (this *Allow) String() string {

@@ -41,7 +41,7 @@ import (
  * </ul>
  *
  * @author Sun Microsystems
- * @since v1.1
+ *
  */
 type ResponseEvent struct { //extends EventObject {
 	// internal private variables

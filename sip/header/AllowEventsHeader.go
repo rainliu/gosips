@@ -22,9 +22,6 @@ import ()
  * the appropriate nodes.
  * <p>
  * Note that "Allow-Events" headers MUST NOT be inserted by proxies.
- *
- * @since v1.1
- * @author Sun Microsystems
  */
 
 type AllowEventsHeader interface {
@@ -38,7 +35,7 @@ type AllowEventsHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the Strings defining the eventType supported
 	 */
-	SetEventType(eventType string) //throws ParseException;
+	SetEventType(eventType string) (ParseException error)
 
 	/**
 	 * Gets the eventType of the AllowEventsHeader.
@@ -46,9 +43,4 @@ type AllowEventsHeader interface {
 	 * @return the String object identifing the eventTypes of AllowEventsHeader.
 	 */
 	GetEventType() string
-
-	/**
-	 * Name of AllowEventsHeader
-	 */
-	//public final static String NAME = "Allow-Events";
 }

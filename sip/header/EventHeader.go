@@ -39,7 +39,7 @@ package header
  * associated with the body of its SUBSCRIBE requests or parameters for the
  * Event header, those semantics apply.
  *
- * @since v1.1
+ *
  * @author Sun Microsystems
  */
 

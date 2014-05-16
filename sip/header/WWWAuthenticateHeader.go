@@ -34,7 +34,7 @@ type WWWAuthenticateHeader interface {
 	 *
 	 * @param scheme - the new string value that identifies the challenge
 	 * information scheme.
-	 * @since v1.1
+	 *
 	 */
 	SetScheme(scheme string)
 
@@ -42,7 +42,7 @@ type WWWAuthenticateHeader interface {
 	 * Returns the scheme of the challenge information for this WWWAuthenticateHeader.
 	 *
 	 * @return the string value of the challenge information.
-	 * @since v1.1
+	 *
 	 */
 	GetScheme() string
 
@@ -56,7 +56,7 @@ type WWWAuthenticateHeader interface {
 	 * @param realm the new Realm string of this WWWAuthenicateHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the realm.
-	 * @since v1.1
+	 *
 	 */
 	SetRealm(realm string) //throws ParseException;
 
@@ -66,7 +66,7 @@ type WWWAuthenticateHeader interface {
 	 *
 	 * @return the string representing the Realm information, null if value is
 	 * not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetRealm() string
 
@@ -77,7 +77,7 @@ type WWWAuthenticateHeader interface {
 	 * @param nonce - the new nonce string of this WWWAuthenicateHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the nonce value.
-	 * @since v1.1
+	 *
 	 */
 	SetNonce(nonce string) //throws ParseException;
 
@@ -86,7 +86,7 @@ type WWWAuthenticateHeader interface {
 	 *
 	 * @return the string representing the nonce information, null if value is
 	 * not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetNonce() string
 
@@ -95,7 +95,7 @@ type WWWAuthenticateHeader interface {
 	 * parameter value.
 	 *
 	 * @param uri - the new URI of this WWWAuthenicateHeader.
-	 * @since v1.1
+	 *
 	 */
 	SetURI(uri address.URI)
 
@@ -104,7 +104,7 @@ type WWWAuthenticateHeader interface {
 	 *
 	 * @return the URI representing the URI information, null if value is
 	 * not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetURI() address.URI
 
@@ -115,7 +115,7 @@ type WWWAuthenticateHeader interface {
 	 * @param algorithm - the new algorithm string of this WWWAuthenicateHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the algorithm value.
-	 * @since v1.1
+	 *
 	 */
 	SetAlgorithm(algorithm string) // throws ParseException;
 
@@ -124,7 +124,7 @@ type WWWAuthenticateHeader interface {
 	 *
 	 * @return the string representing the Algorithm information, null if the
 	 * value is not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetAlgorithm() string
 
@@ -135,7 +135,7 @@ type WWWAuthenticateHeader interface {
 	 * @param qop - the new Qop string of this WWWAuthenicateHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the Qop value.
-	 * @since v1.1
+	 *
 	 */
 	SetQop(qop string) //throws ParseException;
 
@@ -144,7 +144,7 @@ type WWWAuthenticateHeader interface {
 	 *
 	 * @return the string representing the Qop information, null if the
 	 * value is not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetQop() string
 
@@ -155,7 +155,7 @@ type WWWAuthenticateHeader interface {
 	 * @param opaque - the new Opaque string of this WWWAuthenicateHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the opaque value.
-	 * @since v1.1
+	 *
 	 */
 	SetOpaque(opaque string) // throws ParseException;
 
@@ -164,7 +164,7 @@ type WWWAuthenticateHeader interface {
 	 *
 	 * @return the string representing the Opaque information, null if the
 	 * value is not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetOpaque() string
 
@@ -175,7 +175,7 @@ type WWWAuthenticateHeader interface {
 	 * @param domain - the new Domain string of this WWWAuthenicateHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the domain.
-	 * @since v1.1
+	 *
 	 */
 	SetDomain(domain string) //throws ParseException;
 
@@ -184,7 +184,7 @@ type WWWAuthenticateHeader interface {
 	 *
 	 * @return the string representing the Domain information, null if value is
 	 * not Set.
-	 * @since v1.1
+	 *
 	 */
 	GetDomain() string
 
@@ -193,7 +193,7 @@ type WWWAuthenticateHeader interface {
 	 * stale parameter value.
 	 *
 	 * @param stale - the new boolean value of the stale parameter.
-	 * @since v1.1
+	 *
 	 */
 	SetStale(stale bool)
 
@@ -202,7 +202,7 @@ type WWWAuthenticateHeader interface {
 	 * WWWAuthenicateHeader.
 	 *
 	 * @return the boolean representing if the challenge is stale.
-	 * @since v1.1
+	 *
 	 */
 	IsStale() bool
 

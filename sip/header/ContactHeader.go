@@ -68,15 +68,11 @@ package header
  *
  * @see AddressHeader
  * @see Parameters
- *
- * @version v1.1
- * @author Sun Microsystems
  */
 
 type ContactHeader interface {
 	AddressHeader
 	ParametersHeader
-	//Header
 
 	/**
 	 * Returns the value of the <code>expires</code> parameter as delta-seconds.
@@ -108,7 +104,6 @@ type ContactHeader interface {
 	 * @param seconds - new relative value of the expires parameter.
 	 * 0 implies removal of Registration specified in Contact Header.
 	 * @throws InvalidArgumentException if supplied value is less than zero.
-	 * @since v1.1
 	 */
 
 	SetExpires(expires int) (InvalidArgumentException error)
@@ -119,7 +114,6 @@ type ContactHeader interface {
 	 * @return value of the <code>expires</code> parameter measured in
 	 * delta-seconds, O implies removal of Registration specified in Contact
 	 * Header.
-	 * @since v1.1
 	 */
 
 	GetExpires() int
@@ -145,9 +139,7 @@ type ContactHeader interface {
 	 * is not set.
 	 *
 	 * @param qValue - the new float value of the q-value parameter.
-	 * @throws InvalidArgumentException if the q-value parameter value is not
-	 * <code>-1</code> or between <code>0 and 1</code>.
-	 * @since v1.1
+	 * @throws InvalidArgumentException if the q-value parameter value is not between <code>0 and 1</code>.
 	 */
 	SetQValue(qValue float32) (InvalidArgumentException error)
 
@@ -169,15 +161,7 @@ type ContactHeader interface {
 
 	 * the q-value is not set.
 
-	 * @since v1.1
-
 	 */
 
 	GetQValue() float32
-
-	/**
-
-	 * Name of ContactHeader
-
-	 */
 }

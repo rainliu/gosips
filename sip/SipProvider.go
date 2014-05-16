@@ -243,7 +243,7 @@ type SipProvider interface {
 	 * with a ListeningPoint that is being used by another SipProvider in the
 	 * system.
 	 * @see ListeningPoint
-	 * @since v1.1
+	 *
 	 */
 	SetListeningPoint(listeningPoint ListeningPoint) (ObjectInUseException error)
 
@@ -269,7 +269,7 @@ type SipProvider interface {
 	 * @throws TransactionUnavailableException if a new transaction can not be created, for example
 	 * the next hop of the request can not be determined.
 	 * @see ClientTransaction
-	 * @since v1.1
+	 *
 	 */
 	GetNewClientTransaction(request message.Request) (ct ClientTransaction, TransactionUnavailableException error)
 
@@ -290,7 +290,7 @@ type SipProvider interface {
 	 * @throws TransactionUnavailableException if a new transaction can not be created, for example
 	 * the next hop of the request can not be determined.
 	 * @see ServerTransaction
-	 * @since v1.1
+	 *
 	 */
 	GetNewServerTransaction(request message.Request) (st ServerTransaction, TransactionException error)
 	//throws TransactionAlreadyExistsException, TransactionUnavailableException;
@@ -310,7 +310,7 @@ type SipProvider interface {
 	 * retranmissions for the Request. If these semantics are required it is the
 	 * responsibility of the application not the SipProvider.
 	 *
-	 * @since v1.1
+	 *
 	 * @see Request
 	 * @param request the Request message to send statelessly
 	 * @throws SipException if the SipProvider cannot send the Request for any
@@ -345,7 +345,7 @@ type SipProvider interface {
 	 * @throws SipException if the SipProvider cannot send the Response for any
 	 * reason.
 	 * @see Response
-	 * @since v1.1
+	 *
 	 */
 	SendResponse(response message.Response) (SipException error)
 }

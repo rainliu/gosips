@@ -13,9 +13,6 @@ package header
  * <p>
  * For Example:<br>
  * <code>Allow: INVITE, ACK, OPTIONS, CANCEL, BYE</code>
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 type AllowHeader interface {
 	Header
@@ -27,22 +24,14 @@ type AllowHeader interface {
 	 * in this AllowHeader
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the method supported.
-	 * @since v1.1
 	 */
-	SetMethod(method string) //ows ParseException;
+	SetMethod(method string) (ParseException error)
 
 	/**
 	 * Gets the method of the AllowHeader. Returns null if no method is
 	 * defined in this Allow Header.
 	 *
 	 * @return the string identifing the method of AllowHeader.
-	 * @since v1.1
 	 */
 	GetMethod() string
-
-	/**
-	 * Name of AllowHeader
-	 */
-	//ublic final static String NAME = "Allow";
-
 }

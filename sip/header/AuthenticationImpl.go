@@ -9,12 +9,6 @@ import (
 
 /**
  * The generic AuthenticationHeader
- *
- *@author Olivier Deruelle <deruelle@nist.gov>
- *@author M. Ranganathan <mranga@nist.gov><br/>
- *
- *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
- *
  */
 
 type Authentication struct {
@@ -23,41 +17,18 @@ type Authentication struct {
 	scheme string
 }
 
-// public static String DOMAIN = ParameterNames.DOMAIN;
-// public static String REALM = ParameterNames.REALM;
-// public static String OPAQUE = ParameterNames.OPAQUE;
-// public static String ALGORITHM = ParameterNames.ALGORITHM;
-// public static String QOP = ParameterNames.QOP;
-// public static String STALE = ParameterNames.STALE;
-// public static String SIGNATURE = ParameterNames.SIGNATURE;
-// public static String RESPONSE = ParameterNames.RESPONSE;
-// public static String SIGNED_BY = ParameterNames.SIGNED_BY;
-// public static String NC = ParameterNames.NC;
-// public static String URI = ParameterNames.URI;
-// public static String USERNAME = ParameterNames.USERNAME;
-// public static String CNONCE = ParameterNames.CNONCE;
-// public static String NONCE = ParameterNames.NONCE;
-
-func NewAuthenticationFromString(name string) *Authentication {
+func NewAuthentication(name string) *Authentication {
 	this := &Authentication{}
 	this.Parameters.super(name)
-	this.parameters.SetSeparator(core.SIPSeparatorNames_COMMA) // oddball
+	this.parameters.SetSeparator(core.SIPSeparatorNames_COMMA)
 	this.scheme = ParameterNames_DIGEST
 
 	return this
 }
 
-/*
-func NewAuthentication() *Authentication {
-	this := &Authentication{}
-	this.Parameters.super(core.SIPHeaderNames_)
-	this.parameters.SetSeparator(core.SIPSeparatorNames_COMMA)
-	return this
-}*/
-
 func (this *Authentication) super(name string) {
 	this.Parameters.super(name)
-	this.parameters.SetSeparator(core.SIPSeparatorNames_COMMA) // oddball
+	this.parameters.SetSeparator(core.SIPSeparatorNames_COMMA)
 	this.scheme = ParameterNames_DIGEST
 }
 
@@ -127,7 +98,7 @@ func (this *Authentication) EncodeBody() string {
  *
  * @param scheme - the new string value that identifies the challenge
  * information scheme.
- * @since v1.1
+ *
  */
 func (this *Authentication) SetScheme(scheme string) {
 	this.scheme = scheme
@@ -138,7 +109,7 @@ func (this *Authentication) SetScheme(scheme string) {
  * AuthenticationHeaderHeader.
  *
  * @return the string value of the challenge information.
- * @since v1.1
+ *
  */
 func (this *Authentication) GetScheme() string {
 	return this.scheme
@@ -154,7 +125,7 @@ func (this *Authentication) GetScheme() string {
  * @param realm the new Realm String of this WWWAuthenicateHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the realm.
- * @since v1.1
+ *
  */
 func (this *Authentication) SetRealm(realm string) { //throws ParseException {
 	//if (realm==null) throw new  NullPointerException("JAIN-SIP Exception, "+
@@ -168,7 +139,7 @@ func (this *Authentication) SetRealm(realm string) { //throws ParseException {
  *
  * @return the String representing the Realm information, null if value is
  * not Set.
- * @since v1.1
+ *
  */
 func (this *Authentication) GetRealm() string {
 	return this.GetParameter(ParameterNames_REALM)
@@ -181,7 +152,7 @@ func (this *Authentication) GetRealm() string {
  * @param nonce - the new nonce String of this WWWAuthenicateHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the nonce value.
- * @since v1.1
+ *
  */
 func (this *Authentication) SetNonce(nonce string) { //throws ParseException {
 	//if (nonce==null) throw new  NullPointerException("JAIN-SIP Exception, "+
@@ -194,7 +165,7 @@ func (this *Authentication) SetNonce(nonce string) { //throws ParseException {
  *
  * @return the String representing the nonce information, null if value is
  * not Set.
- * @since v1.1
+ *
  */
 func (this *Authentication) GetNonce() string {
 	return this.GetParameter(ParameterNames_NONCE)
@@ -205,7 +176,7 @@ func (this *Authentication) GetNonce() string {
  * parameter value.
  *
  * @param uri - the new URI of this WWWAuthenicateHeader.
- * @since v1.1
+ *
  */
 func (this *Authentication) SetURI(uri address.URI) {
 	if uri != nil {
@@ -223,7 +194,7 @@ func (this *Authentication) SetURI(uri address.URI) {
  *
  * @return the URI representing the URI information, null if value is
  * not Set.
- * @since v1.1
+ *
  */
 func (this *Authentication) GetURI() address.URI {
 	url := this.GetParameter(ParameterNames_URI)
@@ -237,7 +208,7 @@ func (this *Authentication) GetURI() address.URI {
  * @param algorithm - the new algorithm String of this WWWAuthenicateHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the algorithm value.
- * @since v1.1
+ *
  */
 func (this *Authentication) SetAlgorithm(algorithm string) { //} throws ParseException {
 	//if (algorithm==null)
@@ -250,7 +221,7 @@ func (this *Authentication) SetAlgorithm(algorithm string) { //} throws ParseExc
  *
  * @return the String representing the Algorithm information, null if the
  * value is not Set.
- * @since v1.1
+ *
  */
 func (this *Authentication) GetAlgorithm() string {
 	return this.GetParameter(ParameterNames_ALGORITHM)
@@ -263,7 +234,7 @@ func (this *Authentication) GetAlgorithm() string {
  * @param qop - the new Qop string of this WWWAuthenicateHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the Qop value.
- * @since v1.1
+ *
  */
 func (this *Authentication) SetQop(qop string) { // throws ParseException {
 	//if (qop==null)
@@ -276,7 +247,7 @@ func (this *Authentication) SetQop(qop string) { // throws ParseException {
  *
  * @return the string representing the Qop information, null if the
  * value is not Set.
- * @since v1.1
+ *
  */
 func (this *Authentication) GetQop() string {
 	return this.GetParameter(ParameterNames_QOP)
@@ -289,7 +260,7 @@ func (this *Authentication) GetQop() string {
  * @param opaque - the new Opaque string of this WWWAuthenicateHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the opaque value.
- * @since v1.1
+ *
  */
 func (this *Authentication) SetOpaque(opaque string) { //throws ParseException  {
 	//if (opaque==null)
@@ -302,7 +273,7 @@ func (this *Authentication) SetOpaque(opaque string) { //throws ParseException  
  *
  * @return the String representing the Opaque information, null if the
  * value is not Set.
- * @since v1.1
+ *
  */
 func (this *Authentication) GetOpaque() string {
 	return this.GetParameter(ParameterNames_OPAQUE)
@@ -315,7 +286,7 @@ func (this *Authentication) GetOpaque() string {
  * @param domain - the new Domain string of this WWWAuthenicateHeader.
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the domain.
- * @since v1.1
+ *
  */
 func (this *Authentication) SetDomain(domain string) { //throws ParseException{
 	//if (domain==null) throw new
@@ -328,7 +299,7 @@ func (this *Authentication) SetDomain(domain string) { //throws ParseException{
  *
  * @return the String representing the Domain information, null if value is
  * not Set.
- * @since v1.1
+ *
  */
 func (this *Authentication) GetDomain() string {
 	return this.GetParameter(ParameterNames_DOMAIN)
@@ -339,7 +310,7 @@ func (this *Authentication) GetDomain() string {
  * <var>stale</var> parameter value.
  *
  * @param stale - the new boolean value of the stale parameter.
- * @since v1.1
+ *
  */
 func (this *Authentication) SetStale(stale bool) {
 	if stale == true {
@@ -355,7 +326,7 @@ func (this *Authentication) SetStale(stale bool) {
  * WWWAuthenicateHeader.
  *
  * @return the boolean representing if the challenge is stale.
- * @since v1.1
+ *
  */
 func (this *Authentication) IsStale() bool {
 	stale := this.GetParameter(ParameterNames_STALE)

@@ -30,7 +30,7 @@ package header
 * after the number of seconds specified by the "retry-after" parameter).
 * </ul>
 *
-* @since v1.1
+*
 * @author Sun Microsystems
 */
 

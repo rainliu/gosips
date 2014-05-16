@@ -227,7 +227,7 @@ type SipStack interface {
 	 * @throws TansportNotSupportedException if the specified
 	 * transport is not supported by this SipStack.
 	 * @throws InvalidArgumentException if the specified port is invalid.
-	 * @since v1.1
+	 *
 	 */
 	CreateListeningPoint(port int, transport string) (ListeningPoint, error)
 	//throws TransportNotSupportedException, InvalidArgumentException;
@@ -242,7 +242,7 @@ type SipStack interface {
 	 * @throws ObjectInUseException if the specified ListeningPoint cannot be
 	 * deleted because the ListeningPoint is currently in use.
 	 *
-	 * @since v1.1
+	 *
 	 */
 	DeleteListeningPoint(listeningPoint ListeningPoint) (ObjectInUseException error)
 
@@ -276,7 +276,7 @@ type SipStack interface {
 	 * creation of the SipStack object.
 	 *
 	 * @return a string identifing the IP Address
-	 * @since v1.1
+	 *
 	 */
 	GetIPAddress() string
 
@@ -288,7 +288,7 @@ type SipStack interface {
 	 * the SipStack object.
 	 *
 	 * @return the Router object identifying the Router information.
-	 * @since v1.1
+	 *
 	 */
 	GetRouter() message.Router
 
@@ -310,7 +310,7 @@ type SipStack interface {
 	 *
 	 * @return the value of the retransmission filter, <code>true</code> if the
 	 * filter is set, <code>false</code> otherwise.
-	 * @since v1.1
+	 *
 	 */
 	IsRetransmissionFilterActive() bool
 }

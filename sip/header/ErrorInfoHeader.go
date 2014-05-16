@@ -42,7 +42,7 @@ import "gosips/sip/address"
 
  *
 
- * @since v1.1
+ *
 
  * @author Sun Microsystems
 

@@ -2,6 +2,7 @@ package header
 
 import (
 	"bytes"
+	"errors"
 	"gosips/core"
 	"strconv"
 )
@@ -9,17 +10,9 @@ import (
 /**
 *Accept header : The top level header is actually AcceptList which is a list of
 *Accept headers.
-*
-*@version JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type Accept struct {
 	Parameters
-	//implements javax.sip.header.AcceptHeader{
 
 	/** mediaRange field
 	 */
@@ -63,7 +56,6 @@ func (this *Accept) AllowsAllContentSubTypes() bool {
 *@return encoded value of the header as a string.
  */
 func (this *Accept) EncodeBody() string {
-	//String s="";
 	var encoding bytes.Buffer
 	if this.mediaRange != nil {
 		encoding.WriteString(this.mediaRange.String())
@@ -71,7 +63,6 @@ func (this *Accept) EncodeBody() string {
 	if this.parameters != nil && this.parameters.Len() > 0 {
 		encoding.WriteString(core.SIPSeparatorNames_SEMICOLON)
 		encoding.WriteString(this.parameters.String())
-		//core.SIPSeparatorNames_SP + ";" +
 	}
 	return encoding.String()
 }
@@ -159,14 +150,13 @@ func (this *Accept) SetContentType(mtype string) {
  * @param qValue float to set
  * @throws IllegalArgumentException if qValue is <0.0 or >1.0
  */
-func (this *Accept) SetQValue(qValue float32) {
-	//throws InvalidArgumentException {
-	if qValue == -1 {
-		this.RemoveParameter(ParameterNames_Q)
+func (this *Accept) SetQValue(qValue float32) (InvalidArgumentException error) {
+	if qValue < 0.0 || qValue > 1.0 {
+		return errors.New("qvalue out of range!")
 	}
-	s := strconv.FormatFloat(float64(qValue), 'f', 4, 32)
+	s := strconv.FormatFloat(float64(qValue), 'f', -1, 32)
 	this.SetParameter(ParameterNames_Q, s)
-
+	return nil
 }
 
 /**

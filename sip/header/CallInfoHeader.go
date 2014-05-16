@@ -27,7 +27,7 @@ import (
  * <code>Call-Info: http://jcp.org/duke/photo.jpg;<br>
  * purpose=icon, http://jcp.org/duke/; purpose=info</code>
  *
- * @since v1.1
+ *
  * @author Sun Microsystems
  *
  */

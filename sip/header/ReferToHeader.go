@@ -10,7 +10,7 @@ package header
  * encryption. The resource identified by the Refer-To URI is contacted using
  * the normal mechanisms for that URI type.
  *
- * @since v1.1
+ *
  * @author Sun Microsystems
  */
 type ReferToHeader interface {

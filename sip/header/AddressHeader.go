@@ -1,11 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : AddressHeader.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package header
 
 import (
@@ -29,9 +21,6 @@ import (
  * @see ReplyToHeader
  * @see RouteHeader
  * @see ToHeader
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 type AddressHeader interface {
 

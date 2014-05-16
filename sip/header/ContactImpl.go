@@ -172,11 +172,11 @@ func (this *Contact) SetAddress(addr address.Address) {
  * @param qValue float to set
  */
 func (this *Contact) SetQValue(qValue float32) (InvalidArgumentException error) {
-	if qValue != -1 && (qValue < 0 || qValue > 1) {
-		return errors.New("JAIN-SIP Exception, Contact, setQValue(), the qValue is not between 0 and 1")
-	} else {
-		qValueStr := fmt.Sprintf("%f", qValue)
-		this.parameters.AddNameValue(core.NewNameValue(core.SIPParameters_Q, qValueStr))
-		return nil
+	if qValue < 0.0 || qValue > 1.0 {
+		return errors.New("qvalue out of range!")
 	}
+
+	qValueStr := fmt.Sprintf("%f", qValue)
+	this.parameters.AddNameValue(core.NewNameValue(core.SIPParameters_Q, qValueStr))
+	return nil
 }

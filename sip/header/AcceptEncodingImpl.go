@@ -34,8 +34,8 @@ import (
 * </pre>
 *
  */
-type AcceptEncoding struct { //implements AcceptEncodingHeader {
-	Parameters //ParametersHeader
+type AcceptEncoding struct {
+	Parameters
 
 	/** contentEncoding field
 	 */
@@ -59,7 +59,7 @@ func (this *AcceptEncoding) String() string {
 *@return the value of this header encoded into a string.
  */
 func (this *AcceptEncoding) EncodeBody() string {
-	var encoding bytes.Buffer //= new StringBuffer();
+	var encoding bytes.Buffer
 	if this.contentCoding != "" {
 		encoding.WriteString(this.contentCoding)
 	}
@@ -74,9 +74,12 @@ func (this *AcceptEncoding) EncodeBody() string {
  * @return float
  */
 func (this *AcceptEncoding) GetQValue() float32 {
-	qstr := this.Parameters.GetParameterValue("q")
-	q, _ := strconv.ParseFloat(qstr, 32)
-	return float32(q)
+	q, err := strconv.ParseFloat(this.GetParameter(ParameterNames_Q), 32)
+	if err != nil {
+		return -1
+	} else {
+		return float32(q)
+	}
 }
 
 /** get ContentEncoding field
@@ -105,7 +108,6 @@ func (this *AcceptEncoding) SetQValue(q float32) (InvalidArgumentException error
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the encoding value.
  */
-
 func (this *AcceptEncoding) SetEncoding(encoding string) (ParseException error) {
 	if encoding == "" {
 		return errors.New("encoding parameter is null")

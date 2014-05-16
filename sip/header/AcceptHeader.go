@@ -41,14 +41,10 @@ package header
  * For example:<br>
  * <code>Accept: application/sdp;level=1, application/x-private, text/html</code>
  *
- * @version 1.1
- * @author Sun Microsystems
- *
  */
 type AcceptHeader interface {
 	MediaType
 	ParametersHeader
-	//Header
 
 	/**
 	 * Sets q-value for media-range in AcceptHeader. Q-values allow the user to
@@ -60,17 +56,13 @@ type AcceptHeader interface {
 
 	 *
 
-	 * @param qValue - the new float value of the q-value, a value of -1 resets
+	 * @param qValue - the new float value of the q-value
 
-	 * the qValue.
-
-	 * @throws InvalidArgumentException if the q parameter value is not
-
-	 * <code>-1</code> or between <code>0 and 1</code>.
+	 * @throws InvalidArgumentException if the q parameter value is not between <code>0 and 1</code>.
 
 	 */
 
-	SetQValue(qValue float32) //throws InvalidArgumentException;
+	SetQValue(qValue float32) (InvalidArgumentException error)
 
 	/**
 
@@ -113,13 +105,4 @@ type AcceptHeader interface {
 	 */
 
 	AllowsAllContentTypes() bool
-
-	/**
-
-	 * Name of AcceptHeader
-
-	 */
-
-	//public final static String NAME = "Accept";
-
 }

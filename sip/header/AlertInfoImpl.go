@@ -8,14 +8,9 @@ import (
 
 /**
 * AlertInfo SIP Header.
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type AlertInfo struct {
-	Parameters //implements javax.sip.header.AlertInfoHeader {
+	Parameters
 
 	/** URI field
 	 */
@@ -67,8 +62,6 @@ func (this *AlertInfo) SetAlertInfo(uri address.URI) {
  *
  *
  * @return the URI representing the AlertInfo.
- *
- * @since JAIN SIP v1.1
  *
  */
 func (this *AlertInfo) GetAlertInfo() address.URI {

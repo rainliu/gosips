@@ -235,7 +235,7 @@ const REGISTER = "REGISTER"
  * Contact may also be used to specifically announce support for NOTIFY
  * messages when registering.
  *
- * @since v1.1
+ *
  */
 const NOTIFY = "NOTIFY"
 
@@ -289,7 +289,7 @@ const NOTIFY = "NOTIFY"
  * Contact may also be used to specifically announce support for SUBSCRIBE
  * messages when registering.
  *
- * @since v1.1
+ *
  */
 const SUBSCRIBE = "SUBSCRIBE"
 
@@ -326,7 +326,7 @@ const SUBSCRIBE = "SUBSCRIBE"
  * SHOULD also add a Date header field containing the time the message is sent.
  * Most SIP requests are used to setup and modify communication sessions.
  *
- * @since v1.1
+ *
  */
 const MESSAGE = "MESSAGE"
 
@@ -365,7 +365,7 @@ const MESSAGE = "MESSAGE"
  * sent outside the context of a dialog MAY fork, and if it is accepted
  * by multiple agents, MAY create multiple subscriptions.
  *
- * @since v1.1
+ *
  */
 const REFER = "REFER"
 
@@ -394,7 +394,7 @@ const REFER = "REFER"
  * in the SIP call state or the sessions initiated by SIP MUST NOT be sent
  * in an INFO message.
  *
- * @since v1.1
+ *
  */
 const INFO = "INFO"
 
@@ -421,7 +421,7 @@ const INFO = "INFO"
  * PRACK requests MAY contain bodies, which are interpreted according to
  * their type and disposition.
  *
- * @since v1.1
+ *
  */
 const PRACK = "PRACK"
 
@@ -444,7 +444,7 @@ const PRACK = "PRACK"
  * the possibility of user approval. Such approval will frequently be needed,
  * and is possible with a re-INVITE.
  *
- * @since v1.1
+ *
  */
 const UPDATE = "UPDATE"
 

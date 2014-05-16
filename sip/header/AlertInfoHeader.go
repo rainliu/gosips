@@ -20,21 +20,16 @@ import (
  * <p>
  * For Example:<br>
  * <code>Alert-Info: <http://jcp.org/yeeha.wav></code>
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 
 type AlertInfoHeader interface {
 	ParametersHeader
-	//Header
 
 	/**
 	 * Sets the AlertInfo of the AlertInfoHeader to the <var>alertInfo</var>
 	 * parameter value.
 	 *
 	 * @param alertInfo the new Alert Info URI of this AlertInfoHeader.
-	 * @since v1.1
 	 */
 	SetAlertInfo(alertInfo address.URI)
 
@@ -42,13 +37,6 @@ type AlertInfoHeader interface {
 	 * Returns the AlertInfo value of this AlertInfoHeader.
 	 *
 	 * @return the URI representing the AlertInfo.
-	 * @since v1.1
 	 */
 	GetAlertInfo() address.URI
-
-	/**
-	 * Name of the AlertInfoHeader
-	 */
-	//public final static String NAME = "Alert-Info";
-
 }

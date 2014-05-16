@@ -1,16 +1,15 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 )
 
 /**
 * AllowEvents Header.
-*@version JAIN-SIP-1.1
  */
 type AllowEvents struct {
 	SIPHeader
-	//implements javax.sip.header.AllowEventsHeader {
 
 	/** method field
 	 */
@@ -43,10 +42,12 @@ func NewAllowEventsFromString(m string) *AllowEvents {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the Strings defining the eventType supported
  */
-func (this *AllowEvents) SetEventType(eventType string) { // throws ParseException {
-	//if (eventType==null) throw new  NullPointerException("JAIN-SIP Exception,"+
-	//"AllowEvents, setEventType(), the eventType parameter is null");
+func (this *AllowEvents) SetEventType(eventType string) (ParseException error) {
+	if eventType == "" {
+		errors.New("NullPointerException: the eventType parameter is null")
+	}
 	this.eventType = eventType
+	return nil
 }
 
 /**

@@ -20,7 +20,7 @@ import (
  *
  * @see AcceptLanguageList
  */
-type AcceptLanguage struct { //implements AcceptLanguageHeader {
+type AcceptLanguage struct {
 	Parameters
 
 	/** languageRange field
@@ -45,7 +45,7 @@ func (this *AcceptLanguage) String() string {
  *@return  encoded header as a string.
  */
 func (this *AcceptLanguage) EncodeBody() string {
-	var encoding bytes.Buffer //  = new StringBuffer();
+	var encoding bytes.Buffer
 	if this.languageRange != "" {
 		encoding.WriteString(this.languageRange)
 	}
@@ -114,24 +114,16 @@ func (this *AcceptLanguage) SetLanguageRange(languageRange string) {
  *
  *
  *
- * @param qValue - the new float value of the q-value, a value of -1 resets
+ * @param qValue - the new float value of the q-value
  *
- * the qValue.
- *
- * @throws InvalidArgumentException if the q parameter value is not
- *
- * <code>-1</code> or between <code>0 and 1</code>.
+ * @throws InvalidArgumentException if the q parameter value is not between <code>0 and 1</code>.
  *
  */
 func (this *AcceptLanguage) SetQValue(q float32) (InvalidArgumentException error) {
 	if q < 0.0 || q > 1.0 {
 		return errors.New("qvalue out of range!")
 	}
-	if q == -1 {
-		this.RemoveParameter("q")
-	} else {
-		this.SetParameter("q", strconv.FormatFloat(float64(q), 'f', -1, 32))
-	}
+	this.SetParameter("q", strconv.FormatFloat(float64(q), 'f', -1, 32))
 	return nil
 }
 
@@ -147,7 +139,7 @@ func (this *AcceptLanguage) GetAcceptLanguage() string {
 	if this.languageRange == "" {
 		return ""
 	} else {
-		return this.languageRange //new Locale(this.languageRange,Locale.getDefault().getCountry() );
+		return this.languageRange
 	}
 }
 
@@ -163,5 +155,5 @@ func (this *AcceptLanguage) GetAcceptLanguage() string {
  *
  */
 func (this *AcceptLanguage) SetAcceptLanguage(language string) {
-	this.languageRange = language //.getLanguage();
+	this.languageRange = language
 }

@@ -6,11 +6,6 @@ import (
 
 /**
 * AlertInfo Header - there can be several AlertInfo headers.
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type AlertInfoList struct {
 	SIPHeaderList

@@ -2,16 +2,13 @@
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Module Name   : GoSIP Specification
  * File Name     : CSeqHeader.go
- * Author        : Rain Liu   
+ * Author        : Rain Liu
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
- 
+
 package header
 
-import (
-
-)
-
+import ()
 
 /**
  * A CSeq header field in a request contains a single decimal sequence number
@@ -58,48 +55,47 @@ import (
  *
  */
 
-type CSeqHeader interface{
- 	Header
+type CSeqHeader interface {
+	Header
 
-    /**
-     * Sets the method of CSeqHeader
-     *
-     * @param method - the method of the Request of this CSeqHeader
-     * @throws ParseException which signals that an error has been reached
-     * unexpectedly while parsing the method value.
-     */
-    SetMethod(method string) (ParseException error);
+	/**
+	 * Sets the method of CSeqHeader
+	 *
+	 * @param method - the method of the Request of this CSeqHeader
+	 * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the method value.
+	 */
+	SetMethod(method string) (ParseException error)
 
-    /**
-     * Gets the method of CSeqHeader
-     *
-     * @return method of CSeqHeader
-     */
-    GetMethod() string;
+	/**
+	 * Gets the method of CSeqHeader
+	 *
+	 * @return method of CSeqHeader
+	 */
+	GetMethod() string
 
-    /**
-     * Sets the sequence number value of the CSeqHeader. The sequence number
-     * MUST be expressible as a 32-bit unsigned integer and MUST be less than
-     * 2**31.
-     *
-     * @param sequenceNumber - the new sequence number of this CSeqHeader
-     * @throws InvalidArgumentException if supplied value is less than zero.
-     * @since v1.1
-     */
-    SetSequenceNumber(sequenceNumber int) (InvalidArgumentException error);
+	/**
+	 * Sets the sequence number value of the CSeqHeader. The sequence number
+	 * MUST be expressible as a 32-bit unsigned integer and MUST be less than
+	 * 2**31.
+	 *
+	 * @param sequenceNumber - the new sequence number of this CSeqHeader
+	 * @throws InvalidArgumentException if supplied value is less than zero.
+	 *
+	 */
+	SetSequenceNumber(sequenceNumber int) (InvalidArgumentException error)
 
-    /**
-     * Gets the sequence number of this CSeqHeader.
-     *
-     * @return sequence number of the CSeqHeader
-     * @since v1.1
-     */
-    GetSequenceNumber() int;
+	/**
+	 * Gets the sequence number of this CSeqHeader.
+	 *
+	 * @return sequence number of the CSeqHeader
+	 *
+	 */
+	GetSequenceNumber() int
 
-     /**
-     * Name of the CSeqHeader
-     */
-    //public final static String NAME = "CSeq";
+	/**
+	 * Name of the CSeqHeader
+	 */
+	//public final static String NAME = "CSeq";
 
 }
-

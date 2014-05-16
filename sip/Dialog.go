@@ -54,7 +54,7 @@ import (
  * Early --> Confirmed --> Completed --> Terminated
  *
  * @author Sun Microsystems
- * @since v1.1
+ *
  */
 
 type Dialog interface { // extends Serializable{

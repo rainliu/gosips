@@ -6,7 +6,6 @@ import (
 
 /** An abstract class for headers that take an address and parameters.
  */
-
 type AddressParameters struct {
 	Parameters
 

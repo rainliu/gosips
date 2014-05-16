@@ -66,7 +66,7 @@ type RetryAfterHeader interface {
 
 	 * @throws InvalidArgumentException if supplied value is less than zero.
 
-	 * @since v1.1
+	 *
 
 	 */
 
@@ -82,7 +82,7 @@ type RetryAfterHeader interface {
 
 	 * @return the retry after value of the RetryAfterHeader.
 
-	 * @since v1.1
+	 *
 
 	 */
 
@@ -130,7 +130,7 @@ type RetryAfterHeader interface {
 
 	 * @throws InvalidArgumentException if supplied value is less than zero.
 
-	 * @since v1.1
+	 *
 
 	 */
 
@@ -148,7 +148,7 @@ type RetryAfterHeader interface {
 
 	 * Set.
 
-	 * @since v1.1
+	 *
 
 	 */
 

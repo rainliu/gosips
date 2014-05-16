@@ -23,7 +23,7 @@ type AuthenticationInfoHeader interface {
 	 * @param nextNonce - the new nextNonce String of this AuthenticationInfoHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the nextNonce value.
-	 * @since v1.1
+	 *
 	 */
 	SetNextNonce(nextNonce string) //throws ParseException;
 
@@ -32,7 +32,7 @@ type AuthenticationInfoHeader interface {
 	 *
 	 * @return the String representing the nextNonce information, null if value is
 	 * not set.
-	 * @since v1.1
+	 *
 	 */
 	GetNextNonce() string
 
@@ -43,7 +43,7 @@ type AuthenticationInfoHeader interface {
 	 * @param qop - the new Qop string of this AuthenticationInfoHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the Qop value.
-	 * @since v1.1
+	 *
 	 */
 	SetQop(qop string) // throws ParseException;
 
@@ -52,7 +52,7 @@ type AuthenticationInfoHeader interface {
 	 *
 	 * @return the string representing the messageQop information, null if the
 	 * value is not set.
-	 * @since v1.1
+	 *
 	 */
 	GetQop() string
 
@@ -63,7 +63,7 @@ type AuthenticationInfoHeader interface {
 	 * @param cNonce - the new cNonce String of this AuthenticationInfoHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the cNonce value.
-	 * @since v1.1
+	 *
 	 */
 	SetCNonce(cNonce string) //throws ParseException;
 
@@ -72,7 +72,7 @@ type AuthenticationInfoHeader interface {
 	 *
 	 * @return the String representing the cNonce information, null if value is
 	 * not set.
-	 * @since v1.1
+	 *
 	 */
 	GetCNonce() string
 
@@ -83,7 +83,7 @@ type AuthenticationInfoHeader interface {
 	 * @param nonceCount - the new nonceCount integer of this AuthenticationInfoHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the nonceCount value.
-	 * @since v1.1
+	 *
 	 */
 	SetNonceCount(nonceCount int) //throws ParseException;
 
@@ -92,7 +92,7 @@ type AuthenticationInfoHeader interface {
 	 *
 	 * @return the integer representing the nonceCount information, -1 if value is
 	 * not set.
-	 * @since v1.1
+	 *
 	 */
 	GetNonceCount() int
 
@@ -103,7 +103,7 @@ type AuthenticationInfoHeader interface {
 	 * @param response - the new response String of this AuthenticationInfoHeader.
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the Response.
-	 * @since v1.1
+	 *
 	 */
 	SetResponse(response string) // throws ParseException;
 
@@ -111,7 +111,7 @@ type AuthenticationInfoHeader interface {
 	 * Returns the Response value of this AuthenticationInfoHeader.
 	 *
 	 * @return the String representing the Response information.
-	 * @since v1.1
+	 *
 	 */
 	GetResponse() string
 

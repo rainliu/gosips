@@ -40,7 +40,7 @@ import (
  * </ul>
  *
  * @author Sun Microsystems
- * @since v1.1
+ *
  */
 type RequestEvent struct { //extends EventObject {
 	// internal private variables
