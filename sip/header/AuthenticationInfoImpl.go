@@ -1,6 +1,7 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 	"strconv"
 	"strings"
@@ -8,25 +9,17 @@ import (
 
 /** Authentication info SIP Header.
  *
- *@author M. Ranganathan <mranga@nist.gov>  NIST/ITL/ANTD
- *
- *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
- *
- *@version JAIN-1.1
- *
  */
 type AuthenticationInfo struct {
 	Parameters
-	//implements javax.sip.header.AuthenticationInfoHeader {
 }
 
 /** Default contstructor.
  */
-
 func NewAuthenticationInfo() *AuthenticationInfo {
 	this := &AuthenticationInfo{}
 	this.Parameters.super(core.SIPHeaderNames_AUTHENTICATION_INFO)
-	this.parameters.SetSeparator(core.SIPSeparatorNames_COMMA) // Odd ball.
+	this.parameters.SetSeparator(core.SIPSeparatorNames_COMMA)
 	return this
 }
 
@@ -50,7 +43,6 @@ func (this *AuthenticationInfo) EncodeBody() string {
  *@param name is the name for which we want to retrieve the name value
  *  list.
  */
-
 func (this *AuthenticationInfo) GetAuthInfo(name string) *core.NameValue {
 	return this.parameters.GetNameValue(name)
 }
@@ -61,8 +53,6 @@ func (this *AuthenticationInfo) GetAuthInfo(name string) *core.NameValue {
  *
  *
  * @return the String representing the AuthenticationInfo
- *
- * @since JAIN SIP v1.1
  *
  */
 func (this *AuthenticationInfo) GetAuthenticationInfo() string {
@@ -128,8 +118,9 @@ func (this *AuthenticationInfo) GetResponse() string {
  * unexpectedly while parsing the cNonce value.
  *
  */
-func (this *AuthenticationInfo) SetCNonce(cNonce string) { //throws ParseException {
+func (this *AuthenticationInfo) SetCNonce(cNonce string) (ParseException error) {
 	this.SetParameter(ParameterNames_CNONCE, cNonce)
+	return nil
 }
 
 /** Sets the NextNonce of the AuthenticationInfoHeader to the <var>nextNonce</var>
@@ -140,8 +131,9 @@ func (this *AuthenticationInfo) SetCNonce(cNonce string) { //throws ParseExcepti
  * unexpectedly while parsing the nextNonce value.
  *
  */
-func (this *AuthenticationInfo) SetNextNonce(nextNonce string) { //throws ParseException {
+func (this *AuthenticationInfo) SetNextNonce(nextNonce string) (ParseException error) {
 	this.SetParameter(ParameterNames_NEXT_NONCE, nextNonce)
+	return nil
 }
 
 /** Sets the Nonce Count of the AuthenticationInfoHeader to the <var>nonceCount</var>
@@ -152,13 +144,16 @@ func (this *AuthenticationInfo) SetNextNonce(nextNonce string) { //throws ParseE
  * unexpectedly while parsing the nonceCount value.
  *
  */
-func (this *AuthenticationInfo) SetNonceCount(nonceCount int) { //throws ParseException {
-	//if (nonceCount  < 0 ) throw new ParseException("bad value",0);
-	nc := strconv.FormatUint(uint64(nonceCount), 16) //.toHexString(nonceCount)
+func (this *AuthenticationInfo) SetNonceCount(nonceCount int) (ParseException error) {
+	if nonceCount < 0 {
+		return errors.New("ParseException: bad value")
+	}
+	nc := strconv.FormatUint(uint64(nonceCount), 16)
 
 	base := "00000000"
 	nc = base[0:8-len(nc)] + nc
 	this.SetParameter(ParameterNames_NC, nc)
+	return nil
 }
 
 /** Sets the Qop value of the AuthenticationInfoHeader to the new
@@ -169,8 +164,9 @@ func (this *AuthenticationInfo) SetNonceCount(nonceCount int) { //throws ParseEx
  * unexpectedly while parsing the Qop value.
  *
  */
-func (this *AuthenticationInfo) SetQop(qop string) { // throws ParseException {
+func (this *AuthenticationInfo) SetQop(qop string) (ParseException error) {
 	this.SetParameter(ParameterNames_QOP, qop)
+	return nil
 }
 
 /** Sets the Response of the
@@ -183,13 +179,16 @@ func (this *AuthenticationInfo) SetQop(qop string) { // throws ParseException {
  * unexpectedly while parsing the Response.
  *
  */
-func (this *AuthenticationInfo) SetResponse(response string) { //throws ParseException {
+func (this *AuthenticationInfo) SetResponse(response string) (ParseException error) {
 	this.SetParameter(ParameterNames_RESPONSE, response)
+	return nil
 }
 
 func (this *AuthenticationInfo) SetParameter(name, value string) error {
-	//throws ParseException {
-	//if (name == null) throw new NullPointerException("null name");
+	if name == "" {
+		return errors.New("NullPointerException: null name")
+	}
+
 	nv := this.parameters.GetNameValue(strings.ToLower(name))
 	if nv == nil {
 		nv = core.NewNameValue(name, value)
@@ -204,11 +203,13 @@ func (this *AuthenticationInfo) SetParameter(name, value string) error {
 			strings.ToLower(name) == (ParameterNames_NEXT_NONCE) ||
 			strings.ToLower(name) == (ParameterNames_ALGORITHM) ||
 			strings.ToLower(name) == (ParameterNames_RESPONSE_AUTH) {
-			// if (value ==
-			//     throw new NullPointerException("null value");
-			// if (value.startsWith(Separators.DOUBLE_QUOTE))
-			//     throw new ParseException
-			//     (value + " : Unexpected DOUBLE_QUOTE",0);
+			//if value == "" {//TODO by LY
+			//	return errors.New("NullPointerException: null value")
+			//}
+			if strings.HasPrefix(value, core.SIPSeparatorNames_DOUBLE_QUOTE) {
+				return errors.New("ParseException: " +
+					value + " : Unexpected DOUBLE_QUOTE")
+			}
 			nv.SetQuotedValue()
 		}
 		this.parameters.SetNameValue(nv)

@@ -21,8 +21,6 @@ package header
  * @see Parameters
  * @see WWWAuthenticateHeader
  * @see ProxyAuthorizationHeader
- * @version 1.1
- * @author Sun Microsystems
  *
  */
 

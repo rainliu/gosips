@@ -8,13 +8,9 @@ package header
  * <p>
  * For Example:<br>
  * <code>Authentication-Info: nextnonce="47364c23432d2e131a5fb210812c"</code>
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 type AuthenticationInfoHeader interface {
 	ParametersHeader
-	//Header
 
 	/**
 	 * Sets the NextNonce of the AuthenticationInfoHeader to the <var>nextNonce</var>
@@ -25,7 +21,7 @@ type AuthenticationInfoHeader interface {
 	 * unexpectedly while parsing the nextNonce value.
 	 *
 	 */
-	SetNextNonce(nextNonce string) //throws ParseException;
+	SetNextNonce(nextNonce string) (ParseException error)
 
 	/**
 	 * Returns the nextNonce value of this AuthenticationInfoHeader.
@@ -45,7 +41,7 @@ type AuthenticationInfoHeader interface {
 	 * unexpectedly while parsing the Qop value.
 	 *
 	 */
-	SetQop(qop string) // throws ParseException;
+	SetQop(qop string) (ParseException error)
 
 	/**
 	 * Returns the messageQop value of this AuthenticationInfoHeader.
@@ -65,7 +61,7 @@ type AuthenticationInfoHeader interface {
 	 * unexpectedly while parsing the cNonce value.
 	 *
 	 */
-	SetCNonce(cNonce string) //throws ParseException;
+	SetCNonce(cNonce string) (ParseException error)
 
 	/**
 	 * Returns the CNonce value of this AuthenticationInfoHeader.
@@ -85,7 +81,7 @@ type AuthenticationInfoHeader interface {
 	 * unexpectedly while parsing the nonceCount value.
 	 *
 	 */
-	SetNonceCount(nonceCount int) //throws ParseException;
+	SetNonceCount(nonceCount int) (ParseException error)
 
 	/**
 	 * Returns the Nonce Count value of this AuthenticationInfoHeader.
@@ -105,7 +101,7 @@ type AuthenticationInfoHeader interface {
 	 * unexpectedly while parsing the Response.
 	 *
 	 */
-	SetResponse(response string) // throws ParseException;
+	SetResponse(response string) (ParseException error)
 
 	/**
 	 * Returns the Response value of this AuthenticationInfoHeader.
@@ -114,10 +110,4 @@ type AuthenticationInfoHeader interface {
 	 *
 	 */
 	GetResponse() string
-
-	/**
-	 * Name of the AlertInfoHeader
-	 */
-	//public final static String NAME = "Authentication-Info";
-
 }
