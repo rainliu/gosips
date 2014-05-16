@@ -56,7 +56,7 @@ type AuthenticationHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the realm.
 	 */
-	SetRealm(realm string) // throws ParseException;
+	SetRealm(realm string) (ParseException error)
 
 	/**
 	 * Returns the Realm value of this AuthorizationHeader. This convenience
@@ -75,7 +75,7 @@ type AuthenticationHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the username.
 	 */
-	SetUsername(username string) //throws ParseException;
+	SetUsername(username string) (ParseException error)
 
 	/**
 	 * Returns the Username value of this AuthorizationHeader. This convenience
@@ -94,7 +94,7 @@ type AuthenticationHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the nonce value.
 	 */
-	SetNonce(nonce string) //throws ParseException;
+	SetNonce(nonce string) (ParseException error)
 
 	/**
 	 * Returns the Nonce value of this AuthorizationHeader.
@@ -110,7 +110,7 @@ type AuthenticationHeader interface {
 	 *
 	 * @param uri - the new URI of this AuthorizationHeader.
 	 */
-	SetURI(uri address.URI)
+	SetURI(uri address.URI) error
 
 	/**
 	 * Returns the URI value of this AuthorizationHeader, for example DigestURI.
@@ -129,7 +129,7 @@ type AuthenticationHeader interface {
 	 * unexpectedly while parsing the Response.
 	 *
 	 */
-	SetResponse(response string) //throws ParseException;
+	SetResponse(response string) (ParseException error)
 
 	/**
 	 * Returns the Response value of this AuthorizationHeader.
@@ -148,7 +148,7 @@ type AuthenticationHeader interface {
 	 * unexpectedly while parsing the algorithm value.
 	 *
 	 */
-	SetAlgorithm(algorithm string) //throws ParseException;
+	SetAlgorithm(algorithm string) (ParseException error)
 
 	/**
 	 * Returns the Algorithm value of this AuthorizationHeader.
@@ -168,7 +168,7 @@ type AuthenticationHeader interface {
 	 * unexpectedly while parsing the cNonce value.
 	 *
 	 */
-	SetCNonce(cNonce string) //throws ParseException;
+	SetCNonce(cNonce string) (ParseException error)
 
 	/**
 	 * Returns the CNonce value of this AuthorizationHeader.
@@ -188,7 +188,7 @@ type AuthenticationHeader interface {
 	 * unexpectedly while parsing the opaque value.
 	 *
 	 */
-	SetOpaque(opaque string) // throws ParseException;
+	SetOpaque(opaque string) (ParseException error)
 
 	/**
 	 * Returns the Opaque value of this AuthorizationHeader.
@@ -208,7 +208,7 @@ type AuthenticationHeader interface {
 	 * unexpectedly while parsing the Qop value.
 	 *
 	 */
-	SetQop(qop string) //throws ParseException;
+	SetQop(qop string) (ParseException error)
 
 	/**
 	 * Returns the Qop value of this AuthorizationHeader.
@@ -228,7 +228,7 @@ type AuthenticationHeader interface {
 	 * unexpectedly while parsing the nonceCount value.
 	 *
 	 */
-	SetNonceCount(nonceCount int) //throws ParseException;
+	SetNonceCount(nonceCount int) (ParseException error)
 
 	/**
 	 * Returns the Nonce Count value of this AuthorizationHeader.

@@ -73,6 +73,7 @@ package header
 type ContactHeader interface {
 	AddressHeader
 	ParametersHeader
+	QValue
 
 	/**
 	 * Returns the value of the <code>expires</code> parameter as delta-seconds.
@@ -117,51 +118,4 @@ type ContactHeader interface {
 	 */
 
 	GetExpires() int
-
-	/**
-
-	 * Sets the <code>qValue</code> value of the Name Address. If more than
-
-	 * one Contact is sent in a REGISTER request, the registering UA intends
-
-	 * to associate all of the URIs in these Contact header field values with
-
-	 * the address-of-record present in the To field.  This list can be
-
-	 * prioritized with the "q" parameter in the Contact header field.  The "q"
-
-	 * parameter indicates a relative preference for the particular Contact
-
-	 * header field value compared to other bindings for this address-of-record.
-
-	 * A value of <code>-1</code> indicates the <code>qValue</code> paramater
-
-	 * is not set.
-	 *
-	 * @param qValue - the new float value of the q-value parameter.
-	 * @throws InvalidArgumentException if the q-value parameter value is not between <code>0 and 1</code>.
-	 */
-	SetQValue(qValue float32) (InvalidArgumentException error)
-
-	/**
-
-	 * Returns the value of the <code>q-value</code> parameter of this
-
-	 * ContactHeader. The <code>q-value</code> parameter indicates the relative
-
-	 * preference amongst a set of locations. <code>q-values</code> are
-
-	 * decimal numbers from 0 to 1, with higher values indicating higher
-
-	 * preference.
-
-	 *
-
-	 * @return the <code>q-value</code> parameter of this ContactHeader, -1 if
-
-	 * the q-value is not set.
-
-	 */
-
-	GetQValue() float32
 }

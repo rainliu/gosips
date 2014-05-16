@@ -1,6 +1,7 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 	"gosips/sip/address"
 	"strconv"
@@ -39,8 +40,9 @@ func (this *Authentication) super(name string) {
  * @param value  -- value of the parameter.
  */
 func (this *Authentication) SetParameter(name, value string) error {
-	//throws ParseException {
-	//if (name == null) throw new NullPointerException("null name");
+	if name == "" {
+		return errors.New("NullPointerException: null name")
+	}
 	nv := this.parameters.GetNameValue(strings.ToLower(name))
 	if nv == nil {
 		nv = core.NewNameValue(name, value)
@@ -55,11 +57,12 @@ func (this *Authentication) SetParameter(name, value string) error {
 			strings.ToLower(name) == (ParameterNames_URI) ||
 			strings.ToLower(name) == (ParameterNames_ALGORITHM) ||
 			strings.ToLower(name) == (ParameterNames_RESPONSE) {
-			// if (value ==
-			//     throw new NullPointerException("null value");
-			// if (value.startsWith(Separators.DOUBLE_QUOTE))
-			//     throw new ParseException
-			//     (value + " : Unexpected DOUBLE_QUOTE",0);
+			//if value == "" {//TODO by LY
+			//	return errors.New("NullPointerException: null value")
+			//}
+			if strings.HasPrefix(value, core.SIPSeparatorNames_DOUBLE_QUOTE) {
+				return errors.New("ParseException: " + value + " : Unexpected DOUBLE_QUOTE")
+			}
 			nv.SetQuotedValue()
 		}
 		this.parameters.SetNameValue(nv)
@@ -127,10 +130,12 @@ func (this *Authentication) GetScheme() string {
  * unexpectedly while parsing the realm.
  *
  */
-func (this *Authentication) SetRealm(realm string) { //throws ParseException {
-	//if (realm==null) throw new  NullPointerException("JAIN-SIP Exception, "+
-	//" AuthenticationHeader, SetRealm(), The realm parameter is null");
+func (this *Authentication) SetRealm(realm string) (ParseException error) {
+	if realm == "" {
+		return errors.New("NullPointerException: The realm parameter is null")
+	}
 	this.SetParameter(ParameterNames_REALM, realm)
+	return nil
 }
 
 /**
@@ -154,10 +159,12 @@ func (this *Authentication) GetRealm() string {
  * unexpectedly while parsing the nonce value.
  *
  */
-func (this *Authentication) SetNonce(nonce string) { //throws ParseException {
-	//if (nonce==null) throw new  NullPointerException("JAIN-SIP Exception, "+
-	//" AuthenticationHeader, SetNonce(), The nonce parameter is null");
+func (this *Authentication) SetNonce(nonce string) (ParseException error) {
+	if nonce == "" {
+		return errors.New("NullPointerException: The nonce parameter is null")
+	}
 	this.SetParameter(ParameterNames_NONCE, nonce)
+	return nil
 }
 
 /**
@@ -178,14 +185,15 @@ func (this *Authentication) GetNonce() string {
  * @param uri - the new URI of this WWWAuthenicateHeader.
  *
  */
-func (this *Authentication) SetURI(uri address.URI) {
+func (this *Authentication) SetURI(uri address.URI) error {
 	if uri != nil {
 		nv := core.NewNameValue(ParameterNames_URI, uri.String())
 		nv.SetQuotedValue()
 		this.parameters.SetNameValue(nv)
-	} // else {
-	//   throw new NullPointerException("Null URI");
-	//}
+		return nil
+	} else {
+		return errors.New("NullPointerException: Null URI")
+	}
 }
 
 /**
@@ -210,10 +218,12 @@ func (this *Authentication) GetURI() address.URI {
  * unexpectedly while parsing the algorithm value.
  *
  */
-func (this *Authentication) SetAlgorithm(algorithm string) { //} throws ParseException {
-	//if (algorithm==null)
-	//    throw new  NullPointerException( "null arg");
+func (this *Authentication) SetAlgorithm(algorithm string) (ParseException error) {
+	if algorithm == "" {
+		return errors.New("NullPointerException: null arg")
+	}
 	this.SetParameter(ParameterNames_ALGORITHM, algorithm)
+	return nil
 }
 
 /**
@@ -236,10 +246,12 @@ func (this *Authentication) GetAlgorithm() string {
  * unexpectedly while parsing the Qop value.
  *
  */
-func (this *Authentication) SetQop(qop string) { // throws ParseException {
-	//if (qop==null)
-	//    throw new  NullPointerException("null arg");
+func (this *Authentication) SetQop(qop string) (ParseException error) {
+	if qop == "" {
+		return errors.New("NullPointerException: null arg")
+	}
 	this.SetParameter(ParameterNames_QOP, qop)
+	return nil
 }
 
 /**
@@ -262,10 +274,12 @@ func (this *Authentication) GetQop() string {
  * unexpectedly while parsing the opaque value.
  *
  */
-func (this *Authentication) SetOpaque(opaque string) { //throws ParseException  {
-	//if (opaque==null)
-	//    throw new  NullPointerException( "null arg");
+func (this *Authentication) SetOpaque(opaque string) (ParseException error) {
+	if opaque == "" {
+		return errors.New("NullPointerException: null arg")
+	}
 	this.SetParameter(ParameterNames_OPAQUE, opaque)
+	return nil
 }
 
 /**
@@ -288,10 +302,12 @@ func (this *Authentication) GetOpaque() string {
  * unexpectedly while parsing the domain.
  *
  */
-func (this *Authentication) SetDomain(domain string) { //throws ParseException{
-	//if (domain==null) throw new
-	//NullPointerException("null arg");
+func (this *Authentication) SetDomain(domain string) (ParseException error) {
+	if domain == "" {
+		return errors.New("NullPointerException: null arg")
+	}
 	this.SetParameter(ParameterNames_DOMAIN, domain)
+	return nil
 }
 
 /**
@@ -341,8 +357,9 @@ func (this *Authentication) IsStale() bool {
  *
  * @param cnonce -- a nonce string.
  */
-func (this *Authentication) SetCNonce(cnonce string) { //throws ParseException {
+func (this *Authentication) SetCNonce(cnonce string) (ParseException error) {
 	this.SetParameter(ParameterNames_CNONCE, cnonce)
+	return nil
 }
 
 /** Get the CNonce.
@@ -364,16 +381,17 @@ func (this *Authentication) GetNonceCount() int {
  * Bug fix sent in by Andreas Byström
  */
 
-func (this *Authentication) SetNonceCount(nonceCount int) { //}
-	//throws java.text.ParseException {
-	//if (param < 0) throw new ParseException("bad value", 0);
+func (this *Authentication) SetNonceCount(nonceCount int) (ParseException error) {
+	if nonceCount < 0 {
+		return errors.New("ParseException: bad value")
+	}
 
-	nc := strconv.FormatUint(uint64(nonceCount), 16) //.toHexString(nonceCount)
+	nc := strconv.FormatUint(uint64(nonceCount), 16)
 
 	base := "00000000"
 	nc = base[0:8-len(nc)] + nc
 	this.SetParameter(ParameterNames_NC, nc)
-
+	return nil
 }
 
 /**
@@ -389,11 +407,13 @@ func (this *Authentication) GetResponse() string {
  *
  *@param response to Set.
  */
-func (this *Authentication) SetResponse(response string) { //} throws ParseException {
-	//if (response == null)
-	//    throw new NullPointerException("Null parameter");
-	// Bug fix from Andreas Byström
+func (this *Authentication) SetResponse(response string) (ParseException error) {
+	if response == "" {
+		return errors.New("NullPointerException: Null parameter")
+	}
+
 	this.SetParameter(ParameterNames_RESPONSE, response)
+	return nil
 }
 
 /**
@@ -424,6 +444,6 @@ func (this *Authentication) GetUsername() string {
  * @since JAIN SIP v1.1
  *
  */
-func (this *Authentication) SetUsername(username string) { //throws ParseException {
-	this.SetParameter(ParameterNames_USERNAME, username)
+func (this *Authentication) SetUsername(username string) (ParseException error) {
+	return this.SetParameter(ParameterNames_USERNAME, username)
 }

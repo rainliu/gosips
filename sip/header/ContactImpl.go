@@ -3,7 +3,6 @@ package header
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"gosips/core"
 	"gosips/sip/address"
 	"strconv"
@@ -131,13 +130,6 @@ func (this *Contact) SetExpires(expiryDeltaSeconds int) (InvalidArgumentExceptio
 	return nil
 }
 
-/** get the Q-value
- * @return float
- */
-func (this *Contact) GetQValue() float32 {
-	qvalue, _ := strconv.ParseFloat(this.GetParameter(core.SIPParameters_Q), 32)
-	return float32(qvalue)
-}
 
 /** set the Contact List
  * @param cl ContactList to set
@@ -168,15 +160,56 @@ func (this *Contact) SetAddress(addr address.Address) {
 	this.wildCardFlag = false
 }
 
-/** set the Q-value parameter
- * @param qValue float to set
+
+
+/** get the QValue field. Return -1 if the parameter has not been
+ * set.
+ * @return float
  */
-func (this *Contact) SetQValue(qValue float32) (InvalidArgumentException error) {
-	if qValue < 0.0 || qValue > 1.0 {
+func (this *Contact) GetQValue() float32 {
+	if !this.HasParameter(ParameterNames_Q) {
+		return -1
+	}
+	qstr := this.GetParameterValue(ParameterNames_Q)
+	q, _ := strconv.ParseFloat(qstr, 32)
+	return float32(q)
+}
+
+/**
+ * Return true if the q value has been set.
+ * @return boolean
+ */
+func (this *Contact) HasQValue() bool {
+	return this.HasParameter(ParameterNames_Q)
+}
+
+/**
+ * Remove the q value.
+ */
+func (this *Contact) RemoveQValue() {
+	this.RemoveParameter(ParameterNames_Q)
+}
+
+/**
+ * Sets q-value for media-range. Q-values allow the
+ *
+ * user to indicate the relative degree of preference for that media-range,
+ *
+ * using the qvalue scale from 0 to 1. If no q-value is present, the
+ *
+ * media-range should be treated as having a q-value of 1.
+ *
+ *
+ *
+ * @param qValue - the new float value of the q-value
+ *
+ * @throws InvalidArgumentException if the q parameter value is not between <code>0 and 1</code>.
+ *
+ */
+func (this *Contact) SetQValue(q float32) (InvalidArgumentException error) {
+	if q < 0.0 || q > 1.0 {
 		return errors.New("qvalue out of range!")
 	}
-
-	qValueStr := fmt.Sprintf("%f", qValue)
-	this.parameters.AddNameValue(core.NewNameValue(core.SIPParameters_Q, qValueStr))
+	this.SetParameter(ParameterNames_Q, strconv.FormatFloat(float64(q), 'f', -1, 32))
 	return nil
 }

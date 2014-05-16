@@ -336,7 +336,7 @@ func (this *Via) GetProtocol() string {
  */
 func (this *Via) SetProtocol(protocol string) (ParseException error) {
 	if protocol == "" {
-		errors.New("NullPointerException: GoSIP Exception, Via, setProtocol(), the protocol parameter is null.")
+		return errors.New("NullPointerException: GoSIP Exception, Via, setProtocol(), the protocol parameter is null.")
 	}
 	if this.sentProtocol == nil {
 		this.sentProtocol = NewProtocol()
@@ -365,7 +365,7 @@ func (this *Via) GetTTL() int {
  */
 func (this *Via) SetTTL(ttl int) (InvalidArgumentException error) {
 	if ttl < 0 && ttl != -1 {
-		errors.New("InvalidArgumentException: GoSIP Exception, Via, setTTL(), the ttl parameter is < 0")
+		return errors.New("InvalidArgumentException: GoSIP Exception, Via, setTTL(), the ttl parameter is < 0")
 	}
 	this.SetParameter(ParameterNames_TTL, strconv.Itoa(ttl))
 	return nil
@@ -392,7 +392,7 @@ func (this *Via) GetMAddr() string {
  */
 func (this *Via) SetMAddr(mAddr string) (ParseException error) {
 	if mAddr == "" {
-		errors.New("NullPointerException: GoSIP Exception, Via, setMAddr(), the mAddr parameter is null.")
+		return errors.New("NullPointerException: GoSIP Exception, Via, setMAddr(), the mAddr parameter is null.")
 	}
 	host := core.NewHost(mAddr)
 	//host.SetAddress(mAddr)
@@ -420,7 +420,7 @@ func (this *Via) GetReceived() string {
  */
 func (this *Via) SetReceived(received string) (ParseException error) {
 	if received == "" {
-		errors.New("NullPointerException: GoSIP Exception, Via, setReceived(), the received parameter is null.")
+		return errors.New("NullPointerException: GoSIP Exception, Via, setReceived(), the received parameter is null.")
 	}
 	this.SetParameter(ParameterNames_RECEIVED, received)
 	return nil
@@ -446,7 +446,7 @@ func (this *Via) GetBranch() string {
  */
 func (this *Via) SetBranch(branch string) (ParseException error) {
 	if branch == "" {
-		errors.New("NullPointerException: GoSIP Exception, Via, setBranch(), the branch parameter is null.")
+		return errors.New("NullPointerException: GoSIP Exception, Via, setBranch(), the branch parameter is null.")
 	}
 	this.SetParameter(ParameterNames_BRANCH, branch)
 	return nil

@@ -44,7 +44,7 @@ func NewAllowEventsFromString(m string) *AllowEvents {
  */
 func (this *AllowEvents) SetEventType(eventType string) (ParseException error) {
 	if eventType == "" {
-		errors.New("NullPointerException: the eventType parameter is null")
+		return errors.New("NullPointerException: the eventType parameter is null")
 	}
 	this.eventType = eventType
 	return nil

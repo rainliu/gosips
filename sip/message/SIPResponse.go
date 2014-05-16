@@ -304,16 +304,16 @@ func (this *SIPResponse) SetStatusLine(sl *header.StatusLine) {
 //     */
 func (this *SIPResponse) CheckHeaders() (ParseException error) {
 	if this.GetCSeq() == nil {
-		errors.New("ParseException: CSeq")
+		return errors.New("ParseException: CSeq")
 	}
 	if this.GetTo() == nil {
-		errors.New("ParseException: To")
+		return errors.New("ParseException: To")
 	}
 	if this.GetFrom() == nil {
-		errors.New("ParseException: From")
+		return errors.New("ParseException: From")
 	}
 	if this.GetViaHeaders() == nil {
-		errors.New("ParseException: Via")
+		return errors.New("ParseException: Via")
 	}
 	return nil
 }

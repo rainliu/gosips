@@ -85,7 +85,7 @@ func (this *ContentLength) GetContentLength() int {
  */
 func (this *ContentLength) SetContentLength(contentLength int) error { //throws InvalidArgumentException{
 	if contentLength < 0 {
-		errors.New("InvalidArgumentException: ContentLength.SetContentLength(), the contentLength parameter is <0")
+		return errors.New("InvalidArgumentException: ContentLength.SetContentLength(), the contentLength parameter is <0")
 	}
 	this.contentLength = contentLength
 	return nil

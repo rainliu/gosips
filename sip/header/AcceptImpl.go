@@ -96,35 +96,6 @@ func (this *Accept) GetContentSubType() string {
 	}
 }
 
-/**
- * Get the q value.
- * @return float
- */
-func (this *Accept) GetQValue() float32 {
-	q, err := strconv.ParseFloat(this.GetParameter(ParameterNames_Q), 32)
-	if err != nil {
-		return -1
-	} else {
-		return float32(q)
-	}
-}
-
-/**
- * Return true if the q value has been set.
- * @return boolean
- */
-func (this *Accept) HasQValue() bool {
-	return this.HasParameter(ParameterNames_Q)
-
-}
-
-/**
- *Remove the q value.
- */
-func (this *Accept) RemoveQValue() {
-	this.RemoveParameter(ParameterNames_Q)
-}
-
 /** set the ContentSubType field
  * @param subtype String to set
  */
@@ -146,23 +117,62 @@ func (this *Accept) SetContentType(mtype string) {
 }
 
 /**
- * Set the q value
- * @param qValue float to set
- * @throws IllegalArgumentException if qValue is <0.0 or >1.0
- */
-func (this *Accept) SetQValue(qValue float32) (InvalidArgumentException error) {
-	if qValue < 0.0 || qValue > 1.0 {
-		return errors.New("qvalue out of range!")
-	}
-	s := strconv.FormatFloat(float64(qValue), 'f', -1, 32)
-	this.SetParameter(ParameterNames_Q, s)
-	return nil
-}
-
-/**
  * Set the mediaRange member
  * @param m MediaRange field
  */
 func (this *Accept) SetMediaRange(m *MediaRange) {
 	this.mediaRange = m
+}
+
+
+/** get the QValue field. Return -1 if the parameter has not been
+ * set.
+ * @return float
+ */
+func (this *Accept) GetQValue() float32 {
+	if !this.HasParameter(ParameterNames_Q) {
+		return -1
+	}
+	qstr := this.GetParameterValue(ParameterNames_Q)
+	q, _ := strconv.ParseFloat(qstr, 32)
+	return float32(q)
+}
+
+/**
+ * Return true if the q value has been set.
+ * @return boolean
+ */
+func (this *Accept) HasQValue() bool {
+	return this.HasParameter(ParameterNames_Q)
+}
+
+/**
+ * Remove the q value.
+ */
+func (this *Accept) RemoveQValue() {
+	this.RemoveParameter(ParameterNames_Q)
+}
+
+/**
+ * Sets q-value for media-range. Q-values allow the
+ *
+ * user to indicate the relative degree of preference for that media-range,
+ *
+ * using the qvalue scale from 0 to 1. If no q-value is present, the
+ *
+ * media-range should be treated as having a q-value of 1.
+ *
+ *
+ *
+ * @param qValue - the new float value of the q-value
+ *
+ * @throws InvalidArgumentException if the q parameter value is not between <code>0 and 1</code>.
+ *
+ */
+func (this *Accept) SetQValue(q float32) (InvalidArgumentException error) {
+	if q < 0.0 || q > 1.0 {
+		return errors.New("qvalue out of range!")
+	}
+	this.SetParameter(ParameterNames_Q, strconv.FormatFloat(float64(q), 'f', -1, 32))
+	return nil
 }

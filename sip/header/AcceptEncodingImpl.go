@@ -70,35 +70,11 @@ func (this *AcceptEncoding) EncodeBody() string {
 	return encoding.String()
 }
 
-/** get QValue field
- * @return float
- */
-func (this *AcceptEncoding) GetQValue() float32 {
-	q, err := strconv.ParseFloat(this.GetParameter(ParameterNames_Q), 32)
-	if err != nil {
-		return -1
-	} else {
-		return float32(q)
-	}
-}
-
 /** get ContentEncoding field
  * @return String
  */
 func (this *AcceptEncoding) GetEncoding() string {
 	return this.contentCoding
-}
-
-/**
- * Set the qvalue member
- * @param q double to set
- */
-func (this *AcceptEncoding) SetQValue(q float32) (InvalidArgumentException error) {
-	if q < 0.0 || q > 1.0 {
-		return errors.New("qvalue out of range!")
-	}
-	this.Parameters.SetParameter("q", strconv.FormatFloat(float64(q), 'f', -1, 32))
-	return nil
 }
 
 /**
@@ -113,5 +89,58 @@ func (this *AcceptEncoding) SetEncoding(encoding string) (ParseException error) 
 		return errors.New("encoding parameter is null")
 	}
 	this.contentCoding = encoding
+	return nil
+}
+
+
+/** get the QValue field. Return -1 if the parameter has not been
+ * set.
+ * @return float
+ */
+func (this *AcceptEncoding) GetQValue() float32 {
+	if !this.HasParameter(ParameterNames_Q) {
+		return -1
+	}
+	qstr := this.GetParameterValue(ParameterNames_Q)
+	q, _ := strconv.ParseFloat(qstr, 32)
+	return float32(q)
+}
+
+/**
+ * Return true if the q value has been set.
+ * @return boolean
+ */
+func (this *AcceptEncoding) HasQValue() bool {
+	return this.HasParameter(ParameterNames_Q)
+}
+
+/**
+ * Remove the q value.
+ */
+func (this *AcceptEncoding) RemoveQValue() {
+	this.RemoveParameter(ParameterNames_Q)
+}
+
+/**
+ * Sets q-value for media-range. Q-values allow the
+ *
+ * user to indicate the relative degree of preference for that media-range,
+ *
+ * using the qvalue scale from 0 to 1. If no q-value is present, the
+ *
+ * media-range should be treated as having a q-value of 1.
+ *
+ *
+ *
+ * @param qValue - the new float value of the q-value
+ *
+ * @throws InvalidArgumentException if the q parameter value is not between <code>0 and 1</code>.
+ *
+ */
+func (this *AcceptEncoding) SetQValue(q float32) (InvalidArgumentException error) {
+	if q < 0.0 || q > 1.0 {
+		return errors.New("qvalue out of range!")
+	}
+	this.SetParameter(ParameterNames_Q, strconv.FormatFloat(float64(q), 'f', -1, 32))
 	return nil
 }

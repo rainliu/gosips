@@ -117,19 +117,19 @@ func (this *SIPRequest) CheckHeaders() (ParseException error) {
 	/* Check for required headers */
 
 	if this.GetCSeq() == nil {
-		errors.New("ParseException:" + prefix + "CSeq")
+		return errors.New("ParseException:" + prefix + "CSeq")
 	}
 	if this.GetTo() == nil {
-		errors.New("ParseException:" + prefix + "To")
+		return errors.New("ParseException:" + prefix + "To")
 	}
 	if this.GetFrom() == nil {
-		errors.New("ParseException:" + prefix + "From")
+		return errors.New("ParseException:" + prefix + "From")
 	}
 	if this.GetViaHeaders() == nil {
-		errors.New("ParseException:" + prefix + "Via")
+		return errors.New("ParseException:" + prefix + "Via")
 	}
 	if this.GetMaxForwards() == nil {
-		errors.New("ParseException:" + prefix + "MaxForwards")
+		return errors.New("ParseException:" + prefix + "MaxForwards")
 	}
 
 	/*  BUGBUG
@@ -141,7 +141,7 @@ func (this *SIPRequest) CheckHeaders() (ParseException error) {
 	if this.requestLine != nil && this.requestLine.GetMethod() != "" &&
 		this.GetCSeq().GetMethod() != "" &&
 		strings.ToLower(this.requestLine.GetMethod()) != strings.ToLower(this.GetCSeq().GetMethod()) {
-		errors.New("ParseException: CSEQ method mismatch with  Request-Line ")
+		return errors.New("ParseException: CSEQ method mismatch with  Request-Line ")
 	}
 
 	return nil

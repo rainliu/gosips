@@ -47,7 +47,7 @@ func (this *Allow) GetMethod() string {
  */
 func (this *Allow) SetMethod(method string) (ParseException error) {
 	if method == "" {
-		errors.New("NullPointerException: the method parameter is null")
+		return errors.New("NullPointerException: the method parameter is null")
 	}
 	this.method = method
 	return nil
