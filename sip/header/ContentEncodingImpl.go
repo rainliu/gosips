@@ -1,6 +1,7 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 )
 
@@ -45,13 +46,9 @@ import (
 *   Additional information about the encoding parameters MAY be provided
 *   by other entity-header fields not defined by this specification.
 *</pre>
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
  */
 type ContentEncoding struct {
 	SIPHeader
-	//implements 	javax.sip.header.ContentEncodingHeader {
 
 	/** contentEncoding field.
 	 */
@@ -99,8 +96,10 @@ func (this *ContentEncoding) GetEncoding() string {
 /** set the ConentEncoding field.
  * @param encoding String to set
  */
-func (this *ContentEncoding) SetEncoding(encoding string) { //throws ParseException {
-	// if (encoding==null) throw new  NullPointerException("JAIN-SIP Exception, "+
-	// " encoding is null");
+func (this *ContentEncoding) SetEncoding(encoding string) (ParseException error) {
+	if encoding == "" {
+		return errors.New("NullPointerException: encoding is null")
+	}
 	this.contentEncoding = encoding
+	return nil
 }

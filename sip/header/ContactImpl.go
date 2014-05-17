@@ -11,7 +11,7 @@ import (
 /**
 * Contact Item.
  */
-type Contact struct { //implements javax.sip.header.ContactHeader
+type Contact struct {
 	AddressParameters
 
 	// This must be private or the toString will go for a loop!
@@ -38,29 +38,12 @@ func (this *Contact) super(hname string) {
 	this.contactList = NewContactList()
 }
 
-/** Set a parameter.
- */
-/*
-func (this *Contact) SetParameter(name, value string) (ParseException error) {
-	nv := this.parameters.GetNameValue(name)
-	if nv != nil {
-		nv.SetValue(value)
-	} else {
-		nv = core.NewNameValue(name, value)
-		if strings.ToLower(name) == "methods" {
-			nv.SetQuotedValue()
-		}
-		this.parameters.AddNameValue(nv)
-	}
-	return nil
-}*/
-
 /**
  * Encode body of the header into a cannonical String.
  * @return string encoding of the header value.
  */
 func (this *Contact) EncodeBody() string {
-	var encoding bytes.Buffer //= new StringBuffer();
+	var encoding bytes.Buffer
 	if this.wildCardFlag {
 		encoding.WriteString("*")
 		return encoding.String()
@@ -101,7 +84,7 @@ func (this *Contact) GetWildCardFlag() bool {
  * @return Address
  */
 func (this *Contact) GetAddress() address.Address {
-	// JAIN-SIP stores the wild card as an address!
+	//stores the wild card as an address!
 	return this.addr
 }
 
@@ -125,11 +108,9 @@ func (this *Contact) GetExpires() int {
  */
 
 func (this *Contact) SetExpires(expiryDeltaSeconds int) (InvalidArgumentException error) {
-	//Integer deltaSeconds = new Integer(expiryDeltaSeconds);
 	this.parameters.AddNameValue(core.NewNameValue(core.SIPHeaderNames_EXPIRES, strconv.Itoa(expiryDeltaSeconds)))
 	return nil
 }
-
 
 /** set the Contact List
  * @param cl ContactList to set
@@ -159,8 +140,6 @@ func (this *Contact) SetAddress(addr address.Address) {
 	this.AddressParameters.SetAddress(addr)
 	this.wildCardFlag = false
 }
-
-
 
 /** get the QValue field. Return -1 if the parameter has not been
  * set.

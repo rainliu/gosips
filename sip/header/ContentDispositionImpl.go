@@ -2,22 +2,15 @@ package header
 
 import (
 	"bytes"
+	"errors"
 	"gosips/core"
 )
 
 /**
 * Content Dispositon SIP Header.
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="${docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-*@version JAIN-SIP-1.1
-*
  */
 type ContentDisposition struct {
 	Parameters
-	//implements javax.sip.header.ContentDispositionHeader {
 
 	/** dispositionType field.
 	 */
@@ -43,7 +36,7 @@ func (this *ContentDisposition) String() string {
  *
  */
 func (this *ContentDisposition) EncodeBody() string {
-	var encoding bytes.Buffer //= new StringBuffer();
+	var encoding bytes.Buffer
 
 	if this.dispositionType != "" {
 		encoding.WriteString(this.dispositionType)
@@ -59,10 +52,12 @@ func (this *ContentDisposition) EncodeBody() string {
 /** Set the disposition type.
  *@param disposition type.
  */
-func (this *ContentDisposition) SetDispositionType(dispositionType string) { //throws ParseException {
-	//if (dispositionType==null) throw new  NullPointerException("JAIN-SIP Exception"+
-	//, ContentDisposition, SetDispositionType(), the dispositionType parameter is null");
+func (this *ContentDisposition) SetDispositionType(dispositionType string) (ParseException error) {
+	if dispositionType == "" {
+		return errors.New("NullPointerException: the dispositionType parameter is null")
+	}
 	this.dispositionType = dispositionType
+	return nil
 }
 
 /** Get the disposition type.
@@ -82,19 +77,18 @@ func (this *ContentDisposition) GetHandling() string {
 /** Set the dispositionType field.
  * @param type String to Set.
  */
-func (this *ContentDisposition) SetHandling(handling string) {
-	//throws ParseException {
-	// if (handling==null) throw new  NullPointerException("JAIN-SIP Exception"+
-	//", ContentDisposition, SetHandling(), the handling parameter is null");
+func (this *ContentDisposition) SetHandling(handling string) (ParseException error) {
+	if handling == "" {
+		return errors.New("NullPointerException: the handling parameter is null")
+	}
 	this.SetParameter("handling", handling)
+	return nil
 }
 
 /**
  * Gets the interpretation of the message body or message body part of
  *
  * this ContentDispositionHeader.
- *
- *
  *
  * @return interpretation of the message body or message body part
  *

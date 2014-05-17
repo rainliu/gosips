@@ -7,8 +7,7 @@ import (
 /**
 * Call ID Header.
  */
-
-type CallID struct { // implements javax.sip.header.CallIdHeader {
+type CallID struct {
 	SIPHeader
 
 	/** callIdentifier field
@@ -22,7 +21,8 @@ type CallID struct { // implements javax.sip.header.CallIdHeader {
 			this := &CallID{};
 			this.Header.headerName = CALL_ID;
 			return this;
-        }*/
+        }
+*/
 
 /** Constructor given the call Identifier.
 *@param callId string call identifier (should be localid@host)
@@ -57,6 +57,7 @@ func (this *CallID) super(callId string) (IllegalArgumentException error) {
     CallID that = (CallID) other;
     return this.callIdentifier.equals(that.callIdentifier);
 }*/
+
 func (this *CallID) String() string {
 	return this.headerName + core.SIPSeparatorNames_COLON +
 		core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE
@@ -96,11 +97,7 @@ func (this *CallID) GetCallIdentifer() *CallIdentifier {
          * not a token@token.
 */
 func (this *CallID) SetCallId(cid string) (ParseException error) {
-	//try {
 	this.callIdentifier, ParseException = NewCallIdentifier(cid)
-	//} catch (IllegalArgumentException ex) {
-	//throw new ParseException(cid,0);
-	//}
 	return ParseException
 }
 

@@ -1,11 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : ContentDispositionHeader.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package header
 
 /**
@@ -42,12 +34,9 @@ package header
  * @see ContentLengthHeader
  * @see ContentEncodingHeader
  * @see ContentLanguageHeader
- *
- * @since 1.1
- * @author Sun Microsystems
  */
+
 type ContentDispositionHeader interface {
-	//Header
 	ParametersHeader
 
 	/**
@@ -90,30 +79,4 @@ type ContentDispositionHeader interface {
 	 * @return handling information for unknown content dispositions.
 	 */
 	GetHandling() string
-
-	/**
-	 * Name of ContentDispositionHeader
-	 */
-	//public final static String NAME = "Content-Disposition";
-
-	/**
-	 * Session Disposition Type Constant
-	 */
-	//public final static String SESSION = "Session";
-
-	/**
-	 * Render Disposition Type Constant
-	 */
-	//public final static String RENDER = "Render";
-
-	/**
-	 * Icon Disposition Type Constant
-	 */
-	//public final static String ICON = "Icon";
-
-	/**
-	 * Alert Disposition Type Constant
-	 */
-	//public final static String ALERT = "Alert";
-
 }

@@ -1,16 +1,4 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : ContentEncodingHeader.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
- 
 package header
-
-import (
-
-)
 
 /**
  * A ContentEncodingHeader is used as a modifier to the "media-type". When
@@ -22,8 +10,8 @@ import (
  * type.
  * <p>
  * If multiple encodings have been applied to an entity, the ContentEncodings
- * must be listed in the order in which they were applied. All content-coding 
- * values are case-insensitive. Clients MAY apply content encodings to the body 
+ * must be listed in the order in which they were applied. All content-coding
+ * values are case-insensitive. Clients MAY apply content encodings to the body
  * in requests. A server MAY
  * apply content encodings to the bodies in responses. The server MUST only
  * use encodings listed in the Accept-Encoding header field in the request.
@@ -35,19 +23,9 @@ import (
  * @see ContentLengthHeader
  * @see ContentTypeHeader
  * @see ContentLanguageHeader
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 
-type ContentEncodingHeader interface{
+type ContentEncodingHeader interface {
 	Header
 	Encoding
-	
-    /**
-     * Name of ContentEncodingHeader
-     */
-    //public final static String NAME = "Content-Encoding";
-
 }
-

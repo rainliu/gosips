@@ -27,14 +27,10 @@ import (
  * <code>Call-Info: http://jcp.org/duke/photo.jpg;<br>
  * purpose=icon, http://jcp.org/duke/; purpose=info</code>
  *
- *
- * @author Sun Microsystems
- *
  */
 
 type CallInfoHeader interface {
 	ParametersHeader
-	//Header
 
 	/**
 	 * Sets the Information parameter of this CallInfoHeader. The Information
@@ -60,7 +56,7 @@ type CallInfoHeader interface {
 	   * @throws ParseException which signals that an error has been reached
 	   * unexpectedly while parsing the purpose value.
 	*/
-	SetPurpose(purpose string) //throws ParseException;
+	SetPurpose(purpose string) (ParseException error)
 
 	/**
 	 * Gets the purpose of the information supplied in this CallInfoHeader.
@@ -69,9 +65,4 @@ type CallInfoHeader interface {
 	 * if no purpose is present.
 	 */
 	GetPurpose() string
-
-	/**
-	 * Name of CallInfoHeader
-	 */
-	//public final static String NAME = "Call-Info";
 }

@@ -10,8 +10,7 @@ import (
 /**
  *  CSeq SIP Header.
  */
-
-type CSeq struct { //implements javax.sip.header.CSeqHeader{
+type CSeq struct {
 	SIPHeader
 
 	/** seqno field
@@ -22,13 +21,6 @@ type CSeq struct { //implements javax.sip.header.CSeqHeader{
 	 */
 	method string
 }
-
-/**
- *Constructor.
- */
-/*public CSeq() {
-    super(CSEQ);
-}*/
 
 /**
  * Constructor given the sequence number and method.
@@ -134,7 +126,6 @@ func (this *CSeq) SetMethod(meth string) (ParseException error) {
  *
  * @return sequence number of the CSeqHeader
  */
-
 func (this *CSeq) GetSequenceNumber() int {
 	return this.seqno
 }

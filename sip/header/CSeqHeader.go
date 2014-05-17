@@ -1,14 +1,4 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : CSeqHeader.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package header
-
-import ()
 
 /**
  * A CSeq header field in a request contains a single decimal sequence number
@@ -50,9 +40,6 @@ import ()
  * For Example:<br>
  * <code>CSeq: 4711 INVITE</code>
  *
- * @version 1.1
- * @author Sun Microsystems
- *
  */
 
 type CSeqHeader interface {
@@ -92,10 +79,4 @@ type CSeqHeader interface {
 	 *
 	 */
 	GetSequenceNumber() int
-
-	/**
-	 * Name of the CSeqHeader
-	 */
-	//public final static String NAME = "CSeq";
-
 }

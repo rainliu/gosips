@@ -1,6 +1,7 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 	"strings"
 )
@@ -27,17 +28,9 @@ import (
 * </pre>
 *
 *
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type ContentType struct {
 	Parameters
-
-	//implements javax.sip.header.ContentTypeHeader {
 
 	/** mediaRange field.
 	 */
@@ -123,7 +116,6 @@ func (this *ContentType) GetContentSubType() string {
 /** Get the content subtype.
 *@return the content tyep string (or null if not Set).
  */
-
 func (this *ContentType) GetContentType() string {
 	if this.mediaRange == nil {
 		return ""
@@ -163,25 +155,27 @@ func (this *ContentType) SetContentTypeSubType(contentType, contentSubType strin
 * Set the content type.
 *@param contentType Content type string.
  */
-
-func (this *ContentType) SetContentType(contentType string) { //throws ParseException{
-	//if (contentType==null) throw new
-	//NullPointerException( "null arg");
+func (this *ContentType) SetContentType(contentType string) (ParseException error) {
+	if contentType == "" {
+		return errors.New("NullPointerException: null arg")
+	}
 	if this.mediaRange == nil {
 		this.mediaRange = NewMediaRange()
 	}
 	this.mediaRange.SetType(contentType)
+	return nil
 }
 
 /** Set the content subtype.
  * @param contentType String to Set
  */
-func (this *ContentType) SetContentSubType(contentType string) { //throws ParseException {
-	//if (contentType==null) throw new
-	//NullPointerException( "null arg");
-	//if (mediaRange == null) mediaRange = new MediaRange();
+func (this *ContentType) SetContentSubType(contentType string) (ParseException error) {
+	if contentType == "" {
+		return errors.New("NullPointerException: null arg")
+	}
 	if this.mediaRange == nil {
 		this.mediaRange = NewMediaRange()
 	}
 	this.mediaRange.SetSubtype(contentType)
+	return nil
 }

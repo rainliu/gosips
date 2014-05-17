@@ -1,11 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : ContentTypeHeader.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package header
 
 /**
@@ -22,19 +14,9 @@ package header
  * @see ContentLengthHeader
  * @see ContentEncodingHeader
  * @see ContentLanguageHeader
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 
 type ContentTypeHeader interface {
-	//Header
 	ParametersHeader
 	MediaType
-
-	/**
-	 * Name of ContentTypeHeader
-	 */
-	//public final static String NAME = "Content-Type";
-
 }

@@ -13,7 +13,6 @@ type ContentLanguageList struct {
 
 /** Default constructor
  */
-
 func NewContentLanguageList() *ContentLanguageList {
 	this := &ContentLanguageList{}
 	this.SIPHeaderList.super(core.SIPHeaderNames_CONTENT_LANGUAGE)

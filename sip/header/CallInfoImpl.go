@@ -2,24 +2,17 @@ package header
 
 import (
 	"bytes"
+	"errors"
 	"gosips/core"
 	"gosips/sip/address"
 )
 
 /**
 * CallInfo Header.
-*
-*@author "M. Ranganathan" <mranga@nist.gov> <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-*@version JAIN-SIP-1.1
-*
  */
 
 type CallInfo struct {
 	Parameters
-	//implements javax.sip.header.CallInfoHeader {
 
 	info *address.URIImpl
 }
@@ -75,11 +68,12 @@ func (this *CallInfo) GetInfo() address.URI {
 /** set the purpose field
  * @param purpose is the purpose field.
  */
-func (this *CallInfo) SetPurpose(purpose string) {
-	// if (purpose == null) throw new NullPointerException("null arg");
-	//try{
+func (this *CallInfo) SetPurpose(purpose string) error {
+	if purpose == "" {
+		return errors.New("NullPointerException: null arg")
+	}
 	this.SetParameter("purpose", purpose)
-	// } catch (ParseException ex) {}
+	return nil
 }
 
 /** set the URI field

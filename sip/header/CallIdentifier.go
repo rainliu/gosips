@@ -12,8 +12,6 @@ import (
 * @see InReplyTo
  */
 type CallIdentifier struct {
-	// SIPObject
-
 	/** localId field
 	 */
 	localId string
@@ -22,10 +20,6 @@ type CallIdentifier struct {
 	 */
 	host string
 }
-
-/** Default constructor
- */
-//public CallIdentifier() {}
 
 /** Constructor
  *@param local id is the local id.

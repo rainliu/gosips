@@ -1,20 +1,8 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : CallIdHeader.go
- * Author        : Rain Liu   
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
- 
 package header
 
-import (
-
-)
-
 /**
 
- * The Call-ID header field uniquely identifies a particular invitation or all 
+ * The Call-ID header field uniquely identifies a particular invitation or all
  * registrations of a particular client. A single multimedia conference can give rise to
 
  * several calls with different Call-IDs, for example, if a user invites a
@@ -31,8 +19,8 @@ import (
 
  * From tag, and Call-ID completely defines a peer-to-peer SIP relationship
 
- * between two users and is referred to as a dialog. It MUST be the same for 
- * all requests and responses sent by either User Agent in a dialog.  It SHOULD be the 
+ * between two users and is referred to as a dialog. It MUST be the same for
+ * all requests and responses sent by either User Agent in a dialog.  It SHOULD be the
  * same in each registration from a User Agent.
 
  * <p>
@@ -63,65 +51,40 @@ import (
 
  *
 
- * @version 1.1
-
- * @author Sun Microsystems
-
- *
-
  */
 
-
-
-type CallIdHeader interface{
+type CallIdHeader interface {
 	Header
 
+	/**
 
-    /**
+	 * Sets the Call-Id of the CallIdHeader. The CallId parameter uniquely
 
-     * Sets the Call-Id of the CallIdHeader. The CallId parameter uniquely
+	 * identifies a serious of messages within a dialogue.
 
-     * identifies a serious of messages within a dialogue.
+	 *
 
-     *
+	 * @param callId - the string value of the Call-Id of this CallIdHeader.
 
-     * @param callId - the string value of the Call-Id of this CallIdHeader.
+	 * @throws ParseException which signals that an error has been reached
 
-     * @throws ParseException which signals that an error has been reached
+	 * unexpectedly while parsing the callId value.
 
-     * unexpectedly while parsing the callId value.
+	 */
 
-     */
+	SetCallId(callId string) (ParseException error)
 
-    SetCallId(callId string) (ParseException error);
+	/**
 
+	 * Returns the Call-Id of CallIdHeader. The CallId parameter uniquely
 
+	 * identifies a series of messages within a dialogue.
 
-    /**
+	 *
 
-     * Returns the Call-Id of CallIdHeader. The CallId parameter uniquely
+	 * @return the String value of the Call-Id of this CallIdHeader
 
-     * identifies a series of messages within a dialogue.
+	 */
 
-     *
-
-     * @return the String value of the Call-Id of this CallIdHeader
-
-     */
-
-    GetCallId() string;
-
-
-
-
-
-    /**
-
-     * Name of CallIdHeader
-
-     */
-
-    //public final static String NAME = "Call-ID";
-
+	GetCallId() string
 }
-

@@ -41,13 +41,10 @@ import (
 *   to being transferred, unless this is prohibited by the rules in
 *   section 4.4.
 * </pre>
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
  */
+
 type ContentLength struct {
-	SIPHeader //implements
-	//javax.sip.header.ContentLengthHeader {
+	SIPHeader
 
 	/** contentLength field.
 	 */
@@ -83,7 +80,7 @@ func (this *ContentLength) GetContentLength() int {
  * Set the contentLength member
  * @param contentLength int to Set
  */
-func (this *ContentLength) SetContentLength(contentLength int) error { //throws InvalidArgumentException{
+func (this *ContentLength) SetContentLength(contentLength int) error {
 	if contentLength < 0 {
 		return errors.New("InvalidArgumentException: ContentLength.SetContentLength(), the contentLength parameter is <0")
 	}
@@ -101,7 +98,6 @@ func (this *ContentLength) String() string {
  * @return String
  */
 func (this *ContentLength) EncodeBody() string {
-	//if (contentLength == null) return "0";
 	return strconv.Itoa(this.contentLength)
 }
 

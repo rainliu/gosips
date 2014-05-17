@@ -1,17 +1,4 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : ContentLengthHeader.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
- 
 package header
-
-import (
-
-)
-
 
 /**
 
@@ -45,60 +32,38 @@ import (
 
  * @see ContentLanguageHeader
 
- *
-
- * @version 1.1
-
- * @author Sun Microsystems
-
  */
 
-
-
-type ContentLengthHeader interface{
+type ContentLengthHeader interface {
 	Header
 
-    /**
+	/**
 
-     * Set content-length of ContentLengthHeader. The content-length must be
+	 * Set content-length of ContentLengthHeader. The content-length must be
 
-     * greater than or equal to zero.
+	 * greater than or equal to zero.
 
-     *
+	 *
 
-     * @param <var>contentLength</var> the content-length of the message body
+	 * @param <var>contentLength</var> the content-length of the message body
 
-     * as a decimal number of octets.
+	 * as a decimal number of octets.
 
-     * @throws InvalidArgumentException if contentLength is less than zero.
+	 * @throws InvalidArgumentException if contentLength is less than zero.
 
-     */
+	 */
 
-    SetContentLength(contentLength int) (InvalidArgumentException error);
+	SetContentLength(contentLength int) (InvalidArgumentException error)
 
+	/**
 
+	 * Gets content-length of the message body.
 
-    /**
+	 *
 
-     * Gets content-length of the message body.
+	 * @return content-length of the message body as a decimal number of octets.
 
-     *
+	 */
 
-     * @return content-length of the message body as a decimal number of octets.
-
-     */
-
-    GetContentLength() int;
-
-
-
-    /**
-
-     * Name of ContentLengthHeader
-
-     */
-
-    //public final static String NAME = "Content-Length";
-
+	GetContentLength() int
 }
-

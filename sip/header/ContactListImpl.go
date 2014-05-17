@@ -2,7 +2,6 @@ package header
 
 import (
 	"gosips/core"
-	//"gosips/sip/address"
 )
 
 /**
@@ -12,13 +11,6 @@ type ContactList struct {
 	SIPHeaderList
 }
 
-/** constructor
- * @param hl SIPObjectList
- */
-/*public ContactList(SIPObjectList hl) {
-	super(hl,CONTACT);
-}*/
-
 /**
 * Constructor.
  */
@@ -26,7 +18,6 @@ func NewContactList() *ContactList {
 	this := &ContactList{}
 	this.SIPHeaderList.super(core.SIPHeaderNames_CONTACT)
 	return this
-	// Set the headerlist field in our superclass.
 }
 
 func (this *ContactList) super(hname string) {

@@ -51,8 +51,7 @@ import (
 *</pre>
  */
 type ContentLanguage struct {
-	SIPHeader //implements
-	//javax.sip.header.ContentLanguageHeader{
+	SIPHeader
 
 	/** languageTag field.
 	 */
@@ -86,21 +85,21 @@ func (this *ContentLanguage) String() string {
  * @return encoded body of header.
  */
 func (this *ContentLanguage) EncodeBody() string {
-	return this.locale //.getLanguage();
+	return this.locale
 }
 
 /** get the languageTag field.
  * @return String
  */
 func (this *ContentLanguage) GetLanguageTag() string {
-	return this.locale //.getLanguage();
+	return this.locale
 }
 
 /** set the languageTag field
  * @param languageTag -- language tag to set.
  */
 func (this *ContentLanguage) SetLanguageTag(languageTag string) {
-	this.locale = languageTag //new Locale(languageTag,Locale.US.getCountry());
+	this.locale = languageTag
 }
 
 /**

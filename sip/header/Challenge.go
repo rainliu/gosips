@@ -4,25 +4,8 @@ import "gosips/core"
 
 /**
 * Challenge part of the Auth header. This is only used by the parser interface
-*
-*@author M. Ranganathan <mranga@nist.gov>  NIST/ITL/ANTD <br/>
-*
-*<a href="${docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
-type Challenge struct { //} SIPObject   {
-
-	// private static String DOMAIN = ParameterNames.DOMAIN;
-	// private static String REALM = ParameterNames.REALM;
-	// private static String OPAQUE = ParameterNames.OPAQUE;
-	// private static String ALGORITHM = ParameterNames.ALGORITHM;
-	// private static String QOP = ParameterNames.QOP;
-	// private static String STALE = ParameterNames.STALE;
-	// private static String SIGNATURE = ParameterNames.SIGNATURE;
-	// private static String RESPONSE = ParameterNames.RESPONSE;
-	// private static String SIGNED_BY = ParameterNames.SIGNED_BY;
-	// private static String URI = ParameterNames.URI;
-
+type Challenge struct {
 	/** scheme field
 	 */
 	scheme string
