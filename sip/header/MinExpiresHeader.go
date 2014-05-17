@@ -48,23 +48,8 @@ package header
 
  * <code>Min-Expires: 60</code>
 
- *
-
- * @since 1.1
-
- * @author Sun Microsystems
-
  */
 
 type MinExpiresHeader interface {
 	ExpiresHeader
-
-	/**
-
-	 * Name of ExpiresHeader
-
-	 */
-
-	// public final static String NAME = "Min-Expires";
-
 }

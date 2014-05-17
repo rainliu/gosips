@@ -13,9 +13,6 @@ package header
  * @see RequireHeader
  * @see UnsupportedHeader
  * @see SupportedHeader
- *
- * @since 1.1
- * @author Sun Microsystems
  */
 
 type OptionTag interface {
@@ -28,7 +25,7 @@ type OptionTag interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the optionTag value.
 	 */
-	SetOptionTag(optionTag string) // throws ParseException;
+	SetOptionTag(optionTag string) (ParseException error)
 
 	/**
 	 * Gets the option tag of this OptionTag class.

@@ -1,34 +1,16 @@
 package header
 
-import "gosips/core"
+import (
+	"errors"
+	"gosips/core"
+)
 
 /**
 * the Priority header.
-*
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type Priority struct {
 	SIPHeader
-	//implements PriorityHeader {
 
-	/** constant EMERGENCY field
-	 */
-	//public static final String EMERGENCY=ParameterNames.EMERGENCY;
-
-	/** constant URGENT field
-	 */
-	//public static final String URGENT= ParameterNames.URGENT;
-
-	/** constant NORMAL field
-	 */
-	//public static final String NORMAL= ParameterNames.NORMAL;
-
-	/** constant NON_URGENT field
-	 */
-	//public static final String NON_URGENT= ParameterNames.NON_URGENT;
 	/** priority field
 	 */
 	priority string
@@ -67,8 +49,10 @@ func (this *Priority) GetPriority() string {
  * Set the priority member
  * @param p String to set
  */
-func (this *Priority) SetPriority(p string) { //throws ParseException{
-	//if (p==null) throw new  NullPointerException("JAIN-SIP Exception,"+
-	//"Priority, setPriority(), the priority parameter is null");
+func (this *Priority) SetPriority(p string) (ParseException error) {
+	if p == "" {
+		return errors.New("NullPointerException: the priority parameter is null")
+	}
 	this.priority = p
+	return nil
 }

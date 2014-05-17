@@ -1,23 +1,16 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 	"strconv"
 )
 
 /**
 * RAck SIP Header implementation
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type RAck struct {
 	SIPHeader
-	//implements javax.sip.header.RAckHeader{
 
 	cSeqNumber int
 
@@ -78,11 +71,12 @@ func (this *RAck) GetRSeqNumber() int {
  * @param cSeqNumber - the new cSeq number of this RAckHeader
  * @throws InvalidArgumentException if supplied value is less than zero.
  */
-func (this *RAck) SetCSeqNumber(cSeqNumber int) {
-	//throws InvalidArgumentException {
-	// if cSeqNumber <= 0
-	// 	throw new InvalidArgumentException("Bad CSeq # "  + cSeqNumber);
+func (this *RAck) SetCSeqNumber(cSeqNumber int) (InvalidArgumentException error) {
+	if cSeqNumber <= 0 {
+		return errors.New("InvalidArgumentException: Bad CSeq")
+	}
 	this.cSeqNumber = cSeqNumber
+	return nil
 }
 
 /** Sets the method of RAckHeader, which correlates to the method of the
@@ -92,8 +86,9 @@ func (this *RAck) SetCSeqNumber(cSeqNumber int) {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the method value.
  */
-func (this *RAck) SetMethod(method string) { //throws ParseException {
+func (this *RAck) SetMethod(method string) (ParseException error) {
 	this.method = method
+	return nil
 }
 
 /** Sets the sequence number value of the RSeqHeader of the provisional
@@ -103,8 +98,10 @@ func (this *RAck) SetMethod(method string) { //throws ParseException {
  * @param rSeqNumber - the new rSeq number of this RAckHeader
  * @throws InvalidArgumentException if supplied value is less than zero.
  */
-func (this *RAck) SetRSeqNumber(rSeqNumber int) { //throws InvalidArgumentException {
-	//if rSeqNumber <= 0
-	//	throw new InvalidArgumentException("Bad rSeq # "  + rSeqNumber);
+func (this *RAck) SetRSeqNumber(rSeqNumber int) (InvalidArgumentException error) {
+	if rSeqNumber <= 0 {
+		return errors.New("InvalidArgumentException: Bad rSeq")
+	}
 	this.rSeqNumber = rSeqNumber
+	return nil
 }

@@ -1,7 +1,6 @@
 package header
 
 import (
-	//"errors"
 	"container/list"
 	"gosips/core"
 )
@@ -77,15 +76,11 @@ const SIPConstants_SIP_VERSION_STRING = "SIP/2.0"
 * Parameters header. Suitable for extension by headers that have parameters.
  */
 
-type Parameters struct { //implements javax.sip.header.Parameters {
+type Parameters struct {
 	SIPHeader
 
 	parameters *core.NameValueList
 }
-
-//protected Parameters() {
-//	this.parameters = new NameValueList();
-//}
 
 func NewParameters(hdrName string) *Parameters {
 	this := &Parameters{}
@@ -107,7 +102,6 @@ func (this *Parameters) super(hdrName string) {
  * @param <var>name</var> name of parameter to retrieve
  * @return the value of specified parameter
  */
-
 func (this *Parameters) GetParameter(name string) string {
 	return this.parameters.GetParameter(name)
 
@@ -189,7 +183,6 @@ func (this *Parameters) SetParameter(name, value string) (ParseException error) 
  * @param nameValue - the name value of the parameter to set.
  */
 func (this *Parameters) SetParameterFromNameValue(nameValue *core.NameValue) {
-	//System.out.println("setParameter " + this + " nbv = " + nameValue)
 	this.parameters.AddNameValue(nameValue)
 }
 
@@ -342,7 +335,7 @@ func (this *Parameters) HasParameter(parameterName string) bool {
  *Remove all parameters.
  */
 func (this *Parameters) RemoveParameters() {
-	this.parameters.Init() // = new NameValueList();
+	this.parameters.Init()
 }
 
 /**

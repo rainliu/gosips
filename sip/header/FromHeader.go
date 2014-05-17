@@ -1,11 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : FromHeader.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package header
 
 /**
@@ -106,12 +98,8 @@ package header
  * <code>From: "Bob" sips:bob@biloxi.com ;tag=a48s<br>
  * From: sip:+12125551212@phone2net.com;tag=887s<br>
  * From: Anonymous sip:c8oqz84zk7z@privacy.org;tag=hyh8</code>
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 type FromHeader interface {
-	//Header
 	ParametersHeader
 	AddressHeader
 
@@ -147,13 +135,4 @@ type FromHeader interface {
 	 */
 
 	GetTag() string
-
-	/**
-
-	 * Name of FromHeader
-
-	 */
-
-	//public final static String NAME = "From";
-
 }

@@ -50,22 +50,9 @@ package header
 
  * @see OptionTag
 
- * @version 1.1
-
- * @author Sun Microsystems
-
  */
 
 type RequireHeader interface {
 	OptionTag
 	Header
-
-	/**
-
-	 * Name of RequireHeader
-
-	 */
-
-	// public final static String NAME = "Require";
-
 }

@@ -1,17 +1,4 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : MaxForwardsHeader.go
- * Author        : Rain Liu   
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package header
-
-import (
-
-)
-
 
 /**
 
@@ -47,81 +34,54 @@ import (
 
  * <code>Max-Forwards: 6</code>
 
- *
-
- * @version 1.1
-
- * @author Sun Microsystems
-
  */
 
-
-
-type MaxForwardsHeader interface{
+type MaxForwardsHeader interface {
 	Header
 
+	/**
 
-    /**
+	 * This convenience function decrements the number of max-forwards by one.
 
-     * This convenience function decrements the number of max-forwards by one.
+	 * This utility is useful for proxy functionality.
 
-     * This utility is useful for proxy functionality.
+	 *
 
-     *
+	 * @throws TooManyHopsException if implementation cannot decrement
 
-     * @throws TooManyHopsException if implementation cannot decrement
+	 * max-fowards i.e. max-forwards has reached zero
 
-     * max-fowards i.e. max-forwards has reached zero
+	 */
 
-     */
+	DecrementMaxForwards() (TooManyHopsException error)
 
-    DecrementMaxForwards() (TooManyHopsException error);
+	/**
 
+	 * Gets the maximum number of forwards value of this MaxForwardsHeader.
 
+	 *
 
-    /**
+	 * @return the maximum number of forwards of this MaxForwardsHeader
 
-     * Gets the maximum number of forwards value of this MaxForwardsHeader.
+	 */
 
-     *
+	GetMaxForwards() int
 
-     * @return the maximum number of forwards of this MaxForwardsHeader
+	/**
 
-     */
+	 * Sets the max-forwards argument of this MaxForwardsHeader to the supplied
 
-    GetMaxForwards() int;
+	 * <var>maxForwards</var> value.
 
+	 *
 
+	 * @param maxForwards - the number of max-forwards
 
-    /**
+	 * @throws InvalidArgumentException if the maxForwards argument is less
 
-     * Sets the max-forwards argument of this MaxForwardsHeader to the supplied
+	 * than 0 or greater than 255.
 
-     * <var>maxForwards</var> value.
+	 */
 
-     *
-
-     * @param maxForwards - the number of max-forwards
-
-     * @throws InvalidArgumentException if the maxForwards argument is less
-
-     * than 0 or greater than 255.
-
-     */
-
-    SetMaxForwards(maxForwards int) (InvalidArgumentException error);
-
-
-
-
-
-    /**
-
-     * Name of MaxForwardsHeader
-
-     */
-
-    //public final static String NAME = "Max-Forwards";
-
+	SetMaxForwards(maxForwards int) (InvalidArgumentException error)
 }
-

@@ -8,8 +8,7 @@ import (
 /**
 *  Protocol name and version.
  */
-type Protocol struct { // SIPObject {
-
+type Protocol struct {
 	/** protocolName field
 	 */
 	protocolName string

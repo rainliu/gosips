@@ -44,14 +44,9 @@ package header
 
  * @see Header
 
- * @version 1.1
-
- * @author Sun Microsystems
-
  */
 
 type RetryAfterHeader interface {
-	//Header
 	ParametersHeader
 
 	/**
@@ -70,7 +65,7 @@ type RetryAfterHeader interface {
 
 	 */
 
-	SetRetryAfter(retryAfter int) // throws InvalidArgumentException;
+	SetRetryAfter(retryAfter int) (InvalidArgumentException error)
 
 	/**
 
@@ -116,7 +111,7 @@ type RetryAfterHeader interface {
 
 	 */
 
-	SetComment(comment string) // throws ParseException;
+	SetComment(comment string) (ParseException error)
 
 	/**
 
@@ -134,7 +129,7 @@ type RetryAfterHeader interface {
 
 	 */
 
-	SetDuration(duration int) //throws InvalidArgumentException;
+	SetDuration(duration int) (InvalidArgumentException error)
 
 	/**
 
@@ -153,13 +148,4 @@ type RetryAfterHeader interface {
 	 */
 
 	GetDuration() int
-
-	/**
-
-	 * Name of RetryAfterHeader
-
-	 */
-
-	// public final static String NAME = "Retry-After";
-
 }

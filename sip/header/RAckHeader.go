@@ -23,9 +23,6 @@ package header
  * <p>
  * A server must ignore Headers that it does not understand. A proxy must not
  * remove or modify Headers that it does not understand.
- *
- * @since 1.1
- * @author Sun Microsystems
  */
 
 type RAckHeader interface {
@@ -39,7 +36,7 @@ type RAckHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the method value.
 	 */
-	SetMethod(method string) //throws ParseException;
+	SetMethod(method string) (ParseException error)
 
 	/**
 	 * Gets the method of RAckHeader.
@@ -56,7 +53,7 @@ type RAckHeader interface {
 	 * @param cSeqNumber - the new cSeq number of this RAckHeader.
 	 * @throws InvalidArgumentException if supplied value is less than zero.
 	 */
-	SetCSeqNumber(cSeqNumber int) //throws InvalidArgumentException;
+	SetCSeqNumber(cSeqNumber int) (InvalidArgumentException error)
 
 	/**
 	 * Gets the CSeq sequence number of this RAckHeader.
@@ -73,7 +70,7 @@ type RAckHeader interface {
 	 * @param rSeqNumber - the new rSeq number of this RAckHeader.
 	 * @throws InvalidArgumentException if supplied value is less than zero.
 	 */
-	SetRSeqNumber(rSeqNumber int) //throws InvalidArgumentException;
+	SetRSeqNumber(rSeqNumber int) (InvalidArgumentException error)
 
 	/**
 	 * Gets the RSeq sequence number of this RAckHeader.
@@ -81,10 +78,4 @@ type RAckHeader interface {
 	 * @return the integer value of the RSeq number of the RAckHeader.
 	 */
 	GetRSeqNumber() int
-
-	/**
-	 * Name of RAckHeader.
-	 */
-	//public final static String NAME = "RAck";
-
 }

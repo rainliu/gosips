@@ -4,18 +4,9 @@ import "gosips/core"
 
 /**
 * InReplyTo SIP Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type InReplyTo struct {
 	SIPHeader
-	//implements InReplyToHeader{
 
 	callId *CallIdentifier
 }
@@ -46,13 +37,9 @@ func NewInReplyToFromCallIdentifier(cid *CallIdentifier) *InReplyTo {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the callId value.
  */
-func (this *InReplyTo) SetCallId(callId string) { //throws ParseException {
-	//try{
-	this.callId, _ = NewCallIdentifier(callId)
-	// }
-	// catch(Exception e) {
-	//     throw new ParseException(e.getMessage(),0);
-	// }
+func (this *InReplyTo) SetCallId(callId string) (ParseException error) {
+	this.callId, ParseException = NewCallIdentifier(callId)
+	return ParseException
 }
 
 /**

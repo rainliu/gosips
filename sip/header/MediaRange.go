@@ -7,14 +7,7 @@ import (
 /**
 *   Media Range
 * @see Accept
-* @since 0.9
-* @version 1.0
 * <pre>
-* Revisions:
-*
-* Version 1.0
-*    1. Added encode method.
-*
 * media-range    = ( "STAR/STAR"
 *                        | ( type "/" STAR )
 *                        | ( type "/" subtype )
@@ -24,7 +17,6 @@ import (
 * </pre>
  */
 type MediaRange struct {
-
 	/** type field
 	 */
 	mtype string

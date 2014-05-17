@@ -8,17 +8,9 @@ import (
 
 /** The Request-Route header is added to a request by any proxy that insists on
  * being in the path of subsequent requests for the same call leg.
- *
- *@version  JAIN-SIP-1.1
- *
- *@author M. Ranganathan <mranga@nist.gov>  <br/>
- *
- *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
- *
  */
 type RecordRoute struct {
 	AddressParameters
-	//javax.sip.header.RecordRouteHeader {
 }
 
 /**  constructor
@@ -48,7 +40,7 @@ func (this *RecordRoute) String() string {
  *@return String containing the canonicaly encoded header.
  */
 func (this *RecordRoute) EncodeBody() string {
-	var encoding bytes.Buffer //  = new StringBuffer();
+	var encoding bytes.Buffer
 	addr, _ := this.addr.(*address.AddressImpl)
 	if addr.GetAddressType() == address.ADDRESS_SPEC {
 		encoding.WriteString(core.SIPSeparatorNames_LESS_THAN)

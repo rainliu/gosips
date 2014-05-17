@@ -12,9 +12,6 @@ package header
  * <p>
  * For Example:<br>
  * <code>In-Reply-To: 70710@saturn.jcp.org, 17320@saturn.jcp.org</code>
- *
- * @since 1.1
- * @author Sun Microsystems
  */
 type InReplyToHeader interface {
 	Header
@@ -27,7 +24,7 @@ type InReplyToHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the callId value.
 	 */
-	SetCallId(callId string) //throws ParseException;
+	SetCallId(callId string) (ParseException error)
 
 	/**
 	 * Returns the Call-Id of InReplyToHeader. The CallId parameter uniquely
@@ -36,10 +33,4 @@ type InReplyToHeader interface {
 	 * @return the String value of the Call-Id of this InReplyToHeader
 	 */
 	GetCallId() string
-
-	/**
-	 * Name of InReplyToHeader
-	 */
-	//public final static String NAME = "In-Reply-To";
-
 }

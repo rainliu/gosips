@@ -9,18 +9,8 @@ package header
  * reference. The ReferToHeader field MAY be encrypted as part of end-to-end
  * encryption. The resource identified by the Refer-To URI is contacted using
  * the normal mechanisms for that URI type.
- *
- *
- * @author Sun Microsystems
  */
 type ReferToHeader interface {
 	AddressHeader
 	ParametersHeader
-	//Header
-
-	/**
-	 * Name of ReferToHeader
-	 */
-	//public final static String NAME = "Refer-To";
-
 }

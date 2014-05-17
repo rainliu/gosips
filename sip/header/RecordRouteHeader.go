@@ -30,17 +30,8 @@ package header
  * @see RouteHeader
  * @see AddressHeader
  * @see Parameters
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 type RecordRouteHeader interface {
 	AddressHeader
 	ParametersHeader
-	//Header
-
-	/**
-	 * Name of RecordRouteHeader
-	 */
-	// public final static String NAME = "Record-Route";
 }

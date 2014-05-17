@@ -17,17 +17,8 @@ package header
  * @see AddressHeader
  * @see Parameters
  *
- * @version 1.1
- * @author Sun Microsystems
- *
  */
 type RouteHeader interface {
 	AddressHeader
 	ParametersHeader
-	//Header
-
-	/**
-	 * Name of RouteHeader
-	 */
-	// public final static String NAME = "Route";
 }

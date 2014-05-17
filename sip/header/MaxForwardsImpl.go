@@ -9,7 +9,7 @@ import (
 /**
 * MaxForwards Header
  */
-type MaxForwards struct { //implements MaxForwardsHeader {
+type MaxForwards struct {
 	SIPHeader
 
 	/** maxForwards field.

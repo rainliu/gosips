@@ -1,21 +1,15 @@
 package header
 
-import "gosips/core"
+import (
+	"errors"
+	"gosips/core"
+)
 
 /**
 * ProxyRequire Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type ProxyRequire struct {
 	SIPHeader
-	//implements ProxyRequireHeader{
 
 	/** optiontag field
 	 */
@@ -62,10 +56,12 @@ func (this *ProxyRequire) EncodeBody() string {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the optionTag value.
  */
-func (this *ProxyRequire) SetOptionTag(optionTag string) { //throws ParseException {
-	//if (optionTag==null) throw new  NullPointerException(
-	// "JAIN-SIP Exception, ProxyRequire, setOptionTag(), the optionTag parameter is null");
+func (this *ProxyRequire) SetOptionTag(optionTag string) (ParseException error) {
+	if optionTag == "" {
+		return errors.New("NullPointerException: the optionTag parameter is null")
+	}
 	this.optionTag = optionTag
+	return nil
 }
 
 /**

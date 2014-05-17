@@ -1,21 +1,15 @@
 package header
 
-import "gosips/core"
+import (
+	"errors"
+	"gosips/core"
+)
 
 /**
 *Organization SIP Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type Organization struct {
 	SIPHeader
-	//implements OrganizationHeader {
 
 	/** organization field
 	 */
@@ -54,8 +48,10 @@ func (this *Organization) GetOrganization() string {
  * Set the organization member
  * @param o String to set
  */
-func (this *Organization) SetOrganization(o string) { //throws ParseException{
-	// if (o==null) throw new  NullPointerException("JAIN-SIP Exception,"+
-	// " Organization, setOrganization(), the organization parameter is null");
+func (this *Organization) SetOrganization(o string) (ParseException error) {
+	if o == "" {
+		return errors.New("NullPointerException: the organization parameter is null")
+	}
 	this.organization = o
+	return nil
 }

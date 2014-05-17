@@ -2,26 +2,15 @@ package header
 
 import (
 	"bytes"
+	"errors"
 	"gosips/core"
 	"strconv"
 )
 
 /**  Retry-After SIP Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type RetryAfter struct {
-	Parameters //Header implements RetryAfterHeader {
-
-	/** constant DURATION parameter.
-	 */
-	//public static final String DURATION= ParameterNames.DURATION;
+	Parameters
 
 	/** duration field
 	 */
@@ -49,7 +38,7 @@ func (this *RetryAfter) String() string {
  * @return encoded body
  */
 func (this *RetryAfter) EncodeBody() string {
-	var encoding bytes.Buffer //  = new StringBuffer();
+	var encoding bytes.Buffer
 	if this.retryAfter != 0 {
 		encoding.WriteString(strconv.Itoa(this.retryAfter))
 	}
@@ -95,10 +84,12 @@ func (this *RetryAfter) RemoveDuration() {
  * @since JAIN SIP v1.1
  */
 
-func (this *RetryAfter) SetRetryAfter(retryAfter int) { //throws InvalidArgumentException {
-	//if (retryAfter < 0) throw new InvalidArgumentException
-	//("invalid parameter " + retryAfter);
+func (this *RetryAfter) SetRetryAfter(retryAfter int) (InvalidArgumentException error) {
+	if retryAfter < 0 {
+		return errors.New("InvalidArgumentException: invalid parameter")
+	}
 	this.retryAfter = retryAfter
+	return nil
 }
 
 /**
@@ -132,10 +123,12 @@ func (this *RetryAfter) GetComment() string {
  * unexpectedly while parsing the comment.
  */
 
-func (this *RetryAfter) SetComment(comment string) { //throws ParseException {
-	//if (comment==null) throw new  NullPointerException
-	//  ("the comment parameter is null");
+func (this *RetryAfter) SetComment(comment string) (ParseException error) {
+	if comment == "" {
+		return errors.New("NullPointerException: the comment parameter is null")
+	}
 	this.comment = comment
+	return nil
 }
 
 /**
@@ -147,10 +140,12 @@ func (this *RetryAfter) SetComment(comment string) { //throws ParseException {
  * @since JAIN SIP v1.1
  */
 
-func (this *RetryAfter) SetDuration(duration int) { //throws InvalidArgumentException {
-	//if (duration < 0) throw new InvalidArgumentException
-	//    ("the duration parameter is <0");
+func (this *RetryAfter) SetDuration(duration int) (InvalidArgumentException error) {
+	if duration < 0 {
+		return errors.New("InvalidArgumentException: the duration parameter is <0")
+	}
 	this.Parameters.SetParameter(ParameterNames_DURATION, strconv.Itoa(duration))
+	return nil
 }
 
 /**

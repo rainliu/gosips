@@ -26,21 +26,8 @@ package header
 
  * @see RequireHeader
 
- * @version 1.1
-
- * @author Sun Microsystems
-
  */
 
 type ProxyRequireHeader interface {
 	RequireHeader
-
-	/**
-
-	 * Name of ProxyRequireHeader
-
-	 */
-
-	//public final static String NAME = "Proxy-Require";
-
 }

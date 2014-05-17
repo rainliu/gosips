@@ -11,9 +11,6 @@ package header
  * <p>
  * For Example:<br>
  * <code>MIME-Version: 1.0</code>
- *
- * @since 1.1
- * @author Sun Microsystems
  */
 type MimeVersionHeader interface {
 	Header
@@ -32,7 +29,7 @@ type MimeVersionHeader interface {
 	 * @param minorVersion - the new minor MIME version
 	 * @throws InvalidArgumentException if the supplied value is less than zero.
 	 */
-	SetMinorVersion(minorVersion int) //throws InvalidArgumentException;
+	SetMinorVersion(minorVersion int) (InvalidArgumentException error)
 
 	/**
 	 * Gets the Major version value of this MimeVersionHeader.
@@ -48,11 +45,5 @@ type MimeVersionHeader interface {
 	 * @param majorVersion - the new major MIME version
 	 * @throws InvalidArgumentException if the supplied version is less than zero.
 	 */
-	SetMajorVersion(majorVersion int) //throws InvalidArgumentException;
-
-	/**
-	 * Name of MimeVersionHeader
-	 */
-	//public final static String NAME = "MIME-Version";
-
+	SetMajorVersion(majorVersion int) (InvalidArgumentException error)
 }

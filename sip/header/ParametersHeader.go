@@ -8,7 +8,7 @@ import (
 type ParametersHeader interface {
 	Header
 	GetParameter(name string) string
-	GetParameterValue(name string) string //interface{}
+	GetParameterValue(name string) string //interface{} TODO
 	GetParameterNames() *list.List
 	HasParameters() bool
 	RemoveParameter(name string)
@@ -19,5 +19,4 @@ type ParametersHeader interface {
 	GetParameters() *core.NameValueList
 	SetParameters(parameters *core.NameValueList)
 	GetNameValue(parameterName string) *core.NameValue
-	//EncodeBody() string
 }

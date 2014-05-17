@@ -38,14 +38,10 @@ package header
  * </ul>
  * A server must ignore Headers that it does not understand. A proxy must not
  * remove or modify Headers that it does not understand.
- *
- * @since 1.1
- * @author Sun Microsystems
  */
 
 type ReasonHeader interface {
 	ParametersHeader
-	//Header
 
 	/**
 	 * Gets the cause value of the ReasonHeader
@@ -62,7 +58,7 @@ type ReasonHeader interface {
 	 * @param cause - the new integer value of the cause of the ReasonHeader
 	 * @throws InvalidArgumentException if the cause value is less than zero.
 	 */
-	SetCause(cause int) //throws InvalidArgumentException;
+	SetCause(cause int) (InvalidArgumentException error)
 
 	/**
 	 * Sets the protocol of the ReasonHeader, for example SIP or Q.850.
@@ -71,7 +67,7 @@ type ReasonHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the protocol value.
 	 */
-	SetProtocol(protocol string) //throws ParseException;
+	SetProtocol(protocol string) (ParseException error)
 
 	/**
 	 * Gets the protocol value of the ReasonHeader
@@ -87,7 +83,7 @@ type ReasonHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the text value.
 	 */
-	SetText(text string) // throws ParseException;
+	SetText(text string) (ParseException error)
 
 	/**
 	 * Gets the text value of the ReasonHeader
@@ -95,10 +91,4 @@ type ReasonHeader interface {
 	 * @return the string value of the text of the ReasonHeader
 	 */
 	GetText() string
-
-	/**
-	 * Name of ReasonHeader
-	 */
-	//  public final static String NAME = "Reason";
-
 }

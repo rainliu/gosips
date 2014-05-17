@@ -24,27 +24,9 @@ package header
 
  * @see Parameters
 
- *
-
- * @version 1.1
-
- * @author Sun Microsystems
-
- *
-
  */
 
 type ReplyToHeader interface {
 	AddressHeader
 	ParametersHeader
-	//Header
-
-	/**
-
-	 * Name of ReplyToHeader
-
-	 */
-
-	//public final static String NAME = "Reply-To";
-
 }

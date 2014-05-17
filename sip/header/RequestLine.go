@@ -8,12 +8,8 @@ import (
 
 /**
 * RequestLine of SIP Request.
-*
-*@author M. Ranganathan
  */
 type RequestLine struct {
-	//SIPObject {
-
 	/** uri field. Note that this can be a SIP URI or a generic URI
 	 * like tel URI.
 	 */

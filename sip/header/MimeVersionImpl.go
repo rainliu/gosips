@@ -1,24 +1,16 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 	"strconv"
 )
 
 /**
 * MimeVersion SIP Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type MimeVersion struct {
 	SIPHeader
-	//implements MimeVersionHeader{
 
 	/** mimeVersion field
 	 */
@@ -62,10 +54,12 @@ func (this *MimeVersion) GetMajorVersion() int {
  * @param minorVersion - the new integer Minor version
  * @throws InvalidArgumentException
  */
-func (this *MimeVersion) SetMinorVersion(minorVersion int) { //throws InvalidArgumentException {
-	// if (minorVersion<0) throw new InvalidArgumentException("JAIN-SIP Exception"+
-	//", MimeVersion, SetMinorVersion(), the minorVersion parameter is null");
+func (this *MimeVersion) SetMinorVersion(minorVersion int) (InvalidArgumentException error) {
+	if minorVersion < 0 {
+		return errors.New("InvalidArgumentException: the minorVersion parameter is null")
+	}
 	this.minorVersion = minorVersion
+	return nil
 }
 
 /**
@@ -75,10 +69,12 @@ func (this *MimeVersion) SetMinorVersion(minorVersion int) { //throws InvalidArg
  * @param majorVersion - the new integer Major version
  * @throws InvalidArgumentException
  */
-func (this *MimeVersion) SetMajorVersion(majorVersion int) { //throws InvalidArgumentException {
-	//if (majorVersion<0) throw new InvalidArgumentException("JAIN-SIP Exception"+
-	//", MimeVersion, SetMajorVersion(), the majorVersion parameter is null");
+func (this *MimeVersion) SetMajorVersion(majorVersion int) (InvalidArgumentException error) {
+	if majorVersion < 0 {
+		return errors.New("InvalidArgumentException: the majorVersion parameter is null")
+	}
 	this.majorVersion = majorVersion
+	return nil
 }
 
 func (this *MimeVersion) String() string {

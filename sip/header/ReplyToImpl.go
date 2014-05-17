@@ -8,18 +8,9 @@ import (
 
 /**
 * ReplyTo Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type ReplyTo struct {
-	AddressParameters //Header
-	//implements ReplyToHeader {
+	AddressParameters
 }
 
 /** Default constructor
@@ -52,7 +43,7 @@ func (this *ReplyTo) String() string {
  * @return String
  */
 func (this *ReplyTo) EncodeBody() string {
-	var encoding bytes.Buffer //  = new StringBuffer();
+	var encoding bytes.Buffer
 	addr, _ := this.addr.(*address.AddressImpl)
 	if addr.GetAddressType() == address.ADDRESS_SPEC {
 		encoding.WriteString(core.SIPSeparatorNames_LESS_THAN)

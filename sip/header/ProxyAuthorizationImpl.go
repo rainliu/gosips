@@ -4,13 +4,6 @@ import "gosips/core"
 
 /**
 * ProxyAuthorization SIP header.
-*
-* @see ProxyAuthorization
-*
-* @author M. Ranganathan <mranga@nist.gov>  NIST/ITL/ANTD <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type ProxyAuthorization struct {
 	Authentication

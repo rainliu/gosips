@@ -8,12 +8,6 @@ package header
 
  * software to filter calls.
 
- *
-
- * @version 1.1
-
- * @author Sun Microsystems
-
  */
 
 type OrganizationHeader interface {
@@ -35,7 +29,7 @@ type OrganizationHeader interface {
 
 	 */
 
-	SetOrganization(organization string) //throws ParseException;
+	SetOrganization(organization string) (ParseException error)
 
 	/**
 
@@ -48,13 +42,4 @@ type OrganizationHeader interface {
 	 */
 
 	GetOrganization() string
-
-	/**
-
-	 * Name of OrganizationHeader
-
-	 */
-
-	//public final static String NAME = "Organization";
-
 }

@@ -8,18 +8,10 @@ import (
 
 /**
  *Route  SIPHeader Object
- *
- *@version  JAIN-SIP-1.1
- *
- *@author M. Ranganathan <mranga@nist.gov>  <br/>
- *
- *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
- *
  */
 
 type Route struct {
-	AddressParameters //Header
-	//implements javax.sip.header.RouteHeader {
+	AddressParameters
 }
 
 /** Default constructor
@@ -35,7 +27,6 @@ func NewRoute() *Route {
  *@param address -- address of this header.
  *
  */
-
 func NewRouteFromAddress(addr address.Address) *Route {
 	this := &Route{}
 	this.AddressParameters.super(core.SIPHeaderNames_ROUTE)
@@ -62,7 +53,7 @@ func NewRouteFromAddress(addr address.Address) *Route {
  *
  *@return the hashcode of the encoded address.
  */
-func (this *Route) HashCode() int {
+func (this *Route) HashCode() int { //TODO by LY
 	//hp, _ := this.addr.GetHostPort()
 	//strcon.Atoi(hp.String() //.toLowerCase().hashCode();
 	panic("Route.HashCode() Not implement yet")
@@ -82,16 +73,8 @@ func (this *Route) String() string {
  *@return a canonical encoding of the header.
  */
 func (this *Route) EncodeBody() string {
-	var encoding bytes.Buffer //  = new StringBuffer();
-	// addr, _ := this.addr.(*address.AddressImpl)
-	// if addr.GetAddressType() == address.NAME_ADDR {
-	// 	encoding.WriteString(core.SIPSeparatorNames_LESS_THAN)
-	// }
+	var encoding bytes.Buffer
 	encoding.WriteString(this.addr.String())
-	// if addr.GetAddressType() == address.NAME_ADDR {
-	// 	encoding.WriteString(core.SIPSeparatorNames_GREATER_THAN)
-	// }
-
 	if this.parameters != nil && this.parameters.Len() > 0 {
 		encoding.WriteString(core.SIPSeparatorNames_SEMICOLON)
 		encoding.WriteString(this.parameters.String())

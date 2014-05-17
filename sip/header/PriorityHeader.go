@@ -44,12 +44,6 @@ package header
 
  * Priority: non-urgent</code>
 
- *
-
- * @version 1.1
-
- * @author Sun Microsystems
-
  */
 
 type PriorityHeader interface {
@@ -69,7 +63,7 @@ type PriorityHeader interface {
 
 	 */
 
-	SetPriority(priority string) //throws ParseException;
+	SetPriority(priority string) (ParseException error)
 
 	/**
 
@@ -82,51 +76,4 @@ type PriorityHeader interface {
 	 */
 
 	GetPriority() string
-
-	/**
-
-	 * Urgent priority constant
-
-	 */
-
-	//public static final String URGENT = "Urgent";
-
-	/**
-
-	 * Normal priority constant
-
-	 */
-
-	//public static final String NORMAL = "Normal";
-
-	/**
-
-	 * Non-urgent priority constant
-
-	 */
-
-	//public static final String NON_URGENT = "Non-Urgent";
-
-	/**
-
-	 * Emergency priority constant - It is RECOMMENDED that the value of
-
-	 * "emergency" only be used when life, limb, or property are in imminent
-
-	 * danger. Otherwise, there are no semantics defined for this header
-
-	 * field.
-
-	 */
-
-	//public static final String EMERGENCY = "Emergency";
-
-	/**
-
-	 * Name of PriorityHeader
-
-	 */
-
-	//public final static String NAME = "Priority";
-
 }

@@ -1,23 +1,16 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 	"strconv"
 )
 
 /**
 * MinExpires SIP Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type MinExpires struct {
-	SIPHeader // implements MinExpiresHeader {
+	SIPHeader
 
 	/** expires field
 	 */
@@ -54,8 +47,6 @@ func (this *MinExpires) EncodeBody() string {
  *
  * @return the expires value of the ExpiresHeader.
  *
- * @since JAIN SIP v1.1
- *
  */
 func (this *MinExpires) GetExpires() int {
 	return this.expires
@@ -70,12 +61,11 @@ func (this *MinExpires) GetExpires() int {
          *
          * @throws InvalidArgumentException if supplied value is less than zero.
          *
-         * @since JAIN SIP v1.1
-         *
 */
-func (this *MinExpires) SetExpires(expires int) {
-	// throws InvalidArgumentException {
-	//     if (expires < 0) throw new InvalidArgumentException
-	//                 ("bad argument " + expires);
+func (this *MinExpires) SetExpires(expires int) (InvalidArgumentException error) {
+	if expires < 0 {
+		return errors.New("InvalidArgumentException: bad argument")
+	}
 	this.expires = expires
+	return nil
 }

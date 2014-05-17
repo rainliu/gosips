@@ -1,23 +1,14 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 	"strconv"
 )
 
-/**
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
- */
-
 type RSeq struct {
 	SIPHeader
-	//implements javax.sip.header.RSeqHeader {
+
 	sequenceNumber int
 }
 
@@ -43,12 +34,12 @@ func (this *RSeq) GetSequenceNumber() int {
  * @param sequenceNumber - the new Sequence number of this RSeqHeader
  * @throws InvalidArgumentException if supplied value is less than zero.
  */
-func (this *RSeq) SetSequenceNumber(sequenceNumber int) {
-	// throws InvalidArgumentException {
-	//     if (sequenceNumber <= 0)
-	//             throw new InvalidArgumentException
-	//                 ("Bad seq number " + sequenceNumber);
+func (this *RSeq) SetSequenceNumber(sequenceNumber int) (InvalidArgumentException error) {
+	if sequenceNumber <= 0 {
+		return errors.New("InvalidArgumentException: Bad seq number")
+	}
 	this.sequenceNumber = sequenceNumber
+	return nil
 }
 
 func (this *RSeq) String() string {

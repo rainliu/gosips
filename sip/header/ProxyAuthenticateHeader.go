@@ -40,15 +40,7 @@ package header
  *
  * @see Parameters
  * @see ProxyAuthorizationHeader
- * @version 1.1
- * @author Sun Microsystems
  */
 type ProxyAuthenticateHeader interface {
 	WWWAuthenticateHeader
-
-	/**
-	 * Name of ProxyAuthenticateHeader
-	 */
-	//public final static String NAME = "Proxy-Authenticate";
-
 }

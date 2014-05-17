@@ -8,20 +8,9 @@ import (
 
 /**
 *Definition of the Reason SIP Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type Reason struct {
 	Parameters
-	//implements javax.sip.header.ReasonHeader {
-
-	//public final String TEXT = ParameterNames.TEXT;
-	//public final String CAUSE = ParameterNames.CAUSE;
 
 	protocol string
 }
@@ -46,9 +35,9 @@ func (this *Reason) GetCause() int {
  *
  *@param cause - cause to Set.
  */
-func (this *Reason) SetCause(cause int) {
-	// throws javax.sip.InvalidArgumentException {
+func (this *Reason) SetCause(cause int) (InvalidArgumentException error) {
 	this.parameters.AddNameAndValue("cause", strconv.Itoa(cause))
+	return nil
 }
 
 /** Set the protocol
@@ -56,8 +45,9 @@ func (this *Reason) SetCause(cause int) {
  *@param protocol - protocol to Set.
  */
 
-func (this *Reason) SetProtocol(protocol string) { //throws ParseException {
+func (this *Reason) SetProtocol(protocol string) (ParseException error) {
 	this.protocol = protocol
+	return nil
 }
 
 /** Return the protocol.
@@ -72,8 +62,9 @@ func (this *Reason) GetProtocol() string {
  *
  *@param text -- string text to Set.
  */
-func (this *Reason) SetText(text string) { //throws ParseException {
+func (this *Reason) SetText(text string) (ParseException error) {
 	this.parameters.AddNameAndValue("text", text)
+	return nil
 }
 
 /** Get the text.
@@ -107,7 +98,7 @@ func (this *Reason) String() string {
  * A.K.A headerValue.
  */
 func (this *Reason) EncodeBody() string {
-	var encoding bytes.Buffer //  = new StringBuffer();
+	var encoding bytes.Buffer
 	encoding.WriteString(this.protocol)
 
 	if this.parameters != nil && this.parameters.Len() > 0 {
@@ -116,26 +107,3 @@ func (this *Reason) EncodeBody() string {
 	}
 	return encoding.String()
 }
-
-/*
-func (this *Reason) SetParameter(name, value string) error {
-	//throws ParseException {
-	//if (name == null) throw new NullPointerException("null name");
-	nv := this.parameters.GetNameValue(strings.ToLower(name))
-	if nv == nil {
-		nv = core.NewNameValue(name, value)
-		if strings.ToLower(name) == (ParameterNames_TEXT) {
-			// if (value ==
-			//     throw new NullPointerException("null value");
-			// if (value.startsWith(Separators.DOUBLE_QUOTE))
-			//     throw new ParseException
-			//     (value + " : Unexpected DOUBLE_QUOTE",0);
-			nv.SetQuotedValue()
-		}
-		this.parameters.SetNameValue(nv)
-	} else {
-		nv.SetValue(value)
-	}
-
-	return nil
-}*/

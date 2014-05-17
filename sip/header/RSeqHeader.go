@@ -17,9 +17,6 @@ package header
  * <p>
  * A server must ignore Headers that it does not understand. A proxy must not
  * remove or modify Headers that it does not understand.
- *
- * @since 1.1
- * @author Sun Microsystems
  */
 
 type RSeqHeader interface {
@@ -33,7 +30,7 @@ type RSeqHeader interface {
 	 * @param sequenceNumber - the new Sequence number of this RSeqHeader
 	 * @throws InvalidArgumentException if supplied value is less than zero.
 	 */
-	SetSequenceNumber(sequenceNumber int) // throws InvalidArgumentException;
+	SetSequenceNumber(sequenceNumber int) (InvalidArgumentException error)
 
 	/**
 	 * Gets the sequence number of this RSeqHeader.
@@ -41,10 +38,4 @@ type RSeqHeader interface {
 	 * @return the integer value of the Sequence number of the RSeqHeader
 	 */
 	GetSequenceNumber() int
-
-	/**
-	 * Name of RSeqHeader
-	 */
-	//public final static String NAME = "RSeq";
-
 }
