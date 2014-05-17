@@ -20,13 +20,10 @@ import "gosips/sip/address"
  * algorithm=MD5</code>
  *
  * @see Parameters
- * @version 1.1
- * @author Sun Microsystems
  */
 
 type WWWAuthenticateHeader interface {
 	ParametersHeader
-	//Header
 
 	/**
 	 * Sets the scheme of the challenge information for this WWWAuthenticateHeader.
@@ -58,7 +55,7 @@ type WWWAuthenticateHeader interface {
 	 * unexpectedly while parsing the realm.
 	 *
 	 */
-	SetRealm(realm string) //throws ParseException;
+	SetRealm(realm string) (ParseException error)
 
 	/**
 	 * Returns the Realm value of this WWWAuthenicateHeader. This convenience
@@ -79,7 +76,7 @@ type WWWAuthenticateHeader interface {
 	 * unexpectedly while parsing the nonce value.
 	 *
 	 */
-	SetNonce(nonce string) //throws ParseException;
+	SetNonce(nonce string) (ParseException error)
 
 	/**
 	 * Returns the Nonce value of this WWWAuthenicateHeader.
@@ -117,7 +114,7 @@ type WWWAuthenticateHeader interface {
 	 * unexpectedly while parsing the algorithm value.
 	 *
 	 */
-	SetAlgorithm(algorithm string) // throws ParseException;
+	SetAlgorithm(algorithm string) (ParseException error)
 
 	/**
 	 * Returns the Algorithm value of this WWWAuthenicateHeader.
@@ -137,7 +134,7 @@ type WWWAuthenticateHeader interface {
 	 * unexpectedly while parsing the Qop value.
 	 *
 	 */
-	SetQop(qop string) //throws ParseException;
+	SetQop(qop string) (ParseException error)
 
 	/**
 	 * Returns the Qop value of this WWWAuthenicateHeader.
@@ -157,7 +154,7 @@ type WWWAuthenticateHeader interface {
 	 * unexpectedly while parsing the opaque value.
 	 *
 	 */
-	SetOpaque(opaque string) // throws ParseException;
+	SetOpaque(opaque string) (ParseException error)
 
 	/**
 	 * Returns the Opaque value of this WWWAuthenicateHeader.
@@ -177,7 +174,7 @@ type WWWAuthenticateHeader interface {
 	 * unexpectedly while parsing the domain.
 	 *
 	 */
-	SetDomain(domain string) //throws ParseException;
+	SetDomain(domain string) (ParseException error)
 
 	/**
 	 * Returns the Domain value of this WWWAuthenicateHeader.
@@ -205,9 +202,4 @@ type WWWAuthenticateHeader interface {
 	 *
 	 */
 	IsStale() bool
-
-	/**
-	 * Name of WWWAuthenticateHeader
-	 */
-	//public final static string NAME = "WWW-Authenticate";
 }

@@ -51,9 +51,6 @@ package header
  * </ul>
  * For Example:<br>
  * <code>Warning: 307 isi.edu "Session parameter 'foo' not understood"</code>
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 
 type WarningHeader interface {
@@ -74,7 +71,7 @@ type WarningHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the agent value.
 	 */
-	SetAgent(agent string) //throws ParseException;
+	SetAgent(agent string) (ParseException error)
 
 	/**
 	 * Gets text of WarningHeader.
@@ -90,7 +87,7 @@ type WarningHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the text value.
 	 */
-	SetText(text string) //throws ParseException;
+	SetText(text string) (ParseException error)
 
 	/**
 	 * Sets the code of the WarningHeader. The standard RFC3261 codes are
@@ -100,7 +97,7 @@ type WarningHeader interface {
 	 * @throws InvalidArgumentException if an invalid integer code is given for
 	 * the WarningHeader.
 	 */
-	SetCode(code int) //throws InvalidArgumentException;
+	SetCode(code int) (InvalidArgumentException error)
 
 	/**
 	 * Gets the code of the WarningHeader.
@@ -108,14 +105,6 @@ type WarningHeader interface {
 	 * @return the integer code value of the WarningHeader
 	 */
 	GetCode() int
-
-	/**
-	 * Name of WarningHeader
-	 */
-	//public final static String NAME = "Warning";
-
-	// Constants
-
 }
 
 const (

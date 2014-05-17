@@ -4,7 +4,6 @@ import "gosips/core"
 
 /**
 * A list of supported headers.
-*@version 1.0
 *@see Supported
  */
 

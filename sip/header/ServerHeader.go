@@ -16,9 +16,6 @@ import "container/list"
  *
  * @see ViaHeader
  * @see UserAgentHeader
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 type ServerHeader interface {
 	Header
@@ -38,11 +35,5 @@ type ServerHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the List of product value strings.
 	 */
-	SetProduct(product *list.List) //throws ParseException;
-
-	/**
-	 * Name of ServerHeader
-	 */
-	//public final static String NAME = "Server";
-
+	SetProduct(product *list.List) (ParseException error)
 }

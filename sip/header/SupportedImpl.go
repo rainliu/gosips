@@ -1,31 +1,15 @@
 package header
 
-import "gosips/core"
+import (
+	"errors"
+	"gosips/core"
+)
 
 /**
-
 *Supported SIP Header.
-
-*
-
-*@version  JAIN-SIP-1.1
-
-*
-
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-
-*
-
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-
-*
-
  */
 type Supported struct {
 	SIPHeader
-	//implements SupportedHeader {
 
 	/* the Option field
 	 */
@@ -37,7 +21,6 @@ type Supported struct {
 func NewSupported() *Supported {
 	this := &Supported{}
 	this.SIPHeader.super(core.SIPHeaderNames_SUPPORTED)
-	//  optionTag = null;
 	return this
 }
 
@@ -74,10 +57,12 @@ func (this *Supported) EncodeBody() string {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the optionTag value.
  */
-func (this *Supported) SetOptionTag(optionTag string) { //throws ParseException {
-	// if (optionTag==null) throw new  NullPointerException(
-	//  "JAIN-SIP Exception, Supported, "+"setOptionTag(), the optionTag parameter is null");
+func (this *Supported) SetOptionTag(optionTag string) (ParseException error) {
+	if optionTag == "" {
+		return errors.New("NullPointerException: the optionTag parameter is null")
+	}
 	this.optionTag = optionTag
+	return nil
 }
 
 /**

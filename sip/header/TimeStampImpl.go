@@ -1,35 +1,17 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 	"strconv"
 )
 
 /**
-
 *TimeStamp SIP Header.
-
-*
-
-*@version  JAIN-SIP-1.1
-
-*
-
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-
-*
-
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-
-*
-
  */
 
 type TimeStamp struct {
 	SIPHeader
-	//implements TimeStampHeader{
 
 	/** timeStamp field
 	 */
@@ -59,9 +41,6 @@ func (this *TimeStamp) String() string {
  * @return String
  */
 func (this *TimeStamp) EncodeBody() string {
-	//if (delay!=-1)
-	//    return new Float(timeStamp).toString()+ SP+ new Float(delay).toString();
-	//  else  return new Float(timeStamp).toString();
 	if this.delay != -1 {
 		return strconv.FormatFloat(float64(this.timeStamp), 'f', -1, 32) + core.SIPSeparatorNames_SP + strconv.FormatFloat(float64(this.delay), 'f', -1, 32)
 	} else {
@@ -82,10 +61,6 @@ func (this *TimeStamp) RemoveDelay() {
 	this.delay = -1
 }
 
-/********************************************************************************/
-/********************** JAIN-SIP 1.1 methods ************************************/
-/********************************************************************************/
-
 /**
  * Sets the timestamp value of this TimeStampHeader to the new timestamp
  * value passed to this method.
@@ -94,10 +69,12 @@ func (this *TimeStamp) RemoveDelay() {
  * @throws InvalidArgumentException if the timestamp value argument is a
  * negative value.
  */
-func (this *TimeStamp) SetTimeStamp(timeStamp float32) { //throws InvalidArgumentException {
-	//if (timeStamp<0) throw new InvalidArgumentException("JAIN-SIP Exception, TimeStamp, "+
-	//      "setTimeStamp(), the timeStamp parameter is <0");
+func (this *TimeStamp) SetTimeStamp(timeStamp float32) (InvalidArgumentException error) {
+	if timeStamp < 0 {
+		return errors.New("InvalidArgumentException: the timeStamp parameter is <0")
+	}
 	this.timeStamp = timeStamp
+	return nil
 }
 
 /**
@@ -115,7 +92,6 @@ func (this *TimeStamp) GetTimeStamp() float32 {
  *
  * @return the delay value of this TimeStampHeader
  */
-
 func (this *TimeStamp) GetDelay() float32 {
 	return this.delay
 }
@@ -129,8 +105,10 @@ func (this *TimeStamp) GetDelay() float32 {
  * negative value other than <code>-1</code>.
  */
 
-func (this *TimeStamp) SetDelay(delay float32) { //throws InvalidArgumentException {
-	//  if (delay<0 && delay!=-1) throw new InvalidArgumentException(
-	//  "JAIN-SIP Exception, TimeStamp, "+"setDelay(), the delay parameter is <0");
+func (this *TimeStamp) SetDelay(delay float32) (InvalidArgumentException error) {
+	if delay < 0 && delay != -1 {
+		return errors.New("InvalidArgumentException: the delay parameter is <0")
+	}
 	this.delay = delay
+	return nil
 }

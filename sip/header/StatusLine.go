@@ -8,16 +8,9 @@ import (
 
 /**
 * Status Line (for SIPReply) messages.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
  */
 
-type StatusLine struct { //} SIPObject {
-
+type StatusLine struct {
 	matchStatusClass bool
 
 	/** sipVersion field
@@ -37,7 +30,6 @@ type StatusLine struct { //} SIPObject {
  */
 func NewStatusLine() *StatusLine {
 	this := &StatusLine{}
-	//this.reasonPhrase = null;
 	this.sipVersion = SIPConstants_SIP_VERSION_STRING
 	return this
 }

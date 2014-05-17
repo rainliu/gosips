@@ -2,22 +2,16 @@ package header
 
 import (
 	"bytes"
+	"errors"
 	"gosips/core"
 	"strconv"
 )
 
 /**
 *SubscriptionState header
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type SubscriptionState struct {
-	Parameters //Header
-	//implements SubscriptionStateHeader{
+	Parameters
 
 	expires    int
 	retryAfter int
@@ -41,10 +35,12 @@ func NewSubscriptionState() *SubscriptionState {
  * @param expires - the new expires value of this SubscriptionStateHeader.
  * @throws InvalidArgumentException if supplied value is less than zero.
  */
-func (this *SubscriptionState) SetExpires(expires int) { //throws InvalidArgumentException {
-	// if (expires<=0) throw new InvalidArgumentException("JAIN-SIP "+
-	// "Exception, SubscriptionState, SetExpires(), the expires parameter is <=0");
+func (this *SubscriptionState) SetExpires(expires int) (InvalidArgumentException error) {
+	if expires <= 0 {
+		return errors.New("InvalidArgumentException: the expires parameter is <=0")
+	}
 	this.expires = expires
+	return nil
 }
 
 /**
@@ -64,10 +60,12 @@ func (this *SubscriptionState) GetExpires() int {
  * @param retryAfter - the new retry after value of this SubscriptionStateHeader
  * @throws InvalidArgumentException if supplied value is less than zero.
  */
-func (this *SubscriptionState) SetRetryAfter(retryAfter int) { //throws InvalidArgumentException {
-	// if (retryAfter<=0) throw new InvalidArgumentException("JAIN-SIP "+
-	// "Exception, SubscriptionState, SetRetryAfter(), the retryAfter parameter is <=0");
+func (this *SubscriptionState) SetRetryAfter(retryAfter int) (InvalidArgumentException error) {
+	if retryAfter <= 0 {
+		return errors.New("InvalidArgumentException: the retryAfter parameter is <=0")
+	}
 	this.retryAfter = retryAfter
+	return nil
 }
 
 /**
@@ -97,10 +95,12 @@ func (this *SubscriptionState) GetReasonCode() string {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the reason code.
  */
-func (this *SubscriptionState) SetReasonCode(reasonCode string) { //throws ParseException {
-	// if (reasonCode==null) throw new  NullPointerException("JAIN-SIP "+
-	// "Exception, SubscriptionState, SetReasonCode(), the reasonCode parameter is null");
+func (this *SubscriptionState) SetReasonCode(reasonCode string) (ParseException error) {
+	if reasonCode == "" {
+		return errors.New("NullPointerException: the reasonCode parameter is null")
+	}
 	this.reasonCode = reasonCode
+	return nil
 }
 
 /**
@@ -119,10 +119,12 @@ func (this *SubscriptionState) GetState() string {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the state.
  */
-func (this *SubscriptionState) SetState(state string) { //throws ParseException{
-	// if (state==null) throw new  NullPointerException("JAIN-SIP "+
-	// "Exception, SubscriptionState, SetState(), the state parameter is null");
+func (this *SubscriptionState) SetState(state string) (ParseException error) {
+	if state == "" {
+		return errors.New("NullPointerException: the state parameter is null")
+	}
 	this.state = state
+	return nil
 }
 
 func (this *SubscriptionState) String() string {
@@ -134,7 +136,7 @@ func (this *SubscriptionState) String() string {
  * @return the string encoded header body.
  */
 func (this *SubscriptionState) EncodeBody() string {
-	var encoding bytes.Buffer //  = new StringBuffer();
+	var encoding bytes.Buffer
 	if this.state != "" {
 		encoding.WriteString(this.state)
 	}

@@ -1,11 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : ToHeader.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package header
 
 /**
@@ -76,11 +68,8 @@ package header
  * To: Duke sip:duke@jcp.org;tag=287447</code>
  *
  * @see AddressHeader
- * @version 1.1
- * @author Sun Microsystems
  */
 type ToHeader interface {
-	//Header
 	AddressHeader
 	ParametersHeader
 
@@ -111,9 +100,4 @@ type ToHeader interface {
 	 * present, i.e no dialogue is established.
 	 */
 	GetTag() string
-
-	/**
-	 * Name of the ToHeader
-	 */
-	//public final static String NAME = "To";
 }

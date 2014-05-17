@@ -8,17 +8,9 @@ package header
  *
  * @see SupportedHeader
  * @see RequireHeader
- * @version 1.1
- * @author Sun Microsystems
  */
 
 type UnsupportedHeader interface {
 	OptionTag
 	Header
-
-	/**
-	 * Name of UnsupportedHeader
-	 */
-	//public final static String NAME = "Unsupported";
-
 }

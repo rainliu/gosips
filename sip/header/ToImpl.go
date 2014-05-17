@@ -11,8 +11,7 @@ import (
 /**
 *To SIP Header.
  */
-
-type To struct { //  implements javax.sip.header.ToHeader {
+type To struct {
 	AddressParameters
 }
 
@@ -175,12 +174,3 @@ func (this *To) GetUserAtHostPort() string {
 	addr, _ := this.addr.(*address.AddressImpl)
 	return addr.GetUserAtHostPort()
 }
-
-/** Gets a string representation of the Header. This method overrides the
- * toString method in java.lang.Object.
- *
- * @return string representation of Header
- */
-/*public String String() {
-    return this.encode();
-}*/

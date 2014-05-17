@@ -3,33 +3,15 @@ package header
 import (
 	"bytes"
 	"container/list"
+	"errors"
 	"gosips/core"
 )
 
 /**
-
 *Supported SIP Header.
-
-*
-
-*@version  JAIN-SIP-1.1
-
-*
-
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-
-*
-
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-
-*
-
  */
 type Server struct {
 	SIPHeader
-	//implements ServerHeader{
 
 	/** Product tokens.
 	 */
@@ -51,7 +33,7 @@ func NewServer() *Server {
  * @return String
  */
 func (this *Server) EncodeProduct() string {
-	var encoding bytes.Buffer //  = new StringBuffer();
+	var encoding bytes.Buffer
 
 	for e := this.productTokens.Front(); e != nil; e = e.Next() {
 		encoding.WriteString(e.Value.(string))
@@ -102,10 +84,10 @@ func (this *Server) GetProduct() *list.List {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the product value.
  */
-func (this *Server) SetProduct(product *list.List) { //throws ParseException {
-	//      if (product==null) throw new  NullPointerException
-	// ("JAIN-SIP Exception, UserAgent, "+
-	//      		"setProduct(), the "+
-	//           	" product parameter is null");
+func (this *Server) SetProduct(product *list.List) (ParseException error) {
+	if product == nil {
+		return errors.New("NullPointerException: product parameter is null")
+	}
 	this.productTokens = product
+	return nil
 }

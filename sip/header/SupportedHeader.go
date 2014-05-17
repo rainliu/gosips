@@ -24,22 +24,9 @@ package header
 
  * @see UnsupportedHeader
 
- *
-
- * @author Sun Microsystems
-
  */
 
 type SupportedHeader interface {
 	OptionTag
 	Header
-
-	/**
-
-	 * Name of SupportedHeader
-
-	 */
-
-	//public final static String NAME = "Supported";
-
 }

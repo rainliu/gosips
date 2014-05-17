@@ -1,6 +1,7 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 	"strconv"
 )
@@ -8,16 +9,11 @@ import (
 /**
 * the WarningValue SIPObject.
 *
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
 * @see WarningList SIPHeader which strings these toGether.
  */
 
 type Warning struct {
-	SIPHeader //implements  WarningHeader {
+	SIPHeader
 
 	/** warn code field, the warn code consists of three digits.
 	 */
@@ -51,7 +47,6 @@ func (this *Warning) String() string {
  *@return the string encoding of the header value.
  */
 func (this *Warning) EncodeBody() string {
-	//print(this.code)
 	if this.text != "" {
 		return strconv.Itoa(this.code) + core.SIPSeparatorNames_SP + this.agent +
 			core.SIPSeparatorNames_SP + core.SIPSeparatorNames_DOUBLE_QUOTE + this.text + core.SIPSeparatorNames_DOUBLE_QUOTE
@@ -89,14 +84,13 @@ func (this *Warning) GetText() string {
  * @param code int to Set
  * @throws SipParseException if code is not accepted by implementation
  */
-func (this *Warning) SetCode(code int) { //throws InvalidArgumentException {
-	//println(code)
+func (this *Warning) SetCode(code int) (InvalidArgumentException error) {
 	if code >= 300 && code < 400 {
 		this.code = code
+		return nil
+	} else {
+		return errors.New("InvalidArgumentException: Code parameter in the Warning header is invalid")
 	}
-	//println(this.code)
-	// else throw new InvalidArgumentException
-	// ("Code parameter in the Warning header is invalid: code="+code);
 }
 
 /**
@@ -104,13 +98,13 @@ func (this *Warning) SetCode(code int) { //throws InvalidArgumentException {
  * @param host String to Set
  * @throws ParseException if host is not accepted by implementation
  */
-func (this *Warning) SetAgent(host string) { //throws ParseException {
-	// if (host==null)
-	//       throw new NullPointerException
-	//      ("the host parameter in the Warning header is null");
-	// else {
-	this.agent = host
-	//}
+func (this *Warning) SetAgent(host string) (ParseException error) {
+	if host == "" {
+		return errors.New("NullPointerException: the host parameter in the Warning header is null")
+	} else {
+		this.agent = host
+		return nil
+	}
 }
 
 /**
@@ -118,10 +112,10 @@ func (this *Warning) SetAgent(host string) { //throws ParseException {
  * @param text String to Set
  * @throws ParseException if text is not accepted by implementation
  */
-func (this *Warning) SetText(text string) { //throws ParseException {
-	// if (text==null) {
-	//      throw new ParseException
-	//        ("The text parameter in the Warning header is null",0);
-	// }
+func (this *Warning) SetText(text string) (ParseException error) {
+	if text == "" {
+		return errors.New("ParseException: The text parameter in the Warning header is null")
+	}
 	this.text = text
+	return nil
 }

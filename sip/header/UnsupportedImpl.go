@@ -1,18 +1,15 @@
 package header
 
-import "gosips/core"
+import (
+	"errors"
+	"gosips/core"
+)
 
 /**
 * the Unsupported header.
-*
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type Unsupported struct {
 	SIPHeader
-	//implements javax.sip.header.UnsupportedHeader {
 
 	/** option-Tag field.
 	 */
@@ -61,8 +58,10 @@ func (this *Unsupported) GetOptionTag() string {
  * Set the option member
  * @param o String to set
  */
-func (this *Unsupported) SetOptionTag(o string) { //throws ParseException{
-	//if (o==null) throw new  NullPointerException("JAIN-SIP Exception, "+
-	//" Unsupported, setOptionTag(), The option tag parameter is null");
+func (this *Unsupported) SetOptionTag(o string) (ParseException error) {
+	if o == "" {
+		return errors.New("NullPointerException: The option tag parameter is null")
+	}
 	this.optionTag = o
+	return nil
 }

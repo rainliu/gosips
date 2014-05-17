@@ -1,31 +1,15 @@
 package header
 
-import "gosips/core"
+import (
+	"errors"
+	"gosips/core"
+)
 
 /**
-
 *Supported SIP Header.
-
-*
-
-*@version  JAIN-SIP-1.1
-
-*
-
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-
-*
-
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-
-*
-
  */
 type Subject struct {
 	SIPHeader
-	//implements SubjectHeader{
 
 	/** subject field
 	 */
@@ -69,10 +53,12 @@ func (this *Subject) EncodeBody() string {
 
  */
 
-func (this *Subject) SetSubject(subject string) { //throws ParseException {
-	//     if (subject==null) throw new  NullPointerException("JAIN-SIP Exception, "+
-	//     " Subject, setSubject(), the subject parameter is null");
+func (this *Subject) SetSubject(subject string) (ParseException error) {
+	if subject == "" {
+		return errors.New("NullPointerException: the subject parameter is null")
+	}
 	this.subject = subject
+	return nil
 }
 
 /**

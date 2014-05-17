@@ -16,12 +16,6 @@ package header
 
  * <code>Subject: Where is the Moscone?</code>
 
- *
-
- * @version 1.1
-
- * @author Sun Microsystems
-
  */
 
 type SubjectHeader interface {
@@ -43,7 +37,7 @@ type SubjectHeader interface {
 
 	 */
 
-	SetSubject(subject string) //throws ParseException;
+	SetSubject(subject string) (ParseException error)
 
 	/**
 
@@ -56,13 +50,4 @@ type SubjectHeader interface {
 	 */
 
 	GetSubject() string
-
-	/**
-
-	 * Name of SubjectHeader
-
-	 */
-
-	//public final static String NAME = "Subject";
-
 }

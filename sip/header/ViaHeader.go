@@ -1,11 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : ViaHeader.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package header
 
 /**
@@ -120,12 +112,8 @@ package header
  * Two Via header fields are equal if their sent-protocol and sent-by fields
  * are equal, both have the same set of parameters, and the values of all
  * parameters are equal.
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 type ViaHeader interface {
-	//Header
 	ParametersHeader
 
 	/**
@@ -270,10 +258,4 @@ type ViaHeader interface {
 	 * unexpectedly while parsing the branch value.
 	 */
 	SetBranch(branch string) (ParseException error)
-
-	/**
-	 * Name of ViaHeader
-	 */
-	//public final static String NAME = "Via";
-
 }

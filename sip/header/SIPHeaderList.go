@@ -41,7 +41,7 @@ type SIPHeaderLister interface {
  *
  *
  */
-type SIPHeaderList struct { //extends
+type SIPHeaderList struct {
 	SIPHeader
 	list.List
 }
@@ -100,15 +100,15 @@ func (this *SIPHeaderList) String() string {
 		return this.headerName + ":" + core.SIPSeparatorNames_NEWLINE
 	}
 
-	var encoding bytes.Buffer //= new StringBuffer();
+	var encoding bytes.Buffer
 	// The following headers do not have comma separated forms for
 	// multiple headers. Thus, they must be encoded separately.
+	//_, ok := this.(*ExtensionHeaderList)//TODO
 	if this.headerName == core.SIPHeaderNames_WWW_AUTHENTICATE ||
 		this.headerName == core.SIPHeaderNames_PROXY_AUTHENTICATE ||
 		this.headerName == core.SIPHeaderNames_AUTHORIZATION ||
-		this.headerName == core.SIPHeaderNames_PROXY_AUTHORIZATION { //||
+		this.headerName == core.SIPHeaderNames_PROXY_AUTHORIZATION { //|| //TODO by LY
 		//this instanceof ExtensionHeaderList ) {
-		//ListIterator li = hlist.listIterator();
 		for e := this.Front(); e != nil; e = e.Next() {
 			if sh, ok := e.Value.(Header); ok {
 				encoding.WriteString(sh.String())
@@ -119,8 +119,7 @@ func (this *SIPHeaderList) String() string {
 
 		return encoding.String()
 	} else {
-		// These can be concatenated together in an comma separated
-		// list.
+		// These can be concatenated together in an comma separated list.
 		return this.headerName + core.SIPSeparatorNames_COLON + core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE
 	}
 }
@@ -131,8 +130,7 @@ func (this *SIPHeaderList) String() string {
  *Proxy-Authorization and hence this is protected.
  */
 func (this *SIPHeaderList) EncodeBody() string {
-	var encoding bytes.Buffer // = new StringBuffer();
-	//ListIterator iterator = this.listIterator();
+	var encoding bytes.Buffer
 	for e := this.Front(); e != nil; e = e.Next() {
 		if sh, ok := e.Value.(Header); ok {
 			encoding.WriteString(sh.EncodeBody())
@@ -151,18 +149,15 @@ func (this *SIPHeaderList) IsHeaderList() bool {
 	return true
 }
 
-//    /** Get the headers as a linked list of encoded Strings
-//     *@return a linked list with each element of the list containing a
-//     * string encoded header in canonical form.
-//     */
+/** Get the headers as a linked list of encoded Strings
+ *@return a linked list with each element of the list containing a
+ * string encoded header in canonical form.
+ */
 func (this *SIPHeaderList) GetHeadersAsEncodedStrings() *list.List {
 	retval := list.New()
-	//synchronized (headers) {
-
 	for li := this.Front(); li != nil; li = li.Next() {
 		sipHeader := li.Value.(Header)
 		retval.PushBack(sipHeader.String())
 	}
-	//}
 	return retval
 }

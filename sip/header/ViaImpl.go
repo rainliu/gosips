@@ -1,19 +1,17 @@
 package header
 
 import (
-	"errors"
-	"strconv"
-	//"strings"
 	"bytes"
+	"errors"
 	"gosips/core"
-	//"gosips/sip/address"
+	"strconv"
 )
 
 /**
 * Via Header (these are strung together in a ViaList).
  */
 
-type Via struct { //implements javax.sip.header.ViaHeader {
+type Via struct {
 	Parameters
 
 	/** sentProtocol field.
@@ -194,7 +192,7 @@ func (this *Via) SetComment(c string) {
  * A.K.A headerValue.
  */
 func (this *Via) EncodeBody() string {
-	var encoding bytes.Buffer //= new StringBuffer();
+	var encoding bytes.Buffer
 	encoding.WriteString(this.sentProtocol.String())
 	encoding.WriteString(core.SIPSeparatorNames_SP)
 	encoding.WriteString(this.sentBy.String())

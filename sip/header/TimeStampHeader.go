@@ -14,9 +14,6 @@ package header
  * <p>
  * For Example:<br>
  * <code>Timestamp: 54</code>
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 
 type TimeStampHeader interface {
@@ -30,7 +27,7 @@ type TimeStampHeader interface {
 	 * @throws InvalidArgumentException if the timestamp value argument is a
 	 * negative value.
 	 */
-	SetTimeStamp(timeStamp float32) // throws InvalidArgumentException;
+	SetTimeStamp(timeStamp float32) (InvalidArgumentException error)
 
 	/**
 	 * Gets the timestamp value of this TimeStampHeader.
@@ -57,11 +54,5 @@ type TimeStampHeader interface {
 	 * negative value other than the default value <code>-1</code>.
 	 */
 
-	SetDelay(delay float32) //throws InvalidArgumentException;
-
-	/**
-	 * Name of TimeStampHeader
-	 */
-	//public final static String NAME = "Timestamp";
-
+	SetDelay(delay float32) (InvalidArgumentException error)
 }

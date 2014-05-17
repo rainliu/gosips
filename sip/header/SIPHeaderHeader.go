@@ -64,9 +64,6 @@ package header
  * <p>
  * Even though an arbitrary number of parameter pairs may be attached to a
  * header object, any given parameter-name MUST NOT appear more than once.
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 
 type Header interface {

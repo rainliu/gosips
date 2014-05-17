@@ -7,7 +7,6 @@ import (
 /**
 *  Keeps a list and a hashtable of via header functions.
  */
-
 type ViaList struct {
 	SIPHeaderList
 

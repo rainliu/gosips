@@ -8,9 +8,7 @@ import (
 /**
 *  Root class from which all Header objects are subclassed.
  */
-type SIPHeader struct { //implements SIPHeaderNames, javax.sip.header.Header {
-	// SIPObject
-
+type SIPHeader struct {
 	/** name of this header
 	 */
 	headerName string
@@ -60,18 +58,11 @@ func (this *SIPHeader) SetHeaderName(hdrname string) {
 * the headerName:
  */
 func (this *SIPHeader) GetHeaderValue() string {
-	//String encodedHdr = null;
-	//try {
 	encodedHdr := this.String()
-	//} catch (Exception ex) {
-	//	return null;
-	//}
-	//var buffer bytes.Buffer;//new StringBuffer(encodedHdr);
 	buffer := []byte(encodedHdr)
 	for len(buffer) > 0 && buffer[0] != ':' {
 		buffer = buffer[1:]
 	}
-
 	if len(buffer) > 0 {
 		buffer = buffer[1:]
 	}

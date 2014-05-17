@@ -3,20 +3,15 @@ package header
 import (
 	"bytes"
 	"container/list"
+	"errors"
 	"gosips/core"
 )
 
 /**
 * the UserAgent SIPObject.
-*
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type UserAgent struct {
 	SIPHeader
-	//implements  UserAgentHeader {
 
 	/** Product tokens.
 	 */
@@ -38,7 +33,7 @@ func NewUserAgent() *UserAgent {
  * @return String
  */
 func (this *UserAgent) EncodeProduct() string {
-	var encoding bytes.Buffer //  = new StringBuffer();
+	var encoding bytes.Buffer
 
 	for e := this.productTokens.Front(); e != nil; e = e.Next() {
 		encoding.WriteString(e.Value.(string))
@@ -89,10 +84,10 @@ func (this *UserAgent) GetProduct() *list.List {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the product value.
  */
-func (this *UserAgent) SetProduct(product *list.List) { //throws ParseException {
-	//      if (product==null) throw new  NullPointerException
-	// ("JAIN-SIP Exception, UserAgent, "+
-	//      		"setProduct(), the "+
-	//           	" product parameter is null");
+func (this *UserAgent) SetProduct(product *list.List) (ParseException error) {
+	if product == nil {
+		return errors.New("NullPointerException: product parameter is null")
+	}
 	this.productTokens = product
+	return nil
 }
