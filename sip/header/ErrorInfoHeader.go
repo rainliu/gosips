@@ -40,17 +40,10 @@ import "gosips/sip/address"
 
  * Error-Info: sip:not-in-service-recording@atlanta.com</code>
 
- *
-
- *
-
- * @author Sun Microsystems
-
  */
 
 type ErrorInfoHeader interface {
 	ParametersHeader
-	//Header
 
 	/**
 
@@ -96,7 +89,7 @@ type ErrorInfoHeader interface {
 
 	 */
 
-	SetErrorMessage(message string) // throws ParseException;
+	SetErrorMessage(message string) (ParseException error)
 
 	/**
 
@@ -109,13 +102,4 @@ type ErrorInfoHeader interface {
 	 */
 
 	GetErrorMessage() string
-
-	/**
-
-	 * Name of the ErroInfoHeader
-
-	 */
-
-	//public final static String NAME = "Error-Info";
-
 }

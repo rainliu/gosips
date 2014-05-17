@@ -2,23 +2,16 @@ package header
 
 import (
 	"bytes"
+	"errors"
 	"gosips/core"
 	"gosips/sip/address"
 )
 
 /**
 * ErrorInfo SIP Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type ErrorInfo struct {
 	Parameters
-	//implements ErrorInfoHeader{
 
 	errorInfo address.URI
 }
@@ -94,10 +87,12 @@ func (this *ErrorInfo) GetErrorInfo() address.URI {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the error message.
  */
-func (this *ErrorInfo) SetErrorMessage(message string) { //throws ParseException {
-	//if (message==null) throw new  NullPointerException("JAIN-SIP Exception "+
-	//", ErrorInfoHeader, setErrorMessage(), the message parameter is null");
+func (this *ErrorInfo) SetErrorMessage(message string) (ParseException error) {
+	if message == "" {
+		return errors.New("NullPointerException: the message parameter is null")
+	}
 	this.SetParameter("message", message)
+	return nil
 }
 
 /**

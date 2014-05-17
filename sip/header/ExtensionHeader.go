@@ -1,11 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : ExtensionHeader.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package header
 
 /**
@@ -35,6 +27,5 @@ type ExtensionHeader interface {
 	 *
 	 * @return the string of the value parameter.
 	 */
-	//GetValue() string;
-
+	//GetValue() string //redefine in Header
 }

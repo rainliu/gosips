@@ -17,9 +17,6 @@ import "time"
  * <p>
  * Example:<br>
  * Date: Sat, 13 Nov 2010 23:29:00 GMT
- *
- * @version 1.1
- * @author Sun Microsystems
  */
 
 type DateHeader interface {
@@ -50,13 +47,4 @@ type DateHeader interface {
 	 */
 
 	GetDate() *time.Time
-
-	/**
-
-	 * Name of DateHeader
-
-	 */
-
-	//public final static String NAME = "Date";
-
 }

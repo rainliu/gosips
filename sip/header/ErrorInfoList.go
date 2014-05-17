@@ -6,14 +6,6 @@ import (
 
 /**
 * Error Info sip header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-*@since v1.0
 *@see ErrorInfoList
 *<pre>
 *
@@ -35,7 +27,6 @@ type ErrorInfoList struct {
 
 /** Default constructor.
  */
-
 func NewErrorInfoList() *ErrorInfoList {
 	this := &ErrorInfoList{}
 	this.SIPHeaderList.super(core.SIPHeaderNames_ERROR_INFO)

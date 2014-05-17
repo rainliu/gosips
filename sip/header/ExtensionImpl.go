@@ -9,16 +9,11 @@ import (
 * A generic extension header for the stack.
 * The input text of the header gets recorded here.
  */
-
-type Extension struct { //implements  javax.sip.header.ExtensionHeader  {
+type Extension struct {
 	SIPHeader
 
 	value string
 }
-
-/** This was added to allow for automatic cloning of headers.
- */
-//public Extension() {}
 
 func NewExtension(headerName string) *Extension {
 	this := &Extension{}
@@ -46,6 +41,10 @@ func (this *Extension) SetValue(value string) {
 	this.value = value
 }
 
+func (this *Extension) GetValue() string {
+	return this.GetHeaderValue()
+}
+
 /** Get the value of the extension header.
 *@return the value of the extension header.
  */
@@ -54,12 +53,7 @@ func (this *Extension) GetHeaderValue() string {
 		return this.value
 	} else {
 		var encodedHdr string
-		//try {
-		// Bug fix submitted by Lamine Brahimi
 		encodedHdr = this.String()
-		//} catch (Exception ex) {
-		//	return null;
-		//}
 		buffer := []byte(encodedHdr)
 		for len(buffer) > 0 && buffer[0] != ':' {
 			buffer = buffer[1:]
@@ -81,7 +75,6 @@ func (this *Extension) String() string {
 /** Return just the body of this header encoded (leaving out the
 * name and the CRLF at the end).
  */
-
 func (this *Extension) EncodeBody() string {
 	return this.GetHeaderValue()
 }

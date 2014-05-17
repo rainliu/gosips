@@ -1,22 +1,16 @@
 package header
 
 import (
+	"errors"
 	"gosips/core"
 	"strconv"
 )
 
 /**
 * Expires SIP Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type Expires struct {
-	SIPHeader //implements javax.sip.header.ExpiresHeader {
+	SIPHeader
 
 	/** expires field
 	 */
@@ -53,8 +47,6 @@ func (this *Expires) EncodeBody() string {
  *
  * @return the expires value of the ExpiresHeader.
  *
- * @since JAIN SIP v1.1
- *
  */
 func (this *Expires) GetExpires() int {
 	return this.expires
@@ -69,13 +61,11 @@ func (this *Expires) GetExpires() int {
          *
          * @throws InvalidArgumentException if supplied value is less than zero.
          *
-         * @since JAIN SIP v1.1
-         *
 */
-func (this *Expires) SetExpires(expires int) {
-	//     throws InvalidArgumentException {
-	//         if (expires < 0) throw new InvalidArgumentException
-	//                     ("bad argument " + expires);
-	// }
+func (this *Expires) SetExpires(expires int) (InvalidArgumentException error) {
+	if expires < 0 {
+		return errors.New("InvalidArgumentException: bad argument")
+	}
 	this.expires = expires
+	return nil
 }

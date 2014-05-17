@@ -38,14 +38,10 @@ package header
  * If the event package to which the event token corresponds defines behavior
  * associated with the body of its SUBSCRIBE requests or parameters for the
  * Event header, those semantics apply.
- *
- *
- * @author Sun Microsystems
  */
 
 type EventHeader interface {
 	ParametersHeader
-	//Header
 
 	/**
 	 * Sets the eventType to the newly supplied eventType string.
@@ -55,7 +51,7 @@ type EventHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the eventType value.
 	 */
-	SetEventType(eventType string) // throws ParseException;
+	SetEventType(eventType string) (ParseException error)
 
 	/**
 	 * Gets the eventType of the EventHeader.
@@ -71,7 +67,7 @@ type EventHeader interface {
 	 * @throws ParseException which signals that an error has been reached
 	 * unexpectedly while parsing the eventId value.
 	 */
-	SetEventId(eventId string) // throws ParseException;
+	SetEventId(eventId string) (ParseException error)
 
 	/**
 	 * Gets the id of the EventHeader. This method may return null if the
@@ -80,10 +76,4 @@ type EventHeader interface {
 	 * @return the string object identifing the eventId of EventHeader.
 	 */
 	GetEventId() string
-
-	/**
-	 * Name of EventHeader
-	 */
-	//public final static String NAME = "Event";
-
 }

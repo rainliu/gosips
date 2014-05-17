@@ -1,14 +1,4 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : JAIN SIP Specification
- * File Name     : ExpiresHeader.java
- * Author        : Phelim O'Doherty
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package header
-
-import ()
 
 /**
 
@@ -70,12 +60,6 @@ import ()
 
  * <code>Expires: 5</code>
 
- *
-
- * @version 1.1
-
- * @author Sun Microsystems
-
  */
 
 type ExpiresHeader interface {
@@ -89,7 +73,6 @@ type ExpiresHeader interface {
 	 * @throws InvalidArgumentException if supplied value is less than zero.
 	 *
 	 */
-
 	SetExpires(expires int) (InvalidArgumentException error)
 
 	/**
@@ -101,10 +84,4 @@ type ExpiresHeader interface {
 	 */
 
 	GetExpires() int
-
-	/**
-	 * Name of ExpiresHeader
-	 */
-	//public final static String NAME = "Expires";
-
 }

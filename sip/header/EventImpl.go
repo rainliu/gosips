@@ -2,22 +2,16 @@ package header
 
 import (
 	"bytes"
+	"errors"
 	"gosips/core"
 	"strings"
 )
 
 /**
 * Event SIP Header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*@author Olivier Deruelle <deruelle@nist.gov><br/>
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type Event struct {
-	Parameters // implements EventHeader{
+	Parameters
 
 	eventType string
 }
@@ -37,10 +31,12 @@ func NewEvent() *Event {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the eventType value.
  */
-func (this *Event) SetEventType(eventType string) { //throws ParseException {
-	//if (eventType==null)
-	//throw new  NullPointerException( " the eventType is null");
+func (this *Event) SetEventType(eventType string) (ParseException error) {
+	if eventType == "" {
+		return errors.New("NullPointerException: the eventType is null")
+	}
 	this.eventType = eventType
+	return nil
 }
 
 /**
@@ -59,10 +55,12 @@ func (this *Event) GetEventType() string {
  * @throws ParseException which signals that an error has been reached
  * unexpectedly while parsing the eventId value.
  */
-func (this *Event) SetEventId(eventId string) { //throws ParseException {
-	//if (eventId==null)
-	//throw new  NullPointerException( " the eventId parameter is null");
+func (this *Event) SetEventId(eventId string) (ParseException error) {
+	if eventId == "" {
+		return errors.New("NullPointerException: the eventId parameter is null")
+	}
 	this.SetParameter(ParameterNames_ID, eventId)
+	return nil
 }
 
 /**
