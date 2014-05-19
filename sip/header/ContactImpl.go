@@ -38,6 +38,11 @@ func (this *Contact) super(hname string) {
 	this.contactList = NewContactList()
 }
 
+func (this *Contact) String() string {
+	return this.headerName + core.SIPSeparatorNames_COLON +
+		core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE
+}
+
 /**
  * Encode body of the header into a cannonical String.
  * @return string encoding of the header value.

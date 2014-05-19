@@ -493,6 +493,11 @@ func (this *Parameters) GetNameValue(parameterName string) *core.NameValue {
 	return this.parameters.GetNameValue(parameterName)
 }
 
+func (this *Parameters) String() string {
+	return this.headerName + core.SIPSeparatorNames_COLON +
+		core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE
+}
+
 func (this *Parameters) EncodeBody() string {
 	return ""
 }

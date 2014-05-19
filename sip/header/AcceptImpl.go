@@ -52,6 +52,11 @@ func (this *Accept) AllowsAllContentSubTypes() bool {
 	}
 }
 
+func (this *Accept) String() string {
+	return this.headerName + core.SIPSeparatorNames_COLON +
+		core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE
+}
+
 /** Encode the value of this header into cannonical form.
 *@return encoded value of the header as a string.
  */
@@ -123,7 +128,6 @@ func (this *Accept) SetContentType(mtype string) {
 func (this *Accept) SetMediaRange(m *MediaRange) {
 	this.mediaRange = m
 }
-
 
 /** get the QValue field. Return -1 if the parameter has not been
  * set.

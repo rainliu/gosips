@@ -188,6 +188,11 @@ func (this *Via) SetComment(c string) {
 	this.comment = c
 }
 
+func (this *Via) String() string {
+	return this.headerName + core.SIPSeparatorNames_COLON +
+		core.SIPSeparatorNames_SP + this.EncodeBody() + core.SIPSeparatorNames_NEWLINE
+}
+
 /** Encode the body of this header (the stuff that follows headerName).
  * A.K.A headerValue.
  */
