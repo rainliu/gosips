@@ -58,15 +58,11 @@ func NewAcceptEncodingParserFromLexer(lexer core.Lexer) *AcceptEncodingParser {
  * @throws ParseException if the message does not respect the spec.
  */
 func (this *AcceptEncodingParser) Parse() (sh header.Header, ParseException error) {
-
 	acceptEncodingList := header.NewAcceptEncodingList()
-	//if (debug) dbg_enter("AcceptEncodingParser.parse");
+
 	var ch byte
-	//try {
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_ACCEPT_ENCODING)
-
-	//println(lexer.GetRest());
 
 	// empty body is fine for this header.
 	if ch, _ = lexer.LookAheadK(0); ch == '\n' {
@@ -75,13 +71,11 @@ func (this *AcceptEncodingParser) Parse() (sh header.Header, ParseException erro
 	} else {
 		for ch, _ = lexer.LookAheadK(0); ch != '\n'; ch, _ = lexer.LookAheadK(0) {
 			acceptEncoding := header.NewAcceptEncoding()
-			if ch, _ = lexer.LookAheadK(0); ch != ';' {
-				// Content-Coding:
+			if ch, _ = lexer.LookAheadK(0); ch != ';' { // Content-Coding:
 				lexer.Match(TokenTypes_ID)
 				value := lexer.GetNextToken()
 				acceptEncoding.SetEncoding(value.GetTokenValue())
 			}
-			//println(lexer.GetRest());
 
 			for ch, _ = lexer.LookAheadK(0); ch == ';'; ch, _ = lexer.LookAheadK(0) {
 				lexer.Match(';')
@@ -92,14 +86,14 @@ func (this *AcceptEncodingParser) Parse() (sh header.Header, ParseException erro
 				lexer.SPorHT()
 				lexer.Match(TokenTypes_ID)
 				value := lexer.GetNextToken()
-				//try {
-				qv, _ := strconv.ParseFloat(value.GetTokenValue(), 32)
-				acceptEncoding.SetQValue(float32(qv))
-				/*} catch (NumberFormatException ex) {
-					throw createParseException(ex.getMessage());
-				} catch (InvalidArgumentException ex) {
-					throw createParseException(ex.getMessage());
-				}*/
+
+				var qv float64
+				if qv, ParseException = strconv.ParseFloat(value.GetTokenValue(), 32); ParseException != nil {
+					return nil, ParseException
+				}
+				if ParseException = acceptEncoding.SetQValue(float32(qv)); ParseException != nil {
+					return nil, ParseException
+				}
 				lexer.SPorHT()
 			}
 
@@ -111,10 +105,5 @@ func (this *AcceptEncodingParser) Parse() (sh header.Header, ParseException erro
 
 		}
 	}
-	//println(lexer.GetRest());
 	return acceptEncodingList, nil
-	//} finally {
-	//if (debug) dbg_leave("AcceptEncodingParser.parse");
-	//}
-
 }

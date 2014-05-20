@@ -52,28 +52,20 @@ func NewAcceptLanguageParserFromLexer(lexer core.Lexer) *AcceptLanguageParser {
  * @throws ParseException if the message does not respect the spec.
  */
 func (this *AcceptLanguageParser) Parse() (sh header.Header, ParseException error) {
-
 	acceptLanguageList := header.NewAcceptLanguageList()
-	//if (debug) dbg_enter("AcceptLanguageParser.parse");
+
 	var ch byte
-	//try {
 	lexer := this.GetLexer()
-
 	this.HeaderName(TokenTypes_ACCEPT_LANGUAGE)
-
-	//println(lexer.GetRest());
 
 	for ch, _ = lexer.LookAheadK(0); ch != '\n'; ch, _ = lexer.LookAheadK(0) {
 		acceptLanguage := header.NewAcceptLanguage()
 		acceptLanguage.SetHeaderName(core.SIPHeaderNames_ACCEPT_LANGUAGE)
-		if ch, _ = lexer.LookAheadK(0); ch != ';' {
-			// Content-Coding:
+		if ch, _ = lexer.LookAheadK(0); ch != ';' { // Content-Coding:
 			lexer.Match(TokenTypes_ID)
 			value := lexer.GetNextToken()
 			acceptLanguage.SetLanguageRange(value.GetTokenValue())
 		}
-
-		//println(lexer.GetRest());
 
 		for ch, _ = lexer.LookAheadK(0); ch == ';'; ch, _ = lexer.LookAheadK(0) {
 			lexer.Match(';')
@@ -84,15 +76,16 @@ func (this *AcceptLanguageParser) Parse() (sh header.Header, ParseException erro
 			lexer.SPorHT()
 			lexer.Match(TokenTypes_ID)
 			value := lexer.GetNextToken()
-			//try {
-			fl, _ := strconv.ParseFloat(value.GetTokenValue(), 32)
 
-			acceptLanguage.SetQValue(float32(fl))
-			//} catch (NumberFormatException ex) {
-			//	throw createParseException(ex.getMessage());
-			//} catch (InvalidArgumentException ex) {
-			//	throw createParseException(ex.getMessage());
-			//}
+			var qv float64
+			if qv, ParseException = strconv.ParseFloat(value.GetTokenValue(), 32); ParseException != nil {
+				return nil, ParseException
+			}
+
+			if ParseException = acceptLanguage.SetQValue(float32(qv)); ParseException != nil {
+				return nil, ParseException
+			}
+
 			lexer.SPorHT()
 		}
 
@@ -104,10 +97,6 @@ func (this *AcceptLanguageParser) Parse() (sh header.Header, ParseException erro
 			lexer.SPorHT()
 		}
 	}
-	//} finally {
-	//if (debug) dbg_leave("AcceptLanguageParser.parse");
-	//}
 
 	return acceptLanguageList, nil
-
 }

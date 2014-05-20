@@ -6,14 +6,6 @@ import (
 )
 
 /** SIPParser for AllowEvents header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>
-*@author M. Ranganathan <mranga@nist.gov>
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type AllowEventsParser struct {
 	HeaderParser
@@ -43,11 +35,8 @@ func NewAllowEventsParserFromLexer(lexer core.Lexer) *AllowEventsParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *AllowEventsParser) Parse() (sh header.Header, ParseException error) {
-
-	//if (debug) dbg_enter("AllowEventsParser.parse");
 	allowEventsList := header.NewAllowEventsList()
 
-	// try {
 	var ch byte
 
 	lexer := this.GetLexer()
@@ -81,8 +70,3 @@ func (this *AllowEventsParser) Parse() (sh header.Header, ParseException error) 
 
 	return allowEventsList, nil
 }
-
-// finally {
-//     if (debug) dbg_leave("AllowEventsParser.parse");
-// }
-//}

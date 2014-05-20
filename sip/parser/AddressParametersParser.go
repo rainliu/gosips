@@ -2,6 +2,7 @@ package parser
 
 import (
 	"gosips/core"
+	"gosips/sip/address"
 	"gosips/sip/header"
 )
 
@@ -32,17 +33,12 @@ func (this *AddressParametersParser) superFromLexer(lexer core.Lexer) {
 }
 
 func (this *AddressParametersParser) Parse(addressParametersHeader header.AddressParametersHeader) (ParseException error) {
-	//dbg_enter("AddressParametersParser.parse");
-	//try {
 	addressParser := NewAddressParserFromLexer(this.GetLexer())
-	addr, _ := addressParser.Address()
-	//println(addr.GetDisplayName())
-	//println(this.GetLexer().GetRest())
+	var addr *address.AddressImpl
+	if addr, ParseException = addressParser.Address(); ParseException != nil {
+		return ParseException
+	}
 	addressParametersHeader.SetAddress(addr)
-	this.ParametersParser.Parse(addressParametersHeader)
-	//} finally {
-	//   dbg_leave("AddressParametersParser.parse");
-	//}
-
-	return nil
+	ParseException = this.ParametersParser.Parse(addressParametersHeader)
+	return ParseException
 }

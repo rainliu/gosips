@@ -35,11 +35,8 @@ func NewAllowParserFromLexer(lexer core.Lexer) *AllowParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *AllowParser) Parse() (sh header.Header, ParseException error) {
-
-	//if (debug) dbg_enter("AllowParser.parse");
 	allowList := header.NewAllowList()
 
-	//try {
 	var ch byte
 
 	lexer := this.GetLexer()
@@ -71,8 +68,4 @@ func (this *AllowParser) Parse() (sh header.Header, ParseException error) {
 	lexer.Match('\n')
 
 	return allowList, nil
-	// }
-	// finally {
-	//     if (debug) dbg_leave("AllowParser.parse");
-	// }
 }

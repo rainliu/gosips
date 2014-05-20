@@ -6,9 +6,6 @@ import (
 )
 
 /** SIPParser for Accept header.
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type AcceptParser struct {
 	ParametersParser
@@ -46,11 +43,8 @@ func (this *AcceptParser) superFromLexer(lexer core.Lexer) {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *AcceptParser) Parse() (sh header.Header, ParseException error) {
-
-	//if (debug) dbg_enter("AcceptParser.parse");
 	acceptList := header.NewAcceptList()
 
-	//try {
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_ACCEPT)
@@ -90,8 +84,4 @@ func (this *AcceptParser) Parse() (sh header.Header, ParseException error) {
 
 	}
 	return acceptList, nil
-	//        }
-	//        finally {
-	//            if (debug) dbg_leave("AcceptParser.parse");
-	//        }
 }

@@ -34,15 +34,8 @@ func NewAuthorizationParserFromLexer(lexer core.Lexer) *AuthorizationParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *AuthorizationParser) Parse() (sh header.Header, ParseException error) {
-	//dbg_enter("parse");
-	// try {
 	this.HeaderName(TokenTypes_AUTHORIZATION)
 	auth := header.NewAuthorization()
-	this.ChallengeParser.Parse(auth)
-	return auth, nil
-	//   } finally {
-	// dbg_leave("parse");
-
-	//   }
-
+	ParseException = this.ChallengeParser.Parse(auth)
+	return auth, ParseException
 }

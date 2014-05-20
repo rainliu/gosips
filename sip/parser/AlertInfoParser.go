@@ -2,12 +2,11 @@ package parser
 
 import (
 	"gosips/core"
+	"gosips/sip/address"
 	"gosips/sip/header"
 )
 
 /** SIPParser for AlertInfo header.
-*
-* @version 1.0
  */
 type AlertInfoParser struct {
 	ParametersParser
@@ -45,12 +44,11 @@ func (this *AlertInfoParser) superFromLexer(lexer core.Lexer) {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *AlertInfoParser) Parse() (sh header.Header, ParseException error) {
-
-	//if (debug) dbg_enter("AlertInfoParser.parse");
 	alertInfoList := header.NewAlertInfoList()
 
-	// try {
 	var ch byte
+	var uri address.URI
+
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_ALERT_INFO)
 
@@ -61,36 +59,38 @@ func (this *AlertInfoParser) Parse() (sh header.Header, ParseException error) {
 		lexer.SPorHT()
 		lexer.Match('<')
 		urlParser := NewURLParserFromLexer(lexer)
-		uri, _ := urlParser.UriReference()
+		if uri, ParseException = urlParser.UriReference(); ParseException != nil {
+			return nil, ParseException
+		}
 		alertInfo.SetAlertInfo(uri)
 		lexer.Match('>')
 		lexer.SPorHT()
 
-		this.ParametersParser.Parse(alertInfo)
+		if ParseException = this.ParametersParser.Parse(alertInfo); ParseException != nil {
+			return nil, ParseException
+		}
 		alertInfoList.PushBack(alertInfo)
 
 		for ch, _ = lexer.LookAheadK(0); ch == ','; ch, _ = lexer.LookAheadK(0) {
 			lexer.Match(',')
 			lexer.SPorHT()
-
 			alertInfo = header.NewAlertInfo()
-
 			lexer.SPorHT()
 			lexer.Match('<')
 			urlParser = NewURLParserFromLexer(lexer)
-			uri, _ = urlParser.UriReference()
+			if uri, ParseException = urlParser.UriReference(); ParseException != nil {
+				return nil, ParseException
+			}
 			alertInfo.SetAlertInfo(uri)
 			lexer.Match('>')
 			lexer.SPorHT()
 
-			this.ParametersParser.Parse(alertInfo)
+			if ParseException = this.ParametersParser.Parse(alertInfo); ParseException != nil {
+				return nil, ParseException
+			}
 			alertInfoList.PushBack(alertInfo)
 		}
 	}
 
 	return alertInfoList, nil
-	//        }
-	//        finally {
-	//            if (debug) dbg_leave("AlertInfoParser.parse");
-	//        }
 }
