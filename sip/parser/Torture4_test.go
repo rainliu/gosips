@@ -77,7 +77,6 @@ var torture4_i = []string{
 	"To: \"Mr. J. User <sip:j.user@example.com>\n",
 	"Via: SIP/2.0/UDP 192.0.2.15;;,;,,\n",
 	"Via: SIP/7.0/UDP c.example.com;branch=z9hG4bKkdjuw\n",
-
 	"Warning: 1812 overture \"In Progress\"\n",
 
 	"Contact: sip:user@example.com?Route=%3Csip:sip.example.com%3E\n",
@@ -99,7 +98,6 @@ var torture4_o = []string{
 	"Invalid: To: \"Mr. J. User <sip:j.user@example.com>\n",
 	"Invalid: Via: SIP/2.0/UDP 192.0.2.15;;,;,,\n",
 	"Invalid: Via: SIP/7.0/UDP c.example.com;branch=z9hG4bKkdjuw\n",
-
 	"Invalid: Warning: 1812 overture \"In Progress\"\n",
 
 	"Invalid: Contact: sip:user@example.com?Route=%3Csip:sip.example.com%3E\n",

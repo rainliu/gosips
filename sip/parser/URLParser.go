@@ -54,8 +54,6 @@ func (this *URLParser) IsReservedNoSlash(next byte) bool {
 		next == ','
 }
 
-// Missing '=' bug in character set - discovered by interop testing
-// at SIPIT 13 by Bob Johnson and Scott Holben.
 func (this *URLParser) IsUserUnreserved(la byte) bool {
 	return la == '&' ||
 		la == '=' ||
@@ -144,19 +142,13 @@ func (this *URLParser) Reserved() (s string, ParseException error) {
 }
 
 func (this *URLParser) IsEscaped() bool {
-	//try {
 	next, _ := this.GetLexer().LookAheadK(0)
 	next1, _ := this.GetLexer().LookAheadK(1)
 	next2, _ := this.GetLexer().LookAheadK(2)
 	return next == '%' && this.GetLexer().IsHexDigit(next1) && this.GetLexer().IsHexDigit(next2)
-	//} catch (Exception ex) {
-	//    return false;
-	//}
 }
 
 func (this *URLParser) Escaped() (s string, ParseException error) {
-	//if (debug) dbg_enter("escaped");
-	//try {
 	var retval bytes.Buffer
 	next, _ := this.GetLexer().LookAheadK(0)
 	next1, _ := this.GetLexer().LookAheadK(1)
@@ -170,15 +162,9 @@ func (this *URLParser) Escaped() (s string, ParseException error) {
 	} else {
 		return "", this.CreateParseException("escaped")
 	}
-
-	//} finally {
-	//    if (debug) dbg_leave("escaped");
-	//}
 }
 
 func (this *URLParser) Mark() (s string, ParseException error) {
-	//if (debug) dbg_enter("mark");
-	//try {
 	next, _ := this.GetLexer().LookAheadK(0)
 	if this.IsMark(next) {
 		this.GetLexer().ConsumeK(1)
@@ -188,15 +174,9 @@ func (this *URLParser) Mark() (s string, ParseException error) {
 	} else {
 		return "", this.CreateParseException("mark")
 	}
-	//} finally {
-	//    if (debug) dbg_leave("mark");
-	//}
 }
 
 func (this *URLParser) Uric() string {
-	//if (debug) dbg_enter("uric");
-	//try {
-	//try {
 	la, _ := this.GetLexer().LookAheadK(0)
 	if this.IsUnreserved(la) {
 		this.GetLexer().ConsumeK(1)
@@ -211,19 +191,9 @@ func (this *URLParser) Uric() string {
 	} else {
 		return ""
 	}
-	//} catch (Exception ex) {
-	//    return null;
-	//}
-	//} finally {
-	//    if (debug) dbg_leave("uric");
-	//}
-
 }
 
 func (this *URLParser) UricNoSlash() string {
-	//if (debug) dbg_enter("uricNoSlash");
-	//try {
-	//     try {
 	la, _ := this.GetLexer().LookAheadK(0)
 	if this.IsEscaped() {
 		retval := this.GetLexer().CharAsString(3)
@@ -238,12 +208,6 @@ func (this *URLParser) UricNoSlash() string {
 	} else {
 		return ""
 	}
-	// } catch (ParseException ex) {
-	//     return null;
-	// }
-	//} finally {
-	//     if (debug) dbg_leave("uricNoSlash");
-	//}
 }
 
 func (this *URLParser) UricString() string {
@@ -269,11 +233,6 @@ func (this *URLParser) UriReference() (url address.URI, ParseException error) {
 	t1 := vect[0]
 	t2 := vect[1]
 
-	//println("URLParser::UriReference():"+this.GetLexer().GetRest());
-	//println("t2 :" + t2.GetTokenValue());
-	//println("t1 :" + t1.GetTokenValue());
-	//fmt.Printf("tokenval = %d\n", t1.GetTokenType());
-
 	if t1.GetTokenType() == TokenTypes_SIP {
 		if t2.GetTokenType() == ':' {
 			if retval, ParseException = this.SipURL(); ParseException != nil {
@@ -284,19 +243,15 @@ func (this *URLParser) UriReference() (url address.URI, ParseException error) {
 		}
 	} else if t1.GetTokenType() == TokenTypes_TEL {
 		if t2.GetTokenType() == ':' {
-			retval, _ = this.TelURL()
+			if retval, ParseException = this.TelURL(); ParseException != nil {
+				return nil, ParseException
+			}
 		} else {
 			return nil, this.CreateParseException("Expecting ':'")
 		}
 	} else {
-		//println("i'm UriString()");
 		urlString := this.UricString()
-		//try {
 		retval = address.NewURIImpl(urlString)
-		//}
-		//catch (ParseException ex) {
-		//   throw createParseException(ex.getMessage());
-		//}
 	}
 
 	return retval, nil
@@ -305,10 +260,8 @@ func (this *URLParser) UriReference() (url address.URI, ParseException error) {
 /** SIPParser for the base phone number.
  */
 func (this *URLParser) Base_phone_number() (s string, ParseException error) {
-	var retval bytes.Buffer //new StringBuffer() ;
+	var retval bytes.Buffer
 
-	//if (debug) dbg_enter("base_phone_number");
-	//try {
 	lc := 0
 	for this.GetLexer().HasMoreChars() {
 		w, _ := this.GetLexer().LookAheadK(0)
@@ -323,18 +276,13 @@ func (this *URLParser) Base_phone_number() (s string, ParseException error) {
 		}
 	}
 	return retval.String(), nil
-	//} finally {
-	//    if (debug) dbg_leave("base_phone_number");
-	//}
 }
 
 /** SIPParser for the local phone #.
  */
 func (this *URLParser) Local_number() (s string, ParseException error) {
-	var retval bytes.Buffer //StringBuffer s = new StringBuffer() ;
+	var retval bytes.Buffer
 
-	//if (debug) dbg_enter("local_number");
-	//try {
 	lc := 0
 	for this.GetLexer().HasMoreChars() {
 		la, _ := this.GetLexer().LookAheadK(0)
@@ -351,10 +299,6 @@ func (this *URLParser) Local_number() (s string, ParseException error) {
 		}
 	}
 	return retval.String(), nil
-	//} finally {
-	//    if (debug) dbg_leave("local_number");
-	//}
-
 }
 
 /** SIPParser for telephone subscriber.
@@ -362,11 +306,10 @@ func (this *URLParser) Local_number() (s string, ParseException error) {
  *@return the parsed telephone number.
  */
 func (this *URLParser) ParseTelephoneNumber() (tn *address.TelephoneNumber, ParseException error) {
-	//TelephoneNumber tn  ;
 	tn = address.NewTelephoneNumber()
-	//if (debug) dbg_enter("telephone_subscriber");
+
 	this.GetLexer().SelectLexer("charLexer")
-	//try {
+
 	c, _ := this.GetLexer().LookAheadK(0)
 	if c == '+' {
 		tn, _ = this.Global_phone_number()
@@ -379,18 +322,12 @@ func (this *URLParser) ParseTelephoneNumber() (tn *address.TelephoneNumber, Pars
 	}
 
 	return tn, nil
-	//} finally {
-	//    if (debug) dbg_leave("telephone_subscriber");
-	//}
-
 }
 
 func (this *URLParser) Global_phone_number() (tn *address.TelephoneNumber, ParseException error) {
-	//if (debug) dbg_enter("global_phone_number");
-	//try {
 	tn = address.NewTelephoneNumber()
 	tn.SetGlobal(true)
-	//var nv NameValueList;
+
 	this.GetLexer().Match(core.CORELEXER_PLUS)
 	b, _ := this.Base_phone_number()
 	tn.SetPhoneNumber(b)
@@ -403,39 +340,23 @@ func (this *URLParser) Global_phone_number() (tn *address.TelephoneNumber, Parse
 		}
 	}
 	return tn, nil
-	//} finally {
-	//    if (debug) dbg_leave("global_phone_number");
-	//}
 }
 
 func (this *URLParser) Local_phone_number() (tn *address.TelephoneNumber, ParseException error) {
-	//if (debug) dbg_enter("local_phone_number");
 	tn = address.NewTelephoneNumber()
 	tn.SetGlobal(false)
-	//NameValueList nv = null;
-	//String b = null;
-	//try {
 	b, _ := this.Local_number()
 	tn.SetPhoneNumber(b)
 	if this.GetLexer().HasMoreChars() {
 		tok, _ := this.GetLexer().PeekNextToken()
 		switch tok.GetTokenType() {
 		case TokenTypes_SEMICOLON:
-			{
-				this.GetLexer().ConsumeK(1)
-				nv, _ := this.Tel_parameters()
-				tn.SetParameters(nv)
-				//break;
-			}
+			this.GetLexer().ConsumeK(1)
+			nv, _ := this.Tel_parameters()
+			tn.SetParameters(nv)
 		default:
-			{
-				//break;
-			}
 		}
 	}
-	//} finally {
-	//    if (debug) dbg_leave("local_phone_number");
-	//}
 	return tn, nil
 }
 
@@ -463,7 +384,11 @@ func (this *URLParser) Tel_parameters() (nvl *core.NameValueList, ParseException
 func (this *URLParser) TelURL() (telUrl *address.TelURLImpl, ParseException error) {
 	this.GetLexer().Match(TokenTypes_TEL)
 	this.GetLexer().Match(':')
-	tn, _ := this.ParseTelephoneNumber()
+
+	var tn *address.TelephoneNumber
+	if tn, ParseException = this.ParseTelephoneNumber(); ParseException != nil {
+		return nil, ParseException
+	}
 	telUrl = address.NewTelURLImpl()
 	telUrl.SetTelephoneNumber(tn)
 	return telUrl, nil
@@ -476,54 +401,45 @@ func (this *URLParser) TelURL() (telUrl *address.TelURLImpl, ParseException erro
  */
 
 func (this *URLParser) SipURL() (sipurl *address.SipURIImpl, ParseException error) {
-	//if (debug) dbg_enter("sipURL");
 	retval := address.NewSipURIImpl()
-	//try{
+
 	this.GetLexer().Match(TokenTypes_SIP)
 	this.GetLexer().Match(':')
-	retval.SetScheme(core.SIPTransportNames_SIP) //TokenNames_SIP);
-	//m := this.GetLexer().MarkInputPosition();
-	//println("sipulr" + this.GetLexer().GetRest())
+	retval.SetScheme(core.SIPTransportNames_SIP)
 
 	buffer := this.GetLexer().GetRest()
 	if n := strings.Index(buffer, "@"); n == -1 {
 		// hostPort
-		//fmt.Printf("0:%s\n", this.GetLexer().GetRest())
 		hnp := core.NewHostNameParserFromLexer(this.GetLexer())
 		hp, _ := hnp.GetHostPort()
 		retval.SetHostPort(hp)
 	} else {
+		var hp *core.HostPort
 		if n = strings.Index(buffer, ":"); n == -1 {
 			// name@hostPort
-			//fmt.Printf("1:%s\n", this.GetLexer().GetRest())
 			user, _ := this.User()
-			//fmt.Printf("1.1:%s\n", this.GetLexer().GetRest())
 			this.GetLexer().Match('@')
-			//fmt.Printf("1.2:%s\n", this.GetLexer().GetRest())
 			hnp := core.NewHostNameParserFromLexer(this.GetLexer())
-			hp, _ := hnp.GetHostPort()
-			//fmt.Printf("1.3:%s, %s\n",this.GetLexer().GetRest(), hp.String());
+			if hp, ParseException = hnp.GetHostPort(); ParseException != nil {
+				return nil, ParseException
+			}
 			retval.SetUser(user)
 			retval.SetHostPort(hp)
 		} else {
-			//fmt.Printf("2:%s\n", this.GetLexer().GetRest())
 			user, _ := this.User()
-			//la,_ := this.GetLexer().LookAheadK(0);
 			// name:password@hostPort
-			//fmt.Printf("3:%s\n", this.GetLexer().GetRest())
 			this.GetLexer().Match(':')
 			password, _ := this.Password()
-			//fmt.Printf("4:%s\n", this.GetLexer().GetRest())
 			this.GetLexer().Match('@')
-			//fmt.Printf("5:%s\n", this.GetLexer().GetRest())
 			hnp := core.NewHostNameParserFromLexer(this.GetLexer())
-			hp, _ := hnp.GetHostPort()
+			if hp, ParseException = hnp.GetHostPort(); ParseException != nil {
+				return nil, ParseException
+			}
 			retval.SetUser(user)
 			retval.SetUserPassword(password)
 			retval.SetHostPort(hp)
 		}
 	}
-	//println(this.GetLexer().GetRest());
 	this.GetLexer().SelectLexer("charLexer")
 	for this.GetLexer().HasMoreChars() {
 		if la, _ := this.GetLexer().LookAheadK(0); la != ';' {
@@ -550,9 +466,6 @@ func (this *URLParser) SipURL() (sipurl *address.SipURIImpl, ParseException erro
 		}
 	}
 	return retval, nil
-	//} finally {
-	//    if (debug) dbg_leave("sipURL");
-	//}
 }
 
 func (this *URLParser) PeekScheme() (s string, ParseException error) {
@@ -576,7 +489,7 @@ func (this *URLParser) Qheader() (nv *core.NameValue, ParseException error) {
 }
 
 func (this *URLParser) Hvalue() (s string, ParseException error) {
-	var retval bytes.Buffer //= new StringBuffer();
+	var retval bytes.Buffer
 	for this.GetLexer().HasMoreChars() {
 		la, _ := this.GetLexer().LookAheadK(0)
 		// Look for a character that can terminate a URL.
@@ -603,7 +516,7 @@ func (this *URLParser) Hvalue() (s string, ParseException error) {
  * the next delimiter).
  */
 func (this *URLParser) UrlString() (s string, ParseException error) {
-	var retval bytes.Buffer //StringBuffer retval = new StringBuffer();
+	var retval bytes.Buffer
 	this.GetLexer().SelectLexer("charLexer")
 
 	for this.GetLexer().HasMoreChars() {
@@ -620,21 +533,16 @@ func (this *URLParser) UrlString() (s string, ParseException error) {
 }
 
 func (this *URLParser) User() (s string, ParseException error) {
-
-	//if (debug) dbg_enter("user");
-	//try {
-	var retval bytes.Buffer //StringBuffer retval = new StringBuffer();
+	var retval bytes.Buffer
 	for this.GetLexer().HasMoreChars() {
 		la, _ := this.GetLexer().LookAheadK(0)
-		//if (la == '=') break;
+
 		if this.IsUnreserved(la) ||
 			this.IsUserUnreserved(la) {
 			retval.WriteByte(la)
 			this.GetLexer().ConsumeK(1)
 		} else if this.IsEscaped() {
-			//print(this.GetLexer().GetRest())
 			esc := this.GetLexer().NCharAsString(3)
-			//print(esc)
 			this.GetLexer().ConsumeK(3)
 			retval.WriteString(esc)
 		} else {
@@ -642,13 +550,10 @@ func (this *URLParser) User() (s string, ParseException error) {
 		}
 	}
 	return retval.String(), nil
-	//}  finally {
-	//	if (debug) dbg_leave("user");
-	//}
 }
 
 func (this *URLParser) Password() (s string, ParseException error) {
-	var retval bytes.Buffer //StringBuffer retval = new StringBuffer();
+	var retval bytes.Buffer
 	for {
 		la, _ := this.GetLexer().LookAheadK(0)
 		if this.IsUnreserved(la) || la == '&' || la == '=' ||
@@ -668,7 +573,6 @@ func (this *URLParser) Password() (s string, ParseException error) {
 
 /** Default parse method. This method just calls uriReference.
  */
-
 func (this *URLParser) Parse() (url address.URI, ParseException error) {
 	return this.UriReference()
 }
