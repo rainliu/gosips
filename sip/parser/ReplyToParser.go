@@ -6,14 +6,6 @@ import (
 )
 
 /** SIPParser for a list of RelpyTo headers.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-*@version 1.0
  */
 
 type ReplyToParser struct {
@@ -44,18 +36,12 @@ func NewReplyToParserFromLexer(lexer core.Lexer) *ReplyToParser {
  */
 func (this *ReplyToParser) Parse() (sh header.Header, ParseException error) {
 	replyTo := header.NewReplyTo()
-	//if (debug) dbg_enter("ReplyTo.parse");
 
-	// try {
 	this.HeaderName(TokenTypes_REPLY_TO)
 
 	replyTo.SetHeaderName(core.SIPHeaderNames_REPLY_TO)
 
-	this.AddressParametersParser.Parse(replyTo)
+	ParseException = this.AddressParametersParser.Parse(replyTo)
 
-	return replyTo, nil
-	// } finally {
-	//     if (debug) dbg_leave("ReplyTo.parse");
-	// }
-
+	return replyTo, ParseException
 }

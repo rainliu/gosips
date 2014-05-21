@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for InReplyTo header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type InReplyToParser struct {
 	HeaderParser
@@ -43,24 +34,19 @@ func NewInReplyToParserFromLexer(lexer core.Lexer) *InReplyToParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *InReplyToParser) Parse() (sh header.Header, ParseException error) {
-
-	// if (debug) dbg_enter("InReplyToParser.parse");
 	inReplyToList := header.NewInReplyToList()
 
-	// try {
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_IN_REPLY_TO)
 
 	for ch, _ = lexer.LookAheadK(0); ch != '\n'; ch, _ = lexer.LookAheadK(0) {
-		//while (lexer.lookAhead(0) != '\n') {
 		inReplyTo := header.NewInReplyTo()
 		inReplyTo.SetHeaderName(core.SIPHeaderNames_IN_REPLY_TO)
 
 		lexer.Match(TokenTypes_ID)
 		token := lexer.GetNextToken()
 		if ch, _ = lexer.LookAheadK(0); ch == '@' {
-			//if (lexer.lookAhead(0)=='@') {
 			lexer.Match('@')
 			lexer.Match(TokenTypes_ID)
 			secToken := lexer.GetNextToken()
@@ -75,7 +61,6 @@ func (this *InReplyToParser) Parse() (sh header.Header, ParseException error) {
 		inReplyToList.PushBack(inReplyTo)
 
 		for ch, _ = lexer.LookAheadK(0); ch == ','; ch, _ = lexer.LookAheadK(0) {
-			//while (lexer.lookAhead(0) == ',') {
 			lexer.Match(',')
 			lexer.SPorHT()
 
@@ -84,7 +69,6 @@ func (this *InReplyToParser) Parse() (sh header.Header, ParseException error) {
 			lexer.Match(TokenTypes_ID)
 			token = lexer.GetNextToken()
 			if ch, _ = lexer.LookAheadK(0); ch == '@' {
-				//if (lexer.lookAhead(0)=='@') {
 				lexer.Match('@')
 				lexer.Match(TokenTypes_ID)
 				secToken := lexer.GetNextToken()
@@ -99,8 +83,4 @@ func (this *InReplyToParser) Parse() (sh header.Header, ParseException error) {
 	}
 
 	return inReplyToList, nil
-	// }
-	// finally {
-	//     if (debug) dbg_leave("InReplyToParser.parse");
-	// }
 }

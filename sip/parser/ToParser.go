@@ -29,7 +29,11 @@ func NewToParserFromLexer(lexer core.Lexer) *ToParser {
 func (this *ToParser) Parse() (sh header.Header, ParseException error) {
 	to := header.NewTo()
 	this.HeaderName(TokenTypes_TO)
-	this.AddressParametersParser.Parse(to)
+
+	if ParseException = this.AddressParametersParser.Parse(to); ParseException != nil {
+		return nil, ParseException
+	}
+
 	this.GetLexer().Match('\n')
 	addr := to.GetAddress().(*address.AddressImpl)
 	if addr.GetAddressType() == address.ADDRESS_SPEC {

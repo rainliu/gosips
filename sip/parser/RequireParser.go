@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for Require header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type RequireParser struct {
 	HeaderParser
@@ -44,9 +35,7 @@ func NewRequireParserFromLexer(lexer core.Lexer) *RequireParser {
  */
 func (this *RequireParser) Parse() (sh header.Header, ParseException error) {
 	requireList := header.NewRequireList()
-	//if (debug) dbg_enter("RequireParser.parse");
 
-	// try {
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_REQUIRE)
@@ -79,9 +68,6 @@ func (this *RequireParser) Parse() (sh header.Header, ParseException error) {
 		}
 
 	}
-	// } finally {
-	//     if (debug) dbg_leave("RequireParser.parse");
-	// }
 
 	return requireList, nil
 }

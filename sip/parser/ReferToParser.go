@@ -5,20 +5,13 @@ import (
 	"gosips/sip/header"
 )
 
-/** To Header parser.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
+/** ReferTo Header parser.
  */
 type ReferToParser struct {
 	AddressParametersParser
 }
 
-/** Creates new ToParser
+/** Creates new ReferToParser
  * @param String to set
  */
 func NewReferToParser(referTo string) *ReferToParser {
@@ -37,7 +30,9 @@ func (this *ReferToParser) Parse() (sh header.Header, ParseException error) {
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_REFER_TO)
 	referTo := header.NewReferTo()
-	this.AddressParametersParser.Parse(referTo)
+	if ParseException = this.AddressParametersParser.Parse(referTo); ParseException != nil {
+		return nil, ParseException
+	}
 	lexer.Match('\n')
 	return referTo, nil
 }

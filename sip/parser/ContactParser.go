@@ -3,6 +3,7 @@ package parser
 import (
 	"gosips/core"
 	"gosips/sip/header"
+	"strconv"
 )
 
 /**
@@ -39,6 +40,12 @@ func (this *ContactParser) Parse() (sh header.Header, ParseException error) {
 		} else {
 			if ParseException = this.AddressParametersParser.Parse(contact); ParseException != nil {
 				return nil, ParseException
+			}
+
+			if contact.HasParameter(header.ParameterNames_EXPIRES) {
+				if _, ParseException = strconv.Atoi(contact.GetParameter(header.ParameterNames_EXPIRES)); ParseException != nil {
+					return nil, ParseException
+				}
 			}
 		}
 		retval.AddContact(contact)

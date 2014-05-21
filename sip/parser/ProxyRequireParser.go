@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for ProxyRequire header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type ProxyRequireParser struct {
 	HeaderParser
@@ -44,9 +35,7 @@ func NewProxyRequireParserFromLexer(lexer core.Lexer) *ProxyRequireParser {
  */
 func (this *ProxyRequireParser) Parse() (sh header.Header, ParseException error) {
 	proxyRequireList := header.NewProxyRequireList()
-	// if (debug) dbg_enter("ProxyRequireParser.parse");
 
-	//try {
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_PROXY_REQUIRE)
@@ -64,7 +53,6 @@ func (this *ProxyRequireParser) Parse() (sh header.Header, ParseException error)
 		proxyRequireList.PushBack(r)
 
 		for ch, _ = lexer.LookAheadK(0); ch == ','; ch, _ = lexer.LookAheadK(0) {
-			// while (lexer.lookAhead(0) == ',') {
 			lexer.Match(',')
 			lexer.SPorHT()
 
@@ -80,9 +68,6 @@ func (this *ProxyRequireParser) Parse() (sh header.Header, ParseException error)
 		}
 
 	}
-	// } finally {
-	//     if (debug) dbg_leave("ProxyRequireParser.parse");
-	// }
 
 	return proxyRequireList, nil
 }

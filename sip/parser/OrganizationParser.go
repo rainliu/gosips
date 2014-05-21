@@ -7,15 +7,6 @@ import (
 )
 
 /** SIPParser for Organization header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type OrganizationParser struct {
 	HeaderParser
@@ -44,10 +35,8 @@ func NewOrganizationParserFromLexer(lexer core.Lexer) *OrganizationParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *OrganizationParser) Parse() (sh header.Header, ParseException error) {
-
-	//if (debug) dbg_enter("OrganizationParser.parse");
 	organization := header.NewOrganization()
-	// try {
+
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_ORGANIZATION)
 
@@ -59,8 +48,4 @@ func (this *OrganizationParser) Parse() (sh header.Header, ParseException error)
 	organization.SetOrganization(strings.TrimSpace(value))
 
 	return organization, nil
-	// }
-	// finally {
-	//     if (debug) dbg_leave("OrganizationParser.parse");
-	// }
 }

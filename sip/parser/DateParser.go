@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"errors"
 	"gosips/core"
 	"gosips/sip/header"
 	"strings"
@@ -34,17 +35,16 @@ func NewDateParserFromLexer(lexer core.Lexer) *DateParser {
  * @return  the parsed Date header/
  */
 func (this *DateParser) Parse() (sh header.Header, ParseException error) {
-	//if (debug) dbg_enter("DateParser.parse");
-	//try {
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_DATE)
-	t, err := time.Parse(time.RFC1123, strings.TrimSpace(lexer.GetRest()))
+	var t time.Time
+	if t, ParseException = time.Parse(time.RFC1123, strings.TrimSpace(lexer.GetRest())); ParseException != nil {
+		return nil, ParseException
+	}
+	if t.Location().String() != "GMT" {
+		return nil, errors.New("GMT is only acceptable time zone")
+	}
 	retval := header.NewDate()
 	retval.SetDate(&t)
-	return retval, err
-	//           } finally {
-	// if (debug) dbg_leave("DateParser.parse");
-
-	//           }
-
+	return retval, nil
 }

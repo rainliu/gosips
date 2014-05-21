@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for Event header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type EventParser struct {
 	ParametersParser
@@ -44,10 +35,6 @@ func NewEventParserFromLexer(lexer core.Lexer) *EventParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *EventParser) Parse() (sh header.Header, ParseException error) {
-
-	//if (debug) dbg_enter("EventParser.parse");
-
-	//try {
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_EVENT)
 	lexer.SPorHT()
@@ -58,16 +45,12 @@ func (this *EventParser) Parse() (sh header.Header, ParseException error) {
 	value := token.GetTokenValue()
 
 	event.SetEventType(value)
-	this.ParametersParser.Parse(event)
+	if ParseException = this.ParametersParser.Parse(event); ParseException != nil {
+		return nil, ParseException
+	}
 
 	lexer.SPorHT()
 	lexer.Match('\n')
 
 	return event, nil
-
-	// } catch (ParseException ex ) {
-	//      throw createParseException(ex.getMessage());
-	// } finally {
-	//     if (debug) dbg_leave("EventParser.parse");
-	// }
 }

@@ -8,14 +8,6 @@ import (
 )
 
 /** SIPParser for SubscriptionState header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>
-*@author M. Ranganathan <mranga@nist.gov>
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type SubscriptionStateParser struct {
 	HeaderParser
@@ -44,11 +36,8 @@ func NewSubscriptionStateParserFromLexer(lexer core.Lexer) *SubscriptionStatePar
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *SubscriptionStateParser) Parse() (sh header.Header, ParseException error) {
-
-	// if (debug) dbg_enter("SubscriptionStateParser.parse");
-
 	subscriptionState := header.NewSubscriptionState()
-	//  try {
+
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_SUBSCRIPTION_STATE)
@@ -61,7 +50,6 @@ func (this *SubscriptionStateParser) Parse() (sh header.Header, ParseException e
 	subscriptionState.SetState(token.GetTokenValue())
 
 	for ch, _ = lexer.LookAheadK(0); ch == ';'; ch, _ = lexer.LookAheadK(0) {
-		//while (lexer.lookAhead(0) == ';') {
 		lexer.Match(';')
 		lexer.SPorHT()
 		lexer.Match(TokenTypes_ID)
@@ -80,28 +68,24 @@ func (this *SubscriptionStateParser) Parse() (sh header.Header, ParseException e
 			lexer.Match(TokenTypes_ID)
 			token = lexer.GetNextToken()
 			value = token.GetTokenValue()
-			// try {
-			expires, _ := strconv.Atoi(value)
+
+			var expires int
+			if expires, ParseException = strconv.Atoi(value); ParseException != nil {
+				return nil, ParseException
+			}
 			subscriptionState.SetExpires(expires)
-			// } catch (NumberFormatException ex) {
-			//     throw createParseException(ex.GetMessage());
-			// } catch (InvalidArgumentException ex) {
-			//     throw createParseException(ex.GetMessage());
-			// }
 		} else if strings.ToLower(value) == "retry-after" {
 			lexer.Match('=')
 			lexer.SPorHT()
 			lexer.Match(TokenTypes_ID)
 			token = lexer.GetNextToken()
 			value = token.GetTokenValue()
-			//try {
-			retryAfter, _ := strconv.Atoi(value)
+
+			var retryAfter int
+			if retryAfter, ParseException = strconv.Atoi(value); ParseException != nil {
+				return nil, ParseException
+			}
 			subscriptionState.SetRetryAfter(retryAfter)
-			// } catch (NumberFormatException ex) {
-			//     throw createParseException(ex.GetMessage());
-			// } catch (InvalidArgumentException ex) {
-			//     throw createParseException(ex.GetMessage());
-			// }
 		} else {
 			lexer.Match('=')
 			lexer.SPorHT()
@@ -113,10 +97,6 @@ func (this *SubscriptionStateParser) Parse() (sh header.Header, ParseException e
 
 		lexer.SPorHT()
 	}
-	// }
-	// finally {
-	//     if (debug) dbg_leave("SubscriptionStateParser.parse");
-	// }
 
 	return subscriptionState, nil
 }

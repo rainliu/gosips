@@ -116,17 +116,9 @@ const TokenTypes_AND = (int)('&')
 const TokenTypes_UNDERSCORE = (int)('_')
 
 /** Base parser class.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
-
 type SIPParser struct {
-	core.CoreParser //implements TokenTypes {
+	core.CoreParser
 }
 
 func NewSIPParser(buffer string) *SIPParser {
@@ -147,17 +139,12 @@ func (this *SIPParser) CreateParseException(exceptionString string) (ParseExcept
 	return errors.New("ParseException: " + this.GetLexer().GetBuffer() + ":" + exceptionString) // + this.GetLexer().GetPtr());
 }
 
-/*func (this *SIPParser) GetLexer() SIPLexer {
-	return this.GetLexer();
-}*/
-
 func (this *SIPParser) SipVersion() (s string, ParseException error) {
 	if core.Debug.ParserDebug {
 		this.Dbg_enter("sipVersion")
 		defer this.Dbg_leave("sipVersion")
 	}
 
-	//try {
 	var tok *core.Token
 	if tok, ParseException = this.GetLexer().Match(TokenTypes_SIP); ParseException != nil {
 		return "", this.CreateParseException("Expecting SIP")
@@ -174,9 +161,6 @@ func (this *SIPParser) SipVersion() (s string, ParseException error) {
 	}
 
 	return "SIP/2.0", nil
-	//} finally {
-	//	if (debug) dbg_leave("sipVersion");
-	//}
 }
 
 /** parses a method. Consumes if a valid method has been found.
@@ -186,9 +170,11 @@ func (this *SIPParser) Method() (s string, ParseException error) {
 		this.Dbg_enter("method")
 		defer this.Dbg_leave("method")
 	}
-	//try {
-	tokens, _ := this.GetLexer().PeekNextTokenK(1)
-	//println(tokens[0].String())
+	var tokens []*core.Token
+	if tokens, ParseException = this.GetLexer().PeekNextTokenK(1); ParseException != nil {
+		return "", ParseException
+	}
+
 	token := tokens[0]
 	if token.GetTokenType() == TokenTypes_INVITE ||
 		token.GetTokenType() == TokenTypes_ACK ||
@@ -204,7 +190,4 @@ func (this *SIPParser) Method() (s string, ParseException error) {
 	} else {
 		return "", this.CreateParseException("Invalid Method")
 	}
-	//} finally {
-	//      if (Debug.debug) dbg_leave("method");
-	//}
 }

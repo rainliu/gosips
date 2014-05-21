@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for WWW authenitcate header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type WWWAuthenticateParser struct {
 	ChallengeParser
@@ -43,13 +34,8 @@ func NewWWWAuthenticateParserFromLexer(lexer core.Lexer) *WWWAuthenticateParser 
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *WWWAuthenticateParser) Parse() (sh header.Header, ParseException error) {
-	//if (debug) dbg_enter("parse");
-	//try {
 	this.HeaderName(TokenTypes_WWW_AUTHENTICATE)
 	wwwAuthenticate := header.NewWWWAuthenticate()
-	this.ChallengeParser.Parse(wwwAuthenticate)
-	return wwwAuthenticate, nil
-	// } finally {
-	//    if (debug) dbg_leave("parse");
-	// }
+	ParseException = this.ChallengeParser.Parse(wwwAuthenticate)
+	return wwwAuthenticate, ParseException
 }

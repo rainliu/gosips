@@ -46,17 +46,17 @@ func (this *ParametersParser) Parse(parametersHeader header.ParametersHeader) (P
 		lexer.ConsumeK(1)
 		// eat white space
 		lexer.SPorHT()
-		//println(lexer.GetRest())
+
 		if nv, ParseException = this.NameValue('='); ParseException != nil {
 			return ParseException
 		}
 
-		//println(lexer.GetRest())
 		if nv.IsValueQuoted() {
 			parametersHeader.SetParameter(nv.GetName(), "\""+nv.GetValue().(string)+"\"")
 		} else {
 			parametersHeader.SetParameter(nv.GetName(), nv.GetValue().(string))
 		}
+
 		// eat white space
 		lexer.SPorHT()
 

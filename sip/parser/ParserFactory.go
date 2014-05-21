@@ -7,19 +7,8 @@ import (
 
 /** A factory class that does a name lookup on a registered parser and
 * returns a header parser for the given name.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 
-//    // Was missing (bug noticed by Steve Crossley)
-//    parserTable.put("r",ReferToParser()
-
-//   }
 /** create a parser for a header. This is the parser factory.
  */
 func CreateParser(line string) Parser { //, ParseException error) {
@@ -29,9 +18,6 @@ func CreateParser(line string) Parser { //, ParseException error) {
 	if headerName == "" || headerValue == "" {
 		return nil //errors.New("ParseException: The header name or value is null")
 	}
-
-	//Class parserClass =(Class) parserTable.get(headerName.toLowerCase());
-	//println(headerName + "================" + headerValue)
 
 	switch headerName {
 	case strings.ToLower(core.SIPHeaderNames_REPLY_TO):
@@ -163,8 +149,6 @@ func CreateParser(line string) Parser { //, ParseException error) {
 	default:
 		// Just generate a generic SIPHeader. We define
 		// parsers only for the above.
-		//println(line)
-
 		return NewHeaderParser(line)
 	}
 

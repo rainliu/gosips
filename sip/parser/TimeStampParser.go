@@ -7,15 +7,6 @@ import (
 )
 
 /** SIPParser for TimeStamp header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type TimeStampParser struct {
 	HeaderParser
@@ -44,24 +35,28 @@ func NewTimeStampParserFromLexer(lexer core.Lexer) *TimeStampParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *TimeStampParser) Parse() (sh header.Header, ParseException error) {
-
-	//if (debug) dbg_enter("TimeStampParser.parse");
 	timeStamp := header.NewTimeStamp()
-	//try {
+
 	var ch byte
+	var firstNumber, secondNumber int
+
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_TIMESTAMP)
 
 	timeStamp.SetHeaderName(core.SIPHeaderNames_TIMESTAMP)
-
 	lexer.SPorHT()
-	firstNumber, _ := lexer.Number()
 
-	//try {
+	if firstNumber, ParseException = lexer.Number(); ParseException != nil {
+		return nil, ParseException
+	}
+
 	var ts float64
 	if ch, _ = lexer.LookAheadK(0); ch == '.' {
 		lexer.Match('.')
-		secondNumber, _ := lexer.Number()
+
+		if secondNumber, ParseException = lexer.Number(); ParseException != nil {
+			return nil, ParseException
+		}
 
 		s := strconv.Itoa(firstNumber) + "." + strconv.Itoa(secondNumber)
 		ts, _ = strconv.ParseFloat(s, 32)
@@ -70,23 +65,18 @@ func (this *TimeStampParser) Parse() (sh header.Header, ParseException error) {
 	}
 
 	timeStamp.SetTimeStamp(float32(ts))
-	// }
-	// catch (NumberFormatException ex) {
-	//      throw createParseException(ex.getMessage());
-	// } catch (InvalidArgumentException ex) {
-	//     throw createParseException(ex.getMessage());
-	// }
 
 	lexer.SPorHT()
 	if ch, _ = lexer.LookAheadK(0); ch != '\n' {
-		firstNumber, _ = lexer.Number()
-
-		//try {
-		//float ts;
+		if firstNumber, ParseException = lexer.Number(); ParseException != nil {
+			return nil, ParseException
+		}
 
 		if ch, _ = lexer.LookAheadK(0); ch == '.' {
 			lexer.Match('.')
-			secondNumber, _ := lexer.Number()
+			if secondNumber, ParseException = lexer.Number(); ParseException != nil {
+				return nil, ParseException
+			}
 
 			s := strconv.Itoa(firstNumber) + "." + strconv.Itoa(secondNumber)
 			ts, _ = strconv.ParseFloat(s, 32)
@@ -95,18 +85,7 @@ func (this *TimeStampParser) Parse() (sh header.Header, ParseException error) {
 		}
 
 		timeStamp.SetDelay(float32(ts))
-		// }
-		// catch (NumberFormatException ex) {
-		//     throw createParseException(ex.getMessage());
-		// } catch (InvalidArgumentException ex) {
-		//     throw createParseException(ex.getMessage());
-		// }
 	}
-
-	// }
-	// finally {
-	//     if (debug) dbg_leave("TimeStampParser.parse");
-	// }
 
 	return timeStamp, nil
 }

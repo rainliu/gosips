@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for Reason header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type ReasonParser struct {
 	ParametersParser
@@ -44,9 +35,7 @@ func NewReasonParserFromLexer(lexer core.Lexer) *ReasonParser {
  */
 func (this *ReasonParser) Parse() (sh header.Header, ParseException error) {
 	reasonList := header.NewReasonList()
-	//if (debug) dbg_enter("ReasonParser.parse");
 
-	// try {
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_REASON)
@@ -58,7 +47,9 @@ func (this *ReasonParser) Parse() (sh header.Header, ParseException error) {
 		value := token.GetTokenValue()
 
 		reason.SetProtocol(value)
-		this.ParametersParser.Parse(reason)
+		if ParseException = this.ParametersParser.Parse(reason); ParseException != nil {
+			return nil, ParseException
+		}
 		reasonList.PushBack(reason)
 		if ch, _ = lexer.LookAheadK(0); ch == ',' {
 			lexer.Match(',')
@@ -68,12 +59,6 @@ func (this *ReasonParser) Parse() (sh header.Header, ParseException error) {
 		}
 
 	}
-	// } catch (ParseException ex ) {
-	// 	ex.printStackTrace();
-	// 	System.out.println(lexer.getRest());
-	//        } finally {
-	//            if (debug) dbg_leave("ReasonParser.parse");
-	//        }
 
 	return reasonList, nil
 }

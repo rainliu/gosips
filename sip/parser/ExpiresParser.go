@@ -8,13 +8,6 @@ import (
 
 /** SIPParser for SIP Expires SIPParser. Converts from SIP Date to the
 * internal storage (Calendar).
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type ExpiresParser struct {
 	HeaderParser
@@ -42,8 +35,7 @@ func NewExpiresParserFromLexer(lexer core.Lexer) *ExpiresParser {
  */
 func (this *ExpiresParser) Parse() (sh header.Header, ParseException error) {
 	expires := header.NewExpires()
-	// if (debug) dbg_enter("parse");
-	//        try {
+
 	lexer := this.GetLexer()
 	lexer.Match(TokenTypes_EXPIRES)
 	lexer.SPorHT()
@@ -51,17 +43,10 @@ func (this *ExpiresParser) Parse() (sh header.Header, ParseException error) {
 	lexer.SPorHT()
 	nextId := lexer.GetNextId()
 	lexer.Match('\n')
-	//try {
-	delta, ParseException := strconv.ParseInt(nextId, 10, 32)
+	var delta int64
+	if delta, ParseException = strconv.ParseInt(nextId, 10, 32); ParseException != nil {
+		return nil, ParseException
+	}
 	expires.SetExpires(int(delta))
 	return expires, ParseException
-	//           } catch (NumberFormatException ex) {
-	// throw createParseException("bad integer format");
-	//    } catch (InvalidArgumentException ex) {
-	// throw createParseException(ex.getMessage());
-	//    }
-	//       } finally  {
-	// if (debug) dbg_leave("parse");
-	//       }
-
 }

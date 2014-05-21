@@ -6,14 +6,6 @@ import (
 )
 
 /** SIPParser for a list of route headers.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-*@version 1.0
  */
 type RecordRouteParser struct {
 	AddressParametersParser
@@ -41,9 +33,6 @@ func NewRecordRouteParserFromLexer(lexer core.Lexer) *RecordRouteParser {
 func (this *RecordRouteParser) Parse() (sh header.Header, ParseException error) {
 	recordRouteList := header.NewRecordRouteList()
 
-	//if (debug) dbg_enter("RecordRouteParser.parse");
-
-	// try {
 	var ch byte
 	lexer := this.GetLexer()
 	lexer.Match(TokenTypes_RECORD_ROUTE)
@@ -60,12 +49,10 @@ func (this *RecordRouteParser) Parse() (sh header.Header, ParseException error) 
 			lexer.SPorHT()
 		} else if ch, _ = lexer.LookAheadK(0); ch == '\n' {
 			break
+		} else {
+			return nil, this.CreateParseException("unexpected char")
 		}
-		//else throw createParseException("unexpected char");
 	}
-	return recordRouteList, nil
-	//      } finally {
-	// if (debug) dbg_leave("RecordRouteParser.parse");
-	//      }
 
+	return recordRouteList, nil
 }

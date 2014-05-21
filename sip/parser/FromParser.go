@@ -8,7 +8,6 @@ import (
 
 /** From header parser.
  */
-
 type FromParser struct {
 	AddressParametersParser
 }
@@ -32,7 +31,11 @@ func NewFromParserFromLexer(lexer core.Lexer) *FromParser {
 func (this *FromParser) Parse() (sh header.Header, ParseException error) {
 	from := header.NewFrom()
 	this.HeaderName(TokenTypes_FROM)
-	this.AddressParametersParser.Parse(from)
+
+	if ParseException = this.AddressParametersParser.Parse(from); ParseException != nil {
+		return nil, ParseException
+	}
+
 	this.GetLexer().Match('\n')
 	addr := from.GetAddress().(*address.AddressImpl)
 	if addr.GetAddressType() == address.ADDRESS_SPEC {

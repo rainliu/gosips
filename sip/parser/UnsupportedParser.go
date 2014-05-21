@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for Unsupported header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type UnsupportedParser struct {
 	HeaderParser
@@ -44,15 +35,12 @@ func NewUnsupportedParserFromLexer(lexer core.Lexer) *UnsupportedParser {
  */
 func (this *UnsupportedParser) Parse() (sh header.Header, ParseException error) {
 	unsupportedList := header.NewUnsupportedList()
-	//if (debug) dbg_enter("UnsupportedParser.parse");
 
-	//try {
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_UNSUPPORTED)
 
 	for ch, _ = lexer.LookAheadK(0); ch != '\n'; ch, _ = lexer.LookAheadK(0) {
-		//while (lexer.lookAhead(0) != '\n') {
 		lexer.SPorHT()
 		unsupported := header.NewUnsupported()
 		unsupported.SetHeaderName(core.SIPHeaderNames_UNSUPPORTED)
@@ -66,7 +54,6 @@ func (this *UnsupportedParser) Parse() (sh header.Header, ParseException error) 
 		unsupportedList.PushBack(unsupported)
 
 		for ch, _ = lexer.LookAheadK(0); ch == ','; ch, _ = lexer.LookAheadK(0) {
-			// while (lexer.lookAhead(0) == ',') {
 			lexer.Match(',')
 			lexer.SPorHT()
 
@@ -82,9 +69,6 @@ func (this *UnsupportedParser) Parse() (sh header.Header, ParseException error) 
 		}
 
 	}
-	// } finally {
-	//     if (debug) dbg_leave("UnsupportedParser.parse");
-	// }
 
 	return unsupportedList, nil
 }

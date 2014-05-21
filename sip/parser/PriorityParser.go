@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for Priority header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type PriorityParser struct {
 	HeaderParser
@@ -43,10 +34,8 @@ func NewPriorityParserFromLexer(lexer core.Lexer) *PriorityParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *PriorityParser) Parse() (sh header.Header, ParseException error) {
-
-	//if (debug) dbg_enter("PriorityParser.parse");
 	priority := header.NewPriority()
-	// try {
+
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_PRIORITY)
 
@@ -62,8 +51,4 @@ func (this *PriorityParser) Parse() (sh header.Header, ParseException error) {
 	lexer.Match('\n')
 
 	return priority, nil
-	// }
-	// finally {
-	//     if (debug) dbg_leave("PriorityParser.parse");
-	// }
 }

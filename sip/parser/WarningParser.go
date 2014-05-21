@@ -7,15 +7,6 @@ import (
 )
 
 /** SIPParser for Warning header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type WarningParser struct {
 	HeaderParser
@@ -45,30 +36,27 @@ func NewWarningParserFromLexer(lexer core.Lexer) *WarningParser {
  */
 func (this *WarningParser) Parse() (sh header.Header, ParseException error) {
 	warningList := header.NewWarningList()
-	// if (debug) dbg_enter("WarningParser.parse");
 
-	//try {
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_WARNING)
 
 	for ch, _ = lexer.LookAheadK(0); ch != '\n'; ch, _ = lexer.LookAheadK(0) {
-		//while (lexer.lookAhead(0) != '\n') {
 		warning := header.NewWarning()
 		warning.SetHeaderName(core.SIPHeaderNames_WARNING)
 
 		// Parsing the 3digits code
 		lexer.Match(TokenTypes_ID)
 		token := lexer.GetNextToken()
-		//try {
-		code, _ := strconv.Atoi(token.GetTokenValue())
 
-		warning.SetCode(code)
-		// } catch (NumberFormatException ex) {
-		//     throw createParseException(ex.GetMessage());
-		// } catch (InvalidArgumentException ex) {
-		//     throw createParseException(ex.GetMessage());
-		// }
+		var code int
+		if code, ParseException = strconv.Atoi(token.GetTokenValue()); ParseException != nil {
+			return nil, ParseException
+		}
+		if ParseException = warning.SetCode(code); ParseException != nil {
+			return nil, ParseException
+		}
+
 		lexer.SPorHT()
 
 		// Parsing the agent
@@ -78,14 +66,16 @@ func (this *WarningParser) Parse() (sh header.Header, ParseException error) {
 		lexer.SPorHT()
 
 		// Parsing the text
-		text, _ := lexer.QuotedString()
+		var text string
+		if text, ParseException = lexer.QuotedString(); ParseException != nil {
+			return nil, ParseException
+		}
 		warning.SetText(text)
 		lexer.SPorHT()
 
 		warningList.PushBack(warning)
 
 		for ch, _ = lexer.LookAheadK(0); ch == ','; ch, _ = lexer.LookAheadK(0) {
-			//while (lexer.lookAhead(0) == ',') {
 			lexer.Match(',')
 			lexer.SPorHT()
 
@@ -94,14 +84,12 @@ func (this *WarningParser) Parse() (sh header.Header, ParseException error) {
 			// Parsing the 3digits code
 			lexer.Match(TokenTypes_ID)
 			tok := lexer.GetNextToken()
-			//try {
-			code, _ = strconv.Atoi(tok.GetTokenValue())
+
+			if code, ParseException = strconv.Atoi(tok.GetTokenValue()); ParseException != nil {
+				return nil, ParseException
+			}
 			warning.SetCode(code)
-			// } catch (NumberFormatException ex) {
-			//     throw createParseException(ex.GetMessage());
-			// } catch (InvalidArgumentException ex) {
-			//     throw createParseException(ex.GetMessage());
-			// }
+
 			lexer.SPorHT()
 
 			// Parsing the agent
@@ -111,7 +99,9 @@ func (this *WarningParser) Parse() (sh header.Header, ParseException error) {
 			lexer.SPorHT()
 
 			// Parsing the text
-			text, _ = lexer.QuotedString()
+			if text, ParseException = lexer.QuotedString(); ParseException != nil {
+				return nil, ParseException
+			}
 			warning.SetText(text)
 			lexer.SPorHT()
 
@@ -119,9 +109,6 @@ func (this *WarningParser) Parse() (sh header.Header, ParseException error) {
 		}
 
 	}
-	// } finally {
-	//     if (debug) dbg_leave("WarningParser.parse");
-	// }
 
 	return warningList, nil
 }

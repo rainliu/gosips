@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for Supported header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type SupportedParser struct {
 	HeaderParser
@@ -44,15 +35,12 @@ func NewSupportedParserFromLexer(lexer core.Lexer) *SupportedParser {
  */
 func (this *SupportedParser) Parse() (sh header.Header, ParseException error) {
 	supportedList := header.NewSupportedList()
-	//if (debug) dbg_enter("SupportedParser.parse");
 
-	//try {
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_SUPPORTED)
 
 	for ch, _ = lexer.LookAheadK(0); ch != '\n'; ch, _ = lexer.LookAheadK(0) {
-		// while (lexer.lookAhead(0) != '\n') {
 		lexer.SPorHT()
 		supported := header.NewSupported()
 		supported.SetHeaderName(core.SIPHeaderNames_SUPPORTED)
@@ -66,7 +54,6 @@ func (this *SupportedParser) Parse() (sh header.Header, ParseException error) {
 		supportedList.PushBack(supported)
 
 		for ch, _ = lexer.LookAheadK(0); ch == ','; ch, _ = lexer.LookAheadK(0) {
-			//while (lexer.lookAhead(0) == ',') {
 			lexer.Match(',')
 			lexer.SPorHT()
 
@@ -80,11 +67,7 @@ func (this *SupportedParser) Parse() (sh header.Header, ParseException error) {
 
 			supportedList.PushBack(supported)
 		}
-
 	}
-	// } finally {
-	//     if (debug) dbg_leave("SupportedParser.parse");
-	// }
 
 	return supportedList, nil
 }

@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for MimeVersion header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type MimeVersionParser struct {
 	HeaderParser
@@ -43,33 +34,27 @@ func NewMimeVersionParserFromLexer(lexer core.Lexer) *MimeVersionParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *MimeVersionParser) Parse() (sh header.Header, ParseException error) {
-
-	// if (debug) dbg_enter("MimeVersionParser.parse");
 	mimeVersion := header.NewMimeVersion()
-	// try {
+
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_MIME_VERSION)
 
 	mimeVersion.SetHeaderName(core.SIPHeaderNames_MIME_VERSION)
 
-	// try{
-	majorVersion, _ := lexer.Number()
+	var majorVersion, minorVersion int
+	if majorVersion, ParseException = lexer.Number(); ParseException != nil {
+		return nil, ParseException
+	}
 	mimeVersion.SetMajorVersion(majorVersion)
 	lexer.Match('.')
-	minorVersion, _ := lexer.Number()
+	if minorVersion, ParseException = lexer.Number(); ParseException != nil {
+		return nil, ParseException
+	}
 	mimeVersion.SetMinorVersion(minorVersion)
 
-	// }
-	// catch (InvalidArgumentException ex) {
-	//         throw createParseException(ex.getMessage());
-	// }
 	lexer.SPorHT()
 
 	lexer.Match('\n')
 
 	return mimeVersion, nil
-	// }
-	// finally {
-	//     if (debug) dbg_leave("MimeVersionParser.parse");
-	// }
 }

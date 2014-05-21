@@ -7,15 +7,6 @@ import (
 )
 
 /** SIPParser for Subject  header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type SubjectParser struct {
 	HeaderParser
@@ -45,9 +36,7 @@ func NewSubjectParserFromLexer(lexer core.Lexer) *SubjectParser {
  */
 func (this *SubjectParser) Parse() (sh header.Header, ParseException error) {
 	subject := header.NewSubject()
-	//if (debug) dbg_enter("SubjectParser.parse");
 
-	// try {
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_SUBJECT)
 
@@ -55,10 +44,6 @@ func (this *SubjectParser) Parse() (sh header.Header, ParseException error) {
 
 	s := lexer.GetRest()
 	subject.SetSubject(strings.TrimSpace(s))
-
-	// } finally {
-	//     if (debug) dbg_leave("SubjectParser.parse");
-	// }
 
 	return subject, nil
 }

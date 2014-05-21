@@ -7,7 +7,6 @@ import (
 
 /** SIPLexer class for the parser.
  */
-
 type SIPLexer struct {
 	core.CoreLexer
 }
@@ -33,16 +32,11 @@ func (this *SIPLexer) GetHeaderName(line string) string {
 		return ""
 	}
 	var headerName string
-	//try{
 	begin := strings.Index(line, ":")
-	//headerName=null;
 	if begin >= 1 {
 		headerName = line[0:begin]
 	}
-	//}
-	//catch(IndexOutOfBoundsException e) {
-	//     return null;
-	//}
+
 	return headerName
 }
 
@@ -54,18 +48,15 @@ func (this *SIPLexer) GetHeaderValue(line string) string {
 		return ""
 	}
 	var headerValue string
-	//try{
 	begin := strings.Index(line, ":")
-	headerValue = line[begin+1:]
-	//}
-	//catch(IndexOutOfBoundsException e) {
-	//     return null;
-	//}
+	if begin != -1 {
+		headerValue = line[begin+1:]
+	}
+
 	return headerValue
 }
 func (this *SIPLexer) SelectLexer(lexerName string) {
-	//this.currentLexer = this.lexerTables[lexerName];
-	this.CoreLexer.SelectLexer(lexerName) //this.currentLexerName = lexerName;
+	this.CoreLexer.SelectLexer(lexerName)
 	if this.CurrentLexer() == nil {
 		this.AddLexer(lexerName)
 		if lexerName == "method_keywordLexer" {
@@ -152,5 +143,4 @@ func (this *SIPLexer) SelectLexer(lexerName string) {
 	} /*else{
 		println("this.CurrentLexer() != nil");
 	}*/
-
 }

@@ -6,13 +6,6 @@ import (
 )
 
 /** SIPParser for ProxyAuthorization headers.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type ProxyAuthorizationParser struct {
 	ChallengeParser
@@ -43,6 +36,6 @@ func NewProxyAuthorizationParserFromLexer(lexer core.Lexer) *ProxyAuthorizationP
 func (this *ProxyAuthorizationParser) Parse() (sh header.Header, ParseException error) {
 	this.HeaderName(TokenTypes_PROXY_AUTHORIZATION)
 	proxyAuth := header.NewProxyAuthorization()
-	this.ChallengeParser.Parse(proxyAuth)
-	return proxyAuth, nil
+	ParseException = this.ChallengeParser.Parse(proxyAuth)
+	return proxyAuth, ParseException
 }

@@ -7,14 +7,7 @@ import (
 )
 
 /** SIPParser for the SIP request line.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
  */
-
 type RequestLineParser struct {
 	SIPParser
 }
@@ -33,38 +26,33 @@ func NewRequestLineParserFromLexer(lexer core.Lexer) *RequestLineParser {
 }
 
 func (this *RequestLineParser) Parse() (rl *header.RequestLine, ParseException error) {
-	// if (debug) dbg_enter("parse");
-	// try {
 	var m, v string
-	var err error
 	var url address.URI
 
 	retval := header.NewRequestLine()
 	lexer := this.GetLexer()
-	//println(lexer.GetRest())
-	if m, err = this.Method(); err != nil {
-		return nil, err
+
+	if m, ParseException = this.Method(); ParseException != nil {
+		return nil, ParseException
 	}
-	//println(lexer.GetRest())
+
 	lexer.SPorHT()
 	retval.SetMethod(m)
 	lexer.SelectLexer("sip_urlLexer")
 	urlParser := NewURLParserFromLexer(this.GetLexer())
-	if url, err = urlParser.UriReference(); err != nil {
-		return nil, err
+	if url, ParseException = urlParser.UriReference(); ParseException != nil {
+		return nil, ParseException
 	}
 	lexer.SPorHT()
 	retval.SetUri(url)
 	lexer.SelectLexer("request_lineLexer")
-	//println(lexer.GetRest())
-	if v, err = this.SipVersion(); err != nil {
-		return nil, err
+
+	if v, ParseException = this.SipVersion(); ParseException != nil {
+		return nil, ParseException
 	}
 	retval.SetSipVersion(v)
 	lexer.SPorHT()
 	lexer.Match('\n')
+
 	return retval, nil
-	//   } finally {
-	// if (debug) dbg_leave("parse");
-	//   }
 }

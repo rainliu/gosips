@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for RAck header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type RAckParser struct {
 	HeaderParser
@@ -43,36 +34,30 @@ func NewRAckParserFromLexer(lexer core.Lexer) *RAckParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *RAckParser) Parse() (sh header.Header, ParseException error) {
-
-	//if (debug) dbg_enter("RAckParser.parse");
 	rack := header.NewRAck()
-	// try {
+
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_RACK)
 
 	rack.SetHeaderName(core.SIPHeaderNames_RACK)
 
-	//try{
-	number, _ := lexer.Number()
+	var number int
+	if number, ParseException = lexer.Number(); ParseException != nil {
+		return nil, ParseException
+	}
 	rack.SetRSeqNumber(number)
 	lexer.SPorHT()
-	number, _ = lexer.Number()
+	if number, ParseException = lexer.Number(); ParseException != nil {
+		return nil, ParseException
+	}
 	rack.SetCSeqNumber(number)
 	lexer.SPorHT()
 	lexer.Match(TokenTypes_ID)
 	token := lexer.GetNextToken()
 	rack.SetMethod(token.GetTokenValue())
 
-	// }
-	// catch (InvalidArgumentException ex) {
-	//         throw createParseException(ex.getMessage());
-	// }
 	lexer.SPorHT()
 	lexer.Match('\n')
 
 	return rack, nil
-	// }
-	// finally {
-	//     if (debug) dbg_leave("RAckParser.parse");
-	// }
 }

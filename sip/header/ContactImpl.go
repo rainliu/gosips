@@ -104,7 +104,7 @@ func (this *Contact) GetContactParms() *core.NameValueList {
  * @return the Expires parameter.
  */
 func (this *Contact) GetExpires() int {
-	retval, _ := strconv.Atoi(this.GetParameter(core.SIPHeaderNames_EXPIRES))
+	retval, _ := strconv.Atoi(this.GetParameter(ParameterNames_EXPIRES))
 	return retval
 }
 
@@ -113,7 +113,7 @@ func (this *Contact) GetExpires() int {
  */
 
 func (this *Contact) SetExpires(expiryDeltaSeconds int) (InvalidArgumentException error) {
-	this.parameters.AddNameValue(core.NewNameValue(core.SIPHeaderNames_EXPIRES, strconv.Itoa(expiryDeltaSeconds)))
+	this.parameters.AddNameValue(core.NewNameValue(ParameterNames_EXPIRES, strconv.Itoa(expiryDeltaSeconds)))
 	return nil
 }
 

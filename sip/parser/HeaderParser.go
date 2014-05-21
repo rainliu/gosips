@@ -14,7 +14,6 @@ type Parser interface {
 * class. To create a parser for a new header, extend this class and change
 * the createParser class.
  */
-
 type HeaderParser struct {
 	SIPParser
 }
@@ -56,16 +55,17 @@ func (this *HeaderParser) superFromLexer(lexer core.Lexer) {
  */
 func (this *HeaderParser) Parse() (sh header.Header, ParseException error) {
 	lexer := this.GetLexer()
-
-	name, _ := lexer.GetNextTokenByDelim(':')
+	var name string
+	if name, ParseException = lexer.GetNextTokenByDelim(':'); ParseException != nil {
+		return nil, ParseException
+	}
 	lexer.ConsumeK(1)
 	body := strings.TrimSpace(lexer.GetLine())
-	// we dont set any fields because the header is
-	// ok
+
+	// we dont set any fields because the header is ok
 	retval := header.NewExtension(name)
 	retval.SetValue(body)
 	return retval, nil
-
 }
 
 /** Parse the header name until the colon  and chew WS after that.

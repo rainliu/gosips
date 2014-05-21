@@ -8,15 +8,6 @@ import (
 )
 
 /** SIPParser for Server header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type ServerParser struct {
 	HeaderParser
@@ -45,10 +36,8 @@ func NewServerParserFromLexer(lexer core.Lexer) *ServerParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *ServerParser) Parse() (sh header.Header, ParseException error) {
-
-	// if (debug) dbg_enter("ServerParser.parse");
 	server := header.NewServer()
-	// try {
+
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_SERVER)
@@ -58,16 +47,13 @@ func (this *ServerParser) Parse() (sh header.Header, ParseException error) {
 
 	//  mandatory token: product[/product-version] | (comment)
 	for ch, ParseException = lexer.LookAheadK(0); ch != '\n' && ParseException == nil; ch, ParseException = lexer.LookAheadK(0) {
-		//while (this.lexer.lookAhead(0) != '\n'
-		//&& this.lexer.lookAhead(0) != '\0') {
 		if ch == '(' {
 			comment, _ := lexer.Comment()
 			server.AddProductToken("(" + comment + ")")
 		} else {
-			// String tok;
-			//try {
-			tok, err := lexer.GetString('/')
-			if err != nil {
+			var tok string
+			tok, ParseException = lexer.GetString('/')
+			if ParseException != nil {
 				tok = lexer.GetRest()
 				server.AddProductToken(tok)
 				break
@@ -77,18 +63,8 @@ func (this *ServerParser) Parse() (sh header.Header, ParseException error) {
 				}
 				server.AddProductToken(tok)
 			}
-			//    } catch (ParseException ex) {
-			// tok = this.lexer.getRest();
-			// server.addProductToken(tok);
-			// break;
-			//    }
 		}
 	}
-
-	// }
-	// finally {
-	//     if (debug) dbg_leave("ServerParser.parse");
-	// }
 
 	return server, nil
 }

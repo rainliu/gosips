@@ -27,23 +27,19 @@ func (this *MaxForwardsParser) super(hname string) {
 }
 
 func (this *MaxForwardsParser) Parse() (sh header.Header, ParseException error) {
-	//if (debug) dbg_enter("MaxForwardsParser.enter");
-	//    try {
 	contentLength := header.NewMaxForwards()
 	this.HeaderName(TokenTypes_MAX_FORWARDS)
 	lexer := this.GetLexer()
-	number, _ := lexer.Number()
-	if err := contentLength.SetMaxForwards(number); err != nil {
-		return nil, err
+
+	var number int
+	if number, ParseException = lexer.Number(); ParseException != nil {
+		return nil, ParseException
+	}
+	if ParseException = contentLength.SetMaxForwards(number); ParseException != nil {
+		return nil, ParseException
 	}
 	lexer.SPorHT()
 	lexer.Match('\n')
+
 	return contentLength, nil
-	/* } catch (InvalidArgumentException ex) {
-			   throw createParseException(ex.getMessage());
-	              } catch (NumberFormatException ex) {
-			   throw createParseException(ex.getMessage());
-	              }  finally {
-				if (debug) dbg_leave("MaxForwardsParser.leave");
-		      }*/
 }

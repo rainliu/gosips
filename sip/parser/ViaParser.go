@@ -30,9 +30,13 @@ func NewViaParserFromLexer(lexer core.Lexer) *ViaParser {
 func (this *ViaParser) ParseVia(v *header.Via) (ParseException error) {
 	lexer := this.GetLexer()
 
+	var protocolName, protocolVersion *core.Token
 	// The protocol
 	lexer.Match(TokenTypes_ID)
-	protocolName := lexer.GetNextToken()
+
+	if protocolName = lexer.GetNextToken(); protocolName.GetTokenValue() != "SIP" {
+		return this.CreateParseException("Protcoal Not Supported error")
+	}
 
 	lexer.SPorHT()
 	// consume the "/"
@@ -40,7 +44,9 @@ func (this *ViaParser) ParseVia(v *header.Via) (ParseException error) {
 	lexer.SPorHT()
 	lexer.Match(TokenTypes_ID)
 	lexer.SPorHT()
-	protocolVersion := lexer.GetNextToken()
+	if protocolVersion = lexer.GetNextToken(); protocolVersion.GetTokenValue() != "2.0" {
+		return this.CreateParseException("Version Not Supported error")
+	}
 
 	lexer.SPorHT()
 
@@ -61,24 +67,26 @@ func (this *ViaParser) ParseVia(v *header.Via) (ParseException error) {
 
 	// sent-By
 	hnp := core.NewHostNameParserFromLexer(this.GetLexer())
-	hostPort, _ := hnp.GetHostPort()
+
+	var hostPort *core.HostPort
+	if hostPort, ParseException = hnp.GetHostPort(); ParseException != nil {
+		return ParseException
+	}
 	v.SetSentBy(hostPort)
 
 	// Ignore blanks
 	lexer.SPorHT()
 
 	var la byte
-	// parameters
-
 	for la, _ = lexer.LookAheadK(0); la == ';'; la, _ = lexer.LookAheadK(0) {
 		lexer.Match(';')
 		lexer.SPorHT()
-		//println(lexer.GetRest())
-		nameValue, err := this.NameValue()
-		if err != nil {
-			return err
+
+		var nameValue *core.NameValue
+		if nameValue, ParseException = this.NameValue(); ParseException != nil {
+			return ParseException
 		}
-		//println(nameValue.GetValue())
+
 		name := nameValue.GetName()
 		nameValue.SetName(strings.ToLower(name))
 		v.SetParameterFromNameValue(nameValue)
@@ -88,8 +96,8 @@ func (this *ViaParser) ParseVia(v *header.Via) (ParseException error) {
 	if la, _ = lexer.LookAheadK(0); la == '(' {
 		lexer.SelectLexer("charLexer")
 		lexer.ConsumeK(1)
-		var comment bytes.Buffer //=new StringBuffer();
-		//cond:=true;
+
+		var comment bytes.Buffer
 		for {
 			ch, _ := lexer.LookAheadK(0)
 			if ch == ')' {
@@ -120,21 +128,17 @@ func (this *ViaParser) ParseVia(v *header.Via) (ParseException error) {
 /** Overrides the superclass nameValue parser because
 * we have to tolerate IPV6 addresses in the received parameter.
  */
-
 func (this *ViaParser) NameValue() (nv *core.NameValue, ParseException error) {
-	//if (debug) dbg_enter("nameValue");
-	//try {
 	lexer := this.GetLexer()
 	lexer.Match(core.CORELEXER_ID)
 	name := lexer.GetNextToken()
+
 	// eat white space.
 	lexer.SPorHT()
-	//try {
 
 	quoted := false
 
 	la, _ := lexer.LookAheadK(0)
-
 	if la == '=' {
 		lexer.ConsumeK(1)
 		lexer.SPorHT()
@@ -145,7 +149,9 @@ func (this *ViaParser) NameValue() (nv *core.NameValue, ParseException error) {
 			str = lexer.ByteStringNoSemicolon()
 		} else {
 			if la, _ = lexer.LookAheadK(0); la == '"' {
-				str, _ = lexer.QuotedString()
+				if str, ParseException = lexer.QuotedString(); ParseException != nil {
+					return nil, ParseException
+				}
 				quoted = true
 			} else {
 				lexer.Match(core.CORELEXER_ID)
@@ -161,22 +167,13 @@ func (this *ViaParser) NameValue() (nv *core.NameValue, ParseException error) {
 	} else {
 		return core.NewNameValue(name.GetTokenValue(), nil), nil
 	}
-
-	/*} catch (ParseException ex) {
-	          return new NameValue(name.getTokenValue(),null);
-	  }
-
-	  } finally {
-	          if (debug) dbg_leave("nameValue");
-	  }*/
 }
 
 func (this *ViaParser) Parse() (sh header.Header, ParseException error) {
-	//  if (debug) dbg_enter("parse");
-	//  try {
 	lexer := this.GetLexer()
 
 	viaList := header.NewViaList()
+
 	// The first via header.
 	lexer.Match(TokenTypes_VIA)
 	lexer.SPorHT()   // ignore blanks
@@ -185,10 +182,10 @@ func (this *ViaParser) Parse() (sh header.Header, ParseException error) {
 
 	for {
 		v := header.NewVia()
-		this.ParseVia(v)
+		if ParseException = this.ParseVia(v); ParseException != nil {
+			return nil, ParseException
+		}
 		viaList.PushBack(v)
-		//println(lexer.GetRest())
-		//println(v.String())
 		lexer.SPorHT() // eat whitespace.
 		if la, _ := lexer.LookAheadK(0); la == ',' {
 			lexer.ConsumeK(1) // Consume the comma
@@ -199,9 +196,6 @@ func (this *ViaParser) Parse() (sh header.Header, ParseException error) {
 		}
 	}
 	lexer.Match('\n')
-	return viaList, nil
-	// } finally {
-	//if (debug) dbg_leave("parse");
-	// }
 
+	return viaList, nil
 }

@@ -1,15 +1,12 @@
 package parser
 
 import (
-	//"bytes"
 	"bytes"
 	"errors"
-	//"fmt"
 	"gosips/core"
 	"gosips/sip/address"
 	"gosips/sip/header"
 	"gosips/sip/message"
-	//"strconv"
 	"strings"
 )
 
@@ -28,14 +25,6 @@ import (
  * and can be accessed from the message using the GetSDPAnnounce method.
  * Currently only eager parsing of the message is supported (i.e. the
  * entire message is parsed in one feld swoop).
- *
- *
- *@version  JAIN-SIP-1.1
- *
- *@author M. Ranganathan <mranga@nist.gov>  <br/>
- *
- *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
- *
  */
 
 type StringMsgParser struct {
