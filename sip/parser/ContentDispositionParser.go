@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for ContentLanguage header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type ContentDispositionParser struct {
 	ParametersParser
@@ -44,12 +35,6 @@ func NewContentDispositionParserFromLexer(lexer core.Lexer) *ContentDispositionP
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *ContentDispositionParser) Parse() (sh header.Header, ParseException error) {
-
-	//if (debug) dbg_enter("ContentDispositionParser.parse");
-
-	//try {
-	//var ch byte
-	//try {
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_CONTENT_DISPOSITION)
 
@@ -60,18 +45,14 @@ func (this *ContentDispositionParser) Parse() (sh header.Header, ParseException 
 	lexer.Match(TokenTypes_ID)
 
 	token := lexer.GetNextToken()
-	//println(token.GetTokenValue())
 	cd.SetDispositionType(token.GetTokenValue())
 	lexer.SPorHT()
-	this.ParametersParser.Parse(cd)
+	if ParseException = this.ParametersParser.Parse(cd); ParseException != nil {
+		return nil, ParseException
+	}
 
 	lexer.SPorHT()
 	lexer.Match('\n')
 
 	return cd, nil
-	// } catch (ParseException ex ) {
-	//     throw createParseException(ex.getMessage());
-	// } finally {
-	//     if (debug) dbg_leave("ContentDispositionParser.parse");
-	// }
 }

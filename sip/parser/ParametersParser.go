@@ -33,13 +33,13 @@ func (this *ParametersParser) superFromLexer(lexer core.Lexer) {
 
 func (this *ParametersParser) Parse(parametersHeader header.ParametersHeader) (ParseException error) {
 	var ch byte
-	var err error
+	var nv *core.NameValue
 
 	lexer := this.GetLexer()
 
 	lexer.SPorHT()
-	if ch, err = lexer.LookAheadK(0); err != nil {
-		return err
+	if ch, ParseException = lexer.LookAheadK(0); ParseException != nil {
+		return ParseException
 	}
 
 	for ch == ';' {
@@ -47,7 +47,10 @@ func (this *ParametersParser) Parse(parametersHeader header.ParametersHeader) (P
 		// eat white space
 		lexer.SPorHT()
 		//println(lexer.GetRest())
-		nv := this.NameValue('=')
+		if nv, ParseException = this.NameValue('='); ParseException != nil {
+			return ParseException
+		}
+
 		//println(lexer.GetRest())
 		if nv.IsValueQuoted() {
 			parametersHeader.SetParameter(nv.GetName(), "\""+nv.GetValue().(string)+"\"")
@@ -57,8 +60,8 @@ func (this *ParametersParser) Parse(parametersHeader header.ParametersHeader) (P
 		// eat white space
 		lexer.SPorHT()
 
-		if ch, err = lexer.LookAheadK(0); err != nil {
-			return err
+		if ch, ParseException = lexer.LookAheadK(0); ParseException != nil {
+			return ParseException
 		}
 	}
 	return nil

@@ -2,18 +2,11 @@ package parser
 
 import (
 	"gosips/core"
+	"gosips/sip/address"
 	"gosips/sip/header"
 )
 
 /** SIPParser for CallInfo header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>
-*@author M. Ranganathan <mranga@nist.gov>
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type CallInfoParser struct {
 	ParametersParser
@@ -43,12 +36,11 @@ func NewCallInfoParserFromLexer(lexer core.Lexer) *CallInfoParser {
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *CallInfoParser) Parse() (sh header.Header, ParseException error) {
-
-	// if (debug) dbg_enter("CallInfoParser.parse");
 	callInfoList := header.NewCallInfoList()
 
-	//try {
 	var ch byte
+	var uri address.URI
+
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_CALL_INFO)
 
@@ -59,7 +51,9 @@ func (this *CallInfoParser) Parse() (sh header.Header, ParseException error) {
 		lexer.SPorHT()
 		lexer.Match('<')
 		urlParser := NewURLParserFromLexer(lexer)
-		uri, _ := urlParser.UriReference()
+		if uri, ParseException = urlParser.UriReference(); ParseException != nil {
+			return nil, ParseException
+		}
 		callInfo.SetInfo(uri)
 		lexer.Match('>')
 		lexer.SPorHT()
@@ -76,7 +70,9 @@ func (this *CallInfoParser) Parse() (sh header.Header, ParseException error) {
 			lexer.SPorHT()
 			lexer.Match('<')
 			urlParser = NewURLParserFromLexer(lexer)
-			uri, _ = urlParser.UriReference()
+			if uri, ParseException = urlParser.UriReference(); ParseException != nil {
+				return nil, ParseException
+			}
 			callInfo.SetInfo(uri)
 			lexer.Match('>')
 			lexer.SPorHT()
@@ -87,8 +83,4 @@ func (this *CallInfoParser) Parse() (sh header.Header, ParseException error) {
 	}
 
 	return callInfoList, nil
-	// }
-	// finally {
-	//     if (debug) dbg_leave("CallInfoParser.parse");
-	// }
 }

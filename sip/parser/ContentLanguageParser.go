@@ -6,15 +6,6 @@ import (
 )
 
 /** SIPParser for ContentLanguage header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author Olivier Deruelle <deruelle@nist.gov>  <br/>
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
-* @version 1.0
  */
 type ContentLanguageParser struct {
 	HeaderParser
@@ -44,11 +35,8 @@ func NewContentLanguageParserFromLexer(lexer core.Lexer) *ContentLanguageParser 
  * @throws SIPParseException if the message does not respect the spec.
  */
 func (this *ContentLanguageParser) Parse() (sh header.Header, ParseException error) {
-
-	// if (debug) dbg_enter("ContentLanguageParser.parse");
 	contentLanguageList := header.NewContentLanguageList()
 
-	// try {
 	var ch byte
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_CONTENT_LANGUAGE)
@@ -81,9 +69,4 @@ func (this *ContentLanguageParser) Parse() (sh header.Header, ParseException err
 	}
 
 	return contentLanguageList, nil
-	// } catch (ParseException ex ) {
-	//     throw createParseException(ex.GetMessage());
-	// } finally {
-	//     if (debug) dbg_leave("ContentLanguageParser.parse");
-	// }
 }

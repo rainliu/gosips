@@ -37,7 +37,9 @@ func (this *ContactParser) Parse() (sh header.Header, ParseException error) {
 			lexer.Match('*')
 			contact.SetWildCardFlag(true)
 		} else {
-			this.AddressParametersParser.Parse(contact)
+			if ParseException = this.AddressParametersParser.Parse(contact); ParseException != nil {
+				return nil, ParseException
+			}
 		}
 		retval.AddContact(contact)
 		lexer.SPorHT()
@@ -47,7 +49,6 @@ func (this *ContactParser) Parse() (sh header.Header, ParseException error) {
 		} else if la, _ = lexer.LookAheadK(0); la == '\n' {
 			break
 		} else {
-			//println(lexer.GetRest());
 			return nil, this.CreateParseException("unexpected char")
 		}
 	}

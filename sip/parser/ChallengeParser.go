@@ -6,14 +6,6 @@ import (
 )
 
 /** SIPParser for the challenge portion of the authentication header.
- *
- *@version  JAIN-SIP-1.1
- *
- *@author Olivier Deruelle  <deruelle@nist.gov>  <br/>
- *
- *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
- *
- * @version 1.0
  */
 
 type ChallengeParser struct {
@@ -49,21 +41,20 @@ func (this *ChallengeParser) superFromLexer(lexer core.Lexer) {
 /** Get the parameter of the challenge string
  * @return NameValue containing the parameter
  */
-func (this *ChallengeParser) ParseParameter(h header.AuthorizationHeader) { //} error{
-	//if (debug) dbg_enter("parseParameter");
-	//try {
-	nv := this.NameValue('=')
-	h.SetParameter(nv.GetName(), nv.GetValue().(string))
-	// } finally {
-	//if (debug) dbg_leave("parseParameter");
-	// }
+func (this *ChallengeParser) ParseParameter(h header.AuthorizationHeader) (ParseException error) {
+	var nv *core.NameValue
+	if nv, ParseException = this.NameValue('='); ParseException != nil {
+		return ParseException
+	}
+	ParseException = h.SetParameter(nv.GetName(), nv.GetValue().(string))
+	return ParseException
 }
 
 /** parser the String message
  * @return Challenge object
  * @throws ParseException if the message does not respect the spec.
  */
-func (this *ChallengeParser) Parse(h header.AuthorizationHeader) (ParseException error) { //throws ParseException {
+func (this *ChallengeParser) Parse(h header.AuthorizationHeader) (ParseException error) {
 	var ch byte
 	lexer := this.GetLexer()
 	// the Scheme:
@@ -75,7 +66,9 @@ func (this *ChallengeParser) Parse(h header.AuthorizationHeader) (ParseException
 
 	// The parameters:
 	for ch, _ = lexer.LookAheadK(0); ch != '\n'; ch, _ = lexer.LookAheadK(0) {
-		this.ParseParameter(h)
+		if ParseException = this.ParseParameter(h); ParseException != nil {
+			return ParseException
+		}
 		lexer.SPorHT()
 		if ch, ParseException = lexer.LookAheadK(0); ch == '\n' || ParseException != nil { //||ch=='\0'
 			break

@@ -6,13 +6,6 @@ import (
 )
 
 /** SIPParser for content type header.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type ContentTypeParser struct {
 	ParametersParser
@@ -31,11 +24,8 @@ func NewContentTypeParserFromLexer(lexer core.Lexer) *ContentTypeParser {
 }
 
 func (this *ContentTypeParser) Parse() (sh header.Header, ParseException error) {
-
 	contentType := header.NewContentType()
-	//if (debug) dbg_enter("ContentTypeParser.parse");
 
-	//try{
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_CONTENT_TYPE)
 
@@ -51,11 +41,10 @@ func (this *ContentTypeParser) Parse() (sh header.Header, ParseException error) 
 	subType := lexer.GetNextToken()
 	lexer.SPorHT()
 	contentType.SetContentSubType(subType.GetTokenValue())
-	this.ParametersParser.Parse(contentType)
+	if ParseException = this.ParametersParser.Parse(contentType); ParseException != nil {
+		return nil, ParseException
+	}
 	lexer.Match('\n')
-	//           }  finally {
-	// if (debug) dbg_leave("ContentTypeParser.parse");
-	//    }
-	return contentType, nil
 
+	return contentType, nil
 }

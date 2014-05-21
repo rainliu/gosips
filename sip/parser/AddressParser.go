@@ -115,6 +115,7 @@ func (this *AddressParser) Address() (retval *address.AddressImpl, ParseExceptio
 		ch == '/' {
 		retval = address.NewAddressImpl()
 		uriParser := NewURLParserFromLexer(lexer)
+
 		var uri address.URI
 		if uri, ParseException = uriParser.UriReference(); ParseException != nil {
 			return nil, ParseException

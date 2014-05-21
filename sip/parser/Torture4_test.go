@@ -31,7 +31,7 @@ func TestTorture4(t *testing.T) {
 	tvi := torture4_i
 	tvo := torture4_o
 
-	for i := 0; i < 0; /*len(tvi)*/ i++ {
+	for i := 0; i < 1; /*len(tvi)*/ i++ {
 		hp := CreateParser(tvi[i])
 		if sh, err := hp.Parse(); err != nil {
 			t.Log(tvo[i])

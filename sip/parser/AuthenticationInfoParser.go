@@ -37,7 +37,7 @@ func NewAuthenticationInfoParserFromLexer(lexer core.Lexer) *AuthenticationInfoP
  */
 func (this *AuthenticationInfoParser) Parse() (sh header.Header, ParseException error) {
 	var ch byte
-
+	var nv *core.NameValue
 	lexer := this.GetLexer()
 	this.HeaderName(TokenTypes_AUTHENTICATION_INFO)
 
@@ -46,7 +46,9 @@ func (this *AuthenticationInfoParser) Parse() (sh header.Header, ParseException 
 
 	lexer.SPorHT()
 
-	nv := this.NameValue('=')
+	if nv, ParseException = this.NameValue('='); ParseException != nil {
+		return nil, ParseException
+	}
 	authenticationInfo.SetParameter(nv.GetName(), nv.GetValue().(string))
 
 	lexer.SPorHT()
@@ -54,7 +56,9 @@ func (this *AuthenticationInfoParser) Parse() (sh header.Header, ParseException 
 		lexer.Match(',')
 		lexer.SPorHT()
 
-		nv := this.NameValue('=')
+		if nv, ParseException = this.NameValue('='); ParseException != nil {
+			return nil, ParseException
+		}
 		authenticationInfo.SetParameter(nv.GetName(), nv.GetValue().(string))
 
 		lexer.SPorHT()

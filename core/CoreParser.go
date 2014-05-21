@@ -30,14 +30,17 @@ func (this *CoreParser) SetLexer(lexer Lexer) {
 	this.lexer = lexer
 }
 
-func (this *CoreParser) NameValue(separator byte) *NameValue {
+func (this *CoreParser) NameValue(separator byte) (nv *NameValue, ParseException error) {
 	if Debug.ParserDebug {
 		this.Dbg_enter("nameValue")
 		defer this.Dbg_leave("nameValue")
 	}
 
-	this.lexer.Match(CORELEXER_ID)
+	if _, ParseException = this.lexer.Match(CORELEXER_ID); ParseException != nil {
+		return nil, ParseException
+	}
 	name := this.lexer.GetNextToken()
+
 	// eat white space.
 	this.lexer.SPorHT()
 
@@ -53,7 +56,9 @@ func (this *CoreParser) NameValue(separator byte) *NameValue {
 			str, _ = this.lexer.QuotedString()
 			quoted = true
 		} else {
-			this.lexer.Match(CORELEXER_ID)
+			if _, ParseException = this.lexer.Match(CORELEXER_ID); ParseException != nil {
+				return nil, ParseException
+			}
 			value := this.lexer.GetNextToken()
 			str = value.tokenValue
 		}
@@ -62,9 +67,9 @@ func (this *CoreParser) NameValue(separator byte) *NameValue {
 			nv.SetQuotedValue()
 		}
 
-		return nv
+		return nv, nil
 	} else {
-		return NewNameValue(name.tokenValue, "")
+		return NewNameValue(name.tokenValue, ""), nil
 	}
 }
 

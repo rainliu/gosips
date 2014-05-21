@@ -2,7 +2,6 @@ package parser
 
 import (
 	"bytes"
-	//"fmt"
 	"gosips/core"
 	"gosips/sip/address"
 	"strings"
@@ -104,21 +103,20 @@ func (this *URLParser) ParamNameOrValue() (s string, ParseException error) {
 }
 
 func (this *URLParser) UriParam() (nv *core.NameValue, ParseException error) {
-	//if (debug) dbg_enter("uriParam");
-	//try {
-	pname, _ := this.ParamNameOrValue()
+	var pname, pvalue string
+	if pname, ParseException = this.ParamNameOrValue(); ParseException != nil {
+		return nil, ParseException
+	}
 	next, _ := this.GetLexer().LookAheadK(0)
 	if next == '=' {
 		this.GetLexer().ConsumeK(1)
-		pvalue, _ := this.ParamNameOrValue()
+		if pvalue, ParseException = this.ParamNameOrValue(); ParseException != nil {
+			return nil, ParseException
+		}
 		return core.NewNameValue(pname, pvalue), nil
 	} else {
-		//println(pname + "=" + pvalue);
 		return core.NewNameValue(pname, nil), nil
 	}
-	//} finally {
-	//   if (debug) dbg_leave("uriParam");
-	//}
 }
 
 func (this *URLParser) IsReserved(next byte) bool {
@@ -266,12 +264,11 @@ func (this *URLParser) UricString() string {
  *@throws ParsException if there was a problem parsing.
  */
 func (this *URLParser) UriReference() (url address.URI, ParseException error) {
-	///if (debug) dbg_enter("uriReference");
 	var retval address.URI
 	vect, _ := this.GetLexer().PeekNextTokenK(2)
 	t1 := vect[0]
 	t2 := vect[1]
-	//try {
+
 	//println("URLParser::UriReference():"+this.GetLexer().GetRest());
 	//println("t2 :" + t2.GetTokenValue());
 	//println("t1 :" + t1.GetTokenValue());
@@ -279,7 +276,9 @@ func (this *URLParser) UriReference() (url address.URI, ParseException error) {
 
 	if t1.GetTokenType() == TokenTypes_SIP {
 		if t2.GetTokenType() == ':' {
-			retval, _ = this.SipURL()
+			if retval, ParseException = this.SipURL(); ParseException != nil {
+				return nil, ParseException
+			}
 		} else {
 			return nil, this.CreateParseException("Expecting ':'")
 		}
@@ -299,9 +298,7 @@ func (this *URLParser) UriReference() (url address.URI, ParseException error) {
 		//   throw createParseException(ex.getMessage());
 		//}
 	}
-	//} finally {
-	//    if (debug) dbg_leave("uriReference");
-	//}
+
 	return retval, nil
 }
 
@@ -443,9 +440,12 @@ func (this *URLParser) Local_phone_number() (tn *address.TelephoneNumber, ParseE
 }
 
 func (this *URLParser) Tel_parameters() (nvl *core.NameValueList, ParseException error) {
+	var nv *core.NameValue
 	nvList := core.NewNameValueList("tel_parameters")
 	for {
-		nv := this.NameValue('=')
+		if nv, ParseException = this.NameValue('='); ParseException != nil {
+			return nil, ParseException
+		}
 		nvList.AddNameValue(nv)
 		tok, _ := this.GetLexer().LookAheadK(0)
 		if tok == ';' {
@@ -530,7 +530,10 @@ func (this *URLParser) SipURL() (sipurl *address.SipURIImpl, ParseException erro
 			break
 		}
 		this.GetLexer().ConsumeK(1)
-		parms, _ := this.UriParam()
+		var parms *core.NameValue
+		if parms, ParseException = this.UriParam(); ParseException != nil {
+			return nil, ParseException
+		}
 		retval.SetUriParameter(parms)
 	}
 
