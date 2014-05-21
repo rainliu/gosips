@@ -30,15 +30,13 @@ import (
 type StringMsgParser struct {
 	readBody bool
 
-	rawMessage string
-	// Unprocessed message  (for error reporting)
-	rawMessage1 string
-	// Unprocessed message  (for error reporting)
-	currentMessage string
-	// the message being parsed. (for error reporting)
+	rawMessage     string // Unprocessed message  (for error reporting)
+	rawMessage1    string // Unprocessed message  (for error reporting)
+	currentMessage string // the message being parsed. (for error reporting)
+
 	//private ParseExceptionListener parseExceptionListener;
 
-	messageHeaders map[int]string //header.Header // Message headers
+	messageHeaders map[int]string // Message headers
 
 	bufferPointer int
 
@@ -56,27 +54,15 @@ type StringMsgParser struct {
 }
 
 /**
- *@since v0.9
+ *Constructor
  */
 func NewStringMsgParser() *StringMsgParser {
 	this := &StringMsgParser{}
-	//super();
-	//this.messageHeaders = new Vector(10,10);
 	this.bufferPointer = 0
 	this.currentLine = 0
 	this.readBody = true
 	return this
 }
-
-/**
- *Constructor (given a parse exception handler).
- *@since 1.0
- *@param exhandler is the parse exception listener for the message parser.
- */
-// func NewStringMsgParser( ParseExceptionListener exhandler) {
-//     this();
-//     parseExceptionListener = exhandler;
-// }
 
 /** Get the message body.
  */
@@ -115,10 +101,6 @@ func (this *StringMsgParser) GetBodyAsBytes() []byte {
 		body := make([]byte, endIndex-this.bufferPointer)
 
 		copy(body, this.currentMessageBytes[this.bufferPointer:endIndex])
-		//
-		//            for (int i = bufferPointer, k = 0; i < endIndex; i++,k++) {
-		//                body[k] = currentMessageBytes[i];
-		//            }
 
 		this.bufferPointer = endIndex
 		this.contentLength = 0
@@ -154,7 +136,6 @@ func (this *StringMsgParser) ReadBytesToEnd() []byte {
  * @param  pexhadler is a class
  *  	that implements the ParseExceptionListener interface.
  */
-
 // public void SetParseExceptionListener
 // ( ParseExceptionListener pexhandler ) {
 //     parseExceptionListener = pexhandler;
@@ -183,10 +164,9 @@ func (this *StringMsgParser) IsBodyString() bool {
  * @see ParseExceptionListener
  */
 func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.Message, error) {
-	//throws ParseException {
 	this.bufferPointer = 0
 	this.bodyIsString = false
-	//retval := new Vector();
+
 	this.currentMessageBytes = msgBuffer
 	var s int
 	// Squeeze out leading CRLF
@@ -194,7 +174,6 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 	// Bug noted by Will Sullin of Callcast
 	for s = this.bufferPointer; s < len(msgBuffer); s++ {
 		if msgBuffer[s] != '\r' && msgBuffer[s] != '\n' {
-			// msgBuffer[s] != '\0' {
 			break
 		}
 	}
@@ -202,8 +181,6 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 	if s == len(msgBuffer) {
 		return nil, nil
 	}
-
-	//println("0:" + string(msgBuffer) + strconv.Itoa(s))
 
 	// Find the end of the SIP message.
 	var f int
@@ -234,9 +211,7 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 
 	// Encode the body as a UTF-8 string.
 	var messageString string
-	//try {
 	messageString = string(msgBuffer[s:f]) //, "UTF-8");
-	//println("1:" + string(messageString) + strconv.Itoa(f))
 
 	this.bufferPointer = f
 	message := []byte(messageString)
@@ -248,22 +223,14 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 			length--
 		}
 	}
-	//println("1:" + string(message[:length]))
-
-	// if (SIPParser.debug) {
-	//     for (int k = 0 ; k < length; k++) {
-	//         rawMessage1 = rawMessage1 + "[" + message.charAt(k) +"]";
-	//     }
-	// }
 
 	// The following can be written more efficiently in a single pass
 	// but it is somewhat tricky.
-	tokenizer := core.NewStringTokenizer(string(message[:length])) //,"\n",true);
-	var cooked_message bytes.Buffer                                //= new StringBuffer();
-	//try {
-	for tokenizer.HasMoreChars() { //hasMoreElements() ) {
-		nexttok := tokenizer.NextToken() //nextToken();
-		//println("1.x:" + nexttok)
+	tokenizer := core.NewStringTokenizer(string(message[:length]))
+	var cooked_message bytes.Buffer
+
+	for tokenizer.HasMoreChars() {
+		nexttok := tokenizer.NextToken()
 		// Ignore blank lines with leading spaces or tabs.
 		if strings.TrimSpace(nexttok) == "" {
 			cooked_message.WriteString("\n")
@@ -271,24 +238,16 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 			cooked_message.WriteString(nexttok)
 		}
 	}
-	// } catch (NoSuchElementException ex) {
-	// }
+
 	message1 := cooked_message.String()
 	length = strings.Index(message1, "\n\n") + 2
-	var cooked_message1 bytes.Buffer
-
-	//println("2:" + string(message1[:length]))
-	//println("2.x:" + string(message1))
 
 	// Handle continuations - look for a space or a tab at the start
 	// of the line and append it to the previous line.
+	var cooked_message1 bytes.Buffer
 	for k := 0; k < length-1; {
 		if message1[k] == '\n' {
 			if message1[k+1] == '\t' || message1[k+1] == ' ' {
-				//cooked_message.deleteCharAt(k)
-				//cooked_message.deleteCharAt(k)
-				//length--
-				//length--
 				k++
 				k++
 				if k == length {
@@ -297,26 +256,19 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 					continue
 				}
 			} else {
-				//print(string(message1[k]))
 				cooked_message1.WriteByte(message1[k])
 			}
 
 			if message1[k+1] == '\n' {
-				//print(string('\n'))
 				cooked_message1.WriteByte('\n')
-				//length++
-				//k++
 			}
 		} else {
-			//print(string(message1[k]))
 			cooked_message1.WriteByte(message1[k])
 		}
 		k++
 	}
 	cooked_message1.WriteString("\n\n")
 	cooked_message1.WriteString(message1[length:])
-
-	//println("3:" + cooked_message1.String())
 
 	// Separate the string out into substrings for
 	// error reporting.
@@ -329,15 +281,10 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 
 	if this.readBody && sipmsg.GetContentLength() != nil && sipmsg.GetContentLength().GetContentLength() != 0 {
 		this.contentLength = sipmsg.GetContentLength().GetContentLength()
-		//println(strconv.Itoa(this.contentLength))
 		body := this.GetBodyAsBytes()
 		sipmsg.SetMessageContentFromByte(body)
 	}
-	// 	println("I am out")
-	// 	fmt.Printf("11:%v\n", sipmsg.GetContentLength())
-	// 	fmt.Printf("22:%v\n", sipmsg.GetContentLength().GetContentLength())
-	// }
-	// System.out.println("Parsed = " + sipmsg);
+
 	return sipmsg, nil
 }
 
@@ -359,113 +306,6 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 
 func (this *StringMsgParser) ParseSIPMessage(sipMessage string) (message.Message, error) {
 	return this.ParseSIPMessageFromByte([]byte(sipMessage))
-	//throws ParseException {
-	// Handle line folding and evil DOS CR-LF sequences
-	//       this.rawMessage = sipMessages;
-	//       //Vector retval = new Vector();
-	//        pmessage := strings.TrimSpace(sipMessages);
-	//       this.bodyIsString = true;
-
-	//           this.contentLength = 0;
-	//           if pmessage=="" {
-	//           	return nil, nil;
-	//           }
-
-	//           pmessage += "\n\n";
-	//           this.bufferPointer = 0;
-	//           message := []byte(pmessage);
-	//           // squeeze out the leading crlf sequences.
-	//           for message[this.bufferPointer] == '\r' || message[this.bufferPointer] == '\n' {
-	//               this.bufferPointer ++;
-	//               //message.deleteCharAt(0);
-	//           }
-
-	//           // squeeze out the crlf sequences and make them uniformly CR
-	//           message1 := string(message[this.bufferPointer:]);
-	//           length := strings.Index(message1, "\r\n\r\n");
-	//           if length > 0  {
-	//           	length += 4;
-	//           }
-	//           if length == -1 {
-	//               length = strings.Index(message1, "\n\n");
-	//               if length == -1{
-	//                   return nil, errors.New("ParseException: no trailing crlf");
-	//               }
-	//           } else {
-	//           	length += 2;
-	//           }
-
-	//           // Get rid of CR to make it uniform.
-	//           for k := 0; k < length; k++ {
-	// 		if message1[k] == '\r' {
-	// 			copy(message1[k:length-1], message1[k+1:length])
-	// 			length--
-	// 		}
-	// 	}
-
-	//           // if (debugFlag ) {
-	//           //     for (int k = 0 ; k < length; k++) {
-	//           //         rawMessage1 = rawMessage1 + "[" + message.charAt(k) +"]";
-	//           //     }
-	//           // }
-
-	//           // The following can be written more efficiently in a single pass
-	//           // but it is somewhat tricky.
-	//           java.util.StringTokenizer tokenizer = new java.util.StringTokenizer
-	//           (message.toString(),"\n",true);
-	//           StringBuffer cooked_message = new StringBuffer();
-	//           try {
-	//               while( tokenizer.hasMoreElements() ) {
-	//                   String nexttok = tokenizer.nextToken();
-	//                   // Ignore blank lines with leading spaces or tabs.
-	//                   if (nexttok.trim().equals("")) cooked_message.append("\n");
-	//                   else cooked_message.append(nexttok);
-	//               }
-	//           } catch (NoSuchElementException ex) {
-	//           }
-
-	//           message1 = cooked_message.toString();
-	//           length = message1.indexOf("\n\n") + 2;
-
-	//           // Handle continuations - look for a space or a tab at the start
-	//           // of the line and append it to the previous line.
-
-	//           for ( int k = 0 ; k < length - 1 ;  ) {
-	//               if (cooked_message.charAt(k) == '\n') {
-	//                   if ( cooked_message.charAt(k+1) == '\t' ||
-	//                   cooked_message.charAt(k+1) == ' ') {
-	//                       cooked_message.deleteCharAt(k);
-	//                       cooked_message.deleteCharAt(k);
-	//                       length --;
-	//                       length --;
-	//                       if ( k == length) break;
-	//                       continue;
-	//                   }
-	//                   if ( cooked_message.charAt(k+1) == '\n') {
-	//                       cooked_message.insert(k,'\n');
-	//                       length ++;
-	//                       k ++;
-	//                   }
-	//               }
-	//               k++;
-	//           }
-	//           cooked_message.append("\n\n");
-
-	//           // Separate the string out into substrings for
-	//           // error reporting.
-
-	//           currentMessage = cooked_message.toString();
-	//           if (SIPParser.debug) Debug.println(currentMessage);
-	//           bufferPointer = currentMessage.indexOf("\n\n") + 3 ;
-	//           SIPMessage sipmsg = this.parseMessage(currentMessage);
-	//    if (readBody && sipmsg.GetContentLength() != null &&
-	// sipmsg.GetContentLength().GetContentLength() != 0) {
-	// this.contentLength =
-	//      sipmsg.GetContentLength().GetContentLength();
-	// String body = this.GetMessageBody();
-	// sipmsg.SetMessageContent(body);
-	//    }
-	//    return sipmsg;
 }
 
 /** This is called repeatedly by parseSIPMessage to parse
@@ -474,22 +314,18 @@ func (this *StringMsgParser) ParseSIPMessage(sipMessage string) (message.Message
  * prior to its being called.
  */
 func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Message, error) {
-	//throws  ParseException {
-	// position line counter at the end of the
-	// sip messages.
-	// System.out.println("parsing " + currentMessage);
 	var err error
 
 	sip_message_size := 0 // # of lines in the sip message
 	var sipmsg message.Message
 
-	tokenizer := core.NewStringTokenizer(currentMessage) //,"\n",true);
-	this.messageHeaders = make(map[int]string)           // new Vector(); // A list of headers for error reporting
-	//try {
-	for tokenizer.HasMoreChars() { //hasMoreElements() ) {
-		nexttok := tokenizer.NextToken() //nextToken();
+	tokenizer := core.NewStringTokenizer(currentMessage)
+	this.messageHeaders = make(map[int]string) // A list of headers for error reporting
+
+	for tokenizer.HasMoreChars() {
+		nexttok := tokenizer.NextToken()
 		if nexttok == "\n" {
-			nextnexttok := tokenizer.NextToken() //nextToken();
+			nextnexttok := tokenizer.NextToken()
 			if nextnexttok == "\n" {
 				break
 			} else {
@@ -498,43 +334,27 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
 		} else {
 			this.messageHeaders[sip_message_size] = nexttok
 		}
-		//println(this.messageHeaders[sip_message_size])
+
 		sip_message_size++
 	}
-	// } catch (NoSuchElementException ex) {
-	// }
+
 	this.currentLine = 0
 	this.currentHeader = this.messageHeaders[this.currentLine]
 	firstLine := this.currentHeader
-	// System.out.println("first Line " + firstLine);
-
 	if !strings.HasPrefix(firstLine, header.SIPConstants_SIP_VERSION_STRING) {
 		sipmsg = message.NewSIPRequest()
-		//try {
-		rl, _ := NewRequestLineParser(firstLine + "\n").Parse()
+		var rl *header.RequestLine
+		if rl, err = NewRequestLineParser(firstLine + "\n").Parse(); err != nil {
+			return nil, err
+		}
 		sipmsg.(*message.SIPRequest).SetRequestLine(rl)
-		// } catch (ParseException ex) {
-		//         if (this.parseExceptionListener != null)
-		//             this.parseExceptionListener.handleException
-		//             (ex,sipmsg, RequestLine.class,
-		//             firstLine,currentMessage);
-		//         else throw ex;
-
-		// }
 	} else {
 		sipmsg = message.NewSIPResponse()
-		//try {
-		sl, _ := NewStatusLineParser(firstLine + "\n").Parse()
+		var sl *header.StatusLine
+		if sl, err = NewStatusLineParser(firstLine + "\n").Parse(); err != nil {
+			return nil, err
+		}
 		sipmsg.(*message.SIPResponse).SetStatusLine(sl)
-		// } catch (ParseException ex) {
-		//         if (this.parseExceptionListener != null)   {
-		//             this.parseExceptionListener.handleException
-		//             (ex,sipmsg,
-		//             StatusLine.class,
-		//             firstLine,currentMessage);
-		//         } else throw ex;
-
-		// }
 	}
 
 	for i := 1; i < len(this.messageHeaders); i++ {
@@ -542,49 +362,22 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
 		if hdrstring == "" || strings.TrimSpace(hdrstring) == "" {
 			continue
 		}
-		///try {
-		hdrParser := CreateParser(hdrstring + "\n")
-		//           } catch (ParseException ex)  {
-		//               this.parseExceptionListener.handleException
-		//                 ( ex, sipmsg,  null , hdrstring,currentMessage);
-		// continue;
-		//    }
-		//try {
+
+		var hdrParser Parser
+		if hdrParser, err = CreateParser(hdrstring + "\n"); err != nil {
+			return nil, err
+		}
+
 		var sipHeader header.Header
 		if sipHeader, err = hdrParser.Parse(); err != nil {
 			return nil, err
 		}
-
-		// if strings.Contains(hdrstring, "Content-Length") {
-		// 	println(hdrstring)
-		// 	//fmt.Printf("333%v", hdrParser.(*ContentLengthParser))
-		// 	//fmt.Printf("333:%v", sipHeader.(*header.ContentLength).GetContentLength())
-		// }
 
 		if _, ok := sipmsg.(*message.SIPRequest); ok {
 			sipmsg.(*message.SIPRequest).AttachHeader2(sipHeader, false)
 		} else {
 			sipmsg.(*message.SIPResponse).AttachHeader2(sipHeader, false)
 		}
-		// } catch (ParseException ex) {
-		//     if (this.parseExceptionListener != null) {
-		//         String hdrName = SIPLexer.GetHeaderName(hdrstring);
-		//         Class hdrClass = NameMap.GetClassFromName(hdrName);
-		//         try {
-		//             if (hdrClass == null) {
-		//                 hdrClass = Class.forName
-		//                 (PackageNames.SIPHEADERS_PACKAGE
-		//                 + ".ExtensionHeaderImpl");
-		//             }
-		//             this.parseExceptionListener.handleException
-		//             (ex,sipmsg, hdrClass,
-		//             hdrstring,currentMessage);
-		//         } catch (ClassNotFoundException ex1) {
-		//             InternalErrorHandler.handleException(ex1);
-		//         }
-		//     }
-
-		// }
 	}
 	return sipmsg, nil
 }
@@ -594,12 +387,10 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
  * structure.
  * @param address is a String containing the address to be parsed.
  * @return a parsed address structure.
- * @since v1.0
  * @exception  ParseException when the address is badly formatted.
  */
 
 func (this *StringMsgParser) ParseAddress(address string) (*address.AddressImpl, error) {
-	//throws ParseException {
 	addressParser := NewAddressParser(address)
 	return addressParser.Address()
 }
@@ -608,11 +399,9 @@ func (this *StringMsgParser) ParseAddress(address string) (*address.AddressImpl,
  * Parse a host:port and return a parsed structure.
  * @param hostport is a String containing the host:port to be parsed
  * @return a parsed address structure.
- * @since v1.0
  * @exception throws a ParseException when the address is badly formatted.
  */
 func (this *StringMsgParser) ParseHostPort(hostport string) (*core.HostPort, error) {
-	//throws ParseException {
 	lexer := NewSIPLexer("charLexer", hostport)
 	return core.NewHostNameParserFromLexer(lexer).GetHostPort()
 }
@@ -621,11 +410,9 @@ func (this *StringMsgParser) ParseHostPort(hostport string) (*core.HostPort, err
  * Parse a host name and return a parsed structure.
  * @param host is a String containing the host name to be parsed
  * @return a parsed address structure.
- * @since v1.0
  * @exception throws a ParseException when the hostname is badly formatted.
  */
 func (this *StringMsgParser) ParseHost(host string) (*core.Host, error) {
-	//throws ParseException {
 	lexer := NewSIPLexer("charLexer", host)
 	return core.NewHostNameParserFromLexer(lexer).GetHost()
 }
@@ -635,12 +422,9 @@ func (this *StringMsgParser) ParseHost(host string) (*core.Host, error) {
  * @param telphone_number is a String containing
  * the telephone # to be parsed
  * @return a parsed address structure.
- * @since v1.0
  * @exception throws a ParseException when the address is badly formatted.
  */
 func (this *StringMsgParser) ParSetelephoneNumber(telephone_number string) (*address.TelephoneNumber, error) {
-	//throws ParseException {
-	// Bug fix contributed by Will Scullin
 	return NewURLParser(telephone_number).ParseTelephoneNumber()
 }
 
@@ -651,13 +435,8 @@ func (this *StringMsgParser) ParSetelephoneNumber(telephone_number string) (*add
  * @exception ParseException  if there was an error parsing the message.
  */
 func (this *StringMsgParser) ParseSIPUrl(url string) (*address.SipURIImpl, error) {
-	//throws ParseException {
-	//try {
 	sipuri, err := NewURLParser(url).Parse()
 	return sipuri.(*address.SipURIImpl), err
-	//} catch (ClassCastException ex) {
-	//    throw new ParseException(url + " Not a SIP URL ",0);
-	//}
 }
 
 /**
@@ -667,7 +446,6 @@ func (this *StringMsgParser) ParseSIPUrl(url string) (*address.SipURIImpl, error
  * @exception ParseException  if there was an error parsing the message.
  */
 func (this *StringMsgParser) ParseUrl(url string) (*address.URIImpl, error) {
-	//throws ParseException {
 	guri, err := NewURLParser(url).Parse()
 	return guri.(*address.URIImpl), err
 }
@@ -679,7 +457,8 @@ func (this *StringMsgParser) ParseUrl(url string) (*address.URIImpl, error) {
  * @exception ParseException  if there was an error parsing the message.
  */
 func (this *StringMsgParser) ParseSIPHeader(h string) (*header.SIPHeader, error) {
-	//throws ParseException {
+	var err error
+
 	h += "\n\n"
 	// Handle line folding.
 	var nmessage string
@@ -700,9 +479,9 @@ func (this *StringMsgParser) ParseSIPHeader(h string) (*header.SIPHeader, error)
 
 	nmessage += "\n"
 
-	hp := CreateParser(nmessage)
-	if hp == nil {
-		return nil, errors.New("ParseException: could not create parser")
+	var hp Parser
+	if hp, err = CreateParser(nmessage); err != nil {
+		return nil, err
 	}
 
 	shp, err := hp.Parse()

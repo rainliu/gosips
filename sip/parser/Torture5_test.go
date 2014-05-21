@@ -10,7 +10,7 @@ func TestTorture5(t *testing.T) {
 	tvo := torture5
 
 	for i := 0; i < len(tvi); i++ {
-		hp := CreateParser(tvi[i])
+		hp, _ := CreateParser(tvi[i])
 		if sh, err := hp.Parse(); err != nil {
 			t.Log(tvo[i])
 			if strings.Contains(tvo[i], "Invalid:") {

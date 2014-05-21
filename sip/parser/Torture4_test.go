@@ -32,7 +32,7 @@ func TestTorture4(t *testing.T) {
 	tvo := torture4_o
 
 	for i := 0; i < 13; /*len(tvi)*/ i++ {
-		hp := CreateParser(tvi[i])
+		hp, _ := CreateParser(tvi[i])
 		if sh, err := hp.Parse(); err != nil {
 			t.Log(tvo[i])
 			if strings.Contains(tvo[i], "Invalid:") {

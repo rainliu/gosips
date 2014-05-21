@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"errors"
 	"gosips/core"
 	"strings"
 )
@@ -11,146 +12,146 @@ import (
 
 /** create a parser for a header. This is the parser factory.
  */
-func CreateParser(line string) Parser { //, ParseException error) {
+func CreateParser(line string) (parser Parser, ParseException error) {
 	var lexer SIPLexer
 	headerName := strings.TrimSpace(strings.ToLower(lexer.GetHeaderName(line)))
 	headerValue := lexer.GetHeaderValue(line)
 	if headerName == "" || headerValue == "" {
-		return nil //errors.New("ParseException: The header name or value is null")
+		return nil, errors.New("ParseException: The header name or value is null")
 	}
 
 	switch headerName {
 	case strings.ToLower(core.SIPHeaderNames_REPLY_TO):
-		return NewReplyToParser(line)
+		parser = NewReplyToParser(line)
 	case strings.ToLower(core.SIPHeaderNames_IN_REPLY_TO):
-		return NewInReplyToParser(line)
+		parser = NewInReplyToParser(line)
 	case strings.ToLower(core.SIPHeaderNames_ACCEPT_ENCODING):
-		return NewAcceptEncodingParser(line)
+		parser = NewAcceptEncodingParser(line)
 	case strings.ToLower(core.SIPHeaderNames_ACCEPT_LANGUAGE):
-		return NewAcceptLanguageParser(line)
+		parser = NewAcceptLanguageParser(line)
 	case "t":
-		return NewToParser(line)
+		parser = NewToParser(line)
 	case strings.ToLower(core.SIPHeaderNames_TO):
-		return NewToParser(line)
+		parser = NewToParser(line)
 	case strings.ToLower(core.SIPHeaderNames_FROM):
-		return NewFromParser(line)
+		parser = NewFromParser(line)
 	case "f":
-		return NewFromParser(line)
+		parser = NewFromParser(line)
 	case strings.ToLower(core.SIPHeaderNames_CSEQ):
-		return NewCSeqParser(line)
+		parser = NewCSeqParser(line)
 	case strings.ToLower(core.SIPHeaderNames_VIA):
-		return NewViaParser(line)
+		parser = NewViaParser(line)
 	case "v":
-		return NewViaParser(line)
+		parser = NewViaParser(line)
 	case strings.ToLower(core.SIPHeaderNames_CONTACT):
-		return NewContactParser(line)
+		parser = NewContactParser(line)
 	case "m":
-		return NewContactParser(line)
+		parser = NewContactParser(line)
 	case strings.ToLower(core.SIPHeaderNames_CONTENT_TYPE):
-		return NewContentTypeParser(line)
+		parser = NewContentTypeParser(line)
 	case "c":
-		return NewContentTypeParser(line)
+		parser = NewContentTypeParser(line)
 	case strings.ToLower(core.SIPHeaderNames_CONTENT_LENGTH):
-		return NewContentLengthParser(line)
+		parser = NewContentLengthParser(line)
 	case "l":
-		return NewContentLengthParser(line)
+		parser = NewContentLengthParser(line)
 	case strings.ToLower(core.SIPHeaderNames_AUTHORIZATION):
-		return NewAuthorizationParser(line)
+		parser = NewAuthorizationParser(line)
 	case strings.ToLower(core.SIPHeaderNames_WWW_AUTHENTICATE):
-		return NewWWWAuthenticateParser(line)
+		parser = NewWWWAuthenticateParser(line)
 	case strings.ToLower(core.SIPHeaderNames_CALL_ID):
-		return NewCallIDParser(line)
+		parser = NewCallIDParser(line)
 	case "i":
-		return NewCallIDParser(line)
+		parser = NewCallIDParser(line)
 	case strings.ToLower(core.SIPHeaderNames_ROUTE):
-		return NewRouteParser(line)
+		parser = NewRouteParser(line)
 	case strings.ToLower(core.SIPHeaderNames_RECORD_ROUTE):
-		return NewRecordRouteParser(line)
+		parser = NewRecordRouteParser(line)
 	case strings.ToLower(core.SIPHeaderNames_DATE):
-		return NewDateParser(line)
+		parser = NewDateParser(line)
 	case strings.ToLower(core.SIPHeaderNames_PROXY_AUTHORIZATION):
-		return NewProxyAuthorizationParser(line)
+		parser = NewProxyAuthorizationParser(line)
 	case strings.ToLower(core.SIPHeaderNames_PROXY_AUTHENTICATE):
-		return NewProxyAuthenticateParser(line)
+		parser = NewProxyAuthenticateParser(line)
 	case strings.ToLower(core.SIPHeaderNames_RETRY_AFTER):
-		return NewRetryAfterParser(line)
+		parser = NewRetryAfterParser(line)
 	case strings.ToLower(core.SIPHeaderNames_REQUIRE):
-		return NewRequireParser(line)
+		parser = NewRequireParser(line)
 	case strings.ToLower(core.SIPHeaderNames_PROXY_REQUIRE):
-		return NewProxyRequireParser(line)
+		parser = NewProxyRequireParser(line)
 	case strings.ToLower(core.SIPHeaderNames_TIMESTAMP):
-		return NewTimeStampParser(line)
+		parser = NewTimeStampParser(line)
 	case strings.ToLower(core.SIPHeaderNames_UNSUPPORTED):
-		return NewUnsupportedParser(line)
+		parser = NewUnsupportedParser(line)
 	case strings.ToLower(core.SIPHeaderNames_USER_AGENT):
-		return NewUserAgentParser(line)
+		parser = NewUserAgentParser(line)
 	case strings.ToLower(core.SIPHeaderNames_SUPPORTED):
-		return NewSupportedParser(line)
+		parser = NewSupportedParser(line)
 	case "k":
-		return NewSupportedParser(line)
+		parser = NewSupportedParser(line)
 	case strings.ToLower(core.SIPHeaderNames_SERVER):
-		return NewServerParser(line)
+		parser = NewServerParser(line)
 	case strings.ToLower(core.SIPHeaderNames_SUBJECT):
-		return NewSubjectParser(line)
+		parser = NewSubjectParser(line)
 	case "s":
-		return NewSubjectParser(line)
+		parser = NewSubjectParser(line)
 	case strings.ToLower(core.SIPHeaderNames_SUBSCRIPTION_STATE):
-		return NewSubscriptionStateParser(line)
+		parser = NewSubscriptionStateParser(line)
 	case strings.ToLower(core.SIPHeaderNames_MAX_FORWARDS):
-		return NewMaxForwardsParser(line)
+		parser = NewMaxForwardsParser(line)
 	case strings.ToLower(core.SIPHeaderNames_MIME_VERSION):
-		return NewMimeVersionParser(line)
+		parser = NewMimeVersionParser(line)
 	case strings.ToLower(core.SIPHeaderNames_MIN_EXPIRES):
-		return NewMinExpiresParser(line)
+		parser = NewMinExpiresParser(line)
 	case strings.ToLower(core.SIPHeaderNames_ORGANIZATION):
-		return NewOrganizationParser(line)
+		parser = NewOrganizationParser(line)
 	case strings.ToLower(core.SIPHeaderNames_PRIORITY):
-		return NewPriorityParser(line)
+		parser = NewPriorityParser(line)
 	case strings.ToLower(core.SIPHeaderNames_RACK):
-		return NewRAckParser(line)
+		parser = NewRAckParser(line)
 	case strings.ToLower(core.SIPHeaderNames_RSEQ):
-		return NewRSeqParser(line)
+		parser = NewRSeqParser(line)
 	case strings.ToLower(core.SIPHeaderNames_REASON):
-		return NewReasonParser(line)
+		parser = NewReasonParser(line)
 	case strings.ToLower(core.SIPHeaderNames_WARNING):
-		return NewWarningParser(line)
+		parser = NewWarningParser(line)
 	case strings.ToLower(core.SIPHeaderNames_EXPIRES):
-		return NewExpiresParser(line)
+		parser = NewExpiresParser(line)
 	case strings.ToLower(core.SIPHeaderNames_EVENT):
-		return NewEventParser(line)
+		parser = NewEventParser(line)
 	case "o":
-		return NewEventParser(line)
+		parser = NewEventParser(line)
 	case strings.ToLower(core.SIPHeaderNames_ERROR_INFO):
-		return NewErrorInfoParser(line)
+		parser = NewErrorInfoParser(line)
 	case strings.ToLower(core.SIPHeaderNames_CONTENT_LANGUAGE):
-		return NewContentLanguageParser(line)
+		parser = NewContentLanguageParser(line)
 	case strings.ToLower(core.SIPHeaderNames_CONTENT_ENCODING):
-		return NewContentEncodingParser(line)
+		parser = NewContentEncodingParser(line)
 	case "e":
-		return NewContentEncodingParser(line)
+		parser = NewContentEncodingParser(line)
 	case strings.ToLower(core.SIPHeaderNames_CONTENT_DISPOSITION):
-		return NewContentDispositionParser(line)
+		parser = NewContentDispositionParser(line)
 	case strings.ToLower(core.SIPHeaderNames_CALL_INFO):
-		return NewCallInfoParser(line)
+		parser = NewCallInfoParser(line)
 	case strings.ToLower(core.SIPHeaderNames_AUTHENTICATION_INFO):
-		return NewAuthenticationInfoParser(line)
+		parser = NewAuthenticationInfoParser(line)
 	case strings.ToLower(core.SIPHeaderNames_ALLOW):
-		return NewAllowParser(line)
+		parser = NewAllowParser(line)
 	case strings.ToLower(core.SIPHeaderNames_ALLOW_EVENTS):
-		return NewAllowEventsParser(line)
+		parser = NewAllowEventsParser(line)
 	case "u":
-		return NewAllowEventsParser(line)
+		parser = NewAllowEventsParser(line)
 	case strings.ToLower(core.SIPHeaderNames_ALERT_INFO):
-		return NewAlertInfoParser(line)
+		parser = NewAlertInfoParser(line)
 	case strings.ToLower(core.SIPHeaderNames_ACCEPT):
-		return NewAcceptParser(line)
+		parser = NewAcceptParser(line)
 	case strings.ToLower(core.SIPHeaderNames_REFER_TO):
-		return NewReferToParser(line)
+		parser = NewReferToParser(line)
 	default:
 		// Just generate a generic SIPHeader. We define
 		// parsers only for the above.
-		return NewHeaderParser(line)
+		parser = NewHeaderParser(line)
 	}
 
-	return nil
+	return parser, nil
 }
