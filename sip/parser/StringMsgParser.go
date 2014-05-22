@@ -281,6 +281,13 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 
 	if this.readBody && sipmsg.GetContentLength() != nil && sipmsg.GetContentLength().GetContentLength() != 0 {
 		this.contentLength = sipmsg.GetContentLength().GetContentLength()
+
+		endIndex := this.bufferPointer + this.contentLength
+		// guard against bad specifications.
+		if endIndex > len(this.currentMessageBytes) {
+			return nil, errors.New("Content Length Larger Than Message")
+		}
+
 		body := this.GetBodyAsBytes()
 		sipmsg.SetMessageContentFromByte(body)
 	}
@@ -374,6 +381,11 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
 		}
 
 		if _, ok := sipmsg.(*message.SIPRequest); ok {
+			if cseq, present := sipHeader.(*header.CSeq); present {
+				if cseq.GetMethod() != sipmsg.(*message.SIPRequest).GetMethod() {
+					return nil, errors.New("Start Line and CSeq Method Mismatch")
+				}
+			}
 			sipmsg.(*message.SIPRequest).AttachHeader2(sipHeader, false)
 		} else {
 			sipmsg.(*message.SIPResponse).AttachHeader2(sipHeader, false)
@@ -494,9 +506,7 @@ func (this *StringMsgParser) ParseSIPHeader(h string) (*header.SIPHeader, error)
  * @return  a RequestLine structure that has the parsed RequestLine
  * @exception ParseException  if there was an error parsing the requestLine.
  */
-
 func (this *StringMsgParser) ParseSIPRequestLine(requestLine string) (*header.RequestLine, error) {
-	//throws ParseException {
 	requestLine += "\n"
 	return NewRequestLineParser(requestLine).Parse()
 }
@@ -508,9 +518,7 @@ func (this *StringMsgParser) ParseSIPRequestLine(requestLine string) (*header.Re
  * @exception ParseException  if there was an error parsing
  * @see StatusLine
  */
-
 func (this *StringMsgParser) ParseSIPStatusLine(statusLine string) (*header.StatusLine, error) {
-	//throws ParseException {
 	statusLine += "\n"
 	return NewStatusLineParser(statusLine).Parse()
 }

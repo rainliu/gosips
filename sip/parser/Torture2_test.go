@@ -31,11 +31,11 @@ func TestTorture2(t *testing.T) {
 	tvi := torture2_i
 	tvo := torture2_o
 
-	for i := 0; i < 0; /*len(tvi)*/ i++ {
+	for i := 0; i < len(tvi); i++ {
+		t.Log(i + 1)
 		smp := NewStringMsgParser()
 		if sm, err := smp.ParseSIPMessage(tvi[i]); err != nil {
 			t.Log(err)
-			t.Fail()
 		} else {
 			d := sm.String()
 			s := tvo[i]
@@ -391,7 +391,7 @@ var torture2_o = []string{
 		"CSeq: 8 INVITE\r\n" +
 		"Via: SIP/2.0/UDP host5.example.com;branch=z9hG4bK-39234-23523\r\n" +
 		"Content-Type: application/sdp\r\n" +
-		"Content-Length: 154\r\n" +
+		"Content-Length: 9999\r\n" +
 		"\r\n" +
 		"v=0\r\n" +
 		"o=mhandley 29739 7272939 IN IP4 192.0.2.155\r\n" +
@@ -505,7 +505,7 @@ var torture2_o = []string{
 		"m=video 3227 RTP/AVP 31\r\n" +
 		"a=rtpmap:31 LPC\r\n",
 
-	"INVITE  sip:user@example.com  SIP/2.0\r\n" +
+	"INVITE sip:user@example.com SIP/2.0\r\n" +
 		"Max-Forwards: 8\r\n" +
 		"To: <sip:user@example.com>\r\n" +
 		"From: <sip:caller@example.net>;tag=8814\r\n" +
@@ -525,7 +525,7 @@ var torture2_o = []string{
 		"m=video 3227 RTP/AVP 31\r\n" +
 		"a=rtpmap:31 LPC\r\n",
 
-	"OPTIONS sip:remote-target@example.com SIP/2.0\x20\x20\r\n" +
+	"OPTIONS sip:remote-target@example.com SIP/2.0\r\n" +
 		"Via: SIP/2.0/TCP host1.example.com;branch=z9hG4bK299342093\r\n" +
 		"To: <sip:remote-target@example.com>\r\n" +
 		"From: <sip:local-resource@example.com>;tag=329429089\r\n" +
@@ -584,8 +584,8 @@ var torture2_o = []string{
 		"Call-ID: regbadct.k345asrl3fdbv@10.0.0.1\r\n" +
 		"CSeq: 1 REGISTER\r\n" +
 		"Via: SIP/2.0/UDP 135.180.130.133:5060;branch=z9hG4bKkdjuw\r\n" +
-		"Contact: sip:user@example.com?Route=%3Csip:sip.example.com%3E\r\n" +
-		"l: 0\r\n" +
+		"Contact: <sip:user@example.com?Route=%3Csip:sip.example.com%3E>\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"OPTIONS sip:user@example.org SIP/2.0\r\n" +
@@ -596,7 +596,7 @@ var torture2_o = []string{
 		"Call-ID: badaspec.sdf0234n2nds0a099u23h3hnnw009cdkne3\r\n" +
 		"Accept: application/sdp\r\n" +
 		"CSeq: 3923239 OPTIONS\r\n" +
-		"l: 0\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"OPTIONS sip:t.watson@example.org SIP/2.0\r\n" +
@@ -607,7 +607,7 @@ var torture2_o = []string{
 		"Call-ID: baddn.31415@c.example.com\r\n" +
 		"Accept: application/sdp\r\n" +
 		"CSeq: 3923239 OPTIONS\r\n" +
-		"l: 0\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"OPTIONS sip:t.watson@example.org SIP/7.0\r\n" +
@@ -617,7 +617,7 @@ var torture2_o = []string{
 		"To: \"T. Watson\" <sip:t.watson@example.org>\r\n" +
 		"Call-ID: badvers.31417@c.example.com\r\n" +
 		"CSeq 1 OPTIONS\r\n" +
-		"l: 0\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"OPTIONS sip:user@example.com SIP/2.0\r\n" +
@@ -625,9 +625,9 @@ var torture2_o = []string{
 		"From: <sip:caller@example.net>;tag=34525\r\n" +
 		"Max-Forwards: 6\r\n" +
 		"Call-ID: mismatch01.dj0234sxdfl3\r\n" +
-		"CSeq: 8 INVITE\r\n" +
+		"CSeq: 8 OPTIONS\r\n" +
 		"Via: SIP/2.0/UDP host.example.com;branch=z9hG4bKkdjuw\r\n" +
-		"l: 0\r\n" +
+		"Content-Length: 0\r\n" +
 		"\r\n",
 
 	"NEWMETHOD sip:user@example.com SIP/2.0\r\n" +
@@ -635,11 +635,11 @@ var torture2_o = []string{
 		"From: <sip:caller@example.net>;tag=34525\r\n" +
 		"Max-Forwards: 6\r\n" +
 		"Call-ID: mismatch02.dj0234sxdfl3\r\n" +
-		"CSeq: 8 INVITE\r\n" +
+		"CSeq: 8 NEWMETHOD\r\n" +
 		"Contact: <sip:caller@host.example.net>\r\n" +
 		"Via: SIP/2.0/UDP host.example.net;branch=z9hG4bKkdjuw\r\n" +
 		"Content-Type: application/sdp\r\n" +
-		"l: 138\r\n" +
+		"Content-Length: 138\r\n" +
 		"\r\n" +
 		"v=0\r\n" +
 		"o=mhandley 29739 7272939 IN IP4 192.0.2.1\r\n" +

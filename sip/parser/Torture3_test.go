@@ -33,6 +33,7 @@ func TestTorture3(t *testing.T) {
 	tvo := torture3_o
 
 	for i := 0; i < len(tvi); i++ {
+		//t.Log(i)
 		smp := NewStringMsgParser()
 		if sm, err := smp.ParseSIPMessage(tvi[i]); err != nil {
 			t.Log(err)
@@ -180,7 +181,8 @@ var torture3_i = []string{
 		"t=0 0\r\n" +
 		"m=audio 49217 RTP/AVP 0 12\r\n" +
 		"m=video 3227 RTP/AVP 31\r\n" +
-		"a=rtpmap:31 LPC\r\n",
+		"a=rtpmap:31 LPC\r\n" +
+		"\r\n",
 
 	"OPTIONS sip:user@example.com SIP/2.0\r\n" +
 		"Via: SIP/2.0/UDP host5.example.net;branch=z9hG4bK293423\r\n" +
@@ -389,7 +391,7 @@ var torture3_o = []string{
 		//"To: <sip:other@example.net>\r\n" +
 		//"From: <sip:caller@example.net>;tag=2923420123\r\n" +
 		"Content-Type: application/sdp\r\n" +
-		"Content-Length: 152\r\n" +
+		"Content-Length: 154\r\n" +
 		//"Max-Forwards: 5\r\n" +
 		"\r\n" +
 		"v=0\r\n" +
@@ -399,7 +401,8 @@ var torture3_o = []string{
 		"t=0 0\r\n" +
 		"m=audio 49217 RTP/AVP 0 12\r\n" +
 		"m=video 3227 RTP/AVP 31\r\n" +
-		"a=rtpmap:31 LPC\r\n",
+		"a=rtpmap:31 LPC\r\n" +
+		"\r\n",
 
 	"OPTIONS sip:user@example.com SIP/2.0\r\n" +
 		"Via: SIP/2.0/UDP host5.example.net;branch=z9hG4bK293423\r\n" +
