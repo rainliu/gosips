@@ -34,7 +34,7 @@ type StringMsgParser struct {
 	rawMessage1    string // Unprocessed message  (for error reporting)
 	currentMessage string // the message being parsed. (for error reporting)
 
-	//private ParseExceptionListener parseExceptionListener;
+	parseExceptionListener ParseExceptionListener
 
 	messageHeaders map[int]string // Message headers
 
@@ -136,10 +136,9 @@ func (this *StringMsgParser) ReadBytesToEnd() []byte {
  * @param  pexhadler is a class
  *  	that implements the ParseExceptionListener interface.
  */
-// public void SetParseExceptionListener
-// ( ParseExceptionListener pexhandler ) {
-//     parseExceptionListener = pexhandler;
-// }
+func (this *StringMsgParser) SetParseExceptionListener(pexhandler ParseExceptionListener) {
+	this.parseExceptionListener = pexhandler
+}
 
 /** Return true if the body is encoded as a string.
  * If the parseSIPMessage(String) method is invoked then the body
@@ -352,14 +351,26 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
 		sipmsg = message.NewSIPRequest()
 		var rl *header.RequestLine
 		if rl, err = NewRequestLineParser(firstLine + "\n").Parse(); err != nil {
-			return nil, err
+			if this.parseExceptionListener != nil {
+				if err = this.parseExceptionListener.HandleException(err, sipmsg, firstLine, currentMessage); err != nil {
+					return nil, err
+				}
+			} else {
+				return nil, err
+			}
 		}
 		sipmsg.(*message.SIPRequest).SetRequestLine(rl)
 	} else {
 		sipmsg = message.NewSIPResponse()
 		var sl *header.StatusLine
 		if sl, err = NewStatusLineParser(firstLine + "\n").Parse(); err != nil {
-			return nil, err
+			if this.parseExceptionListener != nil {
+				if err = this.parseExceptionListener.HandleException(err, sipmsg, firstLine, currentMessage); err != nil {
+					return nil, err
+				}
+			} else {
+				return nil, err
+			}
 		}
 		sipmsg.(*message.SIPResponse).SetStatusLine(sl)
 	}
@@ -372,12 +383,24 @@ func (this *StringMsgParser) ParseMessage(currentMessage string) (message.Messag
 
 		var hdrParser Parser
 		if hdrParser, err = CreateParser(hdrstring + "\n"); err != nil {
-			return nil, err
+			if this.parseExceptionListener != nil {
+				if err = this.parseExceptionListener.HandleException(err, sipmsg, hdrstring, currentMessage); err != nil {
+					return nil, err
+				}
+			} else {
+				return nil, err
+			}
 		}
 
 		var sipHeader header.Header
 		if sipHeader, err = hdrParser.Parse(); err != nil {
-			return nil, err
+			if this.parseExceptionListener != nil {
+				if err = this.parseExceptionListener.HandleException(err, sipmsg, hdrstring, currentMessage); err != nil {
+					return nil, err
+				}
+			} else {
+				return nil, err
+			}
 		}
 
 		if _, ok := sipmsg.(*message.SIPRequest); ok {
