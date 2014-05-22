@@ -1,11 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : Message.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package message
 
 import (
@@ -41,8 +33,7 @@ import (
  *
 */
 
-type Message interface { //extends Cloneable, Serializable
-
+type Message interface {
 	// Generic header methods of the Message
 
 	/**
@@ -137,7 +128,7 @@ type Message interface { //extends Cloneable, Serializable
 	 * @param header the new Header to replace any existing Headers of that
 	 * type.
 	 */
-	SetHeader(h header.Header)
+	SetHeader(h header.Header) error
 
 	// Content manipulation methods of the Message
 

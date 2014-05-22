@@ -21,17 +21,9 @@ const DEFAULT_METHOD = INVITE
 *   Jeff Keyser added two methods that create responses and generate
 *   cancel requests from incoming orignial  requests without
 *   the additional overhead  of encoding and decoding messages.
-*
-*@version  JAIN-SIP-1.1
-*
-*@author M. Ranganathan <mranga@nist.gov>  <br/>
-*
-*<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
-*
  */
 type SIPRequest struct {
 	SIPMessage
-	//implements javax.sip.message.Request  {
 
 	//transactionPointer core.GenericObject
 

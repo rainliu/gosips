@@ -1,14 +1,4 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : Response.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 package message
-
-import ()
 
 /**
  * A Response message is sent by a recipient of Request once it has received
@@ -185,10 +175,6 @@ import ()
  * </td>
  * </tr>
  * </table>
- *
- * @version 1.1
- * @author Sun Microsystems
- *
  */
 
 type Response interface {

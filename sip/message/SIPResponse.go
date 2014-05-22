@@ -12,18 +12,11 @@ import (
 
 /**
  * SIP Response structure.
- *
- *@version  JAIN-SIP-1.1
- *
- *@author M. Ranganathan <mranga@nist.gov>  <br/>
- *
- *<a href="{@docRoot}/uncopyright.html">This code is in the public domain.</a>
- *
  */
 
 type SIPResponse struct {
 	SIPMessage
-	//implements javax.sip.message.Response {
+
 	statusLine *header.StatusLine
 }
 

@@ -1,11 +1,3 @@
-/**
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Module Name   : GoSIP Specification
- * File Name     : Router.go
- * Author        : Rain Liu
- *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
-
 //TODO move back to address package
 
 package message
@@ -31,9 +23,6 @@ import (
  * The user may define a routing policy dependent on the operation of the
  * SipStack i.e. user agent or proxy, however this routing policy can not be
  * changed dynamically, i.e. the SipStack needs to be deleted and re-created.
- *
- * @author Sun Microsystems
- * @since 1.1
  */
 
 type Router interface {
