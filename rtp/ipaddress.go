@@ -18,25 +18,12 @@ type IPAddress struct {
 
 /** Creates an instance with IP address \c ip and port number \c port (\c port is interpreted in host byte order). */
 func NewIPAddress(ip net.IP, port uint16) *IPAddress {
-	if len(ip) != 4 && len(ip) != 8 {
-		return nil
-	}
-
-	this := &IPAddress{}
-	this.ip = make([]byte, len(ip))
-	copy(this.ip, ip)
-	this.port = port
-
-	return this
+	return &IPAddress{ip: ip, port: port}
 }
 
 /** Sets the IP address of this instance to \c ip. */
 func (this *IPAddress) SetIP(ip net.IP) {
-	if len(ip) != len(this.ip) {
-		return
-	}
-
-	copy(this.ip, ip)
+	this.ip = ip
 }
 
 /** Sets the port number for this instance to \c port which is interpreted in host byte order. */
