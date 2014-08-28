@@ -31,14 +31,14 @@ func NewRTPTimeFromFloat64(t float64) *RTPTime {
 	return this
 }
 
-func NewRTPTimeFromNTPTime(ntptime *RTPNTPTime) *RTPTime {
+func NewRTPTimeFromNTPTime(ntptime *NTPTime) *RTPTime {
 	var s, m uint32
 
-	if ntptime.GetMSW() < RTP_NTPTIMEOFFSET {
+	if ntptime.GetMSW() < NTPTIMEOFFSET {
 		s = 0
 		m = 0
 	} else {
-		s = ntptime.GetMSW() - RTP_NTPTIMEOFFSET
+		s = ntptime.GetMSW() - NTPTIMEOFFSET
 
 		x := float64(ntptime.GetLSW())
 		x /= (65536.0 * 65536.0)
@@ -50,13 +50,13 @@ func NewRTPTimeFromNTPTime(ntptime *RTPNTPTime) *RTPTime {
 	return this
 }
 
-func (this *RTPTime) GetNTPTime() *RTPNTPTime {
-	msw := this.sec + RTP_NTPTIMEOFFSET
+func (this *RTPTime) GetNTPTime() *NTPTime {
+	msw := this.sec + NTPTIMEOFFSET
 	x := float64(this.microsec) / float64(1000000.0)
 	x *= (65536.0 * 65536.0)
 	lsw := uint32(x)
 
-	return NewRTPNTPTime(msw, lsw)
+	return NewNTPTime(msw, lsw)
 }
 
 func (this *RTPTime) Sub(that *RTPTime) {
