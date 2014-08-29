@@ -50,7 +50,7 @@ func (this *IPAddress) GetAddressType() AddressType {
 	}
 }
 
-func (this *IPAddress) IsSameAddress(addr RTPAddress) bool {
+func (this *IPAddress) IsSameAddress(addr Address) bool {
 	if addr2, ok := addr.(*IPAddress); ok {
 		if this.ip.Equal(addr2.ip) && addr2.port == this.port {
 			return true
@@ -59,7 +59,7 @@ func (this *IPAddress) IsSameAddress(addr RTPAddress) bool {
 	return false
 }
 
-func (this *IPAddress) IsFromSameHost(addr RTPAddress) bool {
+func (this *IPAddress) IsFromSameHost(addr Address) bool {
 	if addr2, ok := addr.(*IPAddress); ok {
 		if this.ip.Equal(addr2.ip) {
 			return true
@@ -68,7 +68,7 @@ func (this *IPAddress) IsFromSameHost(addr RTPAddress) bool {
 	return false
 }
 
-func (this *IPAddress) Clone() RTPAddress {
+func (this *IPAddress) Clone() Address {
 	return &IPAddress{ip: this.ip, port: this.port}
 }
 

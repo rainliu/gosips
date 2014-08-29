@@ -50,6 +50,10 @@ func NewRTPTimeFromNTPTime(ntptime *NTPTime) *RTPTime {
 	return this
 }
 
+func (this *RTPTime) Clone() *RTPTime {
+	return &RTPTime{sec: this.sec, microsec: this.microsec}
+}
+
 func (this *RTPTime) GetNTPTime() *NTPTime {
 	msw := this.sec + NTPTIMEOFFSET
 	x := float64(this.microsec) / float64(1000000.0)

@@ -11,7 +11,7 @@ const (
 )
 
 /** This class is an abstract class which is used to specify destinations, multicast groups etc. */
-type RTPAddress interface {
+type Address interface {
 	/** Returns the type of address the actual implementation represents. */
 	GetAddressType() AddressType
 
@@ -20,19 +20,19 @@ type RTPAddress interface {
 	 *  corresponding memory manager will be used to allocate the memory for the address
 	 *  copy.
 	 */
-	Clone() RTPAddress
+	Clone() Address
 
 	/** Checks if the address \c addr is the same address as the one this instance represents.
 	 *  Checks if the address \c addr is the same address as the one this instance represents.
 	 *  Implementations must be able to handle a NULL argument.
 	 */
-	IsSameAddress(addr RTPAddress) bool
+	IsSameAddress(addr Address) bool
 
 	/** Checks if the address \c addr represents the same host as this instance.
 	 *  Checks if the address \c addr represents the same host as this instance. Implementations
 	 *  must be able to handle a NULL argument.
 	 */
-	IsFromSameHost(addr RTPAddress) bool
+	IsFromSameHost(addr Address) bool
 
 	String() string
 }

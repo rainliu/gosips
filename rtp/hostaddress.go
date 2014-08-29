@@ -39,7 +39,7 @@ func (this *HostAddress) GetAddressType() AddressType {
 	return HostAddressType
 }
 
-func (this *HostAddress) IsSameAddress(addr RTPAddress) bool {
+func (this *HostAddress) IsSameAddress(addr Address) bool {
 	if addr2, ok := addr.(*HostAddress); ok {
 		if addr2.host == this.host && addr2.port == this.port {
 			return true
@@ -48,7 +48,7 @@ func (this *HostAddress) IsSameAddress(addr RTPAddress) bool {
 	return false
 }
 
-func (this *HostAddress) IsFromSameHost(addr RTPAddress) bool {
+func (this *HostAddress) IsFromSameHost(addr Address) bool {
 	if addr2, ok := addr.(*HostAddress); ok {
 		if addr2.host == this.host {
 			return true
@@ -57,7 +57,7 @@ func (this *HostAddress) IsFromSameHost(addr RTPAddress) bool {
 	return false
 }
 
-func (this *HostAddress) Clone() RTPAddress {
+func (this *HostAddress) Clone() Address {
 	return &HostAddress{host: this.host, port: this.port}
 }
 
