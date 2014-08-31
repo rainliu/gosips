@@ -34,8 +34,8 @@ const HEADER_M_POS = 8
 const HEADER_PT_MSK = 0x7F
 const HEADER_PT_POS = 9
 
-const SIZEOF_HEADER = 12         //12 bytes or 3 dwords
-const SIZEOF_EXTENSIONHEADER = 4 //4 bytes or 1 dwords
+const SIZEOF_HEADER = 12   //12 bytes or 3 dwords
+const SIZEOF_EXTENSION = 4 //4 bytes or 1 dwords
 
 type Header struct {
 	version     uint8 //:2;
@@ -48,9 +48,16 @@ type Header struct {
 	sequencenumber uint16
 	timestamp      uint32
 	ssrc           uint32
+	csrc           []uint32
 }
 
-func NewHeader(packetbytes []byte) *Header {
+func NewHeader() *Header {
+	this := &Header{}
+
+	return this
+}
+
+func NewHeaderFromBytes(packetbytes []byte) *Header {
 	this := &Header{}
 	if err := this.Parse(packetbytes); err != nil {
 		return nil
@@ -74,12 +81,23 @@ func (this *Header) Parse(packetbytes []byte) error {
 	this.timestamp = uint32(packetbytes[4])<<24 | uint32(packetbytes[5])<<16 | uint32(packetbytes[6])<<8 | uint32(packetbytes[7])
 	this.ssrc = uint32(packetbytes[8])<<24 | uint32(packetbytes[9])<<16 | uint32(packetbytes[10])<<8 | uint32(packetbytes[11])
 
+	if len(packetbytes) < SIZEOF_HEADER+int(this.csrccount)*4 {
+		return errors.New("ERR_RTP_PACKET_INVALIDPACKET")
+	}
+
+	this.csrc = make([]uint32, this.csrccount)
+	for i := uint8(0); i < this.csrccount; i++ {
+		this.csrc[i] = uint32(packetbytes[SIZEOF_HEADER+i*4+0])<<24 |
+			uint32(packetbytes[SIZEOF_HEADER+i*4+1])<<16 |
+			uint32(packetbytes[SIZEOF_HEADER+i*4+2])<<8 |
+			uint32(packetbytes[SIZEOF_HEADER+i*4+3])
+	}
 	return nil
 }
 
 func (this *Header) Encode() []byte {
 	var packetbytes []byte
-	packetbytes = make([]byte, SIZEOF_HEADER)
+	packetbytes = make([]byte, SIZEOF_HEADER+int(this.csrccount)*4)
 
 	packetbytes[0] = ((this.version & HEADER_V_MSK) << HEADER_V_POS) |
 		((this.padding & HEADER_P_MSK) << HEADER_P_POS) |
@@ -102,41 +120,73 @@ func (this *Header) Encode() []byte {
 	packetbytes[10] = byte((this.ssrc >> 8) & 0xFF)
 	packetbytes[11] = byte((this.ssrc >> 0) & 0xFF)
 
+	for i := uint8(0); i < this.csrccount; i++ {
+		packetbytes[SIZEOF_HEADER+i*4+0] = byte((this.csrc[i] >> 24) & 0xFF)
+		packetbytes[SIZEOF_HEADER+i*4+0] = byte((this.csrc[i] >> 16) & 0xFF)
+		packetbytes[SIZEOF_HEADER+i*4+0] = byte((this.csrc[i] >> 8) & 0xFF)
+		packetbytes[SIZEOF_HEADER+i*4+0] = byte((this.csrc[i] >> 0) & 0xFF)
+	}
+
 	return packetbytes
 }
 
-type ExtensionHeader struct {
-	extid  uint16
+type Extension struct {
+	id     uint16
 	length uint16
+	data   []uint32
 }
 
-func NewExtensionHeader(packetbytes []byte) *ExtensionHeader {
-	this := &ExtensionHeader{}
+func NewExtension() *Extension {
+	this := &Extension{}
+
+	return this
+}
+
+func NewExtensionFromBytes(packetbytes []byte) *Extension {
+	this := &Extension{}
 	if err := this.Parse(packetbytes); err != nil {
 		return nil
 	}
 	return this
 }
 
-func (this *ExtensionHeader) Parse(packetbytes []byte) error {
-	if len(packetbytes) < 4 {
+func (this *Extension) Parse(packetbytes []byte) error {
+	if len(packetbytes) < SIZEOF_EXTENSION {
 		return errors.New("ERR_RTP_PACKET_INVALIDPACKET")
 	}
 
-	this.extid = uint16(packetbytes[0])<<8 | uint16(packetbytes[1])
+	this.id = uint16(packetbytes[0])<<8 | uint16(packetbytes[1])
 	this.length = uint16(packetbytes[2])<<8 | uint16(packetbytes[3])
+
+	if len(packetbytes) < SIZEOF_EXTENSION+int(this.length)*4 {
+		return errors.New("ERR_RTP_PACKET_INVALIDPACKET")
+	}
+
+	for i := uint16(0); i < this.length; i++ {
+		this.data[i] = uint32(packetbytes[SIZEOF_EXTENSION+i*4+0])<<24 |
+			uint32(packetbytes[SIZEOF_EXTENSION+i*4+1])<<16 |
+			uint32(packetbytes[SIZEOF_EXTENSION+i*4+2])<<8 |
+			uint32(packetbytes[SIZEOF_EXTENSION+i*4+3])
+	}
 
 	return nil
 }
 
-func (this *ExtensionHeader) Encode() []byte {
+func (this *Extension) Encode() []byte {
 	var packetbytes []byte
-	packetbytes = make([]byte, SIZEOF_EXTENSIONHEADER)
+	packetbytes = make([]byte, SIZEOF_EXTENSION+this.length*4)
 
-	packetbytes[0] = byte((this.extid >> 8) & 0xFF)
-	packetbytes[1] = byte((this.extid >> 0) & 0xFF)
+	packetbytes[0] = byte((this.id >> 8) & 0xFF)
+	packetbytes[1] = byte((this.id >> 0) & 0xFF)
 	packetbytes[2] = byte((this.length >> 8) & 0xFF)
 	packetbytes[3] = byte((this.length >> 0) & 0xFF)
+
+	for i := uint16(0); i < this.length; i++ {
+		packetbytes[SIZEOF_EXTENSION+i*4+0] = byte(this.data[i]>>24) & 0xFF
+		packetbytes[SIZEOF_EXTENSION+i*4+1] = byte(this.data[i]>>16) & 0xFF
+		packetbytes[SIZEOF_EXTENSION+i*4+2] = byte(this.data[i]>>8) & 0xFF
+		packetbytes[SIZEOF_EXTENSION+i*4+3] = byte(this.data[i]>>0) & 0xFF
+	}
 
 	return packetbytes
 }
