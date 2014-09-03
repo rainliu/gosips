@@ -2,15 +2,15 @@ package rtp
 
 import "errors"
 
-/** Represents an RTP Packet.
+/** Represents an RTP RTPPacket.
  *  The RTPPacket class can be used to parse a RTPRawPacket instance if it represents RTP data.
  *  The class can also be used to create a new RTP packet according to the parameters specified by
  *  the user.
  */
-type Packet struct {
+type RTPPacket struct {
 	receivetime *RTPTime
-	header      *Header
-	extension   *Extension
+	header      *RTPHeader
+	extension   *RTPExtension
 	payload     []byte
 
 	packet []byte
@@ -19,8 +19,8 @@ type Packet struct {
 /** Creates an RTPPacket instance based upon the data in \c rawpack, optionally installing a memory manager.
  *  If successful, the data is moved from the raw packet to the RTPPacket instance.
  */
-func NewPacketFromRawPacket(rawpack *RawPacket) *Packet {
-	this := &Packet{}
+func NewRTPPacketFromRawPacket(rawpack *RawPacket) *RTPPacket {
+	this := &RTPPacket{}
 	this.receivetime = rawpack.GetReceiveTime().Clone()
 	if err := this.ParseRawPacket(rawpack); err != nil {
 		return nil
@@ -28,7 +28,7 @@ func NewPacketFromRawPacket(rawpack *RawPacket) *Packet {
 	return this
 }
 
-func (this *Packet) ParseRawPacket(rawpack *RawPacket) error {
+func (this *RTPPacket) ParseRawPacket(rawpack *RawPacket) error {
 	if !rawpack.IsRTP() { // If we didn't receive it on the RTP port, we'll ignore it
 		return errors.New("ERR_RTP_PACKET_INVALIDPACKET")
 	}
@@ -36,7 +36,7 @@ func (this *Packet) ParseRawPacket(rawpack *RawPacket) error {
 	this.packet = make([]byte, len(rawpack.GetData()))
 	copy(this.packet, rawpack.GetData())
 
-	this.header = NewHeader()
+	this.header = NewRTPHeader()
 	if err := this.header.Parse(this.packet); err != nil {
 		return err
 	}
@@ -60,13 +60,13 @@ func (this *Packet) ParseRawPacket(rawpack *RawPacket) error {
 
 	var numpadbytes, payloadoffset, payloadlength int
 
-	payloadoffset = SIZEOF_HEADER + 4*int(this.header.csrccount)
+	payloadoffset = SIZEOF_RTPHEADER + 4*int(this.header.csrccount)
 	if this.header.extension != 0 { // got header extension
-		this.extension = NewExtension()
+		this.extension = NewRTPExtension()
 		if err := this.extension.Parse(this.packet[payloadoffset:]); err != nil {
 			return err
 		}
-		payloadoffset += SIZEOF_EXTENSION + 4*int(this.extension.length)
+		payloadoffset += SIZEOF_RTPEXTENSION + 4*int(this.extension.length)
 	} else {
 		this.extension = nil
 	}
@@ -105,8 +105,8 @@ func NewPacket(payloadtype uint8,
 	gotextension bool,
 	extensionid uint16,
 	extensionlen uint16,
-	extensiondata []uint32) *Packet {
-	this := &Packet{}
+	extensiondata []uint32) *RTPPacket {
+	this := &RTPPacket{}
 
 	this.receivetime = &RTPTime{0, 0}
 	if err := this.BuildPacket(payloadtype,
@@ -126,7 +126,7 @@ func NewPacket(payloadtype uint8,
 
 	return this
 }
-func (this *Packet) BuildPacket(payloadtype uint8,
+func (this *RTPPacket) BuildPacket(payloadtype uint8,
 	payloaddata []byte,
 	seqnr uint16,
 	timestamp uint32,
@@ -150,17 +150,17 @@ func (this *Packet) BuildPacket(payloadtype uint8,
 	}
 
 	var packetlength, packetoffset int
-	packetlength = SIZEOF_HEADER
+	packetlength = SIZEOF_RTPHEADER
 	packetlength += int(numcsrcs) * 4 //sizeof(uint32_t)*((size_t)
 	if gotextension {
-		packetlength += SIZEOF_EXTENSION      //(RTPExtensionHeader);
+		packetlength += SIZEOF_RTPEXTENSION   //(RTPExtensionHeader);
 		packetlength += int(extensionlen) * 4 //sizeof(uint32_t)*((size_t)
 	}
 	packetlength += len(payloaddata) //payloadlen;
 	this.packet = make([]byte, packetlength)
 
 	// Ok, now we'll just fill in...
-	this.header = NewHeader()
+	this.header = NewRTPHeader()
 	this.header.version = RTP_VERSION
 	this.header.padding = 0
 	if gotextension {
@@ -185,11 +185,11 @@ func (this *Packet) BuildPacket(payloadtype uint8,
 		}
 	}
 
-	packetoffset = SIZEOF_HEADER + int(numcsrcs)*4
+	packetoffset = SIZEOF_RTPHEADER + int(numcsrcs)*4
 	copy(this.packet[0:packetoffset], this.header.Encode())
 
 	if gotextension {
-		this.extension = NewExtension()
+		this.extension = NewRTPExtension()
 		this.extension.id = extensionid
 		this.extension.length = extensionlen //sizeof(uint32_t);
 		if extensionlen != 0 {
@@ -198,9 +198,9 @@ func (this *Packet) BuildPacket(payloadtype uint8,
 				this.extension.data[i] = extensiondata[i]
 			}
 		}
-		copy(this.packet[packetoffset:packetoffset+SIZEOF_EXTENSION+int(extensionlen)*4], this.extension.Encode())
+		copy(this.packet[packetoffset:packetoffset+SIZEOF_RTPEXTENSION+int(extensionlen)*4], this.extension.Encode())
 
-		packetoffset += SIZEOF_EXTENSION + int(extensionlen)*4
+		packetoffset += SIZEOF_RTPEXTENSION + int(extensionlen)*4
 	} else {
 		this.extension = nil
 	}
@@ -213,24 +213,24 @@ func (this *Packet) BuildPacket(payloadtype uint8,
 }
 
 /** Returns \c true if the RTP packet has a header extension and \c false otherwise. */
-func (this *Packet) HasExtension() bool {
+func (this *RTPPacket) HasExtension() bool {
 	return this.header.extension != 0
 }
 
 /** Returns \c true if the marker bit was set and \c false otherwise. */
-func (this *Packet) HasMarker() bool {
+func (this *RTPPacket) HasMarker() bool {
 	return this.header.marker != 0
 }
 
 /** Returns the number of CSRCs contained in this packet. */
-func (this *Packet) GetCSRCCount() uint8 {
+func (this *RTPPacket) GetCSRCCount() uint8 {
 	return this.header.csrccount
 }
 
 /** Returns a specific CSRC identifier.
  *  Returns a specific CSRC identifier. The parameter \c num can go from 0 to GetCSRCCount()-1.
  */
-func (this *Packet) GetCSRC(num uint8) uint32 {
+func (this *RTPPacket) GetCSRC(num uint8) uint32 {
 	if num >= this.header.csrccount {
 		return 0
 	}
@@ -239,7 +239,7 @@ func (this *Packet) GetCSRC(num uint8) uint32 {
 }
 
 /** Returns the payload type of the packet. */
-func (this *Packet) GetPayloadType() uint8 {
+func (this *RTPPacket) GetPayloadType() uint8 {
 	return this.header.payloadtype
 }
 
@@ -247,47 +247,47 @@ func (this *Packet) GetPayloadType() uint8 {
  *  Returns the extended sequence number of the packet. When the packet is just received,
  *  only the low $16$ bits will be set. The high 16 bits can be filled in later.
  */
-// func (this *Packet) GetExtendedSequenceNumber() uint32 {
+// func (this *RTPPacket) GetExtendedSequenceNumber() uint32 {
 // 	return this.extseqnr
 // }
 
 /** Returns the sequence number of this packet. */
-func (this *Packet) GetSequenceNumber() uint16 {
+func (this *RTPPacket) GetSequenceNumber() uint16 {
 	return this.header.sequencenumber //uint16(this.extseqnr & 0x0000FFFF)
 }
 
 /** Sets the extended sequence number of this packet to \c seq. */
-// func (this *Packet) SetExtendedSequenceNumber(seq uint32) {
+// func (this *RTPPacket) SetExtendedSequenceNumber(seq uint32) {
 // 	this.extseqnr = seq
 // }
 
 /** Returns the timestamp of this packet. */
-func (this *Packet) GetTimestamp() uint32 {
+func (this *RTPPacket) GetTimestamp() uint32 {
 	return this.header.timestamp
 }
 
 /** Returns the SSRC identifier stored in this packet. */
-func (this *Packet) GetSSRC() uint32 {
+func (this *RTPPacket) GetSSRC() uint32 {
 	return this.header.ssrc
 }
 
 /** Returns a pointer to the actual payload data. */
-func (this *Packet) GetPayload() []byte {
+func (this *RTPPacket) GetPayload() []byte {
 	return this.payload
 }
 
 /** If a header extension is present, this function returns the extension identifier. */
-func (this *Packet) GetExtensionID() uint16 {
+func (this *RTPPacket) GetExtensionID() uint16 {
 	return this.extension.id
 }
 
 /** Returns the length of the header extension data. */
-func (this *Packet) GetExtensionLength() uint16 {
+func (this *RTPPacket) GetExtensionLength() uint16 {
 	return this.extension.length
 }
 
 /** Returns the header extension data. */
-func (this *Packet) GetExtensionData() []uint32 {
+func (this *RTPPacket) GetExtensionData() []uint32 {
 	return this.extension.data
 }
 
@@ -296,16 +296,16 @@ func (this *Packet) GetExtensionData() []uint32 {
  *  reception time is stored in the RTPPacket instance. This function then retrieves that
  *  time.
  */
-func (this *Packet) GetReceiveTime() *RTPTime {
+func (this *RTPPacket) GetReceiveTime() *RTPTime {
 	return this.receivetime
 }
 
 /** Returns a pointer to the data of the entire packet. */
-func (this *Packet) GetPacket() []byte {
+func (this *RTPPacket) GetPacket() []byte {
 	return this.packet
 }
 
-func (this *Packet) Dump() {
+func (this *RTPPacket) Dump() {
 	/*int i;
 
 	printf("Payload type:                %d\n",(int)GetPayloadType());
@@ -318,12 +318,12 @@ func (this *Packet) Dump() {
 		printf("    CSRC[%02d]:                0x%08x\n",i,GetCSRC(i));
 	printf("Payload:                     %s\n",GetPayloadData());
 	printf("Payload length:              %d\n",GetPayloadLength());
-	printf("Packet length:               %d\n",GetPacketLength());
-	printf("Extension:                   %s\n",HasExtension()?"yes":"no");
+	printf("RTPPacket length:               %d\n",GetPacketLength());
+	printf("RTPExtension:                   %s\n",HasExtension()?"yes":"no");
 	if (HasExtension())
 	{
-		printf("    Extension ID:            0x%04x\n",GetExtensionID());
-		printf("    Extension data:          %s\n",GetExtensionData());
-		printf("    Extension length:        %d\n",GetExtensionLength());
+		printf("    RTPExtension ID:            0x%04x\n",GetExtensionID());
+		printf("    RTPExtension data:          %s\n",GetExtensionData());
+		printf("    RTPExtension length:        %d\n",GetExtensionLength());
 	}*/
 }

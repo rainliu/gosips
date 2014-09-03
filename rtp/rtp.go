@@ -21,23 +21,31 @@ const RTP_RTCPTYPE_SDES = 202
 const RTP_RTCPTYPE_BYE = 203
 const RTP_RTCPTYPE_APP = 204
 
-const HEADER_V_MSK = 0x3
-const HEADER_V_POS = 0
-const HEADER_P_MSK = 0x1
-const HEADER_P_POS = 2
-const HEADER_X_MSK = 0x1
-const HEADER_X_POS = 3
-const HEADER_CC_MSK = 0xF
-const HEADER_CC_POS = 4
-const HEADER_M_MSK = 0x1
-const HEADER_M_POS = 8
-const HEADER_PT_MSK = 0x7F
-const HEADER_PT_POS = 9
+const RTP_HEADER_V_MSK = 0x3
+const RTP_HEADER_V_POS = 0
+const RTP_HEADER_P_MSK = 0x1
+const RTP_HEADER_P_POS = 2
+const RTP_HEADER_X_MSK = 0x1
+const RTP_HEADER_X_POS = 3
+const RTP_HEADER_CC_MSK = 0xF
+const RTP_HEADER_CC_POS = 4
+const RTP_HEADER_M_MSK = 0x1
+const RTP_HEADER_M_POS = 8
+const RTP_HEADER_PT_MSK = 0x7F
+const RTP_HEADER_PT_POS = 9
 
-const SIZEOF_HEADER = 12   //12 bytes or 3 dwords
-const SIZEOF_EXTENSION = 4 //4 bytes or 1 dwords
+const RTCP_HEADER_C_MSK = 0x1F
+const RTCP_HEADER_C_POS = 0
+const RTCP_HEADER_P_MSK = 0x1
+const RTCP_HEADER_P_POS = 5
+const RTCP_HEADER_V_MSK = 0x3
+const RTCP_HEADER_V_POS = 6
 
-type Header struct {
+const SIZEOF_RTPHEADER = 12   //12 bytes or 3 dwords
+const SIZEOF_RTPEXTENSION = 4 //4 bytes or 1 dwords
+const SIZEOF_RTCPHEADER = 4   //4 bytes or 1 dwords
+
+type RTPHeader struct {
 	version     uint8 //:2;
 	padding     uint8 //:1;
 	extension   uint8 //:1;
@@ -51,61 +59,61 @@ type Header struct {
 	csrc           []uint32
 }
 
-func NewHeader() *Header {
-	this := &Header{}
+func NewRTPHeader() *RTPHeader {
+	this := &RTPHeader{}
 
 	return this
 }
 
-func NewHeaderFromBytes(packetbytes []byte) *Header {
-	this := &Header{}
+func NewRTPHeaderFromBytes(packetbytes []byte) *RTPHeader {
+	this := &RTPHeader{}
 	if err := this.Parse(packetbytes); err != nil {
 		return nil
 	}
 	return this
 }
 
-func (this *Header) Parse(packetbytes []byte) error {
-	if len(packetbytes) < SIZEOF_HEADER {
+func (this *RTPHeader) Parse(packetbytes []byte) error {
+	if len(packetbytes) < SIZEOF_RTPHEADER {
 		return errors.New("ERR_RTP_PACKET_INVALIDPACKET")
 	}
 
-	this.version = (packetbytes[0] >> HEADER_V_POS) & HEADER_V_MSK
-	this.padding = (packetbytes[0] >> HEADER_P_POS) & HEADER_P_MSK
-	this.extension = (packetbytes[0] >> HEADER_X_POS) & HEADER_X_MSK
-	this.csrccount = (packetbytes[0] >> HEADER_CC_POS) & HEADER_CC_MSK
-	this.marker = (packetbytes[1] >> HEADER_M_POS) & HEADER_M_MSK
-	this.payloadtype = (packetbytes[1] >> HEADER_PT_POS) & HEADER_PT_MSK
+	this.version = (packetbytes[0] >> RTP_HEADER_V_POS) & RTP_HEADER_V_MSK
+	this.padding = (packetbytes[0] >> RTP_HEADER_P_POS) & RTP_HEADER_P_MSK
+	this.extension = (packetbytes[0] >> RTP_HEADER_X_POS) & RTP_HEADER_X_MSK
+	this.csrccount = (packetbytes[0] >> RTP_HEADER_CC_POS) & RTP_HEADER_CC_MSK
+	this.marker = (packetbytes[1] >> RTP_HEADER_M_POS) & RTP_HEADER_M_MSK
+	this.payloadtype = (packetbytes[1] >> RTP_HEADER_PT_POS) & RTP_HEADER_PT_MSK
 
 	this.sequencenumber = uint16(packetbytes[2])<<8 | uint16(packetbytes[3])
 	this.timestamp = uint32(packetbytes[4])<<24 | uint32(packetbytes[5])<<16 | uint32(packetbytes[6])<<8 | uint32(packetbytes[7])
 	this.ssrc = uint32(packetbytes[8])<<24 | uint32(packetbytes[9])<<16 | uint32(packetbytes[10])<<8 | uint32(packetbytes[11])
 
-	if len(packetbytes) < SIZEOF_HEADER+int(this.csrccount)*4 {
+	if len(packetbytes) < SIZEOF_RTPHEADER+int(this.csrccount)*4 {
 		return errors.New("ERR_RTP_PACKET_INVALIDPACKET")
 	}
 
 	this.csrc = make([]uint32, this.csrccount)
 	for i := uint8(0); i < this.csrccount; i++ {
-		this.csrc[i] = uint32(packetbytes[SIZEOF_HEADER+i*4+0])<<24 |
-			uint32(packetbytes[SIZEOF_HEADER+i*4+1])<<16 |
-			uint32(packetbytes[SIZEOF_HEADER+i*4+2])<<8 |
-			uint32(packetbytes[SIZEOF_HEADER+i*4+3])
+		this.csrc[i] = uint32(packetbytes[SIZEOF_RTPHEADER+i*4+0])<<24 |
+			uint32(packetbytes[SIZEOF_RTPHEADER+i*4+1])<<16 |
+			uint32(packetbytes[SIZEOF_RTPHEADER+i*4+2])<<8 |
+			uint32(packetbytes[SIZEOF_RTPHEADER+i*4+3])
 	}
 	return nil
 }
 
-func (this *Header) Encode() []byte {
+func (this *RTPHeader) Encode() []byte {
 	var packetbytes []byte
-	packetbytes = make([]byte, SIZEOF_HEADER+int(this.csrccount)*4)
+	packetbytes = make([]byte, SIZEOF_RTPHEADER+int(this.csrccount)*4)
 
-	packetbytes[0] = ((this.version & HEADER_V_MSK) << HEADER_V_POS) |
-		((this.padding & HEADER_P_MSK) << HEADER_P_POS) |
-		((this.extension & HEADER_X_MSK) << HEADER_X_POS) |
-		((this.csrccount & HEADER_CC_MSK) << HEADER_CC_POS)
+	packetbytes[0] = ((this.version & RTP_HEADER_V_MSK) << RTP_HEADER_V_POS) |
+		((this.padding & RTP_HEADER_P_MSK) << RTP_HEADER_P_POS) |
+		((this.extension & RTP_HEADER_X_MSK) << RTP_HEADER_X_POS) |
+		((this.csrccount & RTP_HEADER_CC_MSK) << RTP_HEADER_CC_POS)
 
-	packetbytes[1] = ((this.marker & HEADER_M_MSK) << HEADER_M_POS) |
-		((this.payloadtype & HEADER_PT_MSK) << HEADER_PT_POS)
+	packetbytes[1] = ((this.marker & RTP_HEADER_M_MSK) << RTP_HEADER_M_POS) |
+		((this.payloadtype & RTP_HEADER_PT_MSK) << RTP_HEADER_PT_POS)
 
 	packetbytes[2] = byte((this.sequencenumber >> 8) & 0xFF)
 	packetbytes[3] = byte(this.sequencenumber & 0xFF)
@@ -121,60 +129,60 @@ func (this *Header) Encode() []byte {
 	packetbytes[11] = byte((this.ssrc >> 0) & 0xFF)
 
 	for i := uint8(0); i < this.csrccount; i++ {
-		packetbytes[SIZEOF_HEADER+i*4+0] = byte((this.csrc[i] >> 24) & 0xFF)
-		packetbytes[SIZEOF_HEADER+i*4+0] = byte((this.csrc[i] >> 16) & 0xFF)
-		packetbytes[SIZEOF_HEADER+i*4+0] = byte((this.csrc[i] >> 8) & 0xFF)
-		packetbytes[SIZEOF_HEADER+i*4+0] = byte((this.csrc[i] >> 0) & 0xFF)
+		packetbytes[SIZEOF_RTPHEADER+i*4+0] = byte((this.csrc[i] >> 24) & 0xFF)
+		packetbytes[SIZEOF_RTPHEADER+i*4+0] = byte((this.csrc[i] >> 16) & 0xFF)
+		packetbytes[SIZEOF_RTPHEADER+i*4+0] = byte((this.csrc[i] >> 8) & 0xFF)
+		packetbytes[SIZEOF_RTPHEADER+i*4+0] = byte((this.csrc[i] >> 0) & 0xFF)
 	}
 
 	return packetbytes
 }
 
-type Extension struct {
+type RTPExtension struct {
 	id     uint16
 	length uint16
 	data   []uint32
 }
 
-func NewExtension() *Extension {
-	this := &Extension{}
+func NewRTPExtension() *RTPExtension {
+	this := &RTPExtension{}
 
 	return this
 }
 
-func NewExtensionFromBytes(packetbytes []byte) *Extension {
-	this := &Extension{}
+func NewRTPExtensionFromBytes(packetbytes []byte) *RTPExtension {
+	this := &RTPExtension{}
 	if err := this.Parse(packetbytes); err != nil {
 		return nil
 	}
 	return this
 }
 
-func (this *Extension) Parse(packetbytes []byte) error {
-	if len(packetbytes) < SIZEOF_EXTENSION {
+func (this *RTPExtension) Parse(packetbytes []byte) error {
+	if len(packetbytes) < SIZEOF_RTPEXTENSION {
 		return errors.New("ERR_RTP_PACKET_INVALIDPACKET")
 	}
 
 	this.id = uint16(packetbytes[0])<<8 | uint16(packetbytes[1])
 	this.length = uint16(packetbytes[2])<<8 | uint16(packetbytes[3])
 
-	if len(packetbytes) < SIZEOF_EXTENSION+int(this.length)*4 {
+	if len(packetbytes) < SIZEOF_RTPEXTENSION+int(this.length)*4 {
 		return errors.New("ERR_RTP_PACKET_INVALIDPACKET")
 	}
 
 	for i := uint16(0); i < this.length; i++ {
-		this.data[i] = uint32(packetbytes[SIZEOF_EXTENSION+i*4+0])<<24 |
-			uint32(packetbytes[SIZEOF_EXTENSION+i*4+1])<<16 |
-			uint32(packetbytes[SIZEOF_EXTENSION+i*4+2])<<8 |
-			uint32(packetbytes[SIZEOF_EXTENSION+i*4+3])
+		this.data[i] = uint32(packetbytes[SIZEOF_RTPEXTENSION+i*4+0])<<24 |
+			uint32(packetbytes[SIZEOF_RTPEXTENSION+i*4+1])<<16 |
+			uint32(packetbytes[SIZEOF_RTPEXTENSION+i*4+2])<<8 |
+			uint32(packetbytes[SIZEOF_RTPEXTENSION+i*4+3])
 	}
 
 	return nil
 }
 
-func (this *Extension) Encode() []byte {
+func (this *RTPExtension) Encode() []byte {
 	var packetbytes []byte
-	packetbytes = make([]byte, SIZEOF_EXTENSION+this.length*4)
+	packetbytes = make([]byte, SIZEOF_RTPEXTENSION+this.length*4)
 
 	packetbytes[0] = byte((this.id >> 8) & 0xFF)
 	packetbytes[1] = byte((this.id >> 0) & 0xFF)
@@ -182,10 +190,10 @@ func (this *Extension) Encode() []byte {
 	packetbytes[3] = byte((this.length >> 0) & 0xFF)
 
 	for i := uint16(0); i < this.length; i++ {
-		packetbytes[SIZEOF_EXTENSION+i*4+0] = byte(this.data[i]>>24) & 0xFF
-		packetbytes[SIZEOF_EXTENSION+i*4+1] = byte(this.data[i]>>16) & 0xFF
-		packetbytes[SIZEOF_EXTENSION+i*4+2] = byte(this.data[i]>>8) & 0xFF
-		packetbytes[SIZEOF_EXTENSION+i*4+3] = byte(this.data[i]>>0) & 0xFF
+		packetbytes[SIZEOF_RTPEXTENSION+i*4+0] = byte(this.data[i]>>24) & 0xFF
+		packetbytes[SIZEOF_RTPEXTENSION+i*4+1] = byte(this.data[i]>>16) & 0xFF
+		packetbytes[SIZEOF_RTPEXTENSION+i*4+2] = byte(this.data[i]>>8) & 0xFF
+		packetbytes[SIZEOF_RTPEXTENSION+i*4+3] = byte(this.data[i]>>0) & 0xFF
 	}
 
 	return packetbytes
@@ -193,4 +201,36 @@ func (this *Extension) Encode() []byte {
 
 type SourceIdentifier struct {
 	ssrc uint32
+}
+
+type RTCPCommonHeader struct {
+	count   uint8 //:5;
+	padding uint8 //:1;
+	version uint8 //:2;
+
+	packettype uint8
+	length     uint16
+}
+
+type RTCPSenderReport struct {
+	ntptime_msw  uint32
+	ntptime_lsw  uint32
+	rtptimestamp uint32
+	packetcount  uint32
+	octetcount   uint32
+}
+
+type RTCPReceiverReport struct {
+	ssrc         uint32 // Identifies about which SSRC's data this report is...
+	fractionlost uint8
+	packetslost  [3]uint8
+	exthighseqnr uint32
+	jitter       uint32
+	lsr          uint32
+	dlsr         uint32
+}
+
+type RTCPSDESHeader struct {
+	sdesid uint8
+	length uint8
 }
