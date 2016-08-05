@@ -6,7 +6,7 @@
  *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 
-package gosip
+package sip
 
 import (
 	"errors"
@@ -14,8 +14,8 @@ import (
 
 /**
 
- * This class contains the enumerations that define the underlying state of an 
- * existing transaction. SIP defines four types of 
+ * This class contains the enumerations that define the underlying state of an
+ * existing transaction. SIP defines four types of
 
  * transactions, these are Invite Client transactions, Invite Server transactions,
 
@@ -27,85 +27,85 @@ import (
 
  * <ul>
 
- * <li> <b>Calling:</b> 
+ * <li> <b>Calling:</b>
 
  * <ul>
 
- * <li> Invite Client transaction: The initial state, "calling", MUST be entered 
+ * <li> Invite Client transaction: The initial state, "calling", MUST be entered
 
  * when the application initiates a new client transaction with an INVITE request.
 
  * </ul>
 
- * <li> <b>Trying:</b> 
+ * <li> <b>Trying:</b>
 
  * <ul>
 
- * <li> Non-Invite Client transaction: The initial state "Trying" is entered 
+ * <li> Non-Invite Client transaction: The initial state "Trying" is entered
 
- * when the application initiates a new client transaction with a request.  
+ * when the application initiates a new client transaction with a request.
 
- * <li> Non-Invite Server transaction: The initial state "Trying" is entered 
+ * <li> Non-Invite Server transaction: The initial state "Trying" is entered
 
- * when the application is passed a request other than INVITE or ACK. 
+ * when the application is passed a request other than INVITE or ACK.
 
  * </ul>
 
- * <li> <b>Proceeding:</b> 
+ * <li> <b>Proceeding:</b>
 
  * <ul>
 
- * <li> Invite Client transaction: If the client transaction receives a 
+ * <li> Invite Client transaction: If the client transaction receives a
 
- * provisional response while in the "Calling" state, it transitions to the 
+ * provisional response while in the "Calling" state, it transitions to the
 
- * "Proceeding" state. 
+ * "Proceeding" state.
 
- * <li> Non-Invite Client transaction: If a provisional response is received 
+ * <li> Non-Invite Client transaction: If a provisional response is received
 
- * while in the "Trying" state, the client transaction SHOULD move to the 
+ * while in the "Trying" state, the client transaction SHOULD move to the
 
- * "Proceeding" state.  
+ * "Proceeding" state.
 
- * <li> Invite Server transaction: When a server transaction is constructed for 
+ * <li> Invite Server transaction: When a server transaction is constructed for
 
- * a request, it enters the initial state "Proceeding".  
+ * a request, it enters the initial state "Proceeding".
 
- * <li> Non-Invite Server transaction: While in the "Trying" state, if the 
+ * <li> Non-Invite Server transaction: While in the "Trying" state, if the
 
- * application passes a provisional response to the server transaction, the 
+ * application passes a provisional response to the server transaction, the
 
  * server transaction MUST enter the "Proceeding" state.
 
  * </ul>
 
- * <li> <b>Completed:</b> The "Completed" state exists to buffer any additional 
+ * <li> <b>Completed:</b> The "Completed" state exists to buffer any additional
 
- * response retransmissions that may be received, which is why the client 
+ * response retransmissions that may be received, which is why the client
 
  * transaction remains there only for unreliable transports.
 
  * <ul>
 
- * <li> Invite Client transaction: When in either the "Calling" or "Proceeding" 
+ * <li> Invite Client transaction: When in either the "Calling" or "Proceeding"
 
- * states, reception of a response with status code from 300-699 MUST cause the 
+ * states, reception of a response with status code from 300-699 MUST cause the
 
  * client transaction to transition to "Completed".
 
- * <li> Non-Invite Client transaction: If a final response (status codes 
+ * <li> Non-Invite Client transaction: If a final response (status codes
 
- * 200-699) is received while in the "Trying" or "Proceeding" state, the client 
+ * 200-699) is received while in the "Trying" or "Proceeding" state, the client
 
  * transaction MUST transition to the "Completed" state.
 
- * <li> Invite Server transaction: While in the "Proceeding" state, if the 
+ * <li> Invite Server transaction: While in the "Proceeding" state, if the
 
- * application passes a response with status code from 300 to 699 to the server 
+ * application passes a response with status code from 300 to 699 to the server
 
- * transaction, the state machine MUST enter the "Completed" state. 
+ * transaction, the state machine MUST enter the "Completed" state.
 
- * <li>Non-Invite Server transaction: If the application passes a final response 
+ * <li>Non-Invite Server transaction: If the application passes a final response
 
  * (status codes 200-699) to the server while in the "Proceeding" state, the
 
@@ -113,71 +113,71 @@ import (
 
  * </ul>
 
- * <li> <b>Confirmed:</b> The purpose of the "Confirmed" state is to absorb any 
+ * <li> <b>Confirmed:</b> The purpose of the "Confirmed" state is to absorb any
 
- * additional ACK messages that arrive, triggered from retransmissions of the 
+ * additional ACK messages that arrive, triggered from retransmissions of the
 
- * final response. Once this time expires the server MUST transition to the 
+ * final response. Once this time expires the server MUST transition to the
 
  * "Terminated" state.
 
  * <ul>
 
- * <li> Invite Server transaction: If an ACK is received while the server 
+ * <li> Invite Server transaction: If an ACK is received while the server
 
- * transaction is in the "Completed" state, the server transaction MUST 
+ * transaction is in the "Completed" state, the server transaction MUST
 
  * transition to the "Confirmed" state.
 
  * </ul>
 
- * <li> <b>Terminated:</b> The transaction MUST be available for garbage collection 
+ * <li> <b>Terminated:</b> The transaction MUST be available for garbage collection
 
  * the instant it enters the "Terminated" state.
 
  * <ul>
 
- * <li> Invite Client transaction:  When in either the "Calling" or "Proceeding" 
+ * <li> Invite Client transaction:  When in either the "Calling" or "Proceeding"
 
- * states, reception of a 2xx response MUST cause the client transaction to 
+ * states, reception of a 2xx response MUST cause the client transaction to
 
- * enter the "Terminated" state. If amount of time that the server transaction 
+ * enter the "Terminated" state. If amount of time that the server transaction
 
- * can remain in the "Completed" state when unreliable transports are used 
+ * can remain in the "Completed" state when unreliable transports are used
 
- * expires while the client transaction is in the "Completed" state, the client 
+ * expires while the client transaction is in the "Completed" state, the client
 
- * transaction MUST move to the "Terminated" state. 
+ * transaction MUST move to the "Terminated" state.
 
- * <li> Non-Invite Client transaction: If the transaction times out while the 
+ * <li> Non-Invite Client transaction: If the transaction times out while the
 
- * client transaction is still in the "Trying" or "Proceeding" state, the client 
+ * client transaction is still in the "Trying" or "Proceeding" state, the client
 
- * transaction SHOULD inform the application about the timeout, and then it 
+ * transaction SHOULD inform the application about the timeout, and then it
 
- * SHOULD enter the "Terminated" state. If the response retransmissions buffer 
+ * SHOULD enter the "Terminated" state. If the response retransmissions buffer
 
- * expires while in the "Completed" state, the client transaction MUST transition 
+ * expires while in the "Completed" state, the client transaction MUST transition
 
  * to the "Terminated" state.
 
- * <li> Invite Server transaction: If in the "Proceeding" state, and the application 
+ * <li> Invite Server transaction: If in the "Proceeding" state, and the application
 
- * passes a 2xx response to the server transaction, the server transaction MUST 
+ * passes a 2xx response to the server transaction, the server transaction MUST
 
- * transition to the "Terminated" state. When the server transaction abandons 
+ * transition to the "Terminated" state. When the server transaction abandons
 
- * retransmitting the response while in the "Completed" state, it implies that 
+ * retransmitting the response while in the "Completed" state, it implies that
 
- * the ACK was never received.  In this case, the server transaction MUST 
+ * the ACK was never received.  In this case, the server transaction MUST
 
- * transition to the "Terminated" state, and MUST indicate to the TU that a 
+ * transition to the "Terminated" state, and MUST indicate to the TU that a
 
  * transaction failure has occurred.
 
- * <li> Non-Invite Server transaction: If the request retransmissions buffer 
+ * <li> Non-Invite Server transaction: If the request retransmissions buffer
 
- * expires while in the "Completed" state, the server transaction MUST transition 
+ * expires while in the "Completed" state, the server transaction MUST transition
 
  * to the "Terminated" state.
 
@@ -185,200 +185,190 @@ import (
 
  * </ul>
 
- * 
+ *
 
- * For each specific transaction state machine, refer to 
+ * For each specific transaction state machine, refer to
 
  * <a href = "http://www.ietf.org/rfc/rfc3261.txt">RFC3261</a>.
 
  */
 
 const (
-	_TRANSACTIONSTATE_CALLING = iota //0
-	_TRANSACTIONSTATE_TRYING			//1
-	_TRANSACTIONSTATE_PROCEEDING		//2
-	_TRANSACTIONSTATE_COMPLETED		//3
-	_TRANSACTIONSTATE_CONFIRMED		//4
-	_TRANSACTIONSTATE_TERMINATED		//5
+	_TRANSACTIONSTATE_CALLING    = iota //0
+	_TRANSACTIONSTATE_TRYING            //1
+	_TRANSACTIONSTATE_PROCEEDING        //2
+	_TRANSACTIONSTATE_COMPLETED         //3
+	_TRANSACTIONSTATE_CONFIRMED         //4
+	_TRANSACTIONSTATE_TERMINATED        //5
 )
 
 const m_transStateSize = 6
 
 var m_transStateArray = []*TransactionState{&TransactionState{_TRANSACTIONSTATE_CALLING},
-											&TransactionState{_TRANSACTIONSTATE_TRYING},
-											&TransactionState{_TRANSACTIONSTATE_PROCEEDING},
-											&TransactionState{_TRANSACTIONSTATE_COMPLETED},
-											&TransactionState{_TRANSACTIONSTATE_CONFIRMED},
-											&TransactionState{_TRANSACTIONSTATE_TERMINATED},
-};    
-    
-    /**
-     * This constant value indicates that the transaction state is "Calling".
-     */    
-	var TRANSACTIONSTATE_CALLING = m_transStateArray[_TRANSACTIONSTATE_CALLING];     
-  
-    /**
-     * This constant value indicates that the transaction state is "Trying".
-     */   
-    var TRANSACTIONSTATE_TRYING = m_transStateArray[_TRANSACTIONSTATE_TRYING];   
- 
-    /**
-     * This constant value indicates that the transaction state is "Proceeding".
-     */        
-    var TRANSACTIONSTATE_PROCEEDING = m_transStateArray[_TRANSACTIONSTATE_PROCEEDING];    
-
-    /**
-     * This constant value indicates that the transaction state is "Completed".
-     */    
-    var TRANSACTIONSTATE_COMPLETED = m_transStateArray[_TRANSACTIONSTATE_COMPLETED];    
-
-    /**
-     * This constant value indicates that the transaction state is "Confirmed".
-     */    
-    var TRANSACTIONSTATE_CONFIRMED = m_transStateArray[_TRANSACTIONSTATE_CONFIRMED];
-
-    /**
-     * This constant value indicates that the transaction state is "Terminated".
-     */    
-    var TRANSACTIONSTATE_TERMINATED = m_transStateArray[_TRANSACTIONSTATE_TERMINATED];
-
-
-type TransactionState struct{ //implements Serializable{   
-    // internal private variables
-    m_transactionState int;
+	&TransactionState{_TRANSACTIONSTATE_TRYING},
+	&TransactionState{_TRANSACTIONSTATE_PROCEEDING},
+	&TransactionState{_TRANSACTIONSTATE_COMPLETED},
+	&TransactionState{_TRANSACTIONSTATE_CONFIRMED},
+	&TransactionState{_TRANSACTIONSTATE_TERMINATED},
 }
 
+/**
+ * This constant value indicates that the transaction state is "Calling".
+ */
+var TRANSACTIONSTATE_CALLING = m_transStateArray[_TRANSACTIONSTATE_CALLING]
 
-    /**
+/**
+ * This constant value indicates that the transaction state is "Trying".
+ */
+var TRANSACTIONSTATE_TRYING = m_transStateArray[_TRANSACTIONSTATE_TRYING]
 
-     * This method returns the object value of the TransactionState
+/**
+ * This constant value indicates that the transaction state is "Proceeding".
+ */
+var TRANSACTIONSTATE_PROCEEDING = m_transStateArray[_TRANSACTIONSTATE_PROCEEDING]
 
-     *
+/**
+ * This constant value indicates that the transaction state is "Completed".
+ */
+var TRANSACTIONSTATE_COMPLETED = m_transStateArray[_TRANSACTIONSTATE_COMPLETED]
 
-     * @return  The TransactionState Object
+/**
+ * This constant value indicates that the transaction state is "Confirmed".
+ */
+var TRANSACTIONSTATE_CONFIRMED = m_transStateArray[_TRANSACTIONSTATE_CONFIRMED]
 
-     * @param timeout The integer value of the TransactionState
+/**
+ * This constant value indicates that the transaction state is "Terminated".
+ */
+var TRANSACTIONSTATE_TERMINATED = m_transStateArray[_TRANSACTIONSTATE_TERMINATED]
 
-     */
+type TransactionState struct { //implements Serializable{
+	// internal private variables
+	m_transactionState int
+}
 
-    func GetTransactionState(transactionState int) (*TransactionState, error){
-        if (transactionState >= 0 && transactionState < m_transStateSize) {
-            return m_transStateArray[transactionState], nil;
-        } 
-        //else {
-            return nil, errors.New("IllegalArgumentException: Invalid transactionState value");
-        //}
-    }
+/**
 
+ * This method returns the object value of the TransactionState
 
+ *
 
-    /**
+ * @return  The TransactionState Object
 
-     * This method returns the integer value of the TransactionState
+ * @param timeout The integer value of the TransactionState
 
-     *
+ */
 
-     * @return The integer value of the TransactionState
+func GetTransactionState(transactionState int) (*TransactionState, error) {
+	if transactionState >= 0 && transactionState < m_transStateSize {
+		return m_transStateArray[transactionState], nil
+	}
+	//else {
+	return nil, errors.New("IllegalArgumentException: Invalid transactionState value")
+	//}
+}
 
-     */
+/**
 
-    func (this *TransactionState) GetValue() int {
-        return this.m_transactionState;
-    }
+ * This method returns the integer value of the TransactionState
 
+ *
 
+ * @return The integer value of the TransactionState
 
-    /**
+ */
 
-     * Returns the designated type as an alternative object to be used when
+func (this *TransactionState) GetValue() int {
+	return this.m_transactionState
+}
 
-     * writing an object to a stream.
+/**
 
-     *
+ * Returns the designated type as an alternative object to be used when
 
-     * This method would be used when for example serializing TransactionState.EARLY
+ * writing an object to a stream.
 
-     * and deserializing it afterwards results again in TransactionState.EARLY.
+ *
 
-     * If you do not implement readResolve(), you would not get
+ * This method would be used when for example serializing TransactionState.EARLY
 
-     * TransactionState.EARLY but an instance with similar content.
+ * and deserializing it afterwards results again in TransactionState.EARLY.
 
-     *
+ * If you do not implement readResolve(), you would not get
 
-     * @return the TransactionState
+ * TransactionState.EARLY but an instance with similar content.
 
-     * @exception ObjectStreamException
+ *
 
-     */
+ * @return the TransactionState
 
-    //func (this *TransactionState) ReadResolve() *TransactionState {
-    //    return m_transStateArray[m_transactionState];
-    //}
+ * @exception ObjectStreamException
 
+ */
 
+//func (this *TransactionState) ReadResolve() *TransactionState {
+//    return m_transStateArray[m_transactionState];
+//}
 
-    /**
+/**
 
-    
-     * This method returns a string version of this class.
-     * 
-     * @return The string version of the TransactionState
 
-     */
+ * This method returns a string version of this class.
+ *
+ * @return The string version of the TransactionState
 
-    func (this *TransactionState) ToString() string{
+ */
 
-        var text string;
+func (this *TransactionState) ToString() string {
 
-        switch this.m_transactionState {
+	var text string
 
-            case _TRANSACTIONSTATE_CALLING:
+	switch this.m_transactionState {
 
-                text = "Calling Transaction";
+	case _TRANSACTIONSTATE_CALLING:
 
-                //break;
+		text = "Calling Transaction"
 
-            case _TRANSACTIONSTATE_TRYING:
+		//break;
 
-                text = "Trying Transaction";
+	case _TRANSACTIONSTATE_TRYING:
 
-                //break;                
+		text = "Trying Transaction"
 
-            case _TRANSACTIONSTATE_PROCEEDING:
+		//break;
 
-                text = "Proceeding Transaction";
+	case _TRANSACTIONSTATE_PROCEEDING:
 
-                //break;
+		text = "Proceeding Transaction"
 
-            case _TRANSACTIONSTATE_COMPLETED:
+		//break;
 
-                text = "Completed Transaction";
+	case _TRANSACTIONSTATE_COMPLETED:
 
-                //break;                 
+		text = "Completed Transaction"
 
-            case _TRANSACTIONSTATE_CONFIRMED:
+		//break;
 
-                text = "Confirmed Transaction";
+	case _TRANSACTIONSTATE_CONFIRMED:
 
-                //break; 
+		text = "Confirmed Transaction"
 
-            case _TRANSACTIONSTATE_TERMINATED:
+		//break;
 
-                text = "Terminated Transaction";
+	case _TRANSACTIONSTATE_TERMINATED:
 
-                //break;                
+		text = "Terminated Transaction"
 
-            default:
+		//break;
 
-                text = "Error while printing Transaction State";
+	default:
 
-                //break;
+		text = "Error while printing Transaction State"
 
-        }
+		//break;
 
-        return text;
+	}
 
-    }
+	return text
 
-
+}
