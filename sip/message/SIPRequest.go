@@ -255,7 +255,7 @@ func (this *SIPRequest) String() string {
 	} else {
 		retval = this.SIPMessage.String()
 	}
-	return retval + core.SIPSeparatorNames_NEWLINE
+	return retval
 }
 
 // /** ALias for encode above.
