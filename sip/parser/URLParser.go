@@ -84,7 +84,7 @@ func (this *URLParser) ParamNameOrValue() (s string, ParseException error) {
 	var retval bytes.Buffer
 	for this.GetLexer().HasMoreChars() {
 		next, _ := this.GetLexer().LookAheadK(0)
-		if next == '[' || next == '[' || next == '/' ||
+		if next == '[' || next == ']' || next == '/' ||
 			next == ':' || next == '&' || next == '+' ||
 			next == '$' || this.IsUnreserved(next) {
 			retval.WriteByte(next)
