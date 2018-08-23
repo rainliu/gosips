@@ -595,7 +595,7 @@ func (this *SIPMessage) AttachHeader2(h header.Header, replaceflag bool) { //thr
  */
 func (this *SIPMessage) AttachHeader3(h header.Header, replaceFlag, top bool) error { //throws SIPDuplicateHeaderException {
 	if h == nil {
-		errors.New("NullPointerException: nil header")
+		return errors.New("NullPointerException: nil header")
 	}
 
 	if replaceFlag {

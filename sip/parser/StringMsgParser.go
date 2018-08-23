@@ -197,7 +197,7 @@ func (this *StringMsgParser) ParseSIPMessageFromByte(msgBuffer []byte) (message.
 		// Could not find CRLFCRLF end of message so look for LFLF
 		for f = s; f < len(msgBuffer)-2; f++ {
 			if msgBuffer[f] == '\n' &&
-				msgBuffer[f] == '\n' {
+				msgBuffer[f+1] == '\n' {
 				break
 			}
 		}
